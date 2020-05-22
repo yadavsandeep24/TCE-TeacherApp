@@ -55,9 +55,7 @@ abstract class BaseViewModel<ViewState> : ViewModel() {
     }
 
     fun areAnyJobsActive(): Boolean {
-        return dataChannelManager.numActiveJobs.value?.let {
-            it > 0
-        } ?: false
+        return dataChannelManager.numActiveJobs.value?.let { it > 0 } ?: false
     }
 
     fun isJobAlreadyActive(stateEvent: StateEvent): Boolean {

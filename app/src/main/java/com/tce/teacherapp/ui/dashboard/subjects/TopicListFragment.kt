@@ -84,7 +84,6 @@ constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         subjectVo = arguments?.getParcelable("subjectdata") as Subject?
-        uiCommunicationListener.displayProgressBar(true)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             activity?.window!!.statusBarColor = resources.getColor(R.color.color_black, null)
         } else {
@@ -178,6 +177,7 @@ constructor(
         })
 
         viewModel.numActiveJobs.observe(viewLifecycleOwner, Observer {
+            Log.d("SAN","viewModel.areAnyJobsActive()-->"+viewModel.areAnyJobsActive())
             uiCommunicationListener.displayProgressBar(viewModel.areAnyJobsActive())
         })
 

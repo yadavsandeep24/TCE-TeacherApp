@@ -1,6 +1,7 @@
 package com.tce.teacherapp.util
 
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.*
@@ -34,10 +35,12 @@ abstract class DataChannelManager<ViewState> {
             .asFlow()
             .onEach { dataState ->
                 dataState.data?.let { data ->
+                    Log.d("SAN","dataState.data")
                     handleNewData(data)
                     removeStateEvent(dataState.stateEvent)
                 }
                 dataState.stateMessage?.let { stateMessage ->
+                    Log.d("SAN","dataState.stateMessage")
                     handleNewStateMessage(stateMessage)
                     removeStateEvent(dataState.stateEvent)
                 }
@@ -87,6 +90,7 @@ abstract class DataChannelManager<ViewState> {
     }
 
     private fun clearActiveStateEventCounter() {
+        Log.d("SAN","clearActiveStateEventCounter")
         _activeStateEvents.clear()
         syncNumActiveStateEvents()
     }
@@ -97,6 +101,7 @@ abstract class DataChannelManager<ViewState> {
     }
 
     private fun removeStateEvent(stateEvent: StateEvent?) {
+        Log.d("SAN","removeStateEvent-->"+stateEvent.toString())
         _activeStateEvents.remove(stateEvent.toString())
         syncNumActiveStateEvents()
     }
@@ -129,6 +134,8 @@ abstract class DataChannelManager<ViewState> {
     }
 
     private fun syncNumActiveStateEvents() {
+
+        Log.d("SAN","_activeStateEvents.size-->"+_activeStateEvents.size)
         _numActiveJobs.value = _activeStateEvents.size
     }
 }

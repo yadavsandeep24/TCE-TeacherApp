@@ -82,4 +82,9 @@ class SubjectsViewModel @Inject constructor(val mainRepository: MainRepository) 
     override fun initNewViewState(): SubjectViewState {
         return SubjectViewState()
     }
+
+    override fun onCleared() {
+        super.onCleared()
+        cancelActiveJobs()
+    }
 }

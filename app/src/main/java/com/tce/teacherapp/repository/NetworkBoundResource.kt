@@ -79,7 +79,7 @@ constructor(
             stateEvent = jobCompleteMarker
         ) {
             override suspend fun handleSuccess(resultObj: CacheObj): DataState<ViewState> {
-                return handleCacheSuccess(resultObj)
+                return handleCacheSuccess(markJobComplete,resultObj)
             }
         }.getResult()
 
@@ -87,7 +87,7 @@ constructor(
 
     abstract suspend fun updateCache(networkObject: NetworkObj)
 
-    abstract fun handleCacheSuccess(resultObj: CacheObj): DataState<ViewState> // make sure to return null for stateEvent
+    abstract fun handleCacheSuccess(isJobComplete: Boolean,resultObj: CacheObj): DataState<ViewState> // make sure to return null for stateEvent
 
 
 }

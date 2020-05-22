@@ -16,7 +16,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -33,7 +32,6 @@ import com.bumptech.glide.signature.ObjectKey
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentSubjectListBinding
 import com.tce.teacherapp.fragments.main.CustomSpinnerAdapter
-import com.tce.teacherapp.ui.BaseFragment
 import com.tce.teacherapp.ui.dashboard.subjects.adapter.SubjectListEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.subjects.adapter.subjectListEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.subjects.state.SUBJECT_VIEW_STATE_BUNDLE_KEY
@@ -52,13 +50,10 @@ class SubjectListFragment
 @Inject
 constructor(
     viewModelFactory: ViewModelProvider.Factory
-) : BaseFragment(R.layout.fragment_subject_list) {
+) : BaseSubjectFragment(R.layout.fragment_subject_list,viewModelFactory) {
 
     private lateinit var binding: FragmentSubjectListBinding
 
-    private val viewModel: SubjectsViewModel by viewModels {
-        viewModelFactory
-    }
     var adapter: CustomSpinnerAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -273,12 +268,10 @@ constructor(
         })
     }
 
-    override fun setupChannel() {
-        viewModel.setupChannel()
-    }
 
 
 }
+
 
 fun RequestManager.loadImage(url: String): RequestBuilder<Bitmap> {
 

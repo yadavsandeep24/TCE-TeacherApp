@@ -82,7 +82,10 @@ constructor(
                 }
             }
 
-            override fun handleCacheSuccess(resultObj: List<Grade>): DataState<SubjectViewState> {
+            override fun handleCacheSuccess(
+                isJobComplete: Boolean,
+                resultObj: List<Grade>
+            ): DataState<SubjectViewState> {
                 if (resultObj.isNotEmpty()) {
                     sharedPrefsEditor.putString(
                         PreferenceKeys.APP_USER_SELECTED_GRADE_ID,
@@ -210,38 +213,27 @@ constructor(
                                 subjectDao.insertBook(book)
                                 for (node in book.node) {
                                     try {
-                                        launch {
                                             subjectDao.insertNode(node)
                                             for (nodex in node.node) {
                                                 try {
-                                                    launch {
                                                         subjectDao.inserNodeX(nodex)
                                                         for (nodexx in nodex.node) {
                                                             try {
-                                                                launch {
                                                                     subjectDao.insertNodeXX(nodexx)
                                                                     for (nodexxx in nodexx.node) {
                                                                         try {
-                                                                            launch {
-                                                                                subjectDao.insertNodeXXX(
-                                                                                    nodexxx
-                                                                                )
-
-                                                                            }
+                                                                                subjectDao.insertNodeXXX(nodexxx)
                                                                         } catch (e: Exception) {
                                                                         }
                                                                     }
-                                                                }
                                                             } catch (e: Exception) {
                                                                 e.printStackTrace()
                                                             }
                                                         }
-                                                    }
                                                 } catch (e: Exception) {
                                                     e.printStackTrace()
                                                 }
                                             }
-                                        }
                                     } catch (e: Exception) {
                                         e.printStackTrace()
                                     }
@@ -254,15 +246,27 @@ constructor(
                 }
             }
 
-            override fun handleCacheSuccess(resultObj: List<Node>): DataState<SubjectViewState> {
+            override fun handleCacheSuccess(
+                isjobComplete: Boolean,
+                resultObj: List<Node>
+            ): DataState<SubjectViewState> {
                 val viewState = SubjectViewState(
                     topicList = resultObj
                 )
-                return DataState.data(
-                    response = null,
-                    data = viewState,
-                    stateEvent = stateEvent
-                )
+                return if(isjobComplete){
+                    DataState.data(
+                        response = null,
+                        data = viewState,
+                        stateEvent = stateEvent
+                    )
+                }else{
+                    DataState.data(
+                        response = null,
+                        data = null,
+                        stateEvent = stateEvent
+                    )
+                }
+
             }
 
         }.result
