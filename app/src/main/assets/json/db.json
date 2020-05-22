@@ -1,0 +1,3071 @@
+{
+  "grades": [
+    {
+      "id": "grd-1",
+      "gradeTitle": "Year 1",
+      "schoolGrdId": "schgrd-ef1c9ccf-36b5-4639-9292-736bd1a0d3bf",
+      "orderNo": "1",
+      "subjects": [
+        {
+          "id": "00",
+          "title": "English",
+          "icon": "icon_2.svg",
+          "index": 1,
+          "books": {
+            "bookId": "book-9cdebf46-c1db-41c2-8d07-81803c55210e",
+            "title": "English"
+          }
+        },
+        {
+          "id": "01",
+          "title": "Hindi",
+          "icon": "icon_3.svg",
+          "index": 3,
+          "books": {
+            "bookId": "book-fb06b681-8a1b-4bf4-b7d0-89d833c2a8df",
+            "title": "Hindi"
+          }
+        },
+        {
+          "id": "02",
+          "title": "General Awareness",
+          "icon": "icon_4.svg",
+          "index": 2,
+          "books": {
+            "bookId": "book-77993d1c-e884-415d-81a6-55fc3405a0ca",
+            "title": "General Awareness"
+          }
+        },
+        {
+          "id": "TATAISBN20812",
+          "title": "Numeracy & Reasoning",
+          "icon": "icon_5.svg",
+          "index": 4,
+          "books": {
+            "bookId": "book-77993d1c-e884-415d-81a6-55fc3405a0ca",
+            "title": "Numeracy & Reasoning"
+          }
+        }
+      ],
+      "divisions": [
+        {
+          "gradeTitle": "Nursery",
+          "divisionTitle": "A"
+        },
+        {
+          "gradeTitle": "Nursery",
+          "divisionTitle": "B"
+        }
+      ]
+    },
+    {
+      "id": "grd-2",
+      "gradeTitle": "Year 2",
+      "schoolGrdId": "schgrd-ef1c9ccf-36b5-4639-9292-736bd1a0d3bf",
+      "orderNo": "2",
+      "subjects": [
+        {
+          "id": "00",
+          "title": "English",
+          "icon": "icon_2.svg",
+          "index": 1,
+          "books": {
+            "bookId": "book-9cdebf46-c1db-41c2-8d07-81803c55210e",
+            "title": "English"
+          }
+        },
+        {
+          "id": "01",
+          "title": "Hindi",
+          "icon": "icon_3.svg",
+          "index": 3,
+          "books": {
+            "bookId": "book-fb06b681-8a1b-4bf4-b7d0-89d833c2a8df",
+            "title": "Hindi"
+          }
+        },
+        {
+          "id": "02",
+          "title": "General Awareness",
+          "icon": "icon_4.svg",
+          "index": 2,
+          "books": {
+            "bookId": "book-77993d1c-e884-415d-81a6-55fc3405a0ca",
+            "title": "General Awareness"
+          }
+        },
+        {
+          "id": "03",
+          "title": "Numeracy & Reasoning",
+          "icon": "icon_5.svg",
+          "index": 4,
+          "books": {
+            "bookId": "book-77993d1c-e884-415d-81a6-55fc3405a0ca",
+            "title": "Numeracy & Reasoning"
+          }
+        }
+      ],
+      "divisions": [
+        {
+          "gradeTitle": "JR KG",
+          "divisionTitle": "A"
+        },
+        {
+          "gradeTitle": "JR KG",
+          "divisionTitle": "B"
+        }
+      ]
+    },
+    {
+      "id": "grd-3",
+      "gradeTitle": "Year 3",
+      "schoolGrdId": "schgrd-ef1c9ccf-36b5-4639-9292-736bd1a0d3bf",
+      "orderNo": "3",
+      "subjects": [
+        {
+          "id": "00",
+          "title": "English",
+          "icon": "icon_2.svg",
+          "index": 1,
+          "books": {
+            "bookId": "book-9cdebf46-c1db-41c2-8d07-81803c55210e",
+            "title": "English"
+          }
+        },
+        {
+          "id": "01",
+          "title": "Hindi",
+          "icon": "icon_3.svg",
+          "index": 3,
+          "books": {
+            "bookId": "book-fb06b681-8a1b-4bf4-b7d0-89d833c2a8df",
+            "title": "Hindi"
+          }
+        },
+        {
+          "id": "02",
+          "title": "General Awareness",
+          "icon": "icon_4.svg",
+          "index": 2,
+          "books": {
+            "bookId": "book-77993d1c-e884-415d-81a6-55fc3405a0ca",
+            "title": "General Awareness"
+          }
+        },
+        {
+          "id": "TATAISBN2071sa",
+          "title": "Numeracy & Reasoning",
+          "icon": "icon_5.svg",
+          "index": 4,
+          "books": {
+            "bookId": "book-77993d1c-e884-415d-81a6-55fc3405a0ca",
+            "title": "Numeracy & Reasoning"
+          }
+        }
+      ],
+      "divisions": [
+        {
+          "gradeTitle": "SR KG",
+          "divisionTitle": "A"
+        },
+        {
+          "gradeTitle": "SR KG",
+          "divisionTitle": "B"
+        }
+      ]
+    }
+  ],
+  "Books": [
+    {
+      "id": "TATAISBN20812",
+      "label": "Green Globe A Book of Numercay 1",
+      "type": "category",
+      "node": [
+        {
+          "id": "32a5d703-5fb8-4b11-b78c-177e9a773b54",
+          "label": "Numbers",
+          "menutype": "main",
+          "type": "category",
+          "index": 10,
+          "node": [
+            {
+              "id": "chp-b219d2d1-cd7c-439e-a8b9-eda9a7bd83bd",
+              "label": "1.0",
+              "type": "chapter",
+              "image": "Thumbnail_A.png",
+              "icon": "a.png",
+              "node": [
+                {
+                  "id": "DUMMYIDeb45513e-684f-41fe-9382-f549a68c73b9",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "icon": "music-time.svg",
+                  "node": [
+                    {
+                      "id": "01",
+                      "type": "application/x-mpegURL",
+                      "contenttype": "AV",
+                      "src": "//amssamples.streaming.mediaservices.windows.net/91492735-c523-432b-ba01-faba6c2206a2/AzureMediaServicesPromo.ism/manifest(format=m3u8-aapl-v3)",
+                      "image": "https://kohantextilejournal.com/wp-content/uploads/2018/04/video-poster.jpg",
+                      "title": "A Day in the Zoo - Modality",
+                      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                      "skills": [
+                        "Observation",
+                        "Language"
+                      ],
+                      "TaggingLevel": "ECE1 > English > Letter & Sound",
+                      "ResourceOriginator": "TCE"
+                    },
+                    {
+                      "id": "02",
+                      "type": "",
+                      "contenttype": "Activity",
+                      "src": "https://game-templates.web.app/gamesRD/gamefloor1/games/memory_game/index.html",
+                      "image": "https://www.ubackground.com/_ph/11/442285041.jpg",
+                      "title": "Activity Type 1",
+                      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                      "skills": [
+                        "Observation",
+                        "Language"
+                      ],
+                      "TaggingLevel": "ECE1 > English > Letter & Sound",
+                      "ResourceOriginator": "TCE"
+                    },
+                    {
+                      "id": "03",
+                      "type": "video/mp4",
+                      "contenttype": "AV",
+                      "src": "http://vjs.zencdn.net/v/oceans.mp4",
+                      "image": "https://googleads.github.io/videojs-ima/examples/posters/bbb_poster.jpg",
+                      "title": "Title Name 1 - Modality",
+                      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                      "skills": [
+                        "Observation",
+                        "Language"
+                      ],
+                      "TaggingLevel": "ECE1 > English > Letter & Sound",
+                      "ResourceOriginator": "TCE"
+                    }
+                  ]
+                },
+                {
+                  "id": "DUMMYID86bc9a3b-1d9b-487f-9d35-55cfb8abc0e0",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "icon": "picture-perfect.svg",
+                  "node": [
+                    {
+                      "id": "0e1",
+                      "type": "",
+                      "contenttype": "Activity",
+                      "src": "https://game-templates.web.app/gamesRD/gamefloor1/games/memory_game/index.html",
+                      "image": "https://www.ubackground.com/_ph/11/442285041.jpg",
+                      "title": "Game",
+                      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                      "skills": [
+                        "Observation",
+                        "Language"
+                      ],
+                      "TaggingLevel": "ECE1 > English > A",
+                      "ResourceOriginator": "TCE"
+                    }
+                  ]
+                },
+                {
+                  "id": "DUMMYIDc082ae40-90a7-4089-a32b-9d435267a1b4",
+                  "label": "Trace",
+                  "type": "teaching point",
+                  "icon": "story-time.svg",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDde48911c-8323-45fc-8c21-f16b6c8870f3",
+                  "label": "Maze",
+                  "type": "teaching point",
+                  "icon": "magic-box.svg",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-2589d09b-01c3-473d-b652-43ca23d18728",
+              "label": "2.0",
+              "type": "chapter",
+              "image": "Thumbnail_A.png",
+              "icon": "b.svg",
+              "node": [
+                {
+                  "id": "DUMMYIDd3d3a242-be5a-4b37-8386-49c0801180ca",
+                  "label": "Introduction",
+                  "treatment": "splash",
+                  "type": "teaching point",
+                  "icon": "music-time.svg",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID86bc9a3b-1d9b-487f-9d35-55cfb8abc0e0",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "icon": "picture-perfect.svg",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDc082ae40-90a7-4089-a32b-9d435267a1b4",
+                  "label": "Trace",
+                  "type": "teaching point",
+                  "icon": "story-time.svg",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDde48911c-8323-45fc-8c21-f16b6c8870f3",
+                  "label": "Maze",
+                  "type": "teaching point",
+                  "icon": "magic-box.svg",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-ffe65a5e-7497-41cc-8ae5-5bdc8c7acc68",
+              "label": "3.0",
+              "type": "chapter",
+              "image": "Thumbnail_A.png",
+              "icon": "c.svg",
+              "node": [
+                {
+                  "id": "DUMMYID2e2f001a-e40d-4d03-a44f-01e89cf3597b",
+                  "label": "Introduction",
+                  "treatment": "splash",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID3c7270a0-feba-48ef-909a-c7842e86cf19",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID2f256b83-2426-4775-b09b-c1e78a1ea487",
+                  "label": "Trace",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID598369d9-779b-4afe-8ae6-27b8f13efd50",
+                  "label": "Maze",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-993d218b-6eab-4014-8d12-7ef20cb68ee3",
+              "label": "4.0",
+              "type": "chapter",
+              "image": "Thumbnail_A.png",
+              "icon": "d.svg",
+              "node": [
+                {
+                  "id": "DUMMYID9905467f-e666-40d2-836f-d05d494e3782",
+                  "label": "Introduction",
+                  "treatment": "splash",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID1a7facca-036b-4565-9c0b-08f326171f63",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDe255d8e9-c8c7-4a93-886e-b6df8733726d",
+                  "label": "Trace",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDa379685e-f559-41d4-a8fb-3090e34283f6",
+                  "label": "Maze",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-f9588010-b583-414b-aa86-5da64438c431",
+              "label": "5.0",
+              "type": "chapter",
+              "image": "Thumbnail_A.png",
+              "icon": "e.svg",
+              "node": [
+                {
+                  "id": "DUMMYIDd2f453f6-1252-4348-8936-7111fc329c97",
+                  "label": "Introduction",
+                  "treatment": "splash",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID48a6d319-5561-431f-9e6f-08418ff41df7",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID095226a2-c824-42ed-b5f0-0a60c692839a",
+                  "label": "Trace",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID3b7cf18b-5d98-490a-8467-6dfc46234a5d",
+                  "label": "Maze",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "73afbcc6-b19d-4e1a-bc4e-d16e3a6cb154",
+          "label": "Colours",
+          "menutype": "main",
+          "type": "category",
+          "index": 11,
+          "node": [
+            {
+              "id": "chp-273d1bf8-6c79-4ecc-a5c4-0e24675fb06a",
+              "label": "Red",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYIDb94c0ee7-0a19-4c07-afc8-a34c4e87d454",
+                  "label": "Introduction",
+                  "treatment": "splash",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDcaf5508d-9703-4239-aa44-2288c184b775",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID382c1a35-74c6-40fa-981b-efc0c4b220c6",
+                  "label": "Play",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-fa3a68cc-16a7-44fe-8719-6350d235fd10",
+              "label": "Blue",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYID565ef693-c06e-4ce9-98d7-6964219bae00",
+                  "label": "Introduction",
+                  "treatment": "splash",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID1fe94d5a-184e-4d6d-9be1-6efad3f7948d",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDe5077ab3-447e-47ab-884e-0cf3b045efac",
+                  "label": "Play",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-893d4360-61dd-42c8-8b1b-b0e138bdd7f1",
+              "label": "Yellow",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYID8f0dcd72-918c-4bb4-bfff-292953f944d0",
+                  "label": "Introduction",
+                  "treatment": "splash",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID06ed51e7-182e-42d6-bff8-3a04c6434c14",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDa98fa04c-2c46-4f60-ac1a-29f429bd65d9",
+                  "label": "Play",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-d4a9cdee-2d02-44bd-a5f4-e73c1b632815",
+              "label": "Green",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYID5dd387b7-2607-45fe-9b0f-5238eee7b4e1",
+                  "label": "Introduction",
+                  "treatment": "splash",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDb8914324-d3c3-4454-a625-686ec4fe9466",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDccef6941-ee00-4b70-83d2-cb27ecddba5c",
+                  "label": "Play",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-c23cd932-d584-4fca-9cd4-00de853ff5e6",
+              "label": "Orange",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYIDf60ffad4-f49a-44d2-a491-a251aff3810a",
+                  "label": "Introduction",
+                  "treatment": "splash",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID2cdf3684-945d-4fad-acb9-d9334d9573c1",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID59dbeb7e-6452-4733-a184-e4670c17c5a7",
+                  "label": "Play",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-f1ff4d1b-221e-465c-916c-f43bbe792b68",
+              "label": "Fun with Colours",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYID81cef6cb-e97a-41d3-865b-971e654deaa3",
+                  "label": "A Farm",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "c7204737-eca6-4d5f-bb26-285c917514d3",
+          "label": "Shapes",
+          "menutype": "main",
+          "type": "category",
+          "index": 12,
+          "node": []
+        },
+        {
+          "id": "0f8a941f-b69b-467e-ab52-65993202cea3",
+          "label": "Pre-Math Concepts",
+          "menutype": "main",
+          "type": "category",
+          "index": 12,
+          "node": []
+        },
+        {
+          "id": "bdd916f0-4058-47b9-a08b-913859242f7a",
+          "label": "Maze",
+          "menutype": "sub",
+          "type": "category",
+          "index": 13,
+          "node": []
+        },
+        {
+          "id": "5a07b261-00fc-49cf-b0d2-b77215a89810",
+          "label": "Puzzles",
+          "menutype": "sub",
+          "type": "category",
+          "index": 14,
+          "node": []
+        },
+        {
+          "id": "c83a5e6c-9ebc-4775-97d2-1e008647abe6",
+          "label": "Patterns",
+          "menutype": "sub",
+          "type": "category",
+          "index": 15,
+          "node": []
+        }
+      ]
+    },
+    {
+      "id": "TATAISBN2071sa",
+      "label": "Year 3 - Numeracy and Reasoning",
+      "type": "category",
+      "node": [
+        {
+          "id": "c28c67b8-1ee9-49e1-bd0d-493ef8b07abe",
+          "label": "Numbers",
+          "type": "category",
+          "menutype": "main",
+          "index": 10,
+          "node": [
+            {
+              "id": "chp-c1b6aec2-ca63-48b5-8942-43d8ea64131f",
+              "label": "Numbers 1-10",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYIDa2e50061-792a-4c84-8af1-fe7d7467b5bd",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID5925042b-ee03-4db0-b81f-3b48eef76b98",
+                  "label": "Count Aloud",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDd4808d47-ed41-4285-8845-64b81db583be",
+                  "label": "Compare Numbers",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDaedc196e-95b4-4918-b3ab-38be2df1a186",
+                  "label": "Missing Numbers",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDb3f2cbf2-4d5f-40d3-a7c9-8050b8729392",
+                  "label": "Addition",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID4531a0d6-ddf9-4752-9023-90c5aff2bae2",
+                  "label": "Just After",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID6489d67c-1c9e-440e-8795-10d74113b046",
+                  "label": "Number Stories",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID59b8dfb6-bf42-4b28-8c8e-8192ed25a653",
+                  "label": "In Between",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID3b3de49c-0267-4208-8c02-0c894fa7afe2",
+                  "label": "Skip Count",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID3f6dff42-e3ea-4927-a903-da410ef4ad9f",
+                  "label": "Tens and Ones",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID477e118e-cfac-4250-9e60-153daf5421b8",
+                  "label": "Substration",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID29b0b1fa-9227-4f33-9a1d-94587359e455",
+                  "label": "Order Numbers",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDd57c5b46-2e98-4d80-aee2-95a1bb53d4ab",
+                  "label": "Number bond",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-c3d6c920-b551-4412-88db-51c6abc22d1e",
+              "label": "Numbers 11-20",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYID88671215-7f22-4aad-9ba9-f89061097a58",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID6483bdf0-49aa-4bd6-97ff-f70f157686ff",
+                  "label": "Count Aloud",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDa593445e-ad5a-48af-a1bd-1717e20fdddf",
+                  "label": "Compare Numbers",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID04c1a061-c4bc-470a-9ce1-39edf481efc6",
+                  "label": "Missing Numbers",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID4c4aacfe-ee35-48d2-b956-cb254c51a077",
+                  "label": "Addition",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDc98e86b3-ae29-4ff0-a9d5-e3436e430578",
+                  "label": "Just After",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID425bf754-525d-4973-9685-caaa6553299c",
+                  "label": "Number Stories",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDea4b9eba-765a-46ad-a161-7583ce4569ce",
+                  "label": "In Between",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID43bdc6af-e768-4b64-9b2b-bbddb5f19143",
+                  "label": "Skip Count",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDb18f146e-a50a-4299-8ab9-b006cb16b816",
+                  "label": "Tens and Ones",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDd5c448d8-9131-4ed9-b8e1-4c8625c1544e",
+                  "label": "Substration",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID6b313a58-d272-44dd-901c-94a3a9ac851e",
+                  "label": "Order Numbers",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID78e38118-e110-439d-96d7-7fa651949010",
+                  "label": "Number bond",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "d419dd60-b41b-4e55-a1db-52bf6317e943",
+          "label": "Colour Mixer",
+          "type": "category",
+          "menutype": "main",
+          "index": 11,
+          "node": [
+            {
+              "id": "chp-4124ea68-dc3a-49be-99d9-c5c6960d22a4",
+              "label": "Primary Colour",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYIDdbfd83bf-d1ad-4fa1-97d3-b3eb810a498c",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDecf5ba6f-cbe6-41d5-8083-74f743e77b58",
+                  "label": "Activity",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-bbc4e957-be47-4015-869c-9f8513eba06e",
+              "label": "Green",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYID9491dadd-fad7-4b69-8451-7d393ff8ac5b",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDa3b2b75e-3e19-4918-a229-814d5bc5950a",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDae8b7c70-2b13-497e-93aa-cc9f255f4b65",
+                  "label": "Make Green",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-24a19db2-89c9-44a4-8ffc-c9377078b706",
+              "label": "Orange",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYID797d2ba7-606c-43ab-b6d8-3771dd11c064",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID1f31a9a7-cad5-40cd-a32a-4a78d52d7d23",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID5ec85d92-ac4f-4fa6-941e-4b5e3b52a80d",
+                  "label": "Make Orange",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-464051e3-33bb-434c-9c64-a1be54df8d02",
+              "label": "Purple",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYIDc9bccc67-ea23-46b0-826d-7ad2a474e159",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID2111c0b2-3768-400d-9a68-e1cdc9a50833",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID5fa55782-5f4c-4b8b-ab79-d1183b67b2fe",
+                  "label": "Make Purple",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-b08c56dd-2de2-4a5f-852c-0b8e75ed2c86",
+              "label": "Pink",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYID6ba913ca-4694-448a-8a4a-737ba9055193",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID0970c4c3-a3f4-45ed-a357-3d932880c32e",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDabb457a0-7abe-4edd-b6a4-5699cca67db7",
+                  "label": "Make Pink",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-1959854d-02f5-48d7-9f91-860dea1e6e67",
+              "label": "Fun with Colours",
+              "type": "chapter",
+              "node": []
+            }
+          ]
+        },
+        {
+          "id": "6a4a0df4-d69f-4364-9b56-781af4096517",
+          "label": "Pre-Math Concepts",
+          "type": "category",
+          "menutype": "main",
+          "index": 12,
+          "node": []
+        },
+        {
+          "id": "077839dc-6589-4750-af28-6b736497e7e5",
+          "label": "Maze",
+          "type": "category",
+          "menutype": "sub",
+          "index": 13,
+          "node": []
+        },
+        {
+          "id": "566b5145-412d-4793-9c04-1445ea449470",
+          "label": "Puzzles",
+          "type": "category",
+          "menutype": "sub",
+          "index": 14,
+          "node": []
+        },
+        {
+          "id": "16c779c0-9a28-4daf-8a80-ad8a14d39b0b",
+          "label": "Patterns",
+          "type": "category",
+          "menutype": "sub",
+          "index": 15,
+          "node": []
+        }
+      ]
+    },
+    {
+      "id": "00",
+      "label": "Year 3 - English",
+      "type": "category",
+      "node": [
+        {
+          "id": "c28c67b8-1ee9-49e1-bd0d-493ef8b07abe",
+          "label": "Letters & Sound",
+          "type": "category",
+          "icon": "icon_2.svg",
+          "menutype": "main",
+          "index": 10,
+          "node": [
+            {
+              "id": "chp-c1b6aec2-ca63-48b5-8942-43d8ea64131a",
+              "label": "A",
+              "type": "chapter",
+              "image": "Thumbnail_A.png",
+              "icon": "a.png",
+              "node": [
+                {
+                  "id": "DUMMYIDc082ae40-90a7-4089-a32b-9d435267a1b4",
+                  "label": "Story Time",
+                  "type": "teaching point",
+                  "icon": "story-time.svg",
+                  "node": [
+                    {
+                      "id": "01",
+                      "type": "application/x-mpegURL",
+                      "contenttype": "AV",
+                      "src": "//amssamples.streaming.mediaservices.windows.net/91492735-c523-432b-ba01-faba6c2206a2/AzureMediaServicesPromo.ism/manifest(format=m3u8-aapl-v3)",
+                      "image": "https://kohantextilejournal.com/wp-content/uploads/2018/04/video-poster.jpg",
+                      "title": "Story Time - AV One",
+                      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                      "skills": [
+                        "Observation",
+                        "Language"
+                      ],
+                      "TaggingLevel": "ECE1 > English > Letter & Sound",
+                      "ResourceOriginator": "TCE"
+                    },
+                    {
+                      "id": "02",
+                      "type": "",
+                      "contenttype": "Activity",
+                      "src": "https://game-templates.web.app/gamesRD/gamefloor1/games/memory_game/index.html",
+                      "image": "https://www.ubackground.com/_ph/11/442285041.jpg",
+                      "title": "Story Time - Activity",
+                      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                      "skills": [
+                        "Observation",
+                        "Language"
+                      ],
+                      "TaggingLevel": "ECE1 > English > Letter & Sound",
+                      "ResourceOriginator": "TCE"
+                    },
+                    {
+                      "id": "03",
+                      "type": "video/mp4",
+                      "contenttype": "AV",
+                      "src": "http://vjs.zencdn.net/v/oceans.mp4",
+                      "image": "https://googleads.github.io/videojs-ima/examples/posters/bbb_poster.jpg",
+                      "title": "Story Time - AV Two",
+                      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                      "skills": [
+                        "Observation",
+                        "Language"
+                      ],
+                      "TaggingLevel": "ECE1 > English > Letter & Sound",
+                      "ResourceOriginator": "TCE"
+                    }
+                  ]
+                },
+                {
+                  "id": "DUMMYIDeb45513e-684f-41fe-9382-f549a68c73b9",
+                  "label": "Sing Along",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "icon": "music-time.svg",
+                  "node": [
+                    {
+                      "id": "01",
+                      "type": "application/x-mpegURL",
+                      "contenttype": "AV",
+                      "src": "//amssamples.streaming.mediaservices.windows.net/91492735-c523-432b-ba01-faba6c2206a2/AzureMediaServicesPromo.ism/manifest(format=m3u8-aapl-v3)",
+                      "image": "https://kohantextilejournal.com/wp-content/uploads/2018/04/video-poster.jpg",
+                      "title": "Music Time - AV One",
+                      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                      "skills": [
+                        "Observation",
+                        "Language"
+                      ],
+                      "TaggingLevel": "ECE1 > English > Letter & Sound",
+                      "ResourceOriginator": "TCE"
+                    },
+                    {
+                      "id": "02",
+                      "type": "video/mp4",
+                      "contenttype": "AV",
+                      "src": "http://vjs.zencdn.net/v/oceans.mp4",
+                      "image": "https://googleads.github.io/videojs-ima/examples/posters/bbb_poster.jpg",
+                      "title": "Music Time - AV Two",
+                      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                      "skills": [
+                        "Observation",
+                        "Language"
+                      ],
+                      "TaggingLevel": "ECE1 > English > Letter & Sound",
+                      "ResourceOriginator": "TCE"
+                    }
+                  ]
+                },
+                {
+                  "id": "DUMMYIDde48911c-8323-45fc-8c21-f16b6c8870f3",
+                  "label": "Trace",
+                  "type": "teaching point",
+                  "icon": "trace-me.svg",
+                  "node": [
+                    {
+                      "id": "01",
+                      "type": "",
+                      "contenttype": "Activity",
+                      "src": "https://game-templates.web.app/gamesRD/gamefloor1/games/memory_game/index.html",
+                      "image": "https://www.ubackground.com/_ph/11/442285041.jpg",
+                      "title": "Trace - Activity",
+                      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                      "skills": [
+                        "Observation",
+                        "Language"
+                      ],
+                      "TaggingLevel": "ECE1 > English > Letter & Sound",
+                      "ResourceOriginator": "TCE"
+                    }
+                  ]
+                },
+                {
+                  "id": "DUMMYIDde48911c-8323-45fc-8c21-f16b6c8870f3",
+                  "label": "Object Bank",
+                  "type": "teaching point",
+                  "icon": "magic-box.svg",
+                  "node": [
+                    {
+                      "id": "01",
+                      "type": "application/x-mpegURL",
+                      "contenttype": "AV",
+                      "src": "//amssamples.streaming.mediaservices.windows.net/91492735-c523-432b-ba01-faba6c2206a2/AzureMediaServicesPromo.ism/manifest(format=m3u8-aapl-v3)",
+                      "image": "https://kohantextilejournal.com/wp-content/uploads/2018/04/video-poster.jpg",
+                      "title": "Object Bank - AV One",
+                      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                      "skills": [
+                        "Observation",
+                        "Language"
+                      ],
+                      "TaggingLevel": "ECE1 > English > Letter & Sound",
+                      "ResourceOriginator": "TCE"
+                    },
+                    {
+                      "id": "02",
+                      "type": "video/mp4",
+                      "contenttype": "AV",
+                      "src": "http://vjs.zencdn.net/v/oceans.mp4",
+                      "image": "https://googleads.github.io/videojs-ima/examples/posters/bbb_poster.jpg",
+                      "title": "Object Bank - AV Two",
+                      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                      "skills": [
+                        "Observation",
+                        "Language"
+                      ],
+                      "TaggingLevel": "ECE1 > English > Letter & Sound",
+                      "ResourceOriginator": "TCE"
+                    }
+                  ]
+                },
+                {
+                  "id": "DUMMYIDde48911c-8323-45fc-8c21-f16b6c8870f3",
+                  "label": "Catch",
+                  "type": "teaching point",
+                  "icon": "catch-game.svg",
+                  "node": [
+                    {
+                      "id": "01",
+                      "type": "application/x-mpegURL",
+                      "contenttype": "AV",
+                      "src": "//amssamples.streaming.mediaservices.windows.net/91492735-c523-432b-ba01-faba6c2206a2/AzureMediaServicesPromo.ism/manifest(format=m3u8-aapl-v3)",
+                      "image": "https://kohantextilejournal.com/wp-content/uploads/2018/04/video-poster.jpg",
+                      "title": "Catch - AV One",
+                      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                      "skills": [
+                        "Observation",
+                        "Language"
+                      ],
+                      "TaggingLevel": "ECE1 > English > Letter & Sound",
+                      "ResourceOriginator": "TCE"
+                    },
+                    {
+                      "id": "02",
+                      "type": "video/mp4",
+                      "contenttype": "AV",
+                      "src": "http://vjs.zencdn.net/v/oceans.mp4",
+                      "image": "https://googleads.github.io/videojs-ima/examples/posters/bbb_poster.jpg",
+                      "title": "Catch - AV Two",
+                      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                      "skills": [
+                        "Observation",
+                        "Language"
+                      ],
+                      "TaggingLevel": "ECE1 > English > Letter & Sound",
+                      "ResourceOriginator": "TCE"
+                    }
+                  ]
+                },
+                {
+                  "id": "DUMMYIDde48911c-8323-45fc-8c21-f16b6c8870f3",
+                  "label": "E-Book",
+                  "type": "teaching point",
+                  "icon": "e-book.svg",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-c3d6c920-b551-4412-88db-51c6abc22d1b",
+              "label": "B",
+              "type": "chapter",
+              "image": "Thumbnail_A.png",
+              "icon": "b.svg",
+              "node": []
+            },
+            {
+              "id": "chp-c3d6c920-b551-4412-88db-51c6abc22d1c",
+              "label": "C",
+              "type": "chapter",
+              "icon": "c.svg",
+              "node": []
+            },
+            {
+              "id": "chp-c3d6c920-b551-4412-88db-51c6abc22d1d",
+              "label": "D",
+              "type": "chapter",
+              "icon": "d.svg",
+              "node": []
+            },
+            {
+              "id": "chp-c3d6c920-b551-4412-88db-51c6abc22d1e",
+              "label": "E",
+              "type": "chapter",
+              "icon": "e.svg",
+              "node": []
+            },
+            {
+              "id": "chp-c3d6c920-b551-4412-88db-51c6abc22d1f",
+              "label": "F",
+              "type": "chapter",
+              "icon": "f.svg",
+              "node": []
+            },
+            {
+              "id": "chp-c3d6c920-b551-4412-88db-51c6abc22d1g",
+              "label": "G",
+              "type": "chapter",
+              "icon": "g.svg",
+              "node": []
+            },
+            {
+              "id": "chp-c3d6c920-b551-4412-88db-51c6abc22d1h",
+              "label": "H",
+              "type": "chapter",
+              "icon": "h.svg",
+              "node": []
+            },
+            {
+              "id": "chp-c3d6c920-b551-4412-88db-51c6abc22d1i",
+              "label": "I",
+              "type": "chapter",
+              "icon": "i.svg",
+              "node": []
+            },
+            {
+              "id": "chp-c3d6c920-b551-4412-88db-51c6abc22d1j",
+              "label": "J",
+              "type": "chapter",
+              "icon": "j.svg",
+              "node": []
+            },
+            {
+              "id": "chp-c3d6c920-b551-4412-88db-51c6abc22d1k",
+              "label": "K",
+              "type": "chapter",
+              "icon": "k.svg",
+              "node": []
+            },
+            {
+              "id": "chp-c3d6c920-b551-4412-88db-51c6abc22d1l",
+              "label": "L",
+              "type": "chapter",
+              "icon": "l.svg",
+              "node": []
+            },
+            {
+              "id": "chp-c3d6c920-b551-4412-88db-51c6abc22d1m",
+              "label": "M",
+              "type": "chapter",
+              "icon": "m.svg",
+              "node": []
+            },
+            {
+              "id": "chp-c3d6c920-b551-4412-88db-51c6abc22d1n",
+              "label": "N",
+              "type": "chapter",
+              "icon": "n.svg",
+              "node": []
+            },
+            {
+              "id": "chp-c3d6c920-b551-4412-88db-51c6abc22d1o",
+              "label": "O",
+              "type": "chapter",
+              "icon": "o.svg",
+              "node": []
+            },
+            {
+              "id": "chp-c3d6c920-b551-4412-88db-51c6abc22d1p",
+              "label": "P",
+              "type": "chapter",
+              "icon": "p.svg",
+              "node": []
+            },
+            {
+              "id": "chp-c3d6c920-b551-4412-88db-51c6abc22d1q",
+              "label": "Q",
+              "type": "chapter",
+              "icon": "q.svg",
+              "node": []
+            },
+            {
+              "id": "chp-c3d6c920-b551-4412-88db-51c6abc22d1r",
+              "label": "R",
+              "type": "chapter",
+              "icon": "r.svg",
+              "node": []
+            },
+            {
+              "id": "chp-c3d6c920-b551-4412-88db-51c6abc22d1s",
+              "label": "S",
+              "type": "chapter",
+              "icon": "s.svg",
+              "node": []
+            },
+            {
+              "id": "chp-c3d6c920-b551-4412-88db-51c6abc22d1t",
+              "label": "T",
+              "type": "chapter",
+              "icon": "t.svg",
+              "node": []
+            },
+            {
+              "id": "chp-c3d6c920-b551-4412-88db-51c6abc22d1u",
+              "label": "U",
+              "type": "chapter",
+              "icon": "u.svg",
+              "node": []
+            },
+            {
+              "id": "chp-c3d6c920-b551-4412-88db-51c6abc22d1v",
+              "label": "V",
+              "type": "chapter",
+              "icon": "v.svg",
+              "node": []
+            },
+            {
+              "id": "chp-c3d6c920-b551-4412-88db-51c6abc22d1w",
+              "label": "W",
+              "type": "chapter",
+              "icon": "w.svg",
+              "node": []
+            },
+            {
+              "id": "chp-c3d6c920-b551-4412-88db-51c6abc22d1x",
+              "label": "X",
+              "type": "chapter",
+              "icon": "x.svg",
+              "node": []
+            },
+            {
+              "id": "chp-c3d6c920-b551-4412-88db-51c6abc22d1y",
+              "label": "Y",
+              "type": "chapter",
+              "icon": "y.svg",
+              "node": []
+            },
+            {
+              "id": "chp-c3d6c920-b551-4412-88db-51c6abc22d1z",
+              "label": "Z",
+              "type": "chapter",
+              "icon": "z.svg",
+              "node": []
+            }
+          ]
+        },
+        {
+          "id": "d419dd60-b41b-4e55-a1db-52bf6317e943",
+          "label": "Ready to Write",
+          "type": "category",
+          "menutype": "main",
+          "icon": "icon_2.svg",
+          "index": 11,
+          "node": [
+            {
+              "id": "chp-4124ea68-dc3a-49be-99d9-c5c6960d22a4",
+              "label": "Primary Colour",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYIDdbfd83bf-d1ad-4fa1-97d3-b3eb810a498c",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDecf5ba6f-cbe6-41d5-8083-74f743e77b58",
+                  "label": "Activity",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-bbc4e957-be47-4015-869c-9f8513eba06e",
+              "label": "Green",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYID9491dadd-fad7-4b69-8451-7d393ff8ac5b",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDa3b2b75e-3e19-4918-a229-814d5bc5950a",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDae8b7c70-2b13-497e-93aa-cc9f255f4b65",
+                  "label": "Make Green",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-24a19db2-89c9-44a4-8ffc-c9377078b706",
+              "label": "Orange",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYID797d2ba7-606c-43ab-b6d8-3771dd11c064",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID1f31a9a7-cad5-40cd-a32a-4a78d52d7d23",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID5ec85d92-ac4f-4fa6-941e-4b5e3b52a80d",
+                  "label": "Make Orange",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-464051e3-33bb-434c-9c64-a1be54df8d02",
+              "label": "Purple",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYIDc9bccc67-ea23-46b0-826d-7ad2a474e159",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID2111c0b2-3768-400d-9a68-e1cdc9a50833",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID5fa55782-5f4c-4b8b-ab79-d1183b67b2fe",
+                  "label": "Make Purple",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-b08c56dd-2de2-4a5f-852c-0b8e75ed2c86",
+              "label": "Pink",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYID6ba913ca-4694-448a-8a4a-737ba9055193",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID0970c4c3-a3f4-45ed-a357-3d932880c32e",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDabb457a0-7abe-4edd-b6a4-5699cca67db7",
+                  "label": "Make Pink",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-1959854d-02f5-48d7-9f91-860dea1e6e67",
+              "label": "Fun with Colours",
+              "type": "chapter",
+              "node": []
+            }
+          ]
+        },
+        {
+          "id": "7c3aae21-c757-40a1-9f40-b28ceb38cf22",
+          "label": "Rhymes & Stories",
+          "type": "category",
+          "menutype": "main",
+          "icon": "icon_2.svg",
+          "index": 12,
+          "node": []
+        },
+        {
+          "id": "077839dc-6589-4750-af28-6b736497e7e5",
+          "label": "Picture Observation",
+          "type": "category",
+          "menutype": "sub",
+          "icon": "icon_2.svg",
+          "index": 13,
+          "node": []
+        },
+        {
+          "id": "566b5145-412d-4793-9c04-1445ea449470",
+          "label": "Sound Gym",
+          "type": "category",
+          "menutype": "sub",
+          "icon": "icon_2.svg",
+          "index": 14,
+          "node": []
+        },
+        {
+          "id": "16c779c0-9a28-4daf-8a80-ad8a14d39b0b",
+          "label": "Conversation Skills",
+          "type": "category",
+          "menutype": "sub",
+          "icon": "icon_2.svg",
+          "index": 15,
+          "node": []
+        }
+      ]
+    },
+    {
+      "id": "01",
+      "label": "Year 3 - Numeracy and Reasoning",
+      "type": "category",
+      "node": [
+        {
+          "id": "c28c67b8-1ee9-49e1-bd0d-493ef8b07abe",
+          "label": "Dummy Book 1",
+          "type": "category",
+          "menutype": "main",
+          "index": 10,
+          "node": [
+            {
+              "id": "chp-c1b6aec2-ca63-48b5-8942-43d8ea64131f",
+              "label": "Numbers 1-10",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYIDa2e50061-792a-4c84-8af1-fe7d7467b5bd",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID5925042b-ee03-4db0-b81f-3b48eef76b98",
+                  "label": "Count Aloud",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDd4808d47-ed41-4285-8845-64b81db583be",
+                  "label": "Compare Numbers",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDaedc196e-95b4-4918-b3ab-38be2df1a186",
+                  "label": "Missing Numbers",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDb3f2cbf2-4d5f-40d3-a7c9-8050b8729392",
+                  "label": "Addition",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID4531a0d6-ddf9-4752-9023-90c5aff2bae2",
+                  "label": "Just After",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID6489d67c-1c9e-440e-8795-10d74113b046",
+                  "label": "Number Stories",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID59b8dfb6-bf42-4b28-8c8e-8192ed25a653",
+                  "label": "In Between",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID3b3de49c-0267-4208-8c02-0c894fa7afe2",
+                  "label": "Skip Count",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID3f6dff42-e3ea-4927-a903-da410ef4ad9f",
+                  "label": "Tens and Ones",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID477e118e-cfac-4250-9e60-153daf5421b8",
+                  "label": "Substration",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID29b0b1fa-9227-4f33-9a1d-94587359e455",
+                  "label": "Order Numbers",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDd57c5b46-2e98-4d80-aee2-95a1bb53d4ab",
+                  "label": "Number bond",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-c3d6c920-b551-4412-88db-51c6abc22d1e",
+              "label": "Numbers 11-20",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYID88671215-7f22-4aad-9ba9-f89061097a58",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID6483bdf0-49aa-4bd6-97ff-f70f157686ff",
+                  "label": "Count Aloud",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDa593445e-ad5a-48af-a1bd-1717e20fdddf",
+                  "label": "Compare Numbers",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID04c1a061-c4bc-470a-9ce1-39edf481efc6",
+                  "label": "Missing Numbers",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID4c4aacfe-ee35-48d2-b956-cb254c51a077",
+                  "label": "Addition",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDc98e86b3-ae29-4ff0-a9d5-e3436e430578",
+                  "label": "Just After",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID425bf754-525d-4973-9685-caaa6553299c",
+                  "label": "Number Stories",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDea4b9eba-765a-46ad-a161-7583ce4569ce",
+                  "label": "In Between",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID43bdc6af-e768-4b64-9b2b-bbddb5f19143",
+                  "label": "Skip Count",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDb18f146e-a50a-4299-8ab9-b006cb16b816",
+                  "label": "Tens and Ones",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDd5c448d8-9131-4ed9-b8e1-4c8625c1544e",
+                  "label": "Substration",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID6b313a58-d272-44dd-901c-94a3a9ac851e",
+                  "label": "Order Numbers",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID78e38118-e110-439d-96d7-7fa651949010",
+                  "label": "Number bond",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "d419dd60-b41b-4e55-a1db-52bf6317e943",
+          "label": "Dummy Book 2",
+          "type": "category",
+          "menutype": "main",
+          "index": 11,
+          "node": [
+            {
+              "id": "chp-4124ea68-dc3a-49be-99d9-c5c6960d22a4",
+              "label": "Primary Colour",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYIDdbfd83bf-d1ad-4fa1-97d3-b3eb810a498c",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDecf5ba6f-cbe6-41d5-8083-74f743e77b58",
+                  "label": "Activity",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-bbc4e957-be47-4015-869c-9f8513eba06e",
+              "label": "Green",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYID9491dadd-fad7-4b69-8451-7d393ff8ac5b",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDa3b2b75e-3e19-4918-a229-814d5bc5950a",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDae8b7c70-2b13-497e-93aa-cc9f255f4b65",
+                  "label": "Make Green",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-24a19db2-89c9-44a4-8ffc-c9377078b706",
+              "label": "Orange",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYID797d2ba7-606c-43ab-b6d8-3771dd11c064",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID1f31a9a7-cad5-40cd-a32a-4a78d52d7d23",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID5ec85d92-ac4f-4fa6-941e-4b5e3b52a80d",
+                  "label": "Make Orange",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-464051e3-33bb-434c-9c64-a1be54df8d02",
+              "label": "Purple",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYIDc9bccc67-ea23-46b0-826d-7ad2a474e159",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID2111c0b2-3768-400d-9a68-e1cdc9a50833",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID5fa55782-5f4c-4b8b-ab79-d1183b67b2fe",
+                  "label": "Make Purple",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-b08c56dd-2de2-4a5f-852c-0b8e75ed2c86",
+              "label": "Pink",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYID6ba913ca-4694-448a-8a4a-737ba9055193",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID0970c4c3-a3f4-45ed-a357-3d932880c32e",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDabb457a0-7abe-4edd-b6a4-5699cca67db7",
+                  "label": "Make Pink",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-1959854d-02f5-48d7-9f91-860dea1e6e67",
+              "label": "Fun with Colours",
+              "type": "chapter",
+              "node": []
+            }
+          ]
+        },
+        {
+          "id": "7c3aae21-c757-40a1-9f40-b28ceb38cf22",
+          "label": "Dummy Book 3",
+          "type": "category",
+          "menutype": "main",
+          "index": 12,
+          "node": []
+        },
+        {
+          "id": "077839dc-6589-4750-af28-6b736497e7e5",
+          "label": "Dummy Asset 1",
+          "type": "category",
+          "menutype": "sub",
+          "index": 13,
+          "node": []
+        },
+        {
+          "id": "566b5145-412d-4793-9c04-1445ea449470",
+          "label": "Dummy Asset 2",
+          "type": "category",
+          "menutype": "sub",
+          "index": 14,
+          "node": []
+        },
+        {
+          "id": "16c779c0-9a28-4daf-8a80-ad8a14d39b0b",
+          "label": "Dummy Asset 3",
+          "type": "category",
+          "menutype": "sub",
+          "index": 15,
+          "node": []
+        }
+      ]
+    },
+    {
+      "id": "02",
+      "label": "Year 3 - Numeracy and Reasoning",
+      "type": "category",
+      "node": [
+        {
+          "id": "c28c67b8-1ee9-49e1-bd0d-493ef8b07abe",
+          "label": "Dummy Book 1",
+          "type": "category",
+          "menutype": "main",
+          "index": 10,
+          "node": [
+            {
+              "id": "chp-c1b6aec2-ca63-48b5-8942-43d8ea64131f",
+              "label": "Numbers 1-10",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYIDa2e50061-792a-4c84-8af1-fe7d7467b5bd",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID5925042b-ee03-4db0-b81f-3b48eef76b98",
+                  "label": "Count Aloud",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDd4808d47-ed41-4285-8845-64b81db583be",
+                  "label": "Compare Numbers",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDaedc196e-95b4-4918-b3ab-38be2df1a186",
+                  "label": "Missing Numbers",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDb3f2cbf2-4d5f-40d3-a7c9-8050b8729392",
+                  "label": "Addition",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID4531a0d6-ddf9-4752-9023-90c5aff2bae2",
+                  "label": "Just After",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID6489d67c-1c9e-440e-8795-10d74113b046",
+                  "label": "Number Stories",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID59b8dfb6-bf42-4b28-8c8e-8192ed25a653",
+                  "label": "In Between",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID3b3de49c-0267-4208-8c02-0c894fa7afe2",
+                  "label": "Skip Count",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID3f6dff42-e3ea-4927-a903-da410ef4ad9f",
+                  "label": "Tens and Ones",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID477e118e-cfac-4250-9e60-153daf5421b8",
+                  "label": "Substration",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID29b0b1fa-9227-4f33-9a1d-94587359e455",
+                  "label": "Order Numbers",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDd57c5b46-2e98-4d80-aee2-95a1bb53d4ab",
+                  "label": "Number bond",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-c3d6c920-b551-4412-88db-51c6abc22d1e",
+              "label": "Numbers 11-20",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYID88671215-7f22-4aad-9ba9-f89061097a58",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID6483bdf0-49aa-4bd6-97ff-f70f157686ff",
+                  "label": "Count Aloud",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDa593445e-ad5a-48af-a1bd-1717e20fdddf",
+                  "label": "Compare Numbers",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID04c1a061-c4bc-470a-9ce1-39edf481efc6",
+                  "label": "Missing Numbers",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID4c4aacfe-ee35-48d2-b956-cb254c51a077",
+                  "label": "Addition",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDc98e86b3-ae29-4ff0-a9d5-e3436e430578",
+                  "label": "Just After",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID425bf754-525d-4973-9685-caaa6553299c",
+                  "label": "Number Stories",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDea4b9eba-765a-46ad-a161-7583ce4569ce",
+                  "label": "In Between",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID43bdc6af-e768-4b64-9b2b-bbddb5f19143",
+                  "label": "Skip Count",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDb18f146e-a50a-4299-8ab9-b006cb16b816",
+                  "label": "Tens and Ones",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDd5c448d8-9131-4ed9-b8e1-4c8625c1544e",
+                  "label": "Substration",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID6b313a58-d272-44dd-901c-94a3a9ac851e",
+                  "label": "Order Numbers",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID78e38118-e110-439d-96d7-7fa651949010",
+                  "label": "Number bond",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "d419dd60-b41b-4e55-a1db-52bf6317e943",
+          "label": "Dummy Book 2",
+          "type": "category",
+          "menutype": "main",
+          "index": 11,
+          "node": [
+            {
+              "id": "chp-4124ea68-dc3a-49be-99d9-c5c6960d22a4",
+              "label": "Primary Colour",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYIDdbfd83bf-d1ad-4fa1-97d3-b3eb810a498c",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDecf5ba6f-cbe6-41d5-8083-74f743e77b58",
+                  "label": "Activity",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-bbc4e957-be47-4015-869c-9f8513eba06e",
+              "label": "Green",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYID9491dadd-fad7-4b69-8451-7d393ff8ac5b",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDa3b2b75e-3e19-4918-a229-814d5bc5950a",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDae8b7c70-2b13-497e-93aa-cc9f255f4b65",
+                  "label": "Make Green",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-24a19db2-89c9-44a4-8ffc-c9377078b706",
+              "label": "Orange",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYID797d2ba7-606c-43ab-b6d8-3771dd11c064",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID1f31a9a7-cad5-40cd-a32a-4a78d52d7d23",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID5ec85d92-ac4f-4fa6-941e-4b5e3b52a80d",
+                  "label": "Make Orange",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-464051e3-33bb-434c-9c64-a1be54df8d02",
+              "label": "Purple",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYIDc9bccc67-ea23-46b0-826d-7ad2a474e159",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID2111c0b2-3768-400d-9a68-e1cdc9a50833",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID5fa55782-5f4c-4b8b-ab79-d1183b67b2fe",
+                  "label": "Make Purple",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-b08c56dd-2de2-4a5f-852c-0b8e75ed2c86",
+              "label": "Pink",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYID6ba913ca-4694-448a-8a4a-737ba9055193",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID0970c4c3-a3f4-45ed-a357-3d932880c32e",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDabb457a0-7abe-4edd-b6a4-5699cca67db7",
+                  "label": "Make Pink",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-1959854d-02f5-48d7-9f91-860dea1e6e67",
+              "label": "Fun with Colours",
+              "type": "chapter",
+              "node": []
+            }
+          ]
+        },
+        {
+          "id": "7c3aae21-c757-40a1-9f40-b28ceb38cf22",
+          "label": "Dummy Book 3",
+          "type": "category",
+          "menutype": "main",
+          "index": 12,
+          "node": []
+        },
+        {
+          "id": "077839dc-6589-4750-af28-6b736497e7e5",
+          "label": "Dummy Asset 1",
+          "type": "category",
+          "menutype": "sub",
+          "index": 13,
+          "node": []
+        },
+        {
+          "id": "566b5145-412d-4793-9c04-1445ea449470",
+          "label": "Dummy Asset 2",
+          "type": "category",
+          "menutype": "sub",
+          "index": 14,
+          "node": []
+        },
+        {
+          "id": "16c779c0-9a28-4daf-8a80-ad8a14d39b0b",
+          "label": "Dummy Asset 3",
+          "type": "category",
+          "menutype": "sub",
+          "index": 15,
+          "node": []
+        }
+      ]
+    },
+    {
+      "id": "03",
+      "label": "Year 3 - Numeracy and Reasoning",
+      "type": "category",
+      "node": [
+        {
+          "id": "c28c67b8-1ee9-49e1-bd0d-493ef8b07abe",
+          "label": "Dummy Book 1",
+          "type": "category",
+          "menutype": "main",
+          "index": 10,
+          "node": [
+            {
+              "id": "chp-c1b6aec2-ca63-48b5-8942-43d8ea64131f",
+              "label": "Numbers 1-10",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYIDa2e50061-792a-4c84-8af1-fe7d7467b5bd",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID5925042b-ee03-4db0-b81f-3b48eef76b98",
+                  "label": "Count Aloud",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDd4808d47-ed41-4285-8845-64b81db583be",
+                  "label": "Compare Numbers",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDaedc196e-95b4-4918-b3ab-38be2df1a186",
+                  "label": "Missing Numbers",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDb3f2cbf2-4d5f-40d3-a7c9-8050b8729392",
+                  "label": "Addition",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID4531a0d6-ddf9-4752-9023-90c5aff2bae2",
+                  "label": "Just After",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID6489d67c-1c9e-440e-8795-10d74113b046",
+                  "label": "Number Stories",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID59b8dfb6-bf42-4b28-8c8e-8192ed25a653",
+                  "label": "In Between",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID3b3de49c-0267-4208-8c02-0c894fa7afe2",
+                  "label": "Skip Count",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID3f6dff42-e3ea-4927-a903-da410ef4ad9f",
+                  "label": "Tens and Ones",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID477e118e-cfac-4250-9e60-153daf5421b8",
+                  "label": "Substration",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID29b0b1fa-9227-4f33-9a1d-94587359e455",
+                  "label": "Order Numbers",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDd57c5b46-2e98-4d80-aee2-95a1bb53d4ab",
+                  "label": "Number bond",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-c3d6c920-b551-4412-88db-51c6abc22d1e",
+              "label": "Numbers 11-20",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYID88671215-7f22-4aad-9ba9-f89061097a58",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID6483bdf0-49aa-4bd6-97ff-f70f157686ff",
+                  "label": "Count Aloud",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDa593445e-ad5a-48af-a1bd-1717e20fdddf",
+                  "label": "Compare Numbers",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID04c1a061-c4bc-470a-9ce1-39edf481efc6",
+                  "label": "Missing Numbers",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID4c4aacfe-ee35-48d2-b956-cb254c51a077",
+                  "label": "Addition",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDc98e86b3-ae29-4ff0-a9d5-e3436e430578",
+                  "label": "Just After",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID425bf754-525d-4973-9685-caaa6553299c",
+                  "label": "Number Stories",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDea4b9eba-765a-46ad-a161-7583ce4569ce",
+                  "label": "In Between",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID43bdc6af-e768-4b64-9b2b-bbddb5f19143",
+                  "label": "Skip Count",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDb18f146e-a50a-4299-8ab9-b006cb16b816",
+                  "label": "Tens and Ones",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDd5c448d8-9131-4ed9-b8e1-4c8625c1544e",
+                  "label": "Substration",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID6b313a58-d272-44dd-901c-94a3a9ac851e",
+                  "label": "Order Numbers",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID78e38118-e110-439d-96d7-7fa651949010",
+                  "label": "Number bond",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "d419dd60-b41b-4e55-a1db-52bf6317e943",
+          "label": "Dummy Book 2",
+          "type": "category",
+          "menutype": "main",
+          "index": 11,
+          "node": [
+            {
+              "id": "chp-4124ea68-dc3a-49be-99d9-c5c6960d22a4",
+              "label": "Primary Colour",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYIDdbfd83bf-d1ad-4fa1-97d3-b3eb810a498c",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDecf5ba6f-cbe6-41d5-8083-74f743e77b58",
+                  "label": "Activity",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-bbc4e957-be47-4015-869c-9f8513eba06e",
+              "label": "Green",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYID9491dadd-fad7-4b69-8451-7d393ff8ac5b",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDa3b2b75e-3e19-4918-a229-814d5bc5950a",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDae8b7c70-2b13-497e-93aa-cc9f255f4b65",
+                  "label": "Make Green",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-24a19db2-89c9-44a4-8ffc-c9377078b706",
+              "label": "Orange",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYID797d2ba7-606c-43ab-b6d8-3771dd11c064",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID1f31a9a7-cad5-40cd-a32a-4a78d52d7d23",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID5ec85d92-ac4f-4fa6-941e-4b5e3b52a80d",
+                  "label": "Make Orange",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-464051e3-33bb-434c-9c64-a1be54df8d02",
+              "label": "Purple",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYIDc9bccc67-ea23-46b0-826d-7ad2a474e159",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID2111c0b2-3768-400d-9a68-e1cdc9a50833",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID5fa55782-5f4c-4b8b-ab79-d1183b67b2fe",
+                  "label": "Make Purple",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-b08c56dd-2de2-4a5f-852c-0b8e75ed2c86",
+              "label": "Pink",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYID6ba913ca-4694-448a-8a4a-737ba9055193",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID0970c4c3-a3f4-45ed-a357-3d932880c32e",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDabb457a0-7abe-4edd-b6a4-5699cca67db7",
+                  "label": "Make Pink",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-1959854d-02f5-48d7-9f91-860dea1e6e67",
+              "label": "Fun with Colours",
+              "type": "chapter",
+              "node": []
+            }
+          ]
+        },
+        {
+          "id": "7c3aae21-c757-40a1-9f40-b28ceb38cf22",
+          "label": "Dummy Book 3",
+          "type": "category",
+          "menutype": "main",
+          "index": 12,
+          "node": []
+        },
+        {
+          "id": "077839dc-6589-4750-af28-6b736497e7e5",
+          "label": "Dummy Asset 1",
+          "type": "category",
+          "menutype": "sub",
+          "index": 13,
+          "node": []
+        },
+        {
+          "id": "566b5145-412d-4793-9c04-1445ea449470",
+          "label": "Dummy Asset 2",
+          "type": "category",
+          "menutype": "sub",
+          "index": 14,
+          "node": []
+        },
+        {
+          "id": "16c779c0-9a28-4daf-8a80-ad8a14d39b0b",
+          "label": "Dummy Asset 3",
+          "type": "category",
+          "menutype": "sub",
+          "index": 15,
+          "node": []
+        }
+      ]
+    },
+    {
+      "id": "04",
+      "label": "Year 3 - Numeracy and Reasoning",
+      "type": "category",
+      "node": [
+        {
+          "id": "c28c67b8-1ee9-49e1-bd0d-493ef8b07abe",
+          "label": "Dummy Book 1",
+          "type": "category",
+          "menutype": "main",
+          "index": 10,
+          "node": [
+            {
+              "id": "chp-c1b6aec2-ca63-48b5-8942-43d8ea64131f",
+              "label": "Numbers 1-10",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYIDa2e50061-792a-4c84-8af1-fe7d7467b5bd",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID5925042b-ee03-4db0-b81f-3b48eef76b98",
+                  "label": "Count Aloud",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDd4808d47-ed41-4285-8845-64b81db583be",
+                  "label": "Compare Numbers",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDaedc196e-95b4-4918-b3ab-38be2df1a186",
+                  "label": "Missing Numbers",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDb3f2cbf2-4d5f-40d3-a7c9-8050b8729392",
+                  "label": "Addition",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID4531a0d6-ddf9-4752-9023-90c5aff2bae2",
+                  "label": "Just After",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID6489d67c-1c9e-440e-8795-10d74113b046",
+                  "label": "Number Stories",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID59b8dfb6-bf42-4b28-8c8e-8192ed25a653",
+                  "label": "In Between",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID3b3de49c-0267-4208-8c02-0c894fa7afe2",
+                  "label": "Skip Count",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID3f6dff42-e3ea-4927-a903-da410ef4ad9f",
+                  "label": "Tens and Ones",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID477e118e-cfac-4250-9e60-153daf5421b8",
+                  "label": "Substration",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID29b0b1fa-9227-4f33-9a1d-94587359e455",
+                  "label": "Order Numbers",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDd57c5b46-2e98-4d80-aee2-95a1bb53d4ab",
+                  "label": "Number bond",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-c3d6c920-b551-4412-88db-51c6abc22d1e",
+              "label": "Numbers 11-20",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYID88671215-7f22-4aad-9ba9-f89061097a58",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID6483bdf0-49aa-4bd6-97ff-f70f157686ff",
+                  "label": "Count Aloud",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDa593445e-ad5a-48af-a1bd-1717e20fdddf",
+                  "label": "Compare Numbers",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID04c1a061-c4bc-470a-9ce1-39edf481efc6",
+                  "label": "Missing Numbers",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID4c4aacfe-ee35-48d2-b956-cb254c51a077",
+                  "label": "Addition",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDc98e86b3-ae29-4ff0-a9d5-e3436e430578",
+                  "label": "Just After",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID425bf754-525d-4973-9685-caaa6553299c",
+                  "label": "Number Stories",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDea4b9eba-765a-46ad-a161-7583ce4569ce",
+                  "label": "In Between",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID43bdc6af-e768-4b64-9b2b-bbddb5f19143",
+                  "label": "Skip Count",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDb18f146e-a50a-4299-8ab9-b006cb16b816",
+                  "label": "Tens and Ones",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDd5c448d8-9131-4ed9-b8e1-4c8625c1544e",
+                  "label": "Substration",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID6b313a58-d272-44dd-901c-94a3a9ac851e",
+                  "label": "Order Numbers",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID78e38118-e110-439d-96d7-7fa651949010",
+                  "label": "Number bond",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "d419dd60-b41b-4e55-a1db-52bf6317e943",
+          "label": "Dummy Book 2",
+          "type": "category",
+          "menutype": "main",
+          "index": 11,
+          "node": [
+            {
+              "id": "chp-4124ea68-dc3a-49be-99d9-c5c6960d22a4",
+              "label": "Primary Colour",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYIDdbfd83bf-d1ad-4fa1-97d3-b3eb810a498c",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDecf5ba6f-cbe6-41d5-8083-74f743e77b58",
+                  "label": "Activity",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-bbc4e957-be47-4015-869c-9f8513eba06e",
+              "label": "Green",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYID9491dadd-fad7-4b69-8451-7d393ff8ac5b",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDa3b2b75e-3e19-4918-a229-814d5bc5950a",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDae8b7c70-2b13-497e-93aa-cc9f255f4b65",
+                  "label": "Make Green",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-24a19db2-89c9-44a4-8ffc-c9377078b706",
+              "label": "Orange",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYID797d2ba7-606c-43ab-b6d8-3771dd11c064",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID1f31a9a7-cad5-40cd-a32a-4a78d52d7d23",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID5ec85d92-ac4f-4fa6-941e-4b5e3b52a80d",
+                  "label": "Make Orange",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-464051e3-33bb-434c-9c64-a1be54df8d02",
+              "label": "Purple",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYIDc9bccc67-ea23-46b0-826d-7ad2a474e159",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID2111c0b2-3768-400d-9a68-e1cdc9a50833",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID5fa55782-5f4c-4b8b-ab79-d1183b67b2fe",
+                  "label": "Make Purple",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-b08c56dd-2de2-4a5f-852c-0b8e75ed2c86",
+              "label": "Pink",
+              "type": "chapter",
+              "node": [
+                {
+                  "id": "DUMMYID6ba913ca-4694-448a-8a4a-737ba9055193",
+                  "label": "Introduction",
+                  "type": "teaching point",
+                  "treatment": "splash",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYID0970c4c3-a3f4-45ed-a357-3d932880c32e",
+                  "label": "Rhyme time",
+                  "type": "teaching point",
+                  "node": []
+                },
+                {
+                  "id": "DUMMYIDabb457a0-7abe-4edd-b6a4-5699cca67db7",
+                  "label": "Make Pink",
+                  "type": "teaching point",
+                  "node": []
+                }
+              ]
+            },
+            {
+              "id": "chp-1959854d-02f5-48d7-9f91-860dea1e6e67",
+              "label": "Fun with Colours",
+              "type": "chapter",
+              "node": []
+            }
+          ]
+        },
+        {
+          "id": "7c3aae21-c757-40a1-9f40-b28ceb38cf22",
+          "label": "Dummy Book 3",
+          "type": "category",
+          "menutype": "main",
+          "index": 12,
+          "node": []
+        },
+        {
+          "id": "077839dc-6589-4750-af28-6b736497e7e5",
+          "label": "Dummy Asset 1",
+          "type": "category",
+          "menutype": "sub",
+          "index": 13,
+          "node": []
+        },
+        {
+          "id": "566b5145-412d-4793-9c04-1445ea449470",
+          "label": "Dummy Asset 2",
+          "type": "category",
+          "menutype": "sub",
+          "index": 14,
+          "node": []
+        },
+        {
+          "id": "16c779c0-9a28-4daf-8a80-ad8a14d39b0b",
+          "label": "Dummy Asset 3",
+          "type": "category",
+          "menutype": "sub",
+          "index": 15,
+          "node": []
+        }
+      ]
+    }
+  ],
+  "Resources": [
+    {
+      "id": "32a5d703-5fb8-4b11-b78c-177e9a773b54",
+      "node": [
+        {
+          "id": "01",
+          "type": "application/x-mpegURL",
+          "contenttype": "AV",
+          "src": "//amssamples.streaming.mediaservices.windows.net/91492735-c523-432b-ba01-faba6c2206a2/AzureMediaServicesPromo.ism/manifest(format=m3u8-aapl-v3)",
+          "image": "https://kohantextilejournal.com/wp-content/uploads/2018/04/video-poster.jpg",
+          "title": "Shared Resource",
+          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+          "skills": [
+            "Observation",
+            "Language"
+          ],
+          "TaggingLevel": "ECE1 > English > Letter & Sound",
+          "ResourceOriginator": "Shared"
+        },
+        {
+          "id": "02",
+          "type": "video/mp4",
+          "contenttype": "AV",
+          "src": "http://vjs.zencdn.net/v/oceans.mp4",
+          "image": "https://googleads.github.io/videojs-ima/examples/posters/bbb_poster.jpg",
+          "title": "My Resource",
+          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+          "skills": [
+            "Observation",
+            "Language"
+          ],
+          "TaggingLevel": "ECE1 > English > Letter & Sound > 1",
+          "ResourceOriginator": "My"
+        }
+      ]
+    },
+    {
+      "id": "c28c67b8-1ee9-49e1-bd0d-493ef8b07abe",
+      "node": [
+        {
+          "id": "01",
+          "type": "application/x-mpegURL",
+          "contenttype": "AV",
+          "src": "//amssamples.streaming.mediaservices.windows.net/91492735-c523-432b-ba01-faba6c2206a2/AzureMediaServicesPromo.ism/manifest(format=m3u8-aapl-v3)",
+          "image": "https://kohantextilejournal.com/wp-content/uploads/2018/04/video-poster.jpg",
+          "title": "Shared Resource",
+          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+          "skills": [
+            "Observation",
+            "Language"
+          ],
+          "TaggingLevel": "ECE1 > English > Letter & Sound",
+          "ResourceOriginator": "Shared"
+        },
+        {
+          "id": "02",
+          "type": "video/mp4",
+          "contenttype": "AV",
+          "src": "http://vjs.zencdn.net/v/oceans.mp4",
+          "image": "https://googleads.github.io/videojs-ima/examples/posters/bbb_poster.jpg",
+          "title": "My Resource",
+          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+          "skills": [
+            "Observation",
+            "Language"
+          ],
+          "TaggingLevel": "ECE1 > English > Letter & Sound > 1",
+          "ResourceOriginator": "My"
+        }
+      ]
+    }
+  ]
+}

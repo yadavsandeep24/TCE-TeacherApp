@@ -1,0 +1,61 @@
+package com.tce.teacherapp.api.response
+
+import com.google.gson.annotations.Expose
+import com.tce.teacherapp.db.entity.NodeXXX
+
+class NodeXXXResponse(
+
+    @Expose
+    val ResourceOriginator: String,
+
+    @Expose
+    val TaggingLevel: String,
+
+    @Expose
+    val contenttype: String,
+
+    @Expose
+    val description: String,
+
+    @Expose
+    val id: String,
+
+    @Expose
+    val image: String?,
+
+    @Expose
+    val skills: List<String>,
+
+    @Expose
+    val src: String,
+
+    @Expose
+    val title: String,
+
+    @Expose
+    val type: String
+) {
+    fun toNodeXXX(
+        bookId: String,
+        nodeID: String,
+        nodeXId: String,
+        nodeXXId: String
+    ): NodeXXX {
+        return NodeXXX(
+            ResourceOriginator = ResourceOriginator,
+            TaggingLevel = TaggingLevel,
+            contenttype = contenttype,
+            description = description,
+            id = id,
+            image = image,
+            skills = skills,
+            src = src,
+            title = title,
+            type = type,
+            nodexxId = nodeXXId,
+            nodexId = nodeXId,
+            nodeId = nodeID,
+            bookId = bookId
+        )
+    }
+}

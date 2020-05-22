@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">TeacherApp</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+
+    <string name="LoginNavHost">LoginNavHost</string>
+
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_messages">Messages</string>
+    <string name="title_subjects">Subjects</string>
+    <string name="title_students">Students</string>
+    <string name="title_planner">Planner</string>
+
+    <string-array name="support_type">
+        <item>Year 1</item>
+        <item>Year 2</item>
+    </string-array>
+
+    <string name="text_error">Error</string>
+    <string name="text_success">Success</string>
+    <string name="text_ok">OK</string>
+    <string name="text_cancel">Cancel</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="text_yes">yes</string>
+    <string name="text_info">Info</string>
 </resources>

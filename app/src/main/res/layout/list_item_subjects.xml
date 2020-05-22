@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:layout_width="130dp"
+    android:layout_height="130dp"
+    android:layout_margin="20dp"
+    android:background="@android:color/transparent"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_course"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        card_view:cardCornerRadius="20dp"
+        card_view:cardElevation="20dp"
+        card_view:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/subject_list_item_gradient_bg">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_subject"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"
+                android:scaleType="fitXY" />
+
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:id="@+id/tv_subjects_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="#001e28"
+                android:gravity="center"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textSize="@dimen/font_size_14_dp"
+                android:layout_alignParentBottom="true"
+                android:text="Subject Title 1 dsds sd sds dsdssds " />
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+    >
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/main_fragments_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/bottom_navigation_view" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:theme="@style/Widget.BottomNavigationView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:id="@+id/bottom_navigation_view"
+            android:layout_width="match_parent"
+            android:layout_marginTop="-15dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/bg_white_rounded_top_right"
+            app:labelVisibilityMode="labeled"
+            app:itemTextColor="@color/bottom_nav_selector"
+            app:itemIconTint="@color/bottom_nav_selector"
+            app:menu="@menu/dashboard_bottom_navigation_menu" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/progress_bar"
+            android:layout_centerInParent="true"
+            android:visibility="visible" />
+    </RelativeLayout>
+</layout>
