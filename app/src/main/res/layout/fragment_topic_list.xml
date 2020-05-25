@@ -6,30 +6,8 @@
         android:layout_width="match_parent"
         android:background="#fff0eb"
         android:layout_height="match_parent"
+        android:paddingTop="?android:attr/actionBarSize"
         tools:context=".ui.dashboard.subjects.SubjectListFragment">
-
-        <RelativeLayout
-            android:id="@+id/top_container"
-            android:layout_width="match_parent"
-            android:layout_height="?android:attr/actionBarSize"
-            android:background="@color/subject_actionbar_color">
-
-            <TextView
-                android:id="@+id/tv_back"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_centerVertical="true"
-                android:background="@drawable/ic_thick_arrow_left" />
-
-            <com.tce.teacherapp.util.RubikBoldTextview
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:textColor="#ffffff"
-                android:textAllCaps="false"
-                android:textSize="@dimen/font_size_16_dp"
-                android:id="@+id/tv_topic_title" />
-        </RelativeLayout>
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/sv_topic"

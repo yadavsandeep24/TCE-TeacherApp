@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -23,6 +24,7 @@ import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentTopicListBinding
 import com.tce.teacherapp.db.entity.Subject
 import com.tce.teacherapp.ui.BaseFragment
+import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.subjects.adapter.SubjectListEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.subjects.adapter.topicListEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.subjects.state.SUBJECT_VIEW_STATE_BUNDLE_KEY
@@ -43,6 +45,8 @@ constructor(
 ) : BaseFragment(R.layout.fragment_topic_list) {
 
     private lateinit var binding: FragmentTopicListBinding
+
+    private lateinit var tvBack :TextView
 
     private val viewModel: SubjectsViewModel by viewModels {
         viewModelFactory
@@ -89,10 +93,21 @@ constructor(
         } else {
             activity?.window!!.statusBarColor = resources.getColor(R.color.color_black)
         }
-        binding.tvBack.setOnClickListener {
+        (activity as DashboardActivity).setCustomToolbar(R.layout.subject_list_top_bar)
+        (activity as DashboardActivity).expandAppBar(true)
+
+        val spnDivision =  (activity as DashboardActivity).binding.toolBar.findViewById<AppCompatSpinner>(R.id.spn_division)
+        spnDivision.visibility = View.GONE
+
+        val tvBack = (activity as DashboardActivity).binding.toolBar.findViewById<TextView>(R.id.tv_back)
+        tvBack.visibility = View.VISIBLE
+
+        val tvTopicTitle = (activity as DashboardActivity).binding.toolBar.findViewById<TextView>(R.id.toolbar_title)
+
+        tvBack.setOnClickListener {
             activity?.onBackPressed()
         }
-        binding.tvTopicTitle.text = subjectVo!!.title
+        tvTopicTitle.text = subjectVo!!.title
 
         val searchText: TextView = binding.svTopic.findViewById(R.id.search_src_text) as TextView
         val myCustomFont: Typeface =

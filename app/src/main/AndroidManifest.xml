@@ -8,7 +8,6 @@
         android:name=".BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
@@ -17,11 +16,11 @@
         tools:targetApi="m">
         <activity
             android:name=".ui.dashboard.DashboardActivity"
-            android:theme="@style/AppTheme_NoActionBar"
+            android:theme="@style/AppThemeTCE"
             android:screenOrientation="sensorPortrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".ui.auth.LauncherActivity"
+            android:name=".ui.login.LauncherActivity"
             android:screenOrientation="sensorPortrait"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>

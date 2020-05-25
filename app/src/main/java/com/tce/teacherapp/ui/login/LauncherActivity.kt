@@ -1,4 +1,4 @@
-package com.tce.teacherapp.ui.auth
+package com.tce.teacherapp.ui.login
 
 import android.os.Bundle
 import androidx.fragment.app.FragmentFactory
@@ -34,7 +34,7 @@ class LauncherActivity : BaseActivity() {
     override fun displayProgressBar(isLoading: Boolean) {
     }
 
-    override fun expandAppBar() {
+    override fun expandAppBar(value: Boolean) {
     }
 
     private fun onRestoreInstanceState() {
@@ -52,6 +52,8 @@ class LauncherActivity : BaseActivity() {
             .replace(
                 R.id.login_fragments_container,
                 navHost,
+
+
                 getString(R.string.LoginNavHost)
             )
             .setPrimaryNavigationFragment(navHost)

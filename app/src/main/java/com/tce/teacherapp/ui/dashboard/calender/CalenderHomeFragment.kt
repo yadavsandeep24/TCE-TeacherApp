@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.tce.teacherapp.R
+import com.tce.teacherapp.ui.dashboard.DashboardActivity
 
 /**
  * A simple [Fragment] subclass.
@@ -28,6 +29,7 @@ class CalenderHomeFragment : Fragment() {
         } else {
             activity?.window!!.statusBarColor = resources.getColor(R.color.color_black)
         }
+        (activity as DashboardActivity).expandAppBar(false)
     }
 
 }

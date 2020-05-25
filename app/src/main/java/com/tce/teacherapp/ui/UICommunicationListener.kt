@@ -12,7 +12,7 @@ interface UICommunicationListener {
 
     fun displayProgressBar(isLoading: Boolean)
 
-    fun expandAppBar()
+    fun expandAppBar(value :Boolean)
 
     fun hideSoftKeyboard()
 

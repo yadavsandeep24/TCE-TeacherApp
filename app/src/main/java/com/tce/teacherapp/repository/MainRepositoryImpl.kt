@@ -11,10 +11,7 @@ import com.tce.teacherapp.db.entity.Grade
 import com.tce.teacherapp.db.entity.Node
 import com.tce.teacherapp.db.entity.Subject
 import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectViewState
-import com.tce.teacherapp.util.CacheResponseHandler
-import com.tce.teacherapp.util.DataState
-import com.tce.teacherapp.util.PreferenceKeys
-import com.tce.teacherapp.util.StateEvent
+import com.tce.teacherapp.util.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
@@ -33,80 +30,97 @@ constructor(
     val sharedPrefsEditor: SharedPreferences.Editor
 ) : MainRepository {
     private val TAG: String = "AppDebug"
-    override fun getGrades(stateEvent: StateEvent): Flow<DataState<SubjectViewState>> {
-        return object : NetworkBoundResource<List<GradeResponse>, List<Grade>, SubjectViewState>(
-            dispatcher = IO,
-            stateEvent = stateEvent,
-            apiCall = {
-                tceService.getGrades()
-            },
-            cacheCall = {
-                subjectDao.getGradeListData()
-            }
-        ) {
-            override suspend fun updateCache(networkObject: List<GradeResponse>) {
-                val gradeList = toGradeList(networkObject)
-                withContext(IO) {
-                    for (grade in gradeList) {
-                        try {
-                            // Launch each insert as a separate job to be executed in parallel
-                            launch {
-                                Log.d(TAG, "updateLocalDb: inserting grade: $grade")
-                                subjectDao.insertGrade(grade)
-                                for (subject in grade.subjectList) {
-                                    try {
-                                        launch {
-                                            subjectDao.insert(subject)
-                                        }
-                                    } catch (e: Exception) {
-                                        Log.e(
-                                            TAG,
-                                            "updateLocalDb: error updating cache data on subject  with title: ${subject.title}. " +
-                                                    "${e.message}"
-                                        )
-                                        // Could send an error report here or something but I don't think you should throw an error to the UI
-                                        // Since there could be many blog posts being inserted/updated.
-                                    }
-                                }
-                            }
-                        } catch (e: Exception) {
-                            Log.e(
-                                TAG,
-                                "updateLocalDb: error updating cache data on blog post with gradeTitle: ${grade.gradeTitle}. " +
-                                        "${e.message}"
-                            )
-                            // Could send an error report here or something but I don't think you should throw an error to the UI
-                            // Since there could be many blog posts being inserted/updated.
-                        }
-                    }
-                }
-            }
+    override fun getGrades(stateEvent: StateEvent): Flow<DataState<SubjectViewState>> = flow{
 
-            override fun handleCacheSuccess(
-                isJobComplete: Boolean,
-                resultObj: List<Grade>
-            ): DataState<SubjectViewState> {
-                if (resultObj.isNotEmpty()) {
-                    sharedPrefsEditor.putString(
-                        PreferenceKeys.APP_USER_SELECTED_GRADE_ID,
-                        resultObj[0].id
-                    ).commit()
-                    sharedPrefsEditor.putInt(PreferenceKeys.APP_USER_SELECTED_GRADE_POSITION, 0)
-                        .commit()
-                }
+        val isNewSession = sharedPreferences.getBoolean(PreferenceKeys.APP_PREFERENCES_NEW_SESSION_GRADES,true)
+         if(isNewSession) {
+             val apiResult = safeApiCall(IO){
+                 tceService.getGrades()
+             }
+             emit(
+                 object: ApiResponseHandler<SubjectViewState, List<GradeResponse>>(
+                     response = apiResult,
+                     stateEvent = stateEvent
+                 ){
+                     override suspend fun handleSuccess(resultObj: List<GradeResponse>): DataState<SubjectViewState> {
+                         val gradeList = toGradeList(resultObj)
+                         withContext(IO) {
+                             for (grade in gradeList) {
+                                 try {
+                                     // Launch each insert as a separate job to be executed in parallel
+                                     launch {
+                                         Log.d(TAG, "updateLocalDb: inserting grade: $grade")
+                                         subjectDao.insertGrade(grade)
+                                         for (subject in grade.subjectList) {
+                                             try {
+                                                 launch {
+                                                     subjectDao.insert(subject)
+                                                 }
+                                             } catch (e: Exception) {
+                                                 Log.e(
+                                                     TAG,
+                                                     "updateLocalDb: error updating cache data on subject  with title: ${subject.title}. " +
+                                                             "${e.message}"
+                                                 )
+                                                 // Could send an error report here or something but I don't think you should throw an error to the UI
+                                                 // Since there could be many blog posts being inserted/updated.
+                                             }
+                                         }
+                                     }
+                                 } catch (e: Exception) {
+                                     Log.e(
+                                         TAG,
+                                         "updateLocalDb: error updating cache data on blog post with gradeTitle: ${grade.gradeTitle}. " +
+                                                 "${e.message}"
+                                     )
+                                     // Could send an error report here or something but I don't think you should throw an error to the UI
+                                     // Since there could be many blog posts being inserted/updated.
+                                 }
+                             }
+                         }
+                         if (resultObj.isNotEmpty()) {
+                             sharedPrefsEditor.putString(PreferenceKeys.APP_USER_SELECTED_GRADE_ID, resultObj[0].id).commit()
+                             sharedPrefsEditor.putInt(PreferenceKeys.APP_USER_SELECTED_GRADE_POSITION, 0).commit()
+                             sharedPrefsEditor.putBoolean(PreferenceKeys.APP_PREFERENCES_NEW_SESSION_GRADES, false).commit()
+                         }
+                         val viewState = SubjectViewState(gradeList = gradeList)
+                         return DataState.data(
+                             response = null,
+                             data = viewState,
+                             stateEvent = stateEvent
+                         )
 
-                val viewState = SubjectViewState(
-                    gradeList = resultObj
-                )
-                return DataState.data(
-                    response = null,
-                    data = viewState,
-                    stateEvent = stateEvent
-                )
-            }
-
-        }.result
-
+                     }
+                 }.getResult()
+             )
+         }else{
+             val apiResult = safeCacheCall(IO) {
+                 val selectedGrade =
+                     sharedPreferences.getString(PreferenceKeys.APP_USER_SELECTED_GRADE_ID, "")
+                 selectedGrade?.let {
+                         subjectDao.getGradeListData()
+                 }
+             }
+             emit(
+                 object : CacheResponseHandler<SubjectViewState, List<Grade>>(
+                     response = apiResult,
+                     stateEvent = stateEvent
+                 ) {
+                     override suspend fun handleSuccess(resultObj: List<Grade>): DataState<SubjectViewState> {
+                         if (resultObj.isNotEmpty()) {
+                             sharedPrefsEditor.putString(PreferenceKeys.APP_USER_SELECTED_GRADE_ID, resultObj[0].id).commit()
+                             sharedPrefsEditor.putInt(PreferenceKeys.APP_USER_SELECTED_GRADE_POSITION, 0).commit()
+                             sharedPrefsEditor.putBoolean(PreferenceKeys.APP_PREFERENCES_NEW_SESSION_GRADES, false).commit()
+                         }
+                         return DataState.data(
+                             data = SubjectViewState(gradeList = resultObj),
+                             response = null,
+                             stateEvent = stateEvent
+                         )
+                     }
+                 }.getResult()
+             )
+         }
     }
 
     override fun getSubjects(
@@ -144,7 +158,6 @@ constructor(
                 }
             }.getResult()
         )
-
     }
 
     override fun setSelectedGrade(
@@ -187,91 +200,104 @@ constructor(
         query: String,
         bookID: String,
         stateEvent: StateEvent
-    ): Flow<DataState<SubjectViewState>> {
-        return object : NetworkBoundResource<List<BookResponse>, List<Node>, SubjectViewState>(
-            dispatcher = IO,
-            stateEvent = stateEvent,
-            apiCall = {
+    ): Flow<DataState<SubjectViewState>>  =  flow{
+        val isNewSession = sharedPreferences.getBoolean(PreferenceKeys.APP_PREFERENCES_NEW_SESSION_BOOKS,true)
+        if(isNewSession){
+            val apiResult = safeApiCall(IO){
                 tceService.getBooks()
-            },
-            cacheCall = {
+            }
+            emit(
+                object: ApiResponseHandler<SubjectViewState, List<BookResponse>>(
+                    response = apiResult,
+                    stateEvent = stateEvent
+                ){
+                    override suspend fun handleSuccess(networkObject: List<BookResponse>): DataState<SubjectViewState> {
+                        val bookList = toBookList(networkObject)
+                        withContext(IO) {
+                            for (book in bookList) {
+                                try {
+                                    // Launch each insert as a separate job to be executed in parallel
+                                    launch {
+                                        Log.d(TAG, "updateLocalDb: inserting book: $book")
+                                        subjectDao.insertBook(book)
+                                        for (node in book.node) {
+                                            try {
+                                                subjectDao.insertNode(node)
+                                                for (nodex in node.node) {
+                                                    try {
+                                                        subjectDao.inserNodeX(nodex)
+                                                        for (nodexx in nodex.node) {
+                                                            try {
+                                                                subjectDao.insertNodeXX(nodexx)
+                                                                for (nodexxx in nodexx.node) {
+                                                                    try {
+                                                                        subjectDao.insertNodeXXX(nodexxx)
+                                                                    } catch (e: Exception) {
+                                                                    }
+                                                                }
+                                                            } catch (e: Exception) {
+                                                                e.printStackTrace()
+                                                            }
+                                                        }
+                                                    } catch (e: Exception) {
+                                                        e.printStackTrace()
+                                                    }
+                                                }
+                                            } catch (e: Exception) {
+                                                e.printStackTrace()
+                                            }
+                                        }
+                                    }
+                                } catch (e: Exception) {
+                                    e.printStackTrace()
+                                }
+                            }
+                        }
+                        var topicList = subjectDao.getTopicListData(bookID)
+                        if (query.isNotEmpty()) {
+                            topicList = subjectDao.getTopicListData(query, bookID)
+                        }
+                        sharedPrefsEditor.putBoolean(PreferenceKeys.APP_PREFERENCES_NEW_SESSION_BOOKS, false).commit()
+                        val viewState = SubjectViewState(
+                            topicList = topicList
+                        )
+                        return DataState.data(
+                            response = null,
+                            data = viewState,
+                            stateEvent = stateEvent
+                        )
+                    }
+
+
+                }.getResult()
+            )
+        }else{
+            val apiResult = safeCacheCall(IO) {
                 if (query.isEmpty()) {
                     subjectDao.getTopicListData(bookID)
                 } else {
                     subjectDao.getTopicListData(query, bookID)
                 }
             }
-        ) {
-            override suspend fun updateCache(networkObject: List<BookResponse>) {
-                val bookList = toBookList(networkObject)
-                withContext(IO) {
-                    for (book in bookList) {
-                        try {
-                            // Launch each insert as a separate job to be executed in parallel
-                            launch {
-                                Log.d(TAG, "updateLocalDb: inserting book: $book")
-                                subjectDao.insertBook(book)
-                                for (node in book.node) {
-                                    try {
-                                            subjectDao.insertNode(node)
-                                            for (nodex in node.node) {
-                                                try {
-                                                        subjectDao.inserNodeX(nodex)
-                                                        for (nodexx in nodex.node) {
-                                                            try {
-                                                                    subjectDao.insertNodeXX(nodexx)
-                                                                    for (nodexxx in nodexx.node) {
-                                                                        try {
-                                                                                subjectDao.insertNodeXXX(nodexxx)
-                                                                        } catch (e: Exception) {
-                                                                        }
-                                                                    }
-                                                            } catch (e: Exception) {
-                                                                e.printStackTrace()
-                                                            }
-                                                        }
-                                                } catch (e: Exception) {
-                                                    e.printStackTrace()
-                                                }
-                                            }
-                                    } catch (e: Exception) {
-                                        e.printStackTrace()
-                                    }
-                                }
-                            }
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                        }
+            emit(
+                object : CacheResponseHandler<SubjectViewState, List<Node>>(
+                    response = apiResult,
+                    stateEvent = stateEvent
+                ) {
+                    override suspend fun handleSuccess(resultObj: List<Node>): DataState<SubjectViewState> {
+                        sharedPrefsEditor.putBoolean(PreferenceKeys.APP_PREFERENCES_NEW_SESSION_BOOKS, false).commit()
+                        val viewState = SubjectViewState(
+                            topicList = resultObj
+                        )
+                        return DataState.data(
+                            response = null,
+                            data = viewState,
+                            stateEvent = stateEvent
+                        )
                     }
-                }
-            }
-
-            override fun handleCacheSuccess(
-                isjobComplete: Boolean,
-                resultObj: List<Node>
-            ): DataState<SubjectViewState> {
-                val viewState = SubjectViewState(
-                    topicList = resultObj
-                )
-                return if(isjobComplete){
-                    DataState.data(
-                        response = null,
-                        data = viewState,
-                        stateEvent = stateEvent
-                    )
-                }else{
-                    DataState.data(
-                        response = null,
-                        data = null,
-                        stateEvent = stateEvent
-                    )
-                }
-
-            }
-
-        }.result
-
-
+                }.getResult()
+            )
+        }
     }
 
     fun toGradeList(grades: List<GradeResponse>): List<Grade> {

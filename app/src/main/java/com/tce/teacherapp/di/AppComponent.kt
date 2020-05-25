@@ -2,8 +2,8 @@ package com.tce.teacherapp.di
 
 import android.app.Application
 import com.tce.teacherapp.ui.BaseActivity
-import com.tce.teacherapp.ui.auth.LauncherActivity
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
+import com.tce.teacherapp.ui.login.LauncherActivity
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton

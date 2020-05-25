@@ -2,7 +2,7 @@ package com.tce.teacherapp.fragments.login
 
 import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModelProvider
-import com.tce.teacherapp.ui.auth.LoginFragment
+import com.tce.teacherapp.ui.login.LoginFragment
 import javax.inject.Inject
 
 class LoginFragmentFactory

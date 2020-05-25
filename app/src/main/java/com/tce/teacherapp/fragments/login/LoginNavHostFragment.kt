@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import androidx.annotation.NavigationRes
 import androidx.navigation.fragment.NavHostFragment
-import com.tce.teacherapp.ui.auth.LauncherActivity
+import com.tce.teacherapp.ui.login.LauncherActivity
 
 class LoginNavHostFragment : NavHostFragment() {
 

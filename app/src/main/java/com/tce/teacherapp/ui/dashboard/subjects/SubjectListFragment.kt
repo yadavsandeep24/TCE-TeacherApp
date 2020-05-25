@@ -15,6 +15,7 @@ import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -32,6 +33,7 @@ import com.bumptech.glide.signature.ObjectKey
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentSubjectListBinding
 import com.tce.teacherapp.fragments.main.CustomSpinnerAdapter
+import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.subjects.adapter.SubjectListEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.subjects.adapter.subjectListEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.subjects.state.SUBJECT_VIEW_STATE_BUNDLE_KEY
@@ -53,6 +55,7 @@ constructor(
 ) : BaseSubjectFragment(R.layout.fragment_subject_list,viewModelFactory) {
 
     private lateinit var binding: FragmentSubjectListBinding
+    private lateinit var spnDivision: AppCompatSpinner
 
     var adapter: CustomSpinnerAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -98,6 +101,12 @@ constructor(
         } else {
             activity?.window!!.statusBarColor = resources.getColor(R.color.color_black)
         }
+        (activity as DashboardActivity).setCustomToolbar(R.layout.subject_list_top_bar)
+        (activity as DashboardActivity).expandAppBar(true)
+
+        spnDivision =  (activity as DashboardActivity).binding.toolBar.findViewById(R.id.spn_division)
+        ((activity as DashboardActivity).binding.toolBar.findViewById(R.id.tv_back) as TextView).visibility = View.GONE
+
         uiCommunicationListener.displayProgressBar(true)
         val searchText: TextView = binding.svSubjects.findViewById(R.id.search_src_text) as TextView
         val myCustomFont: Typeface =
@@ -196,21 +205,27 @@ constructor(
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             if (viewState != null) {
                 viewState.gradeList?.let {
+                    ((activity as DashboardActivity).binding.toolBar.findViewById(R.id.tv_back) as TextView).visibility = View.GONE
+                    val tvTopicTitle = (activity as DashboardActivity).binding.toolBar.findViewById<TextView>(R.id.toolbar_title)
+                    tvTopicTitle.text = resources.getString(R.string.title_subjects)
+                    spnDivision.visibility = View.VISIBLE
+
+
                     Log.d("SAN", "gradeList-->" + it.size)
                     adapter = activity?.let { it1 ->
                         CustomSpinnerAdapter(it1, R.layout.spinner_dropdown, R.id.text1, it)
                     }
-                    binding.spnDivision.adapter = adapter
+                    spnDivision.adapter = adapter
 
                     val listener =
                         adapter?.let { it1 -> SpinnerInteractionListener(it1, viewModel) }
-                    binding.spnDivision.setOnTouchListener(listener)
-                    binding.spnDivision.onItemSelectedListener = listener
+                    spnDivision.setOnTouchListener(listener)
+                    spnDivision.onItemSelectedListener = listener
                     viewModel.setStateEvent(SubjectStateEvent.GetSubjectEvent(""))
                 }
                 viewState.selectedGradePosition?.let {
                     Log.d("SAN", "selectedGradePosition-->$it")
-                    binding.spnDivision.setSelection(it)
+                     spnDivision.setSelection(it)
                 }
                 viewState.subjectList?.let {
                     Log.d("SAN", "subjectList-->" + it.size)

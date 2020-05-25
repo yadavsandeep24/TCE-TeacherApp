@@ -18,6 +18,7 @@ import com.tce.teacherapp.util.setUpNavigation
 import javax.inject.Inject
 import javax.inject.Named
 
+
 class DashboardActivity : BaseActivity(), BottomNavController.OnNavigationReselectedListener,
     BottomNavController.OnNavigationGraphChanged {
 
@@ -51,6 +52,7 @@ class DashboardActivity : BaseActivity(), BottomNavController.OnNavigationResele
         inject()
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dashboard)
+        setupActionBar()
         setupBottomNavigationView()
     }
 
@@ -62,7 +64,18 @@ class DashboardActivity : BaseActivity(), BottomNavController.OnNavigationResele
         }
     }
 
-    override fun expandAppBar() {
+    override fun expandAppBar(value: Boolean) {
+       binding.appBar.setExpanded(value)
+
+    }
+
+    private fun setupActionBar(){
+        setSupportActionBar(binding.toolBar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+    }
+    fun setCustomToolbar(resId :Int){
+        val logo: View = layoutInflater.inflate(resId, binding.toolBar,false)
+        binding.toolBar.addView(logo)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

@@ -15,6 +15,8 @@ import com.tce.teacherapp.api.TCEService.Companion.BASE_URL
 import com.tce.teacherapp.db.AppDatabase
 import com.tce.teacherapp.db.AppDatabase.Companion.DATABASE_NAME
 import com.tce.teacherapp.db.dao.SubjectsDao
+import com.tce.teacherapp.repository.LoginRepository
+import com.tce.teacherapp.repository.LoginRepositoryImpl
 import com.tce.teacherapp.repository.MainRepository
 import com.tce.teacherapp.repository.MainRepositoryImpl
 import com.tce.teacherapp.util.PreferenceKeys
@@ -121,6 +123,20 @@ object AppModule {
     ): MainRepository {
         return MainRepositoryImpl(
             subjectDao,
+            tceService,
+            preferences,
+            editor
+        )
+    }
+
+    @JvmStatic
+    @Provides
+    fun provideLoginRepository(
+        tceService: TCEService,
+        preferences: SharedPreferences,
+        editor: SharedPreferences.Editor
+    ): LoginRepository {
+        return LoginRepositoryImpl(
             tceService,
             preferences,
             editor

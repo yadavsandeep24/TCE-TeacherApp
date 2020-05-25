@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.tce.teacherapp.R
 import com.tce.teacherapp.ui.BaseFragment
+import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 
@@ -34,6 +35,8 @@ class DashboardHomeFragment : BaseFragment(R.layout.fragment_dashboard_home) {
             activity?.window!!.statusBarColor = resources.getColor(R.color.color_black)
         }
         uiCommunicationListener.displayProgressBar(false)
+        (activity as DashboardActivity).expandAppBar(false)
+
     }
 
     override fun setupChannel() {
