@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.tce.teacherapp.ui.UICommunicationListener
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
+import java.lang.Exception
 
 @FlowPreview
 @ExperimentalCoroutinesApi
@@ -36,12 +37,23 @@ abstract class BaseSubjectFragment(
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        try {
-            uiCommunicationListener = context as UICommunicationListener
-        } catch (e: ClassCastException) {
-            Log.e(TAG, "$context must implement UICommunicationListener")
-        }
+       setUICommunicationListener(null)
 
+    }
+
+    fun setUICommunicationListener(mockUICommuncationListener: UICommunicationListener?){
+
+        // TEST: Set interface from mock
+        if(mockUICommuncationListener != null){
+            this.uiCommunicationListener = mockUICommuncationListener
+        }
+        else{ // PRODUCTION: if no mock, get from context
+            try {
+                uiCommunicationListener = (context as UICommunicationListener)
+            }catch (e: Exception){
+                Log.e("SubjectListfragment", "$context must implement UICommunicationListener")
+            }
+        }
     }
 }
 

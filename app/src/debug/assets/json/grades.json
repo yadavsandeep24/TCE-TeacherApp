@@ -1,0 +1,176 @@
+[
+  {
+    "id": "grd-1",
+    "gradeTitle": "Year 1",
+    "schoolGrdId": "schgrd-ef1c9ccf-36b5-4639-9292-736bd1a0d3bf",
+    "orderNo": "1",
+    "subjects": [
+      {
+        "id": "00",
+        "title": "English",
+        "icon": "icon_2.svg",
+        "index": 1,
+        "books": {
+          "bookId": "book-9cdebf46-c1db-41c2-8d07-81803c55210e",
+          "title": "English"
+        }
+      },
+      {
+        "id": "01",
+        "title": "Hindi",
+        "icon": "icon_3.svg",
+        "index": 3,
+        "books": {
+          "bookId": "book-fb06b681-8a1b-4bf4-b7d0-89d833c2a8df",
+          "title": "Hindi"
+        }
+      },
+      {
+        "id": "02",
+        "title": "General Awareness",
+        "icon": "icon_4.svg",
+        "index": 2,
+        "books": {
+          "bookId": "book-77993d1c-e884-415d-81a6-55fc3405a0ca",
+          "title": "General Awareness"
+        }
+      },
+      {
+        "id": "TATAISBN20812",
+        "title": "Numeracy & Reasoning",
+        "icon": "icon_5.svg",
+        "index": 4,
+        "books": {
+          "bookId": "book-77993d1c-e884-415d-81a6-55fc3405a0ca",
+          "title": "Numeracy & Reasoning"
+        }
+      }
+    ],
+    "divisions": [
+      {
+        "gradeTitle": "Nursery",
+        "divisionTitle": "A"
+      },
+      {
+        "gradeTitle": "Nursery",
+        "divisionTitle": "B"
+      }
+    ]
+  },
+  {
+    "id": "grd-2",
+    "gradeTitle": "Year 2",
+    "schoolGrdId": "schgrd-ef1c9ccf-36b5-4639-9292-736bd1a0d3bf",
+    "orderNo": "2",
+    "subjects": [
+      {
+        "id": "00",
+        "title": "English",
+        "icon": "icon_2.svg",
+        "index": 1,
+        "books": {
+          "bookId": "book-9cdebf46-c1db-41c2-8d07-81803c55210e",
+          "title": "English"
+        }
+      },
+      {
+        "id": "01",
+        "title": "Hindi",
+        "icon": "icon_3.svg",
+        "index": 3,
+        "books": {
+          "bookId": "book-fb06b681-8a1b-4bf4-b7d0-89d833c2a8df",
+          "title": "Hindi"
+        }
+      },
+      {
+        "id": "02",
+        "title": "General Awareness",
+        "icon": "icon_4.svg",
+        "index": 2,
+        "books": {
+          "bookId": "book-77993d1c-e884-415d-81a6-55fc3405a0ca",
+          "title": "General Awareness"
+        }
+      },
+      {
+        "id": "03",
+        "title": "Numeracy & Reasoning",
+        "icon": "icon_5.svg",
+        "index": 4,
+        "books": {
+          "bookId": "book-77993d1c-e884-415d-81a6-55fc3405a0ca",
+          "title": "Numeracy & Reasoning"
+        }
+      }
+    ],
+    "divisions": [
+      {
+        "gradeTitle": "JR KG",
+        "divisionTitle": "A"
+      },
+      {
+        "gradeTitle": "JR KG",
+        "divisionTitle": "B"
+      }
+    ]
+  },
+  {
+    "id": "grd-3",
+    "gradeTitle": "Year 3",
+    "schoolGrdId": "schgrd-ef1c9ccf-36b5-4639-9292-736bd1a0d3bf",
+    "orderNo": "3",
+    "subjects": [
+      {
+        "id": "00",
+        "title": "English",
+        "icon": "icon_2.svg",
+        "index": 1,
+        "books": {
+          "bookId": "book-9cdebf46-c1db-41c2-8d07-81803c55210e",
+          "title": "English"
+        }
+      },
+      {
+        "id": "01",
+        "title": "Hindi",
+        "icon": "icon_3.svg",
+        "index": 3,
+        "books": {
+          "bookId": "book-fb06b681-8a1b-4bf4-b7d0-89d833c2a8df",
+          "title": "Hindi"
+        }
+      },
+      {
+        "id": "02",
+        "title": "General Awareness",
+        "icon": "icon_4.svg",
+        "index": 2,
+        "books": {
+          "bookId": "book-77993d1c-e884-415d-81a6-55fc3405a0ca",
+          "title": "General Awareness"
+        }
+      },
+      {
+        "id": "TATAISBN2071sa",
+        "title": "Numeracy & Reasoning",
+        "icon": "icon_5.svg",
+        "index": 4,
+        "books": {
+          "bookId": "book-77993d1c-e884-415d-81a6-55fc3405a0ca",
+          "title": "Numeracy & Reasoning"
+        }
+      }
+    ],
+    "divisions": [
+      {
+        "gradeTitle": "SR KG",
+        "divisionTitle": "A"
+      },
+      {
+        "gradeTitle": "SR KG",
+        "divisionTitle": "B"
+      }
+    ]
+  }
+]
