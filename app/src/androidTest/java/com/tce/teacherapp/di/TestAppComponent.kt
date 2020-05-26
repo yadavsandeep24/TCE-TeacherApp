@@ -10,18 +10,19 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.InternalCoroutinesApi
 import javax.inject.Singleton
 
+
 @ExperimentalCoroutinesApi
 @InternalCoroutinesApi
 @Singleton
-@Component(modules = [
-    TestFragmentModule::class,
-    TestViewModelModule::class,
-    TestAppModule::class
+@Component(
+    modules = [
+        TestFragmentModule::class,
+        TestViewModelModule::class,
+        TestAppModule::class
+
 ])
-interface TestAppComponent: AppComponent {
-
+interface TestAppComponent :AppComponent {
     val apiService: FakeApiService
-
     val mainRepository: FakeMainRepositoryImpl
 
     @Component.Builder
@@ -36,17 +37,3 @@ interface TestAppComponent: AppComponent {
     fun inject(listFragmentTests: ListFragmentTests)
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

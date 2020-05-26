@@ -6,9 +6,9 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.platform.app.InstrumentationRegistry
-import com.tce.teacherapp.di.TestAppComponent
 import com.tce.teacherapp.R
 import com.tce.teacherapp.TestBaseApplication
+import com.tce.teacherapp.di.TestAppComponent
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.util.Constants
 import com.tce.teacherapp.util.Constants.GRADES_DATA_FILENAME
@@ -45,7 +45,7 @@ class ListFragmentTests: BaseMainActivityTests() {
             .applicationContext as TestBaseApplication
 
         val apiService = configureFakeApiService(
-            blogsDataSource = GRADES_DATA_FILENAME,
+            gradesDataSource = GRADES_DATA_FILENAME,
             networkDelay = 0L,
             application = app
         )
@@ -73,7 +73,7 @@ class ListFragmentTests: BaseMainActivityTests() {
             .applicationContext as TestBaseApplication
 
         val apiService = configureFakeApiService(
-            blogsDataSource = GRADES_DATA_FILENAME,
+            gradesDataSource = GRADES_DATA_FILENAME,
             networkDelay = 4000L, // force timeout (4000 > 3000)
             application = app
         )

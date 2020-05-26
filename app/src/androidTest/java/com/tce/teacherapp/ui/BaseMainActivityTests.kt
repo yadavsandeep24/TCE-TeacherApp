@@ -1,8 +1,8 @@
 package com.tce.teacherapp.ui
 
-import com.tce.teacherapp.di.TestAppComponent
 import com.tce.teacherapp.TestBaseApplication
 import com.tce.teacherapp.api.FakeApiService
+import com.tce.teacherapp.di.TestAppComponent
 import com.tce.teacherapp.repository.FakeMainRepositoryImpl
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -16,13 +16,12 @@ import kotlinx.coroutines.InternalCoroutinesApi
 abstract class BaseMainActivityTests{
 
     fun configureFakeApiService(
-        blogsDataSource: String? = null,
-        categoriesDataSource: String? = null,
+        gradesDataSource: String? = null,
         networkDelay: Long? = null,
         application: TestBaseApplication
     ): FakeApiService {
         val apiService = (application.appComponent as TestAppComponent).apiService
-        blogsDataSource?.let { apiService.gradesJsonFileName = it }
+        gradesDataSource?.let { apiService.gradesJsonFileName = it }
         networkDelay?.let { apiService.networkDelay = it }
         return apiService
     }

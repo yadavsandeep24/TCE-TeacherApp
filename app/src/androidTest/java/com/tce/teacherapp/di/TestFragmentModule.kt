@@ -1,12 +1,16 @@
 package com.tce.teacherapp.di
 
 import androidx.fragment.app.FragmentFactory
-import com.tce.teacherapp.fragments.main.FakeMainFragmentFactory
-import com.tce.teacherapp.viewmodels.FakeMainViewModelFactory
+import com.tce.teacherapp.fragments.login.FakeLoginFragmentFactory
+import com.tce.teacherapp.fragments.main.FakeSubjectsFragmentFactory
+import com.tce.teacherapp.viewmodels.FakeLoginViewModelFactory
+import com.tce.teacherapp.viewmodels.FakeSubjectViewModelFactory
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.InternalCoroutinesApi
+import javax.inject.Named
 import javax.inject.Singleton
 
 @ExperimentalCoroutinesApi
@@ -17,10 +21,24 @@ object TestFragmentModule {
     @JvmStatic
     @Singleton
     @Provides
-    fun provideMainFragmentFactory(
-        viewModelFactory: FakeMainViewModelFactory
+    @Named("LoginFragmentFactory")
+    fun provideLoginFragmentFactory(
+        fakeLoginViewModelFactory: FakeLoginViewModelFactory
     ): FragmentFactory {
-        return FakeMainFragmentFactory(
+        return FakeLoginFragmentFactory(
+            fakeLoginViewModelFactory
+        )
+    }
+
+    @FlowPreview
+    @JvmStatic
+    @Singleton
+    @Provides
+    @Named("SubjectsFragmentFactory")
+    fun provideSubjectFragmentFactory(
+        viewModelFactory: FakeSubjectViewModelFactory
+    ): FragmentFactory {
+        return FakeSubjectsFragmentFactory(
             viewModelFactory
         )
     }

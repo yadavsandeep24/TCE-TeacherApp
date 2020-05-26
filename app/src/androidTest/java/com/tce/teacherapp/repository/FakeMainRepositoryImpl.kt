@@ -67,7 +67,29 @@ constructor(): MainRepository{
         query: String,
         stateEvent: StateEvent
     ): Flow<DataState<SubjectViewState>> {
-        TODO("Not yet implemented")
+        throwExceptionIfApiServiceNotInitialzied()
+        return flow{
+
+            val response = safeApiCall(Dispatchers.IO){apiService.getGrades()}
+
+            emit(
+                object: ApiResponseHandler<SubjectViewState, List<GradeResponse>>(
+                    response = response,
+                    stateEvent = stateEvent
+                ) {
+                    override suspend fun handleSuccess(resultObj: List<GradeResponse>): DataState<SubjectViewState> {
+                        val gradeList = toGradeList(resultObj)
+                        val viewState = SubjectViewState(gradeList = gradeList)
+                        return DataState.data(
+                            response = null,
+                            data = viewState,
+                            stateEvent = stateEvent
+                        )
+                    }
+
+                }.getResult()
+            )
+        }
     }
 
     override fun setSelectedGrade(
@@ -75,7 +97,29 @@ constructor(): MainRepository{
         position: Int,
         stateEvent: StateEvent
     ): Flow<DataState<SubjectViewState>> {
-        TODO("Not yet implemented")
+        throwExceptionIfApiServiceNotInitialzied()
+        return flow{
+
+            val response = safeApiCall(Dispatchers.IO){apiService.getGrades()}
+
+            emit(
+                object: ApiResponseHandler<SubjectViewState, List<GradeResponse>>(
+                    response = response,
+                    stateEvent = stateEvent
+                ) {
+                    override suspend fun handleSuccess(resultObj: List<GradeResponse>): DataState<SubjectViewState> {
+                        val gradeList = toGradeList(resultObj)
+                        val viewState = SubjectViewState(gradeList = gradeList)
+                        return DataState.data(
+                            response = null,
+                            data = viewState,
+                            stateEvent = stateEvent
+                        )
+                    }
+
+                }.getResult()
+            )
+        }
     }
 
     override fun getTopicList(
@@ -83,7 +127,29 @@ constructor(): MainRepository{
         bookID: String,
         stateEvent: StateEvent
     ): Flow<DataState<SubjectViewState>> {
-        TODO("Not yet implemented")
+        throwExceptionIfApiServiceNotInitialzied()
+        return flow{
+
+            val response = safeApiCall(Dispatchers.IO){apiService.getGrades()}
+
+            emit(
+                object: ApiResponseHandler<SubjectViewState, List<GradeResponse>>(
+                    response = response,
+                    stateEvent = stateEvent
+                ) {
+                    override suspend fun handleSuccess(resultObj: List<GradeResponse>): DataState<SubjectViewState> {
+                        val gradeList = toGradeList(resultObj)
+                        val viewState = SubjectViewState(gradeList = gradeList)
+                        return DataState.data(
+                            response = null,
+                            data = viewState,
+                            stateEvent = stateEvent
+                        )
+                    }
+
+                }.getResult()
+            )
+        }
     }
 
 /*    @Throws(UninitializedPropertyAccessException::class)

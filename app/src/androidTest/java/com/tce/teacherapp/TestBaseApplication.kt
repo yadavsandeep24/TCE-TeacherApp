@@ -1,6 +1,6 @@
 package com.tce.teacherapp
 
-import com.tce.teacherapp.di.DaggerAppComponent
+import com.tce.teacherapp.di.DaggerTestAppComponent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.InternalCoroutinesApi
 
@@ -9,8 +9,12 @@ import kotlinx.coroutines.InternalCoroutinesApi
 class TestBaseApplication : BaseApplication() {
 
     override fun initAppComponent() {
-        appComponent = DaggerTestAppComponent.builder().application(this).build()
+        appComponent = DaggerTestAppComponent.builder()
+            .application(this)
+            .build()
     }
+
+
 
 }
 
