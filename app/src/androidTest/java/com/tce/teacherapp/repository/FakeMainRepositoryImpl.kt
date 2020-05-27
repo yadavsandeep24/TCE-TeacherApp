@@ -3,7 +3,6 @@ package com.tce.teacherapp.repository
 import com.tce.teacherapp.api.FakeApiService
 import com.tce.teacherapp.api.response.GradeResponse
 import com.tce.teacherapp.db.entity.Grade
-import com.tce.teacherapp.ui.dashboard.subjects.SubjectsViewModel
 import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectViewState
 import com.tce.teacherapp.util.ApiResponseHandler
 import com.tce.teacherapp.util.DataState

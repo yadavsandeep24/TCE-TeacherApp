@@ -6,7 +6,7 @@ import kotlinx.coroutines.InternalCoroutinesApi
 
 @ExperimentalCoroutinesApi
 @UseExperimental(InternalCoroutinesApi::class)
-class TestBaseApplication : BaseApplication() {
+class TestTCEApplication : TCEApplication() {
 
     override fun initAppComponent() {
         appComponent = DaggerTestAppComponent.builder()

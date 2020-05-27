@@ -3,7 +3,7 @@ package com.tce.teacherapp.ui.login
 import android.os.Bundle
 import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModelProvider
-import com.tce.teacherapp.BaseApplication
+import com.tce.teacherapp.TCEApplication
 import com.tce.teacherapp.R
 import com.tce.teacherapp.fragments.login.LoginNavHostFragment
 import com.tce.teacherapp.ui.BaseActivity
@@ -20,7 +20,7 @@ class LauncherActivity : BaseActivity() {
     lateinit var providerFactory: ViewModelProvider.Factory
 
     override fun inject() {
-        (application as BaseApplication).appComponent
+        (application as TCEApplication).appComponent
             .injectLauncherActivity(this)
     }
 

@@ -12,7 +12,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.callbacks.onDismiss
-import com.tce.teacherapp.BaseApplication
+import com.tce.teacherapp.TCEApplication
 import com.tce.teacherapp.R
 import com.tce.teacherapp.util.Constants.Companion.PERMISSIONS_REQUEST_READ_STORAGE
 import com.tce.teacherapp.util.MessageType
@@ -30,7 +30,7 @@ abstract class BaseActivity : AppCompatActivity(),
     abstract fun inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (application as BaseApplication).appComponent
+        (application as TCEApplication).appComponent
             .inject(this)
         super.onCreate(savedInstanceState)
     }

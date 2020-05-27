@@ -4,7 +4,7 @@ import android.app.Application
 import com.tce.teacherapp.di.AppComponent
 import com.tce.teacherapp.di.DaggerAppComponent
 
-open class BaseApplication : Application() {
+open class TCEApplication : Application() {
 
     lateinit var appComponent: AppComponent
 

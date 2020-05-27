@@ -94,36 +94,10 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit-ktx:$androidx_test_ext"
 
     // androidx.fragment
-    def fragment_version = "1.2.0"
+    def fragment_version = "1.2.4"
     debugImplementation "androidx.fragment:fragment-testing:$fragment_version"
     implementation "androidx.fragment:fragment-ktx:$fragment_version"
 
-    // Core library
-    def androidx_test_espresso = '3.2.0'
-    androidTestImplementation "androidx.test.espresso:espresso-core:$androidx_test_espresso"
-    androidTestImplementation "androidx.test.espresso:espresso-intents:$androidx_test_espresso"
-
-    // AndroidJUnitRunner and JUnit Rules
-    def androidx_test = '1.2.0'
-    androidTestImplementation "androidx.test:runner:$androidx_test"
-    androidTestImplementation "androidx.test:rules:$androidx_test"
-    androidTestImplementation "androidx.test:monitor:$androidx_test"
-
-    // arch testing
-    def arch_testing = '2.1.0'
-    androidTestImplementation "androidx.arch.core:core-testing:$arch_testing"
-
-
-    // Assertions
-    def truth_version = '1.0.1'
-    androidTestImplementation "com.google.truth:truth:$truth_version"
-    def truth_ext_version = '1.2.0'
-    androidTestImplementation "androidx.test.ext:truth:$truth_ext_version"
-    def ext_junit_version = '1.1.1'
-    androidTestImplementation "androidx.test.ext:junit-ktx:$ext_junit_version"
-
-    def fragment = "1.2.4"
-    implementation "androidx.fragment:fragment-ktx:$fragment"
 
     // Mockito
     def mockito_core = "2.25.0"
@@ -165,7 +139,7 @@ dependencies {
 
 
     // jetpack navigation components
-    def nav_version = "2.3.0-alpha06"
+    def nav_version = "2.3.0-beta01"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
     implementation "androidx.navigation:navigation-runtime:$nav_version"

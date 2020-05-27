@@ -1,12 +1,12 @@
 package com.tce.teacherapp.api
 
-import com.tce.teacherapp.util.JsonUtil
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.tce.teacherapp.api.response.BookResponse
 import com.tce.teacherapp.api.response.GradeResponse
 import com.tce.teacherapp.api.response.LoginResponse
 import com.tce.teacherapp.util.Constants
+import com.tce.teacherapp.util.JsonUtil
 import kotlinx.coroutines.delay
 import javax.inject.Inject
 import javax.inject.Singleton

@@ -4,10 +4,8 @@ import com.tce.teacherapp.db.entity.Grade
 import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectViewState
 import com.tce.teacherapp.util.DataState
 import com.tce.teacherapp.util.StateEvent
-import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 
-@FlowPreview
 interface MainRepository {
 
     fun getGrades(

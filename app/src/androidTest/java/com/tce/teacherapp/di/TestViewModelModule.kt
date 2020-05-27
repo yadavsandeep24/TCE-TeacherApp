@@ -1,7 +1,6 @@
 package com.tce.teacherapp.di
 
 import androidx.lifecycle.ViewModelProvider
-import com.tce.teacherapp.fragments.login.FakeLoginFragmentFactory
 import com.tce.teacherapp.repository.FakeLoginRepositoryImpl
 import com.tce.teacherapp.repository.FakeMainRepositoryImpl
 import com.tce.teacherapp.viewmodels.FakeLoginViewModelFactory
@@ -16,6 +15,7 @@ import javax.inject.Singleton
 @InternalCoroutinesApi
 @Module
 object TestViewModelModule {
+
 
     @JvmStatic
     @Singleton

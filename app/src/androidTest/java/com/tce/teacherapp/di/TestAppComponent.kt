@@ -3,7 +3,7 @@ package com.tce.teacherapp.di
 import android.app.Application
 import com.tce.teacherapp.api.FakeApiService
 import com.tce.teacherapp.repository.FakeMainRepositoryImpl
-import com.tce.teacherapp.ui.ListFragmentTests
+import com.tce.teacherapp.ui.DetailFragmentTest
 import dagger.BindsInstance
 import dagger.Component
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -34,6 +34,6 @@ interface TestAppComponent :AppComponent {
         fun build(): TestAppComponent
     }
 
-    fun inject(listFragmentTests: ListFragmentTests)
+    fun inject(listFragmentTests: DetailFragmentTest)
 
 }

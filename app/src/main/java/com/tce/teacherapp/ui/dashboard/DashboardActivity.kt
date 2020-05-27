@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.tce.teacherapp.BaseApplication
+import com.tce.teacherapp.TCEApplication
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.ActivityDashboardBinding
 import com.tce.teacherapp.ui.BaseActivity
@@ -44,7 +44,7 @@ class DashboardActivity : BaseActivity(), BottomNavController.OnNavigationResele
     }
 
     override fun inject() {
-        (application as BaseApplication).appComponent
+        (application as TCEApplication).appComponent
             .injectDashBoardActivity(this)
     }
 

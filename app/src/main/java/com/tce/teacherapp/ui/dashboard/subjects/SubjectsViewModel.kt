@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
-@FlowPreview
+@UseExperimental(FlowPreview::class)
 class SubjectsViewModel @Inject constructor(val mainRepository: MainRepository) :
     BaseViewModel<SubjectViewState>() {
 

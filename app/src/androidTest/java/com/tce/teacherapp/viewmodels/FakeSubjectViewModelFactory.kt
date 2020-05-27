@@ -5,12 +5,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.tce.teacherapp.repository.FakeMainRepositoryImpl
 import com.tce.teacherapp.ui.dashboard.subjects.SubjectsViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.InternalCoroutinesApi
 import javax.inject.Inject
 
 
-@FlowPreview
 @ExperimentalCoroutinesApi
 @InternalCoroutinesApi
 class FakeSubjectViewModelFactory
