@@ -1,10 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#ffaa1e"
-    tools:context=".ui.dashboard.messages.MessageListFragment">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.dashboard.messages.MessageListFragment">
+
+        <LinearLayout
+            android:id="@+id/header_container"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/subject_actionbar_color"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Messages"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/white"></TextView>
+
+            <TextView
+                android:id="@+id/tvSubTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(2 Unread)"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/white"></TextView>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/search_container"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:layout_below="@+id/header_container"
+            android:background="@color/grey">
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/sv_message"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/top_container"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/imgFilter"
+                android:background="@drawable/bg_grey_rounded"
+                android:focusable="true"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                app:iconifiedByDefault="false"
+                app:queryBackground="@drawable/bg_white_rounded"
+                app:queryHint="Search Messages" />
+
+            <ImageView
+                android:id="@+id/imgFilter"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/ic_filter">
+
+            </ImageView>
+
+        </RelativeLayout>
+
+        <com.airbnb.epoxy.EpoxyRecyclerView
+            android:id="@+id/rv_message"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/search_container"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp" />
+
+        <include
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            layout="@layout/message_bottom_filter" />
+
+    </RelativeLayout>
 
 
-</FrameLayout>
+</layout>

@@ -10,6 +10,7 @@ import com.tce.teacherapp.db.entity.Book
 import com.tce.teacherapp.db.entity.Grade
 import com.tce.teacherapp.db.entity.Node
 import com.tce.teacherapp.db.entity.Subject
+import com.tce.teacherapp.ui.dashboard.messages.state.MessageViewState
 import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectViewState
 import com.tce.teacherapp.util.*
 import kotlinx.coroutines.Dispatchers.IO
@@ -298,6 +299,24 @@ constructor(
                 }.getResult()
             )
         }
+    }
+
+    override fun getMessage(
+        stateEvent: StateEvent
+    ): Flow<DataState<MessageViewState>> = flow {
+        val messageList = listOf(
+            (com.tce.teacherapp.db.entity.Message(1,"School Announcement", "Hi teacher, please take note that school will be closed on the 20th feb. ",
+                "resources.getDrawable(R.drawable.ic_dummy_school)","1.49 pm","1")),
+            (com.tce.teacherapp.db.entity.Message(2,"Class Apple", "Hi Parents, I am sharing what we have learnt in class.",
+                "resources.getDrawable(R.drawable.ic_dummy_class_apple)","1.49 pm","2"))
+        )
+        emit(
+            DataState.data(
+                data = MessageViewState(messageList = messageList),
+                stateEvent = stateEvent,
+                response = null
+            )
+        )
     }
 
     fun toGradeList(grades: List<GradeResponse>): List<Grade> {

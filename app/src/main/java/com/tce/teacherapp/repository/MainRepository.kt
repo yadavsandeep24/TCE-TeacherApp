@@ -1,6 +1,7 @@
 package com.tce.teacherapp.repository
 
 import com.tce.teacherapp.db.entity.Grade
+import com.tce.teacherapp.ui.dashboard.messages.state.MessageViewState
 import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectViewState
 import com.tce.teacherapp.util.DataState
 import com.tce.teacherapp.util.StateEvent
@@ -28,5 +29,9 @@ interface MainRepository {
         bookID: String,
         stateEvent: StateEvent
     ): Flow<DataState<SubjectViewState>>
+
+    fun getMessage(
+        stateEvent: StateEvent
+    ): Flow<DataState<MessageViewState>>
 
 }

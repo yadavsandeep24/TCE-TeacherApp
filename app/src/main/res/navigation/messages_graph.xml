@@ -9,5 +9,20 @@
         android:id="@+id/messageListFragment"
         android:name="com.tce.teacherapp.ui.dashboard.messages.MessageListFragment"
         android:label="fragment_message_list"
-        tools:layout="@layout/fragment_message_list" />
+        tools:layout="@layout/fragment_message_list">
+        <action
+            android:id="@+id/action_messageListFragment_to_messageDetailFragment"
+            app:destination="@id/messageDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/messageDetailFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.messages.MessageDetailFragment"
+        android:label="MessageDetailFragment" />
+
+
 </navigation>

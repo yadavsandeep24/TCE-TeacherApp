@@ -6,4 +6,6 @@
     <color name="subject_actionbar_color">#5a69ff</color>
     <color name="bottom_navigation_color">#5a69ff</color>
     <color name="color_black">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="grey">#e1e6f0</color>
 </resources>

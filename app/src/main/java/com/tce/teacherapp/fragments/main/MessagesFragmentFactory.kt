@@ -16,11 +16,11 @@ constructor(
         when (className) {
 
             MessageListFragment::class.java.name -> {
-                MessageListFragment()
+                MessageListFragment(viewModelFactory)
             }
 
             else -> {
-                MessageListFragment()
+                MessageListFragment(viewModelFactory)
             }
         }
 

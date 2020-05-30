@@ -3,6 +3,7 @@ package com.tce.teacherapp.di
 import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModelProvider
 import com.tce.teacherapp.fragments.login.LoginFragmentFactory
+import com.tce.teacherapp.fragments.main.MessagesFragmentFactory
 import com.tce.teacherapp.fragments.main.SubjectsFragmentFactory
 import dagger.Module
 import dagger.Provides
@@ -29,6 +30,15 @@ object MainFragmentsModule {
         viewModelFactory: ViewModelProvider.Factory
     ): FragmentFactory {
         return SubjectsFragmentFactory(viewModelFactory)
+    }
+
+    @JvmStatic
+    @Provides
+    @Named("MessagesFragmentFactory")
+    fun provideMessageListFactory(
+        viewModelFactory: ViewModelProvider.Factory
+    ): FragmentFactory {
+        return MessagesFragmentFactory(viewModelFactory)
     }
 
 
