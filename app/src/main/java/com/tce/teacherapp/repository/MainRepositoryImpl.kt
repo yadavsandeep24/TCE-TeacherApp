@@ -6,10 +6,7 @@ import com.tce.teacherapp.api.TCEService
 import com.tce.teacherapp.api.response.BookResponse
 import com.tce.teacherapp.api.response.GradeResponse
 import com.tce.teacherapp.db.dao.SubjectsDao
-import com.tce.teacherapp.db.entity.Book
-import com.tce.teacherapp.db.entity.Grade
-import com.tce.teacherapp.db.entity.Node
-import com.tce.teacherapp.db.entity.Subject
+import com.tce.teacherapp.db.entity.*
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageViewState
 import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectViewState
 import com.tce.teacherapp.util.*
@@ -19,6 +16,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.IOException
+import java.io.InputStream
 import javax.inject.Inject
 
 @FlowPreview
@@ -304,15 +303,32 @@ constructor(
     override fun getMessage(
         stateEvent: StateEvent
     ): Flow<DataState<MessageViewState>> = flow {
-        val messageList = listOf(
+         val messageList = listOf(
             (com.tce.teacherapp.db.entity.Message(1,"School Announcement", "Hi teacher, please take note that school will be closed on the 20th feb. ",
-                "resources.getDrawable(R.drawable.ic_dummy_school)","1.49 pm","1")),
+                "ic_dummy_school.xml","1.49 pm","1",0,"10 January 2020", listOf(
+                    MessageConversion(1,"Hi teacher, please take note that school will be closed on the 20th feb.","","","","","1.49 PM", "1", "Aishwarya"))
+                )),
             (com.tce.teacherapp.db.entity.Message(2,"Class Apple", "Hi Parents, I am sharing what we have learnt in class.",
-                "resources.getDrawable(R.drawable.ic_dummy_class_apple)","1.49 pm","2"))
+                "ic_dummy_class_apple.xml","1.49 pm","2", 13,"10 January 2020", listOf(
+                    MessageConversion(2,"Hi Parents, I am sharing what we have learnt in class.","video","","","image","1.49 PM", "2", "Rajesh"))))
         )
         emit(
             DataState.data(
                 data = MessageViewState(messageList = messageList),
+                stateEvent = stateEvent,
+                response = null
+            )
+        )
+    }
+
+    override fun getStudentList(stateEvent: StateEvent): Flow<DataState<MessageViewState>> = flow {
+        val studentList = listOf(
+            Student(1, "Student Name 1", ""), Student(2, "Student Name 2", ""),
+            Student(3, "Student Name 3", ""), Student(4, "Student Name 4", ""),
+            Student(5, "Student Name 5", ""), Student(6, "Student Name 6", ""))
+        emit(
+            DataState.data(
+                data = MessageViewState(studentList = studentList),
                 stateEvent = stateEvent,
                 response = null
             )

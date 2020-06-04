@@ -34,4 +34,7 @@ interface MainRepository {
         stateEvent: StateEvent
     ): Flow<DataState<MessageViewState>>
 
+    fun getStudentList(
+        stateEvent: StateEvent
+    ): Flow<DataState<MessageViewState>>
 }

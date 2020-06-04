@@ -6,33 +6,31 @@ import com.google.gson.annotations.Expose
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Message(
+data class MessageConversion(
 
     @Expose
     val id: Int,
 
     @Expose
-    val title: String,
+    val message: String,
 
     @Expose
-    val detail: String,
+    val videoUrl: String,
 
     @Expose
-    val icon: String,
+    val videoTitle: String,
+
+    @Expose
+    val videoSubTitle: String,
+
+    @Expose
+    val imageUrl: String,
 
     @Expose
     val time: String,
-
     @Expose
-    val count: String,
-
+    val messageType: String,
     @Expose
-    val NoOfMember: Int,
-
-    @Expose
-    val date: String,
-
-    @Expose
-    val conversionList : List<MessageConversion>
+    val messageFrom: String
 
 ) : Parcelable

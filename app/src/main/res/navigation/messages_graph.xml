@@ -17,12 +17,25 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_messageListFragment_to_newMessageFragment"
+            app:destination="@id/newMessageFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
 
     </fragment>
     <fragment
         android:id="@+id/messageDetailFragment"
         android:name="com.tce.teacherapp.ui.dashboard.messages.MessageDetailFragment"
-        android:label="MessageDetailFragment" />
+        android:label="MessageDetailFragment"
+        tools:layout="@layout/fragment_message_detail"/>
+    <fragment
+        android:id="@+id/newMessageFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.messages.NewMessageFragment"
+        android:label="fragment_new_message"
+        tools:layout="@layout/fragment_new_message" />
 
 
 </navigation>

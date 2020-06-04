@@ -1,6 +1,7 @@
 package com.tce.teacherapp.ui.dashboard.messages
 
 import com.tce.teacherapp.db.entity.Message
+import com.tce.teacherapp.db.entity.Student
 import com.tce.teacherapp.repository.MainRepository
 import com.tce.teacherapp.ui.BaseViewModel
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageStateEvent
@@ -25,6 +26,14 @@ class MessageViewModel @Inject constructor(val mainRepository: MainRepository) :
             setMessageList(it)
         }
 
+        data.selectedMessage?.let {
+            setSelectedMessage(it)
+        }
+
+        data.studentList?.let {
+            setStudentList(it)
+        }
+
     }
 
     private fun setMessageList(messageList: List<Message>) {
@@ -33,6 +42,20 @@ class MessageViewModel @Inject constructor(val mainRepository: MainRepository) :
         setViewState(update)
     }
 
+    private fun setSelectedMessage(mesage: Message) {
+        val update = getCurrentViewStateOrNew()
+        update.selectedMessage = mesage
+        setViewState(update)
+    }
+
+    private fun setStudentList(studentList: List<Student>) {
+        val update = getCurrentViewStateOrNew()
+        update.studentList = studentList
+        setViewState(update)
+    }
+
+
+
     override fun setStateEvent(stateEvent: StateEvent) {
         val job: Flow<DataState<MessageViewState>> = when (stateEvent) {
 
@@ -40,6 +63,13 @@ class MessageViewModel @Inject constructor(val mainRepository: MainRepository) :
                 mainRepository.getMessage(stateEvent = stateEvent)
             }
 
+            is MessageStateEvent.GetStudentEvent -> {
+                mainRepository.getStudentList(stateEvent = stateEvent)
+            }
+
+            is MessageStateEvent.GetMessageConversionEvent -> {
+                mainRepository.getMessage(stateEvent = stateEvent)
+            }
 
             else -> {
                 flow{

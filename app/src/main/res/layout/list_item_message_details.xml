@@ -1,25 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/left_message_container"
+        android:layout_width="315dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_user"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/tv_time_user_name"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/ic_dummy_user"></androidx.appcompat.widget.AppCompatImageView>
+
+        <com.tce.teacherapp.util.RubikRegularTextview
+            android:id="@+id/tv_time_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_toRightOf="@+id/img_user"
+            android:text="Aishwarya : 1.49 PM"></com.tce.teacherapp.util.RubikRegularTextview>
+
+        <com.tce.teacherapp.util.RubikRegularTextview
+            android:id="@+id/tvDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_time_user_name"
+            android:layout_toRightOf="@+id/img_user"
+            android:background="@drawable/left_msg_bg"
+            android:text="detail"
+            android:padding="20dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/white"></com.tce.teacherapp.util.RubikRegularTextview>
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/right_message_container"
+        android:layout_width="315dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_margin="10dp">
+
+        <com.tce.teacherapp.util.RubikRegularTextview
+            android:id="@+id/tv_right_time_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="Aishwarya : 1.49 PM"></com.tce.teacherapp.util.RubikRegularTextview>
+
+        <com.tce.teacherapp.util.RubikRegularTextview
+            android:id="@+id/tvRightDetail"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_below="@+id/tv_right_time_user_name"
+            android:background="@drawable/right_msg_bg"
+            android:text="detail"
+            android:padding="20dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/white"></com.tce.teacherapp.util.RubikRegularTextview>
+
+    </RelativeLayout>
+
 
     <com.google.android.material.card.MaterialCardView
-       android:id="@+id/card_course"
+        android:id="@+id/card_video"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="right"
         android:layout_margin="20dp"
-        app:shapeAppearanceOverlay="@style/MyCardView"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:visibility="visible"
+        app:cardCornerRadius="20dp"
         app:cardElevation="8dp"
-        android:visibility="visible">
+        app:cardPreventCornerOverlap="false">
 
-        <LinearLayout
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:background="#8c91a5">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
 
-        </LinearLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/img_video_thumb"
+                    android:layout_width="156dp"
+                    android:layout_height="88dp"
+                    android:src="@drawable/dummy_video"></androidx.appcompat.widget.AppCompatImageView>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/img_play"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ic_video_play"></androidx.appcompat.widget.AppCompatImageView>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/img_video_thumb"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical">
+
+                    <com.tce.teacherapp.util.RubikRegularTextview
+                        android:id="@+id/tv_subject_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:text="English"
+                        android:textSize="@dimen/font_size_12_dp">
+
+                    </com.tce.teacherapp.util.RubikRegularTextview>
+
+                    <com.tce.teacherapp.util.RubikMediumTextview
+                        android:id="@+id/tv_video_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="A Day in the Zoo"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/font_size_12_dp">
+
+                    </com.tce.teacherapp.util.RubikMediumTextview>
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_margin="20dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:visibility="visible"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        app:cardPreventCornerOverlap="false">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_image"
+            android:layout_width="190dp"
+            android:layout_height="146dp"
+            android:src="@drawable/dummy_image"></androidx.appcompat.widget.AppCompatImageView>
 
     </com.google.android.material.card.MaterialCardView>
+
+
 </LinearLayout>
