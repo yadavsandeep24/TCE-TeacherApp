@@ -32,6 +32,19 @@
                 android:textSize="@dimen/font_size_16_dp"
                 android:textStyle="bold"></com.tce.teacherapp.util.RubikMediumTextview>
 
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:id="@+id/tvNext"
+                android:layout_width="75dp"
+                android:layout_height="30dp"
+                android:text="Next"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/bg_white_rounded"
+                android:textColor="#fa4b28"
+                android:textSize="@dimen/font_size_16_dp"
+                android:gravity="center"
+                android:visibility="gone"></com.tce.teacherapp.util.RubikMediumTextview>
         </RelativeLayout>
 
         <LinearLayout

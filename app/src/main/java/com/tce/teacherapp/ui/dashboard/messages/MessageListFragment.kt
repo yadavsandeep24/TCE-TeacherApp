@@ -119,20 +119,32 @@ constructor(
 
         viewModel.setStateEvent(MessageStateEvent.GetMessageEvent)
 
-        // var bottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet_layout)
+        val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet_layout)
 
-        /*val bottomSheet: View = binding.mainCordinator.findViewById(R.id.bottom_sheet_layout)
-        val behavior: BottomSheetBehavior<*> =
-            BottomSheetBehavior.from(bottomSheet)
+        bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_COLLAPSED
+        bottomSheetBehavior.skipCollapsed = true
 
-        binding.imgFilter.setOnClickListener(View.OnClickListener {
-            if (behavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
-                behavior.setState(BottomSheetBehavior.STATE_EXPANDED)
-            } else {
-                behavior.setState(BottomSheetBehavior.STATE_COLLAPSED)
+        bottomSheetBehavior.addBottomSheetCallback(object : com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.BottomSheetCallback {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                val rotation = when (newState) {
+                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED -> 0f
+                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_COLLAPSED -> 180f
+                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN -> 180f
+                    else -> return
+                }
+
             }
         })
-*/
+        binding.imgFilter.setOnClickListener(View.OnClickListener {
+            if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
+                binding.mainCordinator.setBackgroundColor(resources.getColor(R.color.dim_color))
+                bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
+            } else {
+                binding.mainCordinator.setBackgroundColor(resources.getColor(R.color.transparent))
+                bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+            }
+        })
+
         binding.imgNewMessage.setOnClickListener(View.OnClickListener {
            /* val bundle = Bundle()
             bundle.putParcelable("messageData", )*/

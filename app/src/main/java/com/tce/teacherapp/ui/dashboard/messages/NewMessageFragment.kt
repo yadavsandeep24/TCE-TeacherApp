@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -145,6 +146,16 @@ constructor(
         epoxyVisibilityTracker.attach(binding.rvNewMessage)
         subscribeObservers()
 
+        binding.tvNext.setOnClickListener(View.OnClickListener {
+
+            val bundle = Bundle()
+            bundle.putParcelableArrayList("studentList", studentList!!)
+            findNavController().navigate(
+                R.id.action_newMessageFragment_to_groupChatFragment,
+                bundle
+            )
+
+        })
 
     }
 
@@ -175,6 +186,15 @@ constructor(
                                 id(msg.id.toLong())
                                 strStudentName(msg.name)
                                 listener {
+                                    if (studentList!!.size == 0) {
+                                        binding.rvSelectedStudent.visibility =
+                                            View.GONE
+                                        binding.tvNext.visibility = View.GONE
+                                    } else {
+                                        binding.rvSelectedStudent.visibility =
+                                            View.VISIBLE
+                                        binding.tvNext.visibility = View.VISIBLE
+                                    }
                                     val isExist = studentList!!.any{ it.id ==  msg.id }
                                     if(!isExist) {
                                         studentList!!.add(msg)
