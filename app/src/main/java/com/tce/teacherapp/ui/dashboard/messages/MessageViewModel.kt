@@ -1,6 +1,7 @@
 package com.tce.teacherapp.ui.dashboard.messages
 
 import com.tce.teacherapp.db.entity.Message
+import com.tce.teacherapp.db.entity.MessageResource
 import com.tce.teacherapp.db.entity.Student
 import com.tce.teacherapp.repository.MainRepository
 import com.tce.teacherapp.ui.BaseViewModel
@@ -34,6 +35,14 @@ class MessageViewModel @Inject constructor(val mainRepository: MainRepository) :
             setStudentList(it)
         }
 
+        data.resourceList?.let {
+            setResourceList(it)
+        }
+
+        data.selectedResourceList?.let {
+            setSelectedResourceList(it)
+        }
+
     }
 
     private fun setMessageList(messageList: List<Message>) {
@@ -54,6 +63,17 @@ class MessageViewModel @Inject constructor(val mainRepository: MainRepository) :
         setViewState(update)
     }
 
+    private fun setResourceList(resourceList: List<MessageResource>) {
+        val update = getCurrentViewStateOrNew()
+        update.resourceList = resourceList
+        setViewState(update)
+    }
+
+    private fun setSelectedResourceList(resourceList: List<MessageResource>) {
+        val update = getCurrentViewStateOrNew()
+        update.selectedResourceList = resourceList
+        setViewState(update)
+    }
 
 
     override fun setStateEvent(stateEvent: StateEvent) {
@@ -69,6 +89,15 @@ class MessageViewModel @Inject constructor(val mainRepository: MainRepository) :
 
             is MessageStateEvent.GetMessageConversionEvent -> {
                 mainRepository.getMessage(stateEvent = stateEvent)
+            }
+
+            is MessageStateEvent.GetResourceSelectionEvent -> {
+                mainRepository.getSelectedResourceList(stateEvent.typeId, stateEvent = stateEvent)
+            }
+
+
+            is MessageStateEvent.GetResourceEvent -> {
+                mainRepository.getResourceList(stateEvent = stateEvent)
             }
 
             else -> {

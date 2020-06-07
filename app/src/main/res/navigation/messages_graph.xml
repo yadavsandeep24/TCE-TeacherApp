@@ -48,7 +48,20 @@
         android:id="@+id/groupChatFragment"
         android:name="com.tce.teacherapp.ui.dashboard.messages.GroupChatFragment"
         android:label="fragment_group_chat"
-        tools:layout="@layout/fragment_group_chat" />
+        tools:layout="@layout/fragment_group_chat" >
+        <action
+            android:id="@+id/action_groupChatFragment_to_resourceFragment"
+            app:destination="@id/resourceFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/resourceFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.messages.ResourceFragment"
+        android:label="fragment_resource"
+        tools:layout="@layout/fragment_resource" />
 
 
 </navigation>

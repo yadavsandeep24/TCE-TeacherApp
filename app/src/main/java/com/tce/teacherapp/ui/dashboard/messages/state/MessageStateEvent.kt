@@ -24,6 +24,27 @@ sealed class MessageStateEvent : StateEvent {
         }
     }
 
+    object GetResourceEvent : MessageStateEvent() {
+        override fun errorInfo(): String {
+            return "Error in getting division info."
+        }
+
+        override fun toString(): String {
+            return "GetDivisionEvent"
+        }
+    }
+
+    class GetResourceSelectionEvent(
+        val typeId: Int
+    ) : MessageStateEvent() {
+        override fun errorInfo(): String {
+            return "Error in division selection event"
+        }
+
+        override fun toString(): String {
+            return "DivisionSelectionEvent"
+        }
+    }
 
     class GetMessageConversionEvent(
         val messageId: Int

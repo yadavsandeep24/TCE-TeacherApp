@@ -7,4 +7,6 @@
     <dimen name="font_size_12_dp">12dp</dimen>
     <dimen name="font_size_14_dp">14dp</dimen>
     <dimen name="font_size_16_dp">16dp</dimen>
+
+    <dimen name="_30sdp">30.00dp</dimen>
 </resources>

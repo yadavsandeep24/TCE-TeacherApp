@@ -84,48 +84,83 @@
             <RelativeLayout
                 android:id="@+id/send_message"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="15dp"
                 android:background="@color/white"
                 android:gravity="center_vertical">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/imgAttachment"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="30dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_attachment" />
-
-                <EditText
-                    android:id="@+id/edtTypeMessage"
+                <RelativeLayout
+                    android:id="@+id/attachment"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_toLeftOf="@+id/imgSendMessage"
-                    android:layout_toRightOf="@+id/imgAttachment"
-                    android:background="@drawable/bg_grey_rounded"
-                    android:hint="Type your message"
-                    android:paddingLeft="10dp"
-                    android:textSize="@dimen/font_size_14_dp">
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgAttachment"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="30dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_attachment" />
+
+                    <EditText
+                        android:id="@+id/edtTypeMessage"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_toLeftOf="@+id/imgSendMessage"
+                        android:layout_toRightOf="@+id/imgAttachment"
+                        android:background="@drawable/bg_grey_rounded"
+                        android:hint="Type your message"
+                        android:paddingLeft="10dp"
+                        android:textSize="@dimen/font_size_14_dp">
 
 
-                </EditText>
+                    </EditText>
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/imgSendMessage"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="30dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_send_message" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgSendMessage"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="30dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_send_message" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/attachment_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:visibility="gone"
+                    android:layout_below="@+id/attachment"
+                    android:orientation="vertical">
+
+                    <com.picker.gallery.utils.scroll.FastScrollRecyclerView
+                        android:id="@+id/imageGrid"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginStart="5dp"
+                        android:overScrollMode="never"
+                        app:fastScrollPopupBackgroundSize="@dimen/_30sdp"
+                        app:fastScrollPopupBgColor="#2962ff"
+                        app:fastScrollPopupTextColor="#ffffff"
+                        app:fastScrollPopupTextSize="20dp"
+                        app:fastScrollThumbColor="#2962ff" />
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/albumsrecyclerview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
 
             </RelativeLayout>
 
@@ -136,22 +171,23 @@
             android:id="@+id/bottom_sheet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="100dp"
             android:background="@drawable/filters_sheet_background"
             android:orientation="vertical"
             app:behavior_fitToContents="true"
             app:behavior_hideable="true"
             app:behavior_peekHeight="0dp"
-            android:layout_marginBottom="100dp"
             app:layout_behavior="com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior">
 
             <View
                 android:layout_width="50dp"
                 android:layout_height="4dp"
-                android:background="#e1e6f0"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="5dp"></View>
+                android:layout_marginTop="5dp"
+                android:background="#e1e6f0"></View>
 
             <LinearLayout
+                android:id="@+id/resource_container"
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
                 android:gravity="center_vertical"
@@ -160,15 +196,15 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/ic_resource"
-                    android:layout_marginRight="10dp"></androidx.appcompat.widget.AppCompatImageView>
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/ic_resource"></androidx.appcompat.widget.AppCompatImageView>
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Resources"
-                    android:textSize="@dimen/font_size_16_dp"
-                    android:textColor="@color/color_black">
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/font_size_16_dp">
 
                 </com.tce.teacherapp.util.RubikMediumTextview>
 
@@ -180,6 +216,7 @@
                 android:background="#e1e6f0"></View>
 
             <LinearLayout
+                android:id="@+id/photo_container"
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
                 android:gravity="center_vertical"
@@ -188,15 +225,15 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/ic_photo"
-                    android:layout_marginRight="10dp"></androidx.appcompat.widget.AppCompatImageView>
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/ic_photo"></androidx.appcompat.widget.AppCompatImageView>
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Photo"
-                    android:textSize="@dimen/font_size_16_dp"
-                    android:textColor="@color/color_black">
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/font_size_16_dp">
 
                 </com.tce.teacherapp.util.RubikMediumTextview>
 
@@ -216,15 +253,15 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/ic_voice"
-                    android:layout_marginRight="10dp"></androidx.appcompat.widget.AppCompatImageView>
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/ic_voice"></androidx.appcompat.widget.AppCompatImageView>
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Voice"
-                    android:textSize="@dimen/font_size_16_dp"
-                    android:textColor="@color/color_black">
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/font_size_16_dp">
 
                 </com.tce.teacherapp.util.RubikMediumTextview>
 
@@ -236,6 +273,7 @@
                 android:background="#e1e6f0"></View>
 
             <LinearLayout
+                android:id="@+id/video_container"
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
                 android:gravity="center_vertical"
@@ -244,15 +282,15 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/ic_video"
-                    android:layout_marginRight="10dp"></androidx.appcompat.widget.AppCompatImageView>
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/ic_video"></androidx.appcompat.widget.AppCompatImageView>
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Video"
-                    android:textSize="@dimen/font_size_16_dp"
-                    android:textColor="@color/color_black">
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/font_size_16_dp">
 
                 </com.tce.teacherapp.util.RubikMediumTextview>
 
@@ -272,21 +310,19 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/ic_file"
-                    android:layout_marginRight="10dp"></androidx.appcompat.widget.AppCompatImageView>
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/ic_file"></androidx.appcompat.widget.AppCompatImageView>
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="File"
-                    android:textSize="@dimen/font_size_16_dp"
-                    android:textColor="@color/color_black">
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/font_size_16_dp">
 
                 </com.tce.teacherapp.util.RubikMediumTextview>
 
             </LinearLayout>
-
-
 
 
         </LinearLayout>

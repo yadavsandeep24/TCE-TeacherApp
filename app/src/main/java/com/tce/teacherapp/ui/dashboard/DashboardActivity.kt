@@ -22,7 +22,6 @@ import javax.inject.Named
 class DashboardActivity : BaseActivity(), BottomNavController.OnNavigationReselectedListener,
     BottomNavController.OnNavigationGraphChanged {
 
-
     @Inject
     @Named("SubjectsFragmentFactory")
     lateinit var subjectsFragmentFactory: FragmentFactory

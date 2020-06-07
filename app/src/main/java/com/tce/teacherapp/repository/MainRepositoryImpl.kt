@@ -335,6 +335,39 @@ constructor(
         )
     }
 
+    override fun getResourceList(stateEvent: StateEvent): Flow<DataState<MessageViewState>> = flow {
+        val resourceList = listOf(
+            MessageResource(1, "", "","A Day in the Zoo - Modality",1, "TCE", false),
+            MessageResource(2, "", "","Title Name - 1",2, "My Resource", false),
+            MessageResource(3, "", "","Title Name - 2",3, "Shared", false))
+        emit(
+            DataState.data(
+                data = MessageViewState(resourceList = resourceList),
+                stateEvent = stateEvent,
+                response = null
+            )
+        )
+    }
+
+    override fun getSelectedResourceList(
+        typeId: Int,
+        stateEvent: StateEvent
+    ): Flow<DataState<MessageViewState>> = flow {
+        val resourceList = listOf(
+            MessageResource(1, "", "","A Day in the Zoo - Modality",1, "TCE", false),
+            MessageResource(2, "", "","Title Name - 1",2, "My Resource", false),
+            MessageResource(3, "", "","Title Name - 2",3, "Shared", false),
+            MessageResource(4, "", "","Title Name - 3",3, "Shared", false))
+        val selectedList = resourceList.filter { it.typeId == typeId }
+        emit(
+            DataState.data(
+                data = MessageViewState(selectedResourceList = selectedList),
+                stateEvent = stateEvent,
+                response = null
+            )
+        )
+    }
+
     fun toGradeList(grades: List<GradeResponse>): List<Grade> {
         val gradeList: ArrayList<Grade> = ArrayList()
         for (gradeResponse in grades) {

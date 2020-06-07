@@ -2,10 +2,7 @@ package com.tce.teacherapp.fragments.main
 
 import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModelProvider
-import com.tce.teacherapp.ui.dashboard.messages.GroupChatFragment
-import com.tce.teacherapp.ui.dashboard.messages.MessageDetailFragment
-import com.tce.teacherapp.ui.dashboard.messages.MessageListFragment
-import com.tce.teacherapp.ui.dashboard.messages.NewMessageFragment
+import com.tce.teacherapp.ui.dashboard.messages.*
 import javax.inject.Inject
 
 class MessagesFragmentFactory
@@ -32,6 +29,10 @@ constructor(
 
             GroupChatFragment::class.java.name -> {
                 GroupChatFragment()
+            }
+
+            ResourceFragment::class.java.name -> {
+                ResourceFragment(viewModelFactory)
             }
 
             else -> {

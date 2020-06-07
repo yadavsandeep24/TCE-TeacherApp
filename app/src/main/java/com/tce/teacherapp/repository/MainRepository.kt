@@ -37,4 +37,15 @@ interface MainRepository {
     fun getStudentList(
         stateEvent: StateEvent
     ): Flow<DataState<MessageViewState>>
+
+    fun getResourceList(
+        stateEvent: StateEvent
+    ): Flow<DataState<MessageViewState>>
+
+    fun getSelectedResourceList(
+        typeId: Int,
+        stateEvent: StateEvent
+    ): Flow<DataState<MessageViewState>>
+
+
 }
