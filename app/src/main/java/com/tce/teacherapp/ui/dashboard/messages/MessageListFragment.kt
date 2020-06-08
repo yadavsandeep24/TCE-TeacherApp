@@ -91,7 +91,7 @@ constructor(
         (activity as DashboardActivity).expandAppBar(false)
 
 
-       // uiCommunicationListener.displayProgressBar(true)
+       uiCommunicationListener.displayProgressBar(false)
 
         val searchText: TextView = binding.svMessage.findViewById(R.id.search_src_text) as TextView
         val myCustomFont: Typeface =

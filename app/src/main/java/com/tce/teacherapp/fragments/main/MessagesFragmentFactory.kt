@@ -35,6 +35,10 @@ constructor(
                 ResourceFragment(viewModelFactory)
             }
 
+            GroupInfoFragment::class.java.name -> {
+                GroupInfoFragment(viewModelFactory)
+            }
+
             else -> {
                 MessageListFragment(viewModelFactory)
             }

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fafaff">
+
+        <RelativeLayout
+            android:id="@+id/header_container"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/subject_actionbar_color"
+            android:orientation="vertical">
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgMessageDetail"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="40dp"
+                android:scaleType="fitXY" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/imgMessageDetail"
+                android:orientation="vertical">
+
+                <com.tce.teacherapp.util.RubikMediumTextview
+                    android:id="@+id/tvTitle1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="title"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_size_16_dp"
+                    android:textStyle="bold"></com.tce.teacherapp.util.RubikMediumTextview>
+
+                <com.tce.teacherapp.util.RubikRegularTextview
+                    android:id="@+id/tvSubTitle1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="subTitle"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/white"
+                    android:visibility="visible"></com.tce.teacherapp.util.RubikRegularTextview>
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgClose"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_close_white"></androidx.appcompat.widget.AppCompatImageView>
+
+
+        </RelativeLayout>
+
+
+        <com.airbnb.epoxy.EpoxyRecyclerView
+            android:id="@+id/rv_group_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/send_message"
+            android:layout_below="@+id/header_container"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp" />
+
+
+    </RelativeLayout>
+
+
+</layout>

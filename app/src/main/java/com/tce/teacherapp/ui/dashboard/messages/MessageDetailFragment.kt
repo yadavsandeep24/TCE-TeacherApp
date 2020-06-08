@@ -112,6 +112,19 @@ constructor(
             binding.imgMessageDetail.background = it1
         }
 
+        binding.headerContainer.setOnClickListener(View.OnClickListener {
+            val bundle = Bundle()
+            bundle.putParcelable("messageData", messageVo)
+            findNavController().navigate(
+                R.id.action_messageDetailFragment_to_groupInfoFragment,
+                bundle
+            )
+        })
+
+        binding.imgBack.setOnClickListener(View.OnClickListener {
+            activity?.onBackPressed()
+        })
+
         binding.rvMessageDetail.layoutManager = GridLayoutManager(activity, 1)
         binding.rvMessageDetail.setHasFixedSize(true)
         val epoxyVisibilityTracker = EpoxyVisibilityTracker()

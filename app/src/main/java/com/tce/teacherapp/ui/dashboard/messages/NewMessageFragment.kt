@@ -124,13 +124,9 @@ constructor(
 
         viewModel.setStateEvent(MessageStateEvent.GetStudentEvent)
 
-        /* var bottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet_layout)
-
-         if (bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
-             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)
-         } else {
-             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED)
-         }*/
+        binding.imgBack.setOnClickListener(View.OnClickListener {
+            activity?.onBackPressed()
+        })
 
         val linearLayoutManager = LinearLayoutManager(activity)
         linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL

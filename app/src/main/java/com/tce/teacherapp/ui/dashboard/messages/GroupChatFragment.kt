@@ -209,12 +209,17 @@ class GroupChatFragment : Fragment(), ImagePickerContract {
         })
 
         binding.mainContainer.setOnClickListener(View.OnClickListener {
-            if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN) {
-                bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-            } else {
+            if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
             }
 
+        })
+
+        binding.imgBack.setOnClickListener(View.OnClickListener {
+            if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+            }
+            activity?.onBackPressed()
         })
 
         binding.photoContainer.setOnClickListener(View.OnClickListener {
