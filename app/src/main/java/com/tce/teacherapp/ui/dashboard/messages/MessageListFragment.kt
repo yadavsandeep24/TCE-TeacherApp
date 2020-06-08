@@ -223,7 +223,7 @@ constructor(
         })
 
         viewModel.numActiveJobs.observe(viewLifecycleOwner, Observer {
-            uiCommunicationListener.displayProgressBar(viewModel.areAnyJobsActive())
+           // uiCommunicationListener.displayProgressBar(viewModel.areAnyJobsActive())
         })
 
 
@@ -232,14 +232,14 @@ constructor(
 
             stateMessage?.let {
 
-                uiCommunicationListener.onResponseReceived(
+                /*uiCommunicationListener.onResponseReceived(
                     response = it.response,
                     stateMessageCallback = object : StateMessageCallback {
                         override fun removeMessageFromStack() {
                             viewModel.clearStateMessage()
                         }
                     }
-                )
+                )*/
             }
         })
 

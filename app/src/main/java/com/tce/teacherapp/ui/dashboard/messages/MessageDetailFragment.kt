@@ -37,10 +37,10 @@ import javax.inject.Inject
 class MessageDetailFragment @Inject
 constructor(
     viewModelFactory: ViewModelProvider.Factory
-) : BaseMessageFragment(R.layout.fragment_message_detail,viewModelFactory) {
+) : BaseMessageFragment(R.layout.fragment_message_detail, viewModelFactory) {
 
     private lateinit var binding: FragmentMessageDetailBinding
-    var messageVo : Message? = null
+    var messageVo: Message? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,11 +94,10 @@ constructor(
 
         binding.tvTitle1.setText(messageVo!!.title)
 
-        if(messageVo!!.NoOfMember == 0)
-        {
-            binding.tvSubTitle1.visibility= View.GONE
-        }else{
-            binding.tvSubTitle1.visibility= View.VISIBLE
+        if (messageVo!!.NoOfMember == 0) {
+            binding.tvSubTitle1.visibility = View.GONE
+        } else {
+            binding.tvSubTitle1.visibility = View.VISIBLE
 
         }
         binding.tvSubTitle1.setText(messageVo!!.NoOfMember.toString() + " Members")
@@ -113,12 +112,14 @@ constructor(
         }
 
         binding.headerContainer.setOnClickListener(View.OnClickListener {
-            val bundle = Bundle()
-            bundle.putParcelable("messageData", messageVo)
-            findNavController().navigate(
-                R.id.action_messageDetailFragment_to_groupInfoFragment,
-                bundle
-            )
+            if (messageVo!!.NoOfMember != 0) {
+                val bundle = Bundle()
+                bundle.putParcelable("messageData", messageVo)
+                findNavController().navigate(
+                    R.id.action_messageDetailFragment_to_groupInfoFragment,
+                    bundle
+                )
+            }
         })
 
         binding.imgBack.setOnClickListener(View.OnClickListener {
@@ -140,26 +141,6 @@ constructor(
     }
 
     private fun subscribeObservers() {
-
-       /* viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
-            if (viewState != null) {
-
-                viewState.selectedMessage?.let {
-
-                    binding.rvMessageDetail.withModels {
-                        for (msg in it.conversionList) {
-                            messageDetailEpoxyHolder {
-                                id(msg.id.toLong())
-                                strDetail(msg.message)
-                            }
-                        }
-
-                    }
-                }
-
-
-            }
-        })*/
 
 
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
