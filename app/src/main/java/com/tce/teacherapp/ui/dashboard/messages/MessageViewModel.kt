@@ -80,24 +80,24 @@ class MessageViewModel @Inject constructor(val mainRepository: MainRepository) :
         val job: Flow<DataState<MessageViewState>> = when (stateEvent) {
 
             is MessageStateEvent.GetMessageEvent -> {
-                mainRepository.getMessage(stateEvent = stateEvent)
+                mainRepository.getMessage(stateEvent.query,stateEvent = stateEvent)
             }
 
             is MessageStateEvent.GetStudentEvent -> {
-                mainRepository.getStudentList(stateEvent = stateEvent)
+                mainRepository.getStudentList(stateEvent.query,stateEvent = stateEvent)
             }
 
             is MessageStateEvent.GetMessageConversionEvent -> {
-                mainRepository.getMessage(stateEvent = stateEvent)
+                mainRepository.getMessage(stateEvent.query,stateEvent = stateEvent)
             }
 
             is MessageStateEvent.GetResourceSelectionEvent -> {
-                mainRepository.getSelectedResourceList(stateEvent.typeId, stateEvent = stateEvent)
+                mainRepository.getSelectedResourceList(stateEvent.query,stateEvent.typeId, stateEvent = stateEvent)
             }
 
 
             is MessageStateEvent.GetResourceEvent -> {
-                mainRepository.getResourceList(stateEvent = stateEvent)
+                mainRepository.getResourceList(stateEvent.query,stateEvent = stateEvent)
             }
 
             else -> {

@@ -1,5 +1,6 @@
 package com.tce.teacherapp.ui.dashboard.messages
 
+import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +8,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -81,7 +86,32 @@ constructor(
         // (activity as DashboardActivity).setCustomToolbar(R.layout.subject_list_top_bar)
         (activity as DashboardActivity).expandAppBar(false)
 
-        viewModel.setStateEvent(MessageStateEvent.GetResourceEvent)
+        viewModel.setStateEvent(MessageStateEvent.GetResourceEvent(""))
+
+        val searchText: TextView =
+            binding.svResources.findViewById(R.id.search_src_text) as TextView
+        val myCustomFont: Typeface =
+            Typeface.createFromAsset(requireActivity().assets, "fonts/Rubik-Medium.ttf")
+        searchText.typeface = myCustomFont
+        searchText.textSize = requireActivity().resources.getDimension(R.dimen.font_size_14_px)
+
+        val searchIcon = binding.svResources.findViewById(R.id.search_mag_icon) as ImageView
+        searchIcon.setImageResource(R.drawable.search)
+
+        binding.svResources.setOnQueryTextListener(queryTextListener)
+        // Get the search close button image view
+        val closeButton: ImageView =
+            binding.svResources.findViewById(R.id.search_close_btn) as ImageView
+
+        closeButton.setOnClickListener {
+            val t: Toast = Toast.makeText(activity, "close", Toast.LENGTH_SHORT)
+            t.show()
+            uiCommunicationListener.hideSoftKeyboard()
+            binding.svResources.setQuery("", false)
+            binding.svResources.clearFocus()
+            viewModel.setStateEvent(MessageStateEvent.GetResourceEvent(""))
+            false
+        }
 
         val linearLayoutManager = LinearLayoutManager(activity)
         linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
@@ -103,6 +133,18 @@ constructor(
 
     }
 
+    private val queryTextListener = object : SearchView.OnQueryTextListener {
+        override fun onQueryTextSubmit(query: String): Boolean {
+            return false
+        }
+
+        override fun onQueryTextChange(newText: String): Boolean {
+            viewModel.setStateEvent(MessageStateEvent.GetResourceEvent(newText))
+            return true
+
+        }
+    }
+
 
     private fun subscribeObservers() {
 
@@ -117,7 +159,7 @@ constructor(
                                 id(res.id.toLong())
                                 strType(res.Type)
                                 listener {
-                                    viewModel.setStateEvent(MessageStateEvent.GetResourceSelectionEvent(res.typeId))
+                                    viewModel.setStateEvent(MessageStateEvent.GetResourceSelectionEvent("",res.typeId))
                                    requestModelBuild()
 
                                 }

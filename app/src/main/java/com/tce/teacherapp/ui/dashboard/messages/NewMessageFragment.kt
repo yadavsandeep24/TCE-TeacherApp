@@ -118,11 +118,11 @@ constructor(
             uiCommunicationListener.hideSoftKeyboard()
             binding.svNewMessage.setQuery("", false)
             binding.svNewMessage.clearFocus()
-            // viewModel.setStateEvent(MessageStateEvent.GetMessageEvent(""))
+            viewModel.setStateEvent(MessageStateEvent.GetStudentEvent(""))
             false
         }
 
-        viewModel.setStateEvent(MessageStateEvent.GetStudentEvent)
+        viewModel.setStateEvent(MessageStateEvent.GetStudentEvent(""))
 
         binding.imgBack.setOnClickListener(View.OnClickListener {
             activity?.onBackPressed()
@@ -161,7 +161,7 @@ constructor(
         }
 
         override fun onQueryTextChange(newText: String): Boolean {
-            //  viewModel.setStateEvent(SubjectStateEvent.GetSubjectEvent(newText))
+              viewModel.setStateEvent(MessageStateEvent.GetStudentEvent(newText))
             return true
 
         }

@@ -83,7 +83,7 @@ constructor(
         // (activity as DashboardActivity).setCustomToolbar(R.layout.subject_list_top_bar)
         (activity as DashboardActivity).expandAppBar(false)
 
-        viewModel.setStateEvent(MessageStateEvent.GetStudentEvent)
+        viewModel.setStateEvent(MessageStateEvent.GetStudentEvent(""))
 
         binding.imgClose.setOnClickListener(View.OnClickListener {
             activity?.onBackPressed()

@@ -113,11 +113,11 @@ constructor(
             uiCommunicationListener.hideSoftKeyboard()
             binding.svMessage.setQuery("", false)
             binding.svMessage.clearFocus()
-            viewModel.setStateEvent(SubjectStateEvent.GetSubjectEvent(""))
+            viewModel.setStateEvent(MessageStateEvent.GetMessageEvent(""))
             false
         }
 
-        viewModel.setStateEvent(MessageStateEvent.GetMessageEvent)
+        viewModel.setStateEvent(MessageStateEvent.GetMessageEvent(""))
 
         val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet_layout)
 
@@ -175,7 +175,7 @@ constructor(
         }
 
         override fun onQueryTextChange(newText: String): Boolean {
-            viewModel.setStateEvent(SubjectStateEvent.GetSubjectEvent(newText))
+            viewModel.setStateEvent(MessageStateEvent.GetMessageEvent(newText))
             return true
 
         }

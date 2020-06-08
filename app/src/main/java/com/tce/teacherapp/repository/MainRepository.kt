@@ -31,18 +31,22 @@ interface MainRepository {
     ): Flow<DataState<SubjectViewState>>
 
     fun getMessage(
+        query: String,
         stateEvent: StateEvent
     ): Flow<DataState<MessageViewState>>
 
     fun getStudentList(
+        query: String,
         stateEvent: StateEvent
     ): Flow<DataState<MessageViewState>>
 
     fun getResourceList(
+        query: String,
         stateEvent: StateEvent
     ): Flow<DataState<MessageViewState>>
 
     fun getSelectedResourceList(
+        query: String,
         typeId: Int,
         stateEvent: StateEvent
     ): Flow<DataState<MessageViewState>>

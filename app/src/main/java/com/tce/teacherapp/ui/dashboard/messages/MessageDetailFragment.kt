@@ -90,7 +90,7 @@ constructor(
 
         uiCommunicationListener.displayProgressBar(true)
 
-        viewModel.setStateEvent(MessageStateEvent.GetMessageEvent)
+        viewModel.setStateEvent(MessageStateEvent.GetMessageEvent(""))
 
         binding.tvTitle1.setText(messageVo!!.title)
 

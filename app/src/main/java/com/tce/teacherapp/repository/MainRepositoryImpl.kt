@@ -1,6 +1,7 @@
 package com.tce.teacherapp.repository
 
 import android.content.SharedPreferences
+import android.text.TextUtils
 import android.util.Log
 import com.tce.teacherapp.api.TCEService
 import com.tce.teacherapp.api.response.BookResponse
@@ -301,6 +302,7 @@ constructor(
     }
 
     override fun getMessage(
+        query: String,
         stateEvent: StateEvent
     ): Flow<DataState<MessageViewState>> = flow {
          val messageList = listOf(
@@ -312,37 +314,58 @@ constructor(
                 "ic_dummy_class_apple.xml","1.49 pm","2", 13,"10 January 2020", listOf(
                     MessageConversion(2,"Hi Parents, I am sharing what we have learnt in class.","video","","","image","1.49 PM", "2", "Rajesh"))))
         )
+        var selectedList : List<Message>;
+        if(TextUtils.isEmpty(query)){
+            selectedList = messageList
+        }else{
+            selectedList = messageList.filter { it.title.contains(query, ignoreCase = true) }
+        }
+
         emit(
             DataState.data(
-                data = MessageViewState(messageList = messageList),
+                data = MessageViewState(messageList = selectedList),
                 stateEvent = stateEvent,
                 response = null
             )
         )
     }
 
-    override fun getStudentList(stateEvent: StateEvent): Flow<DataState<MessageViewState>> = flow {
+    override fun getStudentList( query: String,stateEvent: StateEvent): Flow<DataState<MessageViewState>> = flow {
         val studentList = listOf(
             Student(1, "Student Name 1", ""), Student(2, "Student Name 2", ""),
             Student(3, "Student Name 3", ""), Student(4, "Student Name 4", ""),
             Student(5, "Student Name 5", ""), Student(6, "Student Name 6", ""))
+        var selectedList : List<Student>;
+        if(TextUtils.isEmpty(query)){
+            selectedList = studentList
+        }else{
+            selectedList = studentList.filter { it.name.contains(query,  ignoreCase = true) }
+        }
+
         emit(
             DataState.data(
-                data = MessageViewState(studentList = studentList),
+                data = MessageViewState(studentList = selectedList),
                 stateEvent = stateEvent,
                 response = null
             )
         )
     }
 
-    override fun getResourceList(stateEvent: StateEvent): Flow<DataState<MessageViewState>> = flow {
+    override fun getResourceList( query: String,stateEvent: StateEvent): Flow<DataState<MessageViewState>> = flow {
         val resourceList = listOf(
             MessageResource(1, "", "","A Day in the Zoo - Modality",1, "TCE", false),
             MessageResource(2, "", "","Title Name - 1",2, "My Resource", false),
             MessageResource(3, "", "","Title Name - 2",3, "Shared", false))
+        var selectedList : List<MessageResource>;
+        if(TextUtils.isEmpty(query)){
+            selectedList = resourceList
+        }else{
+            selectedList = resourceList.filter { it.title.contains(query, ignoreCase = true) }
+        }
+
         emit(
             DataState.data(
-                data = MessageViewState(resourceList = resourceList),
+                data = MessageViewState(resourceList = selectedList),
                 stateEvent = stateEvent,
                 response = null
             )
@@ -350,6 +373,7 @@ constructor(
     }
 
     override fun getSelectedResourceList(
+        query: String,
         typeId: Int,
         stateEvent: StateEvent
     ): Flow<DataState<MessageViewState>> = flow {
@@ -358,7 +382,13 @@ constructor(
             MessageResource(2, "", "","Title Name - 1",2, "My Resource", false),
             MessageResource(3, "", "","Title Name - 2",3, "Shared", false),
             MessageResource(4, "", "","Title Name - 3",3, "Shared", false))
-        val selectedList = resourceList.filter { it.typeId == typeId }
+        var selectedList : List<MessageResource>;
+        if(TextUtils.isEmpty(query)){
+            selectedList = resourceList.filter { it.typeId == typeId }
+        }else{
+            selectedList = resourceList.filter { it.title.contains(query, ignoreCase = true) && it.typeId == typeId}
+        }
+
         emit(
             DataState.data(
                 data = MessageViewState(selectedResourceList = selectedList),

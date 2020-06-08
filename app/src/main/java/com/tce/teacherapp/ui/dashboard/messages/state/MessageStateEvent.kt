@@ -4,7 +4,9 @@ import com.tce.teacherapp.util.StateEvent
 
 sealed class MessageStateEvent : StateEvent {
 
-    object GetMessageEvent : MessageStateEvent() {
+    class GetMessageEvent (
+        val query: String
+    ) : MessageStateEvent() {
         override fun errorInfo(): String {
             return "Error in getting division info."
         }
@@ -14,7 +16,9 @@ sealed class MessageStateEvent : StateEvent {
         }
     }
 
-    object GetStudentEvent : MessageStateEvent() {
+    class GetStudentEvent (
+        val query: String
+    ) : MessageStateEvent() {
         override fun errorInfo(): String {
             return "Error in getting division info."
         }
@@ -24,7 +28,9 @@ sealed class MessageStateEvent : StateEvent {
         }
     }
 
-    object GetResourceEvent : MessageStateEvent() {
+    class GetResourceEvent(
+        val query: String
+    ) : MessageStateEvent() {
         override fun errorInfo(): String {
             return "Error in getting division info."
         }
@@ -35,6 +41,7 @@ sealed class MessageStateEvent : StateEvent {
     }
 
     class GetResourceSelectionEvent(
+         val query: String,
         val typeId: Int
     ) : MessageStateEvent() {
         override fun errorInfo(): String {
@@ -47,6 +54,7 @@ sealed class MessageStateEvent : StateEvent {
     }
 
     class GetMessageConversionEvent(
+        val query: String,
         val messageId: Int
     ) : MessageStateEvent() {
         override fun errorInfo(): String {
