@@ -9,5 +9,31 @@
         android:id="@+id/dashboardHomeFragment"
         android:name="com.tce.teacherapp.ui.dashboard.home.DashboardHomeFragment"
         android:label="fragment_dashboard_home"
-        tools:layout="@layout/fragment_dashboard_home" />
+        tools:layout="@layout/fragment_dashboard_home" >
+        <action
+            android:id="@+id/action_dashboardHomeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.home.profile.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_updatePasswordFragment"
+            app:destination="@id/updatePasswordFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.home.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/updatePasswordFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.home.profile.UpdatePasswordFragment"
+        android:label="fragment_update_password"
+        tools:layout="@layout/fragment_update_password" />
 </navigation>
