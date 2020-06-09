@@ -160,7 +160,7 @@ constructor(
                                 strType(res.Type)
                                 listener {
                                     viewModel.setStateEvent(MessageStateEvent.GetResourceSelectionEvent("",res.typeId))
-                                   requestModelBuild()
+                                    requestModelBuild()
 
                                 }
                             }
@@ -170,6 +170,7 @@ constructor(
                 }
 
                 viewState.resourceList?.let {
+
                     binding.rvResource.withModels {
                         for (resource in it!!) {
                             resourceEpoxyHolder {
@@ -185,6 +186,7 @@ constructor(
 
 
                 viewState.selectedResourceList?.let {
+                    binding.tvTotalResource.setText(""+ it.size + " file found")
                     binding.rvResource.withModels {
                         for (resource in it!!) {
                             resourceEpoxyHolder {
@@ -200,6 +202,7 @@ constructor(
 
                 binding.tvAll.setOnClickListener(View.OnClickListener {
                     viewState.resourceList?.let {
+                        binding.tvTotalResource.setText(""+ it.size + " file found")
                         binding.rvResource.withModels {
                             for (resource in it!!) {
                                 resourceEpoxyHolder {

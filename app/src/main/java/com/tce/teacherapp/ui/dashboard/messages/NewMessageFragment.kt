@@ -50,6 +50,7 @@ constructor(
 
     private lateinit var binding: FragmentNewMessageBinding
     private var studentList: ArrayList<Student>? = ArrayList()
+    private var mainList: ArrayList<Student>? = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -172,6 +173,74 @@ constructor(
 
 
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
+
+            //getting crash while come back on this page , thats why  comment this code
+            /*if (viewState != null) {
+
+                viewState.studentList?.let {
+                    for (msg in it) {
+                        mainList!!.add(msg)
+                    }
+                }
+                mainList?.let {
+                    Log.d("SAN", "messageList-->" + it.size)
+                    binding.rvNewMessage.withModels {
+                        for (msg in it) {
+                            newMessageEpoxyHolder {
+                                id(msg.id.toLong())
+                                strStudentName(msg.name)
+                                listener {
+                                    if (studentList!!.size == 0) {
+                                        binding.rvSelectedStudent.visibility =
+                                            View.GONE
+                                        binding.tvNext.visibility = View.GONE
+                                    } else {
+                                        binding.rvSelectedStudent.visibility =
+                                            View.VISIBLE
+                                        binding.tvNext.visibility = View.VISIBLE
+                                    }
+                                    val isExist = studentList!!.any{ it.id ==  msg.id }
+                                    if(!isExist) {
+                                        studentList!!.add(msg)
+                                        mainList!!.remove(msg)
+                                        requestModelBuild()
+
+                                        binding.rvSelectedStudent.visibility = View.VISIBLE
+                                        binding.rvSelectedStudent.withModels {
+                                            for (student in studentList!!) {
+                                                selectedStudentEpoxyHolder {
+                                                    id(student.id.toLong())
+                                                    strName(student.name)
+                                                    listener {
+                                                        studentList!!.remove(student)
+                                                        mainList!!.add(student)
+                                                        requestModelBuild()
+
+
+                                                        if (studentList!!.size == 0) {
+                                                            studentList!!.clear()
+                                                            binding.rvSelectedStudent.visibility =
+                                                                View.GONE
+                                                        } else {
+                                                            binding.rvSelectedStudent.visibility =
+                                                                View.VISIBLE
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                }
+
+
+            }*/
+
             if (viewState != null) {
 
                 viewState.studentList?.let {
@@ -226,6 +295,7 @@ constructor(
 
 
             }
+
         })
 
         viewModel.numActiveJobs.observe(viewLifecycleOwner, Observer {
@@ -249,26 +319,7 @@ constructor(
             }
         })
 
-        /*val messageList = listOf(
-            (com.tce.teacherapp.db.entity.Message(1,"School Announcement", "Hi teacher, please take note that school will be closed on the 20th feb. ", resources.getDrawable(R.drawable.ic_dummy_school),"1.49 pm","1")),
-            (com.tce.teacherapp.db.entity.Message(2,"Class Apple", "Hi Parents, I am sharing what we have learnt in class.", resources.getDrawable(R.drawable.ic_dummy_class_apple),"1.49 pm","2"))
-        )
 
-        binding.rvMessage.withModels {
-            for (msg in messageList) {
-                messageListEpoxyHolder {
-                    id(msg.id)
-                    strMessage(msg.title)
-                    strDetail(msg.detail)
-                    strCount(msg.count)
-                    strTime(msg.time)
-                    imageDrawable(msg.icon)
-
-
-                }
-            }
-
-        }*/
 
     }
 

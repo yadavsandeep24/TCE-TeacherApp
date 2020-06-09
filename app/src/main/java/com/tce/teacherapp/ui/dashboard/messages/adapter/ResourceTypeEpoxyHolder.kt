@@ -18,12 +18,16 @@ abstract class ResourceTypeEpoxyHolder  : EpoxyModelWithHolder<ResourceTypeHolde
     @EpoxyAttribute
     lateinit var listener: () -> Unit
 
+    @JvmField
+    @EpoxyAttribute
+    var isSelected:  Boolean  =  false
+
     override fun bind(holder: ResourceTypeHolder) {
         holder.tvType.setText(strType)
 
         holder.tvType.background = null
         holder.tvType.setOnClickListener {
-            if(holder.tvType.background == null) {
+            if(isSelected) {
                 holder.tvType.background =
                     holder.tvType.context.resources.getDrawable(R.drawable.bg_yellow_white_rounded)
             }
