@@ -1,14 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.dashboard.home.profile.SettingsFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="#e1e7f0">
 
-</FrameLayout>
+        <RelativeLayout
+            android:id="@+id/header_container"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="#46465b"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgBack"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/ic_back"></androidx.appcompat.widget.AppCompatImageView>
+
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Settings"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_16_dp"
+                android:textStyle="bold"></com.tce.teacherapp.util.RubikMediumTextview>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:layout_below="@+id/header_container">
+
+            <RelativeLayout
+                android:id="@+id/edit_profile_container"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                android:paddingRight="30dp"
+                android:paddingLeft="30dp">
+
+                <com.tce.teacherapp.util.RubikMediumTextview
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Edit Profile"
+                    android:textSize="@dimen/font_size_16_dp"
+                    android:textColor="@color/color_black"
+                    android:layout_centerVertical="true">
+                </com.tce.teacherapp.util.RubikMediumTextview>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_next">
+
+                </androidx.appcompat.widget.AppCompatImageView>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey"></View>
+
+            <RelativeLayout
+                android:id="@+id/update_password_container"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                android:paddingRight="30dp"
+                android:paddingLeft="30dp">
+
+                <com.tce.teacherapp.util.RubikMediumTextview
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Update Password"
+                    android:textSize="@dimen/font_size_16_dp"
+                    android:textColor="@color/color_black"
+                    android:layout_centerVertical="true">
+                </com.tce.teacherapp.util.RubikMediumTextview>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_next">
+
+                </androidx.appcompat.widget.AppCompatImageView>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey"></View>
+
+            <RelativeLayout
+                android:id="@+id/fingerprint_container"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                android:paddingRight="30dp"
+                android:paddingLeft="30dp">
+
+                <com.tce.teacherapp.util.RubikMediumTextview
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Unlock with Fingerprint"
+                    android:textSize="@dimen/font_size_16_dp"
+                    android:textColor="@color/color_black"
+                    android:layout_centerVertical="true">
+                </com.tce.teacherapp.util.RubikMediumTextview>
+
+                <androidx.appcompat.widget.AppCompatToggleButton
+                    android:layout_width="58dp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:textOn=""
+                    android:textOff=""
+                    android:checked="true"
+                    android:background="@drawable/toggle_selector">
+
+                </androidx.appcompat.widget.AppCompatToggleButton>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey"></View>
+
+            <RelativeLayout
+                android:id="@+id/faceid_container"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                android:paddingRight="30dp"
+                android:paddingLeft="30dp">
+
+                <com.tce.teacherapp.util.RubikMediumTextview
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Unlock with FaceId"
+                    android:textSize="@dimen/font_size_16_dp"
+                    android:textColor="@color/color_black"
+                    android:layout_centerVertical="true">
+                </com.tce.teacherapp.util.RubikMediumTextview>
+
+                <androidx.appcompat.widget.AppCompatToggleButton
+                    android:layout_width="58dp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:textOn=""
+                    android:textOff=""
+                    android:background="@drawable/toggle_selector">
+
+                </androidx.appcompat.widget.AppCompatToggleButton>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey"></View>
+
+        </LinearLayout>
+
+        <com.tce.teacherapp.util.RubikMediumTextview
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Log Out"
+            android:textColor="#f04a14"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginBottom="30dp"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:background="@drawable/bg_white_rounded"
+            ></com.tce.teacherapp.util.RubikMediumTextview>
+
+    </RelativeLayout>
+
+</layout>

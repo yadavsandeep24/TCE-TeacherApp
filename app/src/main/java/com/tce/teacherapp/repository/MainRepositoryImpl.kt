@@ -8,6 +8,7 @@ import com.tce.teacherapp.api.response.BookResponse
 import com.tce.teacherapp.api.response.GradeResponse
 import com.tce.teacherapp.db.dao.SubjectsDao
 import com.tce.teacherapp.db.entity.*
+import com.tce.teacherapp.ui.dashboard.home.state.DashboardViewState
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageViewState
 import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectViewState
 import com.tce.teacherapp.util.*
@@ -392,6 +393,17 @@ constructor(
         emit(
             DataState.data(
                 data = MessageViewState(selectedResourceList = selectedList),
+                stateEvent = stateEvent,
+                response = null
+            )
+        )
+    }
+
+    override fun getProfile(stateEvent: StateEvent): Flow<DataState<DashboardViewState>> = flow {
+      val profile = Profile(1,"Aishwarya", "Mother","9999999999", "aishwarya@gmail.com", "123456","")
+        emit(
+            DataState.data(
+                data = DashboardViewState(profile = profile),
                 stateEvent = stateEvent,
                 response = null
             )

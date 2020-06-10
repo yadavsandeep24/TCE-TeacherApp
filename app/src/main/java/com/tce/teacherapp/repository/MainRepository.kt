@@ -1,6 +1,7 @@
 package com.tce.teacherapp.repository
 
 import com.tce.teacherapp.db.entity.Grade
+import com.tce.teacherapp.ui.dashboard.home.state.DashboardViewState
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageViewState
 import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectViewState
 import com.tce.teacherapp.util.DataState
@@ -51,5 +52,7 @@ interface MainRepository {
         stateEvent: StateEvent
     ): Flow<DataState<MessageViewState>>
 
-
+    fun getProfile(
+        stateEvent: StateEvent
+    ): Flow<DataState<DashboardViewState>>
 }
