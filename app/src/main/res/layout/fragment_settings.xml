@@ -173,6 +173,7 @@
         </LinearLayout>
 
         <com.tce.teacherapp.util.RubikMediumTextview
+            android:id="@+id/tv_logout"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="Log Out"

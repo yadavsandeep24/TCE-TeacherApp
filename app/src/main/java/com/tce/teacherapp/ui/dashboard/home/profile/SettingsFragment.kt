@@ -1,11 +1,12 @@
 package com.tce.teacherapp.ui.dashboard.home.profile
 
+import android.app.Dialog
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.view.*
+import android.widget.TextView
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentSettingsBinding
@@ -33,12 +34,49 @@ class SettingsFragment : Fragment() {
         }
         (activity as DashboardActivity).expandAppBar(false)
 
+        binding.imgBack.setOnClickListener(View.OnClickListener {
+            activity?.onBackPressed()
+        })
+
         binding.editProfileContainer.setOnClickListener(View.OnClickListener {
                 findNavController().navigate(R.id.action_settingsFragment_to_profileFragment)
         })
 
         binding.updatePasswordContainer.setOnClickListener(View.OnClickListener {
             findNavController().navigate(R.id.action_settingsFragment_to_updatePasswordFragment)
+        })
+
+        binding.tvLogout.setOnClickListener(View.OnClickListener {
+
+            val dialog = Dialog(requireActivity(), android.R.style.Theme_Dialog)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setContentView(R.layout.dialog_log_out)
+            dialog.setCanceledOnTouchOutside(false)
+            dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+            dialog.window!!.setBackgroundDrawable(
+                ColorDrawable(
+                    resources
+                        .getColor(android.R.color.transparent)
+                )
+            )
+            dialog.show()
+
+            val txtYes =
+                dialog.findViewById(R.id.tvYes) as TextView
+            val txtNo = dialog.findViewById(R.id.tvNo) as TextView
+
+
+
+            txtYes.setOnClickListener {
+
+
+            }
+
+            txtNo.setOnClickListener(View.OnClickListener {
+                dialog.dismiss()
+            })
+
+
         })
 
     }
