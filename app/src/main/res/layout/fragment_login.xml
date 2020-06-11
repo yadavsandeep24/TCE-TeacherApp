@@ -1,75 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#ffcd23">
 
-        <EditText
-            android:id="@+id/username"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="96dp"
-            android:layout_marginEnd="24dp"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/fl_bottom"
+            android:gravity="center">
 
-            android:hint="@string/prompt_email"
-            android:inputType="textEmailAddress"
-            android:selectAllOnFocus="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/iv_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/ic_tce_logo" />
 
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_below="@+id/iv_logo"
+                android:layout_centerInParent="true"
+                android:background="@drawable/ic_oval" />
 
-            android:hint="@string/prompt_password"
-            android:imeActionLabel="@string/action_sign_in_short"
-            android:imeOptions="actionDone"
-            android:inputType="textPassword"
-            android:selectAllOnFocus="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/username" />
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:id="@+id/tv_welcome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_logo"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:text="Good Morning!"
+                android:textColor="#320500"
+                android:textSize="20sp" />
 
-        <Button
-            android:id="@+id/login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="48dp"
-            android:layout_marginBottom="64dp"
-            android:enabled="true"
-            android:text="@string/action_sign_in"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/password"
-            app:layout_constraintVertical_bias="0.2" />
+            <com.tce.teacherapp.util.RubikRegularTextview
+                android:id="@+id/tv_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_welcome"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="Kindly login with your following details below"
+                android:textColor="#320500"
+                android:textSize="12sp"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edt_school_name"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:hint="School Name"
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="60dp"
+                android:layout_below="@+id/tv_hint"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:textSize="@dimen/font_size_14_dp"
+                android:background="@drawable/bg_grey_rounded"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edt_user_name"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:hint="Username"
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="60dp"
+                android:layout_below="@+id/edt_school_name"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:textSize="@dimen/font_size_14_dp"
+                android:background="@drawable/bg_grey_rounded"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edt_password"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:hint="Password"
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="60dp"
+                android:layout_below="@+id/edt_user_name"
+                android:inputType="textPassword"
+                android:paddingLeft="20dp"
+                android:textSize="@dimen/font_size_14_dp"
+                android:background="@drawable/bg_grey_rounded"/>
+
+
+                <com.tce.teacherapp.util.RubikMediumTextview
+                    android:layout_below="@+id/edt_password"
+                    android:id="@+id/tv_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:text="Login"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginEnd="60dp"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:background="@drawable/login_btn_bg"
+                    android:textSize="@dimen/font_size_14_dp"/>
+
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:layout_marginBottom="20dp"
+                android:text="Having any issues? Drop an email to \n support@schoolname.com"/>
+
+
+        </RelativeLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/login_bottom" />
 
         <ProgressBar
             android:id="@+id/loading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:layout_gravity="center"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="64dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="64dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/password"
-            app:layout_constraintStart_toStartOf="@+id/password"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.3" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:visibility="gone" />
+    </RelativeLayout>
 </layout>

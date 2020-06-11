@@ -7,5 +7,6 @@ interface Constants {
         const val NETWORK_TIMEOUT = 6000L
         const val CACHE_TIMEOUT = 2000L
         const val PERMISSIONS_REQUEST_READ_STORAGE: Int = 301
+        const val DEFAULT_KEY_NAME = "tce_default_key"
     }
 }

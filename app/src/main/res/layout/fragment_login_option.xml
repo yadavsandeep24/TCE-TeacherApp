@@ -1,14 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.login.LoginOptionFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="#ffcd23">
 
-</FrameLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/fl_bottom"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/ic_tce_logo" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_below="@+id/iv_logo"
+                android:layout_centerInParent="true"
+                android:background="@drawable/ic_oval" />
+
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:id="@+id/tv_welcome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_logo"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:text="Welcome!"
+                android:textColor="#320500"
+                android:textSize="20sp" />
+
+            <com.tce.teacherapp.util.RubikRegularTextview
+                android:id="@+id/tv_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_welcome"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="You can use Touch ID to login"
+                android:textColor="#320500"
+                android:textSize="12sp"/>
+
+            <ImageView
+                android:id="@+id/iv_thumb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_hint"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/ic_thumbprint"
+                android:layout_marginTop="30dp"/>
+
+            <LinearLayout
+                android:layout_below="@+id/iv_thumb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:orientation="vertical"
+                android:layout_marginBottom="20dp"
+                android:gravity="center">
+
+                <com.tce.teacherapp.util.RubikMediumTextview
+                    android:id="@+id/tv_login_touch_id"
+                    android:layout_width="225dp"
+                    android:layout_height="40dp"
+                    android:text="Use Touch ID"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:background="@drawable/popup_yes_btn_bg"
+                    android:textSize="@dimen/font_size_14_dp"/>
+
+                <com.tce.teacherapp.util.RubikMediumTextview
+                    android:id="@+id/tv_login_manually"
+                    android:layout_width="225dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="15dp"
+                    android:text="Login Manually"
+                    android:gravity="center"
+                    android:textColor="#fa6636"
+                    android:background="@drawable/popup_no_btn_bg"
+                    android:textSize="@dimen/font_size_14_dp"/>
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/login_bottom" />
+
+        <ProgressBar
+            android:id="@+id/loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+    </RelativeLayout>
+</layout>

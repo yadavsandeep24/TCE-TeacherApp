@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +20,7 @@
                 android:layout_height="20dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
-                android:src="@drawable/ic_back"></androidx.appcompat.widget.AppCompatImageView>
+                android:src="@drawable/ic_back"/>
 
             <com.tce.teacherapp.util.RubikMediumTextview
                 android:layout_width="wrap_content"
@@ -31,7 +29,7 @@
                 android:text="Update Profile"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_size_16_dp"
-                android:textStyle="bold"></com.tce.teacherapp.util.RubikMediumTextview>
+                android:textStyle="bold"/>
 
             <com.tce.teacherapp.util.RubikMediumTextview
                 android:id="@+id/tvSave"
@@ -45,16 +43,22 @@
                 android:textColor="#fa4b28"
                 android:textSize="@dimen/font_size_16_dp"
                 android:gravity="center"
-                android:visibility="visible"></com.tce.teacherapp.util.RubikMediumTextview>
+                android:visibility="visible"/>
 
         </RelativeLayout>
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="30dp"
+            android:scrollbars="none"
+            android:overScrollMode="never"
+            android:paddingRight="30dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp" >
+android:paddingBottom="20dp"
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:id="@+id/profile_image_container"
@@ -147,7 +151,7 @@
                 android:paddingTop="20dp"
                 android:text="Email:"
                 android:textColor="#232337"
-                android:textSize="@dimen/font_size_12_dp"></com.tce.teacherapp.util.RubikMediumTextview>
+                android:textSize="@dimen/font_size_12_dp"/>
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:layout_width="match_parent"
@@ -187,6 +191,7 @@
 
 
         </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
 

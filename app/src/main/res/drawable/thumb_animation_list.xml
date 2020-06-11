@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="true">
+    <item android:drawable="@drawable/ic_thumbprint" android:duration="150" />
+    <item android:drawable="@drawable/ic_thumbprint1" android:duration="150" />
+    <item android:drawable="@drawable/ic_thumbprint2" android:duration="150" />
+    <item android:drawable="@drawable/ic_thumbprint3" android:duration="150" />
+</animation-list>

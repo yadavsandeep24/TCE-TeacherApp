@@ -1,38 +1,19 @@
 package com.tce.teacherapp.ui.dashboard.home.profile
 
-import android.Manifest
-import android.app.Activity
-import android.app.Dialog
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.drawable.ColorDrawable
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.text.TextUtils
-import android.view.*
-import android.widget.TextView
-import androidx.core.content.ContextCompat.checkSelfPermission
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestOptions
-import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentProfileBinding
-import com.tce.teacherapp.util.Utility
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
 
 
 class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
     internal var PICK_PHOTO_FROM_GALLARY = 0
-    internal var PICK_PHOTO_FROM_CAMERA = 1
     private var mIsMideaStoreEnabled: Boolean = false
 
     override fun onCreateView(
@@ -50,12 +31,7 @@ class ProfileFragment : Fragment() {
             Intent.ACTION_PICK,
             MediaStore.Images.Media.EXTERNAL_CONTENT_URI
         )
-        if (activity?.packageManager?.let { i.resolveActivity(it) } != null) {
-            mIsMideaStoreEnabled = true
-        } else {
-            mIsMideaStoreEnabled = false
-
-        }
+        mIsMideaStoreEnabled = activity?.packageManager?.let { i.resolveActivity(it) } != null
 
         binding.profileImageContainer.setOnClickListener(View.OnClickListener {
            /* if (mIsMideaStoreEnabled) {

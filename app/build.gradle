@@ -182,6 +182,10 @@ dependencies {
     implementation "com.github.devlight.shadowlayout:library:1.0.2"
     implementation 'org.jetbrains.anko:anko-sqlite:0.10.2'
 
+
+    def biometric_version = '1.0.0'
+    implementation "androidx.biometric:biometric:$biometric_version"
+
     /*api 'id.zelory:compressor:1.0.4'
     api 'com.yalantis:ucrop:2.2.0'*/
 }

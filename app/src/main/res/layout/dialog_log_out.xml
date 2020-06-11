@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<com.google.android.material.card.MaterialCardView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_gravity="right"
+    android:layout_gravity="center"
     android:layout_margin="20dp"
     android:clipChildren="false"
     android:clipToPadding="false"
@@ -13,76 +14,79 @@
     app:cardPreventCornerOverlap="false">
 
     <LinearLayout
-        android:layout_width="200dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#ffd200"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_alert_pattern"
             android:gravity="center">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_info_outline"></ImageView>
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_info_outline"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#fffad7">
+            android:background="#fffad7"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
 
-            <com.tce.teacherapp.util.RubikMediumTextview
+            <com.tce.teacherapp.util.RubikBoldTextview
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Confirm Logout"
-                android:textColor="@color/color_black"
+                android:textColor="#320500"
                 android:layout_marginTop="10dp"
-                android:textSize="@dimen/font_size_16_dp"></com.tce.teacherapp.util.RubikMediumTextview>
+                android:textSize="@dimen/font_size_14_dp"/>
 
             <com.tce.teacherapp.util.RubikMediumTextview
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="You will return to the login screen"
-                android:textColor="@color/color_black"
+                android:textColor="#320500"
                 android:layout_marginTop="10dp"
-                android:textSize="@dimen/font_size_14_dp"></com.tce.teacherapp.util.RubikMediumTextview>
+                android:textSize="@dimen/font_size_12_dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:gravity="center">
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:id="@+id/tvYes"
                     android:layout_width="100dp"
-                    android:layout_height="40dp"
+                    android:layout_height="35dp"
                     android:text="Yes"
+                    android:gravity="center"
                     android:textColor="@color/white"
-                    android:background="@drawable/bg_orange_rounded"
-                    android:textSize="@dimen/font_size_14_dp"></com.tce.teacherapp.util.RubikMediumTextview>
-
+                    android:background="@drawable/popup_yes_btn_bg"
+                    android:textSize="@dimen/font_size_14_dp"/>
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:id="@+id/tvNo"
                     android:layout_width="100dp"
-                    android:layout_height="40dp"
+                    android:layout_height="35dp"
                     android:text="No"
+                    android:gravity="center"
                     android:textColor="#fa6636"
-                    android:background="@drawable/bg_white_rounded"
+                    android:background="@drawable/popup_no_btn_bg"
                     android:layout_marginLeft="10dp"
-                    android:textSize="@dimen/font_size_14_dp"></com.tce.teacherapp.util.RubikMediumTextview>
+                    android:textSize="@dimen/font_size_14_dp"/>
 
 
             </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
-
-
 </com.google.android.material.card.MaterialCardView>
+</layout>

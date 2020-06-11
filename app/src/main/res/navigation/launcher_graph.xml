@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/launcher_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/loginOptionFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -12,13 +12,25 @@
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
-            app:destination="@id/registerFragment" />
+            app:destination="@id/registerFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
         <action
             android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
-            app:destination="@id/forgotPasswordFragment" />
+            app:destination="@id/forgotPasswordFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
         <action
-            android:id="@+id/action_loginFragment_to_loginOptionFragment"
-            app:destination="@id/loginOptionFragment" />
+            android:id="@+id/action_loginFragment_to_quickAccessSettingFragment"
+            app:destination="@id/quickAccessSettingFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -27,7 +39,11 @@
         tools:layout="@layout/fragment_register" >
         <action
             android:id="@+id/action_registerFragment_to_childRelationFragment"
-            app:destination="@id/childRelationFragment" />
+            app:destination="@id/childRelationFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
     </fragment>
     <fragment
         android:id="@+id/childRelationFragment"
@@ -36,7 +52,11 @@
         tools:layout="@layout/fragment_child_relation" >
         <action
             android:id="@+id/action_childRelationFragment_to_registerInfoFragment"
-            app:destination="@id/registerInfoFragment" />
+            app:destination="@id/registerInfoFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
     </fragment>
     <fragment
         android:id="@+id/registerInfoFragment"
@@ -45,7 +65,11 @@
         tools:layout="@layout/fragment_register_info" >
         <action
             android:id="@+id/action_registerInfoFragment_to_quickAccessSettingFragment"
-            app:destination="@id/quickAccessSettingFragment" />
+            app:destination="@id/quickAccessSettingFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
     </fragment>
     <fragment
         android:id="@+id/quickAccessSettingFragment"
@@ -61,5 +85,13 @@
         android:id="@+id/loginOptionFragment"
         android:name="com.tce.teacherapp.ui.login.LoginOptionFragment"
         android:label="fragment_login_option"
-        tools:layout="@layout/fragment_login_option" />
+        tools:layout="@layout/fragment_login_option" >
+        <action
+            android:id="@+id/action_loginOptionFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+    </fragment>
 </navigation>

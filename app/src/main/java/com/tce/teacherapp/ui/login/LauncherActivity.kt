@@ -1,5 +1,6 @@
 package com.tce.teacherapp.ui.login
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModelProvider
@@ -28,6 +29,11 @@ class LauncherActivity : BaseActivity() {
         inject()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            window!!.statusBarColor = resources.getColor(R.color.color_black, null)
+        } else {
+            window!!.statusBarColor = resources.getColor(R.color.color_black)
+        }
         onRestoreInstanceState()
     }
 

@@ -24,4 +24,11 @@
     <string name="are_you_sure">Are you sure?</string>
     <string name="text_yes">yes</string>
     <string name="text_info">Info</string>
+    <string name="setup_lock_screen">
+        Secure lock screen hasn\'t set been up.\n
+        Go to \'Settings -> Security -> Fingerprint\' to set up a fingerprint or face
+    </string>
+    <string name="prompt_info_title">TCE Biometric</string>
+    <string name="prompt_info_subtitle">Please login to get access</string>
+    <string name="prompt_info_description">My App is using Android biometric authentication</string>
 </resources>

@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.tce.teacherapp.R
 import com.tce.teacherapp.ui.BaseFragment
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
@@ -21,7 +23,10 @@ import javax.inject.Inject
 /**
  * A simple [Fragment] subclass.
  */
-class LoginFragment @Inject constructor(viewModelFactory: ViewModelProvider.Factory) : BaseFragment(R.layout.fragment_login) {
+class LoginFragment
+@Inject
+constructor(viewModelFactory: ViewModelProvider.Factory)
+    : BaseFragment(R.layout.fragment_login) {
 
     val viewModel: LoginViewModel by viewModels {
         viewModelFactory
@@ -37,10 +42,11 @@ class LoginFragment @Inject constructor(viewModelFactory: ViewModelProvider.Fact
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val btnLogin = view.findViewById<Button>(R.id.login)
+        val btnLogin = view.findViewById<TextView>(R.id.tv_login)
 
         btnLogin.setOnClickListener {
-            viewModel.setStateEvent(LoginStateEvent.LoginAttemptEvent("",""))
+            findNavController().navigate(R.id.action_loginFragment_to_quickAccessSettingFragment)
+            //viewModel.setStateEvent(LoginStateEvent.LoginAttemptEvent("",""))
         }
         subscribeObservers()
     }
@@ -53,6 +59,7 @@ class LoginFragment @Inject constructor(viewModelFactory: ViewModelProvider.Fact
                     val i = Intent(activity, DashboardActivity::class.java)
                     startActivity(i)
                     activity?.overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left)
+                    activity?.finish()
                 }
             }
         })

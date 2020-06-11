@@ -1,6 +1,7 @@
 package com.tce.teacherapp.ui.dashboard.home.profile
 
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
@@ -11,10 +12,11 @@ import androidx.navigation.fragment.findNavController
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentSettingsBinding
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
+import com.tce.teacherapp.ui.login.LauncherActivity
 
 class SettingsFragment : Fragment() {
 
-    private lateinit var binding : FragmentSettingsBinding
+    private lateinit var binding: FragmentSettingsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,19 +36,19 @@ class SettingsFragment : Fragment() {
         }
         (activity as DashboardActivity).expandAppBar(false)
 
-        binding.imgBack.setOnClickListener(View.OnClickListener {
+        binding.imgBack.setOnClickListener {
             activity?.onBackPressed()
-        })
+        }
 
-        binding.editProfileContainer.setOnClickListener(View.OnClickListener {
-                findNavController().navigate(R.id.action_settingsFragment_to_profileFragment)
-        })
+        binding.editProfileContainer.setOnClickListener {
+            findNavController().navigate(R.id.action_settingsFragment_to_profileFragment)
+        }
 
-        binding.updatePasswordContainer.setOnClickListener(View.OnClickListener {
+        binding.updatePasswordContainer.setOnClickListener {
             findNavController().navigate(R.id.action_settingsFragment_to_updatePasswordFragment)
-        })
+        }
 
-        binding.tvLogout.setOnClickListener(View.OnClickListener {
+        binding.tvLogout.setOnClickListener {
 
             val dialog = Dialog(requireActivity(), android.R.style.Theme_Dialog)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -65,19 +67,20 @@ class SettingsFragment : Fragment() {
                 dialog.findViewById(R.id.tvYes) as TextView
             val txtNo = dialog.findViewById(R.id.tvNo) as TextView
 
-
-
             txtYes.setOnClickListener {
-
-
+                dialog.dismiss()
+                val i = Intent(activity, LauncherActivity::class.java)
+                startActivity(i)
+                activity?.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+                activity?.finish()
             }
 
-            txtNo.setOnClickListener(View.OnClickListener {
+            txtNo.setOnClickListener {
                 dialog.dismiss()
-            })
+            }
 
 
-        })
+        }
 
     }
 
