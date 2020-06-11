@@ -41,7 +41,7 @@ class SettingsFragment : Fragment() {
         }
 
         binding.editProfileContainer.setOnClickListener {
-            findNavController().navigate(R.id.action_settingsFragment_to_profileFragment)
+            findNavController().navigate(R.id.action_settingsFragment_to_teacherProfileFragment)
         }
 
         binding.updatePasswordContainer.setOnClickListener {

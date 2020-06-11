@@ -17,7 +17,7 @@ abstract class ResourceEpoxyHolder  : EpoxyModelWithHolder<ResourceHolder>(){
 
     override fun bind(holder: ResourceHolder) {
         holder.tvTitle.setText(strTitle)
-        holder.tvTitle.setOnClickListener {
+        holder.tvAdd.setOnClickListener {
             listener()
         }
     }
@@ -25,4 +25,6 @@ abstract class ResourceEpoxyHolder  : EpoxyModelWithHolder<ResourceHolder>(){
 
 class ResourceHolder : KotlinEpoxyHolder(){
     val tvTitle by bind<TextView>(R.id.title)
+    val tvAdd by bind<TextView>(R.id.tvAdd)
+
 }

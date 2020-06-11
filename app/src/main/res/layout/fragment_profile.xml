@@ -66,12 +66,12 @@ android:paddingBottom="20dp"
                 android:layout_height="107dp"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center_horizontal">
-                <androidx.appcompat.widget.AppCompatImageView
+                <com.tce.teacherapp.util.CustomCircularImageView
                     android:id="@+id/img_profile"
                     android:layout_width="107dp"
                     android:layout_height="107dp"
                     android:src="@drawable/ic_user_profile">
-                </androidx.appcompat.widget.AppCompatImageView>
+                </com.tce.teacherapp.util.CustomCircularImageView>
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="37dp"
                     android:layout_height="37dp"

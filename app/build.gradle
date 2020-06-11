@@ -186,6 +186,6 @@ dependencies {
     def biometric_version = '1.0.0'
     implementation "androidx.biometric:biometric:$biometric_version"
 
-    /*api 'id.zelory:compressor:1.0.4'
-    api 'com.yalantis:ucrop:2.2.0'*/
+    api 'id.zelory:compressor:1.0.4'
+    api 'com.yalantis:ucrop:2.2.0'
 }

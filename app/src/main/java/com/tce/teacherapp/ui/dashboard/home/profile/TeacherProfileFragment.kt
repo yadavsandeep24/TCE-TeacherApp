@@ -7,14 +7,16 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.TextUtils
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentProfileBinding
+import com.tce.teacherapp.databinding.FragmentTeacherProfileBinding
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.util.Utility
 import com.yalantis.ucrop.UCrop
@@ -22,17 +24,24 @@ import id.zelory.compressor.Compressor
 import java.io.File
 
 
-class ProfileFragment : Fragment() {
+class TeacherProfileFragment : Fragment() {
 
-    private lateinit var binding: FragmentProfileBinding
+
+    private lateinit var binding : FragmentTeacherProfileBinding
     internal var PICK_PHOTO_FROM_GALLARY = 0
     private var mIsMideaStoreEnabled: Boolean = false
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentProfileBinding.inflate(inflater, container, false)
+        binding = FragmentTeacherProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -60,7 +69,6 @@ class ProfileFragment : Fragment() {
 
     }
 
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
@@ -78,7 +86,9 @@ class ProfileFragment : Fragment() {
                 }
                 if (selectedImageUri != null) {
                     selectedImagePath = Utility.getRealPathFromURI(requireActivity(), selectedImageUri!!)
-                    val compressedImageFile = Compressor.getDefault(requireActivity()).compressToFile(File(selectedImagePath!!))
+                    val compressedImageFile = Compressor.getDefault(requireActivity()).compressToFile(
+                        File(selectedImagePath!!)
+                    )
                     val imageName =requireActivity().getExternalFilesDir(null).toString() + File.separator +
                             ".profilepic" + File.separator + "profile-"+ Utility.getUniqueID("user") + ".PNG"
                     val isImageCopied = Utility.copyFileFromSourceToDestn(compressedImageFile.getPath(), imageName, false)
@@ -112,15 +122,13 @@ class ProfileFragment : Fragment() {
             .withAspectRatio(1F, 1F)
             .withMaxResultSize(768, 1024)
             .withOptions(options)
-            .start(activity as DashboardActivity, this,UCrop.REQUEST_CROP )
+            .start(activity as DashboardActivity, this, UCrop.REQUEST_CROP )
     }
-
-
-
 
     override fun onDestroy() {
         super.onDestroy()
     }
+
 
 
 }
