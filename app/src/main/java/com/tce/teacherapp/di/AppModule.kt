@@ -119,13 +119,15 @@ object AppModule {
         subjectDao: SubjectsDao,
         tceService: TCEService,
         preferences: SharedPreferences,
-        editor: SharedPreferences.Editor
+        editor: SharedPreferences.Editor,
+        application: Application
     ): MainRepository {
         return MainRepositoryImpl(
             subjectDao,
             tceService,
             preferences,
-            editor
+            editor,
+            application
         )
     }
 

@@ -85,11 +85,11 @@ constructor(viewModelFactory: ViewModelProvider.Factory
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-       /* val i = Intent(
+        val i = Intent(
             Intent.ACTION_PICK,
             MediaStore.Images.Media.EXTERNAL_CONTENT_URI
         )
-        mIsMideaStoreEnabled = activity?.packageManager?.let { i.resolveActivity(it) } != null*/
+        mIsMideaStoreEnabled = activity?.packageManager?.let { i.resolveActivity(it) } != null
 
         binding.profileImageContainer.setOnClickListener(View.OnClickListener {
             val i = Intent(

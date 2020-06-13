@@ -58,6 +58,6 @@
     <fragment
         android:id="@+id/teacherProfileFragment"
         android:name="com.tce.teacherapp.ui.dashboard.home.profile.TeacherProfileFragment"
-        android:label="fragment_teacher_profile"
+        android:label="TeacherProfileFragment"
         tools:layout="@layout/fragment_teacher_profile" />
 </navigation>

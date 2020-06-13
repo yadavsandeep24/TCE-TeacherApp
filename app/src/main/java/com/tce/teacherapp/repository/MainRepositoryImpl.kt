@@ -1,8 +1,12 @@
 package com.tce.teacherapp.repository
 
+import android.app.Application
 import android.content.SharedPreferences
+import android.os.ParcelFileDescriptor.open
 import android.text.TextUtils
 import android.util.Log
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.tce.teacherapp.api.TCEService
 import com.tce.teacherapp.api.response.BookResponse
 import com.tce.teacherapp.api.response.GradeResponse
@@ -20,6 +24,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.IOException
 import java.io.InputStream
+import java.nio.channels.DatagramChannel.open
 import javax.inject.Inject
 
 @FlowPreview
@@ -29,7 +34,8 @@ constructor(
     val subjectDao: SubjectsDao,
     val tceService: TCEService,
     val sharedPreferences: SharedPreferences,
-    val sharedPrefsEditor: SharedPreferences.Editor
+    val sharedPrefsEditor: SharedPreferences.Editor,
+    val application: Application
 ) : MainRepository {
     private val TAG: String = "AppDebug"
     override fun getGrades(stateEvent: StateEvent): Flow<DataState<SubjectViewState>> = flow{
@@ -401,14 +407,27 @@ constructor(
 
     override fun getProfile(stateEvent: StateEvent): Flow<DataState<DashboardViewState>> = flow {
         //get data from json
-      val profile = Profile(1,"Aishwarya", "Mother","9999999999", "aishwarya@gmail.com", "123456","Gala No 6 & 7, Laxmi plaza, New Link Road, Andheri west, Mumbai - 400053 ","English,Hindi","")
-        emit(
-            DataState.data(
-                data = DashboardViewState(profile = profile),
-                stateEvent = stateEvent,
-                response = null
+        var jsonString: String  =""
+        try {
+
+            jsonString = application.assets.open("json/profile.json").bufferedReader().use { it.readText() }
+            val gson = Gson()
+            val listPersonType = object : TypeToken<Profile>() {}.type
+            var persons: Profile = gson.fromJson(jsonString, listPersonType)
+            emit(
+                DataState.data(
+                    data = DashboardViewState(profile = persons),
+                    stateEvent = stateEvent,
+                    response = null
+                )
             )
-        )
+        } catch (ioException: IOException) {
+            ioException.printStackTrace()
+        }
+
+
+
+
     }
 
     fun toGradeList(grades: List<GradeResponse>): List<Grade> {

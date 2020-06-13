@@ -1,0 +1,16 @@
+{
+  "profile":
+    {
+      "id": "1",
+      "name": "Aishwarya",
+      "relationship": "Mother",
+      "contact": "9999999999" ,
+      "email": "aishwarya@gmail.com",
+      "password": "123456",
+      "address": "Gala No 6 & 7, Laxmi plaza, New Link Road, Andheri west, Mumbai - 400053",
+      "subjects": "English,Hindi",
+      "imageUrl": ""
+    }
+
+
+}
