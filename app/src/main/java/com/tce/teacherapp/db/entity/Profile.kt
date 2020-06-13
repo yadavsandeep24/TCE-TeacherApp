@@ -25,5 +25,11 @@ data class Profile(
     val password: String,
 
     @Expose
+    val address: String,
+
+    @Expose
+    val subjects: String,
+
+    @Expose
     val imageUrl : String
 ): Parcelable

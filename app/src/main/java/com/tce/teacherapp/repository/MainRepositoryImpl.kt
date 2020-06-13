@@ -400,7 +400,7 @@ constructor(
     }
 
     override fun getProfile(stateEvent: StateEvent): Flow<DataState<DashboardViewState>> = flow {
-      val profile = Profile(1,"Aishwarya", "Mother","9999999999", "aishwarya@gmail.com", "123456","")
+      val profile = Profile(1,"Aishwarya", "Mother","9999999999", "aishwarya@gmail.com", "123456","Gala No 6 & 7, Laxmi plaza, New Link Road, Andheri west, Mumbai - 400053 ","English,Hindi","")
         emit(
             DataState.data(
                 data = DashboardViewState(profile = profile),

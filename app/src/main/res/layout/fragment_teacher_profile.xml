@@ -43,7 +43,7 @@
                 android:textColor="#fa4b28"
                 android:textSize="@dimen/font_size_16_dp"
                 android:gravity="center"
-                android:visibility="visible"/>
+                android:visibility="gone"/>
 
         </RelativeLayout>
 
@@ -82,26 +82,18 @@
 
                 </RelativeLayout>
 
-                <com.tce.teacherapp.util.RubikMediumTextview
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Name:"
-                    android:textColor="#232337"
-                    android:textSize="@dimen/font_size_12_dp"
-                    android:paddingTop="30dp">
-                </com.tce.teacherapp.util.RubikMediumTextview>
 
-                <androidx.appcompat.widget.AppCompatEditText
+                <com.tce.teacherapp.util.RubikBoldTextview
+                    android:id="@+id/tvUserName"
                     android:layout_width="match_parent"
-                    android:layout_height="38dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="123456"
-                    android:inputType="text"
-                    android:paddingLeft="10dp"
-                    android:textSize="@dimen/font_size_14_dp"
-                    android:background="@drawable/bg_grey_rounded">
+                    android:textSize="@dimen/font_size_16_dp"
+                    android:textColor="@color/color_black"
+                    android:gravity="center">
 
-                </androidx.appcompat.widget.AppCompatEditText>
+                </com.tce.teacherapp.util.RubikBoldTextview>
 
 
 
@@ -114,17 +106,15 @@
                     android:paddingTop="20dp">
                 </com.tce.teacherapp.util.RubikMediumTextview>
 
-                <androidx.appcompat.widget.AppCompatEditText
+                <com.tce.teacherapp.util.RubikMediumTextview
+                    android:id="@+id/tvContact"
                     android:layout_width="match_parent"
                     android:layout_height="38dp"
                     android:layout_marginTop="10dp"
                     android:text="123456"
-                    android:inputType="textPhonetic"
-                    android:paddingLeft="10dp"
-                    android:textSize="@dimen/font_size_14_dp"
-                    android:background="@drawable/bg_grey_rounded">
+                    android:textSize="@dimen/font_size_14_dp">
 
-                </androidx.appcompat.widget.AppCompatEditText>
+                </com.tce.teacherapp.util.RubikMediumTextview>
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:layout_width="wrap_content"
@@ -134,17 +124,15 @@
                     android:textColor="#232337"
                     android:textSize="@dimen/font_size_12_dp"/>
 
-                <androidx.appcompat.widget.AppCompatEditText
+                <com.tce.teacherapp.util.RubikMediumTextview
+                    android:id="@+id/tvEmail"
                     android:layout_width="match_parent"
                     android:layout_height="38dp"
                     android:layout_marginTop="10dp"
                     android:text="123456"
-                    android:inputType="textEmailAddress"
-                    android:paddingLeft="10dp"
-                    android:textSize="@dimen/font_size_14_dp"
-                    android:background="@drawable/bg_grey_rounded">
+                    android:textSize="@dimen/font_size_14_dp">
 
-                </androidx.appcompat.widget.AppCompatEditText>
+                </com.tce.teacherapp.util.RubikMediumTextview>
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:layout_width="wrap_content"
@@ -155,20 +143,17 @@
                     android:paddingTop="20dp">
                 </com.tce.teacherapp.util.RubikMediumTextview>
 
-                <androidx.appcompat.widget.AppCompatEditText
+                <com.tce.teacherapp.util.RubikMediumTextview
+                    android:id="@+id/tvAddress"
                     android:layout_width="match_parent"
                     android:layout_height="132dp"
                     android:layout_marginTop="10dp"
                     android:text="123456"
-                    android:inputType="textMultiLine"
-                    android:paddingLeft="10dp"
                     android:gravity="top|start"
                     android:scrollHorizontally="false"
-                    android:paddingTop="10dp"
-                    android:textSize="@dimen/font_size_14_dp"
-                    android:background="@drawable/bg_grey_rounded">
+                    android:textSize="@dimen/font_size_14_dp">
 
-                </androidx.appcompat.widget.AppCompatEditText>
+                </com.tce.teacherapp.util.RubikMediumTextview>
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:layout_width="wrap_content"
@@ -179,17 +164,15 @@
                     android:paddingTop="20dp">
                 </com.tce.teacherapp.util.RubikMediumTextview>
 
-                <androidx.appcompat.widget.AppCompatEditText
+                <com.tce.teacherapp.util.RubikMediumTextview
+                    android:id="@+id/tvSubject"
                     android:layout_width="match_parent"
                     android:layout_height="38dp"
                     android:layout_marginTop="10dp"
                     android:text="123456"
-                    android:inputType="text"
-                    android:paddingLeft="10dp"
-                    android:textSize="@dimen/font_size_14_dp"
-                    android:background="@drawable/bg_grey_rounded">
+                    android:textSize="@dimen/font_size_14_dp">
 
-                </androidx.appcompat.widget.AppCompatEditText>
+                </com.tce.teacherapp.util.RubikMediumTextview>
 
 
             </LinearLayout>

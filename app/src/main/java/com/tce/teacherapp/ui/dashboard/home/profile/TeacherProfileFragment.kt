@@ -7,24 +7,40 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.TextUtils
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.tce.teacherapp.R
-import com.tce.teacherapp.databinding.FragmentProfileBinding
 import com.tce.teacherapp.databinding.FragmentTeacherProfileBinding
+import com.tce.teacherapp.db.entity.Profile
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
+import com.tce.teacherapp.ui.dashboard.home.BaseDashboardFragment
+import com.tce.teacherapp.ui.dashboard.home.state.DASHBOARD_VIEW_STATE_BUNDLE_KEY
+import com.tce.teacherapp.ui.dashboard.home.state.DashboardStateEvent
+import com.tce.teacherapp.ui.dashboard.home.state.DashboardViewState
+import com.tce.teacherapp.ui.dashboard.messages.BaseMessageFragment
+import com.tce.teacherapp.ui.dashboard.messages.state.MessageStateEvent
 import com.tce.teacherapp.util.Utility
 import com.yalantis.ucrop.UCrop
 import id.zelory.compressor.Compressor
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import java.io.File
+import javax.inject.Inject
 
 
-class TeacherProfileFragment : Fragment() {
+@ExperimentalCoroutinesApi
+@FlowPreview
+class TeacherProfileFragment @Inject
+constructor(
+    viewModelFactory: ViewModelProvider.Factory
+) : BaseDashboardFragment(R.layout.fragment_teacher_profile,viewModelFactory) {
 
 
     private lateinit var binding : FragmentTeacherProfileBinding
@@ -34,8 +50,29 @@ class TeacherProfileFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        savedInstanceState?.let { inState ->
+            Log.d(TAG, "DashboardViewState: inState is NOT null")
+            (inState[DASHBOARD_VIEW_STATE_BUNDLE_KEY] as DashboardViewState?)?.let { viewState ->
+                Log.d(TAG, "DashboardViewState: restoring view state: $viewState")
+                viewModel.setViewState(viewState)
+            }
+        }
     }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        val viewState = viewModel.viewState.value
+
+        //clear the list. Don't want to save a large list to bundle.
+        viewState?.profile = null
+
+
+        outState.putParcelable(
+            DASHBOARD_VIEW_STATE_BUNDLE_KEY,
+            viewState
+        )
+        super.onSaveInstanceState(outState)
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,11 +85,11 @@ class TeacherProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val i = Intent(
+       /* val i = Intent(
             Intent.ACTION_PICK,
             MediaStore.Images.Media.EXTERNAL_CONTENT_URI
         )
-        mIsMideaStoreEnabled = activity?.packageManager?.let { i.resolveActivity(it) } != null
+        mIsMideaStoreEnabled = activity?.packageManager?.let { i.resolveActivity(it) } != null*/
 
         binding.profileImageContainer.setOnClickListener(View.OnClickListener {
             val i = Intent(
@@ -66,9 +103,25 @@ class TeacherProfileFragment : Fragment() {
             activity?.onBackPressed()
         })
 
-
+        viewModel.setStateEvent(DashboardStateEvent.GetProfileEvent)
+        subscribeObservers()
     }
 
+    private fun subscribeObservers() {
+
+        viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
+            if (viewState != null) {
+
+                viewState.profile?.let {
+                    binding.tvUserName.setText(it.name)
+                    binding.tvContact.setText(it.contact)
+                    binding.tvEmail.setText(it.email)
+                    binding.tvAddress.setText(it.address)
+                    binding.tvSubject.setText(it.subjects)
+                }
+            }
+        })
+    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
