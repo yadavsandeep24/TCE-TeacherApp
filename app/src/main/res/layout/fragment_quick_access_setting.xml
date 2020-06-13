@@ -22,7 +22,7 @@
                 android:background="@drawable/ic_tce_logo" />
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="match_parent"
                 android:layout_below="@+id/iv_logo"
                 android:layout_centerInParent="true"
                 android:background="@drawable/ic_oval" />
@@ -70,13 +70,15 @@
 
 
             <com.tce.teacherapp.util.RubikMediumTextview
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:id="@+id/tv_skip_for_now"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:textColor="#fa4b28"
-                android:text="Skip for now"/>
+                android:textAllCaps="false"
+                android:text="@string/btn_skip_for_now"/>
 
         </RelativeLayout>
 
@@ -86,13 +88,5 @@
             android:layout_height="150dp"
             android:layout_alignParentBottom="true"
             android:background="@drawable/login_bottom" />
-
-        <ProgressBar
-            android:id="@+id/loading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center"
-            android:visibility="gone" />
     </RelativeLayout>
 </layout>

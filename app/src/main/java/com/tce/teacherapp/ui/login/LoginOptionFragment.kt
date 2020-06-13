@@ -56,7 +56,6 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         binding = FragmentLoginOptionBinding.inflate(inflater, container, false)
         return binding.root
     }

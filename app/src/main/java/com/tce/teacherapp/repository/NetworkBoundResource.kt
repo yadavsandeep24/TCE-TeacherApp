@@ -34,7 +34,7 @@ constructor(
                 emit(
                     buildError<ViewState>(
                         apiResult.errorMessage?.let { it } ?: UNKNOWN_ERROR,
-                        UIComponentType.Dialog(),
+                        UIComponentType.Dialog,
                         stateEvent
                     )
                 )
@@ -44,7 +44,7 @@ constructor(
                 emit(
                     buildError<ViewState>(
                         NETWORK_ERROR,
-                        UIComponentType.Dialog(),
+                        UIComponentType.Dialog,
                         stateEvent
                     )
                 )
@@ -53,7 +53,7 @@ constructor(
             is ApiResult.Success -> {
                 if (apiResult.value == null) {
                     emit(
-                        buildError<ViewState>(UNKNOWN_ERROR, UIComponentType.Dialog(), stateEvent)
+                        buildError<ViewState>(UNKNOWN_ERROR, UIComponentType.Dialog, stateEvent)
                     )
                 } else {
                     updateCache(apiResult.value as NetworkObj)

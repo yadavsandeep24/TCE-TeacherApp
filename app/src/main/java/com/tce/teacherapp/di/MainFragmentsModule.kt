@@ -3,6 +3,7 @@ package com.tce.teacherapp.di
 import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModelProvider
 import com.tce.teacherapp.fragments.login.LoginFragmentFactory
+import com.tce.teacherapp.fragments.main.DashboardFragmentFactory
 import com.tce.teacherapp.fragments.main.MessagesFragmentFactory
 import com.tce.teacherapp.fragments.main.SubjectsFragmentFactory
 import dagger.Module
@@ -19,6 +20,17 @@ object MainFragmentsModule {
         viewModelFactory: ViewModelProvider.Factory
     ): FragmentFactory {
         return LoginFragmentFactory(
+            viewModelFactory
+        )
+    }
+
+    @JvmStatic
+    @Provides
+    @Named("DashboardFragmentFactory")
+    fun provideDashboardFragmentFactory(
+        viewModelFactory: ViewModelProvider.Factory
+    ): FragmentFactory {
+        return DashboardFragmentFactory(
             viewModelFactory
         )
     }

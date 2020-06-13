@@ -18,7 +18,7 @@ abstract class ApiResponseHandler<ViewState, Data>(
                 DataState.error(
                     response = Response(
                         message = "${stateEvent.errorInfo()}\n\nReason: ${response.errorMessage.toString()}",
-                        uiComponentType = UIComponentType.Dialog(),
+                        uiComponentType = UIComponentType.Dialog,
                         messageType = MessageType.Error(),
                         serviceTypes = RequestTypes.GENERIC
                     ),
@@ -30,7 +30,7 @@ abstract class ApiResponseHandler<ViewState, Data>(
                 DataState.error(
                     response = Response(
                         message = "${stateEvent.errorInfo()}\n\nReason: ${NETWORK_ERROR}",
-                        uiComponentType = UIComponentType.Dialog(),
+                        uiComponentType = UIComponentType.Dialog,
                         messageType = MessageType.Error(),
                         serviceTypes = RequestTypes.GENERIC
                     ),
@@ -43,7 +43,7 @@ abstract class ApiResponseHandler<ViewState, Data>(
                     DataState.error(
                         response = Response(
                             message = "${stateEvent.errorInfo()}\n\nReason: Data is NULL.",
-                            uiComponentType = UIComponentType.Dialog(),
+                            uiComponentType = UIComponentType.Dialog,
                             messageType = MessageType.Error(),
                             serviceTypes = RequestTypes.GENERIC
                         ),

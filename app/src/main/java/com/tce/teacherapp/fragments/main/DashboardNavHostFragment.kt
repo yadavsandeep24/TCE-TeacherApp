@@ -4,10 +4,14 @@ import android.content.Context
 import android.os.Bundle
 import androidx.annotation.NavigationRes
 import androidx.navigation.fragment.NavHostFragment
+import com.tce.teacherapp.ui.dashboard.DashboardActivity
 
 class DashboardNavHostFragment : NavHostFragment() {
 
     override fun onAttach(context: Context) {
+
+        childFragmentManager.fragmentFactory =
+            (activity as DashboardActivity).dashboardFragmentFactory
         super.onAttach(context)
     }
 

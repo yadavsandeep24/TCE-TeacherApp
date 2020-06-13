@@ -77,6 +77,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
                 android:paddingRight="30dp"
+                android:visibility="gone"
                 android:paddingLeft="30dp">
 
                 <com.tce.teacherapp.util.RubikMediumTextview
@@ -99,8 +100,10 @@
             </RelativeLayout>
 
             <View
+                android:id="@+id/vw_update_password_divider"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:visibility="gone"
                 android:background="@color/grey"/>
 
             <RelativeLayout
@@ -142,6 +145,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
                 android:paddingRight="30dp"
+                android:visibility="visible"
                 android:paddingLeft="30dp">
 
                 <com.tce.teacherapp.util.RubikMediumTextview
@@ -160,14 +164,17 @@
                     android:layout_centerVertical="true"
                     android:textOn=""
                     android:textOff=""
+                    android:enabled="false"
                     android:background="@drawable/toggle_selector">
 
                 </androidx.appcompat.widget.AppCompatToggleButton>
             </RelativeLayout>
 
             <View
+                android:id="@+id/vw_faceid_divider"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:visibility="visible"
                 android:background="@color/grey"/>
 
         </LinearLayout>

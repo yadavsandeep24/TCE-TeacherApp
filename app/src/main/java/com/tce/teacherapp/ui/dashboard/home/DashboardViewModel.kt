@@ -43,7 +43,7 @@ class DashboardViewModel @Inject constructor(val mainRepository: MainRepository)
                 }
             }
         }
-
+        launchJob(stateEvent, job)
     }
 
     override fun initNewViewState(): DashboardViewState {

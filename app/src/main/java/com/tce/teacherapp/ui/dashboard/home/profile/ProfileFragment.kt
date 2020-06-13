@@ -77,14 +77,14 @@ class ProfileFragment : Fragment() {
 
                 }
                 if (selectedImageUri != null) {
-                    selectedImagePath = Utility.getRealPathFromURI(requireActivity(), selectedImageUri!!)
-                    val compressedImageFile = Compressor.getDefault(requireActivity()).compressToFile(File(selectedImagePath!!))
+                    selectedImagePath = Utility.getRealPathFromURI(requireActivity(), selectedImageUri)
+             /*       val compressedImageFile = Compressor.compress(requireActivity(),File(selectedImagePath))
                     val imageName =requireActivity().getExternalFilesDir(null).toString() + File.separator +
                             ".profilepic" + File.separator + "profile-"+ Utility.getUniqueID("user") + ".PNG"
                     val isImageCopied = Utility.copyFileFromSourceToDestn(compressedImageFile.getPath(), imageName, false)
                     if (isImageCopied) {
                         callCrop(Uri.fromFile(File(imageName)))
-                    }
+                    }*/
                 }
 
             } else if (requestCode == UCrop.REQUEST_CROP) {

@@ -23,9 +23,12 @@ class DashboardActivity : BaseActivity(), BottomNavController.OnNavigationResele
     BottomNavController.OnNavigationGraphChanged {
 
     @Inject
+    @Named("DashboardFragmentFactory")
+    lateinit var dashboardFragmentFactory: FragmentFactory
+
+    @Inject
     @Named("SubjectsFragmentFactory")
     lateinit var subjectsFragmentFactory: FragmentFactory
-
 
     @Inject
     @Named("MessagesFragmentFactory")

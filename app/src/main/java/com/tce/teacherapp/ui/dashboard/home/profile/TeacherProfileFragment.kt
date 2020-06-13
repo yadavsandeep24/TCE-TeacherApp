@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -18,33 +19,32 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentTeacherProfileBinding
-import com.tce.teacherapp.db.entity.Profile
+import com.tce.teacherapp.ui.BaseFragment
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
-import com.tce.teacherapp.ui.dashboard.home.BaseDashboardFragment
+import com.tce.teacherapp.ui.dashboard.home.DashboardViewModel
 import com.tce.teacherapp.ui.dashboard.home.state.DASHBOARD_VIEW_STATE_BUNDLE_KEY
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardStateEvent
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardViewState
-import com.tce.teacherapp.ui.dashboard.messages.BaseMessageFragment
-import com.tce.teacherapp.ui.dashboard.messages.state.MessageStateEvent
+import com.tce.teacherapp.ui.login.LoginViewModel
 import com.tce.teacherapp.util.Utility
 import com.yalantis.ucrop.UCrop
-import id.zelory.compressor.Compressor
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import java.io.File
 import javax.inject.Inject
 
 
 @ExperimentalCoroutinesApi
 @FlowPreview
-class TeacherProfileFragment @Inject
-constructor(
-    viewModelFactory: ViewModelProvider.Factory
-) : BaseDashboardFragment(R.layout.fragment_teacher_profile,viewModelFactory) {
+class TeacherProfileFragment
+@Inject
+constructor(viewModelFactory: ViewModelProvider.Factory
+) : BaseFragment(R.layout.fragment_teacher_profile) {
 
-
+    val viewModel: DashboardViewModel by viewModels {
+        viewModelFactory
+    }
     private lateinit var binding : FragmentTeacherProfileBinding
-    internal var PICK_PHOTO_FROM_GALLARY = 0
+    private var PICK_PHOTO_FROM_GALLARY = 0
     private var mIsMideaStoreEnabled: Boolean = false
 
 
@@ -107,17 +107,20 @@ constructor(
         subscribeObservers()
     }
 
+    override fun setupChannel() {
+        viewModel.setupChannel()
+    }
+
     private fun subscribeObservers() {
 
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             if (viewState != null) {
-
                 viewState.profile?.let {
-                    binding.tvUserName.setText(it.name)
-                    binding.tvContact.setText(it.contact)
-                    binding.tvEmail.setText(it.email)
-                    binding.tvAddress.setText(it.address)
-                    binding.tvSubject.setText(it.subjects)
+                    binding.tvUserName.text = it.name
+                    binding.tvContact.text = it.contact
+                    binding.tvEmail.text = it.email
+                    binding.tvAddress.text = it.address
+                    binding.tvSubject.text = it.subjects
                 }
             }
         })
@@ -129,7 +132,7 @@ constructor(
                 var selectedImagePath: String? = null
                 var selectedImageUri: Uri? = null
                 if (data!!.data == null) {
-                    val path = MediaStore.Images.Media.insertImage(requireActivity().contentResolver, data.getExtras()!!.get("data") as Bitmap, "Title", null)
+                    val path = MediaStore.Images.Media.insertImage(requireActivity().contentResolver, data.extras!!.get("data") as Bitmap, "Title", null)
                     if (!TextUtils.isEmpty(path)) {
                         selectedImageUri = Uri.parse(path)
                     }
@@ -138,16 +141,18 @@ constructor(
 
                 }
                 if (selectedImageUri != null) {
-                    selectedImagePath = Utility.getRealPathFromURI(requireActivity(), selectedImageUri!!)
-                    val compressedImageFile = Compressor.getDefault(requireActivity()).compressToFile(
-                        File(selectedImagePath!!)
+                    selectedImagePath = Utility.getRealPathFromURI(requireActivity(), selectedImageUri)
+
+
+              /*      val compressedImageFile = Compressor.compress(requireActivity(),
+                        File(selectedImagePath)
                     )
                     val imageName =requireActivity().getExternalFilesDir(null).toString() + File.separator +
                             ".profilepic" + File.separator + "profile-"+ Utility.getUniqueID("user") + ".PNG"
-                    val isImageCopied = Utility.copyFileFromSourceToDestn(compressedImageFile.getPath(), imageName, false)
+                    val isImageCopied = Utility.copyFileFromSourceToDestn(compressedImageFile.path, imageName, false)
                     if (isImageCopied) {
                         callCrop(Uri.fromFile(File(imageName)))
-                    }
+                    }*/
                 }
 
             } else if (requestCode == UCrop.REQUEST_CROP) {

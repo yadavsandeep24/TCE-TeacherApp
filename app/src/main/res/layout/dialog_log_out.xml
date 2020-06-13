@@ -58,8 +58,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
+                android:padding="10dp"
                 android:gravity="center">
 
                 <com.tce.teacherapp.util.RubikMediumTextview
@@ -67,8 +66,11 @@
                     android:layout_width="100dp"
                     android:layout_height="35dp"
                     android:text="Yes"
-                    android:gravity="center"
                     android:textColor="@color/white"
+                    android:elevation="2dp"
+                    android:gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/popup_yes_btn_bg"
                     android:textSize="@dimen/font_size_14_dp"/>
 
@@ -77,10 +79,13 @@
                     android:layout_width="100dp"
                     android:layout_height="35dp"
                     android:text="No"
+                    android:elevation="2dp"
                     android:gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="10dp"
                     android:textColor="#fa6636"
                     android:background="@drawable/popup_no_btn_bg"
-                    android:layout_marginLeft="10dp"
                     android:textSize="@dimen/font_size_14_dp"/>
 
 

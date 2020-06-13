@@ -23,7 +23,7 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="match_parent"
                 android:layout_below="@+id/iv_logo"
                 android:layout_centerInParent="true"
                 android:background="@drawable/ic_oval" />
@@ -65,7 +65,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
                 android:orientation="vertical"
-                android:layout_marginBottom="20dp"
                 android:gravity="center">
 
                 <com.tce.teacherapp.util.RubikMediumTextview
@@ -74,18 +73,21 @@
                     android:layout_height="40dp"
                     android:text="Use Touch ID"
                     android:gravity="center"
+                    android:elevation="3dp"
                     android:textColor="@color/white"
-                    android:background="@drawable/popup_yes_btn_bg"
+                    android:background="@drawable/login_btn_bg"
                     android:textSize="@dimen/font_size_14_dp"/>
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:id="@+id/tv_login_manually"
                     android:layout_width="225dp"
                     android:layout_height="40dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="20dp"
                     android:text="Login Manually"
                     android:gravity="center"
                     android:textColor="#fa6636"
+                    android:elevation="3dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/popup_no_btn_bg"
                     android:textSize="@dimen/font_size_14_dp"/>
 

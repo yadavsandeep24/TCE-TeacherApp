@@ -100,9 +100,9 @@
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Contact:"
+                    android:text="My Contact"
                     android:textColor="#232337"
-                    android:textSize="@dimen/font_size_12_dp"
+                    android:textSize="@dimen/font_size_14_dp"
                     android:paddingTop="20dp">
                 </com.tce.teacherapp.util.RubikMediumTextview>
 
@@ -120,9 +120,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="20dp"
-                    android:text="Email:"
+                    android:text="My Email"
                     android:textColor="#232337"
-                    android:textSize="@dimen/font_size_12_dp"/>
+                    android:textSize="@dimen/font_size_14_dp"/>
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:id="@+id/tvEmail"
@@ -139,14 +139,14 @@
                     android:layout_height="wrap_content"
                     android:text="Address:"
                     android:textColor="#232337"
-                    android:textSize="@dimen/font_size_12_dp"
+                    android:textSize="@dimen/font_size_14_dp"
                     android:paddingTop="20dp">
                 </com.tce.teacherapp.util.RubikMediumTextview>
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:id="@+id/tvAddress"
                     android:layout_width="match_parent"
-                    android:layout_height="132dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="123456"
                     android:gravity="top|start"
@@ -160,7 +160,7 @@
                     android:layout_height="wrap_content"
                     android:text="Subjects:"
                     android:textColor="#232337"
-                    android:textSize="@dimen/font_size_12_dp"
+                    android:textSize="@dimen/font_size_14_dp"
                     android:paddingTop="20dp">
                 </com.tce.teacherapp.util.RubikMediumTextview>
 

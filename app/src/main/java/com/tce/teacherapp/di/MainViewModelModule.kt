@@ -3,6 +3,7 @@ package com.tce.teacherapp.di
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.tce.teacherapp.di.keys.MainViewModelKey
+import com.tce.teacherapp.ui.dashboard.home.DashboardViewModel
 import com.tce.teacherapp.ui.dashboard.messages.MessageViewModel
 import com.tce.teacherapp.ui.dashboard.subjects.SubjectsViewModel
 import com.tce.teacherapp.ui.login.LoginViewModel
@@ -21,6 +22,11 @@ abstract class MainViewModelModule {
     @IntoMap
     @MainViewModelKey(LoginViewModel::class)
     abstract fun bindLoginViewModel(loginViewModel: LoginViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @MainViewModelKey(DashboardViewModel::class)
+    abstract fun bindDashboardViewModel(dashboardViewModel: DashboardViewModel): ViewModel
 
     @Binds
     @IntoMap

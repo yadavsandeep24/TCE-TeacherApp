@@ -11,4 +11,5 @@
     <color name="dark_grey">#BBC2D3</color>
     <color name="dim_color">#3C707079</color>
     <color name="transparent">#00000000</color>
+    <color name="login_support_mail">#1e6eff</color>
 </resources>

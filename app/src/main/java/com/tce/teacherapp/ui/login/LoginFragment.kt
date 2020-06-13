@@ -2,21 +2,23 @@ package com.tce.teacherapp.ui.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.TextPaint
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.tce.teacherapp.R
+import com.tce.teacherapp.databinding.FragmentLoginBinding
 import com.tce.teacherapp.ui.BaseFragment
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
-import com.tce.teacherapp.ui.login.state.LoginStateEvent
 import com.tce.teacherapp.util.StateMessageCallback
 import javax.inject.Inject
 
@@ -28,6 +30,8 @@ class LoginFragment
 constructor(viewModelFactory: ViewModelProvider.Factory)
     : BaseFragment(R.layout.fragment_login) {
 
+    private lateinit var binding: FragmentLoginBinding
+
     val viewModel: LoginViewModel by viewModels {
         viewModelFactory
     }
@@ -36,15 +40,20 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false)
+        binding = FragmentLoginBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val btnLogin = view.findViewById<TextView>(R.id.tv_login)
+        val spanSupportMail = SpannableString(resources.getString(R.string.having_any_issues_drop_an_email_to_n_support_schoolname_com))
+        val text = resources.getString(R.string.having_any_issues_drop_an_email_to_n_support_schoolname_com)
+        val textSpan = resources.getString(R.string.support_mail)
+        spanSupportMail.setSpan(Span(), text.indexOf(textSpan), text.length, 0)
+        binding.tvSupportMail.text = spanSupportMail
+        binding.tvSupportMail.movementMethod = LinkMovementMethod.getInstance()
 
-        btnLogin.setOnClickListener {
+        binding.tvLogin.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_quickAccessSettingFragment)
             //viewModel.setStateEvent(LoginStateEvent.LoginAttemptEvent("",""))
         }
@@ -88,6 +97,20 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
 
     override fun setupChannel() {
         viewModel.setupChannel()
+    }
+
+
+    internal inner class Span : ClickableSpan() {
+
+        override fun onClick(tv: View) {
+        }
+
+        override fun updateDrawState(ds: TextPaint) {
+            super.updateDrawState(ds)
+            ds.color = resources.getColor(R.color.login_support_mail)
+            ds.isUnderlineText = false
+        }
+
     }
 
 }

@@ -39,7 +39,7 @@ data.loginFields?.let {
                         DataState.error<LoginViewState>(
                             response = Response(
                                 message = ErrorHandling.INVALID_STATE_EVENT,
-                                uiComponentType = UIComponentType.None(),
+                                uiComponentType = UIComponentType.None,
                                 messageType = MessageType.Error(),
                                 serviceTypes = RequestTypes.GENERIC
                             ),

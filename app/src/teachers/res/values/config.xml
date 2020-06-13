@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ECE Teacher</string>
+    <string name="app_type">@string/app_type_teacher</string>
+    <bool name="is_show_update_password">false</bool>
+    <bool name="is_show_face_id_login">false</bool>
+</resources>
