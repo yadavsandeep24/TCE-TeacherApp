@@ -75,7 +75,15 @@
         android:id="@+id/quickAccessSettingFragment"
         android:name="com.tce.teacherapp.ui.login.QuickAccessSettingFragment"
         android:label="fragment_quick_access_setting"
-        tools:layout="@layout/fragment_quick_access_setting" />
+        tools:layout="@layout/fragment_quick_access_setting" >
+        <action
+            android:id="@+id/action_quickAccessSettingFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+    </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"
         android:name="com.tce.teacherapp.ui.login.ForgotPasswordFragment"

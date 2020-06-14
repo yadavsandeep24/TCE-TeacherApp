@@ -108,7 +108,7 @@ class QuickAccessSettingFragment
 
     override fun onBiometricAuthenticationError(errorCode: Int, errString: CharSequence) {
         if (errorCode == BiometricPrompt.ERROR_NEGATIVE_BUTTON) {
-            findNavController().navigate(R.id.action_loginOptionFragment_to_loginFragment)
+            findNavController().navigate(R.id.action_quickAccessSettingFragment_to_loginFragment)
         }
     }
 
