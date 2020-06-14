@@ -4,8 +4,8 @@ import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModelProvider
-import com.tce.teacherapp.TCEApplication
 import com.tce.teacherapp.R
+import com.tce.teacherapp.TCEApplication
 import com.tce.teacherapp.fragments.login.LoginNavHostFragment
 import com.tce.teacherapp.ui.BaseActivity
 import javax.inject.Inject
@@ -54,6 +54,7 @@ class LauncherActivity : BaseActivity() {
         val navHost = LoginNavHostFragment.create(
             R.navigation.launcher_graph
         )
+
         supportFragmentManager.beginTransaction()
             .replace(
                 R.id.login_fragments_container,

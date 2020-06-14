@@ -2,15 +2,13 @@
   "profile":
     {
       "id": "1",
-      "name": "Aishwarya",
+      "name": "Payal Rajput",
       "relationship": "Mother",
       "contact": "9999999999" ,
-      "email": "aishwarya@gmail.com",
-      "password": "123456",
+      "email": "ece1@tce.com",
+      "password": "123",
       "address": "Gala No 6 & 7, Laxmi plaza, New Link Road, Andheri west, Mumbai - 400053",
-      "subjects": "English,Hindi",
+      "subjects": "English, Hindi, EVS",
       "imageUrl": ""
     }
-
-
 }

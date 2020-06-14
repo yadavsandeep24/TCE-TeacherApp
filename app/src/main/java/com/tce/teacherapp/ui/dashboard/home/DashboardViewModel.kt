@@ -22,6 +22,15 @@ class DashboardViewModel @Inject constructor(val mainRepository: MainRepository)
         data.profile?.let {
             setProfile(it)
         }
+        data.isFingerPrintLoginEnabled?.let {
+            setFingerPrintEnableData(it)
+        }
+    }
+
+    private fun setFingerPrintEnableData(it: Boolean) {
+        val update = getCurrentViewStateOrNew()
+        update.isFingerPrintLoginEnabled = it
+        setViewState(update)
     }
 
     private fun setProfile(profile: Profile) {
@@ -35,6 +44,12 @@ class DashboardViewModel @Inject constructor(val mainRepository: MainRepository)
 
             is DashboardStateEvent.GetProfileEvent -> {
                 mainRepository.getProfile(stateEvent = stateEvent)
+            }
+            is DashboardStateEvent.UpdateProfilePic ->{
+                mainRepository.updateProfilePic(stateEvent.resultUri,stateEvent = stateEvent)
+            }
+            is DashboardStateEvent.CheckFingerPrintLoginEnabled ->{
+                mainRepository.checkFingerPrintEnableMode(stateEvent = stateEvent)
             }
 
             else -> {
@@ -53,5 +68,9 @@ class DashboardViewModel @Inject constructor(val mainRepository: MainRepository)
     override fun onCleared() {
         super.onCleared()
         cancelActiveJobs()
+    }
+
+    fun setFingerPrintEnableMode(checked: Boolean) {
+        mainRepository.setFingerPrintMode(checked)
     }
 }

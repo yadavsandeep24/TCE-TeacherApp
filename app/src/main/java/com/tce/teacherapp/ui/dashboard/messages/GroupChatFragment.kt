@@ -3,7 +3,6 @@ package com.tce.teacherapp.ui.dashboard.messages
 import android.Manifest
 import android.annotation.TargetApi
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -23,8 +22,6 @@ import com.picker.gallery.presenter.PhotosPresenterImpl
 import com.picker.gallery.presenter.VideosPresenterImpl
 import com.picker.gallery.utils.MLog
 import com.picker.gallery.utils.RunOnUiThread
-import com.picker.gallery.utils.font.FontsConstants
-import com.picker.gallery.utils.font.FontsManager
 import com.picker.gallery.view.ImagePickerContract
 import com.picker.gallery.view.OnPhoneImagesObtained
 import com.picker.gallery.view.adapters.AlbumAdapter

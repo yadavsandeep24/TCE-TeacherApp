@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,10 @@ import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.util.Utility
 import com.yalantis.ucrop.UCrop
 import id.zelory.compressor.Compressor
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
 
 
@@ -45,13 +50,13 @@ class ProfileFragment : Fragment() {
         )
         mIsMideaStoreEnabled = activity?.packageManager?.let { i.resolveActivity(it) } != null
 
-        binding.profileImageContainer.setOnClickListener(View.OnClickListener {
+        binding.profileImageContainer.setOnClickListener {
             val i = Intent(
                 Intent.ACTION_PICK,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI
             )
             startActivityForResult(i, PICK_PHOTO_FROM_GALLARY)
-        })
+        }
 
         binding.imgBack.setOnClickListener(View.OnClickListener {
             activity?.onBackPressed()
@@ -77,28 +82,34 @@ class ProfileFragment : Fragment() {
 
                 }
                 if (selectedImageUri != null) {
-                    selectedImagePath = Utility.getRealPathFromURI(requireActivity(), selectedImageUri)
-             /*       val compressedImageFile = Compressor.compress(requireActivity(),File(selectedImagePath))
-                    val imageName =requireActivity().getExternalFilesDir(null).toString() + File.separator +
-                            ".profilepic" + File.separator + "profile-"+ Utility.getUniqueID("user") + ".PNG"
-                    val isImageCopied = Utility.copyFileFromSourceToDestn(compressedImageFile.getPath(), imageName, false)
-                    if (isImageCopied) {
-                        callCrop(Uri.fromFile(File(imageName)))
-                    }*/
+                    GlobalScope.launch(Dispatchers.Main) {
+                        selectedImagePath =
+                            Utility.getRealPathFromURI(requireActivity(), selectedImageUri)
+                               val compressedImageFile = withContext(Dispatchers.IO) {
+                                   Compressor.compress(requireActivity(), File(selectedImagePath))
+                               }
+                                   val imageName =requireActivity().getExternalFilesDir(null).toString() + File.separator +
+                                           ".profilepic" + File.separator + "profile-"+ Utility.getUniqueID("user") + ".PNG"
+                                   val isImageCopied = Utility.copyFileFromSourceToDestn(compressedImageFile.path, imageName, false)
+                                   if (isImageCopied) {
+                                       callCrop(Uri.fromFile(File(imageName)))
+                                   }
+                               }
+                    }
                 }
 
             } else if (requestCode == UCrop.REQUEST_CROP) {
                 handleCropResult(data!!)
             }
-        }
     }
 
     private fun handleCropResult(result: Intent) {
         val resultUri = UCrop.getOutput(result)
+        Log.d("SAN", "resultUri-->$resultUri")
         if (resultUri != null) {
             Glide.with(this)
-                .load(resultUri!!.toString())
-                .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
+                .load(resultUri.toString())
+                .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.AUTOMATIC))
                 .into(binding.imgProfile)
         }
     }

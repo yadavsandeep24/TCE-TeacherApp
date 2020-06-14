@@ -1,6 +1,5 @@
 package com.tce.teacherapp.ui.dashboard.messages.adapter
 
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import com.airbnb.epoxy.EpoxyAttribute

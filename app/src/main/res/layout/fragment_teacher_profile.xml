@@ -7,46 +7,6 @@
         android:background="#f5f8ff"
         android:orientation="vertical">
 
-        <RelativeLayout
-            android:id="@+id/header_container"
-            android:layout_width="match_parent"
-            android:layout_height="?android:attr/actionBarSize"
-            android:background="#46465b"
-            android:orientation="vertical">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgBack"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"
-                android:src="@drawable/ic_back"/>
-
-            <com.tce.teacherapp.util.RubikMediumTextview
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="Update Profile"
-                android:textColor="@color/white"
-                android:textSize="@dimen/font_size_16_dp"
-                android:textStyle="bold"/>
-
-            <com.tce.teacherapp.util.RubikMediumTextview
-                android:id="@+id/tvSave"
-                android:layout_width="80dp"
-                android:layout_height="35dp"
-                android:text="Save"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/bg_white_rounded"
-                android:textColor="#fa4b28"
-                android:textSize="@dimen/font_size_16_dp"
-                android:gravity="center"
-                android:visibility="gone"/>
-
-        </RelativeLayout>
-
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -70,6 +30,7 @@
                         android:id="@+id/img_profile"
                         android:layout_width="107dp"
                         android:layout_height="107dp"
+                        android:elevation="3dp"
                         android:src="@drawable/ic_user_profile">
                     </com.tce.teacherapp.util.CustomCircularImageView>
                     <androidx.appcompat.widget.AppCompatImageView
@@ -77,6 +38,7 @@
                         android:layout_height="37dp"
                         android:src="@drawable/ic_change_profile"
                         android:layout_alignParentRight="true"
+                        android:elevation="3dp"
                         android:layout_alignParentBottom="true">
                     </androidx.appcompat.widget.AppCompatImageView>
 
@@ -103,8 +65,7 @@
                     android:text="My Contact"
                     android:textColor="#232337"
                     android:textSize="@dimen/font_size_14_dp"
-                    android:paddingTop="20dp">
-                </com.tce.teacherapp.util.RubikMediumTextview>
+                    android:paddingTop="20dp"/>
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:id="@+id/tvContact"
@@ -112,9 +73,7 @@
                     android:layout_height="38dp"
                     android:layout_marginTop="10dp"
                     android:text="123456"
-                    android:textSize="@dimen/font_size_14_dp">
-
-                </com.tce.teacherapp.util.RubikMediumTextview>
+                    android:textSize="@dimen/font_size_14_dp"/>
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:layout_width="wrap_content"
@@ -130,9 +89,7 @@
                     android:layout_height="38dp"
                     android:layout_marginTop="10dp"
                     android:text="123456"
-                    android:textSize="@dimen/font_size_14_dp">
-
-                </com.tce.teacherapp.util.RubikMediumTextview>
+                    android:textSize="@dimen/font_size_14_dp"/>
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:layout_width="wrap_content"

@@ -55,4 +55,14 @@ interface MainRepository {
     fun getProfile(
         stateEvent: StateEvent
     ): Flow<DataState<DashboardViewState>>
+
+    fun updateProfilePic(
+        resultUri: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<DashboardViewState>>
+
+    fun setFingerPrintMode(checked: Boolean)
+    fun checkFingerPrintEnableMode(
+        stateEvent: StateEvent
+    ): Flow<DataState<DashboardViewState>>
 }

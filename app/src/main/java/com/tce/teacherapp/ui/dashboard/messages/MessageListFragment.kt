@@ -19,7 +19,6 @@ import com.airbnb.epoxy.EpoxyVisibilityTracker
 import com.airbnb.epoxy.addGlidePreloader
 import com.airbnb.epoxy.glidePreloader
 import com.bumptech.glide.Glide
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentMessageListBinding
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
@@ -29,8 +28,6 @@ import com.tce.teacherapp.ui.dashboard.messages.state.MessageStateEvent
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageViewState
 import com.tce.teacherapp.ui.dashboard.subjects.adapter.SubjectListEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.subjects.loadImage
-import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectStateEvent
-import com.tce.teacherapp.util.StateMessageCallback
 import com.tce.teacherapp.util.Utility
 import kotlinx.android.synthetic.main.message_bottom_filter.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi

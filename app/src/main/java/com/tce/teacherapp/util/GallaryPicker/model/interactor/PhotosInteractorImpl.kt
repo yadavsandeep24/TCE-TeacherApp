@@ -6,7 +6,6 @@ import com.picker.gallery.model.GalleryData
 import com.picker.gallery.presenter.PhotosPresenterImpl
 import com.picker.gallery.utils.MLog
 import java.io.File
-import kotlin.collections.ArrayList
 
 class PhotosInteractorImpl(var presenter: PhotosPresenterImpl) : PhotosInteractor {
 

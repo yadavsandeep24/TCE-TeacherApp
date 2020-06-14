@@ -15,11 +15,18 @@ class LoginViewModel @Inject constructor(val loginRepository: LoginRepository) :
 
 
     override fun handleNewData(data: LoginViewState) {
-data.loginFields?.let {
-        setLoginData(it)
-}
+        data.loginFields?.let {
+            setLoginData(it)
+        }
+        data.isFingerPrintLoginEnabled?.let {
+            setFingerPrintEnableData(it)
+        }
     }
-
+    private fun setFingerPrintEnableData(it: Boolean) {
+        val update = getCurrentViewStateOrNew()
+        update.isFingerPrintLoginEnabled = it
+        setViewState(update)
+    }
     private fun setLoginData(it: LoginFields) {
         val update = getCurrentViewStateOrNew()
         update.loginFields = it
@@ -30,9 +37,15 @@ data.loginFields?.let {
         val job: Flow<DataState<LoginViewState>> = when (stateEvent) {
 
             is LoginStateEvent.LoginAttemptEvent -> {
-                loginRepository.attemptLogin(stateEvent.email,stateEvent.password,stateEvent = stateEvent)
+                loginRepository.attemptLogin(
+                    stateEvent.email,
+                    stateEvent.password,
+                    stateEvent = stateEvent
+                )
             }
-
+            is LoginStateEvent.CheckFingerPrintLoginEnabled ->{
+                loginRepository.checkFingerPrintEnableMode(stateEvent = stateEvent)
+            }
             else -> {
                 flow {
                     emit(
@@ -52,8 +65,12 @@ data.loginFields?.let {
         launchJob(stateEvent, job)
     }
 
+    fun setFingerPrintEnableMode(checked: Boolean) {
+        loginRepository.setFingerPrintMode(checked)
+    }
+
     override fun initNewViewState(): LoginViewState {
-       return LoginViewState()
+        return LoginViewState()
     }
 
     override fun onCleared() {

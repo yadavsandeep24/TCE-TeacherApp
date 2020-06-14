@@ -1,7 +1,6 @@
 package com.picker.gallery.utils
 
 import android.content.Context
-import com.picker.gallery.utils.MLog
 import org.jetbrains.anko.runOnUiThread
 
 /**

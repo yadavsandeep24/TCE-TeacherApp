@@ -3,6 +3,8 @@ package com.tce.teacherapp.repository
 import com.tce.teacherapp.api.FakeApiService
 import com.tce.teacherapp.api.response.GradeResponse
 import com.tce.teacherapp.db.entity.Grade
+import com.tce.teacherapp.ui.dashboard.home.state.DashboardViewState
+import com.tce.teacherapp.ui.dashboard.messages.state.MessageViewState
 import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectViewState
 import com.tce.teacherapp.util.ApiResponseHandler
 import com.tce.teacherapp.util.DataState
@@ -149,6 +151,54 @@ constructor(): MainRepository{
                 }.getResult()
             )
         }
+    }
+
+    override fun getMessage(
+        query: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<MessageViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getStudentList(
+        query: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<MessageViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getResourceList(
+        query: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<MessageViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getSelectedResourceList(
+        query: String,
+        typeId: Int,
+        stateEvent: StateEvent
+    ): Flow<DataState<MessageViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getProfile(stateEvent: StateEvent): Flow<DataState<DashboardViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun setFingerPrintMode(checked: Boolean) {
+        TODO("Not yet implemented")
+    }
+
+    override fun checkFingerPrintEnableMode(stateEvent: StateEvent): Flow<DataState<DashboardViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun updateProfilePic(
+        resultUri: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<DashboardViewState>> {
+        TODO("Not yet implemented")
     }
 
 /*    @Throws(UninitializedPropertyAccessException::class)

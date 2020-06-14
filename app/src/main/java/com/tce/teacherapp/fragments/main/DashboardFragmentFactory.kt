@@ -6,7 +6,6 @@ import com.tce.teacherapp.ui.dashboard.home.DashboardHomeFragment
 import com.tce.teacherapp.ui.dashboard.home.profile.SettingsFragment
 import com.tce.teacherapp.ui.dashboard.home.profile.TeacherProfileFragment
 import com.tce.teacherapp.ui.dashboard.home.profile.UpdatePasswordFragment
-import com.tce.teacherapp.ui.dashboard.messages.GroupChatFragment
 import javax.inject.Inject
 
 class DashboardFragmentFactory
@@ -24,7 +23,7 @@ constructor(
             }
 
             SettingsFragment::class.java.name -> {
-                SettingsFragment()
+                SettingsFragment(viewModelFactory)
             }
 
             UpdatePasswordFragment::class.java.name -> {

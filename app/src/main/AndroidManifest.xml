@@ -18,7 +18,10 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme"
         android:hardwareAccelerated="true"
-        tools:targetApi="m">
+        android:requestLegacyExternalStorage="true"
+        tools:targetApi="m"
+        android:largeHeap="true"
+        tools:ignore="UnusedAttribute">
 
         <activity android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"

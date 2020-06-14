@@ -3,7 +3,6 @@ package com.tce.teacherapp.ui.dashboard.messages
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,6 @@ import com.airbnb.epoxy.EpoxyVisibilityTracker
 import com.airbnb.epoxy.addGlidePreloader
 import com.airbnb.epoxy.glidePreloader
 import com.bumptech.glide.Glide
-
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentMessageDetailBinding
 import com.tce.teacherapp.db.entity.Message

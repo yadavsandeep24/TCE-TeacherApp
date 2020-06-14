@@ -8,7 +8,6 @@ import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import java.lang.Exception
 
 @FlowPreview
 @ExperimentalCoroutinesApi
@@ -25,6 +24,7 @@ abstract class BaseFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupChannel()
+        uiCommunicationListener.isStoragePermissionGranted()
     }
 
     abstract fun setupChannel()

@@ -10,11 +10,8 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnTouchListener
 import android.view.ViewGroup
-import android.widget.AdapterView
+import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
@@ -103,6 +100,9 @@ constructor(
         }
         (activity as DashboardActivity).setCustomToolbar(R.layout.subject_list_top_bar)
         (activity as DashboardActivity).expandAppBar(true)
+
+        val topBar = (activity as DashboardActivity).binding.toolBar.findViewById<RelativeLayout>(R.id.top_container)
+        topBar.setBackgroundColor(resources.getColor(R.color.subject_actionbar_color))
 
         spnDivision =  (activity as DashboardActivity).binding.toolBar.findViewById(R.id.spn_division)
         ((activity as DashboardActivity).binding.toolBar.findViewById(R.id.tv_back) as TextView).visibility = View.GONE

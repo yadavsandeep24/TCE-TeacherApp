@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.tce.teacherapp.ui.UICommunicationListener
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import java.lang.Exception
 
 @FlowPreview
 @ExperimentalCoroutinesApi

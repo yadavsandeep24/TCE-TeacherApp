@@ -3,7 +3,6 @@ package com.picker.gallery.view
 import android.content.Context
 import com.picker.gallery.model.GalleryAlbums
 import com.picker.gallery.model.GalleryData
-import kotlin.collections.ArrayList
 
 interface ImagePickerContract {
     fun initRecyclerViews()

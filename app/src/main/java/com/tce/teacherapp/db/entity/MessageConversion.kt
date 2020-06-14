@@ -1,6 +1,5 @@
 package com.tce.teacherapp.db.entity
 
-import android.graphics.drawable.Drawable
 import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import kotlinx.android.parcel.Parcelize

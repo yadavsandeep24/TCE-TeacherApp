@@ -8,5 +8,6 @@ const val DASHBOARD_VIEW_STATE_BUNDLE_KEY = "com.tce.teacherapp.ui.auth.state.Au
 
 @Parcelize
 data class DashboardViewState (
-    var profile: Profile?= null
+    var profile: Profile?= null,
+    var isFingerPrintLoginEnabled: Boolean? = null
 ) : Parcelable

@@ -12,4 +12,5 @@
     <color name="dim_color">#3C707079</color>
     <color name="transparent">#00000000</color>
     <color name="login_support_mail">#1e6eff</color>
+    <color name="setting_actionbar_color">#46465b</color>
 </resources>

@@ -3,22 +3,14 @@ package com.picker.gallery.utils.scroll
 /**
  * Created by deepan-5901 on 25/01/18.
  */
+
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.res.Resources
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.Path
-import android.graphics.Rect
-import android.graphics.RectF
-import android.graphics.Typeface
-
+import android.graphics.*
 import android.text.TextUtils
 import androidx.annotation.Keep
-import com.picker.gallery.utils.scroll.FastScrollRecyclerView
 import com.picker.gallery.utils.scroll.FastScroller
-import com.picker.gallery.utils.scroll.Utils
 
 class FastScrollPopup(private val mRes: Resources, private val mRecyclerView: FastScrollRecyclerView) {
 

@@ -2,15 +2,13 @@ package com.tce.teacherapp.repository
 
 import android.app.Application
 import android.content.SharedPreferences
-import android.os.ParcelFileDescriptor.open
 import android.text.TextUtils
 import android.util.Log
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.tce.teacherapp.api.TCEService
 import com.tce.teacherapp.api.response.BookResponse
 import com.tce.teacherapp.api.response.GradeResponse
 import com.tce.teacherapp.db.dao.SubjectsDao
+import com.tce.teacherapp.db.dao.UserDao
 import com.tce.teacherapp.db.entity.*
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardViewState
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageViewState
@@ -22,9 +20,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.io.IOException
-import java.io.InputStream
-import java.nio.channels.DatagramChannel.open
 import javax.inject.Inject
 
 @FlowPreview
@@ -32,6 +27,7 @@ class MainRepositoryImpl
 @Inject
 constructor(
     val subjectDao: SubjectsDao,
+    val userDao: UserDao,
     val tceService: TCEService,
     val sharedPreferences: SharedPreferences,
     val sharedPrefsEditor: SharedPreferences.Editor,
@@ -406,28 +402,44 @@ constructor(
     }
 
     override fun getProfile(stateEvent: StateEvent): Flow<DataState<DashboardViewState>> = flow {
-        //get data from json
-        var jsonString: String  =""
-        try {
-
-            jsonString = application.assets.open("json/profile.json").bufferedReader().use { it.readText() }
-            val gson = Gson()
-            val listPersonType = object : TypeToken<Profile>() {}.type
-            var persons: Profile = gson.fromJson(jsonString, listPersonType)
-            emit(
-                DataState.data(
-                    data = DashboardViewState(profile = persons),
-                    stateEvent = stateEvent,
-                    response = null
+            withContext(IO){
+                    val userName = sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_EMAIL,"")
+                    val password = sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_PASSWORD,"")
+                    val userInfo =userDao.getUserInfoData(userName!!,password!!)
+                emit(
+                    DataState.data(
+                        data = DashboardViewState(profile = userInfo),
+                        stateEvent = stateEvent,
+                        response = null
+                    )
                 )
-            )
-        } catch (ioException: IOException) {
-            ioException.printStackTrace()
+            }
+    }
+
+    override fun updateProfilePic(
+        resultUri: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<DashboardViewState>>  = flow{
+        withContext((IO)) {
+            val userId =  sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID,"")
+            userDao.updateProfilePic(resultUri,userId!!)
         }
+    }
 
+    override fun setFingerPrintMode(checked: Boolean) {
+        sharedPrefsEditor.putBoolean(PreferenceKeys.APP_USER_LOGIN_FINGERPRINT_ENABLED,checked).commit()
+        sharedPrefsEditor.apply()
+    }
 
-
-
+    override fun checkFingerPrintEnableMode(stateEvent: StateEvent): Flow<DataState<DashboardViewState>> = flow {
+        val isFingerPrintLoginEnabled = sharedPreferences.getBoolean(PreferenceKeys.APP_USER_LOGIN_FINGERPRINT_ENABLED,true)
+        emit(
+            DataState.data(
+                data = DashboardViewState(isFingerPrintLoginEnabled = isFingerPrintLoginEnabled),
+                stateEvent = stateEvent,
+                response = null
+            )
+        )
     }
 
     fun toGradeList(grades: List<GradeResponse>): List<Grade> {

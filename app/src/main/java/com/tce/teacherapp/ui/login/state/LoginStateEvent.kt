@@ -14,8 +14,19 @@ sealed class LoginStateEvent : StateEvent {
         }
 
         override fun toString(): String {
-            return "LoginStateEvent"
+            return "LoginAttemptEvent"
         }
+    }
+
+    object CheckFingerPrintLoginEnabled: LoginStateEvent(){
+        override fun errorInfo(): String {
+            return "Error in checking FingerPrint mode."
+        }
+
+        override fun toString(): String {
+            return "CheckFingerPrintLoginEnabled"
+        }
+
     }
 
 }

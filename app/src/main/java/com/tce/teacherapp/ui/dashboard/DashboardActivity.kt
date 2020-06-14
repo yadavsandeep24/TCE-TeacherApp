@@ -9,8 +9,8 @@ import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.tce.teacherapp.TCEApplication
 import com.tce.teacherapp.R
+import com.tce.teacherapp.TCEApplication
 import com.tce.teacherapp.databinding.ActivityDashboardBinding
 import com.tce.teacherapp.ui.BaseActivity
 import com.tce.teacherapp.util.BottomNavController
@@ -72,16 +72,21 @@ class DashboardActivity : BaseActivity(), BottomNavController.OnNavigationResele
     }
 
     override fun expandAppBar(value: Boolean) {
-       binding.appBar.setExpanded(value)
-
+        binding.appBar.setExpanded(value)
+        if (value) {
+            binding.appBar.visibility = View.VISIBLE
+        } else {
+            binding.appBar.visibility = View.GONE
+        }
     }
 
-    private fun setupActionBar(){
+    private fun setupActionBar() {
         setSupportActionBar(binding.toolBar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
     }
-    fun setCustomToolbar(resId :Int){
-        val logo: View = layoutInflater.inflate(resId, binding.toolBar,false)
+
+    fun setCustomToolbar(resId: Int) {
+        val logo: View = layoutInflater.inflate(resId, binding.toolBar, false)
         binding.toolBar.addView(logo)
     }
 

@@ -1,6 +1,7 @@
 package com.tce.teacherapp.ui.login
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.TextPaint
@@ -19,6 +20,8 @@ import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentLoginBinding
 import com.tce.teacherapp.ui.BaseFragment
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
+import com.tce.teacherapp.ui.login.state.LoginStateEvent
+import com.tce.teacherapp.util.MessageConstant
 import com.tce.teacherapp.util.StateMessageCallback
 import javax.inject.Inject
 
@@ -53,9 +56,13 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
         binding.tvSupportMail.text = spanSupportMail
         binding.tvSupportMail.movementMethod = LinkMovementMethod.getInstance()
 
+        binding.edtSchoolName.setText(MessageConstant.LOGIN_DEFAULT_SCHOOLNAME)
+        binding.edtUserName.setText(MessageConstant.LOGIN_DEFAULT_USERNAME)
+        binding.edtPassword.setText(MessageConstant.LOGIN_DEFAULT_PASSWORD)
+
         binding.tvLogin.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_quickAccessSettingFragment)
-            //viewModel.setStateEvent(LoginStateEvent.LoginAttemptEvent("",""))
+            viewModel.setStateEvent(LoginStateEvent.LoginAttemptEvent(binding.edtUserName.text.toString().trim(),
+                binding.edtPassword.text.toString().trim()))
         }
         subscribeObservers()
     }
@@ -65,10 +72,23 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             if (viewState != null) {
                 viewState.loginFields?.let {
-                    val i = Intent(activity, DashboardActivity::class.java)
-                    startActivity(i)
-                    activity?.overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left)
-                    activity?.finish()
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if(it.login_mode_fingePrint_Enabled!!){
+                            viewState.loginFields = null
+                            findNavController().navigate(R.id.action_loginFragment_to_quickAccessSettingFragment)
+                        }else{
+                            val i = Intent(activity, DashboardActivity::class.java)
+                            startActivity(i)
+                            activity?.overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left)
+                            activity?.finish()
+                        }
+
+                    }else{
+                      val i = Intent(activity, DashboardActivity::class.java)
+                        startActivity(i)
+                        activity?.overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left)
+                        activity?.finish()
+                    }
                 }
             }
         })

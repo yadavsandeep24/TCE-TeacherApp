@@ -7,10 +7,8 @@ import com.tce.teacherapp.repository.MainRepository
 import com.tce.teacherapp.ui.BaseViewModel
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageStateEvent
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageViewState
-import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectStateEvent
-import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectViewState
-import com.tce.teacherapp.util.*
-import com.tce.teacherapp.util.ErrorHandling.Companion.INVALID_STATE_EVENT
+import com.tce.teacherapp.util.DataState
+import com.tce.teacherapp.util.StateEvent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow

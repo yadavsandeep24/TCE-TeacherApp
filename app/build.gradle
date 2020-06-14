@@ -10,9 +10,11 @@ android {
         applicationId "com.tce.teacherapp"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 1
+        versionCode 2
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        renderscriptTargetApi 29
+        renderscriptSupportModeEnabled true
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [
@@ -148,7 +150,7 @@ dependencies {
 
 
     // jetpack navigation components
-    def nav_version = "2.3.0-beta01"
+    def nav_version = "2.3.0-rc01"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
     implementation "androidx.navigation:navigation-runtime:$nav_version"
@@ -196,5 +198,5 @@ dependencies {
     implementation "androidx.biometric:biometric:$biometric_version"
 
     implementation 'id.zelory:compressor:3.0.0'
-    implementation 'com.yalantis:ucrop:2.2.0'
+    implementation 'com.github.yalantis:ucrop:2.2.5-native'
 }

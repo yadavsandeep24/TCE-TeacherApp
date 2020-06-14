@@ -4,7 +4,6 @@ import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,30 +14,22 @@ import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.airbnb.epoxy.EpoxyVisibilityTracker
-import com.airbnb.epoxy.glidePreloader
-import com.bumptech.glide.Glide
-
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentNewMessageBinding
 import com.tce.teacherapp.db.entity.Student
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
-import com.tce.teacherapp.ui.dashboard.messages.adapter.NewMessageEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.messages.adapter.newMessageEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.messages.adapter.selectedStudentEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.messages.state.MESSAGE_VIEW_STATE_BUNDLE_KEY
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageStateEvent
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageViewState
-import com.tce.teacherapp.ui.dashboard.subjects.loadImage
 import com.tce.teacherapp.util.StateMessageCallback
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import java.util.*
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 
 @ExperimentalCoroutinesApi

@@ -5,20 +5,16 @@ import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.view.*
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import kotlinx.android.synthetic.main.detailedimage.*
-import kotlinx.android.synthetic.main.grid_item.view.*
-import org.jetbrains.anko.doAsync
-import kotlin.collections.ArrayList
 import android.graphics.drawable.Drawable
 import android.provider.MediaStore
+import android.view.*
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.picker.gallery.model.GalleryData
 import com.picker.gallery.utils.DateUtil
@@ -26,6 +22,9 @@ import com.picker.gallery.utils.MLog
 import com.picker.gallery.utils.RunOnUiThread
 import com.picker.gallery.utils.scroll.FastScrollRecyclerView
 import com.tce.teacherapp.R
+import kotlinx.android.synthetic.main.detailedimage.*
+import kotlinx.android.synthetic.main.grid_item.view.*
+import org.jetbrains.anko.doAsync
 
 class VideoGridAdapter() : RecyclerView.Adapter<VideoGridAdapter.MyViewHolder>(), FastScrollRecyclerView.SectionedAdapter {
 

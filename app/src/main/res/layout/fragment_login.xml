@@ -10,7 +10,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/fl_bottom"
+            android:layout_above="@+id/tv_support_mail"
             android:gravity="center">
 
             <ImageView
@@ -113,23 +113,23 @@
                     android:background="@drawable/login_btn_bg"
                     android:textSize="@dimen/font_size_14_dp"/>
 
-            <com.tce.teacherapp.util.RubikMediumTextview
-                android:id="@+id/tv_support_mail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:layout_marginBottom="20dp"
-                android:text="@string/having_any_issues_drop_an_email_to_n_support_schoolname_com"/>
 
 
         </RelativeLayout>
+        <com.tce.teacherapp.util.RubikMediumTextview
+            android:id="@+id/tv_support_mail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:layout_above="@+id/fl_bottom"
+            android:textSize="@dimen/font_size_12_dp"
+            android:text="@string/having_any_issues_drop_an_email_to_n_support_schoolname_com"/>
 
         <FrameLayout
             android:id="@+id/fl_bottom"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="130dp"
             android:layout_alignParentBottom="true"
             android:background="@drawable/login_bottom" />
 

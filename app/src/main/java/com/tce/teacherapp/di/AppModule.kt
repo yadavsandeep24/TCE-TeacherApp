@@ -15,6 +15,7 @@ import com.tce.teacherapp.api.TCEService.Companion.BASE_URL
 import com.tce.teacherapp.db.AppDatabase
 import com.tce.teacherapp.db.AppDatabase.Companion.DATABASE_NAME
 import com.tce.teacherapp.db.dao.SubjectsDao
+import com.tce.teacherapp.db.dao.UserDao
 import com.tce.teacherapp.repository.LoginRepository
 import com.tce.teacherapp.repository.LoginRepositoryImpl
 import com.tce.teacherapp.repository.MainRepository
@@ -86,6 +87,12 @@ object AppModule {
     }
 
     @JvmStatic
+    @Provides
+    fun provideUserDao(db: AppDatabase): UserDao {
+        return db.getUserDao()
+    }
+
+    @JvmStatic
     @Singleton
     @Provides
     fun provideRequestOptions(): RequestOptions {
@@ -117,6 +124,7 @@ object AppModule {
     @Provides
     fun provideMainRepository(
         subjectDao: SubjectsDao,
+        userDao: UserDao,
         tceService: TCEService,
         preferences: SharedPreferences,
         editor: SharedPreferences.Editor,
@@ -124,6 +132,7 @@ object AppModule {
     ): MainRepository {
         return MainRepositoryImpl(
             subjectDao,
+            userDao,
             tceService,
             preferences,
             editor,
@@ -134,14 +143,18 @@ object AppModule {
     @JvmStatic
     @Provides
     fun provideLoginRepository(
+        userDao: UserDao,
         tceService: TCEService,
         preferences: SharedPreferences,
-        editor: SharedPreferences.Editor
+        editor: SharedPreferences.Editor,
+        application: Application
     ): LoginRepository {
         return LoginRepositoryImpl(
+            userDao,
             tceService,
             preferences,
-            editor
+            editor,
+            application
         )
     }
 

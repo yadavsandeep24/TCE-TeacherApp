@@ -12,8 +12,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.callbacks.onDismiss
-import com.tce.teacherapp.TCEApplication
 import com.tce.teacherapp.R
+import com.tce.teacherapp.TCEApplication
 import com.tce.teacherapp.util.Constants.Companion.PERMISSIONS_REQUEST_READ_STORAGE
 import com.tce.teacherapp.util.MessageType
 import com.tce.teacherapp.util.Response
@@ -130,33 +130,16 @@ abstract class BaseActivity : AppCompatActivity(),
     }
 
     override fun isStoragePermissionGranted(): Boolean {
-        if (
-            ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            )
-            != PackageManager.PERMISSION_GRANTED &&
-            ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            )
-            != PackageManager.PERMISSION_GRANTED
-        ) {
-
-
-            ActivityCompat.requestPermissions(
-                this,
+        return if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
+            ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
                 arrayOf(
                     Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-                ),
-                PERMISSIONS_REQUEST_READ_STORAGE
-            )
-
-            return false
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE), PERMISSIONS_REQUEST_READ_STORAGE)
+            false
         } else {
             // Permission has already been granted
-            return true
+            true
         }
     }
 

@@ -29,9 +29,9 @@
         Go to \'Settings -> Security -> Fingerprint\' to set up a fingerprint or face
     </string>
 
-    <string name="prompt_info_title">TCE Biometric</string>
+    <string name="prompt_info_title">Tata Classedge Biometric</string>
     <string name="prompt_info_subtitle">Please login to get access</string>
-    <string name="prompt_info_description">My App is using Android biometric authentication</string>
+    <string name="prompt_info_description">ECE App use Android biometric authentication</string>
 
 
     <string name="btn_skip_for_now"><u>Skip for now</u></string>
@@ -40,8 +40,10 @@
     <string name="app_type_parent">parent</string>
 
     <string name="having_any_issues_drop_an_email_to_n_support_schoolname_com">Having any issues? Drop an email to \n support@schoolname.com</string>
-    <string name = "support_mail">support@schoolname.com</string>
+    <string name="support_mail">support@schoolname.com</string>
 
+    <string name="title_settings">Settings</string>
+    <string name="title_update_profile">Update Profile</string>
 
 
 </resources>

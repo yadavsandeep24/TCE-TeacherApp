@@ -3,16 +3,12 @@ package com.picker.gallery.utils.scroll
 /**
  * Created by deepan-5901 on 25/01/18.
  */
+
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Paint
-import android.graphics.Point
-import android.graphics.Rect
-import android.graphics.Typeface
-
+import android.graphics.*
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.ViewConfiguration

@@ -64,7 +64,6 @@ class Utility {
                 e.printStackTrace()
                 return false
             }
-
         }
 
         fun deleteDir(dir: File): Boolean {

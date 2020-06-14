@@ -1,14 +1,13 @@
 package com.picker.gallery.utils.keypad;
 
 import android.app.Activity
+import android.content.Context
 import android.graphics.Rect
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
-import android.content.Context
 import android.view.inputmethod.InputMethodManager
-
-import java.util.HashMap
+import java.util.*
 
 class KeyboardUtils private constructor(act: Activity, private var mCallback: SoftKeyboardToggleListener?) : ViewTreeObserver.OnGlobalLayoutListener {
     private val mRootView: View

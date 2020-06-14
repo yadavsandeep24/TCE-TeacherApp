@@ -6,7 +6,7 @@
   <path
       android:pathData="M4.2307,8.7763L9.6995,3.0071C10.3404,2.331 11.3784,2.331 12.0193,3.0071C12.6602,3.6827 12.6602,4.7788 12.0193,5.4544L7.7105,10L12.0193,14.5456C12.6602,15.2212 12.6602,16.3173 12.0193,16.9929C11.6988,17.331 11.2794,17.5 10.8594,17.5C10.4399,17.5 10.0199,17.331 9.6995,16.9929L4.2307,11.2237C3.5898,10.5481 3.5898,9.4519 4.2307,8.7763"
       android:strokeWidth="1"
-      android:fillColor="#050505"
+      android:fillColor="#ffffff"
       android:fillType="evenOdd"
       android:strokeColor="#00000000"/>
   <group>
@@ -15,7 +15,7 @@
     <path
         android:pathData="M-2.5,0h20v20h-20z"
         android:strokeWidth="1"
-        android:fillColor="#FFFFFF"
+        android:fillColor="#00000000"
         android:fillType="nonZero"
         android:strokeColor="#00000000"/>
   </group>

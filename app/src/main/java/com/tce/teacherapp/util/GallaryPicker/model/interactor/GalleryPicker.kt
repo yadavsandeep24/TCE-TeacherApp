@@ -7,7 +7,6 @@ import android.util.Log
 import com.picker.gallery.model.GalleryImage
 import com.picker.gallery.model.GalleryVideo
 import java.io.File
-import kotlin.collections.ArrayList
 
 class GalleryPicker(var ctx: Context) {
 
