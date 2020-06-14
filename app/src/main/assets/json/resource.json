@@ -1,0 +1,41 @@
+[
+    {
+      "id": "1",
+      "videoUrl": "",
+      "videoThumb": "",
+      "title": "A Day in the Zoo - Modality" ,
+      "typeId": 1,
+      "Type": "TCE",
+      "isAdded": false
+    },
+    {
+      "id": "2",
+      "videoUrl": "",
+      "videoThumb": "",
+      "title": "Title Name - 1" ,
+      "typeId": 2,
+      "Type": "My Resource",
+      "isAdded": false
+    },
+    {
+      "id": "3",
+      "videoUrl": "",
+      "videoThumb": "",
+      "title": "Title Name - 2" ,
+      "typeId": 3,
+      "Type": "Shared",
+      "isAdded": false
+    },
+    {
+      "id": "4",
+      "videoUrl": "",
+      "videoThumb": "",
+      "title": "Title Name - 3" ,
+      "typeId": 3,
+      "Type": "Shared",
+      "isAdded": false
+    }
+  ]
+
+
+

@@ -1,5 +1,4 @@
-{
-  "message": [
+ [
     {
       "id": "1",
       "title": "Class Apple",
@@ -7,7 +6,8 @@
       "icon": "ic_dummy_class_apple.xml" ,
       "time": "1.49 PM",
       "count": "1",
-      "conversion": [
+      "NoOfMember": "9",
+      "conversionList": [
         {
           "id": "1",
           "message": "Hi Parents, I am sharing what we have learnt in class.",
@@ -22,13 +22,13 @@
         {
           "id": "1",
           "message": "Hi Parents, I am sharing what we have learnt in class.",
-          "videoUrl": "",
+          "videoUrl": "video",
           "videoTitle": "",
           "videoSubTitle": "",
           "imageUrl": "1",
           "time": "1.49 PM",
           "messageFrom": "Aishwarya",
-          "messageType": "1"
+          "messageType": "2"
         }
       ]
     },
@@ -39,22 +39,11 @@
       "icon": "ic_dummy_school.xml" ,
       "time": "1.49 PM",
       "count": "1",
-      "conversion": [
+      "conversionList": [
         {
           "id": "1",
-          "message": "Hi Parents, I am sharing what we have learnt in class.",
-          "videoUrl": "",
-          "videoTitle": "",
-          "videoSubTitle": "",
-          "imageUrl": "1",
-          "time": "1.49 PM",
-          "messageFrom": "Aishwarya",
-          "messageType": "1"
-        },
-        {
-          "id": "1",
-          "message": "Hi Parents, I am sharing what we have learnt in class.",
-          "videoUrl": "",
+          "message": "Hi teacher, please take note that school will be closed on the 20th feb.",
+          "videoUrl": "video",
           "videoTitle": "",
           "videoSubTitle": "",
           "imageUrl": "1",
@@ -67,30 +56,19 @@
     },
     {
       "id": "3",
-      "title": "Year 1",
-      "detail": "schgrd-ef1c9ccf-36b5-4639-9292-736bd1a0d3bf",
-      "icon": "ic_dummy_class_apple.xml" ,
+      "title": "Divya",
+      "detail": "My child not feeling well.",
+      "icon": "dummy_student.png" ,
       "time": "1.49 PM",
       "count": "1",
-      "conversion": [
+      "conversionList": [
         {
           "id": "1",
-          "message": "Hi Parents, I am sharing what we have learnt in class.",
+          "message": "Hi Teacher, My child not feeling well.",
           "videoUrl": "",
           "videoTitle": "",
           "videoSubTitle": "",
-          "imageUrl": "1",
-          "time": "1.49 PM",
-          "messageFrom": "Aishwarya",
-          "messageType": "1"
-        },
-        {
-          "id": "1",
-          "message": "Hi Parents, I am sharing what we have learnt in class.",
-          "videoUrl": "",
-          "videoTitle": "",
-          "videoSubTitle": "",
-          "imageUrl": "1",
+          "imageUrl": "",
           "time": "1.49 PM",
           "messageFrom": "Aishwarya",
           "messageType": "1"
@@ -100,4 +78,3 @@
     }
   ]
 
-}

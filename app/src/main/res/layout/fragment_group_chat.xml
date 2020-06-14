@@ -86,10 +86,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="15dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
                 android:background="@color/white"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
 
                 <RelativeLayout
                     android:id="@+id/attachment"
@@ -138,17 +138,17 @@
                     android:id="@+id/attachment_container"
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
-                    android:visibility="gone"
                     android:layout_below="@+id/attachment"
+                    android:layout_marginTop="10dp"
                     android:orientation="vertical"
-                    android:layout_marginTop="10dp">
+                    android:visibility="gone">
 
                     <com.picker.gallery.utils.scroll.FastScrollRecyclerView
                         android:id="@+id/imageGrid"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="5dp"
                         android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
                         android:overScrollMode="never"
                         app:fastScrollPopupBackgroundSize="@dimen/_30sdp"
                         app:fastScrollPopupBgColor="#2962ff"
@@ -160,9 +160,58 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/albumsrecyclerview"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/attachment_voice_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_below="@+id/attachment"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <View
+                        android:id="@+id/divider"
+                        android:layout_width="50dp"
+                        android:layout_height="4dp"
+                        android:background="@color/grey"
+                        android:layout_marginTop="10dp"
+                        android:layout_centerHorizontal="true"></View>
+
+                    <com.tce.teacherapp.util.RubikBoldTextview
+                       android:id="@+id/tv_record_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="#a0a5b9"
+                        android:text="0:00"
+                        android:textSize="@dimen/_30sdp"
+                        android:gravity="center"
+                        android:layout_below="@+id/divider"
+                        android:layout_above="@+id/tvRecord">
+
+                    </com.tce.teacherapp.util.RubikBoldTextview>
+
+                    <com.tce.teacherapp.util.RubikMediumTextview
+                        android:id="@+id/tvRecord"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:text="Record"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:textSize="@dimen/font_size_16_dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@drawable/bg_orange_rounded">
+
+                    </com.tce.teacherapp.util.RubikMediumTextview>
+
+
+                </RelativeLayout>
+
 
             </RelativeLayout>
 
@@ -247,6 +296,7 @@
                 android:background="#e1e6f0"></View>
 
             <LinearLayout
+                android:id="@+id/voice_container"
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
                 android:gravity="center_vertical"
@@ -304,6 +354,7 @@
                 android:background="#e1e6f0"></View>
 
             <LinearLayout
+                android:id="@+id/file_container"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:gravity="center_vertical"

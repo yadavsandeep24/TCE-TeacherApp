@@ -13,4 +13,5 @@
     <color name="transparent">#00000000</color>
     <color name="login_support_mail">#1e6eff</color>
     <color name="setting_actionbar_color">#46465b</color>
+    <color name="orange">#fa6636</color>
 </resources>
