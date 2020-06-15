@@ -57,7 +57,6 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.setStateEvent(LoginStateEvent.CheckFingerPrintLoginEnabled)
-        val tvLoginManually = view.findViewById<TextView>(R.id.tv_login_manually)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             BiometricHelper.setupKeyStoreAndKeyGenerator()
             val defaultCipher: Cipher = setupCipher()
@@ -66,9 +65,11 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
         }else{
             binding.ivThumb.isEnabled = false
             binding.ivThumb.alpha =  0.4f
+            binding.tvLoginTouchId.isEnabled = false
+            binding.tvLoginTouchId.alpha = 0.4f
         }
 
-        tvLoginManually.setOnClickListener {
+        binding.tvLoginManually.setOnClickListener {
             findNavController().navigate(R.id.action_loginOptionFragment_to_loginFragment)
         }
         subscribeObservers()
@@ -95,10 +96,22 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
                 isEnabled = true
                 binding.ivThumb.alpha = 1.0f
                 setOnClickListener(TouchIdClickListener(defaultCipher, DEFAULT_KEY_NAME))
+
+                binding.tvLoginTouchId.setOnClickListener {
+                    viewModel.setFingerPrintEnableMode(true)
+                    val promptInfo = createPromptInfo(requireContext())
+
+                    if (BiometricHelper.initCipher(defaultCipher, DEFAULT_KEY_NAME)) {
+                        biometricPrompt.authenticate(promptInfo, BiometricPrompt.CryptoObject(defaultCipher))
+                    }
+                }
             }
         } else {
             binding.ivThumb.isEnabled = false
             binding.ivThumb.alpha = 0.4f
+            binding.tvLoginTouchId.isEnabled = false
+            binding.tvLoginTouchId.alpha = 0.4f
+
         }
     }
 
@@ -109,7 +122,7 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
 
         @RequiresApi(Build.VERSION_CODES.M)
         override fun onClick(view: View) {
-
+            viewModel.setFingerPrintEnableMode(true)
             val promptInfo = createPromptInfo(requireContext())
 
             if (BiometricHelper.initCipher(cipher, keyName)) {

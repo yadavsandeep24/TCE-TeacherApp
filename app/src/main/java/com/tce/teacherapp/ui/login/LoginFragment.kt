@@ -73,10 +73,11 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
             if (viewState != null) {
                 viewState.loginFields?.let {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        if(it.login_mode_fingePrint_Enabled!!){
+                        if(!it.login_mode_fingePrint_Enabled!!){
                             viewState.loginFields = null
                             findNavController().navigate(R.id.action_loginFragment_to_quickAccessSettingFragment)
                         }else{
+                            viewState.loginFields = null
                             val i = Intent(activity, DashboardActivity::class.java)
                             startActivity(i)
                             activity?.overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left)

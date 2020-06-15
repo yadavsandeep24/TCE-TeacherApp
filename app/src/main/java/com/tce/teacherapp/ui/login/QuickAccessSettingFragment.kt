@@ -76,10 +76,7 @@ class QuickAccessSettingFragment
                     isEnabled = true
                     binding.ivThumb.alpha = 1.0f
                     setOnClickListener(defaultCipher?.let { it1 ->
-                        TouchIdClickListener(
-                            it1,
-                            Constants.DEFAULT_KEY_NAME
-                        )
+                        TouchIdClickListener(it1, Constants.DEFAULT_KEY_NAME)
                     })
                 }
             } else {
