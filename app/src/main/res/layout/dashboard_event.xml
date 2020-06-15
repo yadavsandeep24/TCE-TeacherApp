@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/dashboard_bg"
+    android:padding="10dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:visibility="visible"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        app:cardPreventCornerOverlap="false"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                android:background="#fffbd9">
+
+                <com.tce.teacherapp.util.RubikBoldTextview
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size_16_dp"
+                    android:text="Todays Hapennings"
+                    android:textColor="@color/color_black"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:textStyle="bold">
+                </com.tce.teacherapp.util.RubikBoldTextview>
+
+                <com.tce.teacherapp.util.RubikMediumTextview
+                    android:id="@+id/tvDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size_16_dp"
+                    android:text="15 June 2020"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/color_black"
+                    android:layout_alignParentRight="true">
+                </com.tce.teacherapp.util.RubikMediumTextview>
+
+            </RelativeLayout>
+
+            <com.airbnb.epoxy.EpoxyRecyclerView
+                android:id="@+id/rv_event"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dp">
+
+            </com.airbnb.epoxy.EpoxyRecyclerView>
+
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</RelativeLayout>

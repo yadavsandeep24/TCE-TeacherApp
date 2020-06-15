@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="right"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:visibility="visible"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="8dp"
+    android:layout_marginTop="10dp"
+    app:cardPreventCornerOverlap="false">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="?android:attr/actionBarSize"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="#1e70ff">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_video">
+
+            </androidx.appcompat.widget.AppCompatImageView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#5591fe"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:orientation="vertical">
+            <com.tce.teacherapp.util.RubikRegularTextview
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Event"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_14_dp"></com.tce.teacherapp.util.RubikRegularTextview>
+
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:id="@+id/tvEventName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Event"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_16_dp"></com.tce.teacherapp.util.RubikMediumTextview>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
