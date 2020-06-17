@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="30dp"
+    android:orientation="vertical">
+
+    <com.tce.teacherapp.util.RubikMediumTextview
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Today's Resource"
+        android:textSize="20dp"
+        android:textColor="@color/color_black">
+    </com.tce.teacherapp.util.RubikMediumTextview>
+
+    <com.airbnb.epoxy.EpoxyRecyclerView
+        android:id="@+id/rv_dash_resource"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.airbnb.epoxy.EpoxyRecyclerView>
+</LinearLayout>

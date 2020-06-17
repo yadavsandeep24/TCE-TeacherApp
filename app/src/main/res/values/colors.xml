@@ -14,4 +14,5 @@
     <color name="login_support_mail">#1e6eff</color>
     <color name="setting_actionbar_color">#46465b</color>
     <color name="orange">#fa6636</color>
+    <color name="dashboard_back">#f5f8ff</color>
 </resources>

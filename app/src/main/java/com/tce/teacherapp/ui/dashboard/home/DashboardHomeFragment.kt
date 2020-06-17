@@ -19,7 +19,10 @@ import com.tce.teacherapp.ui.BaseFragment
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.home.adapter.eventEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.home.adapter.headerEpoxyHolder
+import com.tce.teacherapp.ui.dashboard.home.adapter.todayResourceEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.subjects.SubjectListFragment
+import kotlinx.android.synthetic.main.fragment_dashboard_home.*
+import kotlinx.android.synthetic.main.message_bottom_filter.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 
@@ -56,10 +59,32 @@ class DashboardHomeFragment : BaseFragment(R.layout.fragment_dashboard_home) {
             )
         })
 
-        var list = arrayOf("Junior KG A", "Junior KG B")
-        var adapter = ArrayAdapter(requireActivity(), android.R.layout.simple_spinner_item, list)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.spnClass.adapter = adapter
+        val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
+
+        bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_COLLAPSED
+        bottomSheetBehavior.skipCollapsed = true
+
+        bottomSheetBehavior.addBottomSheetCallback(object : com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.BottomSheetCallback {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                val rotation = when (newState) {
+                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED -> 0f
+                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_COLLAPSED -> 180f
+                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN -> 180f
+                    else -> return
+                }
+
+            }
+        })
+        binding.classContainer.setOnClickListener(View.OnClickListener {
+            if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
+                binding.mainContainer.setBackgroundColor(resources.getColor(R.color.dim_color))
+                bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
+            } else {
+                binding.mainContainer.setBackgroundColor(resources.getColor(R.color.dashboard_back))
+                bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+            }
+        })
+
 
 
         binding.mainEpoxyRecycler.layoutManager = GridLayoutManager(activity, 1)
@@ -82,6 +107,14 @@ class DashboardHomeFragment : BaseFragment(R.layout.fragment_dashboard_home) {
                 id(1)
                 strDate("15 Jan 2020")
             }
+
+            todayResourceEpoxyHolder {
+                id(1)
+                strTitle("Today's Resource")
+
+            }
+
+
         }
     }
 
