@@ -1,0 +1,89 @@
+[
+  {
+    "id": "1",
+    "ResourceId" : "1",
+    "videoUrl": "video",
+    "videoThumb": "",
+    "imageUrl": "",
+    "icon": "ic_video_icon.xml",
+    "title": "Title Name 1 - Modality",
+    "typeId": 1,
+    "Type": "Today Resource",
+    "isAdded": false
+  },
+  {
+    "id": "2",
+    "ResourceId" : "1",
+    "videoUrl": "",
+    "videoThumb": "",
+    "imageUrl": "image",
+    "icon": "ic_video_icon.xml",
+    "title": "Title Name 1 - Modality",
+    "typeId": 1,
+    "Type": "Today Resource",
+    "isAdded": false
+  },
+  {
+    "id": "3",
+    "ResourceId" : "2",
+    "videoUrl": "",
+    "videoThumb": "",
+    "imageUrl": "",
+    "icon": "ic_video_icon.xml",
+    "title": "Title Name 1 - Modality",
+    "typeId": 1,
+    "Type": "Today Resource",
+    "isAdded": false
+  },
+  {
+    "id": "4",
+    "ResourceId" : "0",
+    "videoUrl": "video",
+    "videoThumb": "",
+    "imageUrl": "",
+    "icon": "ic_video_icon.xml",
+    "title": "Title Name 1",
+    "typeId": 2,
+    "Type": "Last Viewed",
+    "isAdded": false
+  },
+  {
+    "id": "5",
+    "ResourceId" : "0",
+    "videoUrl": "",
+    "videoThumb": "",
+    "imageUrl": "image",
+    "icon": "ic_image_icon.xml",
+    "title": "Title Name 1",
+    "typeId": 2,
+    "Type": "Last Viewed",
+    "isAdded": false
+  },
+  {
+    "id": "6",
+    "ResourceId" : "0",
+    "videoUrl": "video",
+    "videoThumb": "",
+    "imageUrl": "",
+    "icon": "ic_play_video_icon.xml",
+    "title": "Title Name 1",
+    "typeId": 2,
+    "Type": "Last Viewed",
+    "isAdded": false
+  },
+  {
+    "id": "7",
+    "ResourceId" : "0",
+    "videoUrl": "",
+    "videoThumb": "",
+    "imageUrl": "image",
+    "icon": "ic_game_icon.xml",
+    "title": "Title Name 1",
+    "typeId": 2,
+    "Type": "Last Viewed",
+    "isAdded": false
+  }
+]
+
+
+

@@ -3,20 +3,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="30dp"
+    android:padding="30dp"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <com.tce.teacherapp.util.RubikMediumTextview
-        android:id="@+id/title"
+        android:id="@+id/view_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Today's Resources"
-        android:textSize="@dimen/font_size_16_dp"
-        android:textColor="@color/color_black">
-    </com.tce.teacherapp.util.RubikMediumTextview>
+        android:layout_marginBottom="15dp"
+        android:text="Last Viewed Resources"
+        android:textColor="@color/color_black"
+        android:textSize="@dimen/font_size_16_dp"></com.tce.teacherapp.util.RubikMediumTextview>
 
     <com.airbnb.epoxy.EpoxyRecyclerView
-        android:id="@+id/rv_dash_resource"
+        android:id="@+id/rv_dash_view_resource"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -47,4 +48,5 @@
         </com.tce.teacherapp.util.RubikMediumTextview>
 
     </LinearLayout>
+
 </LinearLayout>

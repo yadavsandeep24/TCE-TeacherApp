@@ -9,7 +9,7 @@
         android:id="@+id/img_profile"
         android:layout_width="107dp"
         android:layout_height="107dp"
-        android:src="@drawable/ic_user_profile"></com.tce.teacherapp.util.CustomCircularImageView>
+        android:src="@drawable/dummy_teacher_profile"></com.tce.teacherapp.util.CustomCircularImageView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,22 +21,23 @@
         android:gravity="center_vertical"
         android:orientation="vertical">
 
-        <com.tce.teacherapp.util.RubikMediumTextview
+        <com.tce.teacherapp.util.RubikBoldTextview
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/_30sdp"
+            android:textSize="25dp"
             android:text="Hi Payal !"
             android:textColor="@color/color_black"
             android:textStyle="bold">
-        </com.tce.teacherapp.util.RubikMediumTextview>
+        </com.tce.teacherapp.util.RubikBoldTextview>
 
         <com.tce.teacherapp.util.RubikMediumTextview
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/font_size_16_dp"
-            android:text="last sync with "
-            android:textStyle="bold">
+            android:textSize="10dp"
+            android:text="last sync with In-Class App on 2 March 2020, 8 am"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp">
         </com.tce.teacherapp.util.RubikMediumTextview>
 
 

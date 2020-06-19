@@ -7,35 +7,35 @@ import com.airbnb.epoxy.*
 import com.tce.teacherapp.R
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
 
-@EpoxyModelClass(layout = R.layout.dashboard_today_resources)
-abstract class TodayResourceEpoxyHolder : EpoxyModelWithHolder<ResourceHolder>() {
+@EpoxyModelClass(layout = R.layout.dashboard_viewed_resources)
+abstract class ViewedResourceEpoxyHolder : EpoxyModelWithHolder<ViewedHolder>() {
 
     @EpoxyAttribute
     lateinit var strTitle:String
 
-    override fun bind(holder: ResourceHolder) {
+    override fun bind(holder: ViewedHolder) {
 
-        holder.tvShowMore.setText(Html.fromHtml("<u>Show More (6)</u>"))
         holder.tvTitle.setText(strTitle)
-        holder.rvResource.layoutManager = GridLayoutManager(holder.rvResource.context, 1)
+        holder.tvShowMore.setText(Html.fromHtml("<u>Show More (10)</u>"))
+        holder.rvResource.layoutManager = GridLayoutManager(holder.rvResource.context, 2)
         holder.rvResource.setHasFixedSize(true)
         val epoxyVisibilityTracker = EpoxyVisibilityTracker()
         epoxyVisibilityTracker.attach(holder.rvResource)
 
         holder.rvResource.withModels {
-            for (i in 0 until 2) {
-               todayResourceItemEpoxyHolder {
+            for (i in 0 until 4) {
+                viewedResChildItemEpoxyHolder {
                     id(i)
-               }
+                    strName("Title Name 1")
+                }
             }
         }
     }
 
 }
 
-class ResourceHolder : KotlinEpoxyHolder(){
-
+class ViewedHolder : KotlinEpoxyHolder(){
     val tvShowMore by bind<TextView>(R.id.tvShowMore)
-    val tvTitle by bind<TextView>(R.id.title)
-    val rvResource by bind<EpoxyRecyclerView>(R.id.rv_dash_resource)
+    val tvTitle by bind<TextView>(R.id.view_title)
+    val rvResource by bind<EpoxyRecyclerView>(R.id.rv_dash_view_resource)
 }

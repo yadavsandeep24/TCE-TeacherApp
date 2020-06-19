@@ -20,6 +20,7 @@ import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.home.adapter.eventEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.home.adapter.headerEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.home.adapter.todayResourceEpoxyHolder
+import com.tce.teacherapp.ui.dashboard.home.adapter.viewedResourceEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.subjects.SubjectListFragment
 import kotlinx.android.synthetic.main.fragment_dashboard_home.*
 import kotlinx.android.synthetic.main.message_bottom_filter.*
@@ -110,8 +111,13 @@ class DashboardHomeFragment : BaseFragment(R.layout.fragment_dashboard_home) {
 
             todayResourceEpoxyHolder {
                 id(1)
-                strTitle("Today's Resource")
+                strTitle("Today's Resources")
 
+            }
+
+            viewedResourceEpoxyHolder {
+                id(1)
+                strTitle("Last Viewed Resources")
             }
 
 

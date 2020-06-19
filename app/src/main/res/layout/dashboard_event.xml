@@ -36,11 +36,11 @@
                 <com.tce.teacherapp.util.RubikBoldTextview
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/font_size_16_dp"
+                    android:textSize="15dp"
                     android:text="Todays Hapennings"
                     android:textColor="@color/color_black"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="20dp"
                     android:textStyle="bold">
                 </com.tce.teacherapp.util.RubikBoldTextview>
 
@@ -48,7 +48,7 @@
                     android:id="@+id/tvDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/font_size_16_dp"
+                    android:textSize="15dp"
                     android:text="15 June 2020"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="10dp"
@@ -62,9 +62,40 @@
                 android:id="@+id/rv_event"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="20dp">
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
 
             </com.airbnb.epoxy.EpoxyRecyclerView>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_add"
+                    android:layout_marginBottom="10dp">
+
+                </ImageView>
+
+                <com.tce.teacherapp.util.RubikMediumTextview
+                    android:id="@+id/tvShowMore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/font_size_16_dp"
+                    android:text="Show More (4)">
+
+                </com.tce.teacherapp.util.RubikMediumTextview>
+
+            </LinearLayout>
 
 
         </LinearLayout>

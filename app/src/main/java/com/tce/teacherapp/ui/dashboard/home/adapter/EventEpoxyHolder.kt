@@ -1,5 +1,6 @@
 package com.tce.teacherapp.ui.dashboard.home.adapter
 
+import android.text.Html
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.*
@@ -15,7 +16,7 @@ abstract class EventEpoxyHolder :EpoxyModelWithHolder<EventHolder>() {
     override fun bind(holder: EventHolder) {
 
         holder.tvDate.text = strDate
-
+        holder.tvShowMore.setText(Html.fromHtml("<u>Show More (4)</u>"))
         holder.rvEvent.layoutManager = GridLayoutManager(holder.rvEvent.context, 1)
         holder.rvEvent.setHasFixedSize(true)
         val epoxyVisibilityTracker = EpoxyVisibilityTracker()
@@ -34,6 +35,7 @@ abstract class EventEpoxyHolder :EpoxyModelWithHolder<EventHolder>() {
 }
 
 class EventHolder : KotlinEpoxyHolder(){
+    val tvShowMore by bind<TextView>(R.id.tvShowMore)
     val tvDate by bind<TextView>(R.id.tvDate)
     val rvEvent by bind<EpoxyRecyclerView>(R.id.rv_event)
 }
