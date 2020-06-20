@@ -65,4 +65,27 @@ interface MainRepository {
     fun checkFingerPrintEnableMode(
         stateEvent: StateEvent
     ): Flow<DataState<DashboardViewState>>
+
+    fun getDashboardData(
+        count : Int,
+        type: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<DashboardViewState>>
+
+
+    fun getEventList(
+        count : Int,
+        stateEvent: StateEvent
+    ): Flow<DataState<DashboardViewState>>
+
+    fun getTodayResourceList(
+        count : Int,
+        stateEvent: StateEvent
+    ): Flow<DataState<DashboardViewState>>
+
+    fun getLastViewedResourceList(
+        count : Int,
+        stateEvent: StateEvent
+    ): Flow<DataState<DashboardViewState>>
+
 }

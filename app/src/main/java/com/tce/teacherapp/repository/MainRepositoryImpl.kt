@@ -23,6 +23,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.IOException
+import java.lang.reflect.Type
 import javax.inject.Inject
 
 @FlowPreview
@@ -520,6 +521,172 @@ constructor(
                 response = null
             )
         )
+    }
+
+    override fun getDashboardData(
+        count: Int,
+        type: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<DashboardViewState>>  = flow{
+        var jsonString: String = ""
+        val gson = Gson()
+        val listType : Type
+
+        try {
+
+            if(type.equals("event", ignoreCase = true)) {
+                jsonString = application.assets.open("json/event.json").bufferedReader()
+                    .use { it.readText() }
+                listType = object : TypeToken<ArrayList<Event>>() {}.type
+                var list: ArrayList<Event> = gson.fromJson(jsonString, listType)
+                var selectedList: ArrayList<Event> = ArrayList();
+                for (i in 0 until count) {
+                    selectedList.add(list.get(i))
+                }
+                emit(
+                    DataState.data(
+                        data = DashboardViewState(eventList = selectedList),
+                        stateEvent = stateEvent,
+                        response = null
+                    )
+                )
+            } else if(type.equals("today resource", ignoreCase = true)) {
+                jsonString = application.assets.open("json/dashboardResource.json").bufferedReader()
+                    .use { it.readText() }
+                listType = object : TypeToken<ArrayList<DashboardResource>>() {}.type
+                var list: ArrayList<DashboardResource> = gson.fromJson(jsonString, listType)
+                var selectedList: ArrayList<DashboardResource> = ArrayList();
+                for (i in 0 until count) {
+                    selectedList.add(list.get(i))
+                }
+                emit(
+                    DataState.data(
+                        data = DashboardViewState(todayResourceList = selectedList),
+                        stateEvent = stateEvent,
+                        response = null
+                    )
+                )
+            } else if(type.equals("last viewed resource", ignoreCase = true)) {
+                jsonString = application.assets.open("json/dashboardResourceType.json").bufferedReader()
+                    .use { it.readText() }
+                listType = object : TypeToken<ArrayList<DashboardResourceType>>() {}.type
+                var list: ArrayList<DashboardResourceType> = gson.fromJson(jsonString, listType)
+                var selectedList: ArrayList<DashboardResourceType> = ArrayList();
+                for (i in 0 until count) {
+                    selectedList.add(list.get(i))
+                }
+                emit(
+                    DataState.data(
+                        data = DashboardViewState(lastViewedResourceList = selectedList),
+                        stateEvent = stateEvent,
+                        response = null
+                    )
+                )
+            }
+
+
+        } catch (ioException: IOException) {
+            ioException.printStackTrace()
+        }
+
+    }
+
+    override fun getEventList(count : Int,stateEvent: StateEvent): Flow<DataState<DashboardViewState>> =
+        flow {
+        var jsonString: String = ""
+        try {
+
+            jsonString =
+                application.assets.open("json/event.json").bufferedReader().use { it.readText() }
+            val gson = Gson()
+            val listPersonType = object : TypeToken<ArrayList<Event>>() {}.type
+            var eventList: ArrayList<Event> = gson.fromJson(jsonString, listPersonType)
+
+            var selectedList: ArrayList<Event> = ArrayList();
+
+            for (i in 0 until count) {
+                selectedList.add(eventList.get(i))
+            }
+
+            emit(
+                DataState.data(
+                    data = DashboardViewState(eventList = selectedList),
+                    stateEvent = stateEvent,
+                    response = null
+                )
+            )
+
+        } catch (ioException: IOException) {
+            ioException.printStackTrace()
+        }
+
+
+    }
+
+    override fun getTodayResourceList(
+        count: Int,
+        stateEvent: StateEvent
+    ): Flow<DataState<DashboardViewState>> = flow {
+        var jsonString: String = ""
+        try {
+
+            jsonString =
+                application.assets.open("json/dashboardResource.json").bufferedReader().use { it.readText() }
+            val gson = Gson()
+            val listPersonType = object : TypeToken<ArrayList<DashboardResource>>() {}.type
+            var eventList: ArrayList<DashboardResource> = gson.fromJson(jsonString, listPersonType)
+
+            var selectedList: ArrayList<DashboardResource> = ArrayList();
+
+            for (i in 0 until count) {
+                selectedList.add(eventList.get(i))
+            }
+
+            emit(
+                DataState.data(
+                    data = DashboardViewState(todayResourceList = selectedList),
+                    stateEvent = stateEvent,
+                    response = null
+                )
+            )
+
+        } catch (ioException: IOException) {
+            ioException.printStackTrace()
+        }
+
+
+    }
+
+    override fun getLastViewedResourceList(
+        count: Int,
+        stateEvent: StateEvent
+    ): Flow<DataState<DashboardViewState>> = flow {
+        var jsonString: String = ""
+        try {
+            jsonString =
+                application.assets.open("json/dashboardResourceType.json").bufferedReader().use { it.readText() }
+            val gson = Gson()
+            val listPersonType = object : TypeToken<ArrayList<DashboardResourceType>>() {}.type
+            var eventList: ArrayList<DashboardResourceType> = gson.fromJson(jsonString, listPersonType)
+
+            var selectedList: ArrayList<DashboardResourceType> = ArrayList();
+
+            for (i in 0 until count) {
+                selectedList.add(eventList.get(i))
+            }
+
+            emit(
+                DataState.data(
+                    data = DashboardViewState(lastViewedResourceList = selectedList),
+                    stateEvent = stateEvent,
+                    response = null
+                )
+            )
+
+        } catch (ioException: IOException) {
+            ioException.printStackTrace()
+        }
+
     }
 
     fun toGradeList(grades: List<GradeResponse>): List<Grade> {

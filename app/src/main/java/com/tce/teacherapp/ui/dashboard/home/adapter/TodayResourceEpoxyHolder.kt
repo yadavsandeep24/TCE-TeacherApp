@@ -5,6 +5,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.*
 import com.tce.teacherapp.R
+import com.tce.teacherapp.db.entity.DashboardResource
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
 
 @EpoxyModelClass(layout = R.layout.dashboard_today_resources)
@@ -13,9 +14,17 @@ abstract class TodayResourceEpoxyHolder : EpoxyModelWithHolder<ResourceHolder>()
     @EpoxyAttribute
     lateinit var strTitle:String
 
+    @EpoxyAttribute
+    lateinit var resourceList:ArrayList<DashboardResource>
+
+    @EpoxyAttribute
+    lateinit var listener: () -> Unit
+
     override fun bind(holder: ResourceHolder) {
 
         holder.tvShowMore.setText(Html.fromHtml("<u>Show More (6)</u>"))
+        holder.tvShowMore.setOnClickListener{listener()}
+
         holder.tvTitle.setText(strTitle)
         holder.rvResource.layoutManager = GridLayoutManager(holder.rvResource.context, 1)
         holder.rvResource.setHasFixedSize(true)
@@ -23,11 +32,17 @@ abstract class TodayResourceEpoxyHolder : EpoxyModelWithHolder<ResourceHolder>()
         epoxyVisibilityTracker.attach(holder.rvResource)
 
         holder.rvResource.withModels {
-            for (i in 0 until 2) {
-               todayResourceItemEpoxyHolder {
-                    id(i)
-               }
+            resourceList?.let {
+                for(res in it) {
+                    todayResourceItemEpoxyHolder {
+                        id(res.resId)
+                        title(res.title)
+                        subTitle(res.subTitle)
+                        resourceTypeList(res.typeList)
+                    }
+                }
             }
+
         }
     }
 

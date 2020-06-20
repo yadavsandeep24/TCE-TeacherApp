@@ -1,5 +1,8 @@
 package com.tce.teacherapp.ui.dashboard.home
 
+import com.tce.teacherapp.db.entity.DashboardResource
+import com.tce.teacherapp.db.entity.DashboardResourceType
+import com.tce.teacherapp.db.entity.Event
 import com.tce.teacherapp.db.entity.Profile
 import com.tce.teacherapp.repository.MainRepository
 import com.tce.teacherapp.ui.BaseViewModel
@@ -25,6 +28,18 @@ class DashboardViewModel @Inject constructor(val mainRepository: MainRepository)
         data.isFingerPrintLoginEnabled?.let {
             setFingerPrintEnableData(it)
         }
+
+        data.eventList?.let {
+            setEventList(it)
+        }
+
+        data.todayResourceList?.let {
+            setTodayResourceList(it)
+        }
+
+        data.lastViewedResourceList?.let {
+            setLastViewedResourceList(it)
+        }
     }
 
     private fun setFingerPrintEnableData(it: Boolean) {
@@ -39,6 +54,24 @@ class DashboardViewModel @Inject constructor(val mainRepository: MainRepository)
         setViewState(update)
     }
 
+    private fun setEventList(list: ArrayList<Event>) {
+        val update = getCurrentViewStateOrNew()
+        update.eventList = list
+        setViewState(update)
+    }
+
+    private fun setTodayResourceList(list: ArrayList<DashboardResource>) {
+        val update = getCurrentViewStateOrNew()
+        update.todayResourceList = list
+        setViewState(update)
+    }
+
+    private fun setLastViewedResourceList(list: ArrayList<DashboardResourceType>) {
+        val update = getCurrentViewStateOrNew()
+        update.lastViewedResourceList = list
+        setViewState(update)
+    }
+
     override fun setStateEvent(stateEvent: StateEvent) {
         val job: Flow<DataState<DashboardViewState>> = when (stateEvent) {
 
@@ -50,6 +83,22 @@ class DashboardViewModel @Inject constructor(val mainRepository: MainRepository)
             }
             is DashboardStateEvent.CheckFingerPrintLoginEnabled ->{
                 mainRepository.checkFingerPrintEnableMode(stateEvent = stateEvent)
+            }
+
+            is DashboardStateEvent.GetDashboardEvent -> {
+                mainRepository.getDashboardData(stateEvent.count, stateEvent.type, stateEvent = stateEvent)
+            }
+
+            is DashboardStateEvent.GetDashboardEventList -> {
+                mainRepository.getEventList(stateEvent.count,stateEvent = stateEvent)
+            }
+
+            is DashboardStateEvent.GetTodayResource -> {
+                mainRepository.getTodayResourceList(stateEvent.count,stateEvent = stateEvent)
+            }
+
+            is DashboardStateEvent.GetLastViewedResource -> {
+                mainRepository.getTodayResourceList(stateEvent.count,stateEvent = stateEvent)
             }
 
             else -> {

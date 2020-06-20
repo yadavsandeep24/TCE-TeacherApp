@@ -22,7 +22,7 @@
         "videoUrl": "",
         "videoThumb": "",
         "imageUrl": "image",
-        "icon": "ic_video_icon.xml",
+        "icon": "ic_image_icon.xml",
         "title": "Title Name 1 - Modality",
         "typeId": 1,
         "Type": "Today Resource",
@@ -38,10 +38,29 @@
       {
         "id": "3",
         "ResourceId": "2",
-        "videoUrl": "",
+        "videoUrl": "Video",
         "videoThumb": "",
         "imageUrl": "",
         "icon": "ic_video_icon.xml",
+        "title": "Title Name 1 - Modality",
+        "typeId": 1,
+        "Type": "Today Resource",
+        "isAdded": false
+      }
+    ]
+  },
+  {
+    "resId": "3",
+    "title": "English",
+    "subTitle": "Rhymes",
+    "typeList": [
+      {
+        "id": "3",
+        "ResourceId": "2",
+        "videoUrl": "",
+        "videoThumb": "",
+        "imageUrl": "image",
+        "icon": "ic_image_icon.xml",
         "title": "Title Name 1 - Modality",
         "typeId": 1,
         "Type": "Today Resource",

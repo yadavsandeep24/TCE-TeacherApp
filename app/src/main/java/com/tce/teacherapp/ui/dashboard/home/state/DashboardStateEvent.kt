@@ -24,6 +24,47 @@ sealed class DashboardStateEvent : StateEvent {
         }
     }
 
+    class GetDashboardEvent (val count :Int, val type : String): DashboardStateEvent() {
+        override fun errorInfo(): String {
+            return "Error in getting profile info."
+        }
+
+        override fun toString(): String {
+            return "GetProfileEvent"
+        }
+    }
+
+
+    class GetDashboardEventList (val count :Int): DashboardStateEvent() {
+        override fun errorInfo(): String {
+            return "Error in getting profile info."
+        }
+
+        override fun toString(): String {
+            return "GetProfileEvent"
+        }
+    }
+
+    class GetTodayResource (val count :Int): DashboardStateEvent() {
+        override fun errorInfo(): String {
+            return "Error in getting profile info."
+        }
+
+        override fun toString(): String {
+            return "GetProfileEvent"
+        }
+    }
+
+    class GetLastViewedResource (val count :Int): DashboardStateEvent() {
+        override fun errorInfo(): String {
+            return "Error in getting profile info."
+        }
+
+        override fun toString(): String {
+            return "GetProfileEvent"
+        }
+    }
+
     object CheckFingerPrintLoginEnabled: DashboardStateEvent(){
         override fun errorInfo(): String {
             return "Error in checking FingerPrint mode."

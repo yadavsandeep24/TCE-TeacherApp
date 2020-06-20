@@ -19,7 +19,7 @@ constructor(
         when (className) {
 
             DashboardHomeFragment::class.java.name -> {
-                DashboardHomeFragment()
+                DashboardHomeFragment(viewModelFactory)
             }
 
             SettingsFragment::class.java.name -> {
@@ -35,7 +35,7 @@ constructor(
             }
 
             else -> {
-                DashboardHomeFragment()
+                DashboardHomeFragment(viewModelFactory)
             }
         }
 

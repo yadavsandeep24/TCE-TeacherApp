@@ -8,6 +8,6 @@ data class DashboardResource (
     val resId : Int,
     val title : String,
     val subTitle : String,
-    val typeList : List<DashboardResourceType>
+    val typeList : ArrayList<DashboardResourceType>
 
 ): Parcelable

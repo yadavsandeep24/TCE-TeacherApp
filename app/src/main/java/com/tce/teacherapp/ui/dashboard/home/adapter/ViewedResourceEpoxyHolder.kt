@@ -5,6 +5,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.*
 import com.tce.teacherapp.R
+import com.tce.teacherapp.db.entity.DashboardResourceType
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
 
 @EpoxyModelClass(layout = R.layout.dashboard_viewed_resources)
@@ -12,6 +13,9 @@ abstract class ViewedResourceEpoxyHolder : EpoxyModelWithHolder<ViewedHolder>() 
 
     @EpoxyAttribute
     lateinit var strTitle:String
+
+    @EpoxyAttribute
+    lateinit var resourceList:ArrayList<DashboardResourceType>
 
     override fun bind(holder: ViewedHolder) {
 
@@ -23,12 +27,15 @@ abstract class ViewedResourceEpoxyHolder : EpoxyModelWithHolder<ViewedHolder>() 
         epoxyVisibilityTracker.attach(holder.rvResource)
 
         holder.rvResource.withModels {
-            for (i in 0 until 4) {
-                viewedResChildItemEpoxyHolder {
-                    id(i)
-                    strName("Title Name 1")
+            resourceList?.let {
+                for(res in it){
+                    viewedResChildItemEpoxyHolder {
+                        id(res.id)
+                        strName(res.title)
+                    }
                 }
             }
+
         }
     }
 

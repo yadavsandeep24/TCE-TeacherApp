@@ -14,13 +14,53 @@
     "eventName": "Meet Kiran's Parents",
     "imageUrl": "bell_icon.png",
     "type": "TO-DO",
+    "eventColor": "#000000",
+    "typeColor" : "#ffaa1e",
+    "iconBackColor" : "#ffaa1e",
+    "eventBackColor": "#ffebc8"
+  },
+  {
+    "id": "3",
+    "eventName": "Meet Asha's Parents",
+    "imageUrl": "bell_icon.png",
+    "type": "TO-DO",
+    "eventColor": "#000000",
+    "typeColor" : "#ffaa1e",
+    "iconBackColor" : "#ffaa1e",
+    "eventBackColor": "#ffebc8"
+  },
+  {
+    "id": "4",
+    "eventName": "School Sports Day 2020",
+    "imageUrl": "calendar.png",
+    "type": "Event",
     "eventColor": "#FFFFFF",
     "typeColor" : "#FFFFFF",
     "iconBackColor" : "#1e6eff",
     "eventBackColor": "#5591ff"
   },
   {
-    "id": "3",
+    "id": "5",
+    "eventName": "Meet Kiran's Parents",
+    "imageUrl": "bell_icon.png",
+    "type": "TO-DO",
+    "eventColor": "#000000",
+    "typeColor" : "#ffaa1e",
+    "iconBackColor" : "#ffaa1e",
+    "eventBackColor": "#ffebc8"
+  },
+  {
+    "id": "6",
+    "eventName": "Meet Asha's Parents",
+    "imageUrl": "bell_icon.png",
+    "type": "TO-DO",
+    "eventColor": "#000000",
+    "typeColor" : "#ffaa1e",
+    "iconBackColor" : "#ffaa1e",
+    "eventBackColor": "#ffebc8"
+  },
+  {
+    "id": "7",
     "eventName": "Meet Asha's Parents",
     "imageUrl": "bell_icon.png",
     "type": "TO-DO",
