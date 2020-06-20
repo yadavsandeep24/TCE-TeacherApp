@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffcd23">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/tv_support_mail"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/ic_tce_logo" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/iv_logo"
+                android:layout_centerInParent="true"
+                android:background="@drawable/ic_oval" />
+
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:id="@+id/tv_welcome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_logo"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:text="Good Morning!"
+                android:textColor="#320500"
+                android:textSize="20sp" />
+
+            <com.tce.teacherapp.util.RubikRegularTextview
+                android:id="@+id/tv_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_welcome"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="Kindly login with your following details below"
+                android:textColor="#320500"
+                android:textSize="12sp"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edt_mobile_no"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:hint="Mobile Number"
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="60dp"
+                android:layout_below="@+id/tv_hint"
+                android:inputType="textPersonName"
+                android:paddingLeft="20dp"
+                android:textSize="@dimen/font_size_14_dp"
+                android:maxLength="50"
+                android:background="@drawable/bg_grey_rounded"/>
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edt_password"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:hint="Password"
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="60dp"
+                android:layout_below="@+id/edt_mobile_no"
+                android:inputType="textPassword"
+                android:paddingLeft="20dp"
+                android:textSize="@dimen/font_size_14_dp"
+                android:maxLength="15"
+                android:background="@drawable/bg_grey_rounded"/>
+
+
+                <com.tce.teacherapp.util.RubikMediumTextview
+                    android:layout_below="@+id/edt_password"
+                    android:id="@+id/tv_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:text="Login"
+                    android:elevation="3dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginEnd="60dp"
+                    android:gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/login_btn_bg"
+                    android:textSize="@dimen/font_size_14_dp"/>
+
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:id="@+id/tv_forget_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_login"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="Forget Password"
+                android:textColor="#fa4b28"
+                android:textSize="12sp"/>
+
+
+            <LinearLayout
+                android:id="@+id/new_early"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_forget_password"
+                android:gravity="center"
+                android:layout_marginTop="100dp">
+
+                <View
+                    android:layout_width="100dp"
+                    android:layout_height="0.5dp"
+                    android:background="@color/color_black"></View>
+
+                <com.tce.teacherapp.util.RubikMediumTextview
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New to Early Edge?"
+                    android:textColor="@color/color_black"
+                    android:textSize="12sp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp"/>
+
+                <View
+                    android:layout_width="100dp"
+                    android:layout_height="0.5dp"
+                    android:background="@color/color_black"></View>
+
+            </LinearLayout>
+
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/new_early"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:text="Register an Account"
+                android:textColor="@color/white"
+                android:background="@drawable/ic_register_button"
+                android:textSize="@dimen/font_size_14_dp"
+                android:gravity="center"/>
+
+
+        </RelativeLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/login_bottom" />
+
+        <ProgressBar
+            android:id="@+id/loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+    </RelativeLayout>
+</layout>
