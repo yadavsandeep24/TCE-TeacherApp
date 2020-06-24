@@ -211,7 +211,7 @@
                 android:layout_below="@+id/iv_logo"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
-                android:src="@drawable/ic_mother" />
+                android:background="@drawable/ic_mother" />
 
 
         </RelativeLayout>

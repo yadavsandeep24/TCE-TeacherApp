@@ -96,6 +96,7 @@ constructor(
         }
         (activity as DashboardActivity).setCustomToolbar(R.layout.subject_list_top_bar)
         (activity as DashboardActivity).expandAppBar(true)
+        (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
 
         val topBar = (activity as DashboardActivity).binding.toolBar.findViewById<RelativeLayout>(R.id.top_container)
         topBar.setBackgroundColor(resources.getColor(R.color.subject_actionbar_color))

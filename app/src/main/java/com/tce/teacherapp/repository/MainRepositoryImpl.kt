@@ -741,6 +741,7 @@ constructor(
                 )
             }else {
                 userDao.updatePassword(newPassword, userId!!)
+                sharedPrefsEditor.putString(PreferenceKeys.APP_PREFERENCES_KEY_PASSWORD,newPassword).commit()
                 emit(
                     DataState.error(
                         response = Response(

@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentUpdatePasswordBinding
 import com.tce.teacherapp.ui.BaseFragment
@@ -16,9 +17,14 @@ import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.home.DashboardViewModel
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardStateEvent
 import com.tce.teacherapp.util.MessageConstant.Companion.RESPONSE_PASSWORD_UPDATE_SUCCESS
+import com.tce.teacherapp.util.RequestTypes
 import com.tce.teacherapp.util.StateMessageCallback
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
 
+@ExperimentalCoroutinesApi
+@FlowPreview
 class UpdatePasswordFragment
 @Inject
 constructor(viewModelFactory: ViewModelProvider.Factory
@@ -48,6 +54,7 @@ constructor(viewModelFactory: ViewModelProvider.Factory
 
         (activity as DashboardActivity).setCustomToolbar(R.layout.parent_profile_header)
         (activity as DashboardActivity).expandAppBar(true)
+        (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
 
         val tvBack = (activity as DashboardActivity).binding.toolBar.findViewById<TextView>(R.id.tv_back)
         tvBack.visibility = View.VISIBLE
@@ -84,9 +91,19 @@ constructor(viewModelFactory: ViewModelProvider.Factory
         viewModel.stateMessage.observe(viewLifecycleOwner, Observer { stateMessage ->
 
             stateMessage?.let {
+      /*          when(stateMessage.response.serviceTypes){
 
+                    RequestTypes.GENERIC ->{
+                        findNavController().navigate(R.id.action_updatePasswordFragment_to_settingsFragment)
+                    }
+
+                    else -> {
+
+                    }
+                }*/
                 if(stateMessage.response.message.equals(RESPONSE_PASSWORD_UPDATE_SUCCESS)) {
                     uiCommunicationListener.hideSoftKeyboard()
+                    findNavController().navigate(R.id.action_updatePasswordFragment_to_settingsFragment)
                 }
 
                 uiCommunicationListener.onResponseReceived(

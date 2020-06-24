@@ -86,6 +86,7 @@ constructor(
         }
         uiCommunicationListener.displayProgressBar(false)
         (activity as DashboardActivity).expandAppBar(false)
+        (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
 
         binding.imgSetting.setOnClickListener {
             findNavController().navigate(R.id.action_dashboardHomeFragment_to_settingsFragment)

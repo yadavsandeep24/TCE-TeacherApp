@@ -52,6 +52,23 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
             findNavController().navigate(R.id.action_registerInfoFragment_to_quickAccessSettingFragment)
         }
 
+        val relationType = arguments?.getString("relationType")
+
+        if(!relationType.isNullOrEmpty()){
+            if(relationType.equals("father",true)) {
+                binding.user.background = resources.getDrawable(R.drawable.ic_father)
+
+            }else if(relationType.equals("mother",true)){
+                binding.user.background = resources.getDrawable(R.drawable.ic_mother)
+
+
+            }else if(relationType.equals("guardian",true)) {
+                binding.user.background = resources.getDrawable(R.drawable.ic_guardian)
+
+            }
+        }
+
+
         val spanBack= SpannableString("Back")
         var text = "Back"
         val textBackSpan = "Back"

@@ -42,14 +42,20 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.fatherContainer.setOnClickListener {
-            findNavController().navigate(R.id.action_childRelationFragment_to_registerInfoFragment)
+            val bundle = Bundle()
+            bundle.putString("relationType", "father")
+            findNavController().navigate(R.id.action_childRelationFragment_to_registerInfoFragment,bundle)
         }
         binding.motherContainer.setOnClickListener {
-            findNavController().navigate(R.id.action_childRelationFragment_to_registerInfoFragment)
+            val bundle = Bundle()
+            bundle.putString("relationType", "mother")
+            findNavController().navigate(R.id.action_childRelationFragment_to_registerInfoFragment,bundle)
         }
 
         binding.guardianContainer.setOnClickListener {
-            findNavController().navigate(R.id.action_childRelationFragment_to_registerInfoFragment)
+            val bundle = Bundle()
+            bundle.putString("relationType", "guardian")
+            findNavController().navigate(R.id.action_childRelationFragment_to_registerInfoFragment,bundle)
         }
     }
 }

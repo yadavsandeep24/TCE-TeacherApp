@@ -30,6 +30,7 @@ class CalenderHomeFragment : Fragment() {
             activity?.window!!.statusBarColor = resources.getColor(R.color.color_black)
         }
         (activity as DashboardActivity).expandAppBar(false)
+        (activity as DashboardActivity).showHideUnderDevelopmentLabel(true)
     }
 
 }

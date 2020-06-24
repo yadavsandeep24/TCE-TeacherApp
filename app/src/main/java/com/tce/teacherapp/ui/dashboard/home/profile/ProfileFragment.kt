@@ -15,6 +15,7 @@ import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
@@ -25,6 +26,7 @@ import com.tce.teacherapp.ui.BaseFragment
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.home.DashboardViewModel
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardStateEvent
+import com.tce.teacherapp.util.RequestTypes
 import com.tce.teacherapp.util.StateMessageCallback
 import com.tce.teacherapp.util.Utility
 import com.yalantis.ucrop.UCrop
@@ -72,6 +74,7 @@ constructor(
 
         (activity as DashboardActivity).setCustomToolbar(R.layout.parent_profile_header)
         (activity as DashboardActivity).expandAppBar(true)
+        (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
 
         val tvBack =
             (activity as DashboardActivity).binding.toolBar.findViewById<TextView>(R.id.tv_back)
@@ -144,6 +147,16 @@ constructor(
             Log.d("SAN", "LoginFragment-->viewModel.stateMessage")
 
             stateMessage?.let {
+                when(stateMessage.response.serviceTypes){
+
+                    RequestTypes.GENERIC ->{
+                        findNavController().navigate(R.id.action_profileFragment_to_settingsFragment)
+                    }
+
+                    else -> {
+
+                    }
+                }
 
                 uiCommunicationListener.onResponseReceived(
                     response = it.response,

@@ -71,6 +71,14 @@ class DashboardActivity : BaseActivity(), BottomNavController.OnNavigationResele
         }
     }
 
+    fun showHideUnderDevelopmentLabel(isShow:Boolean){
+        if(isShow){
+            binding.tvMessageFeatureNotAvl.visibility = View.VISIBLE
+        }else{
+            binding.tvMessageFeatureNotAvl.visibility = View.GONE
+        }
+    }
+
     override fun expandAppBar(value: Boolean) {
         binding.appBar.setExpanded(value)
         if (value) {

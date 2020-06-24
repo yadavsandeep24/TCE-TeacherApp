@@ -138,7 +138,23 @@ constructor(
                             response = null
                         )
                     )
+                }else{
+                    emit(
+                        DataState.data(
+                            data = LoginViewState(isFingerPrintLoginEnabled = true,isFaceLoginEnabled = false),
+                            stateEvent = stateEvent,
+                            response = null
+                        )
+                    )
                 }
+            }else{
+                emit(
+                    DataState.data(
+                        data = LoginViewState(isFingerPrintLoginEnabled = true,isFaceLoginEnabled = false),
+                        stateEvent = stateEvent,
+                        response = null
+                    )
+                )
             }
         }
     }
