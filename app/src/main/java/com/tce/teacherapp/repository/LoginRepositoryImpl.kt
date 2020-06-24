@@ -9,9 +9,7 @@ import com.tce.teacherapp.db.dao.UserDao
 import com.tce.teacherapp.db.entity.UserInfo
 import com.tce.teacherapp.ui.login.state.LoginFields
 import com.tce.teacherapp.ui.login.state.LoginViewState
-import com.tce.teacherapp.util.DataState
-import com.tce.teacherapp.util.PreferenceKeys
-import com.tce.teacherapp.util.StateEvent
+import com.tce.teacherapp.util.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
@@ -38,12 +36,45 @@ constructor(
         resetSession(true)
 
         withContext(IO){
-            val userInfo = userDao.getUserInfoData(email,password)
-            if(userInfo != null)
-            {
-                sharedPrefsEditor.putString(PreferenceKeys.APP_PREFERENCES_KEY_USER_EMAIL,email).commit()
-                sharedPrefsEditor.putString(PreferenceKeys.APP_PREFERENCES_KEY_PASSWORD,password).commit()
-                sharedPrefsEditor.putString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID,userInfo.id).commit()
+            var isFingerPrintLoginEnabled = true
+            var isFaceIdLoginEnabled = false
+            val userId = sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID,"")
+
+            if(userId?.isNotEmpty()!!) {
+                val checkvalidUser =  userDao.getUserInfoData(email,password)
+                if(checkvalidUser != null) {
+                    sharedPrefsEditor.putString(
+                        PreferenceKeys.APP_PREFERENCES_KEY_USER_EMAIL,
+                        email
+                    ).commit()
+                    sharedPrefsEditor.putString(
+                        PreferenceKeys.APP_PREFERENCES_KEY_PASSWORD,
+                        password
+                    ).commit()
+                    sharedPrefsEditor.putString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID, checkvalidUser.id).commit()
+                    isFingerPrintLoginEnabled = checkvalidUser.fingerPrintMode
+                    isFaceIdLoginEnabled = checkvalidUser.faceIdMode
+                    emit(
+                        DataState.data(
+                            data = LoginViewState(loginFields = LoginFields("",email,password,isFingerPrintLoginEnabled,isFaceIdLoginEnabled)),
+                            stateEvent = stateEvent,
+                            response = null
+                        )
+                    )
+                }else{
+                    emit(
+                        DataState.error(
+                            response = Response(
+                                "Please enter valid Username or Password.",
+                                UIComponentType.Dialog,
+                                MessageType.Error(),
+                                serviceTypes = RequestTypes.GENERIC
+                            ),
+                            stateEvent = stateEvent
+                        )
+                    )
+
+                }
             }else{
                 val jsonString = application.assets.open("json/profile.json").bufferedReader().use { it.readText() }
                 val gson = Gson()
@@ -54,34 +85,64 @@ constructor(
                 sharedPrefsEditor.putString(PreferenceKeys.APP_PREFERENCES_KEY_USER_EMAIL,email).commit()
                 sharedPrefsEditor.putString(PreferenceKeys.APP_PREFERENCES_KEY_PASSWORD,password).commit()
                 sharedPrefsEditor.putString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID,tempUserInfo.profile.id).commit()
-            }
-            val isFingerPrintLoginEnabled = sharedPreferences.getBoolean(PreferenceKeys.APP_USER_LOGIN_FINGERPRINT_ENABLED,true)
-            emit(
-                DataState.data(
-                    data = LoginViewState(loginFields = LoginFields("",email,password,isFingerPrintLoginEnabled)),
-                    stateEvent = stateEvent,
-                    response = null
+                emit(
+                    DataState.data(
+                        data = LoginViewState(loginFields = LoginFields("",email,password,isFingerPrintLoginEnabled,isFaceIdLoginEnabled)),
+                        stateEvent = stateEvent,
+                        response = null
+                    )
                 )
-            )
+            }
         }
-
-
     }
-    override fun setFingerPrintMode(checked: Boolean) {
-        sharedPrefsEditor.putBoolean(PreferenceKeys.APP_USER_LOGIN_FINGERPRINT_ENABLED,checked).commit()
-        sharedPrefsEditor.apply()
+    override fun setFingerPrintMode(
+        checked: Boolean,
+        stateEvent: StateEvent): Flow<DataState<LoginViewState>> = flow {
+        withContext((IO)) {
+            val userId =  sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID,"")
+            userDao.updateFingerPrintLoginMode(checked,userId!!)
+            if(checked) {
+                userDao.updateFaceIdLoginMode(false, userId)
+            }else{
+                userDao.updateFaceIdLoginMode(true, userId)
+            }
+        }
     }
 
-    override fun checkFingerPrintEnableMode(stateEvent: StateEvent): Flow<DataState<LoginViewState>> = flow {
-        val isFingerPrintLoginEnabled = sharedPreferences.getBoolean(PreferenceKeys.APP_USER_LOGIN_FINGERPRINT_ENABLED,true)
-        emit(
-            DataState.data(
-                data = LoginViewState(isFingerPrintLoginEnabled = isFingerPrintLoginEnabled),
-                stateEvent = stateEvent,
-                response = null
-            )
-        )
+    override fun setFaceIdMode(
+        checked: Boolean,
+        stateEvent: StateEvent
+    ): Flow<DataState<LoginViewState>> = flow {
+        withContext((IO)) {
+            val userId =  sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID,"")
+            userDao.updateFaceIdLoginMode(checked,userId!!)
+            if(checked) {
+                userDao.updateFingerPrintLoginMode(false, userId)
+            }else{
+                userDao.updateFingerPrintLoginMode(true, userId)
+            }
+        }
     }
+
+    override fun checkLoginMode(stateEvent: StateEvent): Flow<DataState<LoginViewState>>  = flow{
+        withContext((IO)) {
+            val userName =  sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_EMAIL,"")
+            val userPassword =  sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_PASSWORD,"")
+            if (userName != null && userPassword != null) {
+                    val userInfo = userDao.getUserInfoData(userName,userPassword)
+                if (userInfo != null) {
+                    emit(
+                        DataState.data(
+                            data = LoginViewState(isFingerPrintLoginEnabled = userInfo.fingerPrintMode,isFaceLoginEnabled = userInfo.faceIdMode),
+                            stateEvent = stateEvent,
+                            response = null
+                        )
+                    )
+                }
+            }
+        }
+    }
+
 
     private fun resetSession(new: Boolean) {
         sharedPrefsEditor.putBoolean(PreferenceKeys.APP_PREFERENCES_NEW_SESSION_GRADES,new).commit()

@@ -69,7 +69,7 @@ class QuickAccessSettingFragment
 
         binding.ivThumb.setOnClickListener {
             if (BiometricManager.from(requireContext()).canAuthenticate() == BiometricManager.BIOMETRIC_SUCCESS) {
-                viewModel.setFingerPrintEnableMode(true)
+                //viewModel.setFingerPrintEnableMode(true)
                 BiometricHelper.createKey(Constants.DEFAULT_KEY_NAME)
 
                 binding.ivThumb.run {

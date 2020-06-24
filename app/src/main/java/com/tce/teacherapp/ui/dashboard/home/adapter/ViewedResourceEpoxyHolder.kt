@@ -7,6 +7,7 @@ import com.airbnb.epoxy.*
 import com.tce.teacherapp.R
 import com.tce.teacherapp.db.entity.DashboardResourceType
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
+import com.tce.teacherapp.util.Utility
 
 @EpoxyModelClass(layout = R.layout.dashboard_viewed_resources)
 abstract class ViewedResourceEpoxyHolder : EpoxyModelWithHolder<ViewedHolder>() {
@@ -17,10 +18,15 @@ abstract class ViewedResourceEpoxyHolder : EpoxyModelWithHolder<ViewedHolder>() 
     @EpoxyAttribute
     lateinit var resourceList:ArrayList<DashboardResourceType>
 
+    @EpoxyAttribute
+    lateinit var listener: () -> Unit
+
     override fun bind(holder: ViewedHolder) {
 
-        holder.tvTitle.setText(strTitle)
-        holder.tvShowMore.setText(Html.fromHtml("<u>Show More (10)</u>"))
+        holder.tvTitle.text = strTitle
+        holder.tvShowMore.text = Html.fromHtml("<u>Show More (10)</u>")
+        holder.tvShowMore.setOnClickListener{listener()}
+
         holder.rvResource.layoutManager = GridLayoutManager(holder.rvResource.context, 2)
         holder.rvResource.setHasFixedSize(true)
         val epoxyVisibilityTracker = EpoxyVisibilityTracker()
@@ -32,13 +38,23 @@ abstract class ViewedResourceEpoxyHolder : EpoxyModelWithHolder<ViewedHolder>() 
                     viewedResChildItemEpoxyHolder {
                         id(res.id)
                         strName(res.title)
+                        strIcon(res.icon)
+                        strImageUrl(res.imageUrl)
+                        strVideoUrl(res.videoUrl)
+                        Utility.getDrawable(
+                            res.icon.substring(
+                                0,
+                                res.icon.lastIndexOf(".")
+                            ), holder.rvResource.context
+                        )?.let { it1 ->
+                            imageDrawable(it1)
+                        }
                     }
                 }
             }
 
         }
     }
-
 }
 
 class ViewedHolder : KotlinEpoxyHolder(){

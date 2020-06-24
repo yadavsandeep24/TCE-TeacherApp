@@ -1,7 +1,6 @@
 package com.example.gabriel.soundrecorder.item
 
 import android.content.Context
-import androidx.recyclerview.widget.RecyclerView
 import com.example.gabriel.soundrecorder.player.RecordingRepository
 import com.tce.teacherapp.R
 import com.xwray.groupie.kotlinandroidextensions.Item

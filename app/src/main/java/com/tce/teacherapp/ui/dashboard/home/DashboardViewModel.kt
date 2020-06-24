@@ -28,7 +28,9 @@ class DashboardViewModel @Inject constructor(val mainRepository: MainRepository)
         data.isFingerPrintLoginEnabled?.let {
             setFingerPrintEnableData(it)
         }
-
+        data.isFaceLoginEnabled?.let {
+            setFaceIdEbableddata(it)
+        }
         data.eventList?.let {
             setEventList(it)
         }
@@ -48,6 +50,11 @@ class DashboardViewModel @Inject constructor(val mainRepository: MainRepository)
         setViewState(update)
     }
 
+    private fun setFaceIdEbableddata(it: Boolean) {
+        val update = getCurrentViewStateOrNew()
+        update.isFaceLoginEnabled = it
+        setViewState(update)
+    }
     private fun setProfile(profile: Profile) {
         val update = getCurrentViewStateOrNew()
         update.profile = profile
@@ -81,12 +88,9 @@ class DashboardViewModel @Inject constructor(val mainRepository: MainRepository)
             is DashboardStateEvent.UpdateProfilePic ->{
                 mainRepository.updateProfilePic(stateEvent.resultUri,stateEvent = stateEvent)
             }
-            is DashboardStateEvent.CheckFingerPrintLoginEnabled ->{
-                mainRepository.checkFingerPrintEnableMode(stateEvent = stateEvent)
-            }
 
             is DashboardStateEvent.GetDashboardEvent -> {
-                mainRepository.getDashboardData(stateEvent.count, stateEvent.type, stateEvent = stateEvent)
+                mainRepository.getDashboardData(stateEvent = stateEvent)
             }
 
             is DashboardStateEvent.GetDashboardEventList -> {
@@ -99,6 +103,21 @@ class DashboardViewModel @Inject constructor(val mainRepository: MainRepository)
 
             is DashboardStateEvent.GetLastViewedResource -> {
                 mainRepository.getTodayResourceList(stateEvent.count,stateEvent = stateEvent)
+            }
+            is DashboardStateEvent.CheckLoginEnabledMode ->{
+                mainRepository.checkLoginMode(stateEvent = stateEvent)
+            }
+            is DashboardStateEvent.FingerPrintEnableMode -> {
+                mainRepository.setFingerPrintMode(stateEvent.checked,stateEvent =  stateEvent)
+            }
+            is DashboardStateEvent.FaceIdEnableMode -> {
+                mainRepository.setFaceIdMode(stateEvent.checked,stateEvent =  stateEvent)
+            }
+            is DashboardStateEvent.UpdatePassword -> {
+                mainRepository.updatePassword(stateEvent.oldPassword,stateEvent.newPassword,stateEvent = stateEvent)
+            }
+            is DashboardStateEvent.UpdateProfile -> {
+               mainRepository.updateProfile(stateEvent.userInfo,stateMessage = stateEvent)
             }
 
             else -> {
@@ -119,7 +138,5 @@ class DashboardViewModel @Inject constructor(val mainRepository: MainRepository)
         cancelActiveJobs()
     }
 
-    fun setFingerPrintEnableMode(checked: Boolean) {
-        mainRepository.setFingerPrintMode(checked)
-    }
+
 }

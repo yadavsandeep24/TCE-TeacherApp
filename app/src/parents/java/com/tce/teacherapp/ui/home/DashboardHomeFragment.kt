@@ -1,4 +1,4 @@
-package com.tce.teacherapp.ui.dashboard.home
+package com.tce.teacherapp.ui.home
 
 import android.os.Build
 import android.os.Bundle
@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -15,10 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.EpoxyVisibilityTracker
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentDashboardHomeBinding
-import com.tce.teacherapp.db.entity.Division
 import com.tce.teacherapp.db.entity.Event
-import com.tce.teacherapp.fragments.main.CustomSpinnerAdapter
-import com.tce.teacherapp.ui.BaseFragment
 import com.tce.teacherapp.ui.dashboard.BaseDashboardFragment
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.home.adapter.eventEpoxyHolder
@@ -28,13 +24,8 @@ import com.tce.teacherapp.ui.dashboard.home.adapter.viewedResourceEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.home.state.DASHBOARD_VIEW_STATE_BUNDLE_KEY
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardStateEvent
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardViewState
-import com.tce.teacherapp.ui.dashboard.messages.BaseMessageFragment
 import com.tce.teacherapp.ui.dashboard.messages.state.MESSAGE_VIEW_STATE_BUNDLE_KEY
-import com.tce.teacherapp.ui.dashboard.messages.state.MessageStateEvent
-import com.tce.teacherapp.ui.dashboard.messages.state.MessageViewState
-import com.tce.teacherapp.ui.dashboard.subjects.SubjectListFragment
-import kotlinx.android.synthetic.main.fragment_dashboard_home.*
-import kotlinx.android.synthetic.main.message_bottom_filter.*
+import kotlinx.android.synthetic.parents.fragment_dashboard_home.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
@@ -96,11 +87,9 @@ constructor(
         uiCommunicationListener.displayProgressBar(false)
         (activity as DashboardActivity).expandAppBar(false)
 
-        binding.imgSetting.setOnClickListener(View.OnClickListener {
-            findNavController().navigate(
-                R.id.action_dashboardHomeFragment_to_settingsFragment
-            )
-        })
+        binding.imgSetting.setOnClickListener {
+            findNavController().navigate(R.id.action_dashboardHomeFragment_to_settingsFragment)
+        }
 
         val bottomSheetBehavior =
             com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
@@ -121,7 +110,7 @@ constructor(
 
             }
         })
-        binding.classContainer.setOnClickListener(View.OnClickListener {
+        binding.classContainer.setOnClickListener {
             if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
                 binding.mainContainer.setBackgroundColor(resources.getColor(R.color.dim_color))
                 bottomSheetBehavior.state =
@@ -131,7 +120,7 @@ constructor(
                 bottomSheetBehavior.state =
                     com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
             }
-        })
+        }
 
 
 
@@ -140,8 +129,9 @@ constructor(
         val epoxyVisibilityTracker = EpoxyVisibilityTracker()
         epoxyVisibilityTracker.attach(binding.mainEpoxyRecycler)
 
-        viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(3, "event"))
-
+        viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent)
+       // viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(2, "today resource"))
+       // viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(2, "last viewed resource"))
         subscribeObservers()
 
     }
@@ -150,14 +140,10 @@ constructor(
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             if (viewState != null) {
                 binding.mainEpoxyRecycler.withModels {
-
-
                     headerEpoxyHolder {
                         id(1)
                         strName("Hi Payal !")
                     }
-
-
                     viewState.eventList?.let {
                         eventEpoxyHolder {
                             id(2)
@@ -166,12 +152,10 @@ constructor(
                                 eventList(it)
                             }
                             listener {
-                                viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(7, "event"))
+                                //viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(7, "event"))
                             }
                         }
                     }
-
-                    viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(2, "today resource"))
 
                     viewState.todayResourceList?.let {
                         todayResourceEpoxyHolder {
@@ -179,23 +163,20 @@ constructor(
                             strTitle("Today's Resources")
                             resourceList(it)
                             listener {
-                                viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(3, "today resource"))
+                                //viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(3, "last viewed resource"))
                             }
                         }
                     }
-
-                    viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(2, "last viewed resource"))
-
                     viewState.lastViewedResourceList?.let {
                         viewedResourceEpoxyHolder {
                             id(4)
                             strTitle("Last Viewed Resources")
                             resourceList(it)
+                            listener {
+                                //viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(3, "today resource"))
+                            }
                         }
                     }
-
-
-
                 }
             }
         })

@@ -50,7 +50,6 @@ constructor(viewModelFactory: ViewModelProvider.Factory
     }
     private lateinit var binding : FragmentTeacherProfileBinding
     private var PICK_PHOTO_FROM_GALLARY = 0
-    private var mIsMideaStoreEnabled: Boolean = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

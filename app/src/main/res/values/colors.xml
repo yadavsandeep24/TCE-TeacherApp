@@ -15,4 +15,8 @@
     <color name="setting_actionbar_color">#46465b</color>
     <color name="orange">#fa6636</color>
     <color name="dashboard_back">#f5f8ff</color>
+    <color name="forget_password_text">#fa4b28</color>
+    <color name="terms_text">#232337</color>
+
+    <color name="home_background">#fff098</color>
 </resources>

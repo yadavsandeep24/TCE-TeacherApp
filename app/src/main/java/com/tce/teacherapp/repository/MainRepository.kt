@@ -1,6 +1,7 @@
 package com.tce.teacherapp.repository
 
 import com.tce.teacherapp.db.entity.Grade
+import com.tce.teacherapp.db.entity.Profile
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardViewState
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageViewState
 import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectViewState
@@ -61,14 +62,12 @@ interface MainRepository {
         stateEvent: StateEvent
     ): Flow<DataState<DashboardViewState>>
 
-    fun setFingerPrintMode(checked: Boolean)
-    fun checkFingerPrintEnableMode(
+    fun setFingerPrintMode(
+        checked: Boolean,
         stateEvent: StateEvent
     ): Flow<DataState<DashboardViewState>>
 
     fun getDashboardData(
-        count : Int,
-        type: String,
         stateEvent: StateEvent
     ): Flow<DataState<DashboardViewState>>
 
@@ -86,6 +85,25 @@ interface MainRepository {
     fun getLastViewedResourceList(
         count : Int,
         stateEvent: StateEvent
+    ): Flow<DataState<DashboardViewState>>
+
+    fun setFaceIdMode(
+        checked: Boolean,
+        stateEvent: StateEvent
+    ): Flow<DataState<DashboardViewState>>
+
+    fun checkLoginMode(stateEvent: StateEvent
+    ): Flow<DataState<DashboardViewState>>
+
+    fun updatePassword(
+        oldPassword: String,
+        newPassword: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<DashboardViewState>>
+
+    fun updateProfile(
+        userInfo: Profile,
+        stateMessage: StateEvent
     ): Flow<DataState<DashboardViewState>>
 
 }

@@ -12,8 +12,18 @@ interface LoginRepository {
         password: String,
         stateEvent: StateEvent
     ): Flow<DataState<LoginViewState>>
-    fun setFingerPrintMode(checked: Boolean)
-    fun checkFingerPrintEnableMode(
+
+    fun setFingerPrintMode(
+        checked: Boolean,
         stateEvent: StateEvent
     ): Flow<DataState<LoginViewState>>
+
+    fun setFaceIdMode(
+        checked: Boolean,
+        stateEvent: StateEvent
+    ): Flow<DataState<LoginViewState>>
+
+    fun checkLoginMode(stateEvent: StateEvent
+    ): Flow<DataState<LoginViewState>>
+
 }

@@ -87,6 +87,7 @@ class DashboardActivity : BaseActivity(), BottomNavController.OnNavigationResele
 
     fun setCustomToolbar(resId: Int) {
         val logo: View = layoutInflater.inflate(resId, binding.toolBar, false)
+        binding.toolBar.removeAllViews()
         binding.toolBar.addView(logo)
     }
 

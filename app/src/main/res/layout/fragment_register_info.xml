@@ -1,14 +1,234 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.login.RegisterInfoFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="#ffcd23">
 
-</FrameLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/fl_bottom"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/ic_tce_logo" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/iv_logo"
+                android:layout_centerInParent="true"
+                android:background="@drawable/ic_oval" />
+
+            <ScrollView
+                android:layout_width="341dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/user"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="-30dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_register_back"
+                  android:paddingBottom="20dp"
+                    android:orientation="vertical">
+
+                    <com.tce.teacherapp.util.RubikMediumTextview
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Please enter information below:"
+                        android:textColor="#320500"
+                        android:textSize="@dimen/font_size_12_dp" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/edt_mobile_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_below="@+id/tv_hint"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="30dp"
+                        android:background="@drawable/bg_grey_rounded"
+                        android:hint="Mobile Number"
+                        android:inputType="textPersonName"
+                        android:maxLength="10"
+                        android:paddingLeft="20dp"
+                        android:textSize="@dimen/font_size_14_dp" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="30dp"
+                        android:orientation="horizontal">
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/edt_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:background="@drawable/bg_grey_rounded"
+                            android:hint="Create Password"
+                            android:inputType="textPassword"
+                            android:maxLength="15"
+                            android:paddingLeft="20dp"
+                            android:textSize="@dimen/font_size_14_dp" />
+
+                        <View
+                            android:id="@+id/vw_password_visibility"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="10dp"
+                            android:background="@drawable/ic_baseline_visibility_24"/>
+                    </RelativeLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_30sdp"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="7dp">
+
+                        <CheckBox
+                            android:id="@+id/cb_terms"
+                            android:layout_width="35dp"
+                            android:layout_height="wrap_content"
+                            android:buttonTint="#5a69ff">
+
+                        </CheckBox>
+
+                        <com.tce.teacherapp.util.RubikMediumTextview
+                            android:id="@+id/tv_terms"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:text="@string/i_accept_the_term_amp_conditions"
+                            android:textColor="#232337"
+                            android:textSize="@dimen/font_size_12_dp" />
+
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="250dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="@dimen/_30sdp"
+                        android:paddingBottom="5dp"
+                        android:paddingEnd="5dp"
+                        android:paddingTop="5dp"
+                        android:background="@drawable/bg_captcha"
+                        android:gravity="center_vertical">
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="I am not Robot"/>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:layout_alignParentEnd="true">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_captcha"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/recaptcha">
+
+                        </androidx.appcompat.widget.AppCompatImageView>
+                        <com.tce.teacherapp.util.RubikMediumTextview
+                            android:layout_width="wrap_content"
+                            android:text="Privacy-Terms"
+                            android:textSize="5dp"
+                            android:layout_height="wrap_content"/>
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+
+                    <com.tce.teacherapp.util.RubikMediumTextview
+                        android:id="@+id/tv_register"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="@dimen/_30sdp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="@dimen/_30sdp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/login_btn_bg"
+                        android:elevation="3dp"
+                        android:gravity="center"
+                        android:text="REGISTER"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_size_14_dp" />
+
+
+                    <com.tce.teacherapp.util.RubikMediumTextview
+                        android:id="@+id/tv_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Back"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_horizontal"
+                        android:textColor="#fa4b28"
+                        android:textSize="12sp" />
+
+
+                </LinearLayout>
+            </ScrollView>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_logo"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="45dp"
+                android:src="@drawable/ic_register_top" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/user"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_below="@+id/iv_logo"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_mother" />
+
+
+        </RelativeLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/login_bottom" />
+
+        <ProgressBar
+            android:id="@+id/loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+    </RelativeLayout>
+</layout>

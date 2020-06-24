@@ -27,6 +27,24 @@ class FakeLoginRepositoryImpl
 
     }
 
+    override fun setFingerPrintMode(
+        checked: Boolean,
+        stateEvent: StateEvent
+    ): Flow<DataState<LoginViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun setFaceIdMode(
+        checked: Boolean,
+        stateEvent: StateEvent
+    ): Flow<DataState<LoginViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun checkLoginMode(stateEvent: StateEvent): Flow<DataState<LoginViewState>> {
+        TODO("Not yet implemented")
+    }
+
     private fun resetSession(new: Boolean) {
     }
 }

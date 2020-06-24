@@ -23,7 +23,6 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.IOException
-import java.lang.reflect.Type
 import javax.inject.Inject
 
 @FlowPreview
@@ -340,32 +339,36 @@ constructor(
         query: String,
         stateEvent: StateEvent
     ): Flow<DataState<MessageViewState>> = flow {
-        var jsonString: String = ""
-        try {
 
-            jsonString = application.assets.open("json/messaage.json").bufferedReader()
-                .use { it.readText() }
-            val gson = Gson()
-            val listPersonType = object : TypeToken<List<Message>>() {}.type
-            var messageList: List<Message> = gson.fromJson(jsonString, listPersonType)
+        withContext(IO) {
+            var jsonString: String = ""
+            try {
 
-            var selectedList: List<Message>;
-            if (TextUtils.isEmpty(query)) {
-                selectedList = messageList
-            } else {
-                selectedList = messageList.filter { it.title.contains(query, ignoreCase = true) }
-            }
+                jsonString = application.assets.open("json/messaage.json").bufferedReader()
+                    .use { it.readText() }
+                val gson = Gson()
+                val listPersonType = object : TypeToken<List<Message>>() {}.type
+                val messageList: List<Message> = gson.fromJson(jsonString, listPersonType)
 
-            emit(
-                DataState.data(
-                    data = MessageViewState(messageList = selectedList),
-                    stateEvent = stateEvent,
-                    response = null
+                val selectedList: List<Message>;
+                if (TextUtils.isEmpty(query)) {
+                    selectedList = messageList
+                } else {
+                    selectedList =
+                        messageList.filter { it.title.contains(query, ignoreCase = true) }
+                }
+
+                emit(
+                    DataState.data(
+                        data = MessageViewState(messageList = selectedList),
+                        stateEvent = stateEvent,
+                        response = null
+                    )
                 )
-            )
 
-        } catch (ioException: IOException) {
-            ioException.printStackTrace()
+            } catch (ioException: IOException) {
+                ioException.printStackTrace()
+            }
         }
 
     }
@@ -507,84 +510,66 @@ constructor(
         }
     }
 
-    override fun setFingerPrintMode(checked: Boolean) {
-        sharedPrefsEditor.putBoolean(PreferenceKeys.APP_USER_LOGIN_FINGERPRINT_ENABLED,checked).commit()
-        sharedPrefsEditor.apply()
-    }
-
-    override fun checkFingerPrintEnableMode(stateEvent: StateEvent): Flow<DataState<DashboardViewState>> = flow {
-        val isFingerPrintLoginEnabled = sharedPreferences.getBoolean(PreferenceKeys.APP_USER_LOGIN_FINGERPRINT_ENABLED,true)
-        emit(
-            DataState.data(
-                data = DashboardViewState(isFingerPrintLoginEnabled = isFingerPrintLoginEnabled),
-                stateEvent = stateEvent,
-                response = null
+    override fun setFingerPrintMode(
+        checked: Boolean,
+        stateEvent: StateEvent): Flow<DataState<DashboardViewState>> = flow {
+        withContext((IO)) {
+            val userId =  sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID,"")
+            userDao.updateFingerPrintLoginMode(checked,userId!!)
+            userDao.updateFaceIdLoginMode(!checked, userId)
+            emit(
+                DataState.data(
+                    data = DashboardViewState(isFingerPrintLoginEnabled = checked,isFaceLoginEnabled = !checked),
+                    stateEvent = stateEvent,
+                    response = null
+                )
             )
-        )
+
+        }
     }
 
     override fun getDashboardData(
-        count: Int,
-        type: String,
         stateEvent: StateEvent
-    ): Flow<DataState<DashboardViewState>>  = flow{
-        var jsonString: String = ""
+    ): Flow<DataState<DashboardViewState>>  = flow {
+
+        withContext(IO) {}
         val gson = Gson()
-        val listType : Type
 
         try {
-
-            if(type.equals("event", ignoreCase = true)) {
-                jsonString = application.assets.open("json/event.json").bufferedReader()
+                var jsonString = application.assets.open("json/event.json").bufferedReader()
                     .use { it.readText() }
-                listType = object : TypeToken<ArrayList<Event>>() {}.type
-                var list: ArrayList<Event> = gson.fromJson(jsonString, listType)
-                var selectedList: ArrayList<Event> = ArrayList();
-                for (i in 0 until count) {
-                    selectedList.add(list.get(i))
+                var listType = object : TypeToken<ArrayList<Event>>() {}.type
+                val eventList: ArrayList<Event> = gson.fromJson(jsonString, listType)
+                val selectedEventList: ArrayList<Event> = ArrayList();
+                for (i in 0 until 3) {
+                    selectedEventList.add(eventList[i])
                 }
-                emit(
-                    DataState.data(
-                        data = DashboardViewState(eventList = selectedList),
-                        stateEvent = stateEvent,
-                        response = null
-                    )
-                )
-            } else if(type.equals("today resource", ignoreCase = true)) {
-                jsonString = application.assets.open("json/dashboardResource.json").bufferedReader()
-                    .use { it.readText() }
-                listType = object : TypeToken<ArrayList<DashboardResource>>() {}.type
-                var list: ArrayList<DashboardResource> = gson.fromJson(jsonString, listType)
-                var selectedList: ArrayList<DashboardResource> = ArrayList();
-                for (i in 0 until count) {
-                    selectedList.add(list.get(i))
-                }
-                emit(
-                    DataState.data(
-                        data = DashboardViewState(todayResourceList = selectedList),
-                        stateEvent = stateEvent,
-                        response = null
-                    )
-                )
-            } else if(type.equals("last viewed resource", ignoreCase = true)) {
-                jsonString = application.assets.open("json/dashboardResourceType.json").bufferedReader()
-                    .use { it.readText() }
-                listType = object : TypeToken<ArrayList<DashboardResourceType>>() {}.type
-                var list: ArrayList<DashboardResourceType> = gson.fromJson(jsonString, listType)
-                var selectedList: ArrayList<DashboardResourceType> = ArrayList();
-                for (i in 0 until count) {
-                    selectedList.add(list.get(i))
-                }
-                emit(
-                    DataState.data(
-                        data = DashboardViewState(lastViewedResourceList = selectedList),
-                        stateEvent = stateEvent,
-                        response = null
-                    )
-                )
+            jsonString = application.assets.open("json/dashboardResource.json").bufferedReader()
+                .use { it.readText() }
+            listType = object : TypeToken<ArrayList<DashboardResource>>() {}.type
+            val resourceList: ArrayList<DashboardResource> = gson.fromJson(jsonString, listType)
+            val selectedTodayResourceList: ArrayList<DashboardResource> = ArrayList();
+            for (i in 0 until 2) {
+                selectedTodayResourceList.add(resourceList[i])
             }
 
 
+            jsonString =
+                application.assets.open("json/dashboardResourceType.json").bufferedReader()
+                    .use { it.readText() }
+            listType = object : TypeToken<ArrayList<DashboardResourceType>>() {}.type
+            val lastViewedResourceList: ArrayList<DashboardResourceType> = gson.fromJson(jsonString, listType)
+            val selectedLastViewedResourceList: ArrayList<DashboardResourceType> = ArrayList();
+            for (i in 0 until 4) {
+                selectedLastViewedResourceList.add(lastViewedResourceList[i])
+            }
+                emit(
+                    DataState.data(
+                        data = DashboardViewState(eventList = selectedEventList,todayResourceList = selectedTodayResourceList,lastViewedResourceList = selectedLastViewedResourceList),
+                        stateEvent = stateEvent,
+                        response = null
+                    )
+                )
         } catch (ioException: IOException) {
             ioException.printStackTrace()
         }
@@ -689,6 +674,116 @@ constructor(
 
     }
 
+
+    override fun setFaceIdMode(
+        checked: Boolean,
+        stateEvent: StateEvent
+    ): Flow<DataState<DashboardViewState>> = flow {
+        withContext((IO)) {
+            val userId =  sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID,"")
+            userDao.updateFaceIdLoginMode(checked,userId!!)
+            userDao.updateFingerPrintLoginMode(!checked, userId)
+
+            emit(
+                DataState.data(
+                    data = DashboardViewState(isFingerPrintLoginEnabled = !checked,isFaceLoginEnabled = checked),
+                    stateEvent = stateEvent,
+                    response = null
+                )
+            )
+        }
+    }
+
+    override fun checkLoginMode(stateEvent: StateEvent): Flow<DataState<DashboardViewState>>  = flow{
+        withContext((IO)) {
+            val userName =  sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_EMAIL,"")
+            val userPassword =  sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_PASSWORD,"")
+
+            Log.d("SAN", "userName-->$userName/userPassword-->$userPassword")
+            if (userName != null && userPassword != null) {
+                val userInfo = userDao.getUserInfoData(userName,userPassword)
+                if (userInfo != null) {
+                    Log.d("SAN", "fingerPrintMode-->${userInfo.fingerPrintMode}")
+                    emit(
+                        DataState.data(
+                            data = DashboardViewState(isFingerPrintLoginEnabled = userInfo.fingerPrintMode,isFaceLoginEnabled = userInfo.faceIdMode),
+                            stateEvent = stateEvent,
+                            response = null
+                        )
+                    )
+                }
+            }
+        }
+    }
+
+    override fun updatePassword(
+        oldPassword: String,
+        newPassword: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<DashboardViewState>> = flow{
+        withContext((IO)) {
+            val userId =  sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID,"")
+
+            val dbOldPassword = userId?.let { userDao.getOldPassword(it) }
+
+            if(oldPassword.isNotEmpty() && !dbOldPassword.equals(oldPassword,false))
+            {
+                emit(
+                     DataState.error(
+                        response = Response(
+                            "Old Password mismatch.",
+                            UIComponentType.Dialog,
+                            MessageType.Error(),
+                            serviceTypes = RequestTypes.GENERIC
+                        ),
+                        stateEvent = stateEvent
+                    )
+                )
+            }else {
+                userDao.updatePassword(newPassword, userId!!)
+                emit(
+                    DataState.error(
+                        response = Response(
+                            "Password changed successfully.",
+                            UIComponentType.Dialog,
+                            MessageType.Success(),
+                            serviceTypes = RequestTypes.GENERIC
+                        ),
+                        stateEvent = stateEvent
+                    )
+                )
+            }
+        }
+    }
+
+    override fun updateProfile(
+        userInfo: Profile,
+        stateMessage: StateEvent
+    ): Flow<DataState<DashboardViewState>> = flow {
+
+        withContext((IO)) {
+            val tempUserInfo = userDao.getUserByUserId(userInfo.id)
+            if (tempUserInfo != null) {
+                userInfo.password =  tempUserInfo.password
+                userInfo.fingerPrintMode = tempUserInfo.fingerPrintMode
+                userInfo.imageUrl = tempUserInfo.imageUrl
+                userInfo.faceIdMode = tempUserInfo.faceIdMode
+            }
+            userDao.insertUser(userInfo)
+            emit(
+                DataState.error(
+                    response = Response(
+                        "Profile updated successfully.",
+                        UIComponentType.Dialog,
+                        MessageType.Success(),
+                        serviceTypes = RequestTypes.GENERIC
+                    ),
+                    stateEvent = stateMessage
+                )
+            )
+        }
+    }
+
     fun toGradeList(grades: List<GradeResponse>): List<Grade> {
         val gradeList: ArrayList<Grade> = ArrayList()
         for (gradeResponse in grades) {
@@ -709,6 +804,8 @@ constructor(
         }
         return bookList
     }
+
+
 
 }
 

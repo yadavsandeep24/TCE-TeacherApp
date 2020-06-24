@@ -99,12 +99,17 @@ constructor(viewModelFactory: ViewModelProvider.Factory
         }
 
         binding.tbFingerPrint.setOnCheckedChangeListener { _, isChecked ->
-            viewModel.setFingerPrintEnableMode(isChecked)
+            Log.d("SAN","binding.tbFingerPrint.setOnCheckedChangeListener")
+            viewModel.setStateEvent(DashboardStateEvent.FingerPrintEnableMode(isChecked))
         }
+
+        binding.tbFaceid.setOnCheckedChangeListener { _, isChecked ->
+            Log.d("SAN","binding.tbFaceid.setOnCheckedChangeListener")
+            viewModel.setStateEvent(DashboardStateEvent.FaceIdEnableMode(isChecked))
+        }
+
         binding.editProfileContainer.setOnClickListener {
-            if (resources.getString(R.string.app_type)
-                    .equals(resources.getString(R.string.app_type_teacher),true)
-            ) {
+            if (resources.getString(R.string.app_type).equals(resources.getString(R.string.app_type_teacher),true)) {
                 findNavController().navigate(R.id.action_settingsFragment_to_teacherProfileFragment)
             } else {
                 findNavController().navigate(R.id.action_settingsFragment_to_profileFragment)
@@ -119,7 +124,7 @@ constructor(viewModelFactory: ViewModelProvider.Factory
 
             val dialog = Dialog(requireActivity(), android.R.style.Theme_Dialog)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.setContentView(R.layout.dialog_log_out)
+            dialog.setContentView(R.layout.custom_yesno_dialog)
             dialog.setCanceledOnTouchOutside(false)
             dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
             dialog.window!!.setBackgroundDrawable(
@@ -142,7 +147,7 @@ constructor(viewModelFactory: ViewModelProvider.Factory
                 dialog.dismiss()
             }
         }
-        viewModel.setStateEvent(DashboardStateEvent.CheckFingerPrintLoginEnabled)
+        viewModel.setStateEvent(DashboardStateEvent.CheckLoginEnabledMode)
         subscribeObservers()
     }
     private fun subscribeObservers() {
@@ -150,7 +155,14 @@ constructor(viewModelFactory: ViewModelProvider.Factory
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             if (viewState != null) {
                 viewState.isFingerPrintLoginEnabled?.let {
-                    binding.tbFingerPrint.isChecked = it
+                    Log.d("SAN", "isFingerPrintLoginEnabled-->$it")
+                    if(it) {
+                        binding.tbFingerPrint.isChecked = true
+                        binding.tbFaceid.isChecked = false
+                    }else{
+                        binding.tbFingerPrint.isChecked = false
+                        binding.tbFaceid.isChecked = true
+                    }
                 }
             }
         })

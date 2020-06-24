@@ -3,7 +3,6 @@ package com.tce.teacherapp.fragments.login
 import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModelProvider
 import com.tce.teacherapp.ui.UICommunicationListener
-import com.tce.teacherapp.ui.login.LoginFragment
 import javax.inject.Inject
 
 class FakeLoginFragmentFactory

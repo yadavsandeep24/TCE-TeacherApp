@@ -2,9 +2,7 @@ package com.tce.teacherapp.fragments.login
 
 import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModelProvider
-import com.tce.teacherapp.ui.login.LoginFragment
-import com.tce.teacherapp.ui.login.LoginOptionFragment
-import com.tce.teacherapp.ui.login.QuickAccessSettingFragment
+import com.tce.teacherapp.ui.login.*
 import javax.inject.Inject
 
 class LoginFragmentFactory
@@ -28,6 +26,17 @@ constructor(
             QuickAccessSettingFragment::class.java.name ->{
                 QuickAccessSettingFragment(viewModelFactory)
             }
+
+            RegisterFragment::class.java.name ->{
+                RegisterFragment(viewModelFactory)
+            }
+            ChildRelationFragment::class.java.name ->{
+                ChildRelationFragment(viewModelFactory)
+            }
+            RegisterInfoFragment::class.java.name ->{
+                RegisterInfoFragment(viewModelFactory)
+            }
+
 
             else -> {
                 LoginFragment(viewModelFactory)

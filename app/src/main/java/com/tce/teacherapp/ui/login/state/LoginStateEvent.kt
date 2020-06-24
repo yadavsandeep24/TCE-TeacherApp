@@ -18,7 +18,7 @@ sealed class LoginStateEvent : StateEvent {
         }
     }
 
-    object CheckFingerPrintLoginEnabled: LoginStateEvent(){
+    object CheckLoginEnabledMode: LoginStateEvent() {
         override fun errorInfo(): String {
             return "Error in checking FingerPrint mode."
         }
@@ -29,4 +29,25 @@ sealed class LoginStateEvent : StateEvent {
 
     }
 
+    class FingerPrintEnableMode(val checked: Boolean): LoginStateEvent() {
+
+        override fun errorInfo(): String {
+            return "Error in setting FingerPrint mode."
+        }
+
+        override fun toString(): String {
+            return "setLoginMode"
+        }
+    }
+
+    class FaceIdEnableMode(val checked: Boolean): LoginStateEvent() {
+
+        override fun errorInfo(): String {
+            return "Error in setting FaceId mode."
+        }
+
+        override fun toString(): String {
+            return "FaceIdEnableMode"
+        }
+    }
 }

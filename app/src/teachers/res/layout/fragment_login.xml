@@ -51,11 +51,11 @@
                 android:textSize="12sp"/>
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/edt_mobile_no"
+                android:id="@+id/edt_school_name"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
-                android:hint="Mobile Number"
+                android:hint="School Name"
                 android:layout_marginStart="60dp"
                 android:layout_marginEnd="60dp"
                 android:layout_below="@+id/tv_hint"
@@ -65,25 +65,54 @@
                 android:maxLength="50"
                 android:background="@drawable/bg_grey_rounded"/>
 
-
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/edt_password"
+                android:id="@+id/edt_user_name"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
-                android:hint="Password"
+                android:hint="Username"
                 android:layout_marginStart="60dp"
                 android:layout_marginEnd="60dp"
-                android:layout_below="@+id/edt_mobile_no"
-                android:inputType="textPassword"
+                android:layout_below="@+id/edt_school_name"
+                android:inputType="text"
+                android:maxLength="30"
                 android:paddingLeft="20dp"
                 android:textSize="@dimen/font_size_14_dp"
-                android:maxLength="15"
                 android:background="@drawable/bg_grey_rounded"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_password"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="60dp"
+                android:layout_below="@+id/edt_user_name"
+                android:orientation="horizontal">
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edt_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:paddingLeft="20dp"
+                    android:textSize="@dimen/font_size_14_dp"
+                    android:maxLength="15"
+                    android:background="@drawable/bg_grey_rounded"/>
+
+                <View
+                    android:id="@+id/vw_password_visibility"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/ic_baseline_visibility_24"/>
+            </RelativeLayout>
 
 
                 <com.tce.teacherapp.util.RubikMediumTextview
-                    android:layout_below="@+id/edt_password"
+                    android:layout_below="@+id/rl_password"
                     android:id="@+id/tv_login"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
@@ -99,61 +128,18 @@
                     android:background="@drawable/login_btn_bg"
                     android:textSize="@dimen/font_size_14_dp"/>
 
-            <com.tce.teacherapp.util.RubikMediumTextview
-                android:id="@+id/tv_forget_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_login"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
-                android:text="Forget Password"
-                android:textColor="#fa4b28"
-                android:textSize="12sp"/>
-
-
-            <LinearLayout
-                android:id="@+id/new_early"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_forget_password"
-                android:gravity="center"
-                android:layout_marginTop="100dp">
-
-                <View
-                    android:layout_width="100dp"
-                    android:layout_height="0.5dp"
-                    android:background="@color/color_black"></View>
-
-                <com.tce.teacherapp.util.RubikMediumTextview
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="New to Early Edge?"
-                    android:textColor="@color/color_black"
-                    android:textSize="12sp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginLeft="15dp"/>
-
-                <View
-                    android:layout_width="100dp"
-                    android:layout_height="0.5dp"
-                    android:background="@color/color_black"></View>
-
-            </LinearLayout>
-
-            <com.tce.teacherapp.util.RubikMediumTextview
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/new_early"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp"
-                android:text="Register an Account"
-                android:textColor="@color/white"
-                android:background="@drawable/ic_register_button"
-                android:textSize="@dimen/font_size_14_dp"
-                android:gravity="center"/>
 
 
         </RelativeLayout>
+        <com.tce.teacherapp.util.RubikMediumTextview
+            android:id="@+id/tv_support_mail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:layout_above="@+id/fl_bottom"
+            android:textSize="@dimen/font_size_12_dp"
+            android:text="@string/having_any_issues_drop_an_email_to_n_support_schoolname_com"/>
 
         <FrameLayout
             android:id="@+id/fl_bottom"

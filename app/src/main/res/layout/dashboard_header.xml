@@ -9,7 +9,7 @@
         android:id="@+id/img_profile"
         android:layout_width="107dp"
         android:layout_height="107dp"
-        android:src="@drawable/dummy_teacher_profile"></com.tce.teacherapp.util.CustomCircularImageView>
+        android:src="@drawable/dummy_teacher_profile"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:textSize="10dp"
             android:text="last sync with In-Class App on 2 March 2020, 8 am"
-            android:textStyle="bold"
+            android:textStyle="bold|italic"
             android:layout_marginTop="10dp">
         </com.tce.teacherapp.util.RubikMediumTextview>
 

@@ -5,7 +5,6 @@ class PreferenceKeys {
     companion object {
         // Shared Preference Files:
         const val APP_PREFERENCES: String = "com.tce.teacherapp.APP_PREFERENCES"
-        const val APP_USER_LOGIN_FINGERPRINT_ENABLED = "com.tce.teacherapp.app_user_login_fingerprint_enabled"
         const val APP_USER_SELECTED_GRADE_ID = "com.tce.teacherapp.app_user_selected_grade_id"
         const val APP_USER_SELECTED_GRADE_POSITION = "com.tce.teacherapp.app_user_selected_grade_position"
         const val APP_PREFERENCES_NEW_SESSION_GRADES: String = "com.tce.teacherapp.APP_PREFERENCES_NEW_SESSION_GRADES"

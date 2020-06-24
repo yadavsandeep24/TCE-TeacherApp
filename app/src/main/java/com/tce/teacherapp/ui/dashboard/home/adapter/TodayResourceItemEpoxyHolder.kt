@@ -1,11 +1,12 @@
 package com.tce.teacherapp.ui.dashboard.home.adapter
 
 import android.widget.TextView
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.airbnb.epoxy.*
+import com.airbnb.epoxy.EpoxyAttribute
+import com.airbnb.epoxy.EpoxyModelClass
+import com.airbnb.epoxy.EpoxyModelWithHolder
+import com.airbnb.epoxy.EpoxyRecyclerView
 import com.tce.teacherapp.R
-import com.tce.teacherapp.db.entity.DashboardResource
 import com.tce.teacherapp.db.entity.DashboardResourceType
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
 import com.tce.teacherapp.util.Utility

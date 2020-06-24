@@ -9,7 +9,8 @@ const val LOGIN_VIEW_STATE_BUNDLE_KEY = "com.tce.teacherapp.ui.auth.state.LoginV
 @Parcelize
 data class LoginViewState(
     var loginFields: LoginFields? = null,
-    var isFingerPrintLoginEnabled: Boolean? = null
+    var isFingerPrintLoginEnabled: Boolean? = null,
+    var isFaceLoginEnabled: Boolean? = null
 ) : Parcelable
 
 @Parcelize
@@ -17,7 +18,8 @@ data class LoginFields(
     val login_schoolName: String? = null,
     var login_email: String? = null,
     var login_password: String? = null,
-   var login_mode_fingePrint_Enabled:Boolean? = null
+   var login_mode_fingePrint_Enabled:Boolean? = null,
+   var login_mode_faceId_Enabled:Boolean? = null
 ) : Parcelable{
     class LoginError {
 

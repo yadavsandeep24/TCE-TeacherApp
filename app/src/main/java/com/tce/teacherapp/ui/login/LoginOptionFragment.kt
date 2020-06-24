@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
@@ -56,7 +55,7 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.setStateEvent(LoginStateEvent.CheckFingerPrintLoginEnabled)
+        viewModel.setStateEvent(LoginStateEvent.CheckLoginEnabledMode)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             BiometricHelper.setupKeyStoreAndKeyGenerator()
             val defaultCipher: Cipher = setupCipher()
@@ -80,9 +79,26 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             if (viewState != null) {
                 viewState.isFingerPrintLoginEnabled?.let {
-                   if(!it) {
-                       findNavController().navigate(R.id.action_loginOptionFragment_to_loginFragment)
-                   }
+                    if(it) {
+                        binding.tvHint.text = resources.getString(R.string.lbl_you_can_use_touch_id_to_login)
+                        binding.tvLoginTouchId.text = resources.getString(R.string.lbl_use_touch_id)
+                        binding.ivThumb.background = resources.getDrawable(R.drawable.ic_thumbprint)
+                    }else {
+                        binding.tvHint.text = resources.getString(R.string.lbl_you_can_use_face_id_to_login)
+                        binding.tvLoginTouchId.text = resources.getString(R.string.lbl_use_face_id)
+                        binding.ivThumb.background = resources.getDrawable(R.drawable.ic_face_id)
+                    }
+                }
+                viewState.isFaceLoginEnabled?.let {
+                    if(!it) {
+                        binding.tvHint.text = resources.getString(R.string.lbl_you_can_use_touch_id_to_login)
+                        binding.tvLoginTouchId.text = resources.getString(R.string.lbl_use_touch_id)
+                        binding.ivThumb.background = resources.getDrawable(R.drawable.ic_thumbprint)
+                    }else {
+                        binding.tvHint.text = resources.getString(R.string.lbl_you_can_use_face_id_to_login)
+                        binding.tvLoginTouchId.text = resources.getString(R.string.lbl_use_face_id)
+                        binding.ivThumb.background = resources.getDrawable(R.drawable.ic_face_id)
+                    }
                 }
             }
         })
@@ -95,14 +111,18 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
             binding.ivThumb.run {
                 isEnabled = true
                 binding.ivThumb.alpha = 1.0f
-                setOnClickListener(TouchIdClickListener(defaultCipher, DEFAULT_KEY_NAME))
+                setOnClickListener(TouchIdClickListener(defaultCipher))
 
                 binding.tvLoginTouchId.setOnClickListener {
-                    viewModel.setFingerPrintEnableMode(true)
                     val promptInfo = createPromptInfo(requireContext())
-
-                    if (BiometricHelper.initCipher(defaultCipher, DEFAULT_KEY_NAME)) {
-                        biometricPrompt.authenticate(promptInfo, BiometricPrompt.CryptoObject(defaultCipher))
+                    if(binding.tvLoginTouchId.text.toString().equals(resources.getString(R.string.lbl_use_face_id),true)){
+                        viewModel.setStateEvent(LoginStateEvent.FaceIdEnableMode(true))
+                        biometricPrompt.authenticate(promptInfo)
+                    }else{
+                        viewModel.setStateEvent(LoginStateEvent.FingerPrintEnableMode(true))
+                        if (BiometricHelper.initCipher(defaultCipher, DEFAULT_KEY_NAME)) {
+                            biometricPrompt.authenticate(promptInfo, BiometricPrompt.CryptoObject(defaultCipher))
+                        }
                     }
                 }
             }
@@ -116,17 +136,20 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
     }
 
     private inner class TouchIdClickListener internal constructor(
-        internal var cipher: Cipher,
-        internal var keyName: String
+        internal var cipher: Cipher
     ) : View.OnClickListener {
 
         @RequiresApi(Build.VERSION_CODES.M)
         override fun onClick(view: View) {
-            viewModel.setFingerPrintEnableMode(true)
             val promptInfo = createPromptInfo(requireContext())
-
-            if (BiometricHelper.initCipher(cipher, keyName)) {
-                biometricPrompt.authenticate(promptInfo, BiometricPrompt.CryptoObject(cipher))
+            if(binding.tvLoginTouchId.text.toString().equals(resources.getString(R.string.lbl_use_face_id),true)){
+                viewModel.setStateEvent(LoginStateEvent.FaceIdEnableMode(true))
+                biometricPrompt.authenticate(promptInfo)
+            }else{
+                viewModel.setStateEvent(LoginStateEvent.FingerPrintEnableMode(true))
+                if (BiometricHelper.initCipher(cipher, DEFAULT_KEY_NAME)) {
+                    biometricPrompt.authenticate(promptInfo, BiometricPrompt.CryptoObject(cipher))
+                }
             }
         }
     }

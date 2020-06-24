@@ -33,7 +33,7 @@ data class Profile(
 
     @Expose
     @ColumnInfo(name = "password")
-    val password: String,
+    var password: String,
 
     @Expose
     @ColumnInfo(name = "address")
@@ -45,5 +45,14 @@ data class Profile(
 
     @Expose
     @ColumnInfo(name = "imageurl")
-    val imageUrl : String
-): Parcelable
+    var imageUrl: String,
+
+    @Expose
+    @ColumnInfo(name = "fingerprint_mode_enabled",defaultValue = "0")
+    var fingerPrintMode: Boolean,
+
+    @Expose
+    @ColumnInfo(name = "face_mode_enabled",defaultValue = "0")
+    var faceIdMode: Boolean
+
+) : Parcelable

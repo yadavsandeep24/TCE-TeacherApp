@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/dashboardHomeFragment"
-        android:name="com.tce.teacherapp.ui.dashboard.home.DashboardHomeFragment"
+        android:name="com.tce.teacherapp.ui.home.DashboardHomeFragment"
         android:label="fragment_dashboard_home"
         tools:layout="@layout/fragment_dashboard_home" >
         <action

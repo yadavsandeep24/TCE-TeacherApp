@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.text.SpannableString
 import android.text.TextPaint
 import android.text.method.LinkMovementMethod
+import android.text.method.PasswordTransformationMethod
+import android.text.method.SingleLineTransformationMethod
 import android.text.style.ClickableSpan
 import android.util.Log
 import android.view.LayoutInflater
@@ -23,15 +25,19 @@ import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.login.state.LoginStateEvent
 import com.tce.teacherapp.util.MessageConstant
 import com.tce.teacherapp.util.StateMessageCallback
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass.
  */
+@ExperimentalCoroutinesApi
+@kotlinx.coroutines.FlowPreview
 class LoginFragment
 @Inject
 constructor(viewModelFactory: ViewModelProvider.Factory)
     : BaseFragment(R.layout.fragment_login) {
+    var isPassWordVisible : Boolean = true
 
     private lateinit var binding: FragmentLoginBinding
 
@@ -63,6 +69,19 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
         binding.tvLogin.setOnClickListener {
             viewModel.setStateEvent(LoginStateEvent.LoginAttemptEvent(binding.edtUserName.text.toString().trim(),
                 binding.edtPassword.text.toString().trim()))
+        }
+        binding.vwPasswordVisibility.setOnClickListener {
+            if(isPassWordVisible){
+                isPassWordVisible = false
+                binding.vwPasswordVisibility.background = resources.getDrawable(R.drawable.ic_baseline_visibility_off_24)
+                binding.edtPassword.transformationMethod = SingleLineTransformationMethod()
+
+            }else{
+                isPassWordVisible = true
+                binding.vwPasswordVisibility.background = resources.getDrawable(R.drawable.ic_baseline_visibility_24)
+                binding.edtPassword.transformationMethod = PasswordTransformationMethod()
+            }
+
         }
         subscribeObservers()
     }

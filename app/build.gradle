@@ -60,6 +60,21 @@ android {
             applicationId "com.tce.parentapp"
         }
     }
+
+
+    sourceSets {
+        main {
+            jniLibs.srcDir 'src/main/libs'
+        }
+        teachers {
+            java.srcDirs = ['src/teachers/java',]
+            resources.srcDirs = ['src/teachers/resources',]
+        }
+        parents {
+            java.srcDirs = ['src/parents/java',]
+            resources.srcDirs = ['src/parents/resources',]
+        }
+    }
 }
 
 dependencies {

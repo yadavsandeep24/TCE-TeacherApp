@@ -2,11 +2,17 @@ package com.tce.teacherapp.ui
 
 
 import android.Manifest
+import android.app.Dialog
 import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
+import android.view.Window
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -25,7 +31,7 @@ abstract class BaseActivity : AppCompatActivity(),
 
     val TAG: String = "AppDebug"
 
-    private var dialogInView: MaterialDialog? = null
+    private var dialogInView: Dialog? = null
 
     abstract fun inject()
 
@@ -88,21 +94,21 @@ abstract class BaseActivity : AppCompatActivity(),
             dialogInView = when (response.messageType) {
 
                 is MessageType.Error -> {
-                    displayErrorDialog(
+                    displayCustomOkDialog(
                         message = message,
                         stateMessageCallback = stateMessageCallback
                     )
                 }
 
                 is MessageType.Success -> {
-                    displaySuccessDialog(
+                    displayCustomOkDialog(
                         message = message,
                         stateMessageCallback = stateMessageCallback
                     )
                 }
 
                 is MessageType.Info -> {
-                    displayInfoDialog(
+                    displayCustomOkDialog(
                         message = message,
                         stateMessageCallback = stateMessageCallback
                     )
@@ -151,61 +157,38 @@ abstract class BaseActivity : AppCompatActivity(),
         }
     }
 
-    private fun displaySuccessDialog(
-        message: String?,
-        stateMessageCallback: StateMessageCallback
-    ): MaterialDialog {
-        return MaterialDialog(this)
-            .show {
-                title(R.string.text_success)
-                message(text = message)
-                positiveButton(R.string.text_ok) {
-                    stateMessageCallback.removeMessageFromStack()
-                    dismiss()
-                }
-                onDismiss {
-                    dialogInView = null
-                }
-                cancelable(false)
-            }
-    }
 
-    private fun displayErrorDialog(
+    private fun displayCustomOkDialog(
         message: String?,
         stateMessageCallback: StateMessageCallback
-    ): MaterialDialog {
-        return MaterialDialog(this)
-            .show {
-                title(R.string.text_error)
-                message(text = message)
-                positiveButton(R.string.text_ok) {
-                    stateMessageCallback.removeMessageFromStack()
-                    dismiss()
-                }
-                onDismiss {
-                    dialogInView = null
-                }
-                cancelable(false)
-            }
-    }
+    ): Dialog {
+        val dialog = Dialog(this, android.R.style.Theme_Dialog)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.custom_ok_dialog)
+        dialog.setCanceledOnTouchOutside(false)
+        dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        dialog.window!!.setBackgroundDrawable(
+            ColorDrawable(resources.getColor(android.R.color.transparent))
+        )
+        dialog.show()
 
-    private fun displayInfoDialog(
-        message: String?,
-        stateMessageCallback: StateMessageCallback
-    ): MaterialDialog {
-        return MaterialDialog(this)
-            .show {
-                title(R.string.text_info)
-                message(text = message)
-                positiveButton(R.string.text_ok) {
-                    stateMessageCallback.removeMessageFromStack()
-                    dismiss()
-                }
-                onDismiss {
-                    dialogInView = null
-                }
-                cancelable(false)
-            }
+        val tvMessage =  dialog.findViewById<TextView>(R.id.tv_message)
+        tvMessage.text = message
+        val txtYes = dialog.findViewById(R.id.tv_ok) as TextView
+
+        val ivDialogType = dialog.findViewById<ImageView>(R.id.iv_message_type)
+        ivDialogType.background = resources.getDrawable(R.drawable.ic_baseline_error_outline_24)
+
+        txtYes.setOnClickListener {
+            dialog.dismiss()
+            stateMessageCallback.removeMessageFromStack()
+        }
+
+        dialog.setOnDismissListener {
+            dialogInView = null
+        }
+
+        return dialog
     }
 
     private fun areYouSureDialog(

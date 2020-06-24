@@ -1,27 +1,19 @@
 package com.tce.teacherapp.ui.dashboard.messages
 
 import android.Manifest
-import android.R.attr.path
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
-import android.app.Activity.RESULT_OK
-import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.text.TextUtils
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -47,13 +39,10 @@ import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentGroupChatBinding
 import com.tce.teacherapp.db.entity.Student
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
-import com.tce.teacherapp.util.Utility
 import com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.fragment_group_chat.*
-import org.apache.commons.lang3.StringUtils
 import org.jetbrains.anko.doAsync
 import java.io.File
-import java.net.URISyntaxException
 
 
 class GroupChatFragment : Fragment(), ImagePickerContract {

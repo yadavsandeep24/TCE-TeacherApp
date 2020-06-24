@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#fff098"
-                tools:context=".ui.dashboard.home.DashboardHomeFragment">
+                tools:context=".ui.home.DashboardHomeFragment">
 
                 <LinearLayout
                     android:id="@+id/class_container"
@@ -28,11 +28,11 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/class_selector"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="5dp"
                     android:gravity="center_vertical"
-                    android:paddingTop="5dp">
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="5dp">
 
                     <com.tce.teacherapp.util.RubikBoldTextview
                         android:layout_width="25dp"
@@ -40,16 +40,16 @@
                         android:background="@drawable/ic_dummy_jr"
                         android:gravity="center"
                         android:text="JR"
-                        android:textSize="@dimen/font_size_12_dp"
-                        android:textColor="@color/white"></com.tce.teacherapp.util.RubikBoldTextview>
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_size_12_dp" />
 
                     <com.tce.teacherapp.util.RubikBoldTextview
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:text="Junior KG A"
-                        android:textSize="@dimen/font_size_14_dp"
-                        android:textColor="@color/color_black">
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/font_size_14_dp">
 
                     </com.tce.teacherapp.util.RubikBoldTextview>
 
@@ -101,7 +101,7 @@
                 android:layout_height="4dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="5dp"
-                android:background="#e1e6f0"></View>
+                android:background="#e1e6f0" />
 
             <LinearLayout
                 android:id="@+id/resource_container"
@@ -116,8 +116,8 @@
                     android:background="@drawable/ic_dummy_jr"
                     android:gravity="center"
                     android:text="JR"
-                    android:textSize="@dimen/font_size_12_dp"
-                    android:textColor="@color/white"></com.tce.teacherapp.util.RubikBoldTextview>
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_size_12_dp" />
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:layout_width="wrap_content"
@@ -133,7 +133,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#e1e6f0"></View>
+                android:background="#e1e6f0" />
 
             <LinearLayout
                 android:id="@+id/photo_container"
@@ -148,31 +148,30 @@
                     android:background="@drawable/ic_dummy_jr"
                     android:gravity="center"
                     android:text="JR"
-                    android:textSize="@dimen/font_size_12_dp"
-                    android:textColor="@color/white"></com.tce.teacherapp.util.RubikBoldTextview>
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_size_12_dp" />
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="Junior KG B"
-                    android:textColor="@color/color_black">
-                </com.tce.teacherapp.util.RubikMediumTextview>
+                    android:textColor="@color/color_black"></com.tce.teacherapp.util.RubikMediumTextview>
 
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#e1e6f0"></View>
+                android:background="#e1e6f0" />
 
             <LinearLayout
                 android:id="@+id/voice_container"
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
+                android:layout_marginBottom="30dp"
                 android:gravity="center_vertical"
-                android:paddingLeft="30dp"
-                android:layout_marginBottom="30dp">
+                android:paddingLeft="30dp">
 
                 <com.tce.teacherapp.util.RubikBoldTextview
                     android:layout_width="30dp"
@@ -180,8 +179,8 @@
                     android:background="@drawable/ic_dummy_jr"
                     android:gravity="center"
                     android:text="SR"
-                    android:textSize="@dimen/font_size_12_dp"
-                    android:textColor="@color/white"></com.tce.teacherapp.util.RubikBoldTextview>
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_size_12_dp" />
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:layout_width="wrap_content"
