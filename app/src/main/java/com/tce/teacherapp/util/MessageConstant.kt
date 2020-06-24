@@ -9,6 +9,7 @@ interface MessageConstant {
         const val LOGIN_DEFAULT_PASSWORD = "123"
 
         const val RESPONSE_PASSWORD_UPDATE_SUCCESS = "Password changed successfully."
+        const val UPDATE_PASSWORD_NEW_CONFIRM_MISMATCH ="Both new password should match."
 
     }
 }

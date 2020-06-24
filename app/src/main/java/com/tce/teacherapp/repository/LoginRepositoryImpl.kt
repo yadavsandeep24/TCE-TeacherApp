@@ -80,6 +80,8 @@ constructor(
                 val gson = Gson()
                 val listPersonType = object : TypeToken<UserInfo>() {}.type
                 val tempUserInfo: UserInfo = gson.fromJson(jsonString, listPersonType)
+                tempUserInfo.profile.faceIdMode = isFaceIdLoginEnabled
+                tempUserInfo.profile.fingerPrintMode = isFingerPrintLoginEnabled
                 userDao.insertUser(tempUserInfo.profile)
 
                 sharedPrefsEditor.putString(PreferenceKeys.APP_PREFERENCES_KEY_USER_EMAIL,email).commit()
@@ -157,6 +159,21 @@ constructor(
                 )
             }
         }
+    }
+
+    override fun getPreUserData(stateEvent: StateEvent): Flow<DataState<LoginViewState>>  = flow{
+        withContext(IO){
+            val userID = sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID,"")
+            val userInfo = userID?.let { userDao.getUserByUserId(it) }
+            emit(
+                DataState.data(
+                    data = LoginViewState(profile = userInfo),
+                    stateEvent = stateEvent,
+                    response = null
+                )
+            )
+        }
+
     }
 
 

@@ -1,6 +1,7 @@
 package com.tce.teacherapp.ui.login.state
 
 import android.os.Parcelable
+import com.tce.teacherapp.db.entity.Profile
 import com.tce.teacherapp.util.MessageConstant
 import kotlinx.android.parcel.Parcelize
 
@@ -10,7 +11,8 @@ const val LOGIN_VIEW_STATE_BUNDLE_KEY = "com.tce.teacherapp.ui.auth.state.LoginV
 data class LoginViewState(
     var loginFields: LoginFields? = null,
     var isFingerPrintLoginEnabled: Boolean? = null,
-    var isFaceLoginEnabled: Boolean? = null
+    var isFaceLoginEnabled: Boolean? = null,
+    var profile: Profile?= null
 ) : Parcelable
 
 @Parcelize

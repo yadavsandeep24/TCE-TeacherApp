@@ -56,6 +56,7 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.setStateEvent(LoginStateEvent.PreUserInfoData)
         val spanForgetPassword = SpannableString(resources.getString(R.string.lbl_forget_password))
         val text = resources.getString(R.string.lbl_forget_password)
         val textSpan = resources.getString(R.string.lbl_forget_password)
@@ -113,6 +114,14 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
                         activity?.overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left)
                         activity?.finish()
                     }
+                }
+
+                viewState.profile?.let {
+                     val userName = it.email
+                    val password = it.password
+                    binding.edtUserName.setText(userName)
+                    binding.edtPassword.setText(password)
+
                 }
             }
         })

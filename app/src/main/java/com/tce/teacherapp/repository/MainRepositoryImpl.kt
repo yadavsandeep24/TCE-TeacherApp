@@ -487,9 +487,8 @@ constructor(
 
     override fun getProfile(stateEvent: StateEvent): Flow<DataState<DashboardViewState>> = flow {
             withContext(IO){
-                    val userName = sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_EMAIL,"")
-                    val password = sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_PASSWORD,"")
-                    val userInfo =userDao.getUserInfoData(userName!!,password!!)
+                    val userID = sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID,"")
+                    val userInfo = userID?.let { userDao.getUserByUserId(it) }
                 emit(
                     DataState.data(
                         data = DashboardViewState(profile = userInfo),
@@ -719,14 +718,38 @@ constructor(
     override fun updatePassword(
         oldPassword: String,
         newPassword: String,
+        confirmPassword: String,
         stateEvent: StateEvent
     ): Flow<DataState<DashboardViewState>> = flow{
         withContext((IO)) {
             val userId =  sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID,"")
 
             val dbOldPassword = userId?.let { userDao.getOldPassword(it) }
-
-            if(oldPassword.isNotEmpty() && !dbOldPassword.equals(oldPassword,false))
+            if(oldPassword.isEmpty() || newPassword.isEmpty() || confirmPassword.isEmpty()) {
+                emit(
+                    DataState.error(
+                        response = Response(
+                            MessageConstant.LOGIN_MANDATORY_FIELD,
+                            UIComponentType.Dialog,
+                            MessageType.Error(),
+                            serviceTypes = RequestTypes.GENERIC
+                        ),
+                        stateEvent = stateEvent
+                    )
+                )
+            }else if(!newPassword.equals(confirmPassword,false)) {
+                emit(
+                    DataState.error(
+                        response = Response(
+                            MessageConstant.UPDATE_PASSWORD_NEW_CONFIRM_MISMATCH,
+                            UIComponentType.Dialog,
+                            MessageType.Error(),
+                            serviceTypes = RequestTypes.GENERIC
+                        ),
+                        stateEvent = stateEvent
+                    )
+                )
+            }else if(oldPassword.isNotEmpty() && !dbOldPassword.equals(oldPassword,false))
             {
                 emit(
                      DataState.error(

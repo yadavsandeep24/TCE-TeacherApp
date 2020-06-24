@@ -26,4 +26,7 @@ interface LoginRepository {
     fun checkLoginMode(stateEvent: StateEvent
     ): Flow<DataState<LoginViewState>>
 
+    fun getPreUserData(stateEvent: StateEvent
+    ): Flow<DataState<LoginViewState>>
+
 }

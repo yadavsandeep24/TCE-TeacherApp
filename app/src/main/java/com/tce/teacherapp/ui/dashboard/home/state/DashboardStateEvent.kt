@@ -101,7 +101,8 @@ sealed class DashboardStateEvent : StateEvent {
 
     class UpdatePassword(
         val oldPassword: String,
-        val newPassword: String
+        val newPassword: String,
+        val conFirmPassword: String
     ) : DashboardStateEvent() {
         override fun errorInfo(): String {
             return "Error in setting password mode."

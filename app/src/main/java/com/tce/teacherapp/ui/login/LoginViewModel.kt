@@ -1,5 +1,6 @@
 package com.tce.teacherapp.ui.login
 
+import com.tce.teacherapp.db.entity.Profile
 import com.tce.teacherapp.repository.LoginRepository
 import com.tce.teacherapp.ui.BaseViewModel
 import com.tce.teacherapp.ui.login.state.LoginFields
@@ -24,7 +25,18 @@ class LoginViewModel @Inject constructor(val loginRepository: LoginRepository) :
         data.isFaceLoginEnabled?.let {
             setFaceIdEbableddata(it)
         }
+
+        data.profile?.let {
+            setProfileData(it)
+        }
     }
+
+    private fun setProfileData(it: Profile) {
+        val update = getCurrentViewStateOrNew()
+        update.profile = it
+        setViewState(update)
+    }
+
     private fun setFingerPrintEnableData(it: Boolean) {
         val update = getCurrentViewStateOrNew()
         update.isFingerPrintLoginEnabled = it
@@ -59,6 +71,9 @@ class LoginViewModel @Inject constructor(val loginRepository: LoginRepository) :
             }
             is LoginStateEvent.FaceIdEnableMode -> {
                 loginRepository.setFaceIdMode(stateEvent.checked,stateEvent =  stateEvent)
+            }
+            is LoginStateEvent.PreUserInfoData ->{
+                loginRepository.getPreUserData(stateEvent = stateEvent)
             }
             else -> {
                 flow {

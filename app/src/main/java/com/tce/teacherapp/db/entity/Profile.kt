@@ -48,7 +48,7 @@ data class Profile(
     var imageUrl: String,
 
     @Expose
-    @ColumnInfo(name = "fingerprint_mode_enabled",defaultValue = "0")
+    @ColumnInfo(name = "fingerprint_mode_enabled",defaultValue = "1")
     var fingerPrintMode: Boolean,
 
     @Expose

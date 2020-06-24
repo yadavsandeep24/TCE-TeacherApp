@@ -17,7 +17,6 @@ import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.home.DashboardViewModel
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardStateEvent
 import com.tce.teacherapp.util.MessageConstant.Companion.RESPONSE_PASSWORD_UPDATE_SUCCESS
-import com.tce.teacherapp.util.RequestTypes
 import com.tce.teacherapp.util.StateMessageCallback
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -69,7 +68,7 @@ constructor(viewModelFactory: ViewModelProvider.Factory
         }
 
         tvSave.setOnClickListener{
-            viewModel.setStateEvent(DashboardStateEvent.UpdatePassword(binding.edtOldPassword.text.toString(),binding.edtNewPassword.text.toString()))
+            viewModel.setStateEvent(DashboardStateEvent.UpdatePassword(binding.edtOldPassword.text.toString(),binding.edtNewPassword.text.toString(),binding.edtConfirmPassword.text.toString()))
         }
 
         tvTopicTitle.text = resources.getString(R.string.update_password)

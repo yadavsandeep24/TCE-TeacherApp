@@ -114,7 +114,7 @@ class DashboardViewModel @Inject constructor(val mainRepository: MainRepository)
                 mainRepository.setFaceIdMode(stateEvent.checked,stateEvent =  stateEvent)
             }
             is DashboardStateEvent.UpdatePassword -> {
-                mainRepository.updatePassword(stateEvent.oldPassword,stateEvent.newPassword,stateEvent = stateEvent)
+                mainRepository.updatePassword(stateEvent.oldPassword,stateEvent.newPassword,stateEvent.conFirmPassword,stateEvent = stateEvent)
             }
             is DashboardStateEvent.UpdateProfile -> {
                mainRepository.updateProfile(stateEvent.userInfo,stateMessage = stateEvent)

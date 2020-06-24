@@ -29,6 +29,17 @@ sealed class LoginStateEvent : StateEvent {
 
     }
 
+    object PreUserInfoData : LoginStateEvent() {
+        override fun errorInfo(): String {
+            return "Error in checking userinfo data."
+        }
+
+        override fun toString(): String {
+            return "PreUserInfoData"
+        }
+
+    }
+
     class FingerPrintEnableMode(val checked: Boolean): LoginStateEvent() {
 
         override fun errorInfo(): String {

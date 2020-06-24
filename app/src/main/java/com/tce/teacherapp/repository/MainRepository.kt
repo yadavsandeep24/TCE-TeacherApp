@@ -98,6 +98,7 @@ interface MainRepository {
     fun updatePassword(
         oldPassword: String,
         newPassword: String,
+        confirmPassword: String,
         stateEvent: StateEvent
     ): Flow<DataState<DashboardViewState>>
 
