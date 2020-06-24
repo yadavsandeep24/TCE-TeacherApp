@@ -28,7 +28,7 @@ abstract class EventEpoxyHolder :EpoxyModelWithHolder<EventHolder>() {
         holder.tvShowMore.setOnClickListener{listener()}
 
         holder.rvEvent.layoutManager = GridLayoutManager(holder.rvEvent.context, 1)
-        holder.rvEvent.setHasFixedSize(true)
+        holder.rvEvent.setHasFixedSize(false)
         val epoxyVisibilityTracker = EpoxyVisibilityTracker()
         epoxyVisibilityTracker.attach(holder.rvEvent)
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/dashboard_bg"
     android:padding="10dp">
 
@@ -19,8 +19,7 @@
         android:visibility="visible"
         app:cardCornerRadius="20dp"
         app:cardElevation="8dp"
-        app:cardPreventCornerOverlap="false"
-        >
+        app:cardPreventCornerOverlap="false">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,25 +35,23 @@
                 <com.tce.teacherapp.util.RubikBoldTextview
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15dp"
-                    android:text="Todays Hapennings"
-                    android:textColor="@color/color_black"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="20dp"
-                    android:textStyle="bold">
-                </com.tce.teacherapp.util.RubikBoldTextview>
+                    android:text="Todays Hapennings"
+                    android:textColor="@color/deep_brown"
+                    android:textSize="12dp"
+                    android:textStyle="bold"/>
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:id="@+id/tvDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15dp"
-                    android:text="15 June 2020"
+                    android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="10dp"
-                    android:textColor="@color/color_black"
-                    android:layout_alignParentRight="true">
-                </com.tce.teacherapp.util.RubikMediumTextview>
+                    android:text="15 June 2020"
+                    android:textColor="@color/deep_brown"
+                    android:textSize="11dp"/>
 
             </RelativeLayout>
 
@@ -63,8 +60,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
-                android:paddingRight="20dp"
                 android:paddingTop="10dp"
+                android:paddingRight="20dp"
                 android:paddingBottom="10dp">
 
             </com.airbnb.epoxy.EpoxyRecyclerView>
@@ -72,16 +69,16 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="15dp"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="17dp"
                     android:layout_height="17dp"
-                    android:src="@drawable/ic_add"
-                    android:layout_marginBottom="10dp">
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/ic_add">
 
                 </ImageView>
 
@@ -89,9 +86,9 @@
                     android:id="@+id/tvShowMore"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_black"
-                    android:textSize="@dimen/font_size_16_dp"
-                    android:text="Show More (4)">
+                    android:text="Show More (4)"
+                    android:textColor="@color/dark_blackish_blue"
+                    android:textSize="@dimen/font_size_12_dp">
 
                 </com.tce.teacherapp.util.RubikMediumTextview>
 

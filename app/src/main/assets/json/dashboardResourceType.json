@@ -6,7 +6,7 @@
     "videoThumb": "",
     "imageUrl": "",
     "icon": "ic_video_icon.xml",
-    "title": "Title Name 1 - Modality",
+    "title": "Title Name 1",
     "typeId": 1,
     "Type": "Today Resource",
     "isAdded": false
@@ -18,7 +18,7 @@
     "videoThumb": "",
     "imageUrl": "image",
     "icon": "ic_video_icon.xml",
-    "title": "Title Name 1 - Modality",
+    "title": "Title Name 2",
     "typeId": 1,
     "Type": "Today Resource",
     "isAdded": false
@@ -30,7 +30,7 @@
     "videoThumb": "",
     "imageUrl": "",
     "icon": "ic_video_icon.xml",
-    "title": "Title Name 1 - Modality",
+    "title": "Title Name 3",
     "typeId": 1,
     "Type": "Today Resource",
     "isAdded": false
@@ -42,7 +42,7 @@
     "videoThumb": "",
     "imageUrl": "",
     "icon": "ic_video_icon.xml",
-    "title": "Title Name 1",
+    "title": "Title Name 4",
     "typeId": 2,
     "Type": "Last Viewed",
     "isAdded": false
@@ -54,7 +54,7 @@
     "videoThumb": "",
     "imageUrl": "image",
     "icon": "ic_image_icon.xml",
-    "title": "Title Name 1",
+    "title": "Title Name 5",
     "typeId": 2,
     "Type": "Last Viewed",
     "isAdded": false
@@ -66,7 +66,7 @@
     "videoThumb": "",
     "imageUrl": "",
     "icon": "ic_play_video_icon.xml",
-    "title": "Title Name 1",
+    "title": "Title Name 6",
     "typeId": 2,
     "Type": "Last Viewed",
     "isAdded": false
@@ -78,7 +78,43 @@
     "videoThumb": "",
     "imageUrl": "image",
     "icon": "ic_game_icon.xml",
-    "title": "Title Name 1",
+    "title": "Title Name 7",
+    "typeId": 2,
+    "Type": "Last Viewed",
+    "isAdded": false
+  },
+  {
+    "id": "8",
+    "ResourceId" : "0",
+    "videoUrl": "",
+    "videoThumb": "",
+    "imageUrl": "image",
+    "icon": "ic_game_icon.xml",
+    "title": "Title Name 8",
+    "typeId": 2,
+    "Type": "Last Viewed",
+    "isAdded": false
+  },
+  {
+    "id": "9",
+    "ResourceId" : "0",
+    "videoUrl": "",
+    "videoThumb": "",
+    "imageUrl": "image",
+    "icon": "ic_game_icon.xml",
+    "title": "Title Name 9",
+    "typeId": 2,
+    "Type": "Last Viewed",
+    "isAdded": false
+  },
+  {
+    "id": "10",
+    "ResourceId" : "0",
+    "videoUrl": "",
+    "videoThumb": "",
+    "imageUrl": "image",
+    "icon": "ic_game_icon.xml",
+    "title": "Title Name 10",
     "typeId": 2,
     "Type": "Last Viewed",
     "isAdded": false

@@ -129,7 +129,7 @@ constructor(
         val epoxyVisibilityTracker = EpoxyVisibilityTracker()
         epoxyVisibilityTracker.attach(binding.mainEpoxyRecycler)
 
-        viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent)
+        viewModel.setStateEvent(DashboardStateEvent.GetDashboardData)
        // viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(2, "today resource"))
        // viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(2, "last viewed resource"))
         subscribeObservers()

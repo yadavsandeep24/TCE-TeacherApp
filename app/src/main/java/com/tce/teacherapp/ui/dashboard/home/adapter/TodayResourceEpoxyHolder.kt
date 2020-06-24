@@ -22,12 +22,12 @@ abstract class TodayResourceEpoxyHolder : EpoxyModelWithHolder<ResourceHolder>()
 
     override fun bind(holder: ResourceHolder) {
 
-        holder.tvShowMore.setText(Html.fromHtml("<u>Show More (6)</u>"))
+        holder.tvShowMore.text = Html.fromHtml("<u>Show More (6)</u>")
         holder.tvShowMore.setOnClickListener{listener()}
 
-        holder.tvTitle.setText(strTitle)
+        holder.tvTitle.text = strTitle
         holder.rvResource.layoutManager = GridLayoutManager(holder.rvResource.context, 1)
-        holder.rvResource.setHasFixedSize(true)
+        holder.rvResource.setHasFixedSize(false)
         val epoxyVisibilityTracker = EpoxyVisibilityTracker()
         epoxyVisibilityTracker.attach(holder.rvResource)
 

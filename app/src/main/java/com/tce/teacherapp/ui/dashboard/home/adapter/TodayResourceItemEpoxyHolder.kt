@@ -26,8 +26,8 @@ abstract class TodayResourceItemEpoxyHolder : EpoxyModelWithHolder<ResourceItemH
 
     override fun bind(holder: ResourceItemHolder) {
 
-        holder.tvTitle.setText(title)
-        holder.tvSubTitle.setText(subTitle)
+        holder.tvTitle.text = title
+        holder.tvSubTitle.text = subTitle
         val linearLayoutManager = LinearLayoutManager(holder.rvResourceItem.context)
         linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         holder.rvResourceItem.apply {

@@ -67,7 +67,25 @@
         "isAdded": false
       }
     ]
-  }
+  },  {
+  "resId": "4",
+  "title": "English",
+  "subTitle": "Grammer",
+  "typeList": [
+    {
+      "id": "4",
+      "ResourceId": "2",
+      "videoUrl": "",
+      "videoThumb": "",
+      "imageUrl": "image",
+      "icon": "ic_image_icon.xml",
+      "title": "Title Name 1 - Modality",
+      "typeId": 1,
+      "Type": "Today Resource",
+      "isAdded": false
+    }
+  ]
+}
 ]
 
 

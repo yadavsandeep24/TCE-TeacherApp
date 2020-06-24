@@ -89,11 +89,11 @@ class DashboardViewModel @Inject constructor(val mainRepository: MainRepository)
                 mainRepository.updateProfilePic(stateEvent.resultUri,stateEvent = stateEvent)
             }
 
-            is DashboardStateEvent.GetDashboardEvent -> {
+            is DashboardStateEvent.GetDashboardData -> {
                 mainRepository.getDashboardData(stateEvent = stateEvent)
             }
 
-            is DashboardStateEvent.GetDashboardEventList -> {
+            is DashboardStateEvent.GetDashboardEvent -> {
                 mainRepository.getEventList(stateEvent.count,stateEvent = stateEvent)
             }
 
@@ -102,7 +102,7 @@ class DashboardViewModel @Inject constructor(val mainRepository: MainRepository)
             }
 
             is DashboardStateEvent.GetLastViewedResource -> {
-                mainRepository.getTodayResourceList(stateEvent.count,stateEvent = stateEvent)
+                mainRepository.getLastViewedResourceList(stateEvent.count,stateEvent = stateEvent)
             }
             is DashboardStateEvent.CheckLoginEnabledMode ->{
                 mainRepository.checkLoginMode(stateEvent = stateEvent)

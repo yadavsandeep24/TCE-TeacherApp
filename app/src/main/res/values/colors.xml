@@ -17,6 +17,8 @@
     <color name="dashboard_back">#f5f8ff</color>
     <color name="forget_password_text">#fa4b28</color>
     <color name="terms_text">#232337</color>
+    <color name="deep_brown">#320500</color>
+    <color name="dark_blackish_blue">#232337</color>
 
     <color name="home_background">#fff098</color>
 </resources>

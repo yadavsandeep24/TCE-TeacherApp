@@ -292,7 +292,7 @@ constructor(
 fun RequestManager.loadImage(url: String): RequestBuilder<Bitmap> {
 
     val options = RequestOptions
-        .diskCacheStrategyOf(DiskCacheStrategy.RESOURCE)
+        .diskCacheStrategyOf(DiskCacheStrategy.NONE)
         .dontAnimate()
         .placeholder(R.drawable.ic_letters_sounds_2)
         .signature(ObjectKey(url.plus("preloading")))

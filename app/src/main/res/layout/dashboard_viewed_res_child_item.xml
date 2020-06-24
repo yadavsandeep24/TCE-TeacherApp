@@ -60,8 +60,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:text="Title Name 1"
-                android:textColor="@color/color_black"
-                android:textSize="@dimen/font_size_14_dp">
+                android:textColor="@color/dark_blackish_blue"
+                android:textSize="@dimen/font_size_12_dp">
 
             </com.tce.teacherapp.util.RubikMediumTextview>
 

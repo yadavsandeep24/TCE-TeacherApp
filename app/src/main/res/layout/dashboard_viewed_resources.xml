@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
         android:text="Last Viewed Resources"
-        android:textColor="@color/color_black"
-        android:textSize="@dimen/font_size_16_dp"></com.tce.teacherapp.util.RubikMediumTextview>
+        android:textColor="@color/dark_blackish_blue"
+        android:textSize="@dimen/font_size_16_dp"/>
 
     <com.airbnb.epoxy.EpoxyRecyclerView
         android:id="@+id/rv_dash_view_resource"
@@ -41,8 +41,8 @@
             android:id="@+id/tvShowMore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/color_black"
-            android:textSize="@dimen/font_size_16_dp"
+            android:textColor="@color/dark_blackish_blue"
+            android:textSize="@dimen/font_size_12_dp"
             android:text="Show More (4)">
 
         </com.tce.teacherapp.util.RubikMediumTextview>

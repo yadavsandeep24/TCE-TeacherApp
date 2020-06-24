@@ -33,8 +33,7 @@ sealed class DashboardStateEvent : StateEvent {
             return "GetProfileEvent"
         }
     }
-
-    object GetDashboardEvent : DashboardStateEvent() {
+    object GetDashboardData : DashboardStateEvent() {
         override fun errorInfo(): String {
             return "Error in getting profile info."
         }
@@ -44,34 +43,34 @@ sealed class DashboardStateEvent : StateEvent {
         }
     }
 
-
-    class GetDashboardEventList (val count :Int): DashboardStateEvent() {
+    class GetDashboardEvent(val count: Int) : DashboardStateEvent() {
         override fun errorInfo(): String {
-            return "Error in getting profile info."
+            return "Error in getting event info."
         }
 
         override fun toString(): String {
-            return "GetProfileEvent"
+            return "GetDashboardEvent"
         }
     }
+
 
     class GetTodayResource (val count :Int): DashboardStateEvent() {
         override fun errorInfo(): String {
-            return "Error in getting profile info."
+            return "Error in getting today resource info."
         }
 
         override fun toString(): String {
-            return "GetProfileEvent"
+            return "GetTodayResource"
         }
     }
 
     class GetLastViewedResource (val count :Int): DashboardStateEvent() {
         override fun errorInfo(): String {
-            return "Error in getting profile info."
+            return "Error in getting last view resource info."
         }
 
         override fun toString(): String {
-            return "GetProfileEvent"
+            return "GetLastViewedResource"
         }
     }
 

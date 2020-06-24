@@ -2,6 +2,7 @@ package com.tce.teacherapp.ui.home
 
 import android.os.Build
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -29,6 +30,7 @@ import kotlinx.android.synthetic.teachers.fragment_dashboard_home.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
+
 
 /**
  * A simple [Fragment] subclass.
@@ -130,7 +132,9 @@ constructor(
         val epoxyVisibilityTracker = EpoxyVisibilityTracker()
         epoxyVisibilityTracker.attach(binding.mainEpoxyRecycler)
 
-        viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent)
+        //viewModel.setStateEvent(DashboardStateEvent.GetProfileEvent)
+
+        viewModel.setStateEvent(DashboardStateEvent.GetDashboardData)
        // viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(2, "today resource"))
        // viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(2, "last viewed resource"))
         subscribeObservers()
@@ -141,10 +145,17 @@ constructor(
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             if (viewState != null) {
                 binding.mainEpoxyRecycler.withModels {
-                    headerEpoxyHolder {
-                        id(1)
-                        strName("Hi Payal !")
+
+                    viewState.profile?.let {
+                        headerEpoxyHolder {
+                            Log.d("SAN","it.imageurl-->"+it.imageUrl)
+                            id(1)
+                            strName("Hi ${it.name} !")
+                            strLastSync("2 March 2020, 8 am")
+                            imageUrl(it.imageUrl)
+                        }
                     }
+
                     viewState.eventList?.let {
                         eventEpoxyHolder {
                             id(2)
@@ -153,7 +164,7 @@ constructor(
                                 eventList(it)
                             }
                             listener {
-                                //viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(7, "event"))
+                                viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(7))
                             }
                         }
                     }
@@ -164,7 +175,7 @@ constructor(
                             strTitle("Today's Resources")
                             resourceList(it)
                             listener {
-                                //viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(3, "last viewed resource"))
+                                viewModel.setStateEvent(DashboardStateEvent.GetTodayResource(4))
                             }
                         }
                     }
@@ -174,7 +185,7 @@ constructor(
                             strTitle("Last Viewed Resources")
                             resourceList(it)
                             listener {
-                                //viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(3, "today resource"))
+                                viewModel.setStateEvent(DashboardStateEvent.GetLastViewedResource(10))
                             }
                         }
                     }

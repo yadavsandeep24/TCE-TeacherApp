@@ -178,15 +178,11 @@ constructor(viewModelFactory: ViewModelProvider.Factory
             }
         }
     }
-    private suspend fun compressAndCopyImage(selectedImagePath :String): String {
-        val compressedImageFile = Compressor.compress(requireActivity(), File(selectedImagePath)) {
-            quality(100)
-            format(Bitmap.CompressFormat.PNG)
-        }
+    private fun compressAndCopyImage(selectedImagePath :String): String {
         val imageName = requireActivity().getExternalFilesDir(null)
             .toString() + File.separator +
-                ".profilepic" + File.separator + "tceuser" + ".PNG"
-        val isImageCopied = Utility.copyFileFromSourceToDestn(compressedImageFile.path, imageName, false)
+                ".profilepic" + File.separator + "tceuser"+File.separator+ Utility.getUniqueID("prof")+ ".PNG"
+        val isImageCopied = Utility.copyFileFromSourceToDestn(selectedImagePath, imageName, false)
         return if(isImageCopied) {
             imageName
         }else{
