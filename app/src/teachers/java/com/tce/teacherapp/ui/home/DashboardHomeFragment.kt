@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.EpoxyVisibilityTracker
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentDashboardHomeBinding
 import com.tce.teacherapp.db.entity.Event
@@ -26,6 +27,7 @@ import com.tce.teacherapp.ui.dashboard.home.state.DASHBOARD_VIEW_STATE_BUNDLE_KE
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardStateEvent
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardViewState
 import com.tce.teacherapp.ui.dashboard.messages.state.MESSAGE_VIEW_STATE_BUNDLE_KEY
+import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.teachers.fragment_dashboard_home.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -94,34 +96,43 @@ constructor(
             findNavController().navigate(R.id.action_dashboardHomeFragment_to_settingsFragment)
         }
 
-        val bottomSheetBehavior =
-            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
+        val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
 
-        bottomSheetBehavior.state =
-            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_COLLAPSED
+        bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_COLLAPSED
         bottomSheetBehavior.skipCollapsed = true
+        bottomSheetBehavior.isDraggable = false
 
         bottomSheetBehavior.addBottomSheetCallback(object :
             com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.BottomSheetCallback {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
-                val rotation = when (newState) {
-                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED -> 0f
-                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_COLLAPSED -> 180f
-                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN -> 180f
-                    else -> return
+                if(newState == BottomSheetBehavior.STATE_DRAGGING){
+                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
                 }
 
             }
         })
         binding.classContainer.setOnClickListener {
+            viewModel.setStateEvent(DashboardStateEvent.GetUserClassList)
             if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
-                binding.mainContainer.setBackgroundColor(resources.getColor(R.color.dim_color))
-                bottomSheetBehavior.state =
-                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
+                bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
+                binding.maskLayout.setBackgroundColor(resources.getColor(R.color.dim_color_dashboard))
+                (activity as DashboardActivity).bottom_navigation_view.visibility = View.INVISIBLE
             } else {
-                binding.mainContainer.setBackgroundColor(resources.getColor(R.color.dashboard_back))
-                bottomSheetBehavior.state =
-                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
+                (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
+            }
+        }
+
+        binding.maskLayout.setOnClickListener{
+            if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
+                bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
+                binding.maskLayout.setBackgroundColor(resources.getColor(R.color.dim_color_dashboard))
+                (activity as DashboardActivity).bottom_navigation_view.visibility = View.INVISIBLE
+            } else {
+                bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
+                (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
             }
         }
 
@@ -144,6 +155,10 @@ constructor(
     private fun subscribeObservers() {
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             if (viewState != null) {
+                viewState.classList?.let {
+              Log.d("SAN","classList-->"+it.size)
+                }
+
                 binding.mainEpoxyRecycler.withModels {
 
                     viewState.profile?.let {

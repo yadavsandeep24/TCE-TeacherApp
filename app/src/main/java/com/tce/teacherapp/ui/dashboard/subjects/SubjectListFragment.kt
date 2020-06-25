@@ -294,7 +294,7 @@ fun RequestManager.loadImage(url: String): RequestBuilder<Bitmap> {
     val options = RequestOptions
         .diskCacheStrategyOf(DiskCacheStrategy.NONE)
         .dontAnimate()
-        .placeholder(R.drawable.ic_letters_sounds_2)
+        .placeholder(R.drawable.ic_mother)
         .signature(ObjectKey(url.plus("preloading")))
 
     return asBitmap()

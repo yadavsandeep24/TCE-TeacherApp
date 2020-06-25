@@ -124,4 +124,15 @@ sealed class DashboardStateEvent : StateEvent {
         }
 
     }
+
+    object GetUserClassList : DashboardStateEvent() {
+        override fun errorInfo(): String {
+            return "Error in checking class info."
+        }
+
+        override fun toString(): String {
+            return "GetUserClassList"
+        }
+
+    }
 }

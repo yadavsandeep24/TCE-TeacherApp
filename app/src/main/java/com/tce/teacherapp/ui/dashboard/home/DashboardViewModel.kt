@@ -1,9 +1,6 @@
 package com.tce.teacherapp.ui.dashboard.home
 
-import com.tce.teacherapp.db.entity.DashboardResource
-import com.tce.teacherapp.db.entity.DashboardResourceType
-import com.tce.teacherapp.db.entity.Event
-import com.tce.teacherapp.db.entity.Profile
+import com.tce.teacherapp.db.entity.*
 import com.tce.teacherapp.repository.MainRepository
 import com.tce.teacherapp.ui.BaseViewModel
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardStateEvent
@@ -42,6 +39,16 @@ class DashboardViewModel @Inject constructor(val mainRepository: MainRepository)
         data.lastViewedResourceList?.let {
             setLastViewedResourceList(it)
         }
+
+        data.classList?.let {
+            setuserClassData(it)
+        }
+    }
+
+    private fun setuserClassData(it: List<ClassListsItem>) {
+        val update = getCurrentViewStateOrNew()
+        update.classList = it
+        setViewState(update)
     }
 
     private fun setFingerPrintEnableData(it: Boolean) {
@@ -118,6 +125,9 @@ class DashboardViewModel @Inject constructor(val mainRepository: MainRepository)
             }
             is DashboardStateEvent.UpdateProfile -> {
                mainRepository.updateProfile(stateEvent.userInfo,stateMessage = stateEvent)
+            }
+            is DashboardStateEvent.GetUserClassList -> {
+                mainRepository.getUserClassLists(stateEvent = stateEvent)
             }
 
             else -> {

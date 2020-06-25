@@ -823,6 +823,30 @@ constructor(
         }
     }
 
+    override fun getUserClassLists(stateEvent: StateEvent): Flow<DataState<DashboardViewState>> = flow {
+        var jsonString: String = ""
+        try {
+
+            jsonString = application.assets.open("json/class.json").bufferedReader()
+                .use { it.readText() }
+            val gson = Gson()
+            val listClass = object : TypeToken<List<ClassListsItem>>() {}.type
+            var userClassList: List<ClassListsItem> = gson.fromJson(jsonString, listClass)
+
+            emit(
+                DataState.data(
+                    data = DashboardViewState(classList = userClassList),
+                    stateEvent = stateEvent,
+                    response = null
+                )
+            )
+
+        } catch (ioException: IOException) {
+            ioException.printStackTrace()
+        }
+
+    }
+
     fun toGradeList(grades: List<GradeResponse>): List<Grade> {
         val gradeList: ArrayList<Grade> = ArrayList()
         for (gradeResponse in grades) {

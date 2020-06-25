@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/main_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -15,6 +15,7 @@
             android:orientation="vertical">
 
             <RelativeLayout
+                android:id="@+id/header_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#fff098"
@@ -78,16 +79,21 @@
 
             <com.airbnb.epoxy.EpoxyRecyclerView
                 android:id="@+id/main_epoxy_recycler"
+                android:layout_below="@+id/header_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:overScrollMode="never"/>
-        </LinearLayout>
+            <FrameLayout
+                android:id="@+id/mask_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/transparent"/>
+        </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/bottom_sheet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="100dp"
             android:background="@drawable/filters_sheet_background"
             android:orientation="vertical"
             app:behavior_fitToContents="true"
@@ -155,7 +161,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="Junior KG B"
-                    android:textColor="@color/color_black"></com.tce.teacherapp.util.RubikMediumTextview>
+                    android:textColor="@color/color_black"/>
 
             </LinearLayout>
 
@@ -168,7 +174,6 @@
                 android:id="@+id/voice_container"
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
-                android:layout_marginBottom="30dp"
                 android:gravity="center_vertical"
                 android:paddingLeft="30dp">
 
