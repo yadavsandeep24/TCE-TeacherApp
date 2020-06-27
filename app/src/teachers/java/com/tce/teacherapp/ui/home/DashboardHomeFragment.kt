@@ -19,14 +19,12 @@ import com.tce.teacherapp.databinding.FragmentDashboardHomeBinding
 import com.tce.teacherapp.db.entity.Event
 import com.tce.teacherapp.ui.dashboard.BaseDashboardFragment
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
-import com.tce.teacherapp.ui.dashboard.home.adapter.eventEpoxyHolder
-import com.tce.teacherapp.ui.dashboard.home.adapter.headerEpoxyHolder
-import com.tce.teacherapp.ui.dashboard.home.adapter.todayResourceEpoxyHolder
-import com.tce.teacherapp.ui.dashboard.home.adapter.viewedResourceEpoxyHolder
+import com.tce.teacherapp.ui.dashboard.home.adapter.*
 import com.tce.teacherapp.ui.dashboard.home.state.DASHBOARD_VIEW_STATE_BUNDLE_KEY
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardStateEvent
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardViewState
 import com.tce.teacherapp.ui.dashboard.messages.state.MESSAGE_VIEW_STATE_BUNDLE_KEY
+import com.tce.teacherapp.util.Utility
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.teachers.fragment_dashboard_home.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -45,8 +43,6 @@ constructor(
 ) : BaseDashboardFragment(R.layout.fragment_dashboard_home, viewModelFactory) {
 
     private lateinit var binding: FragmentDashboardHomeBinding
-
-    private var eventList: ArrayList<Event> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -124,7 +120,7 @@ constructor(
             }
         }
 
-        binding.maskLayout.setOnClickListener{
+       /* binding.maskLayout.setOnClickListener{
             if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
                 bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
                 binding.maskLayout.setBackgroundColor(resources.getColor(R.color.dim_color_dashboard))
@@ -134,7 +130,7 @@ constructor(
                 binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
                 (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
             }
-        }
+        }*/
 
 
 
@@ -143,11 +139,13 @@ constructor(
         val epoxyVisibilityTracker = EpoxyVisibilityTracker()
         epoxyVisibilityTracker.attach(binding.mainEpoxyRecycler)
 
-        //viewModel.setStateEvent(DashboardStateEvent.GetProfileEvent)
+        binding.rvFilter.layoutManager = GridLayoutManager(activity, 1)
+        binding.rvFilter.setHasFixedSize(true)
+        val epoxyVisibilityTracker1 = EpoxyVisibilityTracker()
+        epoxyVisibilityTracker1.attach(binding.rvFilter)
 
         viewModel.setStateEvent(DashboardStateEvent.GetDashboardData)
-       // viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(2, "today resource"))
-       // viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(2, "last viewed resource"))
+
         subscribeObservers()
 
     }
@@ -155,9 +153,44 @@ constructor(
     private fun subscribeObservers() {
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             if (viewState != null) {
-                viewState.classList?.let {
-              Log.d("SAN","classList-->"+it.size)
+                binding.rvFilter.withModels {
+                    viewState.classList?.let {
+                        Log.d("SAN","classList-->"+it.size)
+                        for(item in it){
+                            classListEpoxyHolder {
+                                id(item.id)
+                                name(item.name)
+                                imageUrl(item.imageUrl)
+                                shortName(item.shortName)
+                                Utility.getDrawable(
+                                    item.imageUrl.substring(
+                                        0,
+                                        item.imageUrl.lastIndexOf(".")
+                                    ), binding.rvFilter.context
+                                )?.let { it1 ->
+                                    imageDrawable(it1)
+                                }
+                                listener {
+                                    binding.tvClassIcon.setText(item.shortName)
+                                    Utility.getDrawable(
+                                        item.imageUrl.substring(
+                                            0,
+                                            item.imageUrl.lastIndexOf(".")
+                                        ), binding.rvFilter.context
+                                    )?.let { it1 ->
+                                        binding.tvClassIcon.background =  it1
+                                    }
+                                    binding.tvClassTitle.setText(item.name)
+                                    val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
+                                    bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_COLLAPSED
+                                    binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
+                                    (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
+                                }
+                            }
+                        }
+                    }
                 }
+
 
                 binding.mainEpoxyRecycler.withModels {
 

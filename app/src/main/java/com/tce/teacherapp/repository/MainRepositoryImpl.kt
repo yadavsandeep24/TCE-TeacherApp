@@ -564,13 +564,22 @@ constructor(
                 for (i in 0 until 4) {
                     selectedLastViewedResourceList.add(lastViewedResourceList[i])
                 }
+
+                jsonString = application.assets.open("json/class.json").bufferedReader()
+                    .use { it.readText() }
+                val gson = Gson()
+                val listClass = object : TypeToken<List<ClassListsItem>>() {}.type
+                var userClassList: List<ClassListsItem> = gson.fromJson(jsonString, listClass)
+
+
                 emit(
                     DataState.data(
                         data = DashboardViewState(
                             profile = userInfo,
                             eventList = selectedEventList,
                             todayResourceList = selectedTodayResourceList,
-                            lastViewedResourceList = selectedLastViewedResourceList
+                            lastViewedResourceList = selectedLastViewedResourceList,
+                            classList = userClassList
                         ),
                         stateEvent = stateEvent,
                         response = null

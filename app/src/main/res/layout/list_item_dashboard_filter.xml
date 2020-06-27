@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/main_container"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:gravity="center_vertical"
+        android:paddingLeft="30dp">
+
+        <com.tce.teacherapp.util.RubikBoldTextview
+            android:id="@+id/tv_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/ic_dummy_jr"
+            android:gravity="center"
+            android:text="JR"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_12_dp" />
+
+        <com.tce.teacherapp.util.RubikMediumTextview
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Junior KG A"
+            android:textColor="@color/color_black">
+
+        </com.tce.teacherapp.util.RubikMediumTextview>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#e1e6f0" />
+
+
+</LinearLayout>
