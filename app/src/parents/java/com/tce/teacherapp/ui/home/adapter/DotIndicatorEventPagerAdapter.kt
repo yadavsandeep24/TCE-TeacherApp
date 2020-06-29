@@ -5,20 +5,18 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.tce.teacherapp.R
 import com.tce.teacherapp.db.entity.Event
 import com.tce.teacherapp.util.Utility
-import java.util.ArrayList
+import java.util.*
 
 class DotIndicatorEventPagerAdapter :
     RecyclerView.Adapter<DotIndicatorEventPagerAdapter.ViewHolder>() {
-    internal var mEventList: ArrayList<Event>? = null
+    internal var mEventList: List<Event>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context)

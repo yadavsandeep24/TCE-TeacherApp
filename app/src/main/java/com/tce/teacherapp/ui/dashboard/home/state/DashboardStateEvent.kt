@@ -8,12 +8,13 @@ sealed class DashboardStateEvent : StateEvent {
         override fun errorInfo(): String {
             return "Error in updating profile pic info."
         }
+
         override fun toString(): String {
             return "UpdateProfilePic"
         }
     }
 
-    class UpdateProfile(val userInfo : Profile)  : DashboardStateEvent() {
+    class UpdateProfile(val userInfo: Profile) : DashboardStateEvent() {
         override fun errorInfo(): String {
             return "Error in updating profile info."
         }
@@ -33,6 +34,7 @@ sealed class DashboardStateEvent : StateEvent {
             return "GetProfileEvent"
         }
     }
+
     object GetDashboardData : DashboardStateEvent() {
         override fun errorInfo(): String {
             return "Error in getting profile info."
@@ -43,7 +45,10 @@ sealed class DashboardStateEvent : StateEvent {
         }
     }
 
-    class GetDashboardEvent(val count: Int) : DashboardStateEvent() {
+    class GetDashboardEvent(
+        val count: Int,
+        val showOriginal: Boolean
+    ) : DashboardStateEvent() {
         override fun errorInfo(): String {
             return "Error in getting event info."
         }
@@ -54,7 +59,10 @@ sealed class DashboardStateEvent : StateEvent {
     }
 
 
-    class GetTodayResource (val count :Int): DashboardStateEvent() {
+    class GetTodayResource(
+        val count: Int,
+        val showOriginal: Boolean
+    ) : DashboardStateEvent() {
         override fun errorInfo(): String {
             return "Error in getting today resource info."
         }
@@ -64,7 +72,10 @@ sealed class DashboardStateEvent : StateEvent {
         }
     }
 
-    class GetLastViewedResource (val count :Int): DashboardStateEvent() {
+    class GetLastViewedResource(
+        val count: Int,
+        val showOriginal: Boolean
+    ) : DashboardStateEvent() {
         override fun errorInfo(): String {
             return "Error in getting last view resource info."
         }
@@ -75,7 +86,7 @@ sealed class DashboardStateEvent : StateEvent {
     }
 
 
-    class FingerPrintEnableMode(val checked: Boolean): DashboardStateEvent() {
+    class FingerPrintEnableMode(val checked: Boolean) : DashboardStateEvent() {
 
         override fun errorInfo(): String {
             return "Error in setting FingerPrint mode."
@@ -87,7 +98,7 @@ sealed class DashboardStateEvent : StateEvent {
     }
 
 
-    class FaceIdEnableMode(val checked: Boolean): DashboardStateEvent() {
+    class FaceIdEnableMode(val checked: Boolean) : DashboardStateEvent() {
 
         override fun errorInfo(): String {
             return "Error in setting FaceId mode."
@@ -114,7 +125,7 @@ sealed class DashboardStateEvent : StateEvent {
     }
 
 
-    object CheckLoginEnabledMode: DashboardStateEvent() {
+    object CheckLoginEnabledMode : DashboardStateEvent() {
         override fun errorInfo(): String {
             return "Error in checking FingerPrint mode."
         }

@@ -13,6 +13,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -25,8 +26,11 @@ import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.login.state.LoginStateEvent
 import com.tce.teacherapp.util.MessageConstant
 import com.tce.teacherapp.util.StateMessageCallback
+import com.tce.teacherapp.util.Utility.Companion.getBannerDayMessage
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import java.util.*
 import javax.inject.Inject
+
 
 /**
  * A simple [Fragment] subclass.
@@ -35,14 +39,17 @@ import javax.inject.Inject
 @kotlinx.coroutines.FlowPreview
 class LoginFragment
 @Inject
-constructor(viewModelFactory: ViewModelProvider.Factory)
-    : BaseFragment(R.layout.fragment_login) {
-    var isPassWordVisible : Boolean = true
+constructor(viewModelFactory: ViewModelProvider.Factory) : BaseFragment(R.layout.fragment_login) {
+    var isPassWordVisible: Boolean = true
 
     private lateinit var binding: FragmentLoginBinding
 
     val viewModel: LoginViewModel by viewModels {
         viewModelFactory
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(
@@ -53,38 +60,71 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        Log.d("SAN", "LoginFragment-->onResume")
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val spanSupportMail = SpannableString(resources.getString(R.string.having_any_issues_drop_an_email_to_n_support_schoolname_com))
-        val text = resources.getString(R.string.having_any_issues_drop_an_email_to_n_support_schoolname_com)
+        Log.d("SAN", "LoginFragment-->onViewCreated")
+        val isForceFullLogin = arguments?.getBoolean("isForceFullLoginShow")
+        Log.d("SAN", "isForceFullLogin-->$isForceFullLogin")
+        if (isForceFullLogin != null && isForceFullLogin) {
+            binding.srContainer.visibility = View.VISIBLE
+            binding.ivLogo.visibility = View.VISIBLE
+            binding.flBottom.visibility = View.VISIBLE
+        } else {
+            viewModel.setStateEvent(LoginStateEvent.CheckLoginEnabledMode)
+        }
+        val spanSupportMail =
+            SpannableString(resources.getString(R.string.having_any_issues_drop_an_email_to_n_support_schoolname_com))
+        val text =
+            resources.getString(R.string.having_any_issues_drop_an_email_to_n_support_schoolname_com)
         val textSpan = resources.getString(R.string.support_mail)
         spanSupportMail.setSpan(Span(), text.indexOf(textSpan), text.length, 0)
         binding.tvSupportMail.text = spanSupportMail
         binding.tvSupportMail.movementMethod = LinkMovementMethod.getInstance()
 
-        binding.edtSchoolName.setText(MessageConstant.LOGIN_DEFAULT_SCHOOLNAME)
         binding.edtUserName.setText(MessageConstant.LOGIN_DEFAULT_USERNAME)
         binding.edtPassword.setText(MessageConstant.LOGIN_DEFAULT_PASSWORD)
 
         binding.tvLogin.setOnClickListener {
-            viewModel.setStateEvent(LoginStateEvent.LoginAttemptEvent(binding.edtUserName.text.toString().trim(),
-                binding.edtPassword.text.toString().trim()))
+            viewModel.setStateEvent(
+                LoginStateEvent.LoginAttemptEvent(
+                    binding.edtUserName.text.toString().trim(),
+                    binding.edtPassword.text.toString().trim()
+                )
+            )
         }
         binding.vwPasswordVisibility.setOnClickListener {
-            if(isPassWordVisible){
+            if (isPassWordVisible) {
                 isPassWordVisible = false
-                binding.vwPasswordVisibility.background = resources.getDrawable(R.drawable.ic_baseline_visibility_off_24)
+                binding.vwPasswordVisibility.background =
+                    resources.getDrawable(R.drawable.ic_baseline_visibility_off_24)
                 binding.edtPassword.transformationMethod = SingleLineTransformationMethod()
 
-            }else{
+            } else {
                 isPassWordVisible = true
-                binding.vwPasswordVisibility.background = resources.getDrawable(R.drawable.ic_baseline_visibility_24)
+                binding.vwPasswordVisibility.background =
+                    resources.getDrawable(R.drawable.ic_baseline_visibility_24)
                 binding.edtPassword.transformationMethod = PasswordTransformationMethod()
             }
 
         }
+        val arrayAdapter = ArrayAdapter(
+            requireActivity(), android.R.layout.simple_dropdown_item_1line,
+            resources.getStringArray(R.array.school_name)
+        )
+
+        binding.edtSchoolName.setAdapter(arrayAdapter)
+        binding.edtSchoolName.setOnClickListener { binding.edtSchoolName.showDropDown() }
+
+        binding.tvWelcome.text = getBannerDayMessage(requireContext())
+
         subscribeObservers()
     }
+
 
     private fun subscribeObservers() {
 
@@ -92,22 +132,39 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
             if (viewState != null) {
                 viewState.loginFields?.let {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        if(!it.login_mode_fingePrint_Enabled!!){
+                        if (it.isQuickAccessScreenShow!!) {
                             viewState.loginFields = null
                             findNavController().navigate(R.id.action_loginFragment_to_quickAccessSettingFragment)
-                        }else{
+                        } else {
                             viewState.loginFields = null
                             val i = Intent(activity, DashboardActivity::class.java)
                             startActivity(i)
-                            activity?.overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left)
+                            activity?.overridePendingTransition(
+                                R.anim.slide_in_right,
+                                R.anim.slide_out_left
+                            )
                             activity?.finish()
                         }
 
-                    }else{
-                      val i = Intent(activity, DashboardActivity::class.java)
+                    } else {
+                        val i = Intent(activity, DashboardActivity::class.java)
                         startActivity(i)
-                        activity?.overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left)
+                        activity?.overridePendingTransition(
+                            R.anim.slide_in_right,
+                            R.anim.slide_out_left
+                        )
                         activity?.finish()
+                    }
+                }
+
+                viewState.isFingerPrintLoginEnabled?.let {
+                    if (it) {
+                        viewState.isFingerPrintLoginEnabled = null
+                        findNavController().navigate(R.id.action_loginFragment_to_loginOptionFragment)
+                    } else {
+                        binding.srContainer.visibility = View.VISIBLE
+                        binding.ivLogo.visibility = View.VISIBLE
+                        binding.flBottom.visibility = View.VISIBLE
                     }
                 }
             }
@@ -143,6 +200,7 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
     internal inner class Span : ClickableSpan() {
 
         override fun onClick(tv: View) {
+
         }
 
         override fun updateDrawState(ds: TextPaint) {

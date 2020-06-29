@@ -12,7 +12,6 @@ import com.tce.teacherapp.R
 import com.tce.teacherapp.db.entity.LatestUpdateSubList
 import com.tce.teacherapp.ui.dashboard.home.adapter.eventItemEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.home.adapter.todayResChildItemEpoxyHolder
-import com.tce.teacherapp.ui.dashboard.home.adapter.todayResourceItemEpoxyHolder
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
 import com.tce.teacherapp.util.Utility
 

@@ -2,13 +2,10 @@ package com.tce.teacherapp.ui.dashboard.home.adapter
 
 import android.text.Html
 import android.widget.TextView
-import androidx.appcompat.widget.AppCompatImageView
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestOptions
 import com.tce.teacherapp.R
 import com.tce.teacherapp.ui.dashboard.subjects.loadImage
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder

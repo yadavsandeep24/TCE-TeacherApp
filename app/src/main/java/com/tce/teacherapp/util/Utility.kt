@@ -10,6 +10,7 @@ import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.util.Log
+import com.tce.teacherapp.R
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
@@ -236,10 +237,27 @@ class Utility {
         fun isDownloadsDocument(uri: Uri): Boolean {
             return "com.android.providers.downloads.documents" == uri.authority
         }
-
+        fun getBannerDayMessage(context: Context): String? {
+            val c = Calendar.getInstance()
+            val timeOfDay = c[Calendar.HOUR_OF_DAY]
+            var str = context.resources.getString(R.string.lbl_good_morning)
+            when (timeOfDay) {
+                in 0..11 -> {
+                    str = context.resources.getString(R.string.lbl_good_morning)
+                }
+                in 12..15 -> {
+                    str = context.resources.getString(R.string.lbl_good_afternoon)
+                }
+                in 16..20 -> {
+                    str = context.resources.getString(R.string.lbl_good_evening)
+                }
+                in 21..23 -> {
+                    str = context.resources.getString(R.string.lbl_good_night)
+                }
+            }
+            return str
+        }
 
     }
-
-
 
 }

@@ -125,7 +125,7 @@
                     android:layout_height="wrap_content"
                     android:text="Track Bus Location"
                     android:textColor="@color/color_black"
-                    android:textSize="@dimen/font_size_12_dp"></com.tce.teacherapp.util.RubikMediumTextview>
+                    android:textSize="@dimen/font_size_12_dp"/>
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:layout_width="wrap_content"

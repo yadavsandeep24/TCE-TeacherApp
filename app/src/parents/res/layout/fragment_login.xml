@@ -7,32 +7,41 @@
         android:layout_height="match_parent"
         android:background="#ffcd23">
 
-        <RelativeLayout
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:visibility="gone"
+            android:background="@drawable/ic_tce_logo" />
+        <FrameLayout
+            android:id="@+id/fl_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:visibility="gone"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/login_bottom" />
+        <ScrollView
+            android:id="@+id/sr_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/divider_container"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/iv_logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="50dp"
-                android:background="@drawable/ic_tce_logo" />
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/iv_logo"
-                android:layout_centerInParent="true"
-                android:background="@drawable/ic_oval" />
+            android:layout_below="@+id/iv_logo"
+            android:overScrollMode="never"
+            android:background="@drawable/ic_oval"
+            android:fillViewport="true"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:fadeScrollbars="false"
+            android:visibility="gone"
+            android:layout_above="@+id/divider_container">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <com.tce.teacherapp.util.RubikMediumTextview
                 android:id="@+id/tv_welcome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/iv_logo"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="30dp"
                 android:text="Good Morning!"
@@ -125,7 +134,7 @@
                 android:text="Forget Password"/>
 
         </RelativeLayout>
-
+        </ScrollView>
 
         <RelativeLayout
             android:id="@+id/divider_container"
@@ -133,6 +142,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
             android:layout_marginEnd="60dp"
+            android:visibility="gone"
             android:layout_above="@+id/tv_register"
             android:layout_marginTop="20dp">
 
@@ -174,19 +184,15 @@
             android:layout_marginTop="10dp"
             android:layout_marginStart="60dp"
             android:layout_marginEnd="60dp"
+            android:layout_marginBottom="5dp"
             android:gravity="center"
-            android:layout_marginBottom="10dp"
+            android:visibility="gone"
             android:textColor="@color/white"
             android:background="@drawable/register_btn_bg"
             android:textSize="@dimen/font_size_14_dp"/>
 
 
-        <FrameLayout
-            android:id="@+id/fl_bottom"
-            android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/login_bottom" />
+
 
         <ProgressBar
             android:id="@+id/loading"

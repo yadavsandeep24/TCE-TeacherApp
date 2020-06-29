@@ -2,7 +2,6 @@ package com.tce.teacherapp.ui.home
 
 import android.os.Build
 import android.os.Bundle
-import android.text.Html
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +15,6 @@ import com.airbnb.epoxy.EpoxyVisibilityTracker
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentDashboardHomeBinding
-import com.tce.teacherapp.db.entity.Event
 import com.tce.teacherapp.ui.dashboard.BaseDashboardFragment
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.home.adapter.*
@@ -67,8 +65,8 @@ constructor(
         val viewState = viewModel.viewState.value
 
         //clear the list. Don't want to save a large list to bundle.
-        viewState?.eventList = ArrayList()
-        viewState?.todayResourceList = ArrayList()
+        viewState?.eventData!!.eventList = ArrayList()
+        viewState.todayResourceData!!.todayResource = ArrayList()
 
         outState.putParcelable(
             MESSAGE_VIEW_STATE_BUNDLE_KEY,
@@ -204,36 +202,61 @@ constructor(
                         }
                     }
 
-                    viewState.eventList?.let {
+                    viewState.eventData?.let {
                         eventEpoxyHolder {
                             id(2)
                             strDate("15 Jan 2020")
-                            viewState.eventList?.let {
-                                eventList(it)
-                            }
+                            nextEventCount(it.nextEventCount)
+                            showLessButton(it.isShowLess)
+                            eventList(it.eventList)
                             listener {
-                                viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(7))
+                                if(it.isShowLess) {
+                                    viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(3,true))
+                                }else {
+                                    viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(7,false))
+                                }
                             }
                         }
                     }
 
-                    viewState.todayResourceList?.let {
+                    viewState.todayResourceData?.let {
                         todayResourceEpoxyHolder {
                             id(3)
                             strTitle("Today's Resources")
-                            resourceList(it)
+                            nextEventCount(it.nextEventCount)
+                            showLessButton(it.isShowLess)
+                            resourceList(it.todayResource)
+
                             listener {
-                                viewModel.setStateEvent(DashboardStateEvent.GetTodayResource(4))
+                                if(it.isShowLess) {
+                                    viewModel.setStateEvent(DashboardStateEvent.GetTodayResource(2,true))
+                                }else {
+                                    viewModel.setStateEvent(DashboardStateEvent.GetTodayResource(4,false))
+                                }
                             }
                         }
                     }
-                    viewState.lastViewedResourceList?.let {
+                    viewState.lastViewedResourceData?.let {
                         viewedResourceEpoxyHolder {
                             id(4)
                             strTitle("Last Viewed Resources")
-                            resourceList(it)
+                            nextEventCount(it.nextEventCount)
+                            showLessButton(it.isShowLess)
+                            resourceList(it.lastViewResourceList)
                             listener {
-                                viewModel.setStateEvent(DashboardStateEvent.GetLastViewedResource(10))
+                                if (it.isShowLess) {
+                                    viewModel.setStateEvent(
+                                        DashboardStateEvent.GetLastViewedResource(
+                                            2,true
+                                        )
+                                    )
+                                }else{
+                                    viewModel.setStateEvent(
+                                        DashboardStateEvent.GetLastViewedResource(
+                                            10,false
+                                        )
+                                    )
+                                }
                             }
                         }
                     }

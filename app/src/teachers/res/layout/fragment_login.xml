@@ -6,36 +6,39 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ffcd23">
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:visibility="gone"
+            android:background="@drawable/ic_tce_logo" />
+
+        <ScrollView
+            android:id="@+id/sr_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/iv_logo"
+            android:overScrollMode="never"
+            android:background="@drawable/ic_oval"
+            android:fillViewport="true"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:fadeScrollbars="false"
+            android:visibility="gone"
+            android:layout_above="@+id/fl_bottom">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/tv_support_mail"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/iv_logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="50dp"
-                android:background="@drawable/ic_tce_logo" />
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/iv_logo"
-                android:layout_centerInParent="true"
-                android:background="@drawable/ic_oval" />
+            android:layout_height="wrap_content">
 
             <com.tce.teacherapp.util.RubikMediumTextview
                 android:id="@+id/tv_welcome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/iv_logo"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="30dp"
-                android:text="Good Morning!"
+                android:text="@string/lbl_good_morning"
                 android:textColor="#320500"
                 android:textSize="20sp" />
 
@@ -50,7 +53,7 @@
                 android:textColor="#320500"
                 android:textSize="12sp"/>
 
-            <androidx.appcompat.widget.AppCompatEditText
+            <androidx.appcompat.widget.AppCompatAutoCompleteTextView
                 android:id="@+id/edt_school_name"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -128,23 +131,28 @@
                     android:background="@drawable/login_btn_bg"
                     android:textSize="@dimen/font_size_14_dp"/>
 
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:id="@+id/tv_support_mail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:layout_below="@+id/tv_login"
+                android:textSize="@dimen/font_size_12_dp"
+                android:layout_marginTop="60dp"
+                android:text="@string/having_any_issues_drop_an_email_to_n_support_schoolname_com"/>
+
 
 
         </RelativeLayout>
-        <com.tce.teacherapp.util.RubikMediumTextview
-            android:id="@+id/tv_support_mail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:layout_above="@+id/fl_bottom"
-            android:textSize="@dimen/font_size_12_dp"
-            android:text="@string/having_any_issues_drop_an_email_to_n_support_schoolname_com"/>
+        </ScrollView>
+
 
         <FrameLayout
             android:id="@+id/fl_bottom"
             android:layout_width="match_parent"
-            android:layout_height="130dp"
+            android:layout_height="150dp"
+            android:visibility="gone"
             android:layout_alignParentBottom="true"
             android:background="@drawable/login_bottom" />
 

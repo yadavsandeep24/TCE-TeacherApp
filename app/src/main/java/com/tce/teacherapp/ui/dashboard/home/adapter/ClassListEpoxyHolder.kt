@@ -7,7 +7,6 @@ import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.tce.teacherapp.R
-import com.tce.teacherapp.db.entity.Event
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
 
 @EpoxyModelClass(layout = R.layout.list_item_dashboard_filter)

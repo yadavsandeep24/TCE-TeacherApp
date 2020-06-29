@@ -55,7 +55,6 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.setStateEvent(LoginStateEvent.CheckLoginEnabledMode)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             BiometricHelper.setupKeyStoreAndKeyGenerator()
             val defaultCipher: Cipher = setupCipher()
@@ -69,7 +68,9 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
         }
 
         binding.tvLoginManually.setOnClickListener {
-            findNavController().navigate(R.id.action_loginOptionFragment_to_loginFragment)
+            val bundle = Bundle()
+            bundle.putBoolean("isForceFullLoginShow", true)
+            findNavController().navigate(R.id.action_loginOptionFragment_to_loginFragment,bundle)
         }
         subscribeObservers()
     }
@@ -78,8 +79,6 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
 
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             if (viewState != null) {
-                viewState.isFingerPrintLoginEnabled?.let {
-                }
             }
         })
     }

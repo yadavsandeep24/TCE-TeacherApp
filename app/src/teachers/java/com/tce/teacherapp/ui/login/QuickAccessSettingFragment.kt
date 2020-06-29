@@ -73,18 +73,15 @@ class QuickAccessSettingFragment
                 BiometricHelper.createKey(Constants.DEFAULT_KEY_NAME)
 
                 binding.ivThumb.run {
-                    isEnabled = true
-                    binding.ivThumb.alpha = 1.0f
                     setOnClickListener(defaultCipher?.let { it1 ->
                         TouchIdClickListener(it1, Constants.DEFAULT_KEY_NAME)
                     })
                 }
             } else {
                 (activity as LauncherActivity).showToast(getString(R.string.setup_lock_screen))
-                binding.ivThumb.isEnabled = false
-                binding.ivThumb.alpha = 0.4f
             }
         }
+        viewModel.setQuickAccessScreenShow(false)
     }
 
     private inner class TouchIdClickListener internal constructor(

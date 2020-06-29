@@ -21,7 +21,8 @@ data class LoginFields(
     var login_email: String? = null,
     var login_password: String? = null,
    var login_mode_fingePrint_Enabled:Boolean? = null,
-   var login_mode_faceId_Enabled:Boolean? = null
+   var login_mode_faceId_Enabled:Boolean? = null,
+    var isQuickAccessScreenShow: Boolean? = null
 ) : Parcelable{
     class LoginError {
 

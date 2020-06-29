@@ -35,5 +35,147 @@
         android:id="@+id/chapterFragment"
         android:name="com.tce.teacherapp.ui.dashboard.students.ChapterFragment"
         android:label="fragment_chapter"
-        tools:layout="@layout/fragment_chapter" />
+        tools:layout="@layout/fragment_chapter" >
+        <action
+            android:id="@+id/action_chapterFragment_to_selectChapterBookFragment"
+            app:destination="@id/selectChapterBookFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+        <action
+            android:id="@+id/action_chapterFragment_to_selectChapterLearnFragment"
+            app:destination="@id/selectChapterLearnFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+    </fragment>
+    <fragment
+        android:id="@+id/selectChapterLearnFragment"
+        android:name="com.tce.teacherapp.SelectChapterLearnFragment"
+        android:label="fragment_select_chapter_learn"
+        tools:layout="@layout/fragment_select_chapter_learn" >
+        <action
+            android:id="@+id/action_selectChapterLearnFragment_to_subjectResourceDetailFragment"
+            app:destination="@id/subjectResourceDetailFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+        <action
+            android:id="@+id/action_selectChapterLearnFragment_to_HTMLContentFragment"
+            app:destination="@id/HTMLContentFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+        <action
+            android:id="@+id/action_selectChapterLearnFragment_to_pdfFragment"
+            app:destination="@id/pdfFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+        <action
+            android:id="@+id/action_selectChapterLearnFragment_to_videoPlayerFragment"
+            app:destination="@id/videoPlayerFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+        <action
+            android:id="@+id/action_selectChapterLearnFragment_to_SUbjectPracticeFragment"
+            app:destination="@id/SUbjectPracticeFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+        <action
+            android:id="@+id/action_selectChapterLearnFragment_to_subjectResourceSelectionFragment"
+            app:destination="@id/subjectResourceSelectionFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+    </fragment>
+    <fragment
+        android:id="@+id/selectChapterBookFragment"
+        android:name="com.tce.teacherapp.SelectChapterBookFragment"
+        android:label="fragment_select_chapter_book"
+        tools:layout="@layout/fragment_select_chapter_book" />
+    <fragment
+        android:id="@+id/SUbjectPracticeFragment"
+        android:name="com.tce.teacherapp.SUbjectPracticeFragment"
+        android:label="fragment_s_ubject_practice"
+        tools:layout="@layout/fragment_subject_practice" />
+    <fragment
+        android:id="@+id/subjectResourceDetailFragment"
+        android:name="com.tce.teacherapp.SubjectResourceDetailFragment"
+        android:label="fragment_subject_resource_detail"
+        tools:layout="@layout/fragment_subject_resource_detail" />
+    <fragment
+        android:id="@+id/videoPlayerFragment"
+        android:name="com.tce.teacherapp.VideoPlayerFragment"
+        android:label="fragment_video_player"
+        tools:layout="@layout/fragment_video_player" >
+        <action
+            android:id="@+id/action_videoPlayerFragment_to_subjectResourceSelectionFragment"
+            app:destination="@id/subjectResourceSelectionFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/subjectResourceSelectionFragment"
+        android:name="com.tce.teacherapp.SubjectResourceSelectionFragment"
+        android:label="fragment_subject_resource_selection"
+        tools:layout="@layout/fragment_subject_resource_selection" >
+        <action
+            android:id="@+id/action_subjectResourceSelectionFragment_to_resourceListFragment"
+            app:destination="@id/resourceListFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+    </fragment>
+    <fragment
+        android:id="@+id/HTMLContentFragment"
+        android:name="com.tce.teacherapp.HTMLContentFragment"
+        android:label="fragment_h_t_m_l_content"
+        tools:layout="@layout/fragment_html_content" />
+    <fragment
+        android:id="@+id/pdfFragment"
+        android:name="com.tce.teacherapp.PdfFragment"
+        android:label="fragment_pdf"
+        tools:layout="@layout/fragment_pdf" />
+    <fragment
+        android:id="@+id/resourceListFragment"
+        android:name="com.tce.teacherapp.ResourceListFragment"
+        android:label="fragment_resource_list"
+        tools:layout="@layout/fragment_resource_list" >
+        <action
+            android:id="@+id/action_resourceListFragment_to_pdfFragment"
+            app:destination="@id/pdfFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+        <action
+            android:id="@+id/action_resourceListFragment_to_subjectResourceDetailFragment"
+            app:destination="@id/subjectResourceDetailFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+        <action
+            android:id="@+id/action_resourceListFragment_to_HTMLContentFragment"
+            app:destination="@id/HTMLContentFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+    </fragment>
 </navigation>

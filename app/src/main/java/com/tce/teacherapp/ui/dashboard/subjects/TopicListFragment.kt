@@ -185,6 +185,7 @@ constructor(
                                 Utility.getDrawable("topic_" + subj.index, requireContext())
                                     ?.let { it1 -> imageDrawable(it1) }
                                 listener {
+
                                 }
                             }
                         }

@@ -34,7 +34,8 @@
                 android:layout_below="@+id/user"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="-30dp"
-                android:scrollbars="none">
+                android:overScrollMode="never"
+                android:scrollbarAlwaysDrawVerticalTrack="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -219,7 +220,7 @@
         <FrameLayout
             android:id="@+id/fl_bottom"
             android:layout_width="match_parent"
-            android:layout_height="130dp"
+            android:layout_height="150dp"
             android:layout_alignParentBottom="true"
             android:background="@drawable/login_bottom" />
 

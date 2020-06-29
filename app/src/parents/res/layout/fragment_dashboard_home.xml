@@ -46,9 +46,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#f5f8ff"
-                android:visibility="visible">
-
-            </com.airbnb.epoxy.EpoxyRecyclerView>
+                android:overScrollMode="never"
+                android:visibility="visible"/>
         </LinearLayout>
 
         <LinearLayout

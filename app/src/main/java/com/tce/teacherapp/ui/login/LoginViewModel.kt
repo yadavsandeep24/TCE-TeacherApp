@@ -104,4 +104,9 @@ class LoginViewModel @Inject constructor(val loginRepository: LoginRepository) :
         cancelActiveJobs()
     }
 
+    fun setQuickAccessScreenShow(isShow: Boolean) {
+        loginRepository.setQuickAccessScreen(isShow)
+    }
+
+
 }

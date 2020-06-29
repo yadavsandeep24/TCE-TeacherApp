@@ -30,9 +30,6 @@ import com.tce.teacherapp.util.RequestTypes
 import com.tce.teacherapp.util.StateMessageCallback
 import com.tce.teacherapp.util.Utility
 import com.yalantis.ucrop.UCrop
-import id.zelory.compressor.Compressor
-import id.zelory.compressor.constraint.format
-import id.zelory.compressor.constraint.quality
 import kotlinx.coroutines.*
 import java.io.File
 import javax.inject.Inject

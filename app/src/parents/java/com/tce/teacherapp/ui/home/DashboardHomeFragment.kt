@@ -26,7 +26,6 @@ import com.tce.teacherapp.ui.dashboard.subjects.loadImage
 import com.tce.teacherapp.ui.home.adapter.eventEpoxyHolder
 import com.tce.teacherapp.ui.home.adapter.latestUpdateEpoxyHolder
 import com.tce.teacherapp.ui.home.adapter.parentHeaderEpoxyHolder
-import kotlinx.android.synthetic.parents.fragment_dashboard_home.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
@@ -68,8 +67,8 @@ constructor(
         val viewState = viewModel.viewState.value
 
         //clear the list. Don't want to save a large list to bundle.
-        viewState?.eventList = ArrayList()
-        viewState?.todayResourceList = ArrayList()
+        viewState?.eventData!!.eventList = ArrayList()
+        viewState?.todayResourceData!!.todayResource = ArrayList()
 
         outState.putParcelable(
             MESSAGE_VIEW_STATE_BUNDLE_KEY,
@@ -87,6 +86,7 @@ constructor(
         }
         uiCommunicationListener.displayProgressBar(false)
         (activity as DashboardActivity).expandAppBar(false)
+        (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
 
         binding.imgSetting.setOnClickListener {
             findNavController().navigate(R.id.action_dashboardHomeFragment_to_settingsFragment)
@@ -117,11 +117,11 @@ constructor(
                             glide.loadImage(it.imageUrl).into(binding.imgProfile)
                         }
                     }
-                    viewState.eventList?.let {
+                    viewState.eventData?.let {
                         eventEpoxyHolder {
                             id(2)
                             strDate("15 Jan 2020")
-                            viewState.eventList?.let {
+                            it.eventList?.let {
                                 eventList(it)
                             }
                             listener {

@@ -1,15 +1,16 @@
 package com.tce.teacherapp.ui.home.adapter
 
-import android.text.Html
 import android.widget.TextView
 import androidx.viewpager2.widget.ViewPager2
-import com.airbnb.epoxy.*
-import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+import com.airbnb.epoxy.EpoxyAttribute
+import com.airbnb.epoxy.EpoxyModelClass
+import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator
 import com.tce.teacherapp.R
 import com.tce.teacherapp.db.entity.Event
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
 import com.tce.teacherapp.util.dotsIndicator.ZoomOutPageTransformer
+import java.util.*
 
 @EpoxyModelClass(layout = R.layout.dashboard_event)
 abstract class EventEpoxyHolder :EpoxyModelWithHolder<EventHolder>() {
@@ -18,7 +19,7 @@ abstract class EventEpoxyHolder :EpoxyModelWithHolder<EventHolder>() {
     lateinit var strDate : String
 
     @EpoxyAttribute
-    lateinit var eventList : ArrayList<Event>
+    lateinit var eventList : List<Event>
 
     @EpoxyAttribute
     lateinit var listener: () -> Unit
@@ -29,7 +30,7 @@ abstract class EventEpoxyHolder :EpoxyModelWithHolder<EventHolder>() {
 
 
         val adapter = DotIndicatorEventPagerAdapter()
-        adapter.setData(eventList)
+        adapter.setData(eventList as ArrayList<Event>)
         holder.viewPagerEvent.adapter = adapter
 
         val zoomOutPageTransformer =  ZoomOutPageTransformer()

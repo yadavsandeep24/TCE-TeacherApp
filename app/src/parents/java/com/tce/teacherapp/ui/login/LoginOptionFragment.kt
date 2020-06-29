@@ -69,7 +69,9 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
         }
 
         binding.tvLoginManually.setOnClickListener {
-            findNavController().navigate(R.id.action_loginOptionFragment_to_loginFragment)
+            val bundle = Bundle()
+            bundle.putBoolean("isForceFullLoginShow", true)
+            findNavController().navigate(R.id.action_loginOptionFragment_to_loginFragment,bundle)
         }
         subscribeObservers()
     }

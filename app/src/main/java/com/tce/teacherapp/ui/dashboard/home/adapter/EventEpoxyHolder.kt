@@ -1,6 +1,7 @@
 package com.tce.teacherapp.ui.dashboard.home.adapter
 
 import android.text.Html
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.*
@@ -16,7 +17,13 @@ abstract class EventEpoxyHolder :EpoxyModelWithHolder<EventHolder>() {
     lateinit var strDate : String
 
     @EpoxyAttribute
-    lateinit var eventList : ArrayList<Event>
+    lateinit var eventList : List<Event>
+
+    @EpoxyAttribute
+    var nextEventCount : Int =4
+
+    @EpoxyAttribute
+    var showLessButton : Boolean = false
 
     @EpoxyAttribute
     lateinit var listener: () -> Unit
@@ -24,7 +31,14 @@ abstract class EventEpoxyHolder :EpoxyModelWithHolder<EventHolder>() {
     override fun bind(holder: EventHolder) {
 
         holder.tvDate.text = strDate
-        holder.tvShowMore.text = Html.fromHtml("<u>Show More (4)</u>")
+        if(showLessButton){
+            holder.tvShowMore.text = Html.fromHtml("<u>Show Less</u>")
+            holder.ivShowMore.background = holder.rvEvent.context.resources.getDrawable(R.drawable.ic_line)
+        }else {
+            holder.tvShowMore.text = Html.fromHtml("<u>Show More ($nextEventCount)</u>")
+            holder.ivShowMore.background = holder.rvEvent.context.resources.getDrawable(R.drawable.ic_add)
+
+        }
         holder.tvShowMore.setOnClickListener{listener()}
 
         holder.rvEvent.layoutManager = GridLayoutManager(holder.rvEvent.context, 1)
@@ -65,6 +79,7 @@ abstract class EventEpoxyHolder :EpoxyModelWithHolder<EventHolder>() {
 
 class EventHolder : KotlinEpoxyHolder(){
     val tvShowMore by bind<TextView>(R.id.tvShowMore)
+    val ivShowMore by bind<ImageView>(R.id.iv_indicator)
     val tvDate by bind<TextView>(R.id.tvDate)
     val rvEvent by bind<EpoxyRecyclerView>(R.id.rv_event)
 }

@@ -155,7 +155,7 @@
         <com.tce.teacherapp.util.RubikMediumTextview
             android:id="@+id/tv_logout"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:text="Log Out"
             android:textColor="#f04a14"
             android:layout_alignParentBottom="true"
@@ -164,7 +164,7 @@
             android:elevation="2dp"
             android:layout_marginBottom="30dp"
             android:gravity="center"
-            android:textSize="20dp"
+            android:textSize="@dimen/font_size_14_dp"
             android:background="@drawable/bg_white_rounded_logout"
             />
 

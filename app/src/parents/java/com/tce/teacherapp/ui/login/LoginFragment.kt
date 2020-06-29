@@ -25,6 +25,7 @@ import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.login.state.LoginStateEvent
 import com.tce.teacherapp.util.MessageConstant
 import com.tce.teacherapp.util.StateMessageCallback
+import com.tce.teacherapp.util.Utility
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
@@ -56,7 +57,19 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.setStateEvent(LoginStateEvent.PreUserInfoData)
+        Log.d("SAN", "LoginFragment-->onViewCreated")
+        val isForceFullLogin = arguments?.getBoolean("isForceFullLoginShow")
+        Log.d("SAN", "isForceFullLogin-->$isForceFullLogin")
+        if (isForceFullLogin != null && isForceFullLogin) {
+            binding.srContainer.visibility = View.VISIBLE
+            binding.ivLogo.visibility = View.VISIBLE
+            binding.flBottom.visibility = View.VISIBLE
+            binding.dividerContainer.visibility = View.VISIBLE
+            binding.tvRegister.visibility = View.VISIBLE
+        } else {
+            viewModel.setStateEvent(LoginStateEvent.PreUserInfoData)
+        }
+
         val spanForgetPassword = SpannableString(resources.getString(R.string.lbl_forget_password))
         val text = resources.getString(R.string.lbl_forget_password)
         val textSpan = resources.getString(R.string.lbl_forget_password)
@@ -66,6 +79,7 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
 
         binding.edtUserName.setText(MessageConstant.LOGIN_DEFAULT_USERNAME)
         binding.edtPassword.setText(MessageConstant.LOGIN_DEFAULT_PASSWORD)
+        uiCommunicationListener.hideSoftKeyboard()
 
         binding.tvLogin.setOnClickListener {
             viewModel.setStateEvent(LoginStateEvent.LoginAttemptEvent(binding.edtUserName.text.toString().trim(),
@@ -88,6 +102,7 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
             }
 
         }
+        binding.tvWelcome.text = Utility.getBannerDayMessage(requireActivity())
         subscribeObservers()
     }
 
@@ -97,7 +112,7 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
             if (viewState != null) {
                 viewState.loginFields?.let {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        if(!it.login_mode_fingePrint_Enabled!!){
+                        if(it.isQuickAccessScreenShow!!){
                             viewState.loginFields = null
                             findNavController().navigate(R.id.action_loginFragment_to_quickAccessSettingFragment)
                         }else{
@@ -117,10 +132,21 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
                 }
 
                 viewState.profile?.let {
-                     val userName = it.email
-                    val password = it.password
-                    binding.edtUserName.setText(userName)
-                    binding.edtPassword.setText(password)
+                    if(it.faceIdMode || it.fingerPrintMode) {
+                        viewState.profile = null
+                        findNavController().navigate(R.id.action_loginFragment_to_loginOptionFragment)
+                    }else {
+                        binding.srContainer.visibility = View.VISIBLE
+                        binding.ivLogo.visibility = View.VISIBLE
+                        binding.flBottom.visibility = View.VISIBLE
+                        binding.dividerContainer.visibility = View.VISIBLE
+                        binding.tvRegister.visibility = View.VISIBLE
+                        val userName = it.email
+                        val password = it.password
+                        binding.edtUserName.setText(userName)
+                        binding.edtPassword.setText(password)
+                        uiCommunicationListener.hideSoftKeyboard()
+                    }
 
                 }
             }

@@ -33,7 +33,7 @@
             android:name=".ui.dashboard.DashboardActivity"
             android:theme="@style/AppThemeTCE"
             android:screenOrientation="sensorPortrait"
-            tools:ignore="LockedOrientationActivity" />
+            android:windowSoftInputMode="stateHidden|adjustPan|adjustResize" />
         <activity
             android:name=".ui.login.LauncherActivity"
             android:theme="@style/AppThemeTCE"

@@ -56,6 +56,20 @@
     <string name="term_amp_conditions"><![CDATA[Terms & Conditions]]></string>
     <string name="lbl_comming_soon">Under Development, Coming soon.</string>
 
+    <string name="lbl_good_morning">Good Morning!</string>
+    <string name="lbl_good_afternoon">Good Afternoon!</string>
+    <string name="lbl_good_evening">Good Evening!</string>
+    <string name="lbl_good_night">Good Night!</string>
+
+    <array name="school_name">
+        <item>St. Francis</item>
+        <item>Poddar</item>
+        <item>St. George</item>
+        <item>Queens</item>
+        <item>St. Lawrence</item>
+        <item>Ryan International</item>
+        <item>Witty International</item>
+    </array>
 
 
 </resources>

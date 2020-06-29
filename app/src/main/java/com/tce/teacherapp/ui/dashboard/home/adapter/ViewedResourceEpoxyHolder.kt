@@ -1,6 +1,7 @@
 package com.tce.teacherapp.ui.dashboard.home.adapter
 
 import android.text.Html
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.*
@@ -21,10 +22,23 @@ abstract class ViewedResourceEpoxyHolder : EpoxyModelWithHolder<ViewedHolder>() 
     @EpoxyAttribute
     lateinit var listener: () -> Unit
 
+    @EpoxyAttribute
+    var nextEventCount : Int =4
+
+    @EpoxyAttribute
+    var showLessButton : Boolean = false
+
     override fun bind(holder: ViewedHolder) {
 
         holder.tvTitle.text = strTitle
-        holder.tvShowMore.text = Html.fromHtml("<u>Show More (10)</u>")
+        if(showLessButton){
+            holder.tvShowMore.text = Html.fromHtml("<u>Show Less</u>")
+            holder.ivShowMore.background = holder.rvResource.context.resources.getDrawable(R.drawable.ic_line)
+        }else {
+            holder.tvShowMore.text = Html.fromHtml("<u>Show More ($nextEventCount)</u>")
+            holder.ivShowMore.background = holder.rvResource.context.resources.getDrawable(R.drawable.ic_add)
+
+        }
         holder.tvShowMore.setOnClickListener{listener()}
 
         holder.rvResource.layoutManager = GridLayoutManager(holder.rvResource.context, 2)
@@ -59,6 +73,7 @@ abstract class ViewedResourceEpoxyHolder : EpoxyModelWithHolder<ViewedHolder>() 
 
 class ViewedHolder : KotlinEpoxyHolder(){
     val tvShowMore by bind<TextView>(R.id.tvShowMore)
+    val ivShowMore by bind<ImageView>(R.id.iv_indicator)
     val tvTitle by bind<TextView>(R.id.view_title)
     val rvResource by bind<EpoxyRecyclerView>(R.id.rv_dash_view_resource)
 }

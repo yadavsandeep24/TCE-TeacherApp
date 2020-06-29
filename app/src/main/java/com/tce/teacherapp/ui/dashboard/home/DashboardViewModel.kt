@@ -28,15 +28,15 @@ class DashboardViewModel @Inject constructor(val mainRepository: MainRepository)
         data.isFaceLoginEnabled?.let {
             setFaceIdEbableddata(it)
         }
-        data.eventList?.let {
+        data.eventData?.let {
             setEventList(it)
         }
 
-        data.todayResourceList?.let {
+        data.todayResourceData?.let {
             setTodayResourceList(it)
         }
 
-        data.lastViewedResourceList?.let {
+        data.lastViewedResourceData?.let {
             setLastViewedResourceList(it)
         }
 
@@ -78,21 +78,21 @@ class DashboardViewModel @Inject constructor(val mainRepository: MainRepository)
         setViewState(update)
     }
 
-    private fun setEventList(list: ArrayList<Event>) {
+    private fun setEventList(event: EventData) {
         val update = getCurrentViewStateOrNew()
-        update.eventList = list
+        update.eventData = event
         setViewState(update)
     }
 
-    private fun setTodayResourceList(list: ArrayList<DashboardResource>) {
+    private fun setTodayResourceList(todayResource: TodaysResourceData) {
         val update = getCurrentViewStateOrNew()
-        update.todayResourceList = list
+        update.todayResourceData = todayResource
         setViewState(update)
     }
 
-    private fun setLastViewedResourceList(list: ArrayList<DashboardResourceType>) {
+    private fun setLastViewedResourceList(lastViewResource: LastViewResourceData) {
         val update = getCurrentViewStateOrNew()
-        update.lastViewedResourceList = list
+        update.lastViewedResourceData = lastViewResource
         setViewState(update)
     }
 
@@ -111,15 +111,15 @@ class DashboardViewModel @Inject constructor(val mainRepository: MainRepository)
             }
 
             is DashboardStateEvent.GetDashboardEvent -> {
-                mainRepository.getEventList(stateEvent.count,stateEvent = stateEvent)
+                mainRepository.getEventList(stateEvent.count,stateEvent.showOriginal,stateEvent = stateEvent)
             }
 
             is DashboardStateEvent.GetTodayResource -> {
-                mainRepository.getTodayResourceList(stateEvent.count,stateEvent = stateEvent)
+                mainRepository.getTodayResourceList(stateEvent.count,stateEvent.showOriginal,stateEvent = stateEvent)
             }
 
             is DashboardStateEvent.GetLastViewedResource -> {
-                mainRepository.getLastViewedResourceList(stateEvent.count,stateEvent = stateEvent)
+                mainRepository.getLastViewedResourceList(stateEvent.count,stateEvent.showOriginal,stateEvent = stateEvent)
             }
             is DashboardStateEvent.CheckLoginEnabledMode ->{
                 mainRepository.checkLoginMode(stateEvent = stateEvent)

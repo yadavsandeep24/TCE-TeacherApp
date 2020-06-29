@@ -10,6 +10,7 @@ import android.view.*
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatSpinner
+import androidx.biometric.BiometricManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -23,6 +24,7 @@ import com.tce.teacherapp.ui.dashboard.home.state.DASHBOARD_VIEW_STATE_BUNDLE_KE
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardStateEvent
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardViewState
 import com.tce.teacherapp.ui.login.LauncherActivity
+import com.tce.teacherapp.ui.showToast
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
@@ -91,7 +93,7 @@ constructor(viewModelFactory: ViewModelProvider.Factory
         setFaceIdContainerVisibility()
         setUpdatePasswordVisibility()
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && BiometricManager.from(requireContext()).canAuthenticate() == BiometricManager.BIOMETRIC_SUCCESS)  {
             binding.tbFingerPrint.isEnabled = true
             binding.tbFingerPrint.alpha = 1.0f
         }else{
@@ -100,12 +102,15 @@ constructor(viewModelFactory: ViewModelProvider.Factory
         }
 
         binding.tbFingerPrint.setOnCheckedChangeListener { _, isChecked ->
-            Log.d("SAN","binding.tbFingerPrint.setOnCheckedChangeListener")
-            viewModel.setStateEvent(DashboardStateEvent.FingerPrintEnableMode(isChecked))
+            if (BiometricManager.from(requireContext()).canAuthenticate() == BiometricManager.BIOMETRIC_SUCCESS) {
+                viewModel.setStateEvent(DashboardStateEvent.FingerPrintEnableMode(isChecked))
+            }else {
+                (activity as DashboardActivity).showToast(getString(R.string.setup_lock_screen))
+            }
+
         }
 
         binding.tbFaceid.setOnCheckedChangeListener { _, isChecked ->
-            Log.d("SAN","binding.tbFaceid.setOnCheckedChangeListener")
             viewModel.setStateEvent(DashboardStateEvent.FaceIdEnableMode(isChecked))
         }
 

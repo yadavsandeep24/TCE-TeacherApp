@@ -11,9 +11,9 @@ data class DashboardViewState (
     var profile: Profile?= null,
     var isFingerPrintLoginEnabled: Boolean? = null,
     var isFaceLoginEnabled: Boolean? = null,
-    var eventList : ArrayList<Event>? = null,
-    var todayResourceList : ArrayList<DashboardResource>? = null,
-    var lastViewedResourceList : ArrayList<DashboardResourceType>? = null,
+    var eventData : EventData? = null,
+    var todayResourceData: TodaysResourceData? = null,
+    var lastViewedResourceData : LastViewResourceData? = null,
     var isPasswordUpdated: Boolean? = null,
     var classList: List<ClassListsItem>? = null,
     var latestUpdateList : ArrayList<DashboardLatestUpdate>? =null

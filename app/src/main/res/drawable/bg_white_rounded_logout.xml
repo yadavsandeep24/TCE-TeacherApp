@@ -7,7 +7,7 @@
                         android:endColor="#fafaff"
                         android:angle="270" />
                     <corners
-                        android:radius="25dp"/>
+                        android:radius="20dp"/>
                     <padding
                         android:left="10dp"
                         android:top="10dp"
@@ -23,7 +23,7 @@
                         android:endColor="#fafaff"
                         android:angle="270" />
                     <corners
-                        android:radius="25dp"/>
+                        android:radius="20dp"/>
                     <padding
                         android:left="10dp"
                         android:top="10dp"

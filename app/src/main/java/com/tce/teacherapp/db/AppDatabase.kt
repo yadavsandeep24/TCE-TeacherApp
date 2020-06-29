@@ -8,9 +8,16 @@ import com.tce.teacherapp.db.dao.UserDao
 import com.tce.teacherapp.db.entity.*
 
 @Database(
-    entities = [Grade::class, Subject::class, Book::class, Node::class, NodeX::class, NodeXX::class, NodeXXX::class,Profile::class],
-    version = 1
-)
+    entities = [
+        Grade::class,
+        Subject::class,
+        Book::class,
+        Node::class,
+        NodeX::class,
+        NodeXX::class,
+        NodeXXX::class,
+        Profile::class
+    ], version = 2)
 @TypeConverters(StringListConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 

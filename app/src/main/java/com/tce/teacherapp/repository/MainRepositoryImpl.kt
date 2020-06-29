@@ -486,39 +486,43 @@ constructor(
     }
 
     override fun getProfile(stateEvent: StateEvent): Flow<DataState<DashboardViewState>> = flow {
-            withContext(IO){
-                    val userID = sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID,"")
-                    val userInfo = userID?.let { userDao.getUserByUserId(it) }
-                emit(
-                    DataState.data(
-                        data = DashboardViewState(profile = userInfo),
-                        stateEvent = stateEvent,
-                        response = null
-                    )
+        withContext(IO) {
+            val userID = sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID, "")
+            val userInfo = userID?.let { userDao.getUserByUserId(it) }
+            emit(
+                DataState.data(
+                    data = DashboardViewState(profile = userInfo),
+                    stateEvent = stateEvent,
+                    response = null
                 )
-            }
+            )
+        }
     }
 
     override fun updateProfilePic(
         resultUri: String,
         stateEvent: StateEvent
-    ): Flow<DataState<DashboardViewState>>  = flow{
+    ): Flow<DataState<DashboardViewState>> = flow {
         withContext((IO)) {
-            val userId =  sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID,"")
-            userDao.updateProfilePic(resultUri,userId!!)
+            val userId = sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID, "")
+            userDao.updateProfilePic(resultUri, userId!!)
         }
     }
 
     override fun setFingerPrintMode(
         checked: Boolean,
-        stateEvent: StateEvent): Flow<DataState<DashboardViewState>> = flow {
+        stateEvent: StateEvent
+    ): Flow<DataState<DashboardViewState>> = flow {
         withContext((IO)) {
-            val userId =  sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID,"")
-            userDao.updateFingerPrintLoginMode(checked,userId!!)
+            val userId = sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID, "")
+            userDao.updateFingerPrintLoginMode(checked, userId!!)
             userDao.updateFaceIdLoginMode(!checked, userId)
             emit(
                 DataState.data(
-                    data = DashboardViewState(isFingerPrintLoginEnabled = checked,isFaceLoginEnabled = !checked),
+                    data = DashboardViewState(
+                        isFingerPrintLoginEnabled = checked,
+                        isFaceLoginEnabled = !checked
+                    ),
                     stateEvent = stateEvent,
                     response = null
                 )
@@ -529,10 +533,10 @@ constructor(
 
     override fun getDashboardData(
         stateEvent: StateEvent
-    ): Flow<DataState<DashboardViewState>>  = flow {
+    ): Flow<DataState<DashboardViewState>> = flow {
 
         withContext(IO) {
-            val userID = sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID,"")
+            val userID = sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID, "")
             val userInfo = userID?.let { userDao.getUserByUserId(it) }
             val gson = Gson()
 
@@ -541,18 +545,47 @@ constructor(
                     .use { it.readText() }
                 var listType = object : TypeToken<ArrayList<Event>>() {}.type
                 val eventList: ArrayList<Event> = gson.fromJson(jsonString, listType)
-                val selectedEventList: ArrayList<Event> = ArrayList();
-                for (i in 0 until 3) {
-                    selectedEventList.add(eventList[i])
+                val selectedEventList: ArrayList<Event> = ArrayList()
+
+                var isShowLess = false
+                var nextEventCount = 4
+                if (eventList.size > 3) {
+                    for (i in 0 until 3) {
+                        selectedEventList.add(eventList[i])
+                    }
+                    if (eventList.size < 7) {
+                        nextEventCount = eventList.size - 3
+                    }
+                } else {
+                    for (i in 0 until eventList.size) {
+                        selectedEventList.add(eventList[i])
+                    }
+                    nextEventCount = 0
                 }
+                val eventData = EventData(isShowLess, nextEventCount, selectedEventList)
+
+
                 jsonString = application.assets.open("json/dashboardResource.json").bufferedReader()
                     .use { it.readText() }
                 listType = object : TypeToken<ArrayList<DashboardResource>>() {}.type
                 val resourceList: ArrayList<DashboardResource> = gson.fromJson(jsonString, listType)
-                val selectedTodayResourceList: ArrayList<DashboardResource> = ArrayList();
-                for (i in 0 until 2) {
-                    selectedTodayResourceList.add(resourceList[i])
+                val selectedTodayResourceList: ArrayList<DashboardResource> = ArrayList()
+
+                if(resourceList.size>2) {
+                    for (i in 0 until 2) {
+                        selectedTodayResourceList.add(resourceList[i])
+                    }
+                    if (resourceList.size < 8) {
+                        nextEventCount = resourceList.size - 2
+                    }
+                }else{
+                    for (i in 0 until resourceList.size) {
+                        selectedTodayResourceList.add(resourceList[i])
+                    }
+                    nextEventCount = 0
                 }
+
+                val todayResourceData  = TodaysResourceData(isShowLess,nextEventCount,selectedTodayResourceList)
 
                 jsonString =
                     application.assets.open("json/dashboardResourceType.json").bufferedReader()
@@ -560,28 +593,44 @@ constructor(
                 listType = object : TypeToken<ArrayList<DashboardResourceType>>() {}.type
                 val lastViewedResourceList: ArrayList<DashboardResourceType> =
                     gson.fromJson(jsonString, listType)
-                val selectedLastViewedResourceList: ArrayList<DashboardResourceType> = ArrayList();
-                for (i in 0 until 4) {
-                    selectedLastViewedResourceList.add(lastViewedResourceList[i])
+                val selectedLastViewedResourceList: ArrayList<DashboardResourceType> = ArrayList()
+
+                if(lastViewedResourceList.size>2){
+                    for (i in 0 until 2) {
+                        selectedLastViewedResourceList.add(lastViewedResourceList[i])
+                    }
+                    if (lastViewedResourceList.size < 12) {
+                        nextEventCount = lastViewedResourceList.size - 2
+                    }
+                }else{
+                    for (i in 0 until lastViewedResourceList.size) {
+                        selectedLastViewedResourceList.add(lastViewedResourceList[i])
+                    }
+                    nextEventCount = 0
                 }
+
+                val lastViewResourceData = LastViewResourceData(isShowLess,nextEventCount,selectedLastViewedResourceList)
 
                 jsonString = application.assets.open("json/class.json").bufferedReader()
                     .use { it.readText() }
                 val listClass = object : TypeToken<List<ClassListsItem>>() {}.type
                 var userClassList: List<ClassListsItem> = gson.fromJson(jsonString, listClass)
 
-                jsonString = application.assets.open("json/parentLatestUpdate.json").bufferedReader()
-                    .use { it.readText() }
-                val listLatestUpdate = object : TypeToken<ArrayList<DashboardLatestUpdate>>() {}.type
-                var latestUpdateList: ArrayList<DashboardLatestUpdate> = gson.fromJson(jsonString, listLatestUpdate)
+                jsonString =
+                    application.assets.open("json/parentLatestUpdate.json").bufferedReader()
+                        .use { it.readText() }
+                val listLatestUpdate =
+                    object : TypeToken<ArrayList<DashboardLatestUpdate>>() {}.type
+                var latestUpdateList: ArrayList<DashboardLatestUpdate> =
+                    gson.fromJson(jsonString, listLatestUpdate)
 
                 emit(
                     DataState.data(
                         data = DashboardViewState(
                             profile = userInfo,
-                            eventList = selectedEventList,
-                            todayResourceList = selectedTodayResourceList,
-                            lastViewedResourceList = selectedLastViewedResourceList,
+                            eventData = eventData,
+                            todayResourceData = todayResourceData,
+                            lastViewedResourceData = lastViewResourceData,
                             classList = userClassList,
                             latestUpdateList = latestUpdateList
                         ),
@@ -596,7 +645,11 @@ constructor(
 
     }
 
-    override fun getEventList(count : Int,stateEvent: StateEvent): Flow<DataState<DashboardViewState>> = flow {
+    override fun getEventList(
+        count: Int,
+        showOriginal: Boolean,
+        stateEvent: StateEvent
+    ): Flow<DataState<DashboardViewState>> = flow {
         withContext(IO) {
             var jsonString: String = ""
             try {
@@ -605,17 +658,40 @@ constructor(
                         .use { it.readText() }
                 val gson = Gson()
                 val listPersonType = object : TypeToken<ArrayList<Event>>() {}.type
-                var eventList: ArrayList<Event> = gson.fromJson(jsonString, listPersonType)
-
+                val eventList: ArrayList<Event> = gson.fromJson(jsonString, listPersonType)
                 var selectedList: ArrayList<Event> = ArrayList();
 
-                for (i in 0 until count) {
-                    selectedList.add(eventList.get(i))
-                }
+                var isShowLess = false
+                var nextEventCount = 4
 
+                if (showOriginal) {
+                    for (i in 0 until count) {
+                        selectedList.add(eventList[i])
+                    }
+                    if(eventList.size<count+4){
+                        nextEventCount = eventList.size-3
+                    }
+                } else {
+                    if (eventList.size > count) {
+                        for (i in 0 until count) {
+                            selectedList.add(eventList[i])
+                        }
+                        if (eventList.size <= count + nextEventCount) {
+                            nextEventCount = eventList.size
+                            isShowLess = true
+                        }
+                    } else {
+                        for (i in 0 until eventList.size) {
+                            selectedList.add(eventList[i])
+                        }
+                        nextEventCount = eventList.size - count
+                        isShowLess = true
+                    }
+                }
+                val eventData = EventData(isShowLess, nextEventCount, selectedList)
                 emit(
                     DataState.data(
-                        data = DashboardViewState(eventList = selectedList),
+                        data = DashboardViewState(eventData = eventData),
                         stateEvent = stateEvent,
                         response = null
                     )
@@ -630,6 +706,7 @@ constructor(
 
     override fun getTodayResourceList(
         count: Int,
+        showOriginal: Boolean,
         stateEvent: StateEvent
     ): Flow<DataState<DashboardViewState>> = flow {
 
@@ -645,15 +722,41 @@ constructor(
                 var eventList: ArrayList<DashboardResource> =
                     gson.fromJson(jsonString, listPersonType)
 
-                var selectedList: ArrayList<DashboardResource> = ArrayList();
+                var selectedList: ArrayList<DashboardResource> = ArrayList()
 
-                for (i in 0 until count) {
-                    selectedList.add(eventList.get(i))
+
+                var isShowLess = false
+                var nextEventCount = 6
+
+                if (showOriginal) {
+                    for (i in 0 until count) {
+                        selectedList.add(eventList[i])
+                    }
+                    if(eventList.size<count+6){
+                        nextEventCount = eventList.size-2
+                    }
+                } else {
+                    if (eventList.size > count) {
+                        for (i in 0 until count) {
+                            selectedList.add(eventList[i])
+                        }
+                        if (eventList.size <= count + nextEventCount) {
+                            nextEventCount = eventList.size
+                            isShowLess = true
+                        }
+                    } else {
+                        for (i in 0 until eventList.size) {
+                            selectedList.add(eventList[i])
+                        }
+                        nextEventCount = eventList.size - count
+                        isShowLess = true
+                    }
                 }
+                val todayResourceData = TodaysResourceData(isShowLess, nextEventCount, selectedList)
 
                 emit(
                     DataState.data(
-                        data = DashboardViewState(todayResourceList = selectedList),
+                        data = DashboardViewState(todayResourceData = todayResourceData),
                         stateEvent = stateEvent,
                         response = null
                     )
@@ -668,6 +771,7 @@ constructor(
 
     override fun getLastViewedResourceList(
         count: Int,
+        showOriginal: Boolean,
         stateEvent: StateEvent
     ): Flow<DataState<DashboardViewState>> = flow {
         withContext(IO) {
@@ -683,13 +787,38 @@ constructor(
 
                 var selectedList: ArrayList<DashboardResourceType> = ArrayList();
 
-                for (i in 0 until count) {
-                    selectedList.add(eventList.get(i))
+                var isShowLess = false
+                var nextEventCount = 10
+
+                if (showOriginal) {
+                    for (i in 0 until count) {
+                        selectedList.add(eventList[i])
+                    }
+                    if(eventList.size<count+10){
+                        nextEventCount = eventList.size-2
+                    }
+                } else {
+                    if (eventList.size > count) {
+                        for (i in 0 until count) {
+                            selectedList.add(eventList[i])
+                        }
+                        if (eventList.size <= count + nextEventCount) {
+                            nextEventCount = eventList.size
+                            isShowLess = true
+                        }
+                    } else {
+                        for (i in 0 until eventList.size) {
+                            selectedList.add(eventList[i])
+                        }
+                        nextEventCount = eventList.size - count
+                        isShowLess = true
+                    }
                 }
+                val lastViewResourceData = LastViewResourceData(isShowLess, nextEventCount, selectedList)
 
                 emit(
                     DataState.data(
-                        data = DashboardViewState(lastViewedResourceList = selectedList),
+                        data = DashboardViewState(lastViewedResourceData = lastViewResourceData),
                         stateEvent = stateEvent,
                         response = null
                     )
@@ -707,13 +836,16 @@ constructor(
         stateEvent: StateEvent
     ): Flow<DataState<DashboardViewState>> = flow {
         withContext((IO)) {
-            val userId =  sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID,"")
-            userDao.updateFaceIdLoginMode(checked,userId!!)
+            val userId = sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID, "")
+            userDao.updateFaceIdLoginMode(checked, userId!!)
             userDao.updateFingerPrintLoginMode(!checked, userId)
 
             emit(
                 DataState.data(
-                    data = DashboardViewState(isFingerPrintLoginEnabled = !checked,isFaceLoginEnabled = checked),
+                    data = DashboardViewState(
+                        isFingerPrintLoginEnabled = !checked,
+                        isFaceLoginEnabled = checked
+                    ),
                     stateEvent = stateEvent,
                     response = null
                 )
@@ -721,39 +853,45 @@ constructor(
         }
     }
 
-    override fun checkLoginMode(stateEvent: StateEvent): Flow<DataState<DashboardViewState>>  = flow{
-        withContext((IO)) {
-            val userName =  sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_EMAIL,"")
-            val userPassword =  sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_PASSWORD,"")
+    override fun checkLoginMode(stateEvent: StateEvent): Flow<DataState<DashboardViewState>> =
+        flow {
+            withContext((IO)) {
+                val userName =
+                    sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_EMAIL, "")
+                val userPassword =
+                    sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_PASSWORD, "")
 
-            Log.d("SAN", "userName-->$userName/userPassword-->$userPassword")
-            if (userName != null && userPassword != null) {
-                val userInfo = userDao.getUserInfoData(userName,userPassword)
-                if (userInfo != null) {
-                    Log.d("SAN", "fingerPrintMode-->${userInfo.fingerPrintMode}")
-                    emit(
-                        DataState.data(
-                            data = DashboardViewState(isFingerPrintLoginEnabled = userInfo.fingerPrintMode,isFaceLoginEnabled = userInfo.faceIdMode),
-                            stateEvent = stateEvent,
-                            response = null
+                Log.d("SAN", "userName-->$userName/userPassword-->$userPassword")
+                if (userName != null && userPassword != null) {
+                    val userInfo = userDao.getUserInfoData(userName, userPassword)
+                    if (userInfo != null) {
+                        Log.d("SAN", "fingerPrintMode-->${userInfo.fingerPrintMode}")
+                        emit(
+                            DataState.data(
+                                data = DashboardViewState(
+                                    isFingerPrintLoginEnabled = userInfo.fingerPrintMode,
+                                    isFaceLoginEnabled = userInfo.faceIdMode
+                                ),
+                                stateEvent = stateEvent,
+                                response = null
+                            )
                         )
-                    )
+                    }
                 }
             }
         }
-    }
 
     override fun updatePassword(
         oldPassword: String,
         newPassword: String,
         confirmPassword: String,
         stateEvent: StateEvent
-    ): Flow<DataState<DashboardViewState>> = flow{
+    ): Flow<DataState<DashboardViewState>> = flow {
         withContext((IO)) {
-            val userId =  sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID,"")
+            val userId = sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID, "")
 
             val dbOldPassword = userId?.let { userDao.getOldPassword(it) }
-            if(oldPassword.isEmpty() || newPassword.isEmpty() || confirmPassword.isEmpty()) {
+            if (oldPassword.isEmpty() || newPassword.isEmpty() || confirmPassword.isEmpty()) {
                 emit(
                     DataState.error(
                         response = Response(
@@ -765,7 +903,7 @@ constructor(
                         stateEvent = stateEvent
                     )
                 )
-            }else if(!newPassword.equals(confirmPassword,false)) {
+            } else if (!newPassword.equals(confirmPassword, false)) {
                 emit(
                     DataState.error(
                         response = Response(
@@ -777,10 +915,9 @@ constructor(
                         stateEvent = stateEvent
                     )
                 )
-            }else if(oldPassword.isNotEmpty() && !dbOldPassword.equals(oldPassword,false))
-            {
+            } else if (oldPassword.isNotEmpty() && !dbOldPassword.equals(oldPassword, false)) {
                 emit(
-                     DataState.error(
+                    DataState.error(
                         response = Response(
                             "Old Password mismatch.",
                             UIComponentType.Dialog,
@@ -790,9 +927,12 @@ constructor(
                         stateEvent = stateEvent
                     )
                 )
-            }else {
+            } else {
                 userDao.updatePassword(newPassword, userId!!)
-                sharedPrefsEditor.putString(PreferenceKeys.APP_PREFERENCES_KEY_PASSWORD,newPassword).commit()
+                sharedPrefsEditor.putString(
+                    PreferenceKeys.APP_PREFERENCES_KEY_PASSWORD,
+                    newPassword
+                ).commit()
                 emit(
                     DataState.error(
                         response = Response(
@@ -816,7 +956,7 @@ constructor(
         withContext((IO)) {
             val tempUserInfo = userDao.getUserByUserId(userInfo.id)
             if (tempUserInfo != null) {
-                userInfo.password =  tempUserInfo.password
+                userInfo.password = tempUserInfo.password
                 userInfo.fingerPrintMode = tempUserInfo.fingerPrintMode
                 userInfo.imageUrl = tempUserInfo.imageUrl
                 userInfo.faceIdMode = tempUserInfo.faceIdMode
@@ -836,29 +976,30 @@ constructor(
         }
     }
 
-    override fun getUserClassLists(stateEvent: StateEvent): Flow<DataState<DashboardViewState>> = flow {
-        var jsonString: String = ""
-        try {
+    override fun getUserClassLists(stateEvent: StateEvent): Flow<DataState<DashboardViewState>> =
+        flow {
+            var jsonString: String = ""
+            try {
 
-            jsonString = application.assets.open("json/class.json").bufferedReader()
-                .use { it.readText() }
-            val gson = Gson()
-            val listClass = object : TypeToken<List<ClassListsItem>>() {}.type
-            var userClassList: List<ClassListsItem> = gson.fromJson(jsonString, listClass)
+                jsonString = application.assets.open("json/class.json").bufferedReader()
+                    .use { it.readText() }
+                val gson = Gson()
+                val listClass = object : TypeToken<List<ClassListsItem>>() {}.type
+                var userClassList: List<ClassListsItem> = gson.fromJson(jsonString, listClass)
 
-            emit(
-                DataState.data(
-                    data = DashboardViewState(classList = userClassList),
-                    stateEvent = stateEvent,
-                    response = null
+                emit(
+                    DataState.data(
+                        data = DashboardViewState(classList = userClassList),
+                        stateEvent = stateEvent,
+                        response = null
+                    )
                 )
-            )
 
-        } catch (ioException: IOException) {
-            ioException.printStackTrace()
+            } catch (ioException: IOException) {
+                ioException.printStackTrace()
+            }
+
         }
-
-    }
 
     fun toGradeList(grades: List<GradeResponse>): List<Grade> {
         val gradeList: ArrayList<Grade> = ArrayList()
@@ -880,7 +1021,6 @@ constructor(
         }
         return bookList
     }
-
 
 
 }

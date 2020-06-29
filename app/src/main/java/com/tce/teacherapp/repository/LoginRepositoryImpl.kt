@@ -36,9 +36,10 @@ constructor(
         resetSession(true)
 
         withContext(IO){
-            var isFingerPrintLoginEnabled = true
+            var isFingerPrintLoginEnabled = false
             var isFaceIdLoginEnabled = false
             val userId = sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID,"")
+            val isQuickAccessScreenShow = sharedPreferences.getBoolean(PreferenceKeys.APP_PREFERENCES_KEY_USER_QUICK_ACCESS_SCREEN_SHOW,true)
 
             if(userId?.isNotEmpty()!!) {
                 val checkvalidUser =  userDao.getUserInfoData(email,password)
@@ -56,7 +57,7 @@ constructor(
                     isFaceIdLoginEnabled = checkvalidUser.faceIdMode
                     emit(
                         DataState.data(
-                            data = LoginViewState(loginFields = LoginFields("",email,password,isFingerPrintLoginEnabled,isFaceIdLoginEnabled)),
+                            data = LoginViewState(loginFields = LoginFields("",email,password,isFingerPrintLoginEnabled,isFaceIdLoginEnabled,isQuickAccessScreenShow)),
                             stateEvent = stateEvent,
                             response = null
                         )
@@ -89,7 +90,7 @@ constructor(
                 sharedPrefsEditor.putString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID,tempUserInfo.profile.id).commit()
                 emit(
                     DataState.data(
-                        data = LoginViewState(loginFields = LoginFields("",email,password,isFingerPrintLoginEnabled,isFaceIdLoginEnabled)),
+                        data = LoginViewState(loginFields = LoginFields("",email,password,isFingerPrintLoginEnabled,isFaceIdLoginEnabled,isQuickAccessScreenShow)),
                         stateEvent = stateEvent,
                         response = null
                     )
@@ -143,7 +144,7 @@ constructor(
                 }else{
                     emit(
                         DataState.data(
-                            data = LoginViewState(isFingerPrintLoginEnabled = true,isFaceLoginEnabled = false),
+                            data = LoginViewState(isFingerPrintLoginEnabled = false,isFaceLoginEnabled = false),
                             stateEvent = stateEvent,
                             response = null
                         )
@@ -152,7 +153,7 @@ constructor(
             }else{
                 emit(
                     DataState.data(
-                        data = LoginViewState(isFingerPrintLoginEnabled = true,isFaceLoginEnabled = false),
+                        data = LoginViewState(isFingerPrintLoginEnabled = false,isFaceLoginEnabled = false),
                         stateEvent = stateEvent,
                         response = null
                     )
@@ -174,6 +175,11 @@ constructor(
             )
         }
 
+    }
+
+    override fun setQuickAccessScreen(isShow: Boolean) {
+        sharedPrefsEditor.putBoolean(PreferenceKeys.APP_PREFERENCES_KEY_USER_QUICK_ACCESS_SCREEN_SHOW, isShow).commit()
+        sharedPrefsEditor.apply()
     }
 
 

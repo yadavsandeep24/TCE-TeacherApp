@@ -29,4 +29,6 @@ interface LoginRepository {
     fun getPreUserData(stateEvent: StateEvent
     ): Flow<DataState<LoginViewState>>
 
+    fun setQuickAccessScreen(isShow: Boolean)
+
 }
