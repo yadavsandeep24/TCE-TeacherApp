@@ -1,0 +1,75 @@
+[
+  {
+    "id": "1",
+    "title": "School updated attendance",
+    "subtitle": "yesterday at 10.11 am",
+    "icon": "ic_school_icon.xml",
+    "subList" : {
+      "attendance" : "Amit Boaz is marked present on 14 jan 2020",
+      "resourceList": [],
+      "eventList" : []
+    }
+  },
+  {
+    "id": "2",
+    "title": "New message in Arav chat",
+    "subtitle": "14 Jan 2020 at 10.20 am",
+    "icon": "ic_messaage_icon.xml",
+    "subList" : {}
+  },
+  {
+    "id": "3",
+    "title": "New message in Class Apple Chat",
+    "subtitle": "14 Jan 2020 at 10.20 am",
+    "icon": "ic_messaage_icon.xml",
+    "subList" : {}
+  },
+  {
+    "id": "4",
+    "title": "Teacher Bee taught 6 resources on 12 jan 2020",
+    "subtitle": "12 Jan 2020 at 11.20 pm",
+    "icon": "teacher_icon.png",
+    "subList" : {
+      "attendance" : "",
+      "resourceList": [
+        {
+          "id": "1",
+          "videoUrl": "video",
+          "videoThumb": "",
+          "imageUrl": "",
+          "icon": "ic_video_icon.xml",
+          "title": "Title Name 1"
+        },
+        {
+          "id": "2",
+          "videoUrl": "",
+          "videoThumb": "",
+          "imageUrl": "image",
+          "icon": "ic_image_icon.xml",
+          "title": "Title Name 2"
+        }
+      ],
+      "eventList" : []
+    }
+  },
+  {
+    "id": "5",
+    "title": "Teacher Payal shared an event",
+    "subtitle": "1 Jan 2020 at 10.20 pm",
+    "icon": "teacher_icon.png",
+    "subList" : {
+      "attendance" : "",
+      "resourceList": [],
+      "eventList" : [{
+        "id": "1",
+        "eventName": "School Sports Day 2020",
+        "imageUrl": "calendar.png",
+        "type": "Event",
+        "eventColor": "#FFFFFF",
+        "typeColor" : "#FFFFFF",
+        "iconBackColor" : "#1e6eff",
+        "eventBackColor": "#5591ff"
+      }]
+    }
+  }
+]

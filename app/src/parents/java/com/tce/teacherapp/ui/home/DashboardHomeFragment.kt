@@ -12,19 +12,20 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.EpoxyVisibilityTracker
+import com.bumptech.glide.Glide
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentDashboardHomeBinding
 import com.tce.teacherapp.db.entity.Event
 import com.tce.teacherapp.ui.dashboard.BaseDashboardFragment
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
-import com.tce.teacherapp.ui.dashboard.home.adapter.eventEpoxyHolder
-import com.tce.teacherapp.ui.dashboard.home.adapter.headerEpoxyHolder
-import com.tce.teacherapp.ui.dashboard.home.adapter.todayResourceEpoxyHolder
-import com.tce.teacherapp.ui.dashboard.home.adapter.viewedResourceEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.home.state.DASHBOARD_VIEW_STATE_BUNDLE_KEY
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardStateEvent
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardViewState
 import com.tce.teacherapp.ui.dashboard.messages.state.MESSAGE_VIEW_STATE_BUNDLE_KEY
+import com.tce.teacherapp.ui.dashboard.subjects.loadImage
+import com.tce.teacherapp.ui.home.adapter.eventEpoxyHolder
+import com.tce.teacherapp.ui.home.adapter.latestUpdateEpoxyHolder
+import com.tce.teacherapp.ui.home.adapter.parentHeaderEpoxyHolder
 import kotlinx.android.synthetic.parents.fragment_dashboard_home.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -91,47 +92,14 @@ constructor(
             findNavController().navigate(R.id.action_dashboardHomeFragment_to_settingsFragment)
         }
 
-        val bottomSheetBehavior =
-            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
-
-        bottomSheetBehavior.state =
-            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_COLLAPSED
-        bottomSheetBehavior.skipCollapsed = true
-
-        bottomSheetBehavior.addBottomSheetCallback(object :
-            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.BottomSheetCallback {
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                val rotation = when (newState) {
-                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED -> 0f
-                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_COLLAPSED -> 180f
-                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN -> 180f
-                    else -> return
-                }
-
-            }
-        })
-        binding.classContainer.setOnClickListener {
-            if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
-                binding.mainContainer.setBackgroundColor(resources.getColor(R.color.dim_color))
-                bottomSheetBehavior.state =
-                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
-            } else {
-                binding.mainContainer.setBackgroundColor(resources.getColor(R.color.dashboard_back))
-                bottomSheetBehavior.state =
-                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
-            }
-        }
-
-
-
         binding.mainEpoxyRecycler.layoutManager = GridLayoutManager(activity, 1)
         binding.mainEpoxyRecycler.setHasFixedSize(true)
         val epoxyVisibilityTracker = EpoxyVisibilityTracker()
         epoxyVisibilityTracker.attach(binding.mainEpoxyRecycler)
 
         viewModel.setStateEvent(DashboardStateEvent.GetDashboardData)
-       // viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(2, "today resource"))
-       // viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(2, "last viewed resource"))
+        // viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(2, "today resource"))
+        // viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(2, "last viewed resource"))
         subscribeObservers()
 
     }
@@ -140,9 +108,14 @@ constructor(
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             if (viewState != null) {
                 binding.mainEpoxyRecycler.withModels {
-                    headerEpoxyHolder {
-                        id(1)
-                        strName("Hi Payal !")
+                    viewState.profile?.let {
+                        parentHeaderEpoxyHolder {
+                            id(1)
+                            strName("Hi ${it.name} !")
+                            strLastSync("2 March 2020, 8 am")
+                            val glide by lazy { Glide.with(binding.imgProfile.context) }
+                            glide.loadImage(it.imageUrl).into(binding.imgProfile)
+                        }
                     }
                     viewState.eventList?.let {
                         eventEpoxyHolder {
@@ -157,26 +130,17 @@ constructor(
                         }
                     }
 
-                    viewState.todayResourceList?.let {
-                        todayResourceEpoxyHolder {
+                    viewState.latestUpdateList?.let {
+                        latestUpdateEpoxyHolder {
+
                             id(3)
-                            strTitle("Today's Resources")
-                            resourceList(it)
-                            listener {
-                                //viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(3, "last viewed resource"))
-                            }
+                            strTitle("Latest Update")
+                            latestUpdateList(it)
+
+
                         }
                     }
-                    viewState.lastViewedResourceList?.let {
-                        viewedResourceEpoxyHolder {
-                            id(4)
-                            strTitle("Last Viewed Resources")
-                            resourceList(it)
-                            listener {
-                                //viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(3, "today resource"))
-                            }
-                        }
-                    }
+
                 }
             }
         })

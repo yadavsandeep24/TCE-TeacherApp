@@ -222,4 +222,7 @@ dependencies {
 
     api 'org.apache.commons:commons-lang3:3.5'
 
+    //for dot indicator animation
+    implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
+
 }

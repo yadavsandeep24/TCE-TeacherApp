@@ -43,6 +43,16 @@ class DashboardViewModel @Inject constructor(val mainRepository: MainRepository)
         data.classList?.let {
             setuserClassData(it)
         }
+
+        data.latestUpdateList?.let {
+            setLatestUpdateList(it)
+        }
+    }
+
+    private fun setLatestUpdateList(it: ArrayList<DashboardLatestUpdate>) {
+        val update = getCurrentViewStateOrNew()
+        update.latestUpdateList = it
+        setViewState(update)
     }
 
     private fun setuserClassData(it: List<ClassListsItem>) {

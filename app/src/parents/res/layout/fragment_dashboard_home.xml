@@ -5,8 +5,7 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/home_background">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/main_container"
@@ -18,52 +17,16 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#fff098"
+                android:background="@color/home_background"
                 tools:context=".ui.home.DashboardHomeFragment">
 
-                <LinearLayout
-                    android:id="@+id/class_container"
-                    android:layout_width="wrap_content"
-                    android:layout_height="35dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/class_selector"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="5dp"
-                    android:visibility="invisible"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="5dp">
+                    <com.tce.teacherapp.util.CustomCircularImageView
+                        android:id="@+id/img_profile"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginLeft="10dp"/>
 
-                    <com.tce.teacherapp.util.RubikBoldTextview
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:background="@drawable/ic_dummy_jr"
-                        android:gravity="center"
-                        android:text="JR"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/font_size_12_dp" />
 
-                    <com.tce.teacherapp.util.RubikBoldTextview
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="Junior KG A"
-                        android:textColor="@color/color_black"
-                        android:textSize="@dimen/font_size_14_dp">
-
-                    </com.tce.teacherapp.util.RubikBoldTextview>
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:src="@drawable/down_arrow_black">
-
-                    </androidx.appcompat.widget.AppCompatImageView>
-
-                </LinearLayout>
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/img_setting"
@@ -82,7 +45,8 @@
                 android:id="@+id/main_epoxy_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="gone">
+                android:background="#f5f8ff"
+                android:visibility="visible">
 
             </com.airbnb.epoxy.EpoxyRecyclerView>
         </LinearLayout>

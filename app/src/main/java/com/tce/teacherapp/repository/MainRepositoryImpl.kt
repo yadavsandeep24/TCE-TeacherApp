@@ -567,10 +567,13 @@ constructor(
 
                 jsonString = application.assets.open("json/class.json").bufferedReader()
                     .use { it.readText() }
-                val gson = Gson()
                 val listClass = object : TypeToken<List<ClassListsItem>>() {}.type
                 var userClassList: List<ClassListsItem> = gson.fromJson(jsonString, listClass)
 
+                jsonString = application.assets.open("json/parentLatestUpdate.json").bufferedReader()
+                    .use { it.readText() }
+                val listLatestUpdate = object : TypeToken<ArrayList<DashboardLatestUpdate>>() {}.type
+                var latestUpdateList: ArrayList<DashboardLatestUpdate> = gson.fromJson(jsonString, listLatestUpdate)
 
                 emit(
                     DataState.data(
@@ -579,7 +582,8 @@ constructor(
                             eventList = selectedEventList,
                             todayResourceList = selectedTodayResourceList,
                             lastViewedResourceList = selectedLastViewedResourceList,
-                            classList = userClassList
+                            classList = userClassList,
+                            latestUpdateList = latestUpdateList
                         ),
                         stateEvent = stateEvent,
                         response = null
