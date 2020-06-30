@@ -5,7 +5,8 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffcd23">
+        android:background="#ffcd23"
+        android:fitsSystemWindows="true">
 
         <ImageView
             android:id="@+id/iv_logo"
@@ -33,6 +34,7 @@
             android:scrollbarAlwaysDrawVerticalTrack="true"
             android:fadeScrollbars="false"
             android:visibility="gone"
+            android:layout_alignWithParentIfMissing="true"
             android:layout_above="@+id/divider_container">
         <RelativeLayout
             android:layout_width="match_parent"
@@ -190,9 +192,6 @@
             android:textColor="@color/white"
             android:background="@drawable/register_btn_bg"
             android:textSize="@dimen/font_size_14_dp"/>
-
-
-
 
         <ProgressBar
             android:id="@+id/loading"

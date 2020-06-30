@@ -11,6 +11,7 @@ import androidx.annotation.RequiresApi
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.tce.teacherapp.R
@@ -21,6 +22,7 @@ import com.tce.teacherapp.ui.login.state.LoginStateEvent
 import com.tce.teacherapp.ui.showToast
 import com.tce.teacherapp.util.Constants
 import com.tce.teacherapp.util.CustomAnimationDrawableNew
+import com.tce.teacherapp.util.MessageConstant
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import javax.crypto.Cipher
@@ -94,6 +96,21 @@ class QuickAccessSettingFragment
             val promptInfo = BiometricHelper.createPromptInfo(requireContext())
             biometricPrompt.authenticate(promptInfo)
         }
+        subscribeObservers()
+    }
+
+    private fun subscribeObservers() {
+
+        viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
+            if (viewState != null) {
+                viewState.loginFields?.let {
+                    val i = Intent(activity, DashboardActivity::class.java)
+                    startActivity(i)
+                    activity?.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                    activity?.finish()
+                }
+            }
+        })
     }
 
     private inner class TouchIdClickListener internal constructor(
@@ -132,6 +149,13 @@ class QuickAccessSettingFragment
             }
 
             override fun onAnimationFinish() {
+                viewModel.setStateEvent(
+                    LoginStateEvent.LoginAttemptEvent(
+                        MessageConstant.LOGIN_DEFAULT_USERNAME,
+                        MessageConstant.LOGIN_DEFAULT_USERNAME
+                    )
+                )
+
                 val i = Intent(activity, DashboardActivity::class.java)
                 startActivity(i)
                 activity?.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)

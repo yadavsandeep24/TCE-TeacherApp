@@ -22,8 +22,10 @@ import com.tce.teacherapp.ui.login.BiometricHelper.Companion.createBiometricProm
 import com.tce.teacherapp.ui.login.BiometricHelper.Companion.createPromptInfo
 import com.tce.teacherapp.ui.login.BiometricHelper.Companion.setupCipher
 import com.tce.teacherapp.ui.login.state.LoginStateEvent
+import com.tce.teacherapp.util.Constants
 import com.tce.teacherapp.util.Constants.Companion.DEFAULT_KEY_NAME
 import com.tce.teacherapp.util.CustomAnimationDrawableNew
+import com.tce.teacherapp.util.MessageConstant
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import javax.crypto.Cipher
@@ -79,6 +81,12 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
 
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             if (viewState != null) {
+                viewState.loginFields?.let {
+                    val i = Intent(activity, DashboardActivity::class.java)
+                    startActivity(i)
+                    activity?.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                    activity?.finish()
+                }
             }
         })
     }
@@ -94,7 +102,7 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
 
                 binding.tvLoginTouchId.setOnClickListener {
                     val promptInfo = createPromptInfo(requireContext())
-                    if(binding.tvLoginTouchId.text.toString().equals(resources.getString(R.string.lbl_use_face_id),true)){
+                    if(binding.tvLoginTouchId.text.toString().equals(resources.getString(R.string.lbl_use_face_id),true)) {
                         viewModel.setStateEvent(LoginStateEvent.FaceIdEnableMode(true))
                         biometricPrompt.authenticate(promptInfo)
                     }else{
@@ -153,10 +161,12 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
             }
 
             override fun onAnimationFinish() {
-                val i = Intent(activity, DashboardActivity::class.java)
-                startActivity(i)
-                activity?.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-                activity?.finish()
+                viewModel.setStateEvent(
+                    LoginStateEvent.LoginAttemptEvent(
+                        MessageConstant.LOGIN_DEFAULT_USERNAME,
+                        MessageConstant.LOGIN_DEFAULT_USERNAME
+                    )
+                )
             }
         }
         binding.ivThumb.setBackgroundDrawable(cad)

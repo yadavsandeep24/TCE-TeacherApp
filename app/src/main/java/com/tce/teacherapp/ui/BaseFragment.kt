@@ -1,13 +1,20 @@
 package com.tce.teacherapp.ui
 
+import android.R
 import android.content.Context
+import android.graphics.Rect
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.View
+import android.view.ViewGroup
+import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
+
 
 @FlowPreview
 @ExperimentalCoroutinesApi
@@ -48,6 +55,10 @@ abstract class BaseFragment(
                 Log.e("SubjectListfragment", "$context must implement UICommunicationListener")
             }
         }
+    }
+
+    interface OnKeyboardVisibilityListener {
+        fun onVisibilityChanged(visible: Boolean)
     }
 }
 

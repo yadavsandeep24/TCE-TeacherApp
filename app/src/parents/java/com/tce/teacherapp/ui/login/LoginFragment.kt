@@ -1,6 +1,7 @@
 package com.tce.teacherapp.ui.login
 
 import android.content.Intent
+import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
 import android.text.SpannableString
@@ -10,9 +11,12 @@ import android.text.method.PasswordTransformationMethod
 import android.text.method.SingleLineTransformationMethod
 import android.text.style.ClickableSpan
 import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -38,7 +42,7 @@ import javax.inject.Inject
 class LoginFragment
 @Inject
 constructor(viewModelFactory: ViewModelProvider.Factory)
-    : BaseFragment(R.layout.fragment_login) {
+    : BaseFragment(R.layout.fragment_login), BaseFragment.OnKeyboardVisibilityListener {
     var isPassWordVisible : Boolean = true
 
     private lateinit var binding: FragmentLoginBinding
@@ -60,6 +64,7 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
         Log.d("SAN", "LoginFragment-->onViewCreated")
         val isForceFullLogin = arguments?.getBoolean("isForceFullLoginShow")
         Log.d("SAN", "isForceFullLogin-->$isForceFullLogin")
+        setKeyboardVisibilityListener(this)
         if (isForceFullLogin != null && isForceFullLogin) {
             binding.srContainer.visibility = View.VISIBLE
             binding.ivLogo.visibility = View.VISIBLE
@@ -131,23 +136,30 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
                     }
                 }
 
-                viewState.profile?.let {
-                    if(it.faceIdMode || it.fingerPrintMode) {
-                        viewState.profile = null
-                        findNavController().navigate(R.id.action_loginFragment_to_loginOptionFragment)
-                    }else {
-                        binding.srContainer.visibility = View.VISIBLE
-                        binding.ivLogo.visibility = View.VISIBLE
-                        binding.flBottom.visibility = View.VISIBLE
-                        binding.dividerContainer.visibility = View.VISIBLE
-                        binding.tvRegister.visibility = View.VISIBLE
-                        val userName = it.email
-                        val password = it.password
-                        binding.edtUserName.setText(userName)
-                        binding.edtPassword.setText(password)
-                        uiCommunicationListener.hideSoftKeyboard()
+                if(viewState.profile == null) {
+                    binding.srContainer.visibility = View.VISIBLE
+                    binding.ivLogo.visibility = View.VISIBLE
+                    binding.flBottom.visibility = View.VISIBLE
+                    binding.dividerContainer.visibility = View.VISIBLE
+                    binding.tvRegister.visibility = View.VISIBLE
+                }else {
+                    viewState.profile?.let {
+                        if (it.faceIdMode || it.fingerPrintMode) {
+                            viewState.profile = null
+                            findNavController().navigate(R.id.action_loginFragment_to_loginOptionFragment)
+                        } else {
+                            binding.srContainer.visibility = View.VISIBLE
+                            binding.ivLogo.visibility = View.VISIBLE
+                            binding.flBottom.visibility = View.VISIBLE
+                            binding.dividerContainer.visibility = View.VISIBLE
+                            binding.tvRegister.visibility = View.VISIBLE
+                            val userName = it.email
+                            val password = it.password
+                            binding.edtUserName.setText(userName)
+                            binding.edtPassword.setText(password)
+                            uiCommunicationListener.hideSoftKeyboard()
+                        }
                     }
-
                 }
             }
         })
@@ -189,6 +201,46 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
             ds.color = resources.getColor(R.color.forget_password_text)
         }
 
+    }
+      private fun setKeyboardVisibilityListener(onKeyboardVisibilityListener: OnKeyboardVisibilityListener) {
+        val parentView = binding.root
+        parentView.viewTreeObserver.addOnGlobalLayoutListener(object :
+            ViewTreeObserver.OnGlobalLayoutListener {
+            private var alreadyOpen = false
+            private val defaultKeyboardHeightDP = 100
+            private val EstimatedKeyboardDP =
+                defaultKeyboardHeightDP + if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) 48 else 0
+            private val rect: Rect = Rect()
+            override fun onGlobalLayout() {
+                val estimatedKeyboardHeight = TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP,
+                    EstimatedKeyboardDP.toFloat(),
+                    parentView.resources.displayMetrics
+                ).toInt()
+                parentView.getWindowVisibleDisplayFrame(rect)
+                val heightDiff: Int =
+                    parentView.rootView.height - (rect.bottom - rect.top)
+                val isShown = heightDiff >= estimatedKeyboardHeight
+                if (isShown == alreadyOpen) {
+                    Log.i("Keyboard state", "Ignoring global layout change...")
+                    return
+                }
+                alreadyOpen = isShown
+                onKeyboardVisibilityListener.onVisibilityChanged(isShown)
+            }
+        })
+    }
+
+    override fun onVisibilityChanged(visible: Boolean) {
+        if (visible) {
+            binding.flBottom.visibility = View.GONE
+            binding.dividerContainer.visibility = View.GONE
+            binding.tvRegister.visibility = View.GONE
+        }else{
+            binding.flBottom.visibility = View.VISIBLE
+            binding.dividerContainer.visibility = View.VISIBLE
+            binding.tvRegister.visibility = View.VISIBLE
+        }
     }
 
 }

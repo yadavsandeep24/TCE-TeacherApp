@@ -26,12 +26,10 @@ class LoginViewModel @Inject constructor(val loginRepository: LoginRepository) :
             setFaceIdEbableddata(it)
         }
 
-        data.profile?.let {
-            setProfileData(it)
-        }
+        setProfileData(data.profile)
     }
 
-    private fun setProfileData(it: Profile) {
+    private fun setProfileData(it: Profile?) {
         val update = getCurrentViewStateOrNew()
         update.profile = it
         setViewState(update)
