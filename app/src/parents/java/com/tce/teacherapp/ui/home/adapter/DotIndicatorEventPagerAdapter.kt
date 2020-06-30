@@ -7,7 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.tce.teacherapp.R
 import com.tce.teacherapp.db.entity.Event
@@ -44,6 +47,7 @@ class DotIndicatorEventPagerAdapter :
         internal var imgIcon: AppCompatImageView
         internal var iconContainer: LinearLayout
         internal var eventContainer: LinearLayout
+        internal var mainContainer: LinearLayout
 
         init {
             tvEventType = itemView.findViewById(R.id.tv_event_type)
@@ -52,6 +56,7 @@ class DotIndicatorEventPagerAdapter :
             imgIcon = itemView.findViewById(R.id.img_icon)
             iconContainer = itemView.findViewById(R.id.icon_container)
             eventContainer = itemView.findViewById(R.id.event_container)
+            mainContainer = itemView.findViewById(R.id.main_container)
 
         }
     }
@@ -75,5 +80,15 @@ class DotIndicatorEventPagerAdapter :
         holder.tvEventType.setTextColor(Color.parseColor(mEventList!!.get(position).typeColor))
         holder.eventContainer.setBackgroundColor(Color.parseColor(mEventList!!.get(position).eventBackColor))
         holder.iconContainer.setBackgroundColor(Color.parseColor(mEventList!!.get(position).iconBackColor))
+
+        Utility.setSelectorRoundedCornerWithDynamicColor(
+            holder.eventContainer!!.context,  holder.eventContainer!!, 0,
+            mEventList!!.get(position).eventBackColor, mEventList!!.get(position).iconBackColor,
+            R.color.transparent, R.color.transparent, 0
+        )
+
+        holder.eventContainer.setOnClickListener(View.OnClickListener {
+          Toast.makeText(holder.mainContainer.context, "Click" + mEventList!!.get(position).type, Toast.LENGTH_LONG).show()
+        })
     }
 }

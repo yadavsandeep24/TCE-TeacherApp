@@ -8,6 +8,7 @@ import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.tce.teacherapp.R
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
+import com.tce.teacherapp.util.Utility
 
 @EpoxyModelClass(layout = R.layout.list_item_dashboard_filter)
 abstract class ClassListEpoxyHolder : EpoxyModelWithHolder<ClassHolder>(){
@@ -30,6 +31,13 @@ abstract class ClassListEpoxyHolder : EpoxyModelWithHolder<ClassHolder>(){
 
     override fun bind(holder: ClassHolder) {
         super.bind(holder)
+
+        Utility.setSelectorRoundedCorner(
+            holder.mainContainer!!.context,  holder.mainContainer!!, 0,
+            R.color.transparent, R.color.dim_color,
+            R.color.transparent, R.color.transparent, 0
+        )
+
 
         holder.mainContainer.setOnClickListener{listener()}
         holder.tvIcon.setText(shortName)

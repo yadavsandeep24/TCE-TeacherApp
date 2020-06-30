@@ -4,7 +4,9 @@ import android.graphics.drawable.Drawable
 import android.text.TextUtils
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.*
@@ -33,12 +35,35 @@ abstract class LatestUpdateChildItemEpoxyHolder : EpoxyModelWithHolder<ViewedChi
     @EpoxyAttribute
     lateinit var subList: LatestUpdateSubList
 
+    @EpoxyAttribute
+    lateinit var listener: () -> Unit
+
+    @EpoxyAttribute
+    lateinit var listenerPlanner: () -> Unit
+
 
     override fun bind(holder: ViewedChildHolder) {
 
         holder.tvTitle.setText(title)
         holder.tvSubTitle.setText(subTitle)
         holder.imgIcon.background = imageDrawable
+
+        Utility.setSelectorRoundedCorner(
+            holder.topContainer!!.context,  holder.topContainer!!, 0,
+            R.color.transparent, R.color.dim_color,
+            R.color.transparent, R.color.transparent, 0
+        )
+
+        Utility.setSelectorRoundedCorner(
+            holder.tvViewAll!!.context,  holder.tvViewAll!!, 0,
+            R.color.orange, R.color.dim_color,
+            R.color.transparent, R.color.transparent, 50
+        )
+
+        holder.tvViewAll.setOnClickListener{listenerPlanner()}
+
+        holder.topContainer.setOnClickListener{listener()}
+
 
         if (subList.attendance == null && subList.resourceList == null && subList.eventList == null) {
             holder.sublistContainer.visibility = View.GONE
@@ -81,6 +106,9 @@ abstract class LatestUpdateChildItemEpoxyHolder : EpoxyModelWithHolder<ViewedChi
                                 )?.let { it1 ->
                                     imageDrawable(it1)
                                 }
+                                listener {
+                                    Toast.makeText(holder.rvResource.context, "Click " + type.title, Toast.LENGTH_LONG).show()
+                                }
                             }
                         }
 
@@ -117,6 +145,9 @@ abstract class LatestUpdateChildItemEpoxyHolder : EpoxyModelWithHolder<ViewedChi
                                 )?.let { it1 ->
                                     imageDrawable(it1)
                                 }
+                                listener {
+                                    Toast.makeText(holder.rvEvent.context, "Click " + event.type, Toast.LENGTH_LONG).show()
+                                }
                             }
                         }
                     }
@@ -140,6 +171,7 @@ class ViewedChildHolder : KotlinEpoxyHolder() {
     val rvResource by bind<EpoxyRecyclerView>(R.id.rv_resource)
     val tvViewPlanner by bind<TextView>(R.id.tvViewAll)
     val rvEvent by bind<EpoxyRecyclerView>(R.id.rv_event)
+    val topContainer by bind<RelativeLayout>(R.id.top_container)
 
-
+    val tvViewAll by bind<TextView>(R.id.tvViewAll)
 }

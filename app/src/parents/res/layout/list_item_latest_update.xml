@@ -19,6 +19,7 @@
         android:orientation="vertical">
 
         <RelativeLayout
+            android:id="@+id/top_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="10dp">
@@ -51,6 +52,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="#8c91a5"
                     android:textSize="@dimen/font_size_9_dp"
+                    android:layout_marginTop="5dp"
                     android:text="On my way at 6.17 pm">
 
                 </com.tce.teacherapp.util.RubikMediumTextview>

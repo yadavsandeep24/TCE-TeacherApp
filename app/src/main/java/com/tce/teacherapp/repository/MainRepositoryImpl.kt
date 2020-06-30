@@ -532,6 +532,7 @@ constructor(
     }
 
     override fun getDashboardData(
+        id: Int,
         stateEvent: StateEvent
     ): Flow<DataState<DashboardViewState>> = flow {
 
@@ -541,8 +542,14 @@ constructor(
             val gson = Gson()
 
             try {
-                var jsonString = application.assets.open("json/event.json").bufferedReader()
-                    .use { it.readText() }
+                var jsonString :String
+                if(id > 1) {
+                    jsonString = application.assets.open("json/event1.json").bufferedReader()
+                        .use { it.readText() }
+                }else{
+                    jsonString = application.assets.open("json/event.json").bufferedReader()
+                        .use { it.readText() }
+                }
                 var listType = object : TypeToken<ArrayList<Event>>() {}.type
                 val eventList: ArrayList<Event> = gson.fromJson(jsonString, listType)
                 val selectedEventList: ArrayList<Event> = ArrayList()
@@ -565,8 +572,15 @@ constructor(
                 val eventData = EventData(isShowLess, nextEventCount, selectedEventList)
 
 
-                jsonString = application.assets.open("json/dashboardResource.json").bufferedReader()
-                    .use { it.readText() }
+                if(id > 1) {
+                    jsonString =
+                        application.assets.open("json/dashboardResource1.json").bufferedReader()
+                            .use { it.readText() }
+                }else{
+                    jsonString =
+                        application.assets.open("json/dashboardResource.json").bufferedReader()
+                            .use { it.readText() }
+                }
                 listType = object : TypeToken<ArrayList<DashboardResource>>() {}.type
                 val resourceList: ArrayList<DashboardResource> = gson.fromJson(jsonString, listType)
                 val selectedTodayResourceList: ArrayList<DashboardResource> = ArrayList()
@@ -587,9 +601,15 @@ constructor(
 
                 val todayResourceData  = TodaysResourceData(isShowLess,nextEventCount,selectedTodayResourceList)
 
-                jsonString =
-                    application.assets.open("json/dashboardResourceType.json").bufferedReader()
-                        .use { it.readText() }
+                if(id>1) {
+                    jsonString =
+                        application.assets.open("json/dashboardResourceType1.json").bufferedReader()
+                            .use { it.readText() }
+                }else{
+                    jsonString =
+                        application.assets.open("json/dashboardResourceType.json").bufferedReader()
+                            .use { it.readText() }
+                }
                 listType = object : TypeToken<ArrayList<DashboardResourceType>>() {}.type
                 val lastViewedResourceList: ArrayList<DashboardResourceType> =
                     gson.fromJson(jsonString, listType)

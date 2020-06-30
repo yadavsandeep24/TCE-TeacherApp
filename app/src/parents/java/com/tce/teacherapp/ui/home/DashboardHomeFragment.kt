@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -28,6 +29,7 @@ import com.tce.teacherapp.ui.home.adapter.childEpoxyHolder
 import com.tce.teacherapp.ui.home.adapter.eventEpoxyHolder
 import com.tce.teacherapp.ui.home.adapter.latestUpdateEpoxyHolder
 import com.tce.teacherapp.ui.home.adapter.parentHeaderEpoxyHolder
+import com.tce.teacherapp.util.Utility
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.parents.fragment_dashboard_home.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -106,7 +108,17 @@ constructor(
         val epoxyVisibilityTracker1 = EpoxyVisibilityTracker()
         epoxyVisibilityTracker1.attach(binding.rvFilter)
 
-        viewModel.setStateEvent(DashboardStateEvent.GetDashboardData)
+        Utility.setSelectorRoundedCorner(
+            requireContext(),  binding.addChild, 0,
+            R.color.transparent, R.color.dim_color,
+            R.color.transparent, R.color.transparent, 0
+        )
+
+        binding.addChild.setOnClickListener(View.OnClickListener {
+            Toast.makeText(requireContext(), "Add child", Toast.LENGTH_LONG).show()
+        })
+
+        viewModel.setStateEvent(DashboardStateEvent.GetDashboardData(1))
         // viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(2, "today resource"))
         // viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(2, "last viewed resource"))
         subscribeObservers()
@@ -156,8 +168,8 @@ constructor(
                             it.eventList?.let {
                                 eventList(it)
                             }
-                            listener {
-                                //viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(7, "event"))
+                            locationListener {
+                                Toast.makeText(requireContext(), "Track Location" , Toast.LENGTH_LONG).show()
                             }
                         }
                     }
@@ -179,6 +191,9 @@ constructor(
                                 childEpoxyHolder {
                                     id(child.id)
                                     strStudentName(child.name)
+                                    listener {
+
+                                    }
                                 }
                             }
                         }

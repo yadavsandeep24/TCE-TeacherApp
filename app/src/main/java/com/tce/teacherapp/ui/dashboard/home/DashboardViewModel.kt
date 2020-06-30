@@ -117,7 +117,7 @@ class DashboardViewModel @Inject constructor(val mainRepository: MainRepository)
             }
 
             is DashboardStateEvent.GetDashboardData -> {
-                mainRepository.getDashboardData(stateEvent = stateEvent)
+                mainRepository.getDashboardData(stateEvent.id, stateEvent = stateEvent)
             }
 
             is DashboardStateEvent.GetDashboardEvent -> {

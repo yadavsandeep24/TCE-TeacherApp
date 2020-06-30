@@ -10,6 +10,7 @@ import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.tce.teacherapp.R
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
+import com.tce.teacherapp.util.Utility
 
 @EpoxyModelClass(layout = R.layout.list_item_child)
 abstract  class ChildEpoxyHolder : EpoxyModelWithHolder<InfoHolder>(){
@@ -22,10 +23,16 @@ abstract  class ChildEpoxyHolder : EpoxyModelWithHolder<InfoHolder>(){
     override fun bind(holder: InfoHolder) {
 
         holder.tvStudentName.text = strStudentName
+
+        Utility.setSelectorRoundedCorner(
+            holder.lnrMainContainer!!.context,  holder.lnrMainContainer!!, 0, R.color.transparent, R.color.dim_color,
+            R.color.transparent, R.color.transparent, 0
+        )
+
         holder.lnrMainContainer.setOnClickListener { listener() }
         if(strStudentName.contains("Amit")){
             holder.iconTick.visibility = View.VISIBLE
-            holder.tvStudentName.setTextColor(Color.BLUE)
+            holder.tvStudentName.setTextColor(Color.parseColor("#616fff"))
         }else
         {
             holder.tvStudentName.setTextColor(Color.BLACK)

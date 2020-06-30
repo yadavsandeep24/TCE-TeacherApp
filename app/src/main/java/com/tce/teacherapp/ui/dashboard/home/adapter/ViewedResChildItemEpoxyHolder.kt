@@ -3,6 +3,7 @@ package com.tce.teacherapp.ui.dashboard.home.adapter
 import android.graphics.drawable.Drawable
 import android.text.TextUtils
 import android.view.View
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import com.airbnb.epoxy.EpoxyAttribute
@@ -29,6 +30,8 @@ abstract class ViewedResChildItemEpoxyHolder : EpoxyModelWithHolder<ViewedChildH
     @EpoxyAttribute
     lateinit var imageDrawable : Drawable
 
+    @EpoxyAttribute
+    lateinit var listener: () -> Unit
 
     override fun bind(holder: ViewedChildHolder) {
 
@@ -40,6 +43,7 @@ abstract class ViewedResChildItemEpoxyHolder : EpoxyModelWithHolder<ViewedChildH
             holder.imgPlay.visibility = View.GONE
         }
 
+        holder.mainContainer.setOnClickListener{listener()}
     }
 }
 
@@ -47,4 +51,5 @@ class ViewedChildHolder : KotlinEpoxyHolder(){
     val imgIcon by bind<AppCompatImageView>(R.id.img_icon)
     val imgPlay by bind<AppCompatImageView>(R.id.img_play)
     val tvTitle by bind<TextView>(R.id.tv_subject_name)
+    val mainContainer by bind<RelativeLayout>(R.id.main_container)
 }

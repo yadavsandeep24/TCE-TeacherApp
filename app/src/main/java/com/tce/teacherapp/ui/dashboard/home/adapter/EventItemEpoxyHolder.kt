@@ -10,6 +10,7 @@ import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.tce.teacherapp.R
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
+import com.tce.teacherapp.util.Utility
 
 @EpoxyModelClass(layout = R.layout.dashboard_event_list_item)
 abstract class EventItemEpoxyHolder : EpoxyModelWithHolder<ItemHolder>() {
@@ -33,6 +34,10 @@ abstract class EventItemEpoxyHolder : EpoxyModelWithHolder<ItemHolder>() {
     @EpoxyAttribute
     lateinit var imageUrl: String
 
+    @EpoxyAttribute
+    lateinit var listener: () -> Unit
+
+
     override fun bind(holder: ItemHolder) {
         holder.tvEvent.setText(strEvent)
         holder.tvEventType.setText(strEventType)
@@ -41,6 +46,13 @@ abstract class EventItemEpoxyHolder : EpoxyModelWithHolder<ItemHolder>() {
         holder.tvEventType.setTextColor(Color.parseColor(typeColor))
         holder.eventContainer.setBackgroundColor(Color.parseColor(eventBackColor))
         holder.iconContainer.setBackgroundColor(Color.parseColor(iconBackColor))
+        holder.eventContainer.setOnClickListener{listener()}
+        Utility.setSelectorRoundedCornerWithDynamicColor(
+            holder.eventContainer!!.context,  holder.eventContainer!!, 0,
+            eventBackColor, iconBackColor,
+            R.color.transparent, R.color.transparent, 0
+        )
+
     }
 }
 

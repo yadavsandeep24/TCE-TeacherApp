@@ -3,13 +3,17 @@ package com.tce.teacherapp.util
 import android.content.ContentUris
 import android.content.Context
 import android.database.Cursor
+import android.graphics.Color
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.StateListDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import com.tce.teacherapp.R
 import java.io.File
 import java.io.FileInputStream
@@ -258,6 +262,114 @@ class Utility {
             return str
         }
 
+        fun getRectangleBorder(solidColor: Int, radius: FloatArray, strokeWidth: Int, strokeColor: Int): GradientDrawable {
+            val gradientDrawable = GradientDrawable()
+            gradientDrawable.setColor(solidColor)
+            gradientDrawable.shape = GradientDrawable.RECTANGLE
+            gradientDrawable.cornerRadii = radius
+            gradientDrawable.setStroke(strokeWidth, strokeColor)
+            return gradientDrawable
+        }
+
+        fun setSelectorRoundedCorner(
+            context: Context, v: View, Stroke: Int, PrimarySolidColor: Int,
+            PressedSolidColor: Int, PrimaryBorderColor: Int, PressedBOrderColor: Int,
+            radius: Int
+        ) {
+            val states = StateListDrawable()
+
+            states.addState(
+                intArrayOf(android.R.attr.state_pressed), getRectangleBorder(
+                    context.resources
+                        .getColor(PressedSolidColor),
+                    floatArrayOf(
+                        radius.toFloat(),
+                        radius.toFloat(),
+                        radius.toFloat(),
+                        radius.toFloat(),
+                        radius.toFloat(),
+                        radius.toFloat(),
+                        radius.toFloat(),
+                        radius.toFloat()
+                    ),
+                    Stroke,
+                    context.resources.getColor(PressedBOrderColor)
+                )
+            )
+            states.addState(
+                intArrayOf(), getRectangleBorder(
+                    context.resources.getColor(
+                        PrimarySolidColor
+                    ),
+                    floatArrayOf(
+                        radius.toFloat(),
+                        radius.toFloat(),
+                        radius.toFloat(),
+                        radius.toFloat(),
+                        radius.toFloat(),
+                        radius.toFloat(),
+                        radius.toFloat(),
+                        radius.toFloat()
+                    ),
+                    Stroke,
+                    context.resources.getColor(PrimaryBorderColor)
+                )
+            )
+            v.setBackgroundDrawable(states)
+
+        }
+
+        fun setSelectorRoundedCornerWithDynamicColor(
+            context: Context, v: View, Stroke: Int, PrimarySolidColor: String,
+            PressedSolidColor: String, PrimaryBorderColor: Int, PressedBOrderColor: Int,
+            radius: Int
+        ) {
+            val states = StateListDrawable()
+
+            states.addState(
+                intArrayOf(android.R.attr.state_pressed), getRectangleBorder(
+                   Color.parseColor(PressedSolidColor),
+                    floatArrayOf(
+                        radius.toFloat(),
+                        radius.toFloat(),
+                        radius.toFloat(),
+                        radius.toFloat(),
+                        radius.toFloat(),
+                        radius.toFloat(),
+                        radius.toFloat(),
+                        radius.toFloat()
+                    ),
+                    Stroke,
+                    context.resources.getColor(PressedBOrderColor)
+                )
+            )
+            states.addState(
+                intArrayOf(), getRectangleBorder(
+                    Color.parseColor(
+                        PrimarySolidColor
+                    ),
+                    floatArrayOf(
+                        radius.toFloat(),
+                        radius.toFloat(),
+                        radius.toFloat(),
+                        radius.toFloat(),
+                        radius.toFloat(),
+                        radius.toFloat(),
+                        radius.toFloat(),
+                        radius.toFloat()
+                    ),
+                    Stroke,
+                    context.resources.getColor(PrimaryBorderColor)
+                )
+            )
+            v.setBackgroundDrawable(states)
+
+        }
+
+
+
     }
+
+
 
 }

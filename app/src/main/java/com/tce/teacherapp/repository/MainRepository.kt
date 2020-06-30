@@ -68,6 +68,7 @@ interface MainRepository {
     ): Flow<DataState<DashboardViewState>>
 
     fun getDashboardData(
+        id: Int,
         stateEvent: StateEvent
     ): Flow<DataState<DashboardViewState>>
 

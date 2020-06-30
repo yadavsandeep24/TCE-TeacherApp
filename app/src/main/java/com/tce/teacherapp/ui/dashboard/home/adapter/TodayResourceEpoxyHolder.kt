@@ -53,6 +53,7 @@ abstract class TodayResourceEpoxyHolder : EpoxyModelWithHolder<ResourceHolder>()
                         title(res.title)
                         subTitle(res.subTitle)
                         resourceTypeList(res.typeList)
+
                     }
                 }
             }

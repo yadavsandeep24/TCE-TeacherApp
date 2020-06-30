@@ -35,7 +35,7 @@ sealed class DashboardStateEvent : StateEvent {
         }
     }
 
-    object GetDashboardData : DashboardStateEvent() {
+    class GetDashboardData (val id : Int): DashboardStateEvent() {
         override fun errorInfo(): String {
             return "Error in getting profile info."
         }

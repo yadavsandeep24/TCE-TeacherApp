@@ -3,6 +3,7 @@ package com.tce.teacherapp.ui.dashboard.home.adapter
 import android.text.Html
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.*
 import com.tce.teacherapp.R
@@ -66,6 +67,10 @@ abstract class EventEpoxyHolder :EpoxyModelWithHolder<EventHolder>() {
                         )?.let { it1 ->
                             imageDrawable(it1)
                         }
+                        listener {
+                            Toast.makeText(holder.rvEvent.context, "Click" + event.type, Toast.LENGTH_LONG).show()
+                        }
+
                     }
                 }
             }

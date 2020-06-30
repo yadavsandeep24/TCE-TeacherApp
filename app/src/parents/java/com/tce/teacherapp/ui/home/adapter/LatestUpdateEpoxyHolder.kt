@@ -1,6 +1,7 @@
 package com.tce.teacherapp.ui.home.adapter
 
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.*
 import com.tce.teacherapp.R
@@ -49,6 +50,15 @@ abstract class LatestUpdateEpoxyHolder : EpoxyModelWithHolder<ViewedHolder>() {
                         )?.let { it1 ->
                             imageDrawable(it1)
                         }
+
+                        listener {
+                            Toast.makeText(holder.rvResource.context, "Click Message" , Toast.LENGTH_LONG).show()
+                        }
+
+                        listenerPlanner {
+                            Toast.makeText(holder.rvResource.context, "Click Planner" , Toast.LENGTH_LONG).show()
+                        }
+
                     }
                 }
             }

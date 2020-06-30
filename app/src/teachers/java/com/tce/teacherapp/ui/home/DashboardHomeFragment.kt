@@ -105,6 +105,7 @@ constructor(
 
             }
         })
+
         binding.classContainer.setOnClickListener {
             viewModel.setStateEvent(DashboardStateEvent.GetUserClassList)
             if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
@@ -142,7 +143,7 @@ constructor(
         val epoxyVisibilityTracker1 = EpoxyVisibilityTracker()
         epoxyVisibilityTracker1.attach(binding.rvFilter)
 
-        viewModel.setStateEvent(DashboardStateEvent.GetDashboardData)
+        viewModel.setStateEvent(DashboardStateEvent.GetDashboardData(1))
 
         subscribeObservers()
 
@@ -183,6 +184,7 @@ constructor(
                                     bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_COLLAPSED
                                     binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
                                     (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
+                                    viewModel.setStateEvent(DashboardStateEvent.GetDashboardData(2))
                                 }
                             }
                         }
