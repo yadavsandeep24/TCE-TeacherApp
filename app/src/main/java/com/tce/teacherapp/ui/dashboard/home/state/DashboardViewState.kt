@@ -16,5 +16,6 @@ data class DashboardViewState (
     var lastViewedResourceData : LastViewResourceData? = null,
     var isPasswordUpdated: Boolean? = null,
     var classList: List<ClassListsItem>? = null,
-    var latestUpdateList : ArrayList<DashboardLatestUpdate>? =null
+    var latestUpdateList : ArrayList<DashboardLatestUpdate>? =null,
+    var childList : ArrayList<Student>? =null
 ) : Parcelable

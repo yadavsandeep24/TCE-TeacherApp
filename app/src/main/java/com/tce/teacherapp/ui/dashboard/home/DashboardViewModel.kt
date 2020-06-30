@@ -47,6 +47,16 @@ class DashboardViewModel @Inject constructor(val mainRepository: MainRepository)
         data.latestUpdateList?.let {
             setLatestUpdateList(it)
         }
+
+        data.childList?.let {
+            setChildList(it)
+        }
+    }
+
+    private fun setChildList(it: ArrayList<Student>) {
+        val update = getCurrentViewStateOrNew()
+        update.childList = it
+        setViewState(update)
     }
 
     private fun setLatestUpdateList(it: ArrayList<DashboardLatestUpdate>) {

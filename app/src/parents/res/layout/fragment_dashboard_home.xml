@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/main_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -15,6 +15,7 @@
             android:visibility="visible">
 
             <RelativeLayout
+                android:id="@+id/header_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/home_background"
@@ -47,20 +48,26 @@
                 android:layout_height="match_parent"
                 android:background="#f5f8ff"
                 android:overScrollMode="never"
-                android:visibility="visible"/>
-        </LinearLayout>
+                android:visibility="visible"
+                android:layout_below="@+id/header_container"/>
+            <FrameLayout
+                android:id="@+id/mask_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/transparent"/>
+
+        </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/bottom_sheet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="100dp"
             android:background="@drawable/filters_sheet_background"
             android:orientation="vertical"
             app:behavior_fitToContents="true"
             app:behavior_hideable="true"
             app:behavior_peekHeight="0dp"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_behavior="com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior">
 
             <View
@@ -70,8 +77,39 @@
                 android:layout_marginTop="5dp"
                 android:background="#e1e6f0" />
 
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Switch Profile"
+                android:textColor="@color/color_black"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center_horizontal"
+                android:textSize="@dimen/font_size_14_dp">
+
+            </com.tce.teacherapp.util.RubikMediumTextview>
+
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Choose a child profile to view"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center_horizontal"
+                android:textSize="@dimen/font_size_12_dp">
+
+            </com.tce.teacherapp.util.RubikMediumTextview>
+
+
+            <com.airbnb.epoxy.EpoxyRecyclerView
+                android:id="@+id/rvFilter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="150dp">
+
+            </com.airbnb.epoxy.EpoxyRecyclerView>
+
+
             <LinearLayout
-                android:id="@+id/resource_container"
+                android:id="@+id/add_child"
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
                 android:gravity="center_vertical"
@@ -80,80 +118,17 @@
                 <com.tce.teacherapp.util.RubikBoldTextview
                     android:layout_width="30dp"
                     android:layout_height="@dimen/_30sdp"
-                    android:background="@drawable/ic_dummy_jr"
-                    android:gravity="center"
-                    android:text="JR"
+                    android:background="@drawable/bg_orange_rounded"
+                    android:text="+"
+                    android:textSize="20dp"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/font_size_12_dp" />
+                    android:gravity="center" />
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="Junior KG A"
-                    android:textColor="@color/color_black">
-
-                </com.tce.teacherapp.util.RubikMediumTextview>
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#e1e6f0" />
-
-            <LinearLayout
-                android:id="@+id/photo_container"
-                android:layout_width="match_parent"
-                android:layout_height="?android:attr/actionBarSize"
-                android:gravity="center_vertical"
-                android:paddingLeft="30dp">
-
-                <com.tce.teacherapp.util.RubikBoldTextview
-                    android:layout_width="30dp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:background="@drawable/ic_dummy_jr"
-                    android:gravity="center"
-                    android:text="JR"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/font_size_12_dp" />
-
-                <com.tce.teacherapp.util.RubikMediumTextview
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="Junior KG B"
-                    android:textColor="@color/color_black"/>
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#e1e6f0" />
-
-            <LinearLayout
-                android:id="@+id/voice_container"
-                android:layout_width="match_parent"
-                android:layout_height="?android:attr/actionBarSize"
-                android:layout_marginBottom="30dp"
-                android:gravity="center_vertical"
-                android:paddingLeft="30dp">
-
-                <com.tce.teacherapp.util.RubikBoldTextview
-                    android:layout_width="30dp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:background="@drawable/ic_dummy_jr"
-                    android:gravity="center"
-                    android:text="SR"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/font_size_12_dp" />
-
-                <com.tce.teacherapp.util.RubikMediumTextview
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="Senior KG A"
+                    android:text="Add Another Child"
                     android:textColor="@color/color_black">
 
                 </com.tce.teacherapp.util.RubikMediumTextview>

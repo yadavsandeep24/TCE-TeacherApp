@@ -1,29 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/home_background"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:paddingLeft="20dp"
+    android:paddingBottom="20dp"
+    android:paddingTop="20dp">
 
-    <com.tce.teacherapp.util.RubikBoldTextview
-        android:id="@+id/tvName"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hi Aishwarya !"
-        android:textColor="@color/deep_brown"
-        android:textSize="20dp"
-        android:textStyle="bold"></com.tce.teacherapp.util.RubikBoldTextview>
+        android:orientation="vertical"
+        android:layout_centerVertical="true">
 
-    <com.tce.teacherapp.util.RubikMediumTextview
-        android:id="@+id/tv_last_sync"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/deep_brown"
-        android:text="chkjvkcnv,xn"
-        android:textSize="10dp"
-        android:textStyle="italic"></com.tce.teacherapp.util.RubikMediumTextview>
+        <com.tce.teacherapp.util.RubikBoldTextview
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hi Aishwarya !"
+            android:textColor="@color/deep_brown"
+            android:textSize="20dp"
+            android:textStyle="bold"></com.tce.teacherapp.util.RubikBoldTextview>
 
+        <com.tce.teacherapp.util.RubikMediumTextview
+            android:id="@+id/tv_last_sync"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="chkjvkcnv,xn"
+            android:textColor="@color/deep_brown"
+            android:textSize="10dp"
+            android:textStyle="italic"></com.tce.teacherapp.util.RubikMediumTextview>
 
-</LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/filter_container"
+        android:layout_width="80dp"
+        android:layout_height="60dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/dashboard_filter_bg">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="40dp"
+            android:src="@drawable/dummy_student">
+
+        </androidx.appcompat.widget.AppCompatImageView>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/dummy_student">
+
+        </androidx.appcompat.widget.AppCompatImageView>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:src="@drawable/ic_right_arrow"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true">
+
+        </androidx.appcompat.widget.AppCompatImageView>
+
+    </RelativeLayout>
+
+</RelativeLayout>

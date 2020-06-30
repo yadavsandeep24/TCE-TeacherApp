@@ -624,6 +624,12 @@ constructor(
                 var latestUpdateList: ArrayList<DashboardLatestUpdate> =
                     gson.fromJson(jsonString, listLatestUpdate)
 
+                jsonString = application.assets.open("json/child.json").bufferedReader()
+                    .use { it.readText() }
+                val gson = Gson()
+                val listPersonType = object : TypeToken<ArrayList<Student>>() {}.type
+                var studentList: ArrayList<Student> = gson.fromJson(jsonString, listPersonType)
+
                 emit(
                     DataState.data(
                         data = DashboardViewState(
@@ -632,7 +638,8 @@ constructor(
                             todayResourceData = todayResourceData,
                             lastViewedResourceData = lastViewResourceData,
                             classList = userClassList,
-                            latestUpdateList = latestUpdateList
+                            latestUpdateList = latestUpdateList,
+                            childList = studentList
                         ),
                         stateEvent = stateEvent,
                         response = null

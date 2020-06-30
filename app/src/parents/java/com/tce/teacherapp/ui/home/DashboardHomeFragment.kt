@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.EpoxyVisibilityTracker
 import com.bumptech.glide.Glide
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentDashboardHomeBinding
 import com.tce.teacherapp.db.entity.Event
@@ -23,9 +24,12 @@ import com.tce.teacherapp.ui.dashboard.home.state.DashboardStateEvent
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardViewState
 import com.tce.teacherapp.ui.dashboard.messages.state.MESSAGE_VIEW_STATE_BUNDLE_KEY
 import com.tce.teacherapp.ui.dashboard.subjects.loadImage
+import com.tce.teacherapp.ui.home.adapter.childEpoxyHolder
 import com.tce.teacherapp.ui.home.adapter.eventEpoxyHolder
 import com.tce.teacherapp.ui.home.adapter.latestUpdateEpoxyHolder
 import com.tce.teacherapp.ui.home.adapter.parentHeaderEpoxyHolder
+import kotlinx.android.synthetic.main.activity_dashboard.*
+import kotlinx.android.synthetic.parents.fragment_dashboard_home.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
@@ -97,6 +101,11 @@ constructor(
         val epoxyVisibilityTracker = EpoxyVisibilityTracker()
         epoxyVisibilityTracker.attach(binding.mainEpoxyRecycler)
 
+        binding.rvFilter.layoutManager = GridLayoutManager(activity, 1)
+        binding.rvFilter.setHasFixedSize(true)
+        val epoxyVisibilityTracker1 = EpoxyVisibilityTracker()
+        epoxyVisibilityTracker1.attach(binding.rvFilter)
+
         viewModel.setStateEvent(DashboardStateEvent.GetDashboardData)
         // viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(2, "today resource"))
         // viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(2, "last viewed resource"))
@@ -115,6 +124,29 @@ constructor(
                             strLastSync("2 March 2020, 8 am")
                             val glide by lazy { Glide.with(binding.imgProfile.context) }
                             glide.loadImage(it.imageUrl).into(binding.imgProfile)
+                            listener {
+                                val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
+                                bottomSheetBehavior.addBottomSheetCallback(object :
+                                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.BottomSheetCallback {
+                                    override fun onStateChanged(bottomSheet: View, newState: Int) {
+                                        if(newState == BottomSheetBehavior.STATE_DRAGGING){
+                                            bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+                                        }
+
+                                    }
+                                })
+
+                                if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
+                                    bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
+                                    binding.maskLayout.setBackgroundColor(resources.getColor(R.color.dim_color_dashboard))
+                                    (activity as DashboardActivity).bottom_navigation_view.visibility = View.INVISIBLE
+                                } else {
+                                    bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                                    binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
+                                    (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
+                                }
+
+                            }
                         }
                     }
                     viewState.eventData?.let {
@@ -138,6 +170,17 @@ constructor(
                             latestUpdateList(it)
 
 
+                        }
+                    }
+
+                    binding.rvFilter.withModels {
+                        viewState.childList?.let {
+                            for (child in it) {
+                                childEpoxyHolder {
+                                    id(child.id)
+                                    strStudentName(child.name)
+                                }
+                            }
                         }
                     }
 
