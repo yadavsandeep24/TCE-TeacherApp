@@ -12,8 +12,8 @@ import com.tce.teacherapp.db.entity.*
         Grade::class,
         Subject::class,
         Book::class,
-        Node::class,
-        NodeX::class,
+        Topic::class,
+        Chapter::class,
         NodeXX::class,
         NodeXXX::class,
         Profile::class

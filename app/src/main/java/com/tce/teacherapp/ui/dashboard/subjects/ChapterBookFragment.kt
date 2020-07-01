@@ -13,7 +13,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.SearchView
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -23,11 +22,13 @@ import com.airbnb.epoxy.addGlidePreloader
 import com.airbnb.epoxy.glidePreloader
 import com.bumptech.glide.Glide
 import com.tce.teacherapp.R
+import com.tce.teacherapp.databinding.FragmentSelectChapterBookBinding
 import com.tce.teacherapp.databinding.FragmentTopicListBinding
 import com.tce.teacherapp.db.entity.Subject
-import com.tce.teacherapp.ui.BaseFragment
+import com.tce.teacherapp.db.entity.Topic
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.subjects.adapter.SubjectListEpoxyHolder
+import com.tce.teacherapp.ui.dashboard.subjects.adapter.chapterListEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.subjects.adapter.topicListEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.subjects.state.SUBJECT_VIEW_STATE_BUNDLE_KEY
 import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectStateEvent
@@ -36,19 +37,20 @@ import com.tce.teacherapp.util.StateMessageCallback
 import com.tce.teacherapp.util.Utility
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
+import java.lang.Exception
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 @FlowPreview
-class TopicListFragment
+class ChapterBookFragment
 @Inject
 constructor(
     viewModelFactory: ViewModelProvider.Factory
-) : BaseSubjectFragment(R.layout.fragment_topic_list,viewModelFactory) {
+) : BaseSubjectFragment(R.layout.fragment_select_chapter_book,viewModelFactory) {
 
-    private lateinit var binding: FragmentTopicListBinding
+    private lateinit var binding: FragmentSelectChapterBookBinding
 
-    var subjectVo: Subject? = null
+    var topicVo: Topic? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         savedInstanceState?.let { inState ->
@@ -60,27 +62,26 @@ constructor(
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentTopicListBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-
     override fun onSaveInstanceState(outState: Bundle) {
         val viewState = viewModel.viewState.value
 
         //clear the list. Don't want to save a large list to bundle.
-        viewState?.topicList = ArrayList()
+        viewState?.chapterList = ArrayList()
         outState.putParcelable(SUBJECT_VIEW_STATE_BUNDLE_KEY, viewState)
         super.onSaveInstanceState(outState)
+    }
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        binding = FragmentSelectChapterBookBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        subjectVo = arguments?.getParcelable("subjectdata") as Subject?
+        topicVo = arguments?.getParcelable("topicdata") as Topic?
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             activity?.window!!.statusBarColor = resources.getColor(R.color.color_black, null)
         } else {
@@ -104,42 +105,42 @@ constructor(
         tvBack.setOnClickListener {
             activity?.onBackPressed()
         }
-        tvTopicTitle.text = subjectVo!!.title
+        tvTopicTitle.text = topicVo!!.label
 
-        val searchText: TextView = binding.svTopic.findViewById(R.id.search_src_text) as TextView
+        val searchText: TextView = binding.svChapterBook.findViewById(R.id.search_src_text) as TextView
         val myCustomFont: Typeface =
             Typeface.createFromAsset(requireActivity().assets, "fonts/Rubik-Medium.ttf")
         searchText.typeface = myCustomFont
         searchText.textSize = requireActivity().resources.getDimension(R.dimen.font_size_14_px)
 
-        val searchIcon = binding.svTopic.findViewById(R.id.search_mag_icon) as ImageView
+        val searchIcon = binding.svChapterBook.findViewById(R.id.search_mag_icon) as ImageView
         searchIcon.setImageResource(R.drawable.search)
-        binding.svTopic.setOnQueryTextListener(queryTextListener)
+        binding.svChapterBook.setOnQueryTextListener(queryTextListener)
         // Get the search close button image view
         val closeButton: ImageView =
-            binding.svTopic.findViewById(R.id.search_close_btn) as ImageView
+            binding.svChapterBook.findViewById(R.id.search_close_btn) as ImageView
 
         closeButton.setOnClickListener {
             val t: Toast = Toast.makeText(activity, "close", Toast.LENGTH_SHORT)
             t.show()
             uiCommunicationListener.hideSoftKeyboard()
-            binding.svTopic.setQuery("", false)
-            binding.svTopic.clearFocus()
-            if (subjectVo != null) {
-                viewModel.setStateEvent(SubjectStateEvent.GetTopicEvent("", subjectVo!!.id))
+            binding.svChapterBook.setQuery("", false)
+            binding.svChapterBook.clearFocus()
+            if (topicVo != null) {
+                viewModel.setStateEvent(SubjectStateEvent.GetChapterEvent("", topicVo!!.id,topicVo!!.bookId))
             }
             false
         }
 
-        if (subjectVo != null) {
-            viewModel.setStateEvent(SubjectStateEvent.GetTopicEvent("", subjectVo!!.id))
+        if (topicVo != null) {
+            viewModel.setStateEvent(SubjectStateEvent.GetChapterEvent("", topicVo!!.id,topicVo!!.bookId))
         }
 
-        binding.rvTopic.layoutManager = GridLayoutManager(activity, 2)
-        binding.rvTopic.setHasFixedSize(true)
+        binding.rvChapterBook.layoutManager = GridLayoutManager(activity, 2)
+        binding.rvChapterBook.setHasFixedSize(true)
         val epoxyVisibilityTracker = EpoxyVisibilityTracker()
-        epoxyVisibilityTracker.attach(binding.rvTopic)
-        binding.rvTopic.addGlidePreloader(
+        epoxyVisibilityTracker.attach(binding.rvChapterBook)
+        binding.rvChapterBook.addGlidePreloader(
             Glide.with(this),
             preloader = glidePreloader { requestManager, model: SubjectListEpoxyHolder, _ ->
                 requestManager.loadImage(model.imageUrl)
@@ -154,8 +155,8 @@ constructor(
         }
 
         override fun onQueryTextChange(newText: String): Boolean {
-            if (subjectVo != null) {
-                viewModel.setStateEvent(SubjectStateEvent.GetTopicEvent(newText, subjectVo!!.id))
+            if (topicVo != null) {
+                viewModel.setStateEvent(SubjectStateEvent.GetChapterEvent(newText, topicVo!!.id,topicVo!!.bookId))
             }
             return true
 
@@ -166,26 +167,21 @@ constructor(
 
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             if (viewState != null) {
-                viewState.topicList?.let {
-                    Log.d("SAN", "topic-->" + it.size)
-                    binding.rvTopic.withModels {
-                        for (topic in it) {
-                            topicListEpoxyHolder {
-                                id(topic.id)
-                                title(topic.label)
-                                imageUrl(topic.label)
-                                Utility.getDrawable("topic_" + topic.index, requireContext())
-                                    ?.let { it1 -> imageDrawable(it1) }
+                viewState.chapterList?.let {
+                    Log.d("SAN", "chapter_book-->" + it.size)
+                    binding.rvChapterBook.withModels {
+                        for (chapter in it) {
+                            chapterListEpoxyHolder {
+                                id(chapter.id)
+                                title(chapter.label)
+                                chapter.image?.let { it1 -> imageUrl(it1) }
+                                try {
+                                    Utility.getDrawable("default_chapter", requireContext())
+                                        ?.let { it1 -> imageDrawable(it1) }
+                                }catch (e : Exception) {
+                                    e.printStackTrace()
+                                }
                                 listener {
-                                    topic.section?.let { sectionType ->
-                                        val bundle = Bundle()
-                                        bundle.putParcelable("topicdata", topic)
-                                        if(sectionType.equals("learn",true)) {
-                                            findNavController().navigate(R.id.action_topicFragment_to_selectChapterLearnFragment)
-                                        }else if(sectionType.equals("book",true)){
-                                            findNavController().navigate(R.id.action_topicFragment_to_selectChapterBookFragment,bundle)
-                                        }
-                                    }
                                 }
                             }
                         }

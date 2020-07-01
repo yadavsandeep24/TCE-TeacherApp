@@ -120,9 +120,7 @@ constructor(
             findNavController().navigate(R.id.action_dashboardHomeFragment_to_addChildFragment)
         }
 
-        viewModel.setStateEvent(DashboardStateEvent.GetDashboardData(1))
-        // viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(2, "today resource"))
-        // viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(2, "last viewed resource"))
+        viewModel.setStateEvent(DashboardStateEvent.GetParentDashboardData(1))
         subscribeObservers()
 
     }
@@ -211,7 +209,11 @@ constructor(
     }
 
     override fun onChildListItemClick() {
-        Toast.makeText(requireContext(), "Click on Child" , Toast.LENGTH_LONG).show()
+        viewModel.setStateEvent(DashboardStateEvent.GetParentDashboardData(2))
+        val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
+        bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+        binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
+        (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
     }
 
     override fun onMessageClickListener() {

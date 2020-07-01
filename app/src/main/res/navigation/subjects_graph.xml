@@ -24,27 +24,14 @@
         android:label="fragment_topic"
         tools:layout="@layout/fragment_topic_list">
         <action
-            android:id="@+id/action_topicFragment_to_chapterFragment"
-            app:destination="@id/chapterFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left" />
-    </fragment>
-    <fragment
-        android:id="@+id/chapterFragment"
-        android:name="com.tce.teacherapp.ui.dashboard.students.ChapterFragment"
-        android:label="fragment_chapter"
-        tools:layout="@layout/fragment_chapter" >
-        <action
-            android:id="@+id/action_chapterFragment_to_selectChapterBookFragment"
+            android:id="@+id/action_topicFragment_to_selectChapterBookFragment"
             app:destination="@id/selectChapterBookFragment"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"/>
         <action
-            android:id="@+id/action_chapterFragment_to_selectChapterLearnFragment"
+            android:id="@+id/action_topicFragment_to_selectChapterLearnFragment"
             app:destination="@id/selectChapterLearnFragment"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
@@ -53,7 +40,7 @@
     </fragment>
     <fragment
         android:id="@+id/selectChapterLearnFragment"
-        android:name="com.tce.teacherapp.SelectChapterLearnFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.subjects.ChapterLearnFragment"
         android:label="fragment_select_chapter_learn"
         tools:layout="@layout/fragment_select_chapter_learn" >
         <action
@@ -101,22 +88,22 @@
     </fragment>
     <fragment
         android:id="@+id/selectChapterBookFragment"
-        android:name="com.tce.teacherapp.SelectChapterBookFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.subjects.ChapterBookFragment"
         android:label="fragment_select_chapter_book"
         tools:layout="@layout/fragment_select_chapter_book" />
     <fragment
         android:id="@+id/SUbjectPracticeFragment"
-        android:name="com.tce.teacherapp.SUbjectPracticeFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.subjects.SubjectPracticeFragment"
         android:label="fragment_s_ubject_practice"
         tools:layout="@layout/fragment_subject_practice" />
     <fragment
         android:id="@+id/subjectResourceDetailFragment"
-        android:name="com.tce.teacherapp.SubjectResourceDetailFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.subjects.SubjectResourceDetailFragment"
         android:label="fragment_subject_resource_detail"
         tools:layout="@layout/fragment_subject_resource_detail" />
     <fragment
         android:id="@+id/videoPlayerFragment"
-        android:name="com.tce.teacherapp.VideoPlayerFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.subjects.VideoPlayerFragment"
         android:label="fragment_video_player"
         tools:layout="@layout/fragment_video_player" >
         <action
@@ -130,7 +117,7 @@
     </fragment>
     <fragment
         android:id="@+id/subjectResourceSelectionFragment"
-        android:name="com.tce.teacherapp.SubjectResourceSelectionFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.subjects.SubjectResourceSelectionFragment"
         android:label="fragment_subject_resource_selection"
         tools:layout="@layout/fragment_subject_resource_selection" >
         <action
@@ -143,17 +130,17 @@
     </fragment>
     <fragment
         android:id="@+id/HTMLContentFragment"
-        android:name="com.tce.teacherapp.HTMLContentFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.subjects.HTMLContentFragment"
         android:label="fragment_h_t_m_l_content"
         tools:layout="@layout/fragment_html_content" />
     <fragment
         android:id="@+id/pdfFragment"
-        android:name="com.tce.teacherapp.PdfFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.subjects.PdfFragment"
         android:label="fragment_pdf"
         tools:layout="@layout/fragment_pdf" />
     <fragment
         android:id="@+id/resourceListFragment"
-        android:name="com.tce.teacherapp.ResourceListFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.subjects.ResourceListFragment"
         android:label="fragment_resource_list"
         tools:layout="@layout/fragment_resource_list" >
         <action

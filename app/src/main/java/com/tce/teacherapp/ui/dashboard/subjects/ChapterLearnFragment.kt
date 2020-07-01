@@ -8,11 +8,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.tce.teacherapp.R
 import javax.inject.Inject
 
-class SelectChapterBookFragment
+
+class ChapterLearnFragment
 @Inject
 constructor(
     viewModelFactory: ViewModelProvider.Factory
-) : BaseSubjectFragment(R.layout.fragment_select_chapter_book,viewModelFactory) {
+) : BaseSubjectFragment(R.layout.fragment_select_chapter_learn,viewModelFactory) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +24,6 @@ constructor(
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_select_chapter_book, container, false)
+        return inflater.inflate(R.layout.fragment_select_chapter_learn, container, false)
     }
-
 }

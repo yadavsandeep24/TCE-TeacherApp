@@ -23,7 +23,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import com.tce.teacherapp.R;
 
 /**
- * Created by Sandeep Y. on 9/23/2015.
+ * Created by Sandeep Y. on 12/6/2020.
  */
 
 public class CustomCircularImageView extends AppCompatImageView {

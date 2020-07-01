@@ -116,10 +116,12 @@ class DashboardViewModel @Inject constructor(val mainRepository: MainRepository)
                 mainRepository.updateProfilePic(stateEvent.resultUri,stateEvent = stateEvent)
             }
 
-            is DashboardStateEvent.GetDashboardData -> {
-                mainRepository.getDashboardData(stateEvent.id, stateEvent = stateEvent)
+            is DashboardStateEvent.GetTeacherDashboardData -> {
+                mainRepository.getTeacherDashboardData(stateEvent.id, stateEvent = stateEvent)
             }
-
+            is DashboardStateEvent.GetParentDashboardData -> {
+                mainRepository.getParentDashboardData(stateEvent.id, stateEvent = stateEvent)
+            }
             is DashboardStateEvent.GetDashboardEvent -> {
                 mainRepository.getEventList(stateEvent.count,stateEvent.showOriginal,stateEvent = stateEvent)
             }

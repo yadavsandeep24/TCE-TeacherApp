@@ -155,7 +155,7 @@ constructor(
         val epoxyVisibilityTracker1 = EpoxyVisibilityTracker()
         epoxyVisibilityTracker1.attach(binding.rvFilter)
 
-        viewModel.setStateEvent(DashboardStateEvent.GetDashboardData(1))
+        viewModel.setStateEvent(DashboardStateEvent.GetTeacherDashboardData(1))
 
         subscribeObservers()
 
@@ -253,7 +253,7 @@ constructor(
             com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_COLLAPSED
         binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
         (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
-        viewModel.setStateEvent(DashboardStateEvent.GetDashboardData(item.id.toInt()))
+        viewModel.setStateEvent(DashboardStateEvent.GetTeacherDashboardData(item.id.toInt()))
     }
 
 
@@ -276,7 +276,7 @@ constructor(
     }
 
     override fun onTodayResourceItemClick(title: String) {
-        Toast.makeText(requireContext(), "Click on "  + title, Toast.LENGTH_LONG).show()
+        Toast.makeText(requireContext(), "Click on $title", Toast.LENGTH_LONG).show()
     }
 
     override fun onEventShowMoreClick(isShowLess: Boolean) {
@@ -298,7 +298,7 @@ constructor(
     }
 
     override fun onEventItemClick(type: String) {
-        Toast.makeText(requireContext(), "Click on "  + type, Toast.LENGTH_LONG).show()
+        Toast.makeText(requireContext(), "Click on $type", Toast.LENGTH_LONG).show()
     }
 
     override fun onLastViewedResourceShowMoreClick(isShowLess: Boolean) {
@@ -318,7 +318,7 @@ constructor(
     }
 
     override fun onLastViewedItemClick(title: String) {
-        Toast.makeText(requireContext(), "Click on "  + title, Toast.LENGTH_LONG).show()
+        Toast.makeText(requireContext(), "Click on $title", Toast.LENGTH_LONG).show()
     }
 
 

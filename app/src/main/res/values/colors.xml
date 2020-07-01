@@ -22,4 +22,5 @@
     <color name="dark_blackish_blue">#232337</color>
 
     <color name="home_background">#fff098</color>
+    <color name="chapter_text_dim_bg">#88000000</color>
 </resources>

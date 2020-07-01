@@ -1,7 +1,8 @@
 package com.tce.teacherapp.ui.dashboard.subjects
 
+import com.tce.teacherapp.db.entity.Chapter
 import com.tce.teacherapp.db.entity.Grade
-import com.tce.teacherapp.db.entity.Node
+import com.tce.teacherapp.db.entity.Topic
 import com.tce.teacherapp.db.entity.Subject
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -33,11 +34,18 @@ fun SubjectsViewModel.setSelectedGradePosition(it: Int) {
 
 @FlowPreview
 @UseExperimental(ExperimentalCoroutinesApi::class)
-fun SubjectsViewModel.setTopicListData(it: List<Node>) {
+fun SubjectsViewModel.setTopicListData(it: List<Topic>) {
     val update = getCurrentViewStateOrNew()
     update.topicList = it
     setViewState(update)
 }
 
+@FlowPreview
+@UseExperimental(ExperimentalCoroutinesApi::class)
+fun SubjectsViewModel.setChapterListData(it: List<Chapter>) {
+    val update = getCurrentViewStateOrNew()
+    update.chapterList = it
+    setViewState(update)
+}
 
 

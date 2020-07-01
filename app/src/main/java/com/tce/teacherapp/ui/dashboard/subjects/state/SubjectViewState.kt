@@ -1,8 +1,9 @@
 package com.tce.teacherapp.ui.dashboard.subjects.state
 
 import android.os.Parcelable
+import com.tce.teacherapp.db.entity.Chapter
 import com.tce.teacherapp.db.entity.Grade
-import com.tce.teacherapp.db.entity.Node
+import com.tce.teacherapp.db.entity.Topic
 import com.tce.teacherapp.db.entity.Subject
 import kotlinx.android.parcel.Parcelize
 
@@ -13,7 +14,8 @@ data class SubjectViewState(
     var gradeList: List<Grade>? = null,
     var selectedGradePosition: Int? = 0,
     var subjectList: List<Subject>? = null,
-    var topicList: List<Node>? = null
+    var topicList: List<Topic>? = null,
+    var chapterList: List<Chapter>? = null
 ) : Parcelable
 
 

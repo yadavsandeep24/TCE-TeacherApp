@@ -312,11 +312,11 @@ constructor(
                 }
             }
             emit(
-                object : CacheResponseHandler<SubjectViewState, List<Node>>(
+                object : CacheResponseHandler<SubjectViewState, List<Topic>>(
                     response = apiResult,
                     stateEvent = stateEvent
                 ) {
-                    override suspend fun handleSuccess(resultObj: List<Node>): DataState<SubjectViewState> {
+                    override suspend fun handleSuccess(resultObj: List<Topic>): DataState<SubjectViewState> {
                         sharedPrefsEditor.putBoolean(
                             PreferenceKeys.APP_PREFERENCES_NEW_SESSION_BOOKS,
                             false
@@ -517,7 +517,7 @@ constructor(
         }
     }
 
-    override fun getDashboardData(id: Int, stateEvent: StateEvent): Flow<DataState<DashboardViewState>> = flow {
+    override fun getTeacherDashboardData(id: Int, stateEvent: StateEvent): Flow<DataState<DashboardViewState>> = flow {
         Log.d("SAN", "id-->$id")
 
         withContext(IO) {
@@ -619,6 +619,74 @@ constructor(
                 val listClass = object : TypeToken<List<ClassListsItem>>() {}.type
                 val userClassList: List<ClassListsItem> = tempGSON.fromJson(jsonString, listClass)
 
+                emit(
+                    DataState.data(
+                        data = DashboardViewState(
+                            profile = userInfo,
+                            eventData = eventData,
+                            todayResourceData = todayResourceData,
+                            lastViewedResourceData = lastViewResourceData,
+                            classList = userClassList
+                        ),
+                        stateEvent = stateEvent,
+                        response = null
+                    )
+                )
+            } catch (ioException: IOException) {
+                ioException.printStackTrace()
+            }
+        }
+
+    }
+
+    override fun getParentDashboardData(
+        id: Int,
+        stateEvent: StateEvent
+    ): Flow<DataState<DashboardViewState>> = flow {
+        Log.d("SAN", "id-->$id")
+
+        withContext(IO) {
+            val userID = sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID, "")
+            val userInfo = userID?.let { userDao.getUserByUserId(it) }
+            var tempGSON: Gson
+
+            try {
+                var jsonString :String = if(id > 1) {
+                    application.assets.open("json/event1.json").bufferedReader()
+                        .use { it.readText() }
+                }else{
+                    application.assets.open("json/event.json").bufferedReader()
+                        .use { it.readText() }
+                }
+                tempGSON = Gson()
+                val listType = object : TypeToken<ArrayList<Event>>() {}.type
+                val eventList: ArrayList<Event> = tempGSON.fromJson(jsonString, listType)
+                val selectedEventList: ArrayList<Event> = ArrayList()
+
+                val isShowLess = false
+                var nextEventCount = 4
+                if (eventList.size > 3) {
+                    for (i in 0 until 3) {
+                        selectedEventList.add(eventList[i])
+                    }
+                    if (eventList.size < 7) {
+                        nextEventCount = eventList.size - 3
+                    }
+                } else {
+                    for (i in 0 until eventList.size) {
+                        selectedEventList.add(eventList[i])
+                    }
+                    nextEventCount = 0
+                }
+                val eventData = EventData(isShowLess, nextEventCount, selectedEventList)
+
+
+                jsonString = application.assets.open("json/class.json").bufferedReader()
+                    .use { it.readText() }
+                tempGSON = Gson()
+                val listClass = object : TypeToken<List<ClassListsItem>>() {}.type
+                val userClassList: List<ClassListsItem> = tempGSON.fromJson(jsonString, listClass)
+
                 jsonString =
                     application.assets.open("json/parentLatestUpdate.json").bufferedReader()
                         .use { it.readText() }
@@ -639,9 +707,6 @@ constructor(
                         data = DashboardViewState(
                             profile = userInfo,
                             eventData = eventData,
-                            todayResourceData = todayResourceData,
-                            lastViewedResourceData = lastViewResourceData,
-                            classList = userClassList,
                             latestUpdateList = latestUpdateList,
                             childList = studentList
                         ),
@@ -653,7 +718,6 @@ constructor(
                 ioException.printStackTrace()
             }
         }
-
     }
 
     override fun getEventList(
@@ -997,6 +1061,43 @@ constructor(
             }
 
         }
+
+    override fun getChapterList(
+        query: String,
+        topicId: String,
+        bookId: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<SubjectViewState>> = flow {
+            val apiResult = safeCacheCall(IO) {
+                if (query.isEmpty()) {
+                    subjectDao.getChapterListData(topicId,bookId)
+                } else {
+                    subjectDao.getChapterListData(query, topicId,bookId)
+                }
+            }
+            emit(
+                object : CacheResponseHandler<SubjectViewState, List<Chapter>>(
+                    response = apiResult,
+                    stateEvent = stateEvent
+                ) {
+                    override suspend fun handleSuccess(resultObj: List<Chapter>): DataState<SubjectViewState> {
+                        sharedPrefsEditor.putBoolean(
+                            PreferenceKeys.APP_PREFERENCES_NEW_SESSION_BOOKS,
+                            false
+                        ).commit()
+                        val viewState = SubjectViewState(
+                            chapterList = resultObj
+                        )
+                        return DataState.data(
+                            response = null,
+                            data = viewState,
+                            stateEvent = stateEvent
+                        )
+                    }
+                }.getResult()
+            )
+
+    }
 
     fun toGradeList(grades: List<GradeResponse>): List<Grade> {
         val gradeList: ArrayList<Grade> = ArrayList()

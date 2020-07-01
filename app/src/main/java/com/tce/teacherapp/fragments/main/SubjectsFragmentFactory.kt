@@ -36,12 +36,12 @@ constructor(
                 ResourceListFragment(viewModelFactory)
             }
 
-            SelectChapterBookFragment::class.java.name -> {
-                SelectChapterBookFragment(viewModelFactory)
+            ChapterBookFragment::class.java.name -> {
+                ChapterBookFragment(viewModelFactory)
             }
 
-            SelectChapterLearnFragment::class.java.name -> {
-                SelectChapterLearnFragment(viewModelFactory)
+            ChapterLearnFragment::class.java.name -> {
+                ChapterLearnFragment(viewModelFactory)
             }
 
             SubjectPracticeFragment::class.java.name -> {

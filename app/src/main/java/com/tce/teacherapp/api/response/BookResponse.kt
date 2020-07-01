@@ -2,7 +2,7 @@ package com.tce.teacherapp.api.response
 
 import com.google.gson.annotations.Expose
 import com.tce.teacherapp.db.entity.Book
-import com.tce.teacherapp.db.entity.Node
+import com.tce.teacherapp.db.entity.Topic
 
 class BookResponse(
     @Expose
@@ -26,8 +26,8 @@ class BookResponse(
         )
     }
 
-    private fun toNodeList(bookId: String, nodes: List<NodeResponse>): List<Node> {
-        val nodeList: ArrayList<Node> = ArrayList()
+    private fun toNodeList(bookId: String, nodes: List<NodeResponse>): List<Topic> {
+        val nodeList: ArrayList<Topic> = ArrayList()
         for (bookResponse in nodes) {
             nodeList.add(bookResponse.toNode(bookId))
         }

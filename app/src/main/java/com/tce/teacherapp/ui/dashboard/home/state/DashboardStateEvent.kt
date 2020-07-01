@@ -35,13 +35,24 @@ sealed class DashboardStateEvent : StateEvent {
         }
     }
 
-    class GetDashboardData (val id : Int): DashboardStateEvent() {
+    class GetTeacherDashboardData (val id : Int): DashboardStateEvent() {
         override fun errorInfo(): String {
-            return "Error in getting profile info."
+            return "Error in getting teacher dashboard info."
         }
 
         override fun toString(): String {
-            return "GetProfileEvent"
+            return "GetTeacherDashboardData"
+        }
+    }
+
+
+    class GetParentDashboardData (val id : Int): DashboardStateEvent() {
+        override fun errorInfo(): String {
+            return "Error in getting parent dashboard info."
+        }
+
+        override fun toString(): String {
+            return "GetParentDashboardData"
         }
     }
 

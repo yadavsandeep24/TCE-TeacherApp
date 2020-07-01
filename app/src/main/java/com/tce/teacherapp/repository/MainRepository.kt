@@ -2,8 +2,10 @@ package com.tce.teacherapp.repository
 
 import com.tce.teacherapp.db.entity.Grade
 import com.tce.teacherapp.db.entity.Profile
+import com.tce.teacherapp.ui.dashboard.home.state.DashboardStateEvent
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardViewState
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageViewState
+import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectStateEvent
 import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectViewState
 import com.tce.teacherapp.util.DataState
 import com.tce.teacherapp.util.StateEvent
@@ -67,11 +69,15 @@ interface MainRepository {
         stateEvent: StateEvent
     ): Flow<DataState<DashboardViewState>>
 
-    fun getDashboardData(
+    fun getTeacherDashboardData(
         id: Int,
         stateEvent: StateEvent
     ): Flow<DataState<DashboardViewState>>
 
+    fun getParentDashboardData(
+        id: Int,
+        stateEvent: StateEvent
+    ): Flow<DataState<DashboardViewState>>
 
     fun getEventList(
         count : Int,
@@ -114,5 +120,12 @@ interface MainRepository {
     fun getUserClassLists(
         stateEvent: StateEvent
     ): Flow<DataState<DashboardViewState>>
+
+    fun getChapterList(
+        query: String,
+        topicId: String,
+        bookId: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<SubjectViewState>>
 
 }

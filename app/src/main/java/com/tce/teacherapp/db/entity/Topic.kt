@@ -6,33 +6,37 @@ import androidx.room.Entity
 import androidx.room.Ignore
 import kotlinx.android.parcel.Parcelize
 
-
-@Entity(tableName = "NodeX", primaryKeys = ["nodex_id", "node_id", "book_id"])
+@Entity(tableName = "Topic", primaryKeys = ["topic_id", "book_id"])
 @Parcelize
-data class NodeX(
+data class Topic(
+
     @ColumnInfo(name = "icon")
     var icon: String?,
 
-    @ColumnInfo(name = "nodex_id")
+    @ColumnInfo(name = "topic_id")
     var id: String,
 
-    @ColumnInfo(name = "image")
-    var image: String?,
+    @ColumnInfo(name = "index")
+    var index: Int,
 
     @ColumnInfo(name = "label")
     var label: String,
 
+    @ColumnInfo(name = "menu_type")
+    var menutype: String,
+
     @Ignore
-    var node: List<NodeXX>,
+    var node: List<Chapter>,
 
     @ColumnInfo(name = "type")
     var type: String,
 
-    @ColumnInfo(name = "node_id")
-    var nodeId: String,
+    @ColumnInfo(name = "section")
+    var section: String?,
 
     @ColumnInfo(name = "book_id")
     var bookId: String
+
 ) : Parcelable {
-    constructor() : this("", "", "", "", emptyList(), "", "", "")
+    constructor() : this("", "", 0, "", "", emptyList(), "", "","")
 }

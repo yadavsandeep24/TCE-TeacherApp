@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_chapter_book"
+    android:layout_width="140dp"
+    android:layout_height="140dp"
+    android:layout_margin="20dp"
+    app:cardCornerRadius="15dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardElevation="5dp"
+    android:clipToPadding="false"
+    android:clipChildren="false"
+    android:visibility="visible">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_chapter_book"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/default_chapter"
+                android:layout_centerHorizontal="true"
+                android:scaleType="fitXY" />
+
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:id="@+id/tv_chapter_book_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:paddingStart="15dp"
+                android:paddingEnd="10dp"
+                android:paddingTop="5dp"
+                android:minLines="2"
+                android:paddingBottom="5dp"
+                android:gravity="center"
+                android:background="@color/chapter_text_dim_bg"
+                android:ellipsize="end"
+                android:textSize="@dimen/font_size_14_dp"
+                android:text="Subject Title 1 dsds sd sds dsdssds " />
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>

@@ -64,4 +64,19 @@ sealed class SubjectStateEvent : StateEvent {
         }
 
     }
+
+    class GetChapterEvent(
+        val query: String,
+        val topicId: String,
+        val bookId: String
+    ) : SubjectStateEvent() {
+        override fun errorInfo(): String {
+            return "Error in getting chapter info."
+        }
+
+        override fun toString(): String {
+            return "GetChapterEvent"
+        }
+
+    }
 }

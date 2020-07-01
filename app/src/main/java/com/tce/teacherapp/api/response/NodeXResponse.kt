@@ -1,7 +1,7 @@
 package com.tce.teacherapp.api.response
 
 import com.google.gson.annotations.Expose
-import com.tce.teacherapp.db.entity.NodeX
+import com.tce.teacherapp.db.entity.Chapter
 import com.tce.teacherapp.db.entity.NodeXX
 
 class NodeXResponse(
@@ -24,15 +24,15 @@ class NodeXResponse(
     @Expose
     val type: String
 ) {
-    fun toNodeX(bookId: String, nodeId: String): NodeX {
-        return NodeX(
+    fun toNodeX(bookId: String, topicId: String): Chapter {
+        return Chapter(
             icon = icon,
             id = id,
             image = image,
             label = label,
-            node = toNodeXXList(bookId, nodeId, id, node),
+            node = toNodeXXList(bookId, topicId, id, node),
             type = type,
-            nodeId = id,
+            topicId = topicId,
             bookId = bookId
         )
     }
