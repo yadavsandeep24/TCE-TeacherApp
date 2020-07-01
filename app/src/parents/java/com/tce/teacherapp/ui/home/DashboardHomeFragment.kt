@@ -19,6 +19,7 @@ import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentDashboardHomeBinding
 import com.tce.teacherapp.ui.dashboard.BaseDashboardFragment
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
+import com.tce.teacherapp.ui.dashboard.home.listeners.TodayResourceClickListener
 import com.tce.teacherapp.ui.dashboard.home.state.DASHBOARD_VIEW_STATE_BUNDLE_KEY
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardStateEvent
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardViewState
@@ -28,6 +29,9 @@ import com.tce.teacherapp.ui.home.adapter.childEpoxyHolder
 import com.tce.teacherapp.ui.home.adapter.eventEpoxyHolder
 import com.tce.teacherapp.ui.home.adapter.latestUpdateEpoxyHolder
 import com.tce.teacherapp.ui.home.adapter.parentHeaderEpoxyHolder
+import com.tce.teacherapp.ui.home.listeners.ChildClickListener
+import com.tce.teacherapp.ui.home.listeners.EventClickListener
+import com.tce.teacherapp.ui.home.listeners.LatestUpdateClickListeners
 import com.tce.teacherapp.util.Utility
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.parents.fragment_dashboard_home.*
@@ -43,7 +47,8 @@ import javax.inject.Inject
 class DashboardHomeFragment @Inject
 constructor(
     viewModelFactory: ViewModelProvider.Factory
-) : BaseDashboardFragment(R.layout.fragment_dashboard_home, viewModelFactory) {
+) : BaseDashboardFragment(R.layout.fragment_dashboard_home, viewModelFactory), EventClickListener ,
+    ChildClickListener, LatestUpdateClickListeners , TodayResourceClickListener {
 
     private lateinit var binding: FragmentDashboardHomeBinding
 
@@ -165,9 +170,7 @@ constructor(
                             it.eventList?.let {
                                 eventList(it)
                             }
-                            locationListener {
-                                Toast.makeText(requireContext(), "Track Location" , Toast.LENGTH_LONG).show()
-                            }
+                            eventClickListener(this@DashboardHomeFragment)
                         }
                     }
 
@@ -177,8 +180,8 @@ constructor(
                             id(3)
                             strTitle("Latest Update")
                             latestUpdateList(it)
-
-
+                            latestUpdateClickListeners(this@DashboardHomeFragment)
+                            todayResourceListener(this@DashboardHomeFragment)
                         }
                     }
 
@@ -188,9 +191,7 @@ constructor(
                                 childEpoxyHolder {
                                     id(child.id)
                                     strStudentName(child.name)
-                                    listener {
-
-                                    }
+                                    childClickListener(this@DashboardHomeFragment)
                                 }
                             }
                         }
@@ -199,6 +200,38 @@ constructor(
                 }
             }
         })
+    }
+
+    override fun onEventListItemClick(type : String) {
+        Toast.makeText(requireContext(), "Click on " + type, Toast.LENGTH_LONG).show()
+    }
+
+    override fun onLocationClickListener() {
+        Toast.makeText(requireContext(), "Track Location" , Toast.LENGTH_LONG).show()
+    }
+
+    override fun onChildListItemClick() {
+        Toast.makeText(requireContext(), "Click on Child" , Toast.LENGTH_LONG).show()
+    }
+
+    override fun onMessageClickListener() {
+        Toast.makeText(requireContext(), "Click on Message" , Toast.LENGTH_LONG).show()
+    }
+
+    override fun onViewPlannerClick() {
+        Toast.makeText(requireContext(), "Click on view Planner" , Toast.LENGTH_LONG).show()
+    }
+
+    override fun onLatestUpdateEventClick() {
+        Toast.makeText(requireContext(), "Click on event" , Toast.LENGTH_LONG).show()
+    }
+
+    override fun onTodayResourceShowMoreClick(isShowLess: Boolean) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onTodayResourceItemClick(title: String) {
+        Toast.makeText(requireContext(), "Click on " + title, Toast.LENGTH_LONG).show()
     }
 
 

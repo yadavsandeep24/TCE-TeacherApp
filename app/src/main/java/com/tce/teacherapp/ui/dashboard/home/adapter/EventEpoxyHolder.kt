@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.*
 import com.tce.teacherapp.R
 import com.tce.teacherapp.db.entity.Event
+import com.tce.teacherapp.ui.dashboard.home.listeners.EventClickListener
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
 import com.tce.teacherapp.util.Utility
 
@@ -27,7 +28,7 @@ abstract class EventEpoxyHolder :EpoxyModelWithHolder<EventHolder>() {
     var showLessButton : Boolean = false
 
     @EpoxyAttribute
-    lateinit var listener: () -> Unit
+    lateinit var evenClickListener : EventClickListener
 
     override fun bind(holder: EventHolder) {
 
@@ -40,7 +41,7 @@ abstract class EventEpoxyHolder :EpoxyModelWithHolder<EventHolder>() {
             holder.ivShowMore.background = holder.rvEvent.context.resources.getDrawable(R.drawable.ic_add)
 
         }
-        holder.tvShowMore.setOnClickListener{listener()}
+        holder.tvShowMore.setOnClickListener{evenClickListener.onEventShowMoreClick(showLessButton)}
 
         holder.rvEvent.layoutManager = GridLayoutManager(holder.rvEvent.context, 1)
         holder.rvEvent.setHasFixedSize(false)
@@ -67,9 +68,7 @@ abstract class EventEpoxyHolder :EpoxyModelWithHolder<EventHolder>() {
                         )?.let { it1 ->
                             imageDrawable(it1)
                         }
-                        listener {
-                            Toast.makeText(holder.rvEvent.context, "Click" + event.type, Toast.LENGTH_LONG).show()
-                        }
+                        evenClickListener(evenClickListener)
 
                     }
                 }

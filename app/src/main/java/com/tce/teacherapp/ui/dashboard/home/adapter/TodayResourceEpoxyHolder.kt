@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.*
 import com.tce.teacherapp.R
 import com.tce.teacherapp.db.entity.DashboardResource
+import com.tce.teacherapp.ui.dashboard.home.listeners.TodayResourceClickListener
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
 
 @EpoxyModelClass(layout = R.layout.dashboard_today_resources)
@@ -19,7 +20,7 @@ abstract class TodayResourceEpoxyHolder : EpoxyModelWithHolder<ResourceHolder>()
     lateinit var resourceList:ArrayList<DashboardResource>
 
     @EpoxyAttribute
-    lateinit var listener: () -> Unit
+    lateinit var todayResourceClickListener : TodayResourceClickListener
 
     @EpoxyAttribute
     var nextEventCount : Int =4
@@ -37,7 +38,7 @@ abstract class TodayResourceEpoxyHolder : EpoxyModelWithHolder<ResourceHolder>()
             holder.ivShowMore.background = holder.rvResource.context.resources.getDrawable(R.drawable.ic_add)
 
         }
-        holder.tvShowMore.setOnClickListener{listener()}
+        holder.tvShowMore.setOnClickListener{todayResourceClickListener.onTodayResourceShowMoreClick(showLessButton)}
 
         holder.tvTitle.text = strTitle
         holder.rvResource.layoutManager = GridLayoutManager(holder.rvResource.context, 1)
@@ -53,7 +54,7 @@ abstract class TodayResourceEpoxyHolder : EpoxyModelWithHolder<ResourceHolder>()
                         title(res.title)
                         subTitle(res.subTitle)
                         resourceTypeList(res.typeList)
-
+                        todayResourceClickListener(todayResourceClickListener)
                     }
                 }
             }

@@ -7,12 +7,16 @@ import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.tce.teacherapp.R
+import com.tce.teacherapp.db.entity.ClassListsItem
+import com.tce.teacherapp.ui.dashboard.home.listeners.ClassListClickListener
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
 import com.tce.teacherapp.util.Utility
 
 @EpoxyModelClass(layout = R.layout.list_item_dashboard_filter)
 abstract class ClassListEpoxyHolder : EpoxyModelWithHolder<ClassHolder>(){
 
+    @EpoxyAttribute
+    lateinit var classListItem : ClassListsItem
 
     @EpoxyAttribute
     lateinit var imageUrl : String
@@ -24,7 +28,7 @@ abstract class ClassListEpoxyHolder : EpoxyModelWithHolder<ClassHolder>(){
     lateinit var shortName : String
 
     @EpoxyAttribute
-    lateinit var listener: () -> Unit
+    lateinit var classListClickListener: ClassListClickListener
 
     @EpoxyAttribute
     lateinit var imageDrawable : Drawable
@@ -39,7 +43,7 @@ abstract class ClassListEpoxyHolder : EpoxyModelWithHolder<ClassHolder>(){
         )
 
 
-        holder.mainContainer.setOnClickListener{listener()}
+        holder.mainContainer.setOnClickListener{classListClickListener.onClassListItemClick(classListItem)}
         holder.tvIcon.setText(shortName)
         holder.tvIcon.background = imageDrawable
         holder.tvTitle.setText(name)

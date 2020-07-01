@@ -10,6 +10,7 @@ import com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator
 import com.tce.teacherapp.R
 import com.tce.teacherapp.db.entity.Event
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
+import com.tce.teacherapp.ui.home.listeners.EventClickListener
 import com.tce.teacherapp.util.Utility
 import com.tce.teacherapp.util.dotsIndicator.ZoomOutPageTransformer
 import java.util.*
@@ -24,7 +25,7 @@ abstract class EventEpoxyHolder :EpoxyModelWithHolder<EventHolder>() {
     lateinit var eventList : List<Event>
 
     @EpoxyAttribute
-    lateinit var locationListener: () -> Unit
+    lateinit var eventClickListener: EventClickListener
 
     override fun bind(holder: EventHolder) {
 
@@ -36,9 +37,9 @@ abstract class EventEpoxyHolder :EpoxyModelWithHolder<EventHolder>() {
             R.color.transparent, R.color.transparent, 0
         )
 
-        holder.locationContainer.setOnClickListener{locationListener()}
+        holder.locationContainer.setOnClickListener{eventClickListener.onLocationClickListener()}
 
-        val adapter = DotIndicatorEventPagerAdapter()
+        val adapter = DotIndicatorEventPagerAdapter(eventClickListener)
         adapter.setData(eventList as ArrayList<Event>)
         holder.viewPagerEvent.adapter = adapter
 

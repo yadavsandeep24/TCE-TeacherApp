@@ -12,9 +12,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.*
 import com.tce.teacherapp.R
 import com.tce.teacherapp.db.entity.LatestUpdateSubList
-import com.tce.teacherapp.ui.dashboard.home.adapter.eventItemEpoxyHolder
+import com.tce.teacherapp.ui.home.adapter.eventItemEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.home.adapter.todayResChildItemEpoxyHolder
+import com.tce.teacherapp.ui.dashboard.home.listeners.TodayResourceClickListener
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
+import com.tce.teacherapp.ui.home.listeners.LatestUpdateClickListeners
 import com.tce.teacherapp.util.Utility
 
 @EpoxyModelClass(layout = R.layout.list_item_latest_update)
@@ -36,11 +38,10 @@ abstract class LatestUpdateChildItemEpoxyHolder : EpoxyModelWithHolder<ViewedChi
     lateinit var subList: LatestUpdateSubList
 
     @EpoxyAttribute
-    lateinit var listener: () -> Unit
+    lateinit var latestUpdateClickListeners: LatestUpdateClickListeners
 
     @EpoxyAttribute
-    lateinit var listenerPlanner: () -> Unit
-
+    lateinit var todayResourceListener : TodayResourceClickListener
 
     override fun bind(holder: ViewedChildHolder) {
 
@@ -60,9 +61,9 @@ abstract class LatestUpdateChildItemEpoxyHolder : EpoxyModelWithHolder<ViewedChi
             R.color.transparent, R.color.transparent, 50
         )
 
-        holder.tvViewAll.setOnClickListener{listenerPlanner()}
+        holder.tvViewAll.setOnClickListener{latestUpdateClickListeners.onViewPlannerClick()}
 
-        holder.topContainer.setOnClickListener{listener()}
+        holder.topContainer.setOnClickListener{latestUpdateClickListeners.onMessageClickListener()}
 
 
         if (subList.attendance == null && subList.resourceList == null && subList.eventList == null) {
@@ -106,9 +107,7 @@ abstract class LatestUpdateChildItemEpoxyHolder : EpoxyModelWithHolder<ViewedChi
                                 )?.let { it1 ->
                                     imageDrawable(it1)
                                 }
-                                listener {
-                                    Toast.makeText(holder.rvResource.context, "Click " + type.title, Toast.LENGTH_LONG).show()
-                                }
+                               todayResourceClickListener(todayResourceListener)
                             }
                         }
 
@@ -145,9 +144,7 @@ abstract class LatestUpdateChildItemEpoxyHolder : EpoxyModelWithHolder<ViewedChi
                                 )?.let { it1 ->
                                     imageDrawable(it1)
                                 }
-                                listener {
-                                    Toast.makeText(holder.rvEvent.context, "Click " + event.type, Toast.LENGTH_LONG).show()
-                                }
+                                latestUpdateClickListeners(latestUpdateClickListeners)
                             }
                         }
                     }

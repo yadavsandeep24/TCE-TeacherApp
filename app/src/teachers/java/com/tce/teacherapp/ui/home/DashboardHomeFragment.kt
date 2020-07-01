@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -15,9 +16,14 @@ import com.airbnb.epoxy.EpoxyVisibilityTracker
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentDashboardHomeBinding
+import com.tce.teacherapp.db.entity.ClassListsItem
 import com.tce.teacherapp.ui.dashboard.BaseDashboardFragment
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.home.adapter.*
+import com.tce.teacherapp.ui.dashboard.home.listeners.ClassListClickListener
+import com.tce.teacherapp.ui.dashboard.home.listeners.EventClickListener
+import com.tce.teacherapp.ui.dashboard.home.listeners.LastViewedResourceClickListener
+import com.tce.teacherapp.ui.dashboard.home.listeners.TodayResourceClickListener
 import com.tce.teacherapp.ui.dashboard.home.state.DASHBOARD_VIEW_STATE_BUNDLE_KEY
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardStateEvent
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardViewState
@@ -38,7 +44,9 @@ import javax.inject.Inject
 class DashboardHomeFragment @Inject
 constructor(
     viewModelFactory: ViewModelProvider.Factory
-) : BaseDashboardFragment(R.layout.fragment_dashboard_home, viewModelFactory) {
+) : BaseDashboardFragment(R.layout.fragment_dashboard_home, viewModelFactory),
+    ClassListClickListener, EventClickListener , TodayResourceClickListener,
+    LastViewedResourceClickListener {
 
     private lateinit var binding: FragmentDashboardHomeBinding
 
@@ -90,16 +98,18 @@ constructor(
             findNavController().navigate(R.id.action_dashboardHomeFragment_to_settingsFragment)
         }
 
-        val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
+        val bottomSheetBehavior =
+            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
 
-        bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_COLLAPSED
+        bottomSheetBehavior.state =
+            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_COLLAPSED
         bottomSheetBehavior.skipCollapsed = true
         bottomSheetBehavior.isDraggable = false
 
         bottomSheetBehavior.addBottomSheetCallback(object :
             com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.BottomSheetCallback {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
-                if(newState == BottomSheetBehavior.STATE_DRAGGING){
+                if (newState == BottomSheetBehavior.STATE_DRAGGING) {
                     bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
                 }
 
@@ -109,27 +119,29 @@ constructor(
         binding.classContainer.setOnClickListener {
             viewModel.setStateEvent(DashboardStateEvent.GetUserClassList)
             if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
-                bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
+                bottomSheetBehavior.state =
+                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
                 binding.maskLayout.setBackgroundColor(resources.getColor(R.color.dim_color_dashboard))
                 (activity as DashboardActivity).bottom_navigation_view.visibility = View.INVISIBLE
             } else {
-                bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                bottomSheetBehavior.state =
+                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
                 binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
                 (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
             }
         }
 
-       /* binding.maskLayout.setOnClickListener{
-            if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
-                bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
-                binding.maskLayout.setBackgroundColor(resources.getColor(R.color.dim_color_dashboard))
-                (activity as DashboardActivity).bottom_navigation_view.visibility = View.INVISIBLE
-            } else {
-                bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
-                binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
-                (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
-            }
-        }*/
+        /* binding.maskLayout.setOnClickListener{
+             if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
+                 bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
+                 binding.maskLayout.setBackgroundColor(resources.getColor(R.color.dim_color_dashboard))
+                 (activity as DashboardActivity).bottom_navigation_view.visibility = View.INVISIBLE
+             } else {
+                 bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                 binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
+                 (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
+             }
+         }*/
 
 
 
@@ -154,8 +166,8 @@ constructor(
             if (viewState != null) {
                 binding.rvFilter.withModels {
                     viewState.classList?.let {
-                        Log.d("SAN","classList-->"+it.size)
-                        for(item in it){
+                        Log.d("SAN", "classList-->" + it.size)
+                        for (item in it) {
                             classListEpoxyHolder {
                                 id(item.id)
                                 name(item.name)
@@ -169,18 +181,8 @@ constructor(
                                 )?.let { it1 ->
                                     imageDrawable(it1)
                                 }
-                                listener {
-                                    binding.tvClassIcon.text = item.shortName
-                                    Utility.getDrawable(item.imageUrl.substring(0,item.imageUrl.lastIndexOf(".")), binding.rvFilter.context)?.let { it1 ->
-                                        binding.tvClassIcon.background =  it1
-                                    }
-                                    binding.tvClassTitle.text = item.name
-                                    val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
-                                    bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_COLLAPSED
-                                    binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
-                                    (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
-                                    viewModel.setStateEvent(DashboardStateEvent.GetDashboardData(item.id.toInt()))
-                                }
+                                classListItem(item)
+                                classListClickListener(this@DashboardHomeFragment)
                             }
                         }
                     }
@@ -191,7 +193,7 @@ constructor(
 
                     viewState.profile?.let {
                         headerEpoxyHolder {
-                            Log.d("SAN","it.imageurl-->"+it.imageUrl)
+                            Log.d("SAN", "it.imageurl-->" + it.imageUrl)
                             id(1)
                             strName("Hi ${it.name} !")
                             strLastSync("2 March 2020, 8 am")
@@ -206,13 +208,7 @@ constructor(
                             nextEventCount(it.nextEventCount)
                             showLessButton(it.isShowLess)
                             eventList(it.eventList)
-                            listener {
-                                if(it.isShowLess) {
-                                    viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(3,true))
-                                }else {
-                                    viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(7,false))
-                                }
-                            }
+                            evenClickListener(this@DashboardHomeFragment)
                         }
                     }
 
@@ -224,13 +220,7 @@ constructor(
                             showLessButton(it.isShowLess)
                             resourceList(it.todayResource)
 
-                            listener {
-                                if(it.isShowLess) {
-                                    viewModel.setStateEvent(DashboardStateEvent.GetTodayResource(2,true))
-                                }else {
-                                    viewModel.setStateEvent(DashboardStateEvent.GetTodayResource(4,false))
-                                }
-                            }
+                          todayResourceClickListener(this@DashboardHomeFragment)
                         }
                     }
                     viewState.lastViewedResourceData?.let {
@@ -240,26 +230,95 @@ constructor(
                             nextEventCount(it.nextEventCount)
                             showLessButton(it.isShowLess)
                             resourceList(it.lastViewResourceList)
-                            listener {
-                                if (it.isShowLess) {
-                                    viewModel.setStateEvent(
-                                        DashboardStateEvent.GetLastViewedResource(
-                                            2,true
-                                        )
-                                    )
-                                }else{
-                                    viewModel.setStateEvent(
-                                        DashboardStateEvent.GetLastViewedResource(
-                                            10,false
-                                        )
-                                    )
-                                }
-                            }
+                            lastViewedClickListener(this@DashboardHomeFragment)
                         }
                     }
                 }
             }
         })
+    }
+
+    override fun onClassListItemClick(item: ClassListsItem) {
+        binding.tvClassIcon.text = item.shortName
+        Utility.getDrawable(
+            item.imageUrl.substring(0, item.imageUrl.lastIndexOf(".")),
+            binding.rvFilter.context
+        )?.let { it1 ->
+            binding.tvClassIcon.background = it1
+        }
+        binding.tvClassTitle.text = item.name
+        val bottomSheetBehavior =
+            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
+        bottomSheetBehavior.state =
+            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_COLLAPSED
+        binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
+        (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
+        viewModel.setStateEvent(DashboardStateEvent.GetDashboardData(item.id.toInt()))
+    }
+
+
+    override fun onTodayResourceShowMoreClick(isShowLess: Boolean) {
+        if (isShowLess) {
+            viewModel.setStateEvent(
+                DashboardStateEvent.GetTodayResource(
+                    2,
+                    true
+                )
+            )
+        } else {
+            viewModel.setStateEvent(
+                DashboardStateEvent.GetTodayResource(
+                    4,
+                    false
+                )
+            )
+        }
+    }
+
+    override fun onTodayResourceItemClick(title: String) {
+        Toast.makeText(requireContext(), "Click on "  + title, Toast.LENGTH_LONG).show()
+    }
+
+    override fun onEventShowMoreClick(isShowLess: Boolean) {
+        if (isShowLess) {
+            viewModel.setStateEvent(
+                DashboardStateEvent.GetDashboardEvent(
+                    3,
+                    true
+                )
+            )
+        } else {
+            viewModel.setStateEvent(
+                DashboardStateEvent.GetDashboardEvent(
+                    7,
+                    false
+                )
+            )
+        }
+    }
+
+    override fun onEventItemClick(type: String) {
+        Toast.makeText(requireContext(), "Click on "  + type, Toast.LENGTH_LONG).show()
+    }
+
+    override fun onLastViewedResourceShowMoreClick(isShowLess: Boolean) {
+        if (isShowLess) {
+            viewModel.setStateEvent(
+                DashboardStateEvent.GetLastViewedResource(
+                    2, true
+                )
+            )
+        } else {
+            viewModel.setStateEvent(
+                DashboardStateEvent.GetLastViewedResource(
+                    10, false
+                )
+            )
+        }
+    }
+
+    override fun onLastViewedItemClick(title: String) {
+        Toast.makeText(requireContext(), "Click on "  + title, Toast.LENGTH_LONG).show()
     }
 
 

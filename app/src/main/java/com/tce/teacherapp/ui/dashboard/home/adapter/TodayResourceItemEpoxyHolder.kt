@@ -9,6 +9,7 @@ import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.airbnb.epoxy.EpoxyRecyclerView
 import com.tce.teacherapp.R
 import com.tce.teacherapp.db.entity.DashboardResourceType
+import com.tce.teacherapp.ui.dashboard.home.listeners.TodayResourceClickListener
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
 import com.tce.teacherapp.util.Utility
 
@@ -24,6 +25,8 @@ abstract class TodayResourceItemEpoxyHolder : EpoxyModelWithHolder<ResourceItemH
     @EpoxyAttribute
     lateinit var resourceTypeList:ArrayList<DashboardResourceType>
 
+    @EpoxyAttribute
+    lateinit var todayResourceClickListener : TodayResourceClickListener
 
     override fun bind(holder: ResourceItemHolder) {
 
@@ -54,9 +57,7 @@ abstract class TodayResourceItemEpoxyHolder : EpoxyModelWithHolder<ResourceItemH
                         )?.let { it1 ->
                             imageDrawable(it1)
                         }
-                        listener {
-                            Toast.makeText(holder.rvResourceItem.context, "Click " + type.title, Toast.LENGTH_LONG).show()
-                        }
+                        todayResourceClickListener(todayResourceClickListener)
                     }
                 }
             }

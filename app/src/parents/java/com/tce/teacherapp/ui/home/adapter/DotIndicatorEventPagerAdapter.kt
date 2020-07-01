@@ -12,10 +12,11 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.tce.teacherapp.R
 import com.tce.teacherapp.db.entity.Event
+import com.tce.teacherapp.ui.home.listeners.EventClickListener
 import com.tce.teacherapp.util.Utility
 import java.util.*
 
-class DotIndicatorEventPagerAdapter :
+class DotIndicatorEventPagerAdapter(private val eventListener: EventClickListener) :
     RecyclerView.Adapter<DotIndicatorEventPagerAdapter.ViewHolder>() {
     internal var mEventList: List<Event>? = null
 
@@ -86,7 +87,7 @@ class DotIndicatorEventPagerAdapter :
         )
 
         holder.eventContainer.setOnClickListener(View.OnClickListener {
-          Toast.makeText(holder.mainContainer.context, "Click" + mEventList!!.get(position).type, Toast.LENGTH_LONG).show()
+            eventListener.onEventListItemClick(mEventList!!.get(position).type)
         })
     }
 }

@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.*
 import com.tce.teacherapp.R
 import com.tce.teacherapp.db.entity.DashboardLatestUpdate
+import com.tce.teacherapp.ui.dashboard.home.listeners.TodayResourceClickListener
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
+import com.tce.teacherapp.ui.home.listeners.LatestUpdateClickListeners
 import com.tce.teacherapp.util.Utility
 
 @EpoxyModelClass(layout = R.layout.dashboard_latest_update)
@@ -21,7 +23,10 @@ abstract class LatestUpdateEpoxyHolder : EpoxyModelWithHolder<ViewedHolder>() {
     lateinit var latestUpdateList:ArrayList<DashboardLatestUpdate>
 
     @EpoxyAttribute
-    lateinit var listener: () -> Unit
+    lateinit var latestUpdateClickListeners: LatestUpdateClickListeners
+
+    @EpoxyAttribute
+    lateinit var todayResourceListener : TodayResourceClickListener
 
     override fun bind(holder: ViewedHolder) {
 
@@ -51,13 +56,8 @@ abstract class LatestUpdateEpoxyHolder : EpoxyModelWithHolder<ViewedHolder>() {
                             imageDrawable(it1)
                         }
 
-                        listener {
-                            Toast.makeText(holder.rvResource.context, "Click Message" , Toast.LENGTH_LONG).show()
-                        }
-
-                        listenerPlanner {
-                            Toast.makeText(holder.rvResource.context, "Click Planner" , Toast.LENGTH_LONG).show()
-                        }
+                        latestUpdateClickListeners(latestUpdateClickListeners)
+                        todayResourceListener(todayResourceListener)
 
                     }
                 }

@@ -1,4 +1,4 @@
-package com.tce.teacherapp.ui.dashboard.home.adapter
+package com.tce.teacherapp.ui.home.adapter
 
 import android.graphics.Color
 import android.graphics.drawable.Drawable
@@ -9,8 +9,8 @@ import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.tce.teacherapp.R
-import com.tce.teacherapp.ui.dashboard.home.listeners.EventClickListener
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
+import com.tce.teacherapp.ui.home.listeners.LatestUpdateClickListeners
 import com.tce.teacherapp.util.Utility
 
 @EpoxyModelClass(layout = R.layout.dashboard_event_list_item)
@@ -36,7 +36,7 @@ abstract class EventItemEpoxyHolder : EpoxyModelWithHolder<ItemHolder>() {
     lateinit var imageUrl: String
 
     @EpoxyAttribute
-    lateinit var evenClickListener : EventClickListener
+    lateinit var latestUpdateClickListeners: LatestUpdateClickListeners
 
 
     override fun bind(holder: ItemHolder) {
@@ -47,7 +47,7 @@ abstract class EventItemEpoxyHolder : EpoxyModelWithHolder<ItemHolder>() {
         holder.tvEventType.setTextColor(Color.parseColor(typeColor))
         holder.eventContainer.setBackgroundColor(Color.parseColor(eventBackColor))
         holder.iconContainer.setBackgroundColor(Color.parseColor(iconBackColor))
-        holder.eventContainer.setOnClickListener{evenClickListener.onEventItemClick(strEventType)}
+        holder.eventContainer.setOnClickListener{latestUpdateClickListeners.onLatestUpdateEventClick()}
         Utility.setSelectorRoundedCornerWithDynamicColor(
             holder.eventContainer!!.context,  holder.eventContainer!!, 0,
             eventBackColor, iconBackColor,

@@ -10,6 +10,7 @@ import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.tce.teacherapp.R
+import com.tce.teacherapp.ui.dashboard.home.listeners.TodayResourceClickListener
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
 import com.tce.teacherapp.util.Utility
 
@@ -32,12 +33,12 @@ abstract class TodayResChildItemEpoxyHolder :EpoxyModelWithHolder<TodayChildHold
     lateinit var imageDrawable : Drawable
 
     @EpoxyAttribute
-    lateinit var listener: () -> Unit
+    lateinit var todayResourceClickListener : TodayResourceClickListener
 
 
     override fun bind(holder: TodayChildHolder) {
 
-        holder.mainContainer.setOnClickListener{listener()}
+        holder.mainContainer.setOnClickListener{todayResourceClickListener.onTodayResourceItemClick(strName)}
         Utility.setSelectorRoundedCorner(
             holder.mainContainer!!.context,  holder.mainContainer!!, 0,
             R.color.transparent, R.color.dim_color,

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.*
 import com.tce.teacherapp.R
 import com.tce.teacherapp.db.entity.DashboardResourceType
+import com.tce.teacherapp.ui.dashboard.home.listeners.LastViewedResourceClickListener
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
 import com.tce.teacherapp.util.Utility
 
@@ -21,7 +22,7 @@ abstract class ViewedResourceEpoxyHolder : EpoxyModelWithHolder<ViewedHolder>() 
     lateinit var resourceList:ArrayList<DashboardResourceType>
 
     @EpoxyAttribute
-    lateinit var listener: () -> Unit
+    lateinit var lastViewedClickListener : LastViewedResourceClickListener
 
     @EpoxyAttribute
     var nextEventCount : Int =4
@@ -40,7 +41,7 @@ abstract class ViewedResourceEpoxyHolder : EpoxyModelWithHolder<ViewedHolder>() 
             holder.ivShowMore.background = holder.rvResource.context.resources.getDrawable(R.drawable.ic_add)
 
         }
-        holder.tvShowMore.setOnClickListener{listener()}
+        holder.tvShowMore.setOnClickListener{lastViewedClickListener.onLastViewedResourceShowMoreClick(showLessButton)}
 
         holder.rvResource.layoutManager = GridLayoutManager(holder.rvResource.context, 2)
         holder.rvResource.setHasFixedSize(false)
@@ -64,9 +65,7 @@ abstract class ViewedResourceEpoxyHolder : EpoxyModelWithHolder<ViewedHolder>() 
                         )?.let { it1 ->
                             imageDrawable(it1)
                         }
-                        listener {
-                            Toast.makeText(holder.rvResource.context, "Click " + res.title, Toast.LENGTH_LONG).show()
-                        }
+                        lastViewedClickListener(lastViewedClickListener)
                     }
                 }
             }
