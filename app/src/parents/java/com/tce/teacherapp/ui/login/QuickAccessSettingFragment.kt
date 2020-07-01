@@ -64,7 +64,6 @@ class QuickAccessSettingFragment
             biometricPrompt = BiometricHelper.createBiometricPrompt(requireContext(), this, this)
         }
         binding.tvSkipForNow.setOnClickListener {
-            viewModel.setStateEvent(LoginStateEvent.FingerPrintEnableMode(true))
             val i = Intent(activity, DashboardActivity::class.java)
             startActivity(i)
             activity?.overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left)
@@ -96,6 +95,7 @@ class QuickAccessSettingFragment
             val promptInfo = BiometricHelper.createPromptInfo(requireContext())
             biometricPrompt.authenticate(promptInfo)
         }
+        viewModel.setQuickAccessScreenShow(false)
         subscribeObservers()
     }
 

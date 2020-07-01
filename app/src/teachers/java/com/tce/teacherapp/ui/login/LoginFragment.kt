@@ -39,7 +39,8 @@ import javax.inject.Inject
 @kotlinx.coroutines.FlowPreview
 class LoginFragment
 @Inject
-constructor(viewModelFactory: ViewModelProvider.Factory) : BaseFragment(R.layout.fragment_login) {
+constructor(viewModelFactory: ViewModelProvider.Factory) : BaseFragment(R.layout.fragment_login),
+    BaseFragment.OnKeyboardVisibilityListener {
     var isPassWordVisible: Boolean = true
 
     private lateinit var binding: FragmentLoginBinding
@@ -68,6 +69,7 @@ constructor(viewModelFactory: ViewModelProvider.Factory) : BaseFragment(R.layout
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d("SAN", "LoginFragment-->onViewCreated")
+        setKeyboardVisibilityListener(binding.root,this)
         val isForceFullLogin = arguments?.getBoolean("isForceFullLoginShow")
         Log.d("SAN", "isForceFullLogin-->$isForceFullLogin")
         if (isForceFullLogin != null && isForceFullLogin) {
@@ -207,6 +209,15 @@ constructor(viewModelFactory: ViewModelProvider.Factory) : BaseFragment(R.layout
             super.updateDrawState(ds)
             ds.color = resources.getColor(R.color.login_support_mail)
             ds.isUnderlineText = false
+        }
+
+    }
+
+    override fun onVisibilityChanged(visible: Boolean) {
+        if(visible) {
+            binding.flBottom.visibility = View.GONE
+        }else{
+            binding.flBottom.visibility = View.VISIBLE
         }
 
     }

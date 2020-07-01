@@ -1,7 +1,6 @@
 package com.tce.teacherapp.ui.login
 
 import android.content.Intent
-import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
 import android.text.SpannableString
@@ -11,12 +10,9 @@ import android.text.method.PasswordTransformationMethod
 import android.text.method.SingleLineTransformationMethod
 import android.text.style.ClickableSpan
 import android.util.Log
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -64,7 +60,7 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
         Log.d("SAN", "LoginFragment-->onViewCreated")
         val isForceFullLogin = arguments?.getBoolean("isForceFullLoginShow")
         Log.d("SAN", "isForceFullLogin-->$isForceFullLogin")
-        setKeyboardVisibilityListener(this)
+        setKeyboardVisibilityListener(binding.root,this)
         if (isForceFullLogin != null && isForceFullLogin) {
             binding.srContainer.visibility = View.VISIBLE
             binding.ivLogo.visibility = View.VISIBLE
@@ -202,34 +198,7 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
         }
 
     }
-      private fun setKeyboardVisibilityListener(onKeyboardVisibilityListener: OnKeyboardVisibilityListener) {
-        val parentView = binding.root
-        parentView.viewTreeObserver.addOnGlobalLayoutListener(object :
-            ViewTreeObserver.OnGlobalLayoutListener {
-            private var alreadyOpen = false
-            private val defaultKeyboardHeightDP = 100
-            private val EstimatedKeyboardDP =
-                defaultKeyboardHeightDP + if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) 48 else 0
-            private val rect: Rect = Rect()
-            override fun onGlobalLayout() {
-                val estimatedKeyboardHeight = TypedValue.applyDimension(
-                    TypedValue.COMPLEX_UNIT_DIP,
-                    EstimatedKeyboardDP.toFloat(),
-                    parentView.resources.displayMetrics
-                ).toInt()
-                parentView.getWindowVisibleDisplayFrame(rect)
-                val heightDiff: Int =
-                    parentView.rootView.height - (rect.bottom - rect.top)
-                val isShown = heightDiff >= estimatedKeyboardHeight
-                if (isShown == alreadyOpen) {
-                    Log.i("Keyboard state", "Ignoring global layout change...")
-                    return
-                }
-                alreadyOpen = isShown
-                onKeyboardVisibilityListener.onVisibilityChanged(isShown)
-            }
-        })
-    }
+
 
     override fun onVisibilityChanged(visible: Boolean) {
         if (visible) {

@@ -80,28 +80,22 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
 
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             if (viewState != null) {
+
+                viewState.isFaceLoginEnabled?.let {
+                        binding.tvHint.text = resources.getString(R.string.lbl_you_can_use_face_id_to_login)
+                        binding.tvLoginTouchId.text = resources.getString(R.string.lbl_use_face_id)
+                        binding.ivThumb.background = resources.getDrawable(R.drawable.ic_face_id)
+                }
+
                 viewState.isFingerPrintLoginEnabled?.let {
                     if(it) {
-                        binding.tvHint.text = resources.getString(R.string.lbl_you_can_use_touch_id_to_login)
+                        binding.tvHint.text =
+                            resources.getString(R.string.lbl_you_can_use_touch_id_to_login)
                         binding.tvLoginTouchId.text = resources.getString(R.string.lbl_use_touch_id)
                         binding.ivThumb.background = resources.getDrawable(R.drawable.ic_thumbprint)
-                    }else {
-                        binding.tvHint.text = resources.getString(R.string.lbl_you_can_use_face_id_to_login)
-                        binding.tvLoginTouchId.text = resources.getString(R.string.lbl_use_face_id)
-                        binding.ivThumb.background = resources.getDrawable(R.drawable.ic_face_id)
                     }
                 }
-                viewState.isFaceLoginEnabled?.let {
-                    if(!it) {
-                        binding.tvHint.text = resources.getString(R.string.lbl_you_can_use_touch_id_to_login)
-                        binding.tvLoginTouchId.text = resources.getString(R.string.lbl_use_touch_id)
-                        binding.ivThumb.background = resources.getDrawable(R.drawable.ic_thumbprint)
-                    }else {
-                        binding.tvHint.text = resources.getString(R.string.lbl_you_can_use_face_id_to_login)
-                        binding.tvLoginTouchId.text = resources.getString(R.string.lbl_use_face_id)
-                        binding.ivThumb.background = resources.getDrawable(R.drawable.ic_face_id)
-                    }
-                }
+
             }
         })
     }

@@ -17,6 +17,15 @@
             app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"/>
+        <action
+            android:id="@+id/action_dashboardHomeFragment_to_addChildFragment"
+            app:destination="@id/addChildFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/dashboardHomeFragment"/>
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -78,4 +87,19 @@
         android:name="com.tce.teacherapp.ui.dashboard.home.profile.TeacherProfileFragment"
         android:label="TeacherProfileFragment"
         tools:layout="@layout/fragment_teacher_profile" />
+    <fragment
+        android:id="@+id/addChildFragment"
+        android:name="com.tce.teacherapp.ui.home.AddChildFragment"
+        android:label="fragment_add_child"
+        tools:layout="@layout/fragment_add_child" >
+        <action
+            android:id="@+id/action_addChildFragment_to_dashboardHomeFragment"
+            app:destination="@id/dashboardHomeFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/addChildFragment"/>
+    </fragment>
 </navigation>

@@ -17,7 +17,6 @@ import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentDashboardHomeBinding
-import com.tce.teacherapp.db.entity.Event
 import com.tce.teacherapp.ui.dashboard.BaseDashboardFragment
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.home.state.DASHBOARD_VIEW_STATE_BUNDLE_KEY
@@ -47,8 +46,6 @@ constructor(
 ) : BaseDashboardFragment(R.layout.fragment_dashboard_home, viewModelFactory) {
 
     private lateinit var binding: FragmentDashboardHomeBinding
-
-    private var eventList: ArrayList<Event> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -114,9 +111,9 @@ constructor(
             R.color.transparent, R.color.transparent, 0
         )
 
-        binding.addChild.setOnClickListener(View.OnClickListener {
-            Toast.makeText(requireContext(), "Add child", Toast.LENGTH_LONG).show()
-        })
+        binding.addChild.setOnClickListener {
+            findNavController().navigate(R.id.action_dashboardHomeFragment_to_addChildFragment)
+        }
 
         viewModel.setStateEvent(DashboardStateEvent.GetDashboardData(1))
         // viewModel.setStateEvent(DashboardStateEvent.GetDashboardEvent(2, "today resource"))

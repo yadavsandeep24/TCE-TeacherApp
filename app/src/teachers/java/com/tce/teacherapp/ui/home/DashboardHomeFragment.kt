@@ -170,21 +170,16 @@ constructor(
                                     imageDrawable(it1)
                                 }
                                 listener {
-                                    binding.tvClassIcon.setText(item.shortName)
-                                    Utility.getDrawable(
-                                        item.imageUrl.substring(
-                                            0,
-                                            item.imageUrl.lastIndexOf(".")
-                                        ), binding.rvFilter.context
-                                    )?.let { it1 ->
+                                    binding.tvClassIcon.text = item.shortName
+                                    Utility.getDrawable(item.imageUrl.substring(0,item.imageUrl.lastIndexOf(".")), binding.rvFilter.context)?.let { it1 ->
                                         binding.tvClassIcon.background =  it1
                                     }
-                                    binding.tvClassTitle.setText(item.name)
+                                    binding.tvClassTitle.text = item.name
                                     val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
                                     bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_COLLAPSED
                                     binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
                                     (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
-                                    viewModel.setStateEvent(DashboardStateEvent.GetDashboardData(2))
+                                    viewModel.setStateEvent(DashboardStateEvent.GetDashboardData(item.id.toInt()))
                                 }
                             }
                         }

@@ -160,15 +160,14 @@ constructor(viewModelFactory: ViewModelProvider.Factory
 
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             if (viewState != null) {
+
+                viewState.isFaceLoginEnabled?.let {
+                    Log.d("SAN", "isFaceLoginEnabled-->$it")
+                    binding.tbFaceid.isChecked = it
+                }
                 viewState.isFingerPrintLoginEnabled?.let {
                     Log.d("SAN", "isFingerPrintLoginEnabled-->$it")
-                    if(it) {
-                        binding.tbFingerPrint.isChecked = true
-                        binding.tbFaceid.isChecked = false
-                    }else{
-                        binding.tbFingerPrint.isChecked = false
-                        binding.tbFaceid.isChecked = true
-                    }
+                    binding.tbFingerPrint.isChecked = it
                 }
             }
         })

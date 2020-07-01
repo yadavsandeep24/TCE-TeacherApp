@@ -509,52 +509,36 @@ constructor(
         }
     }
 
-    override fun setFingerPrintMode(
-        checked: Boolean,
-        stateEvent: StateEvent
-    ): Flow<DataState<DashboardViewState>> = flow {
+    override fun setFingerPrintMode(checked: Boolean, stateEvent: StateEvent): Flow<DataState<DashboardViewState>> = flow {
         withContext((IO)) {
             val userId = sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID, "")
             userDao.updateFingerPrintLoginMode(checked, userId!!)
-            userDao.updateFaceIdLoginMode(!checked, userId)
-            emit(
-                DataState.data(
-                    data = DashboardViewState(
-                        isFingerPrintLoginEnabled = checked,
-                        isFaceLoginEnabled = !checked
-                    ),
-                    stateEvent = stateEvent,
-                    response = null
-                )
-            )
-
+            emit(DataState.data(data = DashboardViewState(isFingerPrintLoginEnabled = checked),stateEvent = stateEvent,response = null))
         }
     }
 
-    override fun getDashboardData(
-        id: Int,
-        stateEvent: StateEvent
-    ): Flow<DataState<DashboardViewState>> = flow {
+    override fun getDashboardData(id: Int, stateEvent: StateEvent): Flow<DataState<DashboardViewState>> = flow {
+        Log.d("SAN", "id-->$id")
 
         withContext(IO) {
             val userID = sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID, "")
             val userInfo = userID?.let { userDao.getUserByUserId(it) }
-            val gson = Gson()
+            var tempGSON: Gson
 
             try {
-                var jsonString :String
-                if(id > 1) {
-                    jsonString = application.assets.open("json/event1.json").bufferedReader()
+                var jsonString :String = if(id > 1) {
+                    application.assets.open("json/event1.json").bufferedReader()
                         .use { it.readText() }
                 }else{
-                    jsonString = application.assets.open("json/event.json").bufferedReader()
+                    application.assets.open("json/event.json").bufferedReader()
                         .use { it.readText() }
                 }
+                tempGSON = Gson()
                 var listType = object : TypeToken<ArrayList<Event>>() {}.type
-                val eventList: ArrayList<Event> = gson.fromJson(jsonString, listType)
+                val eventList: ArrayList<Event> = tempGSON.fromJson(jsonString, listType)
                 val selectedEventList: ArrayList<Event> = ArrayList()
 
-                var isShowLess = false
+                val isShowLess = false
                 var nextEventCount = 4
                 if (eventList.size > 3) {
                     for (i in 0 until 3) {
@@ -572,17 +556,16 @@ constructor(
                 val eventData = EventData(isShowLess, nextEventCount, selectedEventList)
 
 
-                if(id > 1) {
-                    jsonString =
-                        application.assets.open("json/dashboardResource1.json").bufferedReader()
-                            .use { it.readText() }
+                jsonString = if(id > 1) {
+                    application.assets.open("json/todaysResource1.json").bufferedReader()
+                        .use { it.readText() }
                 }else{
-                    jsonString =
-                        application.assets.open("json/dashboardResource.json").bufferedReader()
-                            .use { it.readText() }
+                    application.assets.open("json/todaysResource.json").bufferedReader()
+                        .use { it.readText() }
                 }
+                tempGSON = Gson()
                 listType = object : TypeToken<ArrayList<DashboardResource>>() {}.type
-                val resourceList: ArrayList<DashboardResource> = gson.fromJson(jsonString, listType)
+                val resourceList: ArrayList<DashboardResource> = tempGSON.fromJson(jsonString, listType)
                 val selectedTodayResourceList: ArrayList<DashboardResource> = ArrayList()
 
                 if(resourceList.size>2) {
@@ -601,18 +584,17 @@ constructor(
 
                 val todayResourceData  = TodaysResourceData(isShowLess,nextEventCount,selectedTodayResourceList)
 
-                if(id>1) {
-                    jsonString =
-                        application.assets.open("json/dashboardResourceType1.json").bufferedReader()
-                            .use { it.readText() }
+                jsonString = if(id>1) {
+                    application.assets.open("json/lastViewedResource1.json").bufferedReader()
+                        .use { it.readText() }
                 }else{
-                    jsonString =
-                        application.assets.open("json/dashboardResourceType.json").bufferedReader()
-                            .use { it.readText() }
+                    application.assets.open("json/lastViewedResource.json").bufferedReader()
+                        .use { it.readText() }
                 }
+                tempGSON = Gson()
                 listType = object : TypeToken<ArrayList<DashboardResourceType>>() {}.type
                 val lastViewedResourceList: ArrayList<DashboardResourceType> =
-                    gson.fromJson(jsonString, listType)
+                    tempGSON.fromJson(jsonString, listType)
                 val selectedLastViewedResourceList: ArrayList<DashboardResourceType> = ArrayList()
 
                 if(lastViewedResourceList.size>2){
@@ -633,22 +615,24 @@ constructor(
 
                 jsonString = application.assets.open("json/class.json").bufferedReader()
                     .use { it.readText() }
+                tempGSON = Gson()
                 val listClass = object : TypeToken<List<ClassListsItem>>() {}.type
-                var userClassList: List<ClassListsItem> = gson.fromJson(jsonString, listClass)
+                val userClassList: List<ClassListsItem> = tempGSON.fromJson(jsonString, listClass)
 
                 jsonString =
                     application.assets.open("json/parentLatestUpdate.json").bufferedReader()
                         .use { it.readText() }
+                tempGSON = Gson()
                 val listLatestUpdate =
                     object : TypeToken<ArrayList<DashboardLatestUpdate>>() {}.type
-                var latestUpdateList: ArrayList<DashboardLatestUpdate> =
-                    gson.fromJson(jsonString, listLatestUpdate)
+                val latestUpdateList: ArrayList<DashboardLatestUpdate> =
+                    tempGSON.fromJson(jsonString, listLatestUpdate)
 
                 jsonString = application.assets.open("json/child.json").bufferedReader()
                     .use { it.readText() }
-                val gson = Gson()
+                tempGSON = Gson()
                 val listPersonType = object : TypeToken<ArrayList<Student>>() {}.type
-                var studentList: ArrayList<Student> = gson.fromJson(jsonString, listPersonType)
+                val studentList: ArrayList<Student> = tempGSON.fromJson(jsonString, listPersonType)
 
                 emit(
                     DataState.data(
@@ -742,7 +726,7 @@ constructor(
             try {
 
                 jsonString =
-                    application.assets.open("json/dashboardResource.json").bufferedReader()
+                    application.assets.open("json/todaysResource.json").bufferedReader()
                         .use { it.readText() }
                 val gson = Gson()
                 val listPersonType = object : TypeToken<ArrayList<DashboardResource>>() {}.type
@@ -805,7 +789,7 @@ constructor(
             var jsonString: String = ""
             try {
                 jsonString =
-                    application.assets.open("json/dashboardResourceType.json").bufferedReader()
+                    application.assets.open("json/lastViewedResource.json").bufferedReader()
                         .use { it.readText() }
                 val gson = Gson()
                 val listPersonType = object : TypeToken<ArrayList<DashboardResourceType>>() {}.type
@@ -858,25 +842,11 @@ constructor(
     }
 
 
-    override fun setFaceIdMode(
-        checked: Boolean,
-        stateEvent: StateEvent
-    ): Flow<DataState<DashboardViewState>> = flow {
+    override fun setFaceIdMode(checked: Boolean, stateEvent: StateEvent): Flow<DataState<DashboardViewState>> = flow {
         withContext((IO)) {
             val userId = sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID, "")
             userDao.updateFaceIdLoginMode(checked, userId!!)
-            userDao.updateFingerPrintLoginMode(!checked, userId)
-
-            emit(
-                DataState.data(
-                    data = DashboardViewState(
-                        isFingerPrintLoginEnabled = !checked,
-                        isFaceLoginEnabled = checked
-                    ),
-                    stateEvent = stateEvent,
-                    response = null
-                )
-            )
+            emit(DataState.data(data = DashboardViewState(isFaceLoginEnabled = checked),stateEvent = stateEvent,response = null))
         }
     }
 
