@@ -10,6 +10,7 @@ import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.tce.teacherapp.R
+import com.tce.teacherapp.db.entity.DashboardResourceType
 import com.tce.teacherapp.ui.dashboard.home.listeners.TodayResourceClickListener
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
 import com.tce.teacherapp.util.Utility
@@ -35,10 +36,12 @@ abstract class TodayResChildItemEpoxyHolder :EpoxyModelWithHolder<TodayChildHold
     @EpoxyAttribute
     lateinit var todayResourceClickListener : TodayResourceClickListener
 
+    @EpoxyAttribute
+    lateinit var dashboardResourceType: DashboardResourceType
 
     override fun bind(holder: TodayChildHolder) {
 
-        holder.mainContainer.setOnClickListener{todayResourceClickListener.onTodayResourceItemClick(strName)}
+        holder.mainContainer.setOnClickListener{todayResourceClickListener.onTodayResourceItemClick(dashboardResourceType)}
         Utility.setSelectorRoundedCorner(
             holder.mainContainer!!.context,  holder.mainContainer!!, 0,
             R.color.transparent, R.color.dim_color,

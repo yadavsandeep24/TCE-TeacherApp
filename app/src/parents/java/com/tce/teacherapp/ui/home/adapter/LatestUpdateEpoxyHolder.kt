@@ -17,8 +17,6 @@ abstract class LatestUpdateEpoxyHolder : EpoxyModelWithHolder<ViewedHolder>() {
     @EpoxyAttribute
     lateinit var strTitle:String
 
-
-
     @EpoxyAttribute
     lateinit var latestUpdateList:ArrayList<DashboardLatestUpdate>
 
@@ -55,7 +53,7 @@ abstract class LatestUpdateEpoxyHolder : EpoxyModelWithHolder<ViewedHolder>() {
                         )?.let { it1 ->
                             imageDrawable(it1)
                         }
-
+                        dashboardLatestUpdate(res)
                         latestUpdateClickListeners(latestUpdateClickListeners)
                         todayResourceListener(todayResourceListener)
 

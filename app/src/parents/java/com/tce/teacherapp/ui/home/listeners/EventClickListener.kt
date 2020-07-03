@@ -1,9 +1,11 @@
 package com.tce.teacherapp.ui.home.listeners
 
+import com.tce.teacherapp.db.entity.Event
+
 /**
  * Created by Sandeep Y. on 1/7/2020.
  */
 interface EventClickListener {
-    fun onEventListItemClick(type : String)
+    fun onEventListItemClick(event : Event)
     fun onLocationClickListener()
 }

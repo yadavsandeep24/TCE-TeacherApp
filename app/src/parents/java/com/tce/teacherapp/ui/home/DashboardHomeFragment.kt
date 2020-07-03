@@ -17,6 +17,10 @@ import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentDashboardHomeBinding
+import com.tce.teacherapp.db.entity.DashboardLatestUpdate
+import com.tce.teacherapp.db.entity.DashboardResourceType
+import com.tce.teacherapp.db.entity.Event
+import com.tce.teacherapp.db.entity.Student
 import com.tce.teacherapp.ui.dashboard.BaseDashboardFragment
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.home.listeners.TodayResourceClickListener
@@ -189,6 +193,7 @@ constructor(
                                 childEpoxyHolder {
                                     id(child.id)
                                     strStudentName(child.name)
+                                    student(child)
                                     childClickListener(this@DashboardHomeFragment)
                                 }
                             }
@@ -200,15 +205,15 @@ constructor(
         })
     }
 
-    override fun onEventListItemClick(type : String) {
-        Toast.makeText(requireContext(), "Click on " + type, Toast.LENGTH_LONG).show()
+    override fun onEventListItemClick(event : Event) {
+        Toast.makeText(requireContext(), "Click on " + event.type, Toast.LENGTH_LONG).show()
     }
 
     override fun onLocationClickListener() {
         Toast.makeText(requireContext(), "Track Location" , Toast.LENGTH_LONG).show()
     }
 
-    override fun onChildListItemClick() {
+    override fun onChildListItemClick(student : Student) {
         viewModel.setStateEvent(DashboardStateEvent.GetParentDashboardData(2))
         val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
         bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
@@ -216,7 +221,7 @@ constructor(
         (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
     }
 
-    override fun onMessageClickListener() {
+    override fun onMessageClickListener(dashboardLatestUpdate : DashboardLatestUpdate) {
         Toast.makeText(requireContext(), "Click on Message" , Toast.LENGTH_LONG).show()
     }
 
@@ -224,7 +229,7 @@ constructor(
         Toast.makeText(requireContext(), "Click on view Planner" , Toast.LENGTH_LONG).show()
     }
 
-    override fun onLatestUpdateEventClick() {
+    override fun onLatestUpdateEventClick(event  : Event) {
         Toast.makeText(requireContext(), "Click on event" , Toast.LENGTH_LONG).show()
     }
 
@@ -232,8 +237,8 @@ constructor(
         TODO("Not yet implemented")
     }
 
-    override fun onTodayResourceItemClick(title: String) {
-        Toast.makeText(requireContext(), "Click on " + title, Toast.LENGTH_LONG).show()
+    override fun onTodayResourceItemClick(dashboardResourceType: DashboardResourceType) {
+        Toast.makeText(requireContext(), "Click on ${dashboardResourceType.title}" , Toast.LENGTH_LONG).show()
     }
 
 

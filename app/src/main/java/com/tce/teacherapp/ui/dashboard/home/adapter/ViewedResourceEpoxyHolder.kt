@@ -65,6 +65,7 @@ abstract class ViewedResourceEpoxyHolder : EpoxyModelWithHolder<ViewedHolder>() 
                         )?.let { it1 ->
                             imageDrawable(it1)
                         }
+                        dashboardResourceType(res)
                         lastViewedClickListener(lastViewedClickListener)
                     }
                 }

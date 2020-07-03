@@ -11,6 +11,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.*
 import com.tce.teacherapp.R
+import com.tce.teacherapp.db.entity.DashboardLatestUpdate
 import com.tce.teacherapp.db.entity.LatestUpdateSubList
 import com.tce.teacherapp.ui.home.adapter.eventItemEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.home.adapter.todayResChildItemEpoxyHolder
@@ -43,6 +44,9 @@ abstract class LatestUpdateChildItemEpoxyHolder : EpoxyModelWithHolder<ViewedChi
     @EpoxyAttribute
     lateinit var todayResourceListener : TodayResourceClickListener
 
+    @EpoxyAttribute
+    lateinit var dashboardLatestUpdate: DashboardLatestUpdate
+
     override fun bind(holder: ViewedChildHolder) {
 
         holder.tvTitle.setText(title)
@@ -63,7 +67,7 @@ abstract class LatestUpdateChildItemEpoxyHolder : EpoxyModelWithHolder<ViewedChi
 
         holder.tvViewAll.setOnClickListener{latestUpdateClickListeners.onViewPlannerClick()}
 
-        holder.topContainer.setOnClickListener{latestUpdateClickListeners.onMessageClickListener()}
+        holder.topContainer.setOnClickListener{latestUpdateClickListeners.onMessageClickListener(dashboardLatestUpdate)}
 
 
         if (subList.attendance == null && subList.resourceList == null && subList.eventList == null) {
@@ -107,6 +111,7 @@ abstract class LatestUpdateChildItemEpoxyHolder : EpoxyModelWithHolder<ViewedChi
                                 )?.let { it1 ->
                                     imageDrawable(it1)
                                 }
+                                dashboardResourceType(type)
                                todayResourceClickListener(todayResourceListener)
                             }
                         }
@@ -144,6 +149,7 @@ abstract class LatestUpdateChildItemEpoxyHolder : EpoxyModelWithHolder<ViewedChi
                                 )?.let { it1 ->
                                     imageDrawable(it1)
                                 }
+                                event(event)
                                 latestUpdateClickListeners(latestUpdateClickListeners)
                             }
                         }

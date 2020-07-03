@@ -57,6 +57,7 @@ abstract class TodayResourceItemEpoxyHolder : EpoxyModelWithHolder<ResourceItemH
                         )?.let { it1 ->
                             imageDrawable(it1)
                         }
+                        dashboardResourceType(type)
                         todayResourceClickListener(todayResourceClickListener)
                     }
                 }

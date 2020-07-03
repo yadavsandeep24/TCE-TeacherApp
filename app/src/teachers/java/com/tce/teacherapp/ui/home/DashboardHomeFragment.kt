@@ -17,6 +17,8 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentDashboardHomeBinding
 import com.tce.teacherapp.db.entity.ClassListsItem
+import com.tce.teacherapp.db.entity.DashboardResourceType
+import com.tce.teacherapp.db.entity.Event
 import com.tce.teacherapp.ui.dashboard.BaseDashboardFragment
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.home.adapter.*
@@ -275,8 +277,8 @@ constructor(
         }
     }
 
-    override fun onTodayResourceItemClick(title: String) {
-        Toast.makeText(requireContext(), "Click on $title", Toast.LENGTH_LONG).show()
+    override fun onTodayResourceItemClick(dashboardResourceType: DashboardResourceType) {
+        Toast.makeText(requireContext(), "Click on ${dashboardResourceType.title}", Toast.LENGTH_LONG).show()
     }
 
     override fun onEventShowMoreClick(isShowLess: Boolean) {
@@ -297,8 +299,8 @@ constructor(
         }
     }
 
-    override fun onEventItemClick(type: String) {
-        Toast.makeText(requireContext(), "Click on $type", Toast.LENGTH_LONG).show()
+    override fun onEventItemClick(event: Event) {
+        Toast.makeText(requireContext(), "Click on ${event.type}", Toast.LENGTH_LONG).show()
     }
 
     override fun onLastViewedResourceShowMoreClick(isShowLess: Boolean) {
@@ -317,8 +319,8 @@ constructor(
         }
     }
 
-    override fun onLastViewedItemClick(title: String) {
-        Toast.makeText(requireContext(), "Click on $title", Toast.LENGTH_LONG).show()
+    override fun onLastViewedItemClick(dashboardResourceTye : DashboardResourceType) {
+        Toast.makeText(requireContext(), "Click on ${dashboardResourceTye.title}", Toast.LENGTH_LONG).show()
     }
 
 

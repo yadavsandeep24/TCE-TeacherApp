@@ -87,7 +87,7 @@ class DotIndicatorEventPagerAdapter(private val eventListener: EventClickListene
         )
 
         holder.eventContainer.setOnClickListener(View.OnClickListener {
-            eventListener.onEventListItemClick(mEventList!!.get(position).type)
+            eventListener.onEventListItemClick(mEventList!!.get(position))
         })
     }
 }

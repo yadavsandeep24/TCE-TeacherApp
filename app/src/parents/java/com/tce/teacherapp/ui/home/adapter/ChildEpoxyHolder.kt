@@ -9,6 +9,7 @@ import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.tce.teacherapp.R
+import com.tce.teacherapp.db.entity.Student
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
 import com.tce.teacherapp.ui.home.listeners.ChildClickListener
 import com.tce.teacherapp.util.Utility
@@ -18,6 +19,10 @@ abstract  class ChildEpoxyHolder : EpoxyModelWithHolder<InfoHolder>(){
 
     @EpoxyAttribute
     lateinit var strStudentName : String
+
+    @EpoxyAttribute
+    lateinit var student : Student
+
     @EpoxyAttribute
     lateinit var childClickListener: ChildClickListener
 
@@ -30,7 +35,7 @@ abstract  class ChildEpoxyHolder : EpoxyModelWithHolder<InfoHolder>(){
             R.color.transparent, R.color.transparent, 0
         )
 
-        holder.lnrMainContainer.setOnClickListener { childClickListener.onChildListItemClick() }
+        holder.lnrMainContainer.setOnClickListener { childClickListener.onChildListItemClick(student) }
         if(strStudentName.contains("Amit")){
             holder.iconTick.visibility = View.VISIBLE
             holder.tvStudentName.setTextColor(Color.parseColor("#616fff"))

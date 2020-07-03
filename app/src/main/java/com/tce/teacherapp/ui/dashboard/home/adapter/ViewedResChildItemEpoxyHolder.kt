@@ -10,6 +10,7 @@ import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.tce.teacherapp.R
+import com.tce.teacherapp.db.entity.DashboardResourceType
 import com.tce.teacherapp.ui.dashboard.home.listeners.LastViewedResourceClickListener
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
 
@@ -34,6 +35,9 @@ abstract class ViewedResChildItemEpoxyHolder : EpoxyModelWithHolder<ViewedChildH
     @EpoxyAttribute
     lateinit var lastViewedClickListener : LastViewedResourceClickListener
 
+    @EpoxyAttribute
+    lateinit var dashboardResourceType: DashboardResourceType
+
     override fun bind(holder: ViewedChildHolder) {
 
         holder.tvTitle.setText(strName)
@@ -44,7 +48,7 @@ abstract class ViewedResChildItemEpoxyHolder : EpoxyModelWithHolder<ViewedChildH
             holder.imgPlay.visibility = View.GONE
         }
 
-        holder.mainContainer.setOnClickListener{lastViewedClickListener.onLastViewedItemClick(strName)}
+        holder.mainContainer.setOnClickListener{lastViewedClickListener.onLastViewedItemClick(dashboardResourceType)}
     }
 }
 

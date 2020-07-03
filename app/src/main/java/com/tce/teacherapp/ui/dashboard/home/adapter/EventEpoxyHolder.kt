@@ -68,6 +68,7 @@ abstract class EventEpoxyHolder :EpoxyModelWithHolder<EventHolder>() {
                         )?.let { it1 ->
                             imageDrawable(it1)
                         }
+                        event(event)
                         evenClickListener(evenClickListener)
 
                     }
