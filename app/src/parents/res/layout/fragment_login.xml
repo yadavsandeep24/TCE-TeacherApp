@@ -93,7 +93,7 @@
                     android:inputType="textPassword"
                     android:paddingLeft="20dp"
                     android:textSize="@dimen/font_size_14_dp"
-                    android:maxLength="15"
+                    android:maxLength="8"
                     android:background="@drawable/bg_grey_rounded"/>
 
                 <View

@@ -94,6 +94,7 @@ constructor(viewModelFactory: ViewModelProvider.Factory) : BaseFragment(R.layout
         binding.tvLogin.setOnClickListener {
             viewModel.setStateEvent(
                 LoginStateEvent.LoginAttemptEvent(
+                    binding.edtSchoolName.text.toString().trim(),
                     binding.edtUserName.text.toString().trim(),
                     binding.edtPassword.text.toString().trim()
                 )

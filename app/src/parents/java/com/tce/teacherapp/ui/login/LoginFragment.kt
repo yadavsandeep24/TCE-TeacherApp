@@ -83,7 +83,7 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
         uiCommunicationListener.hideSoftKeyboard()
 
         binding.tvLogin.setOnClickListener {
-            viewModel.setStateEvent(LoginStateEvent.LoginAttemptEvent(binding.edtUserName.text.toString().trim(),
+            viewModel.setStateEvent(LoginStateEvent.LoginAttemptEvent(null,binding.edtUserName.text.toString().trim(),
                 binding.edtPassword.text.toString().trim()))
         }
 
@@ -190,6 +190,10 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
     internal inner class Span : ClickableSpan() {
 
         override fun onClick(tv: View) {
+            val bundle = Bundle()
+            bundle.putString("relationType", "mother")
+            bundle.putBoolean("isRegister",false)
+            findNavController().navigate(R.id.action_loginFragment_to_mobileNumberFragment,bundle)
         }
 
         override fun updateDrawState(ds: TextPaint) {

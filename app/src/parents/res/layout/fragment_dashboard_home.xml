@@ -103,6 +103,7 @@
                 android:id="@+id/rvFilter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:overScrollMode="never"
                 android:minHeight="150dp">
 
             </com.airbnb.epoxy.EpoxyRecyclerView>

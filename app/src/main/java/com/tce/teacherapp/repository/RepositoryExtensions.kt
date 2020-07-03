@@ -89,7 +89,7 @@ fun <ViewState> buildError(
 ): DataState<ViewState> {
     return DataState.error(
         response = Response(
-            message = "${stateEvent?.errorInfo()}\n\nReason: ${message}",
+            message = message,
             uiComponentType = uiComponentType,
             messageType = MessageType.Error(),
             serviceTypes = RequestTypes.GENERIC

@@ -15,7 +15,6 @@ import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.EpoxyVisibilityTracker
 import com.airbnb.epoxy.addGlidePreloader
@@ -23,13 +22,10 @@ import com.airbnb.epoxy.glidePreloader
 import com.bumptech.glide.Glide
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentSelectChapterBookBinding
-import com.tce.teacherapp.databinding.FragmentTopicListBinding
-import com.tce.teacherapp.db.entity.Subject
 import com.tce.teacherapp.db.entity.Topic
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.subjects.adapter.SubjectListEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.subjects.adapter.chapterListEpoxyHolder
-import com.tce.teacherapp.ui.dashboard.subjects.adapter.topicListEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.subjects.state.SUBJECT_VIEW_STATE_BUNDLE_KEY
 import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectStateEvent
 import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectViewState
@@ -37,7 +33,6 @@ import com.tce.teacherapp.util.StateMessageCallback
 import com.tce.teacherapp.util.Utility
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import java.lang.Exception
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi

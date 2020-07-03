@@ -16,7 +16,7 @@
             android:layout_height="50dp"
             android:layout_below="@+id/tv_time_user_name"
             android:layout_marginRight="20dp"
-            android:src="@drawable/dummy_student"></androidx.appcompat.widget.AppCompatImageView>
+            android:src="@drawable/dummy_student"/>
 
         <com.tce.teacherapp.util.RubikMediumTextview
             android:id="@+id/tv_student_name"
@@ -27,7 +27,7 @@
             android:textColor="@color/color_black"
             android:layout_toRightOf="@+id/img_user"
             android:layout_centerVertical="true"
-            android:textSize="@dimen/font_size_16_dp"></com.tce.teacherapp.util.RubikMediumTextview>
+            android:textSize="@dimen/font_size_16_dp"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/icon_tick"
@@ -45,5 +45,5 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/grey"></View>
+        android:background="@color/grey"/>
 </LinearLayout>

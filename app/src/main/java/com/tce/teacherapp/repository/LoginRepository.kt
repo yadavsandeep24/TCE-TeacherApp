@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.Flow
 interface LoginRepository {
 
     fun attemptLogin(
+        schoolName : String?,
         email: String,
         password: String,
         stateEvent: StateEvent
@@ -30,5 +31,16 @@ interface LoginRepository {
     ): Flow<DataState<LoginViewState>>
 
     fun setQuickAccessScreen(isShow: Boolean)
+
+    fun resentOTP(
+        strMobileNo: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<LoginViewState>>
+
+    fun registerUser(
+        mobileNo: String,
+        password: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<LoginViewState>>
 
 }

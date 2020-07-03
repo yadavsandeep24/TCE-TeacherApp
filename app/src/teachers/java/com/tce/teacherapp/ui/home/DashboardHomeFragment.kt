@@ -97,6 +97,7 @@ constructor(
         (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
 
         binding.imgSetting.setOnClickListener {
+            (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
             findNavController().navigate(R.id.action_dashboardHomeFragment_to_settingsFragment)
         }
 
@@ -104,7 +105,7 @@ constructor(
             com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
 
         bottomSheetBehavior.state =
-            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_COLLAPSED
+            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
         bottomSheetBehavior.skipCollapsed = true
         bottomSheetBehavior.isDraggable = false
 
@@ -249,10 +250,8 @@ constructor(
             binding.tvClassIcon.background = it1
         }
         binding.tvClassTitle.text = item.name
-        val bottomSheetBehavior =
-            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
-        bottomSheetBehavior.state =
-            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_COLLAPSED
+        val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
+        bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
         binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
         (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
         viewModel.setStateEvent(DashboardStateEvent.GetTeacherDashboardData(item.id.toInt()))

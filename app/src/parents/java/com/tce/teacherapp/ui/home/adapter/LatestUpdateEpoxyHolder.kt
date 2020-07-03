@@ -1,7 +1,6 @@
 package com.tce.teacherapp.ui.home.adapter
 
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.*
 import com.tce.teacherapp.R

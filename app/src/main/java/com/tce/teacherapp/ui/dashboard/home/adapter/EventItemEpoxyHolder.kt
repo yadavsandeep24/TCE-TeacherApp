@@ -43,8 +43,8 @@ abstract class EventItemEpoxyHolder : EpoxyModelWithHolder<ItemHolder>() {
     lateinit var event: Event
 
     override fun bind(holder: ItemHolder) {
-        holder.tvEvent.setText(strEvent)
-        holder.tvEventType.setText(strEventType)
+        holder.tvEvent.text = strEvent
+        holder.tvEventType.text = strEventType
         holder.imgIcon.background = imageDrawable
         holder.tvEvent.setTextColor(Color.parseColor(eventColor))
         holder.tvEventType.setTextColor(Color.parseColor(typeColor))

@@ -60,6 +60,8 @@
     <string name="lbl_good_afternoon">Good Afternoon!</string>
     <string name="lbl_good_evening">Good Evening!</string>
     <string name="lbl_good_night">Good Night!</string>
+    <string name="lbl_resend_otp">Resend OTP</string>
+    <string name="digits_allowed_mobile_number">0123456789</string>
 
     <array name="school_name">
         <item>St. Francis</item>

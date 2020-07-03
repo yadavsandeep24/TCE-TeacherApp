@@ -13,8 +13,10 @@ import com.tce.teacherapp.db.dao.SubjectsDao
 import com.tce.teacherapp.db.dao.UserDao
 import com.tce.teacherapp.db.entity.*
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardViewState
+import com.tce.teacherapp.ui.dashboard.home.state.UpdatePasswordFields
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageViewState
 import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectViewState
+import com.tce.teacherapp.ui.login.state.LoginFields
 import com.tce.teacherapp.util.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.FlowPreview
@@ -681,20 +683,17 @@ constructor(
                 val eventData = EventData(isShowLess, nextEventCount, selectedEventList)
 
 
-                jsonString = application.assets.open("json/class.json").bufferedReader()
-                    .use { it.readText() }
-                tempGSON = Gson()
-                val listClass = object : TypeToken<List<ClassListsItem>>() {}.type
-                val userClassList: List<ClassListsItem> = tempGSON.fromJson(jsonString, listClass)
+                 val jsonParentUpdateString :String = if(id > 1) {
+                    application.assets.open("json/parentLatestUpdate1.json").bufferedReader().use { it.readText() }
+                }else{
+                    application.assets.open("json/parentLatestUpdate.json").bufferedReader().use { it.readText() }
+                }
 
-                jsonString =
-                    application.assets.open("json/parentLatestUpdate.json").bufferedReader()
-                        .use { it.readText() }
                 tempGSON = Gson()
                 val listLatestUpdate =
                     object : TypeToken<ArrayList<DashboardLatestUpdate>>() {}.type
                 val latestUpdateList: ArrayList<DashboardLatestUpdate> =
-                    tempGSON.fromJson(jsonString, listLatestUpdate)
+                    tempGSON.fromJson(jsonParentUpdateString, listLatestUpdate)
 
                 jsonString = application.assets.open("json/child.json").bufferedReader()
                     .use { it.readText() }
@@ -950,7 +949,7 @@ constructor(
     ): Flow<DataState<DashboardViewState>> = flow {
         withContext((IO)) {
             val userId = sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID, "")
-
+            val updatepasswordErrors = UpdatePasswordFields(old_password = oldPassword, new_password = newPassword,confirm_password = confirmPassword).checkValidPassword()
             val dbOldPassword = userId?.let { userDao.getOldPassword(it) }
             if (oldPassword.isEmpty() || newPassword.isEmpty() || confirmPassword.isEmpty()) {
                 emit(
@@ -988,7 +987,16 @@ constructor(
                         stateEvent = stateEvent
                     )
                 )
-            } else {
+            }else if(updatepasswordErrors != LoginFields.LoginError.none()) {
+                Log.d("SAN", "emitting error: ${updatepasswordErrors}")
+                emit(
+                    buildError(
+                        updatepasswordErrors,
+                        UIComponentType.Dialog,
+                        stateEvent
+                    )
+                )
+            }else {
                 userDao.updatePassword(newPassword, userId!!)
                 sharedPrefsEditor.putString(
                     PreferenceKeys.APP_PREFERENCES_KEY_PASSWORD,

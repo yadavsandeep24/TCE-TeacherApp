@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:text="Event"
                 android:textColor="@color/white"
-                android:textSize="@dimen/font_size_9_dp"></com.tce.teacherapp.util.RubikMediumTextview>
+                android:textSize="@dimen/font_size_9_dp"/>
 
             <com.tce.teacherapp.util.RubikMediumTextview
                 android:id="@+id/tvEventName"
@@ -60,7 +60,7 @@
                 android:text="Event"
                 android:textColor="@color/white"
                 android:layout_marginTop="5dp"
-                android:textSize="@dimen/font_size_12_dp"></com.tce.teacherapp.util.RubikMediumTextview>
+                android:textSize="@dimen/font_size_12_dp"/>
 
             <com.tce.teacherapp.util.RubikMediumTextview
                 android:id="@+id/tvReadMore"
@@ -69,7 +69,7 @@
                 android:textSize="11dp"
                 android:layout_marginTop="10dp"
                 android:textColor="@color/white"
-                android:text="Read More"></com.tce.teacherapp.util.RubikMediumTextview>
+                android:text="Read More"/>
         </LinearLayout>
     </LinearLayout>
 

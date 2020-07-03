@@ -2,6 +2,7 @@ package com.tce.teacherapp.repository
 
 import android.app.Application
 import android.content.SharedPreferences
+import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.tce.teacherapp.api.TCEService
@@ -9,6 +10,7 @@ import com.tce.teacherapp.db.dao.UserDao
 import com.tce.teacherapp.db.entity.UserInfo
 import com.tce.teacherapp.ui.login.state.LoginFields
 import com.tce.teacherapp.ui.login.state.LoginViewState
+import com.tce.teacherapp.ui.login.state.RegisterUserFields
 import com.tce.teacherapp.util.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.FlowPreview
@@ -29,21 +31,82 @@ constructor(
 ): LoginRepository {
 
     override fun attemptLogin(
+        schoolName : String?,
         email: String,
         password: String,
         stateEvent: StateEvent
     ): Flow<DataState<LoginViewState>>  = flow{
         resetSession(true)
 
-        withContext(IO){
-            var isFingerPrintLoginEnabled = false
-            var isFaceIdLoginEnabled = false
-            val userId = sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID,"")
-            val isQuickAccessScreenShow = sharedPreferences.getBoolean(PreferenceKeys.APP_PREFERENCES_KEY_USER_QUICK_ACCESS_SCREEN_SHOW,true)
+        withContext(IO) {
+            val loginFieldErrors = LoginFields(login_email = email, login_password = password,login_schoolName = schoolName).isValidForLogin()
+            if (loginFieldErrors.equals(LoginFields.LoginError.none())) {
+                var isFingerPrintLoginEnabled = false
+                var isFaceIdLoginEnabled = false
+                val userId =
+                    sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID, "")
+                val isQuickAccessScreenShow = sharedPreferences.getBoolean(
+                    PreferenceKeys.APP_PREFERENCES_KEY_USER_QUICK_ACCESS_SCREEN_SHOW,
+                    true
+                )
 
-            if(userId?.isNotEmpty()!!) {
-                val checkvalidUser =  userDao.getUserInfoData(email,password)
-                if(checkvalidUser != null) {
+                if (userId?.isNotEmpty()!!) {
+                    val checkvalidUser = userDao.getUserInfoData(email, password)
+                    if (checkvalidUser != null) {
+                        sharedPrefsEditor.putString(
+                            PreferenceKeys.APP_PREFERENCES_KEY_USER_EMAIL,
+                            email
+                        ).commit()
+                        sharedPrefsEditor.putString(
+                            PreferenceKeys.APP_PREFERENCES_KEY_PASSWORD,
+                            password
+                        ).commit()
+                        sharedPrefsEditor.putString(
+                            PreferenceKeys.APP_PREFERENCES_KEY_USER_ID,
+                            checkvalidUser.id
+                        ).commit()
+                        isFingerPrintLoginEnabled = checkvalidUser.fingerPrintMode
+                        isFaceIdLoginEnabled = checkvalidUser.faceIdMode
+                        emit(
+                            DataState.data(
+                                data = LoginViewState(
+                                    loginFields = LoginFields(
+                                        "",
+                                        email,
+                                        password,
+                                        isFingerPrintLoginEnabled,
+                                        isFaceIdLoginEnabled,
+                                        isQuickAccessScreenShow
+                                    )
+                                ),
+                                stateEvent = stateEvent,
+                                response = null
+                            )
+                        )
+                    } else {
+                        emit(
+                            DataState.error(
+                                response = Response(
+                                    "Please enter valid Username or Password.",
+                                    UIComponentType.Dialog,
+                                    MessageType.Error(),
+                                    serviceTypes = RequestTypes.GENERIC
+                                ),
+                                stateEvent = stateEvent
+                            )
+                        )
+
+                    }
+                } else {
+                    val jsonString = application.assets.open("json/profile.json").bufferedReader()
+                        .use { it.readText() }
+                    val gson = Gson()
+                    val listPersonType = object : TypeToken<UserInfo>() {}.type
+                    val tempUserInfo: UserInfo = gson.fromJson(jsonString, listPersonType)
+                    tempUserInfo.profile.faceIdMode = isFaceIdLoginEnabled
+                    tempUserInfo.profile.fingerPrintMode = isFingerPrintLoginEnabled
+                    userDao.insertUser(tempUserInfo.profile)
+
                     sharedPrefsEditor.putString(
                         PreferenceKeys.APP_PREFERENCES_KEY_USER_EMAIL,
                         email
@@ -52,50 +115,38 @@ constructor(
                         PreferenceKeys.APP_PREFERENCES_KEY_PASSWORD,
                         password
                     ).commit()
-                    sharedPrefsEditor.putString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID, checkvalidUser.id).commit()
-                    isFingerPrintLoginEnabled = checkvalidUser.fingerPrintMode
-                    isFaceIdLoginEnabled = checkvalidUser.faceIdMode
+                    sharedPrefsEditor.putString(
+                        PreferenceKeys.APP_PREFERENCES_KEY_USER_ID,
+                        tempUserInfo.profile.id
+                    ).commit()
                     emit(
                         DataState.data(
-                            data = LoginViewState(loginFields = LoginFields("",email,password,isFingerPrintLoginEnabled,isFaceIdLoginEnabled,isQuickAccessScreenShow)),
+                            data = LoginViewState(
+                                loginFields = LoginFields(
+                                    "",
+                                    email,
+                                    password,
+                                    isFingerPrintLoginEnabled,
+                                    isFaceIdLoginEnabled,
+                                    isQuickAccessScreenShow
+                                )
+                            ),
                             stateEvent = stateEvent,
                             response = null
                         )
                     )
-                }else{
-                    emit(
-                        DataState.error(
-                            response = Response(
-                                "Please enter valid Username or Password.",
-                                UIComponentType.Dialog,
-                                MessageType.Error(),
-                                serviceTypes = RequestTypes.GENERIC
-                            ),
-                            stateEvent = stateEvent
-                        )
-                    )
-
                 }
             }else{
-                val jsonString = application.assets.open("json/profile.json").bufferedReader().use { it.readText() }
-                val gson = Gson()
-                val listPersonType = object : TypeToken<UserInfo>() {}.type
-                val tempUserInfo: UserInfo = gson.fromJson(jsonString, listPersonType)
-                tempUserInfo.profile.faceIdMode = isFaceIdLoginEnabled
-                tempUserInfo.profile.fingerPrintMode = isFingerPrintLoginEnabled
-                userDao.insertUser(tempUserInfo.profile)
-
-                sharedPrefsEditor.putString(PreferenceKeys.APP_PREFERENCES_KEY_USER_EMAIL,email).commit()
-                sharedPrefsEditor.putString(PreferenceKeys.APP_PREFERENCES_KEY_PASSWORD,password).commit()
-                sharedPrefsEditor.putString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID,tempUserInfo.profile.id).commit()
+                Log.d("SAN", "emitting error: ${loginFieldErrors}")
                 emit(
-                    DataState.data(
-                        data = LoginViewState(loginFields = LoginFields("",email,password,isFingerPrintLoginEnabled,isFaceIdLoginEnabled,isQuickAccessScreenShow)),
-                        stateEvent = stateEvent,
-                        response = null
+                    buildError(
+                        loginFieldErrors,
+                        UIComponentType.Dialog,
+                        stateEvent
                     )
                 )
             }
+
         }
     }
     override fun setFingerPrintMode(
@@ -180,6 +231,50 @@ constructor(
     override fun setQuickAccessScreen(isShow: Boolean) {
         sharedPrefsEditor.putBoolean(PreferenceKeys.APP_PREFERENCES_KEY_USER_QUICK_ACCESS_SCREEN_SHOW, isShow).commit()
         sharedPrefsEditor.apply()
+    }
+
+    override fun resentOTP(
+        strMobileNo: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<LoginViewState>> = flow{
+
+        emit(
+            DataState.error(
+                response = Response(
+                    "OTP has been sent.",
+                    UIComponentType.Dialog,
+                    MessageType.Error(),
+                    serviceTypes = RequestTypes.GENERIC
+                ),
+                stateEvent = stateEvent
+            )
+        )
+    }
+
+    override fun registerUser(
+        mobileNo: String,
+        password: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<LoginViewState>> = flow{
+        withContext(IO) {
+            val registerFieldErrors = RegisterUserFields(mobile_no = mobileNo, password = password).checkValidRegistration()
+            if (registerFieldErrors == LoginFields.LoginError.none()) {
+
+                emit(
+                    DataState.data(
+                        data = LoginViewState(registerFields = RegisterUserFields(mobileNo,password)),
+                        stateEvent = stateEvent,
+                        response = null
+                    )
+                )
+            }else{
+                Log.d("SAN", "emitting error: $registerFieldErrors")
+                emit(
+                    buildError(registerFieldErrors, UIComponentType.Dialog, stateEvent)
+                )
+            }
+        }
+
     }
 
 

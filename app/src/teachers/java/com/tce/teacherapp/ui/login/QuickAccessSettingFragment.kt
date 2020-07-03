@@ -139,6 +139,7 @@ class QuickAccessSettingFragment
             override fun onAnimationFinish() {
                 viewModel.setStateEvent(
                     LoginStateEvent.LoginAttemptEvent(
+                        MessageConstant.LOGIN_DEFAULT_SCHOOLNAME,
                         MessageConstant.LOGIN_DEFAULT_USERNAME,
                         MessageConstant.LOGIN_DEFAULT_USERNAME
                     )

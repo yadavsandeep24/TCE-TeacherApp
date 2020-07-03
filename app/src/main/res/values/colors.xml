@@ -23,4 +23,5 @@
 
     <color name="home_background">#fff098</color>
     <color name="chapter_text_dim_bg">#88000000</color>
+    <color name="nasty_green">#82b941</color>
 </resources>

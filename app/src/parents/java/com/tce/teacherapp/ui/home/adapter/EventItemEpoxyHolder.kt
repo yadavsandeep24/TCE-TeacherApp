@@ -2,6 +2,7 @@ package com.tce.teacherapp.ui.home.adapter
 
 import android.graphics.Color
 import android.graphics.drawable.Drawable
+import android.text.Html
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
@@ -43,8 +44,8 @@ abstract class EventItemEpoxyHolder : EpoxyModelWithHolder<ItemHolder>() {
     lateinit var event: Event
 
     override fun bind(holder: ItemHolder) {
-        holder.tvEvent.setText(strEvent)
-        holder.tvEventType.setText(strEventType)
+        holder.tvEvent.text = strEvent
+        holder.tvEventType.text = strEventType
         holder.imgIcon.background = imageDrawable
         holder.tvEvent.setTextColor(Color.parseColor(eventColor))
         holder.tvEventType.setTextColor(Color.parseColor(typeColor))
@@ -52,11 +53,13 @@ abstract class EventItemEpoxyHolder : EpoxyModelWithHolder<ItemHolder>() {
         holder.iconContainer.setBackgroundColor(Color.parseColor(iconBackColor))
         holder.eventContainer.setOnClickListener{latestUpdateClickListeners.onLatestUpdateEventClick(event)}
         Utility.setSelectorRoundedCornerWithDynamicColor(
-            holder.eventContainer!!.context,  holder.eventContainer!!, 0,
+            holder.eventContainer.context,  holder.eventContainer, 0,
             eventBackColor, iconBackColor,
             R.color.transparent, R.color.transparent, 0
         )
 
+        holder.tvReadMore.text = Html.fromHtml("<u>Read More</u>")
+        holder.tvReadMore.setTextColor(Color.parseColor(eventColor))
     }
 }
 
@@ -66,5 +69,6 @@ class ItemHolder : KotlinEpoxyHolder(){
     val iconContainer by bind<LinearLayout>(R.id.icon_container)
     val tvEventType by bind<TextView>(R.id.tv_event_type)
     val imgIcon by bind<AppCompatImageView>(R.id.img_icon)
+    val tvReadMore by bind<TextView>(R.id.tvReadMore)
 
 }

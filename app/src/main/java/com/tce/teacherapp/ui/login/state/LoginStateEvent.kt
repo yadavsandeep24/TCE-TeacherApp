@@ -5,6 +5,7 @@ import com.tce.teacherapp.util.StateEvent
 sealed class LoginStateEvent : StateEvent {
 
     data class LoginAttemptEvent(
+        val schoolName: String?,
         val email: String,
         val password: String
     ) : LoginStateEvent() {
@@ -18,7 +19,7 @@ sealed class LoginStateEvent : StateEvent {
         }
     }
 
-    object CheckLoginEnabledMode: LoginStateEvent() {
+    object CheckLoginEnabledMode : LoginStateEvent() {
         override fun errorInfo(): String {
             return "Error in checking FingerPrint mode."
         }
@@ -40,7 +41,7 @@ sealed class LoginStateEvent : StateEvent {
 
     }
 
-    class FingerPrintEnableMode(val checked: Boolean): LoginStateEvent() {
+    class FingerPrintEnableMode(val checked: Boolean) : LoginStateEvent() {
 
         override fun errorInfo(): String {
             return "Error in setting FingerPrint mode."
@@ -51,7 +52,7 @@ sealed class LoginStateEvent : StateEvent {
         }
     }
 
-    class FaceIdEnableMode(val checked: Boolean): LoginStateEvent() {
+    class FaceIdEnableMode(val checked: Boolean) : LoginStateEvent() {
 
         override fun errorInfo(): String {
             return "Error in setting FaceId mode."
@@ -59,6 +60,32 @@ sealed class LoginStateEvent : StateEvent {
 
         override fun toString(): String {
             return "FaceIdEnableMode"
+        }
+    }
+
+    class ResentOTP(
+        val strMobileNo: String
+    ) : LoginStateEvent() {
+        override fun errorInfo(): String {
+            return "Error in sending  otp."
+        }
+
+        override fun toString(): String {
+            return "ResentOTP"
+        }
+
+    }
+
+    class RegisterUserEvent(
+        val mobileNo: String,
+        val password: String)
+        :LoginStateEvent(){
+        override fun errorInfo(): String {
+            return "Error in registering user  otp."
+        }
+
+        override fun toString(): String {
+            return "RegisterUserEvent"
         }
     }
 }

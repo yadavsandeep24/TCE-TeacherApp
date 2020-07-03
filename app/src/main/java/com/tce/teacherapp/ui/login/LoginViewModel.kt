@@ -6,6 +6,7 @@ import com.tce.teacherapp.ui.BaseViewModel
 import com.tce.teacherapp.ui.login.state.LoginFields
 import com.tce.teacherapp.ui.login.state.LoginStateEvent
 import com.tce.teacherapp.ui.login.state.LoginViewState
+import com.tce.teacherapp.ui.login.state.RegisterUserFields
 import com.tce.teacherapp.util.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -25,7 +26,9 @@ class LoginViewModel @Inject constructor(val loginRepository: LoginRepository) :
         data.isFaceLoginEnabled?.let {
             setFaceIdEbableddata(it)
         }
-
+        data.registerFields?.let {
+            setRegisterData(it)
+        }
         setProfileData(data.profile)
     }
 
@@ -51,11 +54,18 @@ class LoginViewModel @Inject constructor(val loginRepository: LoginRepository) :
         setViewState(update)
     }
 
+    private fun setRegisterData(it: RegisterUserFields) {
+        val update = getCurrentViewStateOrNew()
+        update.registerFields = it
+        setViewState(update)
+    }
+
     override fun setStateEvent(stateEvent: StateEvent) {
         val job: Flow<DataState<LoginViewState>> = when (stateEvent) {
 
             is LoginStateEvent.LoginAttemptEvent -> {
                 loginRepository.attemptLogin(
+                    stateEvent.schoolName,
                     stateEvent.email,
                     stateEvent.password,
                     stateEvent = stateEvent
@@ -72,6 +82,12 @@ class LoginViewModel @Inject constructor(val loginRepository: LoginRepository) :
             }
             is LoginStateEvent.PreUserInfoData ->{
                 loginRepository.getPreUserData(stateEvent = stateEvent)
+            }
+            is LoginStateEvent.ResentOTP ->{
+                loginRepository.resentOTP(stateEvent.strMobileNo,stateEvent = stateEvent)
+            }
+            is LoginStateEvent.RegisterUserEvent ->{
+                loginRepository.registerUser(stateEvent.mobileNo,stateEvent.password,stateEvent =stateEvent)
             }
             else -> {
                 flow {

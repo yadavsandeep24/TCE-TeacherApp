@@ -1,7 +1,6 @@
 package com.tce.teacherapp.ui.dashboard.home.adapter
 
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass

@@ -17,7 +17,7 @@ import com.tce.teacherapp.db.entity.*
         NodeXX::class,
         NodeXXX::class,
         Profile::class
-    ], version = 2)
+    ], version = 3)
 @TypeConverters(StringListConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 

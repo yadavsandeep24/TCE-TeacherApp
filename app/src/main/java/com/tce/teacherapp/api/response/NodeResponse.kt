@@ -1,8 +1,8 @@
 package com.tce.teacherapp.api.response
 
 import com.google.gson.annotations.Expose
-import com.tce.teacherapp.db.entity.Topic
 import com.tce.teacherapp.db.entity.Chapter
+import com.tce.teacherapp.db.entity.Topic
 
 class NodeResponse(
 

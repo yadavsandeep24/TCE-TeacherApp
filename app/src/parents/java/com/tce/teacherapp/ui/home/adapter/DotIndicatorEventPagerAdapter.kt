@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.tce.teacherapp.R
@@ -62,8 +61,8 @@ class DotIndicatorEventPagerAdapter(private val eventListener: EventClickListene
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.tvEventName.setText(mEventList!!.get(position).eventName)
-        holder.tvReadMore.setText(Html.fromHtml("<u>Read More</u>"))
+        holder.tvEventName.text = mEventList!!.get(position).eventName
+        holder.tvReadMore.text = Html.fromHtml("<u>Read More</u>")
         holder.tvReadMore.setTextColor(Color.parseColor(mEventList!!.get(position).eventColor))
 
         holder.tvEventType.setText(mEventList!!.get(position).type)

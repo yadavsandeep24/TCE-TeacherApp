@@ -6,14 +6,12 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.*
 import com.tce.teacherapp.R
 import com.tce.teacherapp.db.entity.DashboardLatestUpdate
 import com.tce.teacherapp.db.entity.LatestUpdateSubList
-import com.tce.teacherapp.ui.home.adapter.eventItemEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.home.adapter.todayResChildItemEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.home.listeners.TodayResourceClickListener
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder

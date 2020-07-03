@@ -151,15 +151,11 @@ class QuickAccessSettingFragment
             override fun onAnimationFinish() {
                 viewModel.setStateEvent(
                     LoginStateEvent.LoginAttemptEvent(
+                        null,
                         MessageConstant.LOGIN_DEFAULT_USERNAME,
-                        MessageConstant.LOGIN_DEFAULT_USERNAME
+                        MessageConstant.LOGIN_DEFAULT_PASSWORD
                     )
                 )
-
-                val i = Intent(activity, DashboardActivity::class.java)
-                startActivity(i)
-                activity?.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-                activity?.finish()
             }
         }
         binding.ivThumb.setBackgroundDrawable(cad)

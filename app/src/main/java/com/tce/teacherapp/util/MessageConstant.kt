@@ -10,6 +10,8 @@ interface MessageConstant {
 
         const val RESPONSE_PASSWORD_UPDATE_SUCCESS = "Password changed successfully."
         const val UPDATE_PASSWORD_NEW_CONFIRM_MISMATCH ="Both new password should match."
+        const val UPDATE_PASSWORD_VALIDATION ="New password must contain:\nMinimum eight characters,\nat least one uppercase letter," +
+                "\nat least one lowercase letter,\none special character."
 
     }
 }

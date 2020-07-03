@@ -32,7 +32,7 @@ abstract class EventEpoxyHolder :EpoxyModelWithHolder<EventHolder>() {
         holder.tvDate.text = strDate
 
         Utility.setSelectorRoundedCorner(
-            holder.locationContainer!!.context,  holder.locationContainer!!, 0,
+            holder.locationContainer.context,  holder.locationContainer, 0,
             R.color.transparent, R.color.dim_color,
             R.color.transparent, R.color.transparent, 0
         )
@@ -54,7 +54,7 @@ abstract class EventEpoxyHolder :EpoxyModelWithHolder<EventHolder>() {
     }
 }
 
-class EventHolder : KotlinEpoxyHolder(){
+class EventHolder : KotlinEpoxyHolder() {
     val tvDate by bind<TextView>(R.id.tvDate)
     val viewPagerEvent by bind<ViewPager2>(R.id.view_pager_event)
     val dotsIndicator by bind<SpringDotsIndicator>(R.id.dots_indicator)

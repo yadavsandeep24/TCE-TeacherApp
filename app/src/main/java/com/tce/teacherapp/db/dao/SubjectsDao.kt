@@ -5,7 +5,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.tce.teacherapp.db.entity.*
-import java.util.concurrent.ConcurrentHashMap
 
 @Dao
 interface SubjectsDao {

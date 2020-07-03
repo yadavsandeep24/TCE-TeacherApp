@@ -80,6 +80,7 @@
                 android:inputType="text"
                 android:paddingLeft="10dp"
                 android:textSize="@dimen/font_size_14_dp"
+                android:enabled="false"
                 android:background="@drawable/bg_grey_rounded">
 
             </androidx.appcompat.widget.AppCompatEditText>
@@ -145,6 +146,7 @@
                 android:scrollHorizontally="false"
                 android:paddingTop="10dp"
                 android:textSize="@dimen/font_size_14_dp"
+                android:enabled="false"
                 android:background="@drawable/bg_grey_rounded">
 
             </androidx.appcompat.widget.AppCompatEditText>

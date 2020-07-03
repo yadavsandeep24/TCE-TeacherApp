@@ -13,7 +13,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.SearchView
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -25,7 +24,6 @@ import com.bumptech.glide.Glide
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentTopicListBinding
 import com.tce.teacherapp.db.entity.Subject
-import com.tce.teacherapp.ui.BaseFragment
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.subjects.adapter.SubjectListEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.subjects.adapter.topicListEpoxyHolder
