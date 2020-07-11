@@ -24,4 +24,13 @@
     <color name="home_background">#fff098</color>
     <color name="chapter_text_dim_bg">#88000000</color>
     <color name="nasty_green">#82b941</color>
+    <color name="sandy_yellow">#ffeb7d</color>
+    <color name="blue">#5a69ff</color>
+    <color name="pale">#fffad7</color>
+
+    <color name="calender_page_bg_color">#FFFFFF</color>
+    <color name="calender_item_view_bg_color">#FFFFFF</color>
+    <color name="calender_toolbar_color">#FFFFFF</color>
+    <color name="calender_text_grey">#232337</color>
+    <color name="calender_text_grey_light">#a0a5b9</color>
 </resources>

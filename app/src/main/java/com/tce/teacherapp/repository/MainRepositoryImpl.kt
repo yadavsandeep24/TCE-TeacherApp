@@ -15,6 +15,7 @@ import com.tce.teacherapp.db.entity.*
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardViewState
 import com.tce.teacherapp.ui.dashboard.home.state.UpdatePasswordFields
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageViewState
+import com.tce.teacherapp.ui.dashboard.planner.state.PlannerViewState
 import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectViewState
 import com.tce.teacherapp.ui.login.state.LoginFields
 import com.tce.teacherapp.util.*
@@ -1105,6 +1106,112 @@ constructor(
                 }.getResult()
             )
 
+    }
+
+    override fun getPlannerData(
+        query: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<PlannerViewState>> = flow {
+        var jsonString: String = ""
+        try {
+
+            jsonString = application.assets.open("json/lessonPlan.json").bufferedReader()
+                .use { it.readText() }
+            val gson = Gson()
+            val listClass = object : TypeToken<List<LessonPlan>>() {}.type
+            var list: List<LessonPlan> = gson.fromJson(jsonString, listClass)
+
+            jsonString = application.assets.open("json/event.json").bufferedReader()
+                .use { it.readText() }
+            val listEvent = object : TypeToken<List<Event>>() {}.type
+            var list1: List<Event> = gson.fromJson(jsonString, listEvent)
+
+            jsonString = application.assets.open("json/birthday.json").bufferedReader()
+                .use { it.readText() }
+            val listBirthday = object : TypeToken<List<StudentBirthDay>>() {}.type
+            var list2: List<StudentBirthDay> = gson.fromJson(jsonString, listBirthday)
+
+            jsonString = application.assets.open("json/dailyPlanner.json").bufferedReader()
+                .use { it.readText() }
+            val listPlanner = object : TypeToken<List<DailyPlanner>>() {}.type
+            var list3: List<DailyPlanner> = gson.fromJson(jsonString, listPlanner)
+
+
+            emit(
+                DataState.data(
+                    data = PlannerViewState(lessonPlanList = list,
+                                            eventList = list1,
+                                            birthdayList = list2,
+                                            dailyPlannerList = list3
+                    ),
+
+                    stateEvent = stateEvent,
+                    response = null
+                )
+            )
+
+        } catch (ioException: IOException) {
+            ioException.printStackTrace()
+        }
+    }
+
+    override fun getPlannerEventList(
+        count: Int,
+        showOriginal: Boolean,
+        stateEvent: StateEvent
+    ): Flow<DataState<PlannerViewState>> = flow {
+        withContext(IO) {
+            var jsonString: String = ""
+            try {
+                jsonString =
+                    application.assets.open("json/event.json").bufferedReader()
+                        .use { it.readText() }
+                val gson = Gson()
+                val listPersonType = object : TypeToken<ArrayList<Event>>() {}.type
+                val eventList: ArrayList<Event> = gson.fromJson(jsonString, listPersonType)
+                var selectedList: ArrayList<Event> = ArrayList();
+
+                var isShowLess = false
+                var nextEventCount = 4
+
+                if (showOriginal) {
+                    for (i in 0 until count) {
+                        selectedList.add(eventList[i])
+                    }
+                    if (eventList.size < count + 4) {
+                        nextEventCount = eventList.size - 3
+                    }
+                } else {
+                    if (eventList.size > count) {
+                        for (i in 0 until count) {
+                            selectedList.add(eventList[i])
+                        }
+                        if (eventList.size <= count + nextEventCount) {
+                            nextEventCount = eventList.size
+                            isShowLess = true
+                        }
+                    } else {
+                        for (i in 0 until eventList.size) {
+                            selectedList.add(eventList[i])
+                        }
+                        nextEventCount = eventList.size - count
+                        isShowLess = true
+                    }
+                }
+                val eventData = EventData(isShowLess, nextEventCount, selectedList)
+                emit(
+                    DataState.data(
+                        data = PlannerViewState(eventData = eventData),
+                        stateEvent = stateEvent,
+                        response = null
+                    )
+                )
+
+            } catch (ioException: IOException) {
+                ioException.printStackTrace()
+            }
+
+        }
     }
 
     fun toGradeList(grades: List<GradeResponse>): List<Grade> {

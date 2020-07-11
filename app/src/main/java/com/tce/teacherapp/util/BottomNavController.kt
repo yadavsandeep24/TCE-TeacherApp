@@ -100,7 +100,7 @@ class BottomNavController(
             }
 
             R.id.nav_planner -> {
-                CalenderNavHostFragment.create(R.navigation.calender_graph)
+                PlannerNavHostFragment.create(R.navigation.planner_graph)
             }
 
             else -> {

@@ -225,4 +225,11 @@ dependencies {
     //for dot indicator animation
     implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
 
+    //for calender view
+    api "com.jakewharton.threetenabp:threetenabp:1.2.4"
+    testImplementation('org.threeten:threetenbp:1.4.4') {
+        // Use threetenBP library for tests as context will
+        // not be available to initialise threetenABP
+        exclude group: 'com.jakewharton.threetenabp', module: 'threetenabp'
+    }
 }

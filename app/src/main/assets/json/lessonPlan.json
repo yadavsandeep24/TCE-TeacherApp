@@ -1,0 +1,569 @@
+[
+  {
+    "id": "LP1",
+    "Date": "2020-06-02",
+    "IsHoliday": false,
+    "HolidayMsg": "",
+    "PeriodList": [
+      {
+        "id": "p1",
+        "Topic": "Conversation 2",
+        "ShareToAll": true,
+        "LessonTypeValue": "Circle time",
+        "LessonTypeId": "LT2",
+        "SequenceNo": 1,
+        "Date": "2020-06-02",
+        "ResourceList": [
+          {
+            "id": "IRSC3",
+            "title": "Title Name 1 - Modality",
+            "contenttype": "AV",
+            "image": "https://kohantextilejournal.com/wp-content/uploads/2018/04/video-poster.jpg",
+            "SequenceNo": 1,
+            "ResourceOriginator": "TCE",
+            "IsSystemAdded": true
+          },
+          {
+            "id": "ERSC1",
+            "title": "Title Name 2 - Modality",
+            "contenttype": "AV",
+            "image": "https://googleads.github.io/videojs-ima/examples/posters/bbb_poster.jpg",
+            "SequenceNo": 2,
+            "ResourceOriginator": "Shared",
+            "IsSystemAdded": false
+          }
+        ],
+        "Skills": [
+          "observation",
+          "Language"
+        ],
+        "TeacherFocus": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        "Activity": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
+      },
+      {
+        "id": "p2",
+        "Topic": "Conversation",
+        "ShareToAll": false,
+        "LessonTypeValue": "Circle time",
+        "LessonTypeId": "LT2",
+        "SequenceNo": 2,
+        "Date": "2020-06-02",
+        "ResourceList": [
+          {
+            "id": "RSS1",
+            "title": "Title Name 1 - Modality",
+            "contenttype": "AV",
+            "image": "https://kohantextilejournal.com/wp-content/uploads/2018/04/video-poster.jpg",
+            "SequenceNo": 1,
+            "ResourceOriginator": "TCE",
+            "IsSystemAdded": true
+          },
+          {
+            "id": "RSS2",
+            "title": "Title Name 2 - Modality",
+            "contenttype": "AV",
+            "image": "https://googleads.github.io/videojs-ima/examples/posters/bbb_poster.jpg",
+            "SequenceNo": 2,
+            "ResourceOriginator": "Shared",
+            "IsSystemAdded": false
+          }
+        ],
+        "Skills": [
+          "observation",
+          "Language"
+        ],
+        "TeacherFocus": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        "Activity": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
+      }
+    ]
+  },
+  {
+    "id": "SuBcOG4v",
+    "Date": "2020-06-23",
+    "IsHoliday": false,
+    "HolidayMsg": "",
+    "PeriodList": [
+      {
+        "id": "DcQXo",
+        "Topic": "Test Lesson Plan",
+        "ShareToAll": false,
+        "LessonTypeValue": "Choice Time",
+        "LessonTypeId": "LT1",
+        "ResourceList": [
+          {
+            "id": "ERSC3",
+            "type": "application/x-mpegURL",
+            "contenttype": "AV",
+            "src": "//amssamples.streaming.mediaservices.windows.net/91492735-c523-432b-ba01-faba6c2206a2/AzureMediaServicesPromo.ism/manifest(format=m3u8-aapl-v3)",
+            "image": "https://kohantextilejournal.com/wp-content/uploads/2018/04/video-poster.jpg",
+            "title": "Shared Resource",
+            "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+            "skills": [
+              "Observation",
+              "Language"
+            ],
+            "TaggingLevel": "ECE1 > English > Letter & Sound",
+            "ResourceOriginator": "Shared",
+            "SequenceNo": 1
+          },
+          {
+            "id": "ERSC4",
+            "type": "video/mp4",
+            "contenttype": "AV",
+            "src": "http://vjs.zencdn.net/v/oceans.mp4",
+            "image": "https://googleads.github.io/videojs-ima/examples/posters/bbb_poster.jpg",
+            "title": "My Resource",
+            "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+            "skills": [
+              "Observation",
+              "Language"
+            ],
+            "TaggingLevel": "ECE1 > English > Letter & Sound > 1",
+            "ResourceOriginator": "My",
+            "SequenceNo": 2
+          }
+        ],
+        "SequenceNo": 1,
+        "Date": "2020-06-23T06:08:43.808Z",
+        "Skills": [
+          "Observation"
+        ],
+        "TeacherFocus": "Test Focus",
+        "Activity": "Test Activity"
+      },
+      {
+        "id": "",
+        "Topic": "",
+        "ShareToAll": false,
+        "LessonTypeValue": "",
+        "LessonTypeId": "",
+        "ResourceList": [],
+        "SequenceNo": 2,
+        "Date": "2020-06-23T06:08:43.808Z"
+      },
+      {
+        "id": "",
+        "Topic": "",
+        "ShareToAll": false,
+        "LessonTypeValue": "",
+        "LessonTypeId": "",
+        "ResourceList": [],
+        "SequenceNo": 3,
+        "Date": "2020-06-23T06:08:43.808Z"
+      },
+      {
+        "id": "",
+        "Topic": "",
+        "ShareToAll": false,
+        "LessonTypeValue": "",
+        "LessonTypeId": "",
+        "ResourceList": [],
+        "SequenceNo": 4,
+        "Date": "2020-06-23T06:08:43.808Z"
+      },
+      {
+        "id": "",
+        "Topic": "",
+        "ShareToAll": false,
+        "LessonTypeValue": "",
+        "LessonTypeId": "",
+        "ResourceList": [],
+        "SequenceNo": 5,
+        "Date": "2020-06-23T06:08:43.808Z"
+      },
+      {
+        "id": "",
+        "Topic": "",
+        "ShareToAll": false,
+        "LessonTypeValue": "",
+        "LessonTypeId": "",
+        "ResourceList": [],
+        "SequenceNo": 6,
+        "Date": "2020-06-23T06:08:43.808Z"
+      },
+      {
+        "id": "",
+        "Topic": "",
+        "ShareToAll": false,
+        "LessonTypeValue": "",
+        "LessonTypeId": "",
+        "ResourceList": [],
+        "SequenceNo": 7,
+        "Date": "2020-06-23T06:08:43.808Z"
+      },
+      {
+        "id": "",
+        "Topic": "",
+        "ShareToAll": false,
+        "LessonTypeValue": "",
+        "LessonTypeId": "",
+        "ResourceList": [],
+        "SequenceNo": 8,
+        "Date": "2020-06-23T06:08:43.808Z"
+      }
+    ]
+  },
+  {
+    "id": "8VcWKPU6",
+    "Date": "2020-06-30",
+    "IsHoliday": false,
+    "HolidayMsg": "",
+    "PeriodList": [
+      {
+        "id": "",
+        "Topic": "",
+        "ShareToAll": false,
+        "LessonTypeValue": "",
+        "LessonTypeId": "",
+        "ResourceList": [],
+        "SequenceNo": 2,
+        "Date": "2020-06-30T06:08:43.808Z"
+      },
+      {
+        "id": "",
+        "Topic": "",
+        "ShareToAll": false,
+        "LessonTypeValue": "",
+        "LessonTypeId": "",
+        "ResourceList": [],
+        "SequenceNo": 3,
+        "Date": "2020-06-30T06:08:43.808Z"
+      },
+      {
+        "id": "",
+        "Topic": "",
+        "ShareToAll": false,
+        "LessonTypeValue": "",
+        "LessonTypeId": "",
+        "ResourceList": [],
+        "SequenceNo": 4,
+        "Date": "2020-06-30T06:08:43.808Z"
+      },
+      {
+        "id": "",
+        "Topic": "",
+        "ShareToAll": false,
+        "LessonTypeValue": "",
+        "LessonTypeId": "",
+        "ResourceList": [],
+        "SequenceNo": 5,
+        "Date": "2020-06-30T06:08:43.808Z"
+      },
+      {
+        "id": "",
+        "Topic": "",
+        "ShareToAll": false,
+        "LessonTypeValue": "",
+        "LessonTypeId": "",
+        "ResourceList": [],
+        "SequenceNo": 6,
+        "Date": "2020-06-30T06:08:43.808Z"
+      },
+      {
+        "id": "",
+        "Topic": "",
+        "ShareToAll": false,
+        "LessonTypeValue": "",
+        "LessonTypeId": "",
+        "ResourceList": [],
+        "SequenceNo": 7,
+        "Date": "2020-06-30T06:08:43.808Z"
+      },
+      {
+        "id": "",
+        "Topic": "",
+        "ShareToAll": false,
+        "LessonTypeValue": "",
+        "LessonTypeId": "",
+        "ResourceList": [],
+        "SequenceNo": 8,
+        "Date": "2020-06-30T06:08:43.808Z"
+      },
+      {
+        "id": "CEexv",
+        "Topic": "Test Lesson",
+        "ShareToAll": false,
+        "LessonTypeValue": "Choice Time",
+        "LessonTypeId": "LT1",
+        "ResourceList": [
+          {
+            "id": "ERSC4",
+            "type": "video/mp4",
+            "contenttype": "AV",
+            "src": "http://vjs.zencdn.net/v/oceans.mp4",
+            "image": "https://googleads.github.io/videojs-ima/examples/posters/bbb_poster.jpg",
+            "title": "My Resource",
+            "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+            "skills": [
+              "Observation",
+              "Language"
+            ],
+            "TaggingLevel": "ECE1 > English > Letter & Sound > 1",
+            "ResourceOriginator": "My",
+            "SequenceNo": 1
+          },
+          {
+            "id": "ERSC3",
+            "type": "application/x-mpegURL",
+            "contenttype": "AV",
+            "src": "//amssamples.streaming.mediaservices.windows.net/91492735-c523-432b-ba01-faba6c2206a2/AzureMediaServicesPromo.ism/manifest(format=m3u8-aapl-v3)",
+            "image": "https://kohantextilejournal.com/wp-content/uploads/2018/04/video-poster.jpg",
+            "title": "Shared Resource",
+            "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+            "skills": [
+              "Observation",
+              "Language"
+            ],
+            "TaggingLevel": "ECE1 > English > Letter & Sound",
+            "ResourceOriginator": "Shared",
+            "SequenceNo": 1
+          }
+        ],
+        "SequenceNo": 1,
+        "Date": "2020-06-30T06:08:43.808Z",
+        "Skills": [],
+        "TeacherFocus": "sdzsf dfd",
+        "Activity": "sfs sfdgdzf"
+      }
+    ]
+  },
+  {
+    "id": "Oi65GxJo",
+    "Date": "2020-06-24",
+    "IsHoliday": false,
+    "HolidayMsg": "",
+    "PeriodList": [
+      {
+        "id": "xdzem",
+        "Topic": "Test Lesson Plan",
+        "ShareToAll": false,
+        "LessonTypeValue": "Choice Time",
+        "LessonTypeId": "LT1",
+        "ResourceList": [
+          {
+            "id": "ERSC4",
+            "type": "video/mp4",
+            "contenttype": "AV",
+            "src": "http://vjs.zencdn.net/v/oceans.mp4",
+            "image": "https://googleads.github.io/videojs-ima/examples/posters/bbb_poster.jpg",
+            "title": "My Resource",
+            "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+            "skills": [
+              "Observation",
+              "Language"
+            ],
+            "TaggingLevel": "ECE1 > English > Letter & Sound > 1",
+            "ResourceOriginator": "My",
+            "SequenceNo": 1
+          },
+          {
+            "id": "ERSC3",
+            "type": "application/x-mpegURL",
+            "contenttype": "AV",
+            "src": "//amssamples.streaming.mediaservices.windows.net/91492735-c523-432b-ba01-faba6c2206a2/AzureMediaServicesPromo.ism/manifest(format=m3u8-aapl-v3)",
+            "image": "https://kohantextilejournal.com/wp-content/uploads/2018/04/video-poster.jpg",
+            "title": "Shared Resource",
+            "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+            "skills": [
+              "Observation",
+              "Language"
+            ],
+            "TaggingLevel": "ECE1 > English > Letter & Sound",
+            "ResourceOriginator": "Shared",
+            "SequenceNo": 1
+          }
+        ],
+        "SequenceNo": 1,
+        "Date": "2020-06-24T05:39:26.144Z",
+        "Skills": [
+          "Observation"
+        ],
+        "TeacherFocus": "Test Focus",
+        "Activity": "Test Activity"
+      },
+      {
+        "id": "",
+        "Topic": "",
+        "ShareToAll": false,
+        "LessonTypeValue": "",
+        "LessonTypeId": "",
+        "ResourceList": [],
+        "SequenceNo": 2,
+        "Date": "2020-06-24T05:39:26.144Z"
+      },
+      {
+        "id": "",
+        "Topic": "",
+        "ShareToAll": false,
+        "LessonTypeValue": "",
+        "LessonTypeId": "",
+        "ResourceList": [],
+        "SequenceNo": 3,
+        "Date": "2020-06-24T05:39:26.144Z"
+      },
+      {
+        "id": "",
+        "Topic": "",
+        "ShareToAll": false,
+        "LessonTypeValue": "",
+        "LessonTypeId": "",
+        "ResourceList": [],
+        "SequenceNo": 4,
+        "Date": "2020-06-24T05:39:26.144Z"
+      },
+      {
+        "id": "",
+        "Topic": "",
+        "ShareToAll": false,
+        "LessonTypeValue": "",
+        "LessonTypeId": "",
+        "ResourceList": [],
+        "SequenceNo": 5,
+        "Date": "2020-06-24T05:39:26.144Z"
+      },
+      {
+        "id": "",
+        "Topic": "",
+        "ShareToAll": false,
+        "LessonTypeValue": "",
+        "LessonTypeId": "",
+        "ResourceList": [],
+        "SequenceNo": 6,
+        "Date": "2020-06-24T05:39:26.144Z"
+      },
+      {
+        "id": "",
+        "Topic": "",
+        "ShareToAll": false,
+        "LessonTypeValue": "",
+        "LessonTypeId": "",
+        "ResourceList": [],
+        "SequenceNo": 7,
+        "Date": "2020-06-24T05:39:26.144Z"
+      },
+      {
+        "id": "",
+        "Topic": "",
+        "ShareToAll": false,
+        "LessonTypeValue": "",
+        "LessonTypeId": "",
+        "ResourceList": [],
+        "SequenceNo": 8,
+        "Date": "2020-06-24T05:39:26.144Z"
+      }
+    ]
+  },
+  {
+    "id": "RyL0ST9W",
+    "Date": "2020-06-25",
+    "IsHoliday": false,
+    "HolidayMsg": "",
+    "PeriodList": [
+      {
+        "id": "",
+        "Topic": "",
+        "ShareToAll": false,
+        "LessonTypeValue": "",
+        "LessonTypeId": "",
+        "ResourceList": [],
+        "SequenceNo": 1,
+        "Date": "2020-06-25T14:06:46.934Z"
+      },
+      {
+        "id": "9LOnG",
+        "Topic": "Test Lesson Plan",
+        "ShareToAll": true,
+        "LessonTypeValue": "Choice Time",
+        "LessonTypeId": "LT1",
+        "ResourceList": [
+          {
+            "id": "ERSC3",
+            "type": "application/x-mpegURL",
+            "contenttype": "AV",
+            "src": "//amssamples.streaming.mediaservices.windows.net/91492735-c523-432b-ba01-faba6c2206a2/AzureMediaServicesPromo.ism/manifest(format=m3u8-aapl-v3)",
+            "image": "https://kohantextilejournal.com/wp-content/uploads/2018/04/video-poster.jpg",
+            "title": "Shared Resource",
+            "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+            "skills": [
+              "Observation",
+              "Language"
+            ],
+            "TaggingLevel": "ECE1 > English > Letter & Sound",
+            "ResourceOriginator": "Shared",
+            "SequenceNo": 1
+          }
+        ],
+        "SequenceNo": 2,
+        "Date": "2020-06-25T14:06:46.934Z",
+        "Skills": [
+          "Observation"
+        ],
+        "TeacherFocus": "Test Focus",
+        "Activity": "Test Activity"
+      },
+      {
+        "id": "",
+        "Topic": "",
+        "ShareToAll": false,
+        "LessonTypeValue": "",
+        "LessonTypeId": "",
+        "ResourceList": [],
+        "SequenceNo": 3,
+        "Date": "2020-06-25T14:06:46.934Z"
+      },
+      {
+        "id": "",
+        "Topic": "",
+        "ShareToAll": false,
+        "LessonTypeValue": "",
+        "LessonTypeId": "",
+        "ResourceList": [],
+        "SequenceNo": 4,
+        "Date": "2020-06-25T14:06:46.934Z"
+      },
+      {
+        "id": "",
+        "Topic": "",
+        "ShareToAll": false,
+        "LessonTypeValue": "",
+        "LessonTypeId": "",
+        "ResourceList": [],
+        "SequenceNo": 5,
+        "Date": "2020-06-25T14:06:46.934Z"
+      },
+      {
+        "id": "",
+        "Topic": "",
+        "ShareToAll": false,
+        "LessonTypeValue": "",
+        "LessonTypeId": "",
+        "ResourceList": [],
+        "SequenceNo": 6,
+        "Date": "2020-06-25T14:06:46.934Z"
+      },
+      {
+        "id": "",
+        "Topic": "",
+        "ShareToAll": false,
+        "LessonTypeValue": "",
+        "LessonTypeId": "",
+        "ResourceList": [],
+        "SequenceNo": 7,
+        "Date": "2020-06-25T14:06:46.934Z"
+      },
+      {
+        "id": "",
+        "Topic": "",
+        "ShareToAll": false,
+        "LessonTypeValue": "",
+        "LessonTypeId": "",
+        "ResourceList": [],
+        "SequenceNo": 8,
+        "Date": "2020-06-25T14:06:46.934Z"
+      }
+    ]
+  },
+  {
+    "id": "HD6l1xc"
+  }
+]

@@ -35,6 +35,10 @@ class DashboardActivity : BaseActivity(), BottomNavController.OnNavigationResele
     lateinit var messageFragmentFactory: FragmentFactory
 
     @Inject
+    @Named("PlannerFragmentFactory")
+    lateinit var plannerFragmentFactory: FragmentFactory
+
+    @Inject
     lateinit var providerFactory: ViewModelProvider.Factory
 
     private lateinit var bottomNavigationView: BottomNavigationView
