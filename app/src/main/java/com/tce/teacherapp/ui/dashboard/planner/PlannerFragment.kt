@@ -20,6 +20,7 @@ import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentMessageListBinding
 import com.tce.teacherapp.databinding.FragmentPlannerBinding
 import com.tce.teacherapp.db.entity.Event
+import com.tce.teacherapp.db.entity.LessonPlanPeriod
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.home.listeners.EventClickListener
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardStateEvent
@@ -29,6 +30,7 @@ import com.tce.teacherapp.ui.dashboard.messages.state.MESSAGE_VIEW_STATE_BUNDLE_
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageStateEvent
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageViewState
 import com.tce.teacherapp.ui.dashboard.planner.adapter.dailyPlannerEpoxyHolder
+import com.tce.teacherapp.ui.dashboard.planner.listeners.LessonPlanClickListener
 import com.tce.teacherapp.ui.dashboard.planner.state.PLANNER_VIEW_STATE_BUNDLE_KEY
 import com.tce.teacherapp.ui.dashboard.planner.state.PlannerStateEvent
 import com.tce.teacherapp.ui.dashboard.planner.state.PlannerViewState
@@ -45,7 +47,8 @@ class PlannerFragment
 @Inject
 constructor(
     viewModelFactory: ViewModelProvider.Factory
-) : BasePlannerFragment(R.layout.fragment_planner, viewModelFactory), EventClickListener {
+) : BasePlannerFragment(R.layout.fragment_planner, viewModelFactory), EventClickListener ,
+    LessonPlanClickListener {
 
     private lateinit var binding : FragmentPlannerBinding
 
@@ -146,6 +149,7 @@ constructor(
                                 id(msg.id.toLong())
                                 dailyPlanner(msg)
                                 evenClickListener(this@PlannerFragment)
+                                lessonPLanClickListener(this@PlannerFragment)
                             }
                         }
 
@@ -199,7 +203,21 @@ constructor(
     }
 
     override fun onEventItemClick(event: Event) {
-        Toast.makeText(requireContext(), "Click on ${event.type}", Toast.LENGTH_LONG).show()
+        val bundle = Bundle()
+        bundle.putParcelable("eventData", event)
+        findNavController().navigate(
+            R.id.action_plannerFragment_to_eventDisplayFragment,
+            bundle
+        )
+    }
+
+    override fun onLessonPlanClick(lessonPlanPeriod: LessonPlanPeriod) {
+        val bundle = Bundle()
+        bundle.putParcelable("lessonPlanData", lessonPlanPeriod)
+        findNavController().navigate(
+            R.id.action_plannerFragment_to_lessonPlanDisplayFragment,
+            bundle
+        )
     }
 
 }

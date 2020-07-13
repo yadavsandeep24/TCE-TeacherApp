@@ -1,5 +1,7 @@
 package com.tce.teacherapp.ui.dashboard.planner.adapter
 
+import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.airbnb.epoxy.EpoxyAttribute
@@ -11,6 +13,8 @@ import com.tce.teacherapp.db.entity.DashboardResourceType
 import com.tce.teacherapp.db.entity.LessonPlanPeriod
 import com.tce.teacherapp.db.entity.LessonPlanResource
 import com.tce.teacherapp.ui.dashboard.home.adapter.todayResChildItemEpoxyHolder
+import com.tce.teacherapp.ui.dashboard.home.listeners.ClassListClickListener
+import com.tce.teacherapp.ui.dashboard.planner.listeners.LessonPlanClickListener
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
 import com.tce.teacherapp.util.Utility
 
@@ -19,6 +23,9 @@ abstract class LessonPlanEpoxyHolder : EpoxyModelWithHolder<PlanHolder>() {
 
     @EpoxyAttribute
     lateinit var period:LessonPlanPeriod
+
+    @EpoxyAttribute
+    lateinit var lessonPLanClickListener: LessonPlanClickListener
 
     override fun bind(holder: PlanHolder) {
         super.bind(holder)
@@ -33,6 +40,10 @@ abstract class LessonPlanEpoxyHolder : EpoxyModelWithHolder<PlanHolder>() {
             setHasFixedSize(true)
 
         }
+
+        holder.lessonPlanContainer.setOnClickListener(View.OnClickListener {
+            lessonPLanClickListener.onLessonPlanClick(period)
+        })
 
         holder.rvResourceItem.withModels {
             period.ResourceList?.let {
@@ -63,4 +74,5 @@ class PlanHolder : KotlinEpoxyHolder(){
     val tvTitle by bind<TextView>(R.id.tv_res_title)
     val tvSubTitle by bind<TextView>(R.id.tv_res_sub_title)
     val rvResourceItem by bind<EpoxyRecyclerView>(R.id.rv_resource_item)
+    val lessonPlanContainer by bind<LinearLayout>(R.id.lesson_plan_container)
 }

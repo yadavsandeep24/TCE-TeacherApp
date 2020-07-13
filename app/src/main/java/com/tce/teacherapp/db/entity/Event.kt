@@ -24,8 +24,17 @@ data class Event(
     val typeColor: String,
     @Expose
     val iconBackColor: String,
+
     @Expose
-    val eventBackColor: String
+    val eventBackColor: String,
+
+    @Expose
+    val date: String,
+    @Expose
+    val note: String,
+    @Expose
+    val eventImageUrl: String
+
 
 
 ) : Parcelable

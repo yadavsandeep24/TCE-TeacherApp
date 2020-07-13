@@ -15,13 +15,14 @@ import com.kizitonwose.calendarview.ui.DayBinder
 import com.kizitonwose.calendarview.ui.MonthHeaderFooterBinder
 import com.kizitonwose.calendarview.ui.ViewContainer
 import com.tce.teacherapp.R
-import com.tce.teacherapp.databinding.FragmentMonthlyPlannerBinding
-import com.tce.teacherapp.databinding.FragmentPlannerBinding
+import com.tce.teacherapp.databinding.*
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
+import org.jetbrains.anko.childrenSequence
 import org.threeten.bp.LocalDate
 import org.threeten.bp.YearMonth
 import org.threeten.bp.format.TextStyle
 import java.util.*
+
 
 
 class MonthlyPlannerFragment : Fragment() {
@@ -68,13 +69,14 @@ class MonthlyPlannerFragment : Fragment() {
             )
         })
 
-      /*  val daysOfWeek = daysOfWeekFromLocale()
+/*
+        val daysOfWeek = daysOfWeekFromLocale()
 
         val currentMonth = YearMonth.now()
         binding.exFiveCalendar.setup(currentMonth.minusMonths(10), currentMonth.plusMonths(10), daysOfWeek.first())
-        binding.exFiveCalendar.scrollToMonth(currentMonth)*/
+        binding.exFiveCalendar.scrollToMonth(currentMonth)
 
-      /*  class DayViewContainer(view: View) : ViewContainer(view) {
+        class DayViewContainer(view: View) : ViewContainer(view) {
             lateinit var day: CalendarDay // Will be set when this container is bound.
             val binding =  CalendarDayBinding.bind(view)
             init {
@@ -109,7 +111,8 @@ class MonthlyPlannerFragment : Fragment() {
                     textView.setTextColorRes(R.color.calender_text_grey)
                     layout.setBackgroundResource(if (selectedDate == day.date) R.drawable.calender_selected_bg else 0)
 
-                   *//* val flights = flights[day.date]
+                   */
+/* val flights = flights[day.date]
                     if (flights != null) {
                         if (flights.count() == 1) {
                             flightBottomView.setBackgroundColor(view.context.getColorCompat(flights[0].color))
@@ -118,6 +121,7 @@ class MonthlyPlannerFragment : Fragment() {
                             flightBottomView.setBackgroundColor(view.context.getColorCompat(flights[1].color))
                         }
                     }*//*
+
                 } else {
                     textView.setTextColorRes(R.color.calender_text_grey_light)
                     layout.background = null
@@ -126,7 +130,7 @@ class MonthlyPlannerFragment : Fragment() {
         }
 
         class MonthViewContainer(view: View) : ViewContainer(view) {
-            val legendLayout = CalendarHeaderBinding.bind(view).legendLayout.root
+            val legendLayout = CalendarDayLegendBinding.bind(view).legendLayout
         }
         binding.exFiveCalendar.monthHeaderBinder = object :
             MonthHeaderFooterBinder<MonthViewContainer> {
@@ -135,16 +139,19 @@ class MonthlyPlannerFragment : Fragment() {
                 // Setup each header day text if we have not done that already.
                 if (container.legendLayout.tag == null) {
                     container.legendLayout.tag = month.yearMonth
-                    container.legendLayout.children.map { it as TextView }.forEachIndexed { index, tv ->
+                    container.legendLayout.childrenSequence().map { it as TextView }.forEachIndexed {
+                            index, tv ->
                         tv.text = daysOfWeek[index].getDisplayName(TextStyle.SHORT, Locale.ENGLISH)
                             .toUpperCase(Locale.ENGLISH)
                         tv.setTextColorRes(R.color.calender_text_grey)
                         tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f)
+
                     }
                     month.yearMonth
                 }
             }
-        }*/
+        }
+*/
 
 
 

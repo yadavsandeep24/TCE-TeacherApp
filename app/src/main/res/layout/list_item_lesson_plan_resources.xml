@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:visibility="visible"
+        app:cardCornerRadius="10dp"
+        app:cardPreventCornerOverlap="false">
+
+        <RelativeLayout
+            android:layout_width="270dp"
+            android:layout_height="40dp"
+            android:background="#e1e6f0">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_icon"
+                android:layout_width="@dimen/font_size_16_dp"
+                android:layout_height="@dimen/font_size_16_dp"
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/ic_gallary"
+                android:layout_centerVertical="true">
+
+            </androidx.appcompat.widget.AppCompatImageView>
+
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:id="@+id/tv_res_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text="Observarion"
+                android:textColor="@color/color_black"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/img_icon"
+                android:textSize="@dimen/font_size_12_dp">
+
+            </com.tce.teacherapp.util.RubikMediumTextview>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_lock"
+                android:layout_width="@dimen/font_size_16_dp"
+                android:layout_height="@dimen/font_size_16_dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ic_lock"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_centerVertical="true">
+
+            </androidx.appcompat.widget.AppCompatImageView>
+
+
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</LinearLayout>

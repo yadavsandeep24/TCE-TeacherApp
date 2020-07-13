@@ -13,10 +13,35 @@
         <action
             android:id="@+id/action_plannerFragment_to_monthlyPlannerFragment"
             app:destination="@id/monthlyPlannerFragment" />
+        <action
+            android:id="@+id/action_plannerFragment_to_eventDisplayFragment"
+            app:destination="@id/eventDisplayFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+        <action
+            android:id="@+id/action_plannerFragment_to_lessonPlanDisplayFragment"
+            app:destination="@id/lessonPlanDisplayFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
     </fragment>
     <fragment
         android:id="@+id/monthlyPlannerFragment"
         android:name="com.tce.teacherapp.ui.dashboard.planner.MonthlyPlannerFragment"
         android:label="fragment_monthly_planner"
         tools:layout="@layout/fragment_monthly_planner" />
+    <fragment
+        android:id="@+id/eventDisplayFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.planner.EventDisplayFragment"
+        android:label="fragment_event_display"
+        tools:layout="@layout/fragment_event_display"
+        />
+    <fragment
+        android:id="@+id/lessonPlanDisplayFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.planner.LessonPlanDisplayFragment"
+        android:label="fragment_lesson_plan_display"
+        tools:layout="@layout/fragment_lesson_plan_display" />
 </navigation>

@@ -9,6 +9,7 @@ import com.airbnb.epoxy.*
 import com.tce.teacherapp.R
 import com.tce.teacherapp.db.entity.DailyPlanner
 import com.tce.teacherapp.ui.dashboard.home.listeners.EventClickListener
+import com.tce.teacherapp.ui.dashboard.planner.listeners.LessonPlanClickListener
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
 import com.tce.teacherapp.util.Utility
 import java.text.SimpleDateFormat
@@ -23,7 +24,8 @@ abstract class DailyPlannerEpoxyHolder : EpoxyModelWithHolder<PlannerHolder>() {
     @EpoxyAttribute
     lateinit var evenClickListener : EventClickListener
 
-
+    @EpoxyAttribute
+    lateinit var lessonPLanClickListener: LessonPlanClickListener
 
 
     override fun bind(holder: PlannerHolder) {
@@ -119,6 +121,7 @@ abstract class DailyPlannerEpoxyHolder : EpoxyModelWithHolder<PlannerHolder>() {
                     lessonPlanEpoxyHolder {
                         id(event.id)
                         period(event)
+                        lessonPLanClickListener(lessonPLanClickListener)
                     }
                 }
             }

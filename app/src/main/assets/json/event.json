@@ -7,17 +7,23 @@
     "eventColor": "#FFFFFF",
     "typeColor" : "#FFFFFF",
     "iconBackColor" : "#1e6eff",
-    "eventBackColor": "#5591ff"
+    "eventBackColor": "#5591ff",
+    "date" :  "13 July 2020 Monday",
+    "note": "Ldkkdm ddfkj djlk ljlm laksmdlf kdskn sksd sdkjfhvbsde9uuw iefskj",
+    "eventImageUrl" : "SportsDay.jpg"
   },
   {
     "id": "2",
-    "eventName": "Meet Kiran's Parents",
+    "eventName": "Remind parents to bring sports attire for tommarow's event",
     "imageUrl": "bell_icon.png",
     "type": "TO-DO",
     "eventColor": "#000000",
     "typeColor" : "#ffaa1e",
     "iconBackColor" : "#ffaa1e",
-    "eventBackColor": "#ffebc8"
+    "eventBackColor": "#ffebc8",
+    "date" :  "13 July 2020 Monday",
+    "note": "Remind parents to bring sports attire for tommarow's event",
+    "eventImageUrl" : "SportsDay.jpg"
   },
   {
     "id": "3",
@@ -27,7 +33,10 @@
     "eventColor": "#000000",
     "typeColor" : "#ffaa1e",
     "iconBackColor" : "#ffaa1e",
-    "eventBackColor": "#ffebc8"
+    "eventBackColor": "#ffebc8",
+    "date" :  "13 July 2020 Monday",
+    "note": "Meet Asha's Parents",
+    "eventImageUrl" : "SportsDay.jpg"
   },
   {
     "id": "4",
@@ -37,7 +46,10 @@
     "eventColor": "#FFFFFF",
     "typeColor" : "#FFFFFF",
     "iconBackColor" : "#1e6eff",
-    "eventBackColor": "#5591ff"
+    "eventBackColor": "#5591ff",
+    "date" :  "13 July 2020 Monday",
+    "note": "Ldkkdm ddfkj djlk ljlm laksmdlf kdskn sksd sdkjfhvbsde9uuw iefskj",
+    "eventImageUrl" : "SportsDay.jpg"
   },
   {
     "id": "5",
@@ -47,7 +59,10 @@
     "eventColor": "#000000",
     "typeColor" : "#ffaa1e",
     "iconBackColor" : "#ffaa1e",
-    "eventBackColor": "#ffebc8"
+    "eventBackColor": "#ffebc8",
+    "date" :  "13 July 2020 Monday",
+    "note": "Meet Kiran's Parents",
+    "eventImageUrl" : "SportsDay.jpg"
   },
   {
     "id": "6",
@@ -57,7 +72,10 @@
     "eventColor": "#000000",
     "typeColor" : "#ffaa1e",
     "iconBackColor" : "#ffaa1e",
-    "eventBackColor": "#ffebc8"
+    "eventBackColor": "#ffebc8",
+    "date" :  "13 July 2020 Monday",
+    "note": "Meet Asha's Parents",
+    "eventImageUrl" : "SportsDay.jpg"
   },
   {
     "id": "7",
@@ -67,6 +85,9 @@
     "eventColor": "#000000",
     "typeColor" : "#ffaa1e",
     "iconBackColor" : "#ffaa1e",
-    "eventBackColor": "#ffebc8"
+    "eventBackColor": "#ffebc8",
+    "date" :  "13 July 2020 Monday",
+    "note": "Meet Asha's Parents",
+    "eventImageUrl" : "SportsDay.jpg"
   }
 ]
