@@ -40,11 +40,10 @@ constructor(
 
         withContext(IO) {
             val loginFieldErrors = LoginFields(login_email = email, login_password = password,login_schoolName = schoolName).isValidForLogin()
-            if (loginFieldErrors.equals(LoginFields.LoginError.none())) {
+            if (loginFieldErrors == LoginFields.LoginError.none()) {
                 var isFingerPrintLoginEnabled = false
                 var isFaceIdLoginEnabled = false
-                val userId =
-                    sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID, "")
+                val userId = sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID, "")
                 val isQuickAccessScreenShow = sharedPreferences.getBoolean(
                     PreferenceKeys.APP_PREFERENCES_KEY_USER_QUICK_ACCESS_SCREEN_SHOW,
                     true

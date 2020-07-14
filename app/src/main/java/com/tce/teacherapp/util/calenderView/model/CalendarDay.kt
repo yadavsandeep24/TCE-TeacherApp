@@ -1,16 +1,21 @@
-package com.kizitonwose.calendarview.model
+package com.tce.teacherapp.util.calenderView.model
 
-import com.kizitonwose.calendarview.utils.next
-import com.kizitonwose.calendarview.utils.previous
-import com.kizitonwose.calendarview.utils.yearMonth
-import org.threeten.bp.LocalDate
-import org.threeten.bp.YearMonth
+import android.os.Build
+import com.tce.teacherapp.util.calenderView.utils.next
+import com.tce.teacherapp.util.calenderView.utils.previous
+import com.tce.teacherapp.util.calenderView.utils.yearMonth
 import java.io.Serializable
+import java.time.LocalDate
+import java.time.YearMonth
 
 data class CalendarDay internal constructor(val date: LocalDate, val owner: DayOwner) :
     Comparable<CalendarDay>, Serializable {
 
-    val day = date.dayOfMonth
+    val day = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        date.dayOfMonth
+    } else {
+        TODO("VERSION.SDK_INT < O")
+    }
 
     // Find the actual month on the calendar that owns this date.
     internal val positionYearMonth: YearMonth

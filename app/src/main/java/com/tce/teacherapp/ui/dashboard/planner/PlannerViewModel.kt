@@ -3,9 +3,6 @@ package com.tce.teacherapp.ui.dashboard.planner
 import com.tce.teacherapp.db.entity.*
 import com.tce.teacherapp.repository.MainRepository
 import com.tce.teacherapp.ui.BaseViewModel
-import com.tce.teacherapp.ui.dashboard.home.state.DashboardStateEvent
-import com.tce.teacherapp.ui.dashboard.messages.state.MessageStateEvent
-import com.tce.teacherapp.ui.dashboard.messages.state.MessageViewState
 import com.tce.teacherapp.ui.dashboard.planner.state.PlannerStateEvent
 import com.tce.teacherapp.ui.dashboard.planner.state.PlannerViewState
 import com.tce.teacherapp.util.DataState

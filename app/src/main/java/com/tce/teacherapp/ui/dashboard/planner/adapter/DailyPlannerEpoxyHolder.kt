@@ -1,11 +1,13 @@
 package com.tce.teacherapp.ui.dashboard.planner.adapter
 
-import android.text.Html
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.airbnb.epoxy.*
+import com.airbnb.epoxy.EpoxyAttribute
+import com.airbnb.epoxy.EpoxyModelClass
+import com.airbnb.epoxy.EpoxyModelWithHolder
+import com.airbnb.epoxy.EpoxyRecyclerView
 import com.tce.teacherapp.R
 import com.tce.teacherapp.db.entity.DailyPlanner
 import com.tce.teacherapp.ui.dashboard.home.listeners.EventClickListener

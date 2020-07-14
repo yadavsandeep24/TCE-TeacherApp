@@ -30,8 +30,8 @@ class SubjectsViewModel @Inject constructor(val mainRepository: MainRepository) 
         data.topicList?.let {
             setTopicListData(it)
         }
-        data.chapterList?.let {
-            setChapterListData(it)
+        data.chapterLearnData?.let {
+            setChapterLearnData(it)
         }
     }
 
@@ -67,6 +67,13 @@ class SubjectsViewModel @Inject constructor(val mainRepository: MainRepository) 
                     stateEvent.query,
                     stateEvent.topicId,
                     stateEvent.bookId,
+                    stateEvent = stateEvent
+                )
+            }
+            is SubjectStateEvent.GetTopicResourceEvent ->{
+                mainRepository.getTopicResourceList(
+                    stateEvent.query,
+                    stateEvent.topicId,
                     stateEvent = stateEvent
                 )
             }

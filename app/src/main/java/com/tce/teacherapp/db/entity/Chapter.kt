@@ -23,7 +23,7 @@ data class Chapter(
     var label: String,
 
     @Ignore
-    var node: List<NodeXX>,
+    var chapterResourceTypeList: List<ChapterResourceType>,
 
     @ColumnInfo(name = "type")
     var type: String,

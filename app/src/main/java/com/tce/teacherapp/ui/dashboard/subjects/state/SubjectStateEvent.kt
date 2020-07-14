@@ -79,4 +79,18 @@ sealed class SubjectStateEvent : StateEvent {
         }
 
     }
+
+    class GetTopicResourceEvent(
+        val query: String,
+        val topicId: String
+    ) : SubjectStateEvent() {
+        override fun errorInfo(): String {
+            return "Error in getting topic resource info."
+        }
+
+        override fun toString(): String {
+            return "GetTopicResourceEvent"
+        }
+
+    }
 }

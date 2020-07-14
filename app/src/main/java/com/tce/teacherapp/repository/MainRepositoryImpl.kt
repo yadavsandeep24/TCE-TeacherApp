@@ -9,6 +9,7 @@ import com.google.gson.reflect.TypeToken
 import com.tce.teacherapp.api.TCEService
 import com.tce.teacherapp.api.response.BookResponse
 import com.tce.teacherapp.api.response.GradeResponse
+import com.tce.teacherapp.api.response.ResourceListResponse
 import com.tce.teacherapp.db.dao.SubjectsDao
 import com.tce.teacherapp.db.dao.UserDao
 import com.tce.teacherapp.db.entity.*
@@ -68,47 +69,26 @@ constructor(
                                                     subjectDao.insert(subject)
                                                 }
                                             } catch (e: Exception) {
-                                                Log.e(
-                                                    TAG,
-                                                    "updateLocalDb: error updating cache data on subject  with title: ${subject.title}. " +
-                                                            "${e.message}"
-                                                )
+                                                Log.e(TAG,"updateLocalDb: ${subject.title}. " +"${e.message}")
                                                 // Could send an error report here or something but I don't think you should throw an error to the UI
                                                 // Since there could be many blog posts being inserted/updated.
                                             }
                                         }
                                     }
                                 } catch (e: Exception) {
-                                    Log.e(
-                                        TAG,
-                                        "updateLocalDb: error updating cache data on blog post with gradeTitle: ${grade.gradeTitle}. " +
-                                                "${e.message}"
-                                    )
+                                    Log.e(TAG,"updateLocalDb: ${grade.gradeTitle}. " + "${e.message}")
                                     // Could send an error report here or something but I don't think you should throw an error to the UI
                                     // Since there could be many blog posts being inserted/updated.
                                 }
                             }
                         }
                         if (resultObj.isNotEmpty()) {
-                            sharedPrefsEditor.putString(
-                                PreferenceKeys.APP_USER_SELECTED_GRADE_ID,
-                                resultObj[0].id
-                            ).commit()
-                            sharedPrefsEditor.putInt(
-                                PreferenceKeys.APP_USER_SELECTED_GRADE_POSITION,
-                                0
-                            ).commit()
-                            sharedPrefsEditor.putBoolean(
-                                PreferenceKeys.APP_PREFERENCES_NEW_SESSION_GRADES,
-                                false
-                            ).commit()
+                            sharedPrefsEditor.putString(PreferenceKeys.APP_USER_SELECTED_GRADE_ID,resultObj[0].id).commit()
+                            sharedPrefsEditor.putInt(PreferenceKeys.APP_USER_SELECTED_GRADE_POSITION,0).commit()
+                            sharedPrefsEditor.putBoolean(PreferenceKeys.APP_PREFERENCES_NEW_SESSION_GRADES,false).commit()
                         }
                         val viewState = SubjectViewState(gradeList = gradeList)
-                        return DataState.data(
-                            response = null,
-                            data = viewState,
-                            stateEvent = stateEvent
-                        )
+                        return DataState.data(response = null, data = viewState, stateEvent = stateEvent)
 
                     }
                 }.getResult()
@@ -250,19 +230,21 @@ constructor(
                                     launch {
                                         Log.d(TAG, "updateLocalDb: inserting book: $book")
                                         subjectDao.insertBook(book)
-                                        for (node in book.node) {
+                                        for (topic in book.topicList) {
                                             try {
-                                                subjectDao.insertNode(node)
-                                                for (nodex in node.node) {
+                                                subjectDao.insertTopic(topic)
+                                                for (chapter in topic.chapterList) {
                                                     try {
-                                                        subjectDao.inserNodeX(nodex)
-                                                        for (nodexx in nodex.node) {
+                                                        subjectDao.insertChapter(chapter)
+                                                        for (chapterResourceType in chapter.chapterResourceTypeList) {
                                                             try {
-                                                                subjectDao.insertNodeXX(nodexx)
-                                                                for (nodexxx in nodexx.node) {
+                                                                subjectDao.insertChapterResourceType(
+                                                                    chapterResourceType
+                                                                )
+                                                                for (resource in chapterResourceType.resourceList) {
                                                                     try {
-                                                                        subjectDao.insertNodeXXX(
-                                                                            nodexxx
+                                                                        subjectDao.insertResource(
+                                                                            resource
                                                                         )
                                                                     } catch (e: Exception) {
                                                                     }
@@ -293,9 +275,7 @@ constructor(
                             PreferenceKeys.APP_PREFERENCES_NEW_SESSION_BOOKS,
                             false
                         ).commit()
-                        val viewState = SubjectViewState(
-                            topicList = topicList
-                        )
+                        val viewState = SubjectViewState(topicList = topicList)
                         return DataState.data(
                             response = null,
                             data = viewState,
@@ -380,29 +360,23 @@ constructor(
         query: String,
         stateEvent: StateEvent
     ): Flow<DataState<MessageViewState>> = flow {
-        var jsonString: String = ""
+        var jsonString = ""
         try {
 
             jsonString = application.assets.open("json/student.json").bufferedReader()
                 .use { it.readText() }
             val gson = Gson()
             val listPersonType = object : TypeToken<List<Student>>() {}.type
-            var studentList: List<Student> = gson.fromJson(jsonString, listPersonType)
+            val studentList: List<Student> = gson.fromJson(jsonString, listPersonType)
 
-            var selectedList: List<Student>;
-            if (TextUtils.isEmpty(query)) {
-                selectedList = studentList
+            val selectedList: List<Student>;
+            selectedList = if (TextUtils.isEmpty(query)) {
+                studentList
             } else {
-                selectedList = studentList.filter { it.name.contains(query, ignoreCase = true) }
+                studentList.filter { it.name.contains(query, ignoreCase = true) }
             }
 
-            emit(
-                DataState.data(
-                    data = MessageViewState(studentList = selectedList),
-                    stateEvent = stateEvent,
-                    response = null
-                )
-            )
+            emit(DataState.data(data = MessageViewState(studentList = selectedList),stateEvent = stateEvent,response = null))
 
         } catch (ioException: IOException) {
             ioException.printStackTrace()
@@ -410,24 +384,21 @@ constructor(
 
     }
 
-    override fun getResourceList(
-        query: String,
-        stateEvent: StateEvent
-    ): Flow<DataState<MessageViewState>> = flow {
-        var jsonString: String = ""
+    override fun getResourceList(query: String,stateEvent: StateEvent): Flow<DataState<MessageViewState>> = flow {
+        val jsonString: String
         try {
 
             jsonString = application.assets.open("json/resourceType.json").bufferedReader()
                 .use { it.readText() }
             val gson = Gson()
             val listPersonType = object : TypeToken<List<MessageResource>>() {}.type
-            var resourceList: List<MessageResource> = gson.fromJson(jsonString, listPersonType)
+            val resourceList: List<MessageResource> = gson.fromJson(jsonString, listPersonType)
 
-            var selectedList: List<MessageResource>;
-            if (TextUtils.isEmpty(query)) {
-                selectedList = resourceList
+            val selectedList: List<MessageResource>;
+            selectedList = if (TextUtils.isEmpty(query)) {
+                resourceList
             } else {
-                selectedList = resourceList.filter { it.title.contains(query, ignoreCase = true) }
+                resourceList.filter { it.title.contains(query, ignoreCase = true) }
             }
 
             emit(
@@ -451,21 +422,20 @@ constructor(
         stateEvent: StateEvent
     ): Flow<DataState<MessageViewState>> = flow {
 
-        var jsonString: String = ""
+        val jsonString: String
         try {
-
             jsonString =
                 application.assets.open("json/resource.json").bufferedReader().use { it.readText() }
             val gson = Gson()
             val listPersonType = object : TypeToken<List<MessageResource>>() {}.type
-            var resourceList: List<MessageResource> = gson.fromJson(jsonString, listPersonType)
+            val resourceList: List<MessageResource> = gson.fromJson(jsonString, listPersonType)
 
-            var selectedList: List<MessageResource>;
+            val selectedList: List<MessageResource>;
 
-            if (TextUtils.isEmpty(query)) {
-                selectedList = resourceList.filter { it.typeId == typeId }
+            selectedList = if (TextUtils.isEmpty(query)) {
+                resourceList.filter { it.typeId == typeId }
             } else {
-                selectedList = resourceList.filter {
+                resourceList.filter {
                     it.title.contains(
                         query,
                         ignoreCase = true
@@ -490,7 +460,7 @@ constructor(
 
     override fun getProfile(stateEvent: StateEvent): Flow<DataState<DashboardViewState>> = flow {
         withContext(IO) {
-            val userID = sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID, "")
+            val userID = sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID,"")
             val userInfo = userID?.let { userDao.getUserByUserId(it) }
             emit(
                 DataState.data(
@@ -512,15 +482,27 @@ constructor(
         }
     }
 
-    override fun setFingerPrintMode(checked: Boolean, stateEvent: StateEvent): Flow<DataState<DashboardViewState>> = flow {
+    override fun setFingerPrintMode(
+        checked: Boolean,
+        stateEvent: StateEvent
+    ): Flow<DataState<DashboardViewState>> = flow {
         withContext((IO)) {
             val userId = sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID, "")
             userDao.updateFingerPrintLoginMode(checked, userId!!)
-            emit(DataState.data(data = DashboardViewState(isFingerPrintLoginEnabled = checked),stateEvent = stateEvent,response = null))
+            emit(
+                DataState.data(
+                    data = DashboardViewState(isFingerPrintLoginEnabled = checked),
+                    stateEvent = stateEvent,
+                    response = null
+                )
+            )
         }
     }
 
-    override fun getTeacherDashboardData(id: Int, stateEvent: StateEvent): Flow<DataState<DashboardViewState>> = flow {
+    override fun getTeacherDashboardData(
+        id: Int,
+        stateEvent: StateEvent
+    ): Flow<DataState<DashboardViewState>> = flow {
         Log.d("SAN", "id-->$id")
 
         withContext(IO) {
@@ -529,10 +511,10 @@ constructor(
             var tempGSON: Gson
 
             try {
-                var jsonString :String = if(id > 1) {
+                var jsonString: String = if (id > 1) {
                     application.assets.open("json/event1.json").bufferedReader()
                         .use { it.readText() }
-                }else{
+                } else {
                     application.assets.open("json/event.json").bufferedReader()
                         .use { it.readText() }
                 }
@@ -559,38 +541,40 @@ constructor(
                 val eventData = EventData(isShowLess, nextEventCount, selectedEventList)
 
 
-                jsonString = if(id > 1) {
+                jsonString = if (id > 1) {
                     application.assets.open("json/todaysResource1.json").bufferedReader()
                         .use { it.readText() }
-                }else{
+                } else {
                     application.assets.open("json/todaysResource.json").bufferedReader()
                         .use { it.readText() }
                 }
                 tempGSON = Gson()
                 listType = object : TypeToken<ArrayList<DashboardResource>>() {}.type
-                val resourceList: ArrayList<DashboardResource> = tempGSON.fromJson(jsonString, listType)
+                val resourceList: ArrayList<DashboardResource> =
+                    tempGSON.fromJson(jsonString, listType)
                 val selectedTodayResourceList: ArrayList<DashboardResource> = ArrayList()
 
-                if(resourceList.size>2) {
+                if (resourceList.size > 2) {
                     for (i in 0 until 2) {
                         selectedTodayResourceList.add(resourceList[i])
                     }
                     if (resourceList.size < 8) {
                         nextEventCount = resourceList.size - 2
                     }
-                }else{
+                } else {
                     for (i in 0 until resourceList.size) {
                         selectedTodayResourceList.add(resourceList[i])
                     }
                     nextEventCount = 0
                 }
 
-                val todayResourceData  = TodaysResourceData(isShowLess,nextEventCount,selectedTodayResourceList)
+                val todayResourceData =
+                    TodaysResourceData(isShowLess, nextEventCount, selectedTodayResourceList)
 
-                jsonString = if(id>1) {
+                jsonString = if (id > 1) {
                     application.assets.open("json/lastViewedResource1.json").bufferedReader()
                         .use { it.readText() }
-                }else{
+                } else {
                     application.assets.open("json/lastViewedResource.json").bufferedReader()
                         .use { it.readText() }
                 }
@@ -600,21 +584,22 @@ constructor(
                     tempGSON.fromJson(jsonString, listType)
                 val selectedLastViewedResourceList: ArrayList<DashboardResourceType> = ArrayList()
 
-                if(lastViewedResourceList.size>2){
+                if (lastViewedResourceList.size > 2) {
                     for (i in 0 until 2) {
                         selectedLastViewedResourceList.add(lastViewedResourceList[i])
                     }
                     if (lastViewedResourceList.size < 12) {
                         nextEventCount = lastViewedResourceList.size - 2
                     }
-                }else{
+                } else {
                     for (i in 0 until lastViewedResourceList.size) {
                         selectedLastViewedResourceList.add(lastViewedResourceList[i])
                     }
                     nextEventCount = 0
                 }
 
-                val lastViewResourceData = LastViewResourceData(isShowLess,nextEventCount,selectedLastViewedResourceList)
+                val lastViewResourceData =
+                    LastViewResourceData(isShowLess, nextEventCount, selectedLastViewedResourceList)
 
                 jsonString = application.assets.open("json/class.json").bufferedReader()
                     .use { it.readText() }
@@ -654,10 +639,10 @@ constructor(
             var tempGSON: Gson
 
             try {
-                var jsonString :String = if(id > 1) {
+                var jsonString: String = if (id > 1) {
                     application.assets.open("json/event1.json").bufferedReader()
                         .use { it.readText() }
-                }else{
+                } else {
                     application.assets.open("json/event.json").bufferedReader()
                         .use { it.readText() }
                 }
@@ -684,10 +669,12 @@ constructor(
                 val eventData = EventData(isShowLess, nextEventCount, selectedEventList)
 
 
-                 val jsonParentUpdateString :String = if(id > 1) {
-                    application.assets.open("json/parentLatestUpdate1.json").bufferedReader().use { it.readText() }
-                }else{
-                    application.assets.open("json/parentLatestUpdate.json").bufferedReader().use { it.readText() }
+                val jsonParentUpdateString: String = if (id > 1) {
+                    application.assets.open("json/parentLatestUpdate1.json").bufferedReader()
+                        .use { it.readText() }
+                } else {
+                    application.assets.open("json/parentLatestUpdate.json").bufferedReader()
+                        .use { it.readText() }
                 }
 
                 tempGSON = Gson()
@@ -726,7 +713,7 @@ constructor(
         stateEvent: StateEvent
     ): Flow<DataState<DashboardViewState>> = flow {
         withContext(IO) {
-            var jsonString: String = ""
+            var jsonString: String
             try {
                 jsonString =
                     application.assets.open("json/event.json").bufferedReader()
@@ -734,7 +721,7 @@ constructor(
                 val gson = Gson()
                 val listPersonType = object : TypeToken<ArrayList<Event>>() {}.type
                 val eventList: ArrayList<Event> = gson.fromJson(jsonString, listPersonType)
-                var selectedList: ArrayList<Event> = ArrayList();
+                val selectedList: ArrayList<Event> = ArrayList();
 
                 var isShowLess = false
                 var nextEventCount = 4
@@ -743,8 +730,8 @@ constructor(
                     for (i in 0 until count) {
                         selectedList.add(eventList[i])
                     }
-                    if(eventList.size<count+4){
-                        nextEventCount = eventList.size-3
+                    if (eventList.size < count + 4) {
+                        nextEventCount = eventList.size - 3
                     }
                 } else {
                     if (eventList.size > count) {
@@ -786,7 +773,7 @@ constructor(
     ): Flow<DataState<DashboardViewState>> = flow {
 
         withContext(IO) {
-            var jsonString: String = ""
+            val jsonString: String
             try {
 
                 jsonString =
@@ -794,10 +781,10 @@ constructor(
                         .use { it.readText() }
                 val gson = Gson()
                 val listPersonType = object : TypeToken<ArrayList<DashboardResource>>() {}.type
-                var eventList: ArrayList<DashboardResource> =
+                val eventList: ArrayList<DashboardResource> =
                     gson.fromJson(jsonString, listPersonType)
 
-                var selectedList: ArrayList<DashboardResource> = ArrayList()
+                val selectedList: ArrayList<DashboardResource> = ArrayList()
 
 
                 var isShowLess = false
@@ -807,8 +794,8 @@ constructor(
                     for (i in 0 until count) {
                         selectedList.add(eventList[i])
                     }
-                    if(eventList.size<count+6){
-                        nextEventCount = eventList.size-2
+                    if (eventList.size < count + 6) {
+                        nextEventCount = eventList.size - 2
                     }
                 } else {
                     if (eventList.size > count) {
@@ -850,17 +837,17 @@ constructor(
         stateEvent: StateEvent
     ): Flow<DataState<DashboardViewState>> = flow {
         withContext(IO) {
-            var jsonString: String = ""
+            val jsonString: String
             try {
                 jsonString =
                     application.assets.open("json/lastViewedResource.json").bufferedReader()
                         .use { it.readText() }
                 val gson = Gson()
                 val listPersonType = object : TypeToken<ArrayList<DashboardResourceType>>() {}.type
-                var eventList: ArrayList<DashboardResourceType> =
+                val eventList: ArrayList<DashboardResourceType> =
                     gson.fromJson(jsonString, listPersonType)
 
-                var selectedList: ArrayList<DashboardResourceType> = ArrayList();
+                val selectedList: ArrayList<DashboardResourceType> = ArrayList();
 
                 var isShowLess = false
                 var nextEventCount = 10
@@ -869,8 +856,8 @@ constructor(
                     for (i in 0 until count) {
                         selectedList.add(eventList[i])
                     }
-                    if(eventList.size<count+10){
-                        nextEventCount = eventList.size-2
+                    if (eventList.size < count + 10) {
+                        nextEventCount = eventList.size - 2
                     }
                 } else {
                     if (eventList.size > count) {
@@ -889,7 +876,8 @@ constructor(
                         isShowLess = true
                     }
                 }
-                val lastViewResourceData = LastViewResourceData(isShowLess, nextEventCount, selectedList)
+                val lastViewResourceData =
+                    LastViewResourceData(isShowLess, nextEventCount, selectedList)
 
                 emit(
                     DataState.data(
@@ -906,11 +894,20 @@ constructor(
     }
 
 
-    override fun setFaceIdMode(checked: Boolean, stateEvent: StateEvent): Flow<DataState<DashboardViewState>> = flow {
+    override fun setFaceIdMode(
+        checked: Boolean,
+        stateEvent: StateEvent
+    ): Flow<DataState<DashboardViewState>> = flow {
         withContext((IO)) {
             val userId = sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID, "")
             userDao.updateFaceIdLoginMode(checked, userId!!)
-            emit(DataState.data(data = DashboardViewState(isFaceLoginEnabled = checked),stateEvent = stateEvent,response = null))
+            emit(
+                DataState.data(
+                    data = DashboardViewState(isFaceLoginEnabled = checked),
+                    stateEvent = stateEvent,
+                    response = null
+                )
+            )
         }
     }
 
@@ -950,7 +947,11 @@ constructor(
     ): Flow<DataState<DashboardViewState>> = flow {
         withContext((IO)) {
             val userId = sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID, "")
-            val updatepasswordErrors = UpdatePasswordFields(old_password = oldPassword, new_password = newPassword,confirm_password = confirmPassword).checkValidPassword()
+            val updatepasswordErrors = UpdatePasswordFields(
+                old_password = oldPassword,
+                new_password = newPassword,
+                confirm_password = confirmPassword
+            ).checkValidPassword()
             val dbOldPassword = userId?.let { userDao.getOldPassword(it) }
             if (oldPassword.isEmpty() || newPassword.isEmpty() || confirmPassword.isEmpty()) {
                 emit(
@@ -988,7 +989,7 @@ constructor(
                         stateEvent = stateEvent
                     )
                 )
-            }else if(updatepasswordErrors != LoginFields.LoginError.none()) {
+            } else if (updatepasswordErrors != LoginFields.LoginError.none()) {
                 Log.d("SAN", "emitting error: ${updatepasswordErrors}")
                 emit(
                     buildError(
@@ -997,7 +998,7 @@ constructor(
                         stateEvent
                     )
                 )
-            }else {
+            } else {
                 userDao.updatePassword(newPassword, userId!!)
                 sharedPrefsEditor.putString(
                     PreferenceKeys.APP_PREFERENCES_KEY_PASSWORD,
@@ -1077,35 +1078,122 @@ constructor(
         bookId: String,
         stateEvent: StateEvent
     ): Flow<DataState<SubjectViewState>> = flow {
-            val apiResult = safeCacheCall(IO) {
-                if (query.isEmpty()) {
-                    subjectDao.getChapterListData(topicId,bookId)
-                } else {
-                    subjectDao.getChapterListData(query, topicId,bookId)
+        val apiResult = safeCacheCall(IO) {
+            if (query.isEmpty()) {
+                subjectDao.getChapterListData(topicId, bookId)
+            } else {
+                subjectDao.getChapterListData(query, topicId, bookId)
+            }
+        }
+        emit(
+            object : CacheResponseHandler<SubjectViewState, List<Chapter>>(
+                response = apiResult,
+                stateEvent = stateEvent
+            ) {
+                override suspend fun handleSuccess(resultObj: List<Chapter>): DataState<SubjectViewState> {
+                    sharedPrefsEditor.putBoolean(
+                        PreferenceKeys.APP_PREFERENCES_NEW_SESSION_BOOKS,
+                        false
+                    ).commit()
+
+                    val chapterLearnData = ChapterLearnData(true,resultObj,null)
+                    val viewState = SubjectViewState(chapterLearnData = chapterLearnData)
+                    return DataState.data(
+                        response = null,
+                        data = viewState,
+                        stateEvent = stateEvent
+                    )
                 }
+            }.getResult()
+        )
+
+    }
+
+    override fun getTopicResourceList(
+        query: String,
+        topicId: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<SubjectViewState>> = flow {
+
+        val isNewSession = sharedPreferences.getBoolean(PreferenceKeys.APP_PREFERENCES_NEW_SESSION_RESOURCES, true)
+        if (isNewSession) {
+            val apiResult = safeApiCall(IO) {
+                tceService.getTopicResources()
             }
             emit(
-                object : CacheResponseHandler<SubjectViewState, List<Chapter>>(
+                object : ApiResponseHandler<SubjectViewState, List<ResourceListResponse>>(
                     response = apiResult,
                     stateEvent = stateEvent
                 ) {
-                    override suspend fun handleSuccess(resultObj: List<Chapter>): DataState<SubjectViewState> {
-                        sharedPrefsEditor.putBoolean(
-                            PreferenceKeys.APP_PREFERENCES_NEW_SESSION_BOOKS,
-                            false
-                        ).commit()
-                        val viewState = SubjectViewState(
-                            chapterList = resultObj
-                        )
+                    override suspend fun handleSuccess(resultObj: List<ResourceListResponse>): DataState<SubjectViewState> {
+                        val resourceList : ArrayList<Resource> = ArrayList()
+                        withContext(IO) {
+                            for (topicResourceItem in resultObj) {
+                                try {
+                                    // Launch each insert as a separate job to be executed in parallel
+                                    launch {
+                                        val resourceResponseList = topicResourceItem.resourceList
+
+                                        for (resourceItem in resourceResponseList){
+                                            val resource = resourceItem.toResource(topicResourceItem.id)
+                                            resourceList.add(resource)
+                                            try {
+                                                subjectDao.insertResource(resource)
+                                            } catch (e: Exception) {
+                                            }
+                                        }
+                                    }
+                                } catch (e: Exception) {
+                                    // Could send an error report here or something but I don't think you should throw an error to the UI
+                                    // Since there could be many blog posts being inserted/updated.
+                                }
+                            }
+                        }
+                        if (resultObj.isNotEmpty()) {
+                            sharedPrefsEditor.putBoolean(PreferenceKeys.APP_PREFERENCES_NEW_SESSION_RESOURCES,false).commit()
+                        }
+
+                        val chapterLearnData = ChapterLearnData(false,null,resourceList)
+                        val viewState = SubjectViewState(chapterLearnData = chapterLearnData)
                         return DataState.data(
                             response = null,
                             data = viewState,
                             stateEvent = stateEvent
                         )
+
                     }
                 }.getResult()
             )
+        } else {
+            val apiResult = safeCacheCall(IO) {
 
+                if(query.isEmpty()) {
+                    subjectDao.getTopicResourceListData(topicId)
+                }else{
+                    subjectDao.getTopicResourceListData(query,topicId)
+                }
+            }
+            emit(
+                object : CacheResponseHandler<SubjectViewState, List<Resource>>(
+                    response = apiResult,
+                    stateEvent = stateEvent
+                ) {
+                    override suspend fun handleSuccess(resultObj: List<Resource>): DataState<SubjectViewState> {
+                        if (resultObj.isNotEmpty()) {
+                            sharedPrefsEditor.putString(PreferenceKeys.APP_USER_SELECTED_GRADE_ID, resultObj[0].id).commit()
+                            sharedPrefsEditor.putInt(PreferenceKeys.APP_USER_SELECTED_GRADE_POSITION, 0).commit()
+                            sharedPrefsEditor.putBoolean(PreferenceKeys.APP_PREFERENCES_NEW_SESSION_GRADES, false).commit()
+                        }
+                        val chapterLearnData = ChapterLearnData(false,null,resultObj)
+                        return DataState.data(
+                            data = SubjectViewState(chapterLearnData = chapterLearnData),
+                            response = null,
+                            stateEvent = stateEvent
+                        )
+                    }
+                }.getResult()
+            )
+        }
     }
 
     override fun getPlannerData(
@@ -1217,9 +1305,7 @@ constructor(
     fun toGradeList(grades: List<GradeResponse>): List<Grade> {
         val gradeList: ArrayList<Grade> = ArrayList()
         for (gradeResponse in grades) {
-            val grade = gradeResponse.toGrade()
-            gradeList.add(
-                gradeResponse.toGrade()
+            gradeList.add(gradeResponse.toGrade()
             )
         }
         return gradeList
@@ -1228,13 +1314,11 @@ constructor(
     fun toBookList(books: List<BookResponse>): List<Book> {
         val bookList: ArrayList<Book> = ArrayList()
         for (bookResponse in books) {
-            bookList.add(
-                bookResponse.toBook()
+            bookList.add(bookResponse.toBook()
             )
         }
         return bookList
     }
-
 
 }
 

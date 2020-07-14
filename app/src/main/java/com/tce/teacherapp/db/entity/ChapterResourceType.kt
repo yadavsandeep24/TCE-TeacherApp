@@ -7,21 +7,21 @@ import androidx.room.Ignore
 import kotlinx.android.parcel.Parcelize
 
 
-@Entity(tableName = "NodeXX", primaryKeys = ["nodexx_id", "nodex_id", "node_id", "book_id"])
+@Entity(tableName = "ChapterResourceType", primaryKeys = ["chapterResourceType_id", "chapter_id", "topic_id", "book_id"])
 @Parcelize
-data class NodeXX(
+data class ChapterResourceType(
 
     @ColumnInfo(name = "icon")
     var icon: String?,
 
-    @ColumnInfo(name = "nodexx_id")
+    @ColumnInfo(name = "chapterResourceType_id")
     var id: String,
 
     @ColumnInfo(name = "label")
     var label: String,
 
     @Ignore
-    var node: List<NodeXXX>,
+    var resourceList: List<Resource>,
 
     @ColumnInfo(name = "treatment")
     var treatment: String?,
@@ -29,11 +29,11 @@ data class NodeXX(
     @ColumnInfo(name = "type")
     var type: String,
 
-    @ColumnInfo(name = "nodex_id")
-    var nodexId: String,
+    @ColumnInfo(name = "chapter_id")
+    var chapterId: String,
 
-    @ColumnInfo(name = "node_id")
-    var nodeId: String,
+    @ColumnInfo(name = "topic_id")
+    var topicId: String,
 
     @ColumnInfo(name = "book_id")
     var bookId: String

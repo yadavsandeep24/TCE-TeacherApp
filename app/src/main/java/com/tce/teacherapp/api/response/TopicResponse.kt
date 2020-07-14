@@ -1,10 +1,11 @@
 package com.tce.teacherapp.api.response
 
 import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
 import com.tce.teacherapp.db.entity.Chapter
 import com.tce.teacherapp.db.entity.Topic
 
-class NodeResponse(
+class TopicResponse(
 
     @Expose
     val icon: String?,
@@ -22,7 +23,8 @@ class NodeResponse(
     val menutype: String,
 
     @Expose
-    val node: List<NodeXResponse>,
+    @SerializedName("node")
+    val chapterList: List<ChapterResponse>,
 
     @Expose
     val type: String,
@@ -30,7 +32,7 @@ class NodeResponse(
     @Expose
     val section:String?
 ) {
-    fun toNode(bookId: String): Topic {
+    fun toTopic(bookId: String): Topic {
         return Topic(
             icon = icon,
             id = id,
@@ -38,21 +40,21 @@ class NodeResponse(
             label = label,
             menutype = menutype,
             type = type,
-            node = toNodeXList(bookId, id, node),
+            chapterList = toChapterList(bookId, id, chapterList),
             bookId = bookId,
             section = section
         )
     }
 
-    private fun toNodeXList(
+    private fun toChapterList(
         bookId: String,
         id: String,
-        nodes: List<NodeXResponse>
+        chapters: List<ChapterResponse>
     ): List<Chapter> {
-        val nodeXList: ArrayList<Chapter> = ArrayList()
-        for (nodeXResponse in nodes) {
-            nodeXList.add(nodeXResponse.toNodeX(bookId, id))
+        val chapterList: ArrayList<Chapter> = ArrayList()
+        for (chapterResponse in chapters) {
+            chapterList.add(chapterResponse.toChapter(bookId, id))
         }
-        return nodeXList
+        return chapterList
     }
 }

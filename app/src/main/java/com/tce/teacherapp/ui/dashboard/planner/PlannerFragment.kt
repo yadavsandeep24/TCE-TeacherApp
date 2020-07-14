@@ -3,11 +3,9 @@ package com.tce.teacherapp.ui.dashboard.planner
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -17,18 +15,12 @@ import com.airbnb.epoxy.addGlidePreloader
 import com.airbnb.epoxy.glidePreloader
 import com.bumptech.glide.Glide
 import com.tce.teacherapp.R
-import com.tce.teacherapp.databinding.FragmentMessageListBinding
 import com.tce.teacherapp.databinding.FragmentPlannerBinding
 import com.tce.teacherapp.db.entity.Event
 import com.tce.teacherapp.db.entity.LessonPlanPeriod
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.home.listeners.EventClickListener
-import com.tce.teacherapp.ui.dashboard.home.state.DashboardStateEvent
-import com.tce.teacherapp.ui.dashboard.messages.BaseMessageFragment
-import com.tce.teacherapp.ui.dashboard.messages.adapter.messageListEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.messages.state.MESSAGE_VIEW_STATE_BUNDLE_KEY
-import com.tce.teacherapp.ui.dashboard.messages.state.MessageStateEvent
-import com.tce.teacherapp.ui.dashboard.messages.state.MessageViewState
 import com.tce.teacherapp.ui.dashboard.planner.adapter.dailyPlannerEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.planner.listeners.LessonPlanClickListener
 import com.tce.teacherapp.ui.dashboard.planner.state.PLANNER_VIEW_STATE_BUNDLE_KEY
@@ -36,7 +28,6 @@ import com.tce.teacherapp.ui.dashboard.planner.state.PlannerStateEvent
 import com.tce.teacherapp.ui.dashboard.planner.state.PlannerViewState
 import com.tce.teacherapp.ui.dashboard.subjects.adapter.SubjectListEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.subjects.loadImage
-import com.tce.teacherapp.util.Utility
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
@@ -71,19 +62,6 @@ constructor(
         return binding.root
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        val viewState = viewModel.viewState.value
-
-        //clear the list. Don't want to save a large list to bundle.
-        viewState?.dailyPlannerList = ArrayList()
-
-
-        outState.putParcelable(
-            MESSAGE_VIEW_STATE_BUNDLE_KEY,
-            viewState
-        )
-        super.onSaveInstanceState(outState)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

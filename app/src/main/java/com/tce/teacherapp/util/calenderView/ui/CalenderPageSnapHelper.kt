@@ -1,4 +1,4 @@
-package com.kizitonwose.calendarview.ui
+package com.tce.teacherapp.util.calenderView.ui
 
 import android.view.View
 import androidx.recyclerview.widget.OrientationHelper

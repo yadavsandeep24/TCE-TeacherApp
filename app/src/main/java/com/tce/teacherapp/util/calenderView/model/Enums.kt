@@ -1,4 +1,4 @@
-package com.kizitonwose.calendarview.model
+package com.tce.teacherapp.util.calenderView.model
 
 /**
  * Describes the month to which a [CalendarDay] belongs.

@@ -1,7 +1,7 @@
-package com.kizitonwose.calendarview.model
+package com.tce.teacherapp.util.calenderView.model
 
-import org.threeten.bp.YearMonth
 import java.io.Serializable
+import java.time.YearMonth
 
 data class CalendarMonth(
     val yearMonth: YearMonth,

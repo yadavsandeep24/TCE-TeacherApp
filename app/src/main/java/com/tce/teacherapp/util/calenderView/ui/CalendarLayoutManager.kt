@@ -1,4 +1,4 @@
-package com.kizitonwose.calendarview.ui
+package com.tce.teacherapp.util.calenderView.ui
 
 import android.content.Context
 import android.graphics.Rect
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
-import com.kizitonwose.calendarview.CalendarView
-import com.kizitonwose.calendarview.model.CalendarDay
-import com.kizitonwose.calendarview.model.ScrollMode
-import com.kizitonwose.calendarview.utils.NO_INDEX
-import org.threeten.bp.YearMonth
+import com.tce.teacherapp.util.calenderView.CalendarView
+import com.tce.teacherapp.util.calenderView.model.CalendarDay
+import com.tce.teacherapp.util.calenderView.model.ScrollMode
+import com.tce.teacherapp.util.calenderView.utils.NO_INDEX
+import java.time.YearMonth
 
 internal class CalendarLayoutManager(private val calView: CalendarView, @RecyclerView.Orientation orientation: Int) :
     LinearLayoutManager(calView.context, orientation, false) {

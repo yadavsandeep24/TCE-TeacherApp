@@ -1,6 +1,7 @@
 package com.tce.teacherapp.api.response
 
 import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
 import com.tce.teacherapp.db.entity.Book
 import com.tce.teacherapp.db.entity.Topic
 
@@ -12,7 +13,8 @@ class BookResponse(
     val label: String,
 
     @Expose
-    val node: List<NodeResponse>,
+    @SerializedName("node")
+    val topicList: List<TopicResponse>,
 
     @Expose
     val type: String
@@ -22,16 +24,16 @@ class BookResponse(
             id = id,
             label = label,
             type = type,
-            node = toNodeList(id, node)
+            topicList = toTopicList(id, topicList)
         )
     }
 
-    private fun toNodeList(bookId: String, nodes: List<NodeResponse>): List<Topic> {
-        val nodeList: ArrayList<Topic> = ArrayList()
-        for (bookResponse in nodes) {
-            nodeList.add(bookResponse.toNode(bookId))
+    private fun toTopicList(bookId: String, topics: List<TopicResponse>): List<Topic> {
+        val topicList: ArrayList<Topic> = ArrayList()
+        for (bookResponse in topics) {
+            topicList.add(bookResponse.toTopic(bookId))
         }
-        return nodeList
+        return topicList
 
     }
 }

@@ -19,16 +19,16 @@ interface SubjectsDao {
     suspend fun insertBook(book: Book): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertNode(node: Topic): Long
+    suspend fun insertTopic(topic: Topic): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun inserNodeX(nodex: Chapter): Long
+    suspend fun insertChapter(chapter: Chapter): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertNodeXX(nodexx: NodeXX): Long
+    suspend fun insertChapterResourceType(chapterResourceType: ChapterResourceType): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertNodeXXX(nodexxx: NodeXXX): Long
+    suspend fun insertResource(resource: Resource): Long
 
     @Query("SELECT * FROM Grade ORDER BY order_no ASC")
     fun getGradeListData(): List<Grade>
@@ -50,6 +50,12 @@ interface SubjectsDao {
 
     @Query("SELECT * FROM Chapter where topic_id = :topicId and book_id = :bookId AND label LIKE '%' || :query || '%'")
     fun getChapterListData(query: String,topicId:String, bookId: String): List<Chapter>
+
+    @Query("SELECT * FROM Resource where chapterResourceType_id = :chapterResourceTypeId")
+    fun getTopicResourceListData(chapterResourceTypeId:String): List<Resource>
+
+    @Query("SELECT * FROM Resource where chapterResourceType_id = :chapterResourceTypeId AND title LIKE '%' || :query || '%'")
+    fun getTopicResourceListData(query: String,chapterResourceTypeId:String): List<Resource>
 
 }
 

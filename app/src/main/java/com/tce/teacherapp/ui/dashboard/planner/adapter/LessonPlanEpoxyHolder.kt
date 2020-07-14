@@ -9,11 +9,7 @@ import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.airbnb.epoxy.EpoxyRecyclerView
 import com.tce.teacherapp.R
-import com.tce.teacherapp.db.entity.DashboardResourceType
 import com.tce.teacherapp.db.entity.LessonPlanPeriod
-import com.tce.teacherapp.db.entity.LessonPlanResource
-import com.tce.teacherapp.ui.dashboard.home.adapter.todayResChildItemEpoxyHolder
-import com.tce.teacherapp.ui.dashboard.home.listeners.ClassListClickListener
 import com.tce.teacherapp.ui.dashboard.planner.listeners.LessonPlanClickListener
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
 import com.tce.teacherapp.util.Utility

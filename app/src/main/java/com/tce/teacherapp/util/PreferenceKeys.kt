@@ -9,6 +9,7 @@ class PreferenceKeys {
         const val APP_USER_SELECTED_GRADE_POSITION = "com.tce.teacherapp.app_user_selected_grade_position"
         const val APP_PREFERENCES_NEW_SESSION_GRADES: String = "com.tce.teacherapp.APP_PREFERENCES_NEW_SESSION_GRADES"
         const val APP_PREFERENCES_NEW_SESSION_BOOKS: String = "com.tce.teacherapp.APP_PREFERENCES_NEW_SESSION_BOOKS"
+        const val APP_PREFERENCES_NEW_SESSION_RESOURCES: String = "com.tce.teacherapp.APP_PREFERENCES_NEW_SESSION_RESOURCES"
 
 
         const val APP_PREFERENCES_KEY_USER_QUICK_ACCESS_SCREEN_SHOW = "com.tce.teacherapp.app_preferences_key_user_quick_access_screen_show"

@@ -1,10 +1,10 @@
-package com.kizitonwose.calendarview.model
+package com.tce.teacherapp.util.calenderView.model
 
-import com.kizitonwose.calendarview.utils.next
-import org.threeten.bp.DayOfWeek
-import org.threeten.bp.LocalDate
-import org.threeten.bp.YearMonth
-import org.threeten.bp.temporal.WeekFields
+import com.tce.teacherapp.util.calenderView.utils.next
+import java.time.DayOfWeek
+import java.time.LocalDate
+import java.time.YearMonth
+import java.time.temporal.WeekFields
 
 internal data class MonthConfig(
     val outDateStyle: OutDateStyle,

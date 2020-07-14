@@ -1,6 +1,6 @@
 package com.tce.teacherapp.ui.dashboard.subjects
 
-import com.tce.teacherapp.db.entity.Chapter
+import com.tce.teacherapp.db.entity.ChapterLearnData
 import com.tce.teacherapp.db.entity.Grade
 import com.tce.teacherapp.db.entity.Subject
 import com.tce.teacherapp.db.entity.Topic
@@ -42,10 +42,9 @@ fun SubjectsViewModel.setTopicListData(it: List<Topic>) {
 
 @FlowPreview
 @UseExperimental(ExperimentalCoroutinesApi::class)
-fun SubjectsViewModel.setChapterListData(it: List<Chapter>) {
+fun SubjectsViewModel.setChapterLearnData(it: ChapterLearnData) {
     val update = getCurrentViewStateOrNew()
-    update.chapterList = it
+    update.chapterLearnData = it
     setViewState(update)
 }
-
 

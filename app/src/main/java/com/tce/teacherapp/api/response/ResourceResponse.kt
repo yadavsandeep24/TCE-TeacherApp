@@ -1,9 +1,9 @@
 package com.tce.teacherapp.api.response
 
 import com.google.gson.annotations.Expose
-import com.tce.teacherapp.db.entity.NodeXXX
+import com.tce.teacherapp.db.entity.Resource
 
-class NodeXXXResponse(
+class ResourceResponse(
 
     @Expose
     val ResourceOriginator: String,
@@ -35,13 +35,10 @@ class NodeXXXResponse(
     @Expose
     val type: String
 ) {
-    fun toNodeXXX(
-        bookId: String,
-        nodeID: String,
-        nodeXId: String,
-        nodeXXId: String
-    ): NodeXXX {
-        return NodeXXX(
+    fun toResource(
+        chapterResourceTypeId: String
+    ): Resource {
+        return Resource(
             ResourceOriginator = ResourceOriginator,
             TaggingLevel = TaggingLevel,
             contenttype = contenttype,
@@ -52,10 +49,7 @@ class NodeXXXResponse(
             src = src,
             title = title,
             type = type,
-            nodexxId = nodeXXId,
-            nodexId = nodeXId,
-            nodeId = nodeID,
-            bookId = bookId
+            chapterResourceTypeId = chapterResourceTypeId
         )
     }
 }

@@ -20,7 +20,7 @@ data class Book(
     var label: String,
 
     @Ignore
-    var node: List<Topic>,
+    var topicList: List<Topic>,
 
     @ColumnInfo(name = "type")
     var type: String

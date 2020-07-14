@@ -24,6 +24,10 @@
     <color name="home_background">#fff098</color>
     <color name="chapter_text_dim_bg">#88000000</color>
     <color name="nasty_green">#82b941</color>
+    <color name="dark">#232337</color>
+    <color name="gunmetal">#46465a</color>
+    <color name="very_light_blue">#e1e6f0</color>
+    <color name="pale_grey">#f5f8ff</color>
     <color name="sandy_yellow">#ffeb7d</color>
     <color name="blue">#5a69ff</color>
     <color name="pale">#fffad7</color>

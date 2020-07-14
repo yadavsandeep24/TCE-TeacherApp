@@ -4,17 +4,15 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentEventDisplayBinding
-import com.tce.teacherapp.databinding.FragmentMonthlyPlannerBinding
 import com.tce.teacherapp.db.entity.Event
-import com.tce.teacherapp.db.entity.Subject
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 
 

@@ -3,6 +3,7 @@ package com.tce.teacherapp.api
 import com.tce.teacherapp.api.response.BookResponse
 import com.tce.teacherapp.api.response.GradeResponse
 import com.tce.teacherapp.api.response.LoginResponse
+import com.tce.teacherapp.api.response.ResourceListResponse
 import retrofit2.http.Field
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -23,6 +24,10 @@ interface TCEService {
 
     @GET("Books")
     suspend fun getBooks(): List<BookResponse>
+
+    @GET("Resources")
+    suspend fun getTopicResources(): List<ResourceListResponse>
+
 
 }
 

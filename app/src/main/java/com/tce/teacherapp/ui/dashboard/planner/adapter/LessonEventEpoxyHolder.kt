@@ -2,7 +2,6 @@ package com.tce.teacherapp.ui.dashboard.planner.adapter
 
 import android.graphics.Color
 import android.graphics.drawable.Drawable
-import android.text.Html
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView

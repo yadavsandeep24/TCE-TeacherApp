@@ -51,11 +51,6 @@ constructor(
             SubjectResourceDetailFragment::class.java.name -> {
                 SubjectResourceDetailFragment(viewModelFactory)
             }
-
-            SubjectResourceSelectionFragment::class.java.name -> {
-                SubjectResourceSelectionFragment(viewModelFactory)
-            }
-
             VideoPlayerFragment::class.java.name -> {
                 VideoPlayerFragment(viewModelFactory)
             }

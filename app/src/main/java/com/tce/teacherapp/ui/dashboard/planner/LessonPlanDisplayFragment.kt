@@ -15,7 +15,6 @@ import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentLessonPlanDisplayBinding
 import com.tce.teacherapp.db.entity.LessonPlanPeriod
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
-import com.tce.teacherapp.ui.dashboard.planner.adapter.birthdayItemEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.planner.adapter.resourceEpoxyHolder
 
 

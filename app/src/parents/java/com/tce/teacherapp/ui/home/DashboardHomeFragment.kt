@@ -27,7 +27,6 @@ import com.tce.teacherapp.ui.dashboard.home.listeners.TodayResourceClickListener
 import com.tce.teacherapp.ui.dashboard.home.state.DASHBOARD_VIEW_STATE_BUNDLE_KEY
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardStateEvent
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardViewState
-import com.tce.teacherapp.ui.dashboard.messages.state.MESSAGE_VIEW_STATE_BUNDLE_KEY
 import com.tce.teacherapp.ui.dashboard.subjects.loadImage
 import com.tce.teacherapp.ui.home.adapter.childEpoxyHolder
 import com.tce.teacherapp.ui.home.adapter.eventEpoxyHolder
@@ -76,16 +75,13 @@ constructor(
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        val viewState = viewModel.viewState.value
+        //val viewState = viewModel.viewState.value
 
         //clear the list. Don't want to save a large list to bundle.
-        viewState?.eventData!!.eventList = ArrayList()
-        viewState?.todayResourceData!!.todayResource = ArrayList()
+       // viewState?.eventData.eventList = ArrayList()
+       // viewState.todayResourceData!!.todayResource = ArrayList()
 
-        outState.putParcelable(
-            MESSAGE_VIEW_STATE_BUNDLE_KEY,
-            viewState
-        )
+       // outState.putParcelable(MESSAGE_VIEW_STATE_BUNDLE_KEY, viewState)
         super.onSaveInstanceState(outState)
     }
 

@@ -26,7 +26,7 @@ data class Topic(
     var menutype: String,
 
     @Ignore
-    var node: List<Chapter>,
+    var chapterList: List<Chapter>,
 
     @ColumnInfo(name = "type")
     var type: String,

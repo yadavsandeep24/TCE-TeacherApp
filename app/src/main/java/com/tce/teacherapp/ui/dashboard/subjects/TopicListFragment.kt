@@ -179,7 +179,7 @@ constructor(
                                         val bundle = Bundle()
                                         bundle.putParcelable("topicdata", topic)
                                         if(sectionType.equals("learn",true)) {
-                                            findNavController().navigate(R.id.action_topicFragment_to_selectChapterLearnFragment)
+                                            findNavController().navigate(R.id.action_topicFragment_to_selectChapterLearnFragment,bundle)
                                         }else if(sectionType.equals("book",true)){
                                             findNavController().navigate(R.id.action_topicFragment_to_selectChapterBookFragment,bundle)
                                         }

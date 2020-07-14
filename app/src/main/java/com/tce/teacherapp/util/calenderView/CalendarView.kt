@@ -1,4 +1,4 @@
-package com.kizitonwose.calendarview
+package com.tce.teacherapp.util.calenderView
 
 import android.content.Context
 import android.util.AttributeSet
@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import androidx.annotation.Px
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.kizitonwose.calendarview.model.*
-import com.kizitonwose.calendarview.ui.*
 import com.tce.teacherapp.R
-import org.threeten.bp.DayOfWeek
-import org.threeten.bp.LocalDate
-import org.threeten.bp.YearMonth
+import com.tce.teacherapp.util.calenderView.model.*
+import com.tce.teacherapp.util.calenderView.ui.*
+import java.time.DayOfWeek
+import java.time.LocalDate
+import java.time.YearMonth
 
 open class CalendarView : RecyclerView {
 

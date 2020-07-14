@@ -69,7 +69,7 @@
                         android:layout_marginLeft="5dp"
                         android:text="Daily"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/font_size_12_dp"></com.tce.teacherapp.util.RubikBoldTextview>
+                        android:textSize="@dimen/font_size_12_dp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -95,7 +95,7 @@
                         android:layout_marginLeft="5dp"
                         android:text="Monthly"
                         android:textColor="@color/blue"
-                        android:textSize="@dimen/font_size_12_dp"></com.tce.teacherapp.util.RubikBoldTextview>
+                        android:textSize="@dimen/font_size_12_dp"/>
                 </LinearLayout>
 
 
@@ -116,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:text="7 July 2020 Tuesday"
                 android:textColor="@color/color_black"
-                android:textSize="@dimen/font_size_12_dp"></com.tce.teacherapp.util.RubikMediumTextview>
+                android:textSize="@dimen/font_size_12_dp"/>
         </LinearLayout>
 
         <com.airbnb.epoxy.EpoxyRecyclerView

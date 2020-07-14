@@ -61,7 +61,6 @@ constructor(
         val viewState = viewModel.viewState.value
 
         //clear the list. Don't want to save a large list to bundle.
-        viewState?.chapterList = ArrayList()
         outState.putParcelable(SUBJECT_VIEW_STATE_BUNDLE_KEY, viewState)
         super.onSaveInstanceState(outState)
     }
@@ -162,10 +161,9 @@ constructor(
 
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             if (viewState != null) {
-                viewState.chapterList?.let {
-                    Log.d("SAN", "chapter_book-->" + it.size)
+                viewState.chapterLearnData?.let {
                     binding.rvChapterBook.withModels {
-                        for (chapter in it) {
+                        for (chapter in it.chapterList!!) {
                             chapterListEpoxyHolder {
                                 id(chapter.id)
                                 title(chapter.label)

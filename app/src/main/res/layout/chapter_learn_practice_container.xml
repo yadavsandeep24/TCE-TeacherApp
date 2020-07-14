@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="20dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/pale_grey"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:gravity="center">
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/transparent"
+        android:layout_centerInParent="true">
+    <com.tce.teacherapp.util.RubikBoldTextview
+        android:id="@+id/tv_practice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="@dimen/font_size_16_dp"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/dark"
+        android:text="Practice"/>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_practice"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/ic_practice"/>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,7 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-
     <RelativeLayout
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -33,7 +32,7 @@
                     android:layout_marginLeft="5dp"
                     android:text="Today"
                     android:textColor="@color/blue"
-                    android:textSize="@dimen/font_size_12_dp"></com.tce.teacherapp.util.RubikBoldTextview>
+                    android:textSize="@dimen/font_size_12_dp"/>
 
 
             </LinearLayout>
@@ -68,7 +67,7 @@
                         android:layout_marginLeft="5dp"
                         android:text="Daily"
                         android:textColor="@color/blue"
-                        android:textSize="@dimen/font_size_12_dp"></com.tce.teacherapp.util.RubikBoldTextview>
+                        android:textSize="@dimen/font_size_12_dp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -95,7 +94,7 @@
                         android:layout_marginLeft="5dp"
                         android:text="Monthly"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/font_size_12_dp"></com.tce.teacherapp.util.RubikBoldTextview>
+                        android:textSize="@dimen/font_size_12_dp"/>
                 </LinearLayout>
 
 
@@ -116,11 +115,11 @@
                 android:layout_height="wrap_content"
                 android:text="7 July 2020 Tuesday"
                 android:textColor="@color/color_black"
-                android:textSize="@dimen/font_size_12_dp"></com.tce.teacherapp.util.RubikMediumTextview>
+                android:textSize="@dimen/font_size_12_dp"/>
         </LinearLayout>
 
-<!--
-        <com.kizitonwose.calendarview.CalendarView
+
+        <com.tce.teacherapp.util.calenderView.CalendarView
             android:id="@+id/exFiveCalendar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -130,7 +129,6 @@
             app:cv_outDateStyle="endOfGrid"
             app:cv_scrollMode="paged"
             android:layout_below="@+id/today_date_container"/>
--->
 
     </RelativeLayout>
 </layout>

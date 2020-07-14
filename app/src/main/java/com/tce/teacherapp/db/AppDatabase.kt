@@ -14,10 +14,10 @@ import com.tce.teacherapp.db.entity.*
         Book::class,
         Topic::class,
         Chapter::class,
-        NodeXX::class,
-        NodeXXX::class,
+        ChapterResourceType::class,
+        Resource::class,
         Profile::class
-    ], version = 3)
+    ], version = 1)
 @TypeConverters(StringListConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 

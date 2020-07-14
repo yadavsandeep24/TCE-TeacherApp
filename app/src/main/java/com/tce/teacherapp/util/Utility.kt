@@ -256,7 +256,7 @@ class Utility {
                     str = context.resources.getString(R.string.lbl_good_evening)
                 }
                 in 21..23 -> {
-                    str = context.resources.getString(R.string.lbl_good_night)
+                    str = context.resources.getString(R.string.lbl_good_evening)
                 }
             }
             return str
