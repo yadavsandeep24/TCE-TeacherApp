@@ -102,21 +102,6 @@
 
         </RelativeLayout>
 
-        <LinearLayout
-            android:id="@+id/today_date_container"
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:layout_below="@+id/header_container"
-            android:background="@color/pale"
-            android:gravity="center">
-
-            <com.tce.teacherapp.util.RubikMediumTextview
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="7 July 2020 Tuesday"
-                android:textColor="@color/color_black"
-                android:textSize="@dimen/font_size_12_dp"/>
-        </LinearLayout>
 
 
         <com.tce.teacherapp.util.calenderView.CalendarView
@@ -128,7 +113,7 @@
             app:cv_orientation="vertical"
             app:cv_outDateStyle="endOfGrid"
             app:cv_scrollMode="paged"
-            android:layout_below="@+id/today_date_container"/>
+            android:layout_below="@+id/header_container"/>
 
     </RelativeLayout>
 </layout>

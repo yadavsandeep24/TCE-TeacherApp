@@ -23,7 +23,7 @@ constructor(
             }
 
             MonthlyPlannerFragment::class.java.name -> {
-                MonthlyPlannerFragment()
+                MonthlyPlannerFragment(viewModelFactory)
             }
 
             EventDisplayFragment::class.java.name -> {

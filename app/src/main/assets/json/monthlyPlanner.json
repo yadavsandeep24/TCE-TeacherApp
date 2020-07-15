@@ -1,0 +1,62 @@
+[
+  {
+    "id": "1",
+    "date": "2020-07-15",
+    "eventList": [
+      {
+        "id": "1",
+        "eventName": "School Sports Day 2020",
+        "imageUrl": "calendar.png",
+        "type": "Event",
+        "eventColor": "#FFFFFF",
+        "typeColor" : "#FFFFFF",
+        "iconBackColor" : "#1e6eff",
+        "eventBackColor": "#5591ff",
+        "date" :  "13 July 2020 Monday",
+        "note": "Ldkkdm ddfkj djlk ljlm laksmdlf kdskn sksd sdkjfhvbsde9uuw iefskj",
+        "eventImageUrl" : "SportsDay.jpg"
+      },
+      {
+        "id": "2",
+        "eventName": "Remind parents to bring sports attire for tommarow's event",
+        "imageUrl": "bell_icon.png",
+        "type": "TO-DO",
+        "eventColor": "#000000",
+        "typeColor" : "#ffaa1e",
+        "iconBackColor" : "#ffaa1e",
+        "eventBackColor": "#ffebc8",
+        "date" :  "13 July 2020 Monday",
+        "note": "Remind parents to bring sports attire for tommarow's event",
+        "eventImageUrl" : "SportsDay.jpg"
+      }
+    ]
+
+  },
+  {
+    "id": "2",
+    "date": "2020-07-20",
+    "eventList": [
+      {
+        "id": "1",
+        "eventName": "Meet Kiran's Parents",
+        "imageUrl": "bell_icon.png",
+        "type": "TO-DO",
+        "eventColor": "#000000",
+        "typeColor": "#ffaa1e",
+        "iconBackColor": "#ffaa1e",
+        "eventBackColor": "#ffebc8"
+      },
+      {
+        "id": "2",
+        "eventName": "School Sports Day 2020",
+        "imageUrl": "calendar.png",
+        "type": "Event",
+        "eventColor": "#FFFFFF",
+        "typeColor": "#FFFFFF",
+        "iconBackColor": "#1e6eff",
+        "eventBackColor": "#5591ff"
+      }
+    ]
+
+  }
+]

@@ -12,6 +12,7 @@ data class PlannerViewState(
     var eventList: List<Event>? = null,
     var birthdayList: List<StudentBirthDay>? = null,
     var lessonPlanList: List<LessonPlan>? = null,
-    var dailyPlannerList : List<DailyPlanner>? = null
+    var dailyPlannerList : List<DailyPlanner>? = null,
+    var monthlyPlannerList : List<MonthlyPlanner>? = null
 
 ) : Parcelable

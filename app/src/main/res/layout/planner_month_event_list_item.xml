@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/font_size_16_dp"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:visibility="visible"
+    app:cardCornerRadius="10dp"
+    android:layout_marginTop="2dp"
+    app:cardPreventCornerOverlap="false">
+
+    <LinearLayout
+        android:id="@+id/event_container"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/font_size_16_dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <View
+            android:layout_width="4dp"
+            android:layout_height="4dp"
+            android:background="#ffd200"></View>
+
+        <com.tce.teacherapp.util.RubikMediumTextview
+            android:id="@+id/tv_event"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textSize="@dimen/font_size_9_dp">
+
+        </com.tce.teacherapp.util.RubikMediumTextview>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

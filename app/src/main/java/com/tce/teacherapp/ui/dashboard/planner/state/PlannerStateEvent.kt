@@ -29,5 +29,18 @@ sealed class PlannerStateEvent : StateEvent {
         }
     }
 
+    class GetMonthlyPlannerData (
+        val query: String
+    ) : PlannerStateEvent() {
+        override fun errorInfo(): String {
+            return "Error in getting division info."
+        }
+
+        override fun toString(): String {
+            return "GetDivisionEvent"
+        }
+    }
+
+
 
 }

@@ -144,4 +144,10 @@ interface MainRepository {
         stateEvent: StateEvent
     ): Flow<DataState<PlannerViewState>>
 
+    fun getMonthlyPlannerData(
+        query: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<PlannerViewState>>
+
+
 }

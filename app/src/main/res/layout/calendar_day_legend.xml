@@ -1,83 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
-<LinearLayout
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/legendLayout"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center"
-    android:orientation="horizontal"
-    tools:ignore="HardcodedText">
 
-    <TextView
-        android:id="@+id/legendText1"
-        android:layout_width="0dp"
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="SUN"
-        android:textColor="@color/color_black"
-        android:textSize="14sp" />
+        android:id="@+id/legendLayout"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/legendText2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="MON"
-        android:textColor="@color/color_black"
-        android:textSize="14sp" />
+        <LinearLayout
+            android:id="@+id/month_view"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:background="#fffad7"
+            android:gravity="center">
 
-    <TextView
-        android:id="@+id/legendText3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="TUE"
-        android:textColor="@color/color_black"
-        android:textSize="14sp" />
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:id="@+id/tv_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="January 2020"
+                android:textColor="@color/color_black"
+                android:tag="month"
+                android:textSize="@dimen/font_size_12_dp">
 
-    <TextView
-        android:id="@+id/legendText4"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="WED"
-        android:textColor="@color/color_black"
-        android:textSize="14sp" />
+            </com.tce.teacherapp.util.RubikMediumTextview>
 
-    <TextView
-        android:id="@+id/legendText5"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="THU"
-        android:textColor="@color/color_black"
-        android:textSize="14sp" />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/legendText6"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="FRI"
-        android:textColor="@color/color_black"
-        android:textSize="14sp" />
+        <LinearLayout
+            android:id="@+id/day_view"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            tools:ignore="HardcodedText">
 
-    <TextView
-        android:id="@+id/legendText7"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="SAT"
-        android:textColor="@color/color_black"
-        android:textSize="14sp" />
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:id="@+id/legendText1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="S"
+                android:textColor="@color/color_black"
+                android:textSize="14sp" />
 
-</LinearLayout>
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:id="@+id/legendText2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="M"
+                android:textColor="@color/color_black"
+                android:textSize="14sp" />
+
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:id="@+id/legendText3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="T"
+                android:textColor="@color/color_black"
+                android:textSize="14sp" />
+
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:id="@+id/legendText4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="W"
+                android:textColor="@color/color_black"
+                android:textSize="14sp" />
+
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:id="@+id/legendText5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="T"
+                android:textColor="@color/color_black"
+                android:textSize="14sp" />
+
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:id="@+id/legendText6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="F"
+                android:textColor="@color/color_black"
+                android:textSize="14sp" />
+
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:id="@+id/legendText7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="S"
+                android:textColor="@color/color_black"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+    </LinearLayout>
 </layout>

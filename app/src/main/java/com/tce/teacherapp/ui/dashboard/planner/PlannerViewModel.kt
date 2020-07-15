@@ -39,6 +39,9 @@ class PlannerViewModel @Inject constructor(val mainRepository: MainRepository) :
             setEventList(it)
         }
 
+        data.monthlyPlannerList?.let {
+            setMonthlyPlannerList(it)
+        }
 
     }
 
@@ -47,6 +50,13 @@ class PlannerViewModel @Inject constructor(val mainRepository: MainRepository) :
         update.eventData = event
         setViewState(update)
     }
+
+    private fun setMonthlyPlannerList(list: List<MonthlyPlanner>) {
+        val update = getCurrentViewStateOrNew()
+        update.monthlyPlannerList = list
+        setViewState(update)
+    }
+
 
     private fun setDailyPlannerList(list: List<DailyPlanner>) {
         val update = getCurrentViewStateOrNew()
@@ -82,6 +92,10 @@ class PlannerViewModel @Inject constructor(val mainRepository: MainRepository) :
 
             is PlannerStateEvent.GetPlannerEvent -> {
                 mainRepository.getPlannerEventList(stateEvent.count,stateEvent.showOriginal,stateEvent = stateEvent)
+            }
+
+            is PlannerStateEvent.GetMonthlyPlannerData -> {
+                mainRepository.getMonthlyPlannerData(stateEvent.query,stateEvent = stateEvent)
             }
 
             else -> {

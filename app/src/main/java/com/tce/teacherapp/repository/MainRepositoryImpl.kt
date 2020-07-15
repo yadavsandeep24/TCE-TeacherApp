@@ -1302,6 +1302,41 @@ constructor(
         }
     }
 
+    override fun getMonthlyPlannerData(
+        query: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<PlannerViewState>> = flow {
+        var jsonString: String = ""
+        try {
+
+            jsonString = application.assets.open("json/monthlyPlanner.json").bufferedReader()
+                .use { it.readText() }
+            val gson = Gson()
+            val listClass = object : TypeToken<List<MonthlyPlanner>>() {}.type
+            var list: List<MonthlyPlanner> = gson.fromJson(jsonString, listClass)
+
+            val selectedList: List<MonthlyPlanner>;
+            selectedList = if (TextUtils.isEmpty(query)) {
+                list
+            } else {
+                list.filter { it.date.contains(query, ignoreCase = true) }
+            }
+
+
+            emit(
+                DataState.data(
+                    data = PlannerViewState(monthlyPlannerList = selectedList
+                    ),
+                    stateEvent = stateEvent,
+                    response = null
+                )
+            )
+
+        } catch (ioException: IOException) {
+            ioException.printStackTrace()
+        }
+    }
+
     fun toGradeList(grades: List<GradeResponse>): List<Grade> {
         val gradeList: ArrayList<Grade> = ArrayList()
         for (gradeResponse in grades) {
