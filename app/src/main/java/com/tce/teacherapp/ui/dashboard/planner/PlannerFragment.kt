@@ -198,4 +198,13 @@ constructor(
         )
     }
 
+    override fun onMarkCompletedClick(lessonPlanPeriod: LessonPlanPeriod) {
+        val bundle = Bundle()
+        bundle.putParcelable("lessonPlanData", lessonPlanPeriod)
+        findNavController().navigate(
+            R.id.action_plannerFragment_to_markCompletedFragment,
+            bundle
+        )
+    }
+
 }

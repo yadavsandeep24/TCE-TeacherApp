@@ -3,11 +3,9 @@ package com.tce.teacherapp.ui.dashboard.planner.adapter
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.airbnb.epoxy.EpoxyAttribute
-import com.airbnb.epoxy.EpoxyModelClass
-import com.airbnb.epoxy.EpoxyModelWithHolder
-import com.airbnb.epoxy.EpoxyRecyclerView
+import com.airbnb.epoxy.*
 import com.tce.teacherapp.R
 import com.tce.teacherapp.db.entity.LessonPlanPeriod
 import com.tce.teacherapp.ui.dashboard.planner.listeners.LessonPlanClickListener
@@ -21,21 +19,36 @@ abstract class LessonPlanEpoxyHolder : EpoxyModelWithHolder<PlanHolder>() {
     lateinit var period:LessonPlanPeriod
 
     @EpoxyAttribute
+    lateinit var screenType:String
+
+    @EpoxyAttribute
     lateinit var lessonPLanClickListener: LessonPlanClickListener
 
     override fun bind(holder: PlanHolder) {
         super.bind(holder)
 
+        if(screenType.equals("markCompleted")){
+            holder.tvSequence.visibility = View.GONE
+            holder.rvResourceItem.layoutManager = GridLayoutManager(holder.rvResourceItem.context, 2)
+            holder.rvResourceItem.setHasFixedSize(true)
+            val epoxyVisibilityTracker = EpoxyVisibilityTracker()
+            epoxyVisibilityTracker.attach(holder.rvResourceItem)
+
+        }else{
+            holder.tvSequence.visibility = View.VISIBLE
+            val linearLayoutManager = LinearLayoutManager(holder.rvResourceItem.context)
+            linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
+            holder.rvResourceItem.apply {
+                layoutManager = linearLayoutManager
+                setHasFixedSize(true)
+
+            }
+        }
+
         holder.tvSequence.setText(period.SequenceNo.toString())
         holder.tvTitle.text = period.Topic
         holder.tvSubTitle.text = period.LessonTypeValue
-        val linearLayoutManager = LinearLayoutManager(holder.rvResourceItem.context)
-        linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
-        holder.rvResourceItem.apply {
-            layoutManager = linearLayoutManager
-            setHasFixedSize(true)
 
-        }
 
         holder.lessonPlanContainer.setOnClickListener(View.OnClickListener {
             lessonPLanClickListener.onLessonPlanClick(period)
@@ -47,6 +60,7 @@ abstract class LessonPlanEpoxyHolder : EpoxyModelWithHolder<PlanHolder>() {
                     lessonPlanChildItemEpoxyHolder {
                         id(type.id)
                         resource(type)
+                        screenType(screenType)
                         Utility.getDrawable(
                             type.image.substring(
                                 0,

@@ -2,10 +2,7 @@ package com.tce.teacherapp.fragments.main
 
 import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModelProvider
-import com.tce.teacherapp.ui.dashboard.planner.EventDisplayFragment
-import com.tce.teacherapp.ui.dashboard.planner.LessonPlanDisplayFragment
-import com.tce.teacherapp.ui.dashboard.planner.MonthlyPlannerFragment
-import com.tce.teacherapp.ui.dashboard.planner.PlannerFragment
+import com.tce.teacherapp.ui.dashboard.planner.*
 import javax.inject.Inject
 
 class PlannerFragmentFactory
@@ -32,6 +29,10 @@ constructor(
 
             LessonPlanDisplayFragment::class.java.name -> {
                 LessonPlanDisplayFragment()
+            }
+
+            MarkCompletedFragment::class.java.name -> {
+                MarkCompletedFragment()
             }
 
             else -> {

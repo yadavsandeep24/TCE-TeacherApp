@@ -23,6 +23,7 @@
             android:layout_width="135dp"
             android:layout_height="77dp">
 
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_video_thumb"
                 android:layout_width="match_parent"
@@ -31,10 +32,10 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_play"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="19dp"
+                android:layout_height="20dp"
                 android:layout_centerInParent="true"
-                android:src="@drawable/ic_video_play"/>
+                android:src="@drawable/ic_video_play" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_icon"
@@ -43,6 +44,21 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="-5dp"/>
+
+            <LinearLayout
+                android:layout_width="30dp"
+                android:layout_height="24dp"
+                android:background="@drawable/grey_left_bottom_rounded"
+                android:layout_alignParentRight="true"
+                android:gravity="center">
+
+                <CheckBox
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:background="@drawable/checkbox_selector">
+                </CheckBox>
+
+            </LinearLayout>
 
 
         </RelativeLayout>

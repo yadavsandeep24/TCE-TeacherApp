@@ -13,7 +13,8 @@
             android:layout_width="match_parent"
             android:layout_height="36dp"
             android:background="#fffad7"
-            android:gravity="center">
+            android:gravity="center"
+            android:visibility="gone">
 
             <com.tce.teacherapp.util.RubikMediumTextview
                 android:id="@+id/tv_month"

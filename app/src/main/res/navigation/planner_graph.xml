@@ -27,6 +27,13 @@
             app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"/>
+        <action
+            android:id="@+id/action_plannerFragment_to_markCompletedFragment"
+            app:destination="@id/markCompletedFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
     </fragment>
     <fragment
         android:id="@+id/monthlyPlannerFragment"
@@ -44,4 +51,9 @@
         android:name="com.tce.teacherapp.ui.dashboard.planner.LessonPlanDisplayFragment"
         android:label="fragment_lesson_plan_display"
         tools:layout="@layout/fragment_lesson_plan_display" />
+    <fragment
+        android:id="@+id/markCompletedFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.planner.MarkCompletedFragment"
+        android:label="fragment_mark_completed"
+        tools:layout="@layout/fragment_mark_completed" />
 </navigation>

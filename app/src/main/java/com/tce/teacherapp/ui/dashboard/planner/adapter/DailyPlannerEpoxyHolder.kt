@@ -2,6 +2,7 @@ package com.tce.teacherapp.ui.dashboard.planner.adapter
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.airbnb.epoxy.EpoxyAttribute
@@ -44,6 +45,9 @@ abstract class DailyPlannerEpoxyHolder : EpoxyModelWithHolder<PlannerHolder>() {
         }
         holder.tvShowMore.setOnClickListener{evenClickListener.onEventShowMoreClick(showLessButton)}*/
 
+        holder.markCompletedContainer.setOnClickListener(View.OnClickListener {
+            lessonPLanClickListener.onMarkCompletedClick(dailyPlanner.lessonPlan.PeriodList.get(0))
+        })
 
         if(SimpleDateFormat("dd MMMM yyyy EEEE").format(Date()).equals(dailyPlanner.date, ignoreCase = true)){
             holder.tvDate.visibility = View.GONE
@@ -123,6 +127,7 @@ abstract class DailyPlannerEpoxyHolder : EpoxyModelWithHolder<PlannerHolder>() {
                     lessonPlanEpoxyHolder {
                         id(event.id)
                         period(event)
+                        screenType("lessonPlan")
                         lessonPLanClickListener(lessonPLanClickListener)
                     }
                 }
@@ -139,4 +144,6 @@ class PlannerHolder : KotlinEpoxyHolder(){
     val rvEvent by bind<EpoxyRecyclerView>(R.id.rv_event)
     val rvBirthday by bind<EpoxyRecyclerView>(R.id.rv_birthday)
     val rvLessonPLan by bind<EpoxyRecyclerView>(R.id.rv_lessons)
+    val markCompletedContainer by bind<LinearLayout>(R.id.mark_completed_container)
+
 }

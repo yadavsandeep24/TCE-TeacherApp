@@ -16,6 +16,8 @@ import com.tce.teacherapp.util.Utility
 @EpoxyModelClass(layout = R.layout.list_item_child_lesson_plan)
 abstract class LessonPlanChildItemEpoxyHolder : EpoxyModelWithHolder<PlanChildHolder>() {
 
+    @EpoxyAttribute
+    lateinit var screenType:String
 
     @EpoxyAttribute
     lateinit var imageDrawable : Drawable
@@ -32,13 +34,21 @@ abstract class LessonPlanChildItemEpoxyHolder : EpoxyModelWithHolder<PlanChildHo
             R.color.transparent, R.color.transparent, 0
         )
 
+        if(screenType.equals("markCompleted")){
+            holder.imgPlay.visibility = View.GONE
+        }else{
+            holder.imgPlay.visibility = View.VISIBLE
+            if(resource.contenttype.equals("AV")){
+                holder.imgPlay.visibility = View.VISIBLE
+            }else{
+                holder.imgPlay.visibility = View.GONE
+            }
+        }
+
+
         holder.tvTitle.setText(resource.title)
         holder.imgIcon.background = imageDrawable
-        if(resource.contenttype.equals("AV")){
-            holder.imgPlay.visibility = View.VISIBLE
-        }else{
-            holder.imgPlay.visibility = View.GONE
-        }
+
 
     }
 

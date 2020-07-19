@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<com.google.android.material.card.MaterialCardView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="20dp"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:visibility="visible"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="8dp"
+    app:cardPreventCornerOverlap="false">
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_success_pattern"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_message_type"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@drawable/ic_white_tick_rounded" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:background="#fffad7"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <com.tce.teacherapp.util.RubikBoldTextview
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3 Resources Marked!"
+                android:textColor="#320500"
+                android:visibility="visible"
+                android:layout_marginTop="10dp"
+                android:textSize="@dimen/font_size_14_dp"/>
+
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:id="@+id/tv_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="You will return to the login screen"
+                android:textColor="#320500"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                android:textSize="@dimen/font_size_12_dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
+</layout>
