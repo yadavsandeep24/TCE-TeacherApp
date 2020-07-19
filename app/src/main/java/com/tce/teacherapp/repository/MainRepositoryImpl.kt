@@ -1213,6 +1213,25 @@ constructor(
                 .use { it.readText() }
             val listEvent = object : TypeToken<List<Event>>() {}.type
             var list1: List<Event> = gson.fromJson(jsonString, listEvent)
+            val selectedEventList: ArrayList<Event> = ArrayList()
+
+            val isShowLess = false
+            var nextEventCount = 4
+            if (list1.size > 3) {
+                for (i in 0 until 3) {
+                    selectedEventList.add(list1[i])
+                }
+                if (list1.size < 7) {
+                    nextEventCount = list1.size - 3
+                }
+            } else {
+                for (i in 0 until list1.size) {
+                    selectedEventList.add(list1[i])
+                }
+                nextEventCount = 0
+            }
+            val eventData = EventData(isShowLess, nextEventCount, selectedEventList)
+
 
             jsonString = application.assets.open("json/birthday.json").bufferedReader()
                 .use { it.readText() }
@@ -1224,11 +1243,33 @@ constructor(
             val listPlanner = object : TypeToken<List<DailyPlanner>>() {}.type
             var list3: List<DailyPlanner> = gson.fromJson(jsonString, listPlanner)
 
+            for(j in 0 until  list3.size){
+                val selectedEventList: ArrayList<Event> = ArrayList()
+
+                val isShowLess = false
+                var nextEventCount = 4
+                if (list3.get(j).eventList.size > 3) {
+                    for (i in 0 until 3) {
+                        selectedEventList.add(list3.get(j).eventList[i])
+                    }
+                    if (list3.get(j).eventList.size < 7) {
+                        nextEventCount = list3.get(j).eventList.size - 3
+                    }
+                } else {
+                    for (i in 0 until list3.get(j).eventList.size) {
+                        selectedEventList.add(list3.get(j).eventList[i])
+                    }
+                    nextEventCount = 0
+                }
+                val eventData = EventData(isShowLess, nextEventCount, selectedEventList)
+                list3.get(j).eventData = eventData
+            }
+
 
             emit(
                 DataState.data(
                     data = PlannerViewState(lessonPlanList = list,
-                                            eventList = list1,
+                                            eventData = eventData,
                                             birthdayList = list2,
                                             dailyPlannerList = list3
                     ),
@@ -1252,7 +1293,7 @@ constructor(
             var jsonString: String = ""
             try {
                 jsonString =
-                    application.assets.open("json/event.json").bufferedReader()
+                    application.assets.open("json/eventPlanner.json").bufferedReader()
                         .use { it.readText() }
                 val gson = Gson()
                 val listPersonType = object : TypeToken<ArrayList<Event>>() {}.type

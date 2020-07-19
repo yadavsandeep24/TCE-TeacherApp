@@ -46,6 +46,7 @@
                 android:layout_marginBottom="-5dp"/>
 
             <LinearLayout
+                android:id="@+id/checkbox_container"
                 android:layout_width="30dp"
                 android:layout_height="24dp"
                 android:background="@drawable/grey_left_bottom_rounded"
@@ -53,9 +54,12 @@
                 android:gravity="center">
 
                 <CheckBox
+                    android:id="@+id/chk_completed"
                     android:layout_width="18dp"
                     android:layout_height="18dp"
-                    android:background="@drawable/checkbox_selector">
+                    android:checked="false"
+                    android:button="@null"
+                    android:background="@drawable/lesson_plan_checkbox_selector">
                 </CheckBox>
 
             </LinearLayout>

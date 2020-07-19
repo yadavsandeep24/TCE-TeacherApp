@@ -1,5 +1,6 @@
 package com.tce.teacherapp.ui.dashboard.planner.adapter
 
+import android.text.Html
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -31,11 +32,15 @@ abstract class DailyPlannerEpoxyHolder : EpoxyModelWithHolder<PlannerHolder>() {
     lateinit var lessonPLanClickListener: LessonPlanClickListener
 
 
+
+
     override fun bind(holder: PlannerHolder) {
         super.bind(holder)
         holder.tvDate.setText(dailyPlanner.date)
 
-       /* if(showLessButton){
+        var nextEventCount = dailyPlanner.eventData.nextEventCount
+
+        if(dailyPlanner.eventData.isShowLess){
             holder.tvShowMore.text = Html.fromHtml("<u>Show Less</u>")
             holder.ivShowMore.background = holder.rvEvent.context.resources.getDrawable(R.drawable.ic_line)
         }else {
@@ -43,7 +48,7 @@ abstract class DailyPlannerEpoxyHolder : EpoxyModelWithHolder<PlannerHolder>() {
             holder.ivShowMore.background = holder.rvEvent.context.resources.getDrawable(R.drawable.ic_add)
 
         }
-        holder.tvShowMore.setOnClickListener{evenClickListener.onEventShowMoreClick(showLessButton)}*/
+        holder.tvShowMore.setOnClickListener{evenClickListener.onEventShowMoreClick(dailyPlanner.eventData.isShowLess)}
 
         holder.markCompletedContainer.setOnClickListener(View.OnClickListener {
             lessonPLanClickListener.onMarkCompletedClick(dailyPlanner.lessonPlan.PeriodList.get(0))
@@ -63,7 +68,7 @@ abstract class DailyPlannerEpoxyHolder : EpoxyModelWithHolder<PlannerHolder>() {
         }
 
         holder.rvEvent.withModels {
-            dailyPlanner.eventList?.let {
+            dailyPlanner.eventData.eventList?.let {
                 for (event in it){
                     lessonEventEpoxyHolder {
                         id(event.id)

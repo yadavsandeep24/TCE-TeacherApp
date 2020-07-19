@@ -20,6 +20,9 @@ data class DailyPlanner(
     val birthdayList : ArrayList<StudentBirthDay>,
 
     @Expose
-    val lessonPlan : LessonPlan
+    val lessonPlan : LessonPlan,
+
+    var eventData : EventData
+
 
     ):Parcelable
