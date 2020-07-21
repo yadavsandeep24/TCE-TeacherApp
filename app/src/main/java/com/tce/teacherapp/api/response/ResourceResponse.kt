@@ -36,7 +36,8 @@ class ResourceResponse(
     val type: String
 ) {
     fun toResource(
-        chapterResourceTypeId: String
+        chapterResourceTypeId: String,
+        chapterId:String
     ): Resource {
         return Resource(
             ResourceOriginator = ResourceOriginator,
@@ -49,7 +50,8 @@ class ResourceResponse(
             src = src,
             title = title,
             type = type,
-            chapterResourceTypeId = chapterResourceTypeId
+            chapterResourceTypeId = chapterResourceTypeId,
+            chapterId = chapterId
         )
     }
 }

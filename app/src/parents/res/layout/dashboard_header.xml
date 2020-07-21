@@ -21,7 +21,7 @@
             android:text="Hi Aishwarya !"
             android:textColor="@color/deep_brown"
             android:textSize="20dp"
-            android:textStyle="bold"></com.tce.teacherapp.util.RubikBoldTextview>
+            android:textStyle="bold"/>
 
         <com.tce.teacherapp.util.RubikMediumTextview
             android:id="@+id/tv_last_sync"
@@ -31,7 +31,7 @@
             android:text="chkjvkcnv,xn"
             android:textColor="@color/deep_brown"
             android:textSize="10dp"
-            android:textStyle="italic"></com.tce.teacherapp.util.RubikMediumTextview>
+            android:textStyle="italic"/>
 
     </LinearLayout>
 

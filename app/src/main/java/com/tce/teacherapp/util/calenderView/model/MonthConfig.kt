@@ -33,7 +33,7 @@ internal data class MonthConfig(
     internal companion object {
 
         /**
-         * A [YearMonth] will have multiple [CalendarMonth] instances if the [maxRowCount] is
+         * a [YearMonth] will have multiple [CalendarMonth] instances if the [maxRowCount] is
          * less than 6. Each [CalendarMonth] will hold just enough [CalendarDay] instances(weekDays)
          * to fit in the [maxRowCount].
          */

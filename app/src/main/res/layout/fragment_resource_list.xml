@@ -1,12 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <FrameLayout
+    <RelativeLayout
+        android:id="@+id/ll_resource_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
+        android:layout_height="match_parent"
+        android:background="@color/sandy_yellow"
+        android:visibility="visible">
+        <ImageView
+            android:id="@+id/iv_container"
             android:layout_width="match_parent"
+            android:scaleType="fitXY"
             android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
-    </FrameLayout>
+            android:src="@drawable/group"/>
+        <TextView
+            android:id="@+id/tv_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="20dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/ic_cancel_button" />
+
+
+        <com.tce.teacherapp.util.RubikBoldTextview
+            android:id="@+id/tv_resource_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Resources"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/dark"
+            android:textSize="18dp" />
+
+        <com.tce.teacherapp.util.RubikMediumTextview
+            android:id="@+id/tv_resource_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:text="0 files found"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/tv_resource_title"
+            android:textColor="@color/gunmetal"
+            android:textSize="@dimen/font_size_12_dp" />
+
+        <com.airbnb.epoxy.EpoxyRecyclerView
+            android:id="@+id/rv_chapter_learn_resource"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_below="@+id/tv_resource_count"
+            android:layout_centerHorizontal="true"
+            android:overScrollMode="never" />
+    </RelativeLayout>
 </layout>

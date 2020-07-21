@@ -131,6 +131,7 @@ interface MainRepository {
     fun getTopicResourceList(
         query: String,
         topicId: String,
+        chapterId: String,
         stateEvent: StateEvent
     ): Flow<DataState<SubjectViewState>>
     fun getPlannerData(
@@ -148,6 +149,13 @@ interface MainRepository {
         query: String,
         stateEvent: StateEvent
     ): Flow<DataState<PlannerViewState>>
+
+    fun getChapterResourceType(
+        chapterId: String,
+        topicId: String,
+        bookId: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<SubjectViewState>>
 
 
 }

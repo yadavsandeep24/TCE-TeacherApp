@@ -54,7 +54,12 @@ constructor(
             VideoPlayerFragment::class.java.name -> {
                 VideoPlayerFragment(viewModelFactory)
             }
-
+            ChapterResourceSelectionFragment::class.java.name -> {
+                ChapterResourceSelectionFragment(viewModelFactory)
+            }
+            ImageContentFragment::class.java.name ->{
+                ImageContentFragment(viewModelFactory)
+            }
             else -> {
                 SubjectListFragment(viewModelFactory)
             }

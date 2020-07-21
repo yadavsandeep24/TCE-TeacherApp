@@ -3,35 +3,35 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 <androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/exFiveDayLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@+id/exFiveDayLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="1dp"
-        android:background="@color/calender_item_view_bg_color">
+        android:background="@drawable/calender_day_border">
 
-        <TextView
+        <com.tce.teacherapp.util.RubikMediumTextview
             android:id="@+id/exFiveDayText"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="4dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="9dp"
             android:textColor="@color/calender_text_grey"
-            android:textSize="12sp"
+            android:textSize="14sp"
             tools:text="24"
-            android:layout_above="@+id/rv_event"/>
+            android:gravity="center"
+            android:layout_alignParentTop="true"/>
 
         <com.airbnb.epoxy.EpoxyRecyclerView
             android:id="@+id/rv_event"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="18dp"
-            ></com.airbnb.epoxy.EpoxyRecyclerView>
+            android:layout_width="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:paddingStart="2dp"
+            android:layout_marginEnd="2dp"
+            android:layout_alignParentBottom="true"/>
 
     </RelativeLayout>
 

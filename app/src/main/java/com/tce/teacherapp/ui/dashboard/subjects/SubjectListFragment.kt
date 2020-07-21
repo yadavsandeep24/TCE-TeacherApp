@@ -1,5 +1,6 @@
 package com.tce.teacherapp.ui.dashboard.subjects
 
+import android.content.pm.ActivityInfo
 import android.graphics.Bitmap
 import android.graphics.Typeface
 import android.os.Build
@@ -71,6 +72,7 @@ constructor(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         binding = FragmentSubjectListBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -101,6 +103,7 @@ constructor(
         (activity as DashboardActivity).setCustomToolbar(R.layout.subject_list_top_bar)
         (activity as DashboardActivity).expandAppBar(true)
         (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
+        (activity as DashboardActivity).showHideBottomBar(true)
 
         val topBar = (activity as DashboardActivity).binding.toolBar.findViewById<RelativeLayout>(R.id.top_container)
         topBar.setBackgroundColor(resources.getColor(R.color.subject_actionbar_color))
@@ -136,12 +139,12 @@ constructor(
 
         viewModel.setStateEvent(SubjectStateEvent.GetDivisionEvent)
 
-        binding.rvSubjects.layoutManager = GridLayoutManager(activity, 2)
+        binding.rvSubjects.layoutManager = GridLayoutManager(activity, Utility.calculateNumberOfColumns(2,requireContext()))
         binding.rvSubjects.setHasFixedSize(true)
         val epoxyVisibilityTracker = EpoxyVisibilityTracker()
         epoxyVisibilityTracker.attach(binding.rvSubjects)
         binding.rvSubjects.addGlidePreloader(
-            Glide.with(this),
+            Glide.with(requireActivity()),
             preloader = glidePreloader { requestManager, model: SubjectListEpoxyHolder, _ ->
                 requestManager.loadImage(model.imageUrl)
             }
@@ -284,8 +287,6 @@ constructor(
             }
         })
     }
-
-
 
 }
 

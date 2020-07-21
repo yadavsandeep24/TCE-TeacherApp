@@ -2,6 +2,7 @@ package com.tce.teacherapp.util
 
 import android.content.ContentUris
 import android.content.Context
+import android.content.res.Configuration
 import android.database.Cursor
 import android.graphics.Color
 import android.graphics.drawable.Drawable
@@ -22,15 +23,20 @@ import java.net.URISyntaxException
 import java.util.*
 
 
-class Utility {
+open class Utility {
 
     companion object {
 
         fun getDrawable(name: String?, context: Context): Drawable? {
             Log.d("SAN", "name-->$name")
-            val resourceId: Int = context.resources
-                .getIdentifier(name, "drawable", context.packageName)
-            return context.resources.getDrawable(resourceId, null)
+            return try {
+                val resourceId: Int = context.resources
+                    .getIdentifier(name, "drawable", context.packageName)
+                context.resources.getDrawable(resourceId, null)
+            }catch (e:java.lang.Exception) {
+                e.printStackTrace()
+                null
+            }
         }
 
         fun getRealPathFromURI(context: Context, contentUri: Uri): String {
@@ -365,9 +371,53 @@ class Utility {
             v.setBackgroundDrawable(states)
 
         }
+        fun calculateNumberOfColumns(base: Int,context: Context): Int {
+            var columns = base
+            val screenSize = getScreenSizeCategory(context)
+            if (screenSize == "small") {
+                if (base != 1) {
+                    columns -= 1
+                }
+            } else if (screenSize == "normal") {
+                // Do nothing
+            } else if (screenSize == "large") {
+                columns += 2
+            } else if (screenSize == "xlarge") {
+                columns += 3
+            }
+            if (context.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                columns = (columns * 1.5).toInt()
+            }
+            return columns
+        }
 
+        // Custom method to get screen current orientation
+         fun getScreenOrientation(context: Context): String? {
+            var orientation = "undefined"
+            if (context.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                orientation = "landscape"
+            } else if (context.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                orientation = "portrait"
+            }
+            return orientation
+        }
 
-
+        // Custom method to get screen size category
+        protected fun getScreenSizeCategory(context: Context): String {
+            val screenLayout: Int =
+                context.resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK
+            return when (screenLayout) {
+                Configuration.SCREENLAYOUT_SIZE_SMALL ->                 // small screens are at least 426dp x 320dp
+                    "small"
+                Configuration.SCREENLAYOUT_SIZE_NORMAL ->                 // normal screens are at least 470dp x 320dp
+                    "normal"
+                Configuration.SCREENLAYOUT_SIZE_LARGE ->                 // large screens are at least 640dp x 480dp
+                    "large"
+                Configuration.SCREENLAYOUT_SIZE_XLARGE ->                 // xlarge screens are at least 960dp x 720dp
+                    "xlarge"
+                else -> "undefined"
+            }
+        }
     }
 
 

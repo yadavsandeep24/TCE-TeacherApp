@@ -28,12 +28,11 @@ import com.tce.teacherapp.util.MessageConstant
 import com.tce.teacherapp.util.StateMessageCallback
 import com.tce.teacherapp.util.Utility.Companion.getBannerDayMessage
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import java.util.*
 import javax.inject.Inject
 
 
 /**
- * A simple [Fragment] subclass.
+ * a simple [Fragment] subclass.
  */
 @ExperimentalCoroutinesApi
 @kotlinx.coroutines.FlowPreview

@@ -58,5 +58,32 @@
       }
     ]
 
+  },
+  {
+    "id": "3",
+    "date": "2020-07-21",
+    "eventList": [
+      {
+        "id": "5",
+        "eventName": "Meet Rahul's Parents",
+        "imageUrl": "bell_icon.png",
+        "type": "TO-DO",
+        "eventColor": "#000000",
+        "typeColor": "#ffaa1e",
+        "iconBackColor": "#ffaa1e",
+        "eventBackColor": "#ffebc8"
+      },
+      {
+        "id": "6",
+        "eventName": "School Annual Day 2020",
+        "imageUrl": "calendar.png",
+        "type": "Event",
+        "eventColor": "#FFFFFF",
+        "typeColor": "#FFFFFF",
+        "iconBackColor": "#1e6eff",
+        "eventBackColor": "#5591ff"
+      }
+    ]
+
   }
 ]

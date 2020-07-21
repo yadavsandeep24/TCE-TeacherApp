@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="122dp"
+    android:layout_height="105dp">
+    <View
+        android:id="@+id/vw_main"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_toStartOf="@+id/right_divider"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/chapter_resource_bg_left"/>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/tv_name"
+        android:background="@drawable/music_time"/>
+
+
+<com.tce.teacherapp.util.LondrinaSolidRegularTextview
+    android:id="@+id/tv_name"
+    android:layout_width="wrap_content"
+    android:layout_height="20dp"
+    android:singleLine="true"
+    android:textColor="#353535"
+    android:gravity="center"
+    android:layout_alignParentBottom="true"
+    android:layout_marginBottom="5dp"
+    android:layout_centerHorizontal="true"
+    android:text="Music Time"/>
+    <View
+        android:id="@+id/right_divider"
+        style="@style/Divider"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"/>
+
+</RelativeLayout>

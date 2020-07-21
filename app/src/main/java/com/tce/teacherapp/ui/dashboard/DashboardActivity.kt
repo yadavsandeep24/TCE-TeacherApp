@@ -1,5 +1,6 @@
 package com.tce.teacherapp.ui.dashboard
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -97,6 +98,14 @@ class DashboardActivity : BaseActivity(), BottomNavController.OnNavigationResele
         supportActionBar?.setDisplayShowTitleEnabled(false)
     }
 
+    fun showHideBottomBar(value: Boolean){
+        if(value){
+            binding.bottomNavigationView.visibility = View.VISIBLE
+        }else{
+            binding.bottomNavigationView.visibility = View.GONE
+        }
+    }
+
     fun setCustomToolbar(resId: Int) {
         val logo: View = layoutInflater.inflate(resId, binding.toolBar, false)
         binding.toolBar.removeAllViews()
@@ -126,5 +135,9 @@ class DashboardActivity : BaseActivity(), BottomNavController.OnNavigationResele
     override fun onBackPressed() = bottomNavController.onBackPressed()
     override fun onGraphChange() {
 
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
     }
 }

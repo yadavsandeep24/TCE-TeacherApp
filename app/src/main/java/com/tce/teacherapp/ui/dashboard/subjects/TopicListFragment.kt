@@ -1,5 +1,6 @@
 package com.tce.teacherapp.ui.dashboard.subjects
 
+import android.content.pm.ActivityInfo
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
@@ -62,6 +63,7 @@ constructor(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         binding = FragmentTopicListBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -87,6 +89,7 @@ constructor(
         (activity as DashboardActivity).setCustomToolbar(R.layout.subject_list_top_bar)
         (activity as DashboardActivity).expandAppBar(true)
         (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
+        (activity as DashboardActivity).showHideBottomBar(true)
 
         val topBar = (activity as DashboardActivity).binding.toolBar.findViewById<RelativeLayout>(R.id.top_container)
         topBar.setBackgroundColor(resources.getColor(R.color.subject_actionbar_color))
@@ -138,7 +141,7 @@ constructor(
         val epoxyVisibilityTracker = EpoxyVisibilityTracker()
         epoxyVisibilityTracker.attach(binding.rvTopic)
         binding.rvTopic.addGlidePreloader(
-            Glide.with(this),
+            Glide.with(requireActivity()),
             preloader = glidePreloader { requestManager, model: SubjectListEpoxyHolder, _ ->
                 requestManager.loadImage(model.imageUrl)
             }

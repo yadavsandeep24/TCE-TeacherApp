@@ -6,7 +6,7 @@ import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
 /**
- * A pattern for easier view binding with an [EpoxyHolder]
+ * a pattern for easier view binding with an [EpoxyHolder]
  *
  * See [com.airbnb.epoxy.kotlinsample.models.ItemEpoxyHolder] for a usage example.
  */

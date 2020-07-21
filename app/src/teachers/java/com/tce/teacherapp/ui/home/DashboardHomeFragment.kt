@@ -1,5 +1,6 @@
 package com.tce.teacherapp.ui.home
 
+import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -29,7 +30,6 @@ import com.tce.teacherapp.ui.dashboard.home.listeners.TodayResourceClickListener
 import com.tce.teacherapp.ui.dashboard.home.state.DASHBOARD_VIEW_STATE_BUNDLE_KEY
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardStateEvent
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardViewState
-import com.tce.teacherapp.ui.dashboard.messages.state.MESSAGE_VIEW_STATE_BUNDLE_KEY
 import com.tce.teacherapp.util.Utility
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.teachers.fragment_dashboard_home.*
@@ -39,7 +39,7 @@ import javax.inject.Inject
 
 
 /**
- * A simple [Fragment] subclass.
+ * a simple [Fragment] subclass.
  */
 @ExperimentalCoroutinesApi
 @FlowPreview
@@ -67,22 +67,9 @@ constructor(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         binding = FragmentDashboardHomeBinding.inflate(inflater, container, false)
         return binding.root
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        val viewState = viewModel.viewState.value
-
-        //clear the list. Don't want to save a large list to bundle.
-        viewState?.eventData!!.eventList = ArrayList()
-        viewState.todayResourceData!!.todayResource = ArrayList()
-
-        outState.putParcelable(
-            MESSAGE_VIEW_STATE_BUNDLE_KEY,
-            viewState
-        )
-        super.onSaveInstanceState(outState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -321,6 +308,5 @@ constructor(
     override fun onLastViewedItemClick(dashboardResourceTye : DashboardResourceType) {
         Toast.makeText(requireContext(), "Click on ${dashboardResourceTye.title}", Toast.LENGTH_LONG).show()
     }
-
 
 }

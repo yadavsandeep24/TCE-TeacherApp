@@ -10,7 +10,7 @@ import com.tce.teacherapp.R
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 
 /**
- * A simple [Fragment] subclass.
+ * a simple [Fragment] subclass.
  */
 class CalenderHomeFragment : Fragment() {
 

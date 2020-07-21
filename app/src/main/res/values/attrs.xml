@@ -84,7 +84,7 @@
         To show a week mode calendar, set this value to 1. -->
         <attr name="cv_maxRowCount" format="integer" />
 
-        <!-- A ViewGroup which is instantiated and used as the background for each month.
+        <!-- a ViewGroup which is instantiated and used as the background for each month.
          This class must have a constructor which takes only a Context. You should
          exclude the name and constructor of this class from code obfuscation if enabled. -->
         <attr name="cv_monthViewClass" format="string" />

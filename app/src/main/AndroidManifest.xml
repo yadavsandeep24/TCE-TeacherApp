@@ -27,6 +27,7 @@
         <activity android:name=".ui.dashboard.subjects.VideoPlayerActivity"
             android:theme="@style/AppThemeTCE"/>
         <activity android:name=".ui.dashboard.subjects.ChapterResourceSelectionActivity"
+            android:configChanges="orientation"
             android:theme="@style/AppThemeTCE" />
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
@@ -34,7 +35,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".ui.dashboard.DashboardActivity"
-            android:screenOrientation="sensorPortrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/AppThemeTCE" />
         <activity
             android:name=".ui.login.LauncherActivity"

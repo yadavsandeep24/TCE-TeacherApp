@@ -1,9 +1,6 @@
 package com.tce.teacherapp.ui.dashboard.subjects
 
-import com.tce.teacherapp.db.entity.ChapterLearnData
-import com.tce.teacherapp.db.entity.Grade
-import com.tce.teacherapp.db.entity.Subject
-import com.tce.teacherapp.db.entity.Topic
+import com.tce.teacherapp.db.entity.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 
@@ -48,3 +45,11 @@ fun SubjectsViewModel.setChapterLearnData(it: ChapterLearnData) {
     setViewState(update)
 }
 
+
+@FlowPreview
+@UseExperimental(ExperimentalCoroutinesApi::class)
+fun SubjectsViewModel.setChapterResourceTypeData(it: List<ChapterResourceType>) {
+    val update = getCurrentViewStateOrNew()
+    update.chapterResourceTyeList = it
+    setViewState(update)
+}

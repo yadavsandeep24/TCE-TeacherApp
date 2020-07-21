@@ -11,6 +11,7 @@
     app:cardPreventCornerOverlap="false"
     app:cardElevation="8dp"
     app:strokeColor="#ffffff"
+    android:layout_gravity="center"
     android:clipToPadding="false"
     android:clipChildren="false"
     android:visibility="visible">

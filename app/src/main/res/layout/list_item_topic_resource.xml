@@ -5,9 +5,7 @@
     android:id="@+id/card_video"
     android:layout_width="match_parent"
     android:layout_height="80dp"
-    android:layout_marginStart="10dp"
     android:layout_marginTop="5dp"
-    android:layout_marginEnd="10dp"
     android:layout_marginBottom="5dp"
     android:clipChildren="true"
     android:clipToPadding="true"
@@ -33,6 +31,7 @@
                 android:src="@drawable/topic_resource_bg" />
 
             <com.tce.teacherapp.util.RubikMediumTextview
+                android:id="@+id/tv_resource_generator"
                 android:layout_width="60dp"
                 android:layout_height="20dp"
                 android:background="@drawable/ic_label_orange"
@@ -49,6 +48,7 @@
                 android:src="@drawable/ic_video_play" />
 
             <View
+                android:id="@+id/vw_resource_type"
                 android:layout_width="30dp"
                 android:layout_height="24dp"
                 android:layout_alignParentEnd="true"
@@ -58,7 +58,7 @@
 
 
             <com.tce.teacherapp.util.RubikMediumTextview
-                android:id="@+id/title"
+                android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="A Day in the Zoo"
@@ -69,12 +69,12 @@
                 android:textSize="@dimen/font_size_14_dp" />
 
             <com.tce.teacherapp.util.RubikMediumTextview
-                android:id="@+id/sub_title"
+                android:id="@+id/tv_sub_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="10dp"
-                android:layout_below="@+id/title"
+                android:layout_below="@+id/tv_title"
                 android:layout_toRightOf="@+id/video_container"
                 android:text="Year > Subject > Book > Chapter"
                 android:textColor="@color/gunmetal"

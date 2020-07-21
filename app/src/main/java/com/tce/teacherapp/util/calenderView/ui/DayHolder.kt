@@ -34,7 +34,7 @@ internal class DayHolder(private val config: DayConfig) {
             }
         }
         containerView = FrameLayout(parent.context).apply {
-            // This will be placed in the WeekLayout(A LinearLayout) hence we
+            // This will be placed in the WeekLayout(a LinearLayout) hence we
             // use LinearLayout.LayoutParams and set the weight appropriately.
             // The parent's wightSum is already set to 7 to accommodate seven week days.
             layoutParams = LinearLayout.LayoutParams(config.width, config.height, 1F)

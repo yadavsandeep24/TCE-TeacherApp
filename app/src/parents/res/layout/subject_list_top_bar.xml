@@ -3,7 +3,7 @@
 xmlns:android="http://schemas.android.com/apk/res/android"
 android:id="@+id/top_container"
 android:layout_width="match_parent"
-android:layout_height="?android:attr/actionBarSize"
+android:layout_height="60dp"
 android:background="@color/subject_actionbar_color">
     <TextView
         android:id="@+id/tv_back"
@@ -37,4 +37,13 @@ android:background="@color/subject_actionbar_color">
     android:textAllCaps="false"
     android:textSize="16dp"
     android:text="@string/title_subjects" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_user"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/dummy_student"/>
 </RelativeLayout>

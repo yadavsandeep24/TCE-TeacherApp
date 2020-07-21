@@ -280,5 +280,6 @@ constructor(
     private fun resetSession(new: Boolean) {
         sharedPrefsEditor.putBoolean(PreferenceKeys.APP_PREFERENCES_NEW_SESSION_GRADES,new).commit()
         sharedPrefsEditor.putBoolean(PreferenceKeys.APP_PREFERENCES_NEW_SESSION_BOOKS,new).commit()
+        sharedPrefsEditor.putBoolean(PreferenceKeys.APP_PREFERENCES_NEW_SESSION_RESOURCES,new).commit()
     }
 }

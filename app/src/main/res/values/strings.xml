@@ -74,4 +74,10 @@
     </array>
 
 
+
+    <string name="media_url_mp3">https://storage.googleapis.com/exoplayer-test-media-0/Jazz_In_Paris.mp3</string>
+    <string name="media_url_mp4">https://storage.googleapis.com/exoplayer-test-media-0/BigBuckBunny_320x180.mp4</string>
+    <string name="lbl_resources_found"><![CDATA[ shared resources found in ]]></string>
+
+
 </resources>

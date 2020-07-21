@@ -1112,6 +1112,7 @@ constructor(
     override fun getTopicResourceList(
         query: String,
         topicId: String,
+        chapterId: String,
         stateEvent: StateEvent
     ): Flow<DataState<SubjectViewState>> = flow {
 
@@ -1135,7 +1136,7 @@ constructor(
                                         val resourceResponseList = topicResourceItem.resourceList
 
                                         for (resourceItem in resourceResponseList){
-                                            val resource = resourceItem.toResource(topicResourceItem.id)
+                                            val resource = resourceItem.toResource(topicResourceItem.id,topicResourceItem.id)
                                             resourceList.add(resource)
                                             try {
                                                 subjectDao.insertResource(resource)
@@ -1153,7 +1154,7 @@ constructor(
                             sharedPrefsEditor.putBoolean(PreferenceKeys.APP_PREFERENCES_NEW_SESSION_RESOURCES,false).commit()
                         }
 
-                        val chapterLearnData = ChapterLearnData(false,null,resourceList)
+                        val chapterLearnData = ChapterLearnData(false,null,subjectDao.getTopicResourceListData(topicId,chapterId))
                         val viewState = SubjectViewState(chapterLearnData = chapterLearnData)
                         return DataState.data(
                             response = null,
@@ -1168,9 +1169,9 @@ constructor(
             val apiResult = safeCacheCall(IO) {
 
                 if(query.isEmpty()) {
-                    subjectDao.getTopicResourceListData(topicId)
+                    subjectDao.getTopicResourceListData(topicId,chapterId)
                 }else{
-                    subjectDao.getTopicResourceListData(query,topicId)
+                    subjectDao.getTopicResourceListData(query,topicId,chapterId)
                 }
             }
             emit(
@@ -1179,11 +1180,6 @@ constructor(
                     stateEvent = stateEvent
                 ) {
                     override suspend fun handleSuccess(resultObj: List<Resource>): DataState<SubjectViewState> {
-                        if (resultObj.isNotEmpty()) {
-                            sharedPrefsEditor.putString(PreferenceKeys.APP_USER_SELECTED_GRADE_ID, resultObj[0].id).commit()
-                            sharedPrefsEditor.putInt(PreferenceKeys.APP_USER_SELECTED_GRADE_POSITION, 0).commit()
-                            sharedPrefsEditor.putBoolean(PreferenceKeys.APP_PREFERENCES_NEW_SESSION_GRADES, false).commit()
-                        }
                         val chapterLearnData = ChapterLearnData(false,null,resultObj)
                         return DataState.data(
                             data = SubjectViewState(chapterLearnData = chapterLearnData),
@@ -1298,7 +1294,7 @@ constructor(
                 val gson = Gson()
                 val listPersonType = object : TypeToken<ArrayList<Event>>() {}.type
                 val eventList: ArrayList<Event> = gson.fromJson(jsonString, listPersonType)
-                var selectedList: ArrayList<Event> = ArrayList();
+                val selectedList: ArrayList<Event> = ArrayList();
 
                 var isShowLess = false
                 var nextEventCount = 4
@@ -1376,6 +1372,50 @@ constructor(
         } catch (ioException: IOException) {
             ioException.printStackTrace()
         }
+    }
+
+    override fun getChapterResourceType(
+        chapterId: String,
+        topicId: String,
+        bookId: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<SubjectViewState>> = flow {
+        val apiResult = safeCacheCall(IO) {
+            subjectDao.getChapterResourceTypeData(chapterId,topicId,bookId)
+        }
+        emit(
+            object : CacheResponseHandler<SubjectViewState, List<ChapterResourceType>>(
+                response = apiResult,
+                stateEvent = stateEvent
+            ) {
+                override suspend fun handleSuccess(resultObj: List<ChapterResourceType>): DataState<SubjectViewState> {
+                    val chapterResourceType = ChapterResourceType("ic_resources.svg","resource","Resource", emptyList(),"","",
+                        chapterId,
+                       topicId,
+                        bookId)
+                    val listOfResourceTpe: MutableList<ChapterResourceType> = mutableListOf()
+                    listOfResourceTpe.addAll(resultObj)
+                    listOfResourceTpe.add(chapterResourceType)
+                    Log.d("SAN","listOfResourceTpe-->"+listOfResourceTpe.size)
+                    Log.d("SAN","resultObj-->"+resultObj.size)
+
+                    for (i in listOfResourceTpe.indices) {
+                        var resourceList = subjectDao.getTopicResourceListData(listOfResourceTpe[i].id,listOfResourceTpe[i].chapterId)
+                        if(listOfResourceTpe[i].id.equals("resource",true)){
+                            resourceList = subjectDao.getTopicResourceListData(listOfResourceTpe[i].topicId,listOfResourceTpe[i].topicId)
+                        }
+
+                        listOfResourceTpe[i].resourceList = resourceList
+                    }
+                    return DataState.data(
+                        data = SubjectViewState(chapterResourceTyeList =listOfResourceTpe),
+                        response = null,
+                        stateEvent = stateEvent
+                    )
+                }
+            }.getResult()
+        )
+
     }
 
     fun toGradeList(grades: List<GradeResponse>): List<Grade> {

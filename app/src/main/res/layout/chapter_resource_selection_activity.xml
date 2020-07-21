@@ -1,30 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<RelativeLayout
     android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_margin="20dp"
-    android:layout_height="match_parent">
-
-    <TableLayout
-
+    android:layout_height="match_parent"
+    android:background="@color/sandy_yellow">
+    <ImageView
+        android:id="@+id/iv_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TableRow android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout>
-
-            </LinearLayout>
-
-
-        </TableRow>
-
-
-    </TableLayout>
-    <Button
-        android:id="@+id/btn_nav_next"
+        android:scaleType="fitXY"
+        android:layout_height="match_parent"
+        android:src="@drawable/group"/>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_cancel_button1"/>
+    <ScrollView
+        android:id="@+id/sw_main"
         android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:text="Next"
-        android:layout_height="?android:actionBarSize"/>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/iv_cancel"
+        android:layout_marginTop="20dp"
+        android:overScrollMode="never">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <HorizontalScrollView
+                android:id="@+id/hs_row1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:overScrollMode="never"
+                android:scrollbars="none">
+                <LinearLayout
+                    android:id="@+id/ll_row1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"/>
+            </HorizontalScrollView>
+
+        <LinearLayout
+            android:id="@+id/ll_row2"
+            android:layout_width="match_parent"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"/>
+
+        <LinearLayout
+            android:id="@+id/ll_row3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:orientation="horizontal"/>
+        <LinearLayout
+            android:id="@+id/ll_row4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:orientation="horizontal"/>
+        <LinearLayout
+            android:id="@+id/ll_row5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:orientation="horizontal"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="100dp"/>
+        </LinearLayout>
+
+    </ScrollView>
+
 </RelativeLayout>
+</layout>

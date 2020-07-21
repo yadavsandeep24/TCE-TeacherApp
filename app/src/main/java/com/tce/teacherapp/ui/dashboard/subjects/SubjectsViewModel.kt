@@ -33,6 +33,9 @@ class SubjectsViewModel @Inject constructor(val mainRepository: MainRepository) 
         data.chapterLearnData?.let {
             setChapterLearnData(it)
         }
+        data.chapterResourceTyeList?.let {
+            setChapterResourceTypeData(it)
+        }
     }
 
 
@@ -74,6 +77,15 @@ class SubjectsViewModel @Inject constructor(val mainRepository: MainRepository) 
                 mainRepository.getTopicResourceList(
                     stateEvent.query,
                     stateEvent.topicId,
+                    stateEvent.chapterId,
+                    stateEvent = stateEvent
+                )
+            }
+            is SubjectStateEvent.GetChapterResourceTypeEvent ->{
+                mainRepository.getChapterResourceType(
+                    stateEvent.chapterId,
+                    stateEvent.topicId,
+                    stateEvent.bookId,
                     stateEvent = stateEvent
                 )
             }

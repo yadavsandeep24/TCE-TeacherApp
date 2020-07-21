@@ -29,7 +29,7 @@ abstract class MonthlyEventEpoxyHolder : EpoxyModelWithHolder<MonthlyEventHolder
     override fun bind(holder: MonthlyEventHolder) {
         super.bind(holder)
 
-        holder.tvEvent.setText(strEvent)
+        holder.tvEvent.text = strEvent
         holder.tvEvent.setTextColor(Color.parseColor(eventColor))
         holder.eventContainer.setBackgroundColor(Color.parseColor(eventBackColor))
 

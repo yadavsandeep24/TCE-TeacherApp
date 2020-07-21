@@ -53,12 +53,9 @@ class LauncherActivity : BaseActivity() {
     private fun createNavHost() {
         val navHost = LoginNavHostFragment.create(R.navigation.launcher_graph)
 
-        supportFragmentManager.beginTransaction()
-            .replace(
+        supportFragmentManager.beginTransaction().replace(
                 R.id.login_fragments_container,
                 navHost,
-
-
                 getString(R.string.LoginNavHost)
             )
             .setPrimaryNavigationFragment(navHost)

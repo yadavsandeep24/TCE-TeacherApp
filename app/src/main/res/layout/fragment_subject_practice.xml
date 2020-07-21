@@ -3,10 +3,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent"
+        android:background="@color/colorAccent">
     </FrameLayout>
 </layout>

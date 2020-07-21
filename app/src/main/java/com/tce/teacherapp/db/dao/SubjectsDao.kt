@@ -51,11 +51,14 @@ interface SubjectsDao {
     @Query("SELECT * FROM Chapter where topic_id = :topicId and book_id = :bookId AND label LIKE '%' || :query || '%'")
     fun getChapterListData(query: String,topicId:String, bookId: String): List<Chapter>
 
-    @Query("SELECT * FROM Resource where chapterResourceType_id = :chapterResourceTypeId")
-    fun getTopicResourceListData(chapterResourceTypeId:String): List<Resource>
+    @Query("SELECT * FROM Resource where chapterResourceType_id = :chapterResourceTypeId AND chapter_id = :chapterId")
+    fun getTopicResourceListData(chapterResourceTypeId:String,chapterId: String): List<Resource>
 
-    @Query("SELECT * FROM Resource where chapterResourceType_id = :chapterResourceTypeId AND title LIKE '%' || :query || '%'")
-    fun getTopicResourceListData(query: String,chapterResourceTypeId:String): List<Resource>
+    @Query("SELECT * FROM Resource where chapterResourceType_id = :chapterResourceTypeId AND chapter_id = :chapterId AND title LIKE '%' || :query || '%'")
+    fun getTopicResourceListData(query: String,chapterResourceTypeId:String,chapterId: String): List<Resource>
+
+    @Query("SELECT * FROM ChapterResourceType where chapter_id = :chapterID AND topic_id = :topicId  AND book_id = :bookId")
+    fun getChapterResourceTypeData(chapterID: String,topicId:String,bookId: String): List<ChapterResourceType>
 
 }
 

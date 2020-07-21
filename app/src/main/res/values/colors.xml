@@ -37,4 +37,6 @@
     <color name="calender_toolbar_color">#FFFFFF</color>
     <color name="calender_text_grey">#232337</color>
     <color name="calender_text_grey_light">#a0a5b9</color>
+    <color name="blue_grey">#8c91a5</color>
+    <color name="pale_grey_three">#fafaff</color>
 </resources>

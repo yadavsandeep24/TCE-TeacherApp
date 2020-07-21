@@ -82,7 +82,8 @@ sealed class SubjectStateEvent : StateEvent {
 
     class GetTopicResourceEvent(
         val query: String,
-        val topicId: String
+        val topicId: String,
+        val chapterId: String
     ) : SubjectStateEvent() {
         override fun errorInfo(): String {
             return "Error in getting topic resource info."
@@ -90,6 +91,21 @@ sealed class SubjectStateEvent : StateEvent {
 
         override fun toString(): String {
             return "GetTopicResourceEvent"
+        }
+
+    }
+
+    class GetChapterResourceTypeEvent(
+        val chapterId: String,
+        val topicId: String,
+        val bookId: String
+    ) : SubjectStateEvent() {
+        override fun errorInfo(): String {
+            return "Error in getting chapter resource type info."
+        }
+
+        override fun toString(): String {
+            return "GetChapterResourceTypeEvent"
         }
 
     }

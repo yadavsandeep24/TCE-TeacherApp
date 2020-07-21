@@ -1,9 +1,11 @@
 package com.tce.teacherapp.ui.dashboard.subjects
 
-import android.content.Intent
+import android.annotation.SuppressLint
+import android.content.pm.ActivityInfo
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +18,7 @@ import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.EpoxyVisibilityTracker
 import com.airbnb.epoxy.addGlidePreloader
@@ -35,6 +38,7 @@ import com.tce.teacherapp.util.StateMessageCallback
 import com.tce.teacherapp.util.Utility
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
+import java.util.*
 import javax.inject.Inject
 
 
@@ -66,6 +70,7 @@ constructor(
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         binding = FragmentChapterLearnBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -81,14 +86,18 @@ constructor(
         (activity as DashboardActivity).setCustomToolbar(R.layout.subject_list_top_bar)
         (activity as DashboardActivity).expandAppBar(true)
         (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
+        (activity as DashboardActivity).showHideBottomBar(true)
 
-        val topBar = (activity as DashboardActivity).binding.toolBar.findViewById<RelativeLayout>(R.id.top_container)
+        val topBar =
+            (activity as DashboardActivity).binding.toolBar.findViewById<RelativeLayout>(R.id.top_container)
         topBar.setBackgroundColor(resources.getColor(R.color.subject_actionbar_color))
 
-        val spnDivision = (activity as DashboardActivity).binding.toolBar.findViewById<AppCompatSpinner>(R.id.spn_division)
+        val spnDivision =
+            (activity as DashboardActivity).binding.toolBar.findViewById<AppCompatSpinner>(R.id.spn_division)
         spnDivision.visibility = View.GONE
 
-        val tvBack = (activity as DashboardActivity).binding.toolBar.findViewById<TextView>(R.id.tv_back)
+        val tvBack =
+            (activity as DashboardActivity).binding.toolBar.findViewById<TextView>(R.id.tv_back)
         tvBack.visibility = View.VISIBLE
 
         val tvTopicTitle =
@@ -114,19 +123,28 @@ constructor(
             binding.svChapterLearn.findViewById(R.id.search_close_btn) as ImageView
 
         closeButton.setOnClickListener {
-            val t: Toast = Toast.makeText(activity, "close", Toast.LENGTH_SHORT)
-            t.show()
             uiCommunicationListener.hideSoftKeyboard()
             binding.svChapterLearn.setQuery("", false)
             binding.svChapterLearn.clearFocus()
             if (topicVo != null) {
-                viewModel.setStateEvent(
-                    SubjectStateEvent.GetChapterEvent(
-                        "",
-                        topicVo!!.id,
-                        topicVo!!.bookId
+
+                if (binding.rvChapterLearn.visibility == View.VISIBLE) {
+                    viewModel.setStateEvent(
+                        SubjectStateEvent.GetChapterEvent(
+                            "",
+                            topicVo!!.id,
+                            topicVo!!.bookId
+                        )
                     )
-                )
+                } else {
+                    viewModel.setStateEvent(
+                        SubjectStateEvent.GetTopicResourceEvent(
+                            "",
+                            topicVo!!.id,
+                            topicVo!!.id
+                        )
+                    )
+                }
             }
             false
         }
@@ -145,7 +163,7 @@ constructor(
         var epoxyVisibilityTracker = EpoxyVisibilityTracker()
         epoxyVisibilityTracker.attach(binding.rvChapterLearn)
         binding.rvChapterLearn.addGlidePreloader(
-            Glide.with(this),
+            Glide.with(requireActivity()),
             preloader = glidePreloader { requestManager, model: SubjectListEpoxyHolder, _ ->
                 requestManager.loadImage(model.imageUrl)
             }
@@ -156,13 +174,11 @@ constructor(
         epoxyVisibilityTracker = EpoxyVisibilityTracker()
         epoxyVisibilityTracker.attach(binding.rvChapterLearnResource)
         binding.rvChapterLearnResource.addGlidePreloader(
-            Glide.with(this),
+            Glide.with(requireActivity()),
             preloader = glidePreloader { requestManager, model: SubjectListEpoxyHolder, _ ->
                 requestManager.loadImage(model.imageUrl)
             }
         )
-
-
 
         binding.tvLearn.setOnClickListener {
             uiCommunicationListener.hideSoftKeyboard()
@@ -173,7 +189,13 @@ constructor(
             binding.tvResource.background =
                 resources.getDrawable(R.drawable.ic_rectangle_unselected)
             binding.tvResource.setTextColor(resources.getColor(R.color.dark))
-            viewModel.setStateEvent(SubjectStateEvent.GetChapterEvent("",topicVo!!.id,topicVo!!.bookId))
+            viewModel.setStateEvent(
+                SubjectStateEvent.GetChapterEvent(
+                    "",
+                    topicVo!!.id,
+                    topicVo!!.bookId
+                )
+            )
         }
 
         binding.tvResource.setOnClickListener {
@@ -184,7 +206,17 @@ constructor(
             binding.tvResource.setTextColor(resources.getColor(R.color.deep_brown))
             binding.tvLearn.background = resources.getDrawable(R.drawable.ic_rectangle_unselected)
             binding.tvLearn.setTextColor(resources.getColor(R.color.dark))
-            viewModel.setStateEvent(SubjectStateEvent.GetTopicResourceEvent("", topicVo!!.id))
+            viewModel.setStateEvent(
+                SubjectStateEvent.GetTopicResourceEvent(
+                    "",
+                    topicVo!!.id,
+                    topicVo!!.id
+                )
+            )
+        }
+
+        binding.practiceContainer.ivPractice.setOnClickListener {
+            //findNavController().navigate(R.id.action_selectChapterLearnFragment_to_SUbjectPracticeFragment)
         }
         subscribeObservers()
     }
@@ -196,19 +228,30 @@ constructor(
 
         override fun onQueryTextChange(newText: String): Boolean {
             if (topicVo != null) {
-                viewModel.setStateEvent(
-                    SubjectStateEvent.GetChapterEvent(
-                        newText,
-                        topicVo!!.id,
-                        topicVo!!.bookId
+                if (binding.rvChapterLearn.visibility == View.VISIBLE) {
+                    viewModel.setStateEvent(
+                        SubjectStateEvent.GetChapterEvent(
+                            newText,
+                            topicVo!!.id,
+                            topicVo!!.bookId
+                        )
                     )
-                )
+                } else {
+                    viewModel.setStateEvent(
+                        SubjectStateEvent.GetTopicResourceEvent(
+                            newText,
+                            topicVo!!.id,
+                            topicVo!!.id
+                        )
+                    )
+                }
             }
             return true
 
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun subscribeObservers() {
 
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
@@ -223,16 +266,40 @@ constructor(
                                     id(chapter.id)
                                     chapter.image?.let { it1 -> imageUrl(it1) }
                                     try {
-                                        Utility.getDrawable("ic_b", requireContext())
-                                            ?.let { it1 -> imageDrawable(it1) }
+                                        var name = chapter.icon?.substring(
+                                            0,
+                                            chapter.icon!!.lastIndexOf(".")
+                                        )
+                                        if (chapter.icon.isNullOrEmpty()) {
+                                            name = "a"
+                                        }
+                                        Log.d("SAN", "name-->$name")
+                                        if (Utility.getDrawable(
+                                                name?.toLowerCase(Locale.ROOT),
+                                                requireContext()
+                                            ) == null
+                                        ) {
+                                            Utility.getDrawable("a", requireContext())
+                                                ?.let { it1 -> imageDrawable(it1) }
+                                        } else {
+                                            Utility.getDrawable(
+                                                name?.toLowerCase(Locale.ROOT),
+                                                requireContext()
+                                            )?.let { it1 -> imageDrawable(it1) }
+                                        }
                                     } catch (e: Exception) {
                                         e.printStackTrace()
                                     }
                                     listener {
                                         val bundle = Bundle()
-                                      //  bundle.putParcelable("chapterdata", chapter)
-                                        val i = Intent(context,ChapterResourceSelectionActivity::class.java)
+                                        bundle.putParcelable("chapterdata", chapter)
+                                        findNavController().navigate(
+                                            R.id.action_selectChapterLearnFragment_to_chapterResourceSelectionFragment,
+                                            bundle
+                                        )
+                                        /*val i = Intent(context,ChapterResourceSelectionActivity::class.java)
                                         startActivity(i)
+                                        activity?.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)*/
                                     }
                                 }
                             }
@@ -240,12 +307,23 @@ constructor(
                     }
 
                     if (it.resourceList != null) {
+                        val countValue = it.resourceList!!.size
+                        val staticText = context?.resources?.getString(R.string.lbl_resources_found)
+                        val topicName = topicVo?.label
+                        val htmlText = Html.fromHtml("$countValue $staticText <b>$topicName</b>")
+                        binding.tvResourceCount.text = htmlText
                         binding.rvChapterLearnResource.withModels {
                             for (resource in it.resourceList!!) {
                                 topicResourceEpoxyHolder {
                                     id(resource.id)
+                                    resourceVo(resource)
                                     listener {
-
+                                        val bundle = Bundle()
+                                        bundle.putParcelable("resourceData", resource)
+                                        findNavController().navigate(
+                                            R.id.action_selectChapterLearnFragment_to_subjectResourceDetailFragment,
+                                            bundle
+                                        )
                                     }
                                 }
                             }
@@ -265,7 +343,7 @@ constructor(
 //                                id(chapter.id)
 //                                chapter.image?.let { it1 -> imageUrl(it1) }
 //                                try {
-//                                    Utility.getDrawable("ic_b", requireContext())
+//                                    Utility.getDrawable("b", requireContext())
 //                                        ?.let { it1 -> imageDrawable(it1) }
 //                                } catch (e: Exception) {
 //                                    e.printStackTrace()
@@ -293,29 +371,29 @@ constructor(
 //
 //                    }
 //                }
-                }
-            })
+            }
+        })
 
-            viewModel.numActiveJobs.observe(viewLifecycleOwner, Observer {
-                Log.d("SAN", "viewModel.areAnyJobsActive()-->" + viewModel.areAnyJobsActive())
-                uiCommunicationListener.displayProgressBar(viewModel.areAnyJobsActive())
-            })
+        viewModel.numActiveJobs.observe(viewLifecycleOwner, Observer {
+            Log.d("SAN", "viewModel.areAnyJobsActive()-->" + viewModel.areAnyJobsActive())
+            uiCommunicationListener.displayProgressBar(viewModel.areAnyJobsActive())
+        })
 
 
-            viewModel.stateMessage.observe(viewLifecycleOwner, Observer { stateMessage ->
-                Log.d("SAN", "SubjectListFragment-->viewModel.stateMessage")
+        viewModel.stateMessage.observe(viewLifecycleOwner, Observer { stateMessage ->
+            Log.d("SAN", "SubjectListFragment-->viewModel.stateMessage")
 
-                stateMessage?.let {
+            stateMessage?.let {
 
-                    uiCommunicationListener.onResponseReceived(
-                        response = it.response,
-                        stateMessageCallback = object : StateMessageCallback {
-                            override fun removeMessageFromStack() {
-                                viewModel.clearStateMessage()
-                            }
+                uiCommunicationListener.onResponseReceived(
+                    response = it.response,
+                    stateMessageCallback = object : StateMessageCallback {
+                        override fun removeMessageFromStack() {
+                            viewModel.clearStateMessage()
                         }
-                    )
-                }
-            })
-        }
+                    }
+                )
+            }
+        })
     }
+}

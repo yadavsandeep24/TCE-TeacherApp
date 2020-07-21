@@ -2,6 +2,7 @@ package com.tce.teacherapp.util.calenderView
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View.MeasureSpec.UNSPECIFIED
 import android.view.ViewGroup
 import androidx.annotation.Px
@@ -91,7 +92,7 @@ open class CalendarView : RecyclerView {
         }
 
     /**
-     * A [ViewGroup] which is instantiated and used as the background for each month.
+     * a [ViewGroup] which is instantiated and used as the background for each month.
      * This class must have a constructor which takes only a [Context]. You should
      * exclude the name and constructor of this class from code obfuscation if enabled.
      */
@@ -213,7 +214,7 @@ open class CalendarView : RecyclerView {
     private var firstDayOfWeek: DayOfWeek? = null
 
     private var autoSize = true
-    private var sizedInternally = false
+    private var sizedInternally = true
 
     internal val isVertical: Boolean
         get() = orientation == VERTICAL
@@ -257,7 +258,7 @@ open class CalendarView : RecyclerView {
             val widthMode = MeasureSpec.getMode(widthMeasureSpec)
             val widthSize = MeasureSpec.getSize(widthMeasureSpec)
             val heightMode = MeasureSpec.getMode(heightMeasureSpec)
-
+            Log.d("SAN", "widthMode$widthMode/widthSize-->$widthSize/heightMode-->$heightMode")
             if (widthMode == UNSPECIFIED && heightMode == UNSPECIFIED) {
                 throw UnsupportedOperationException("Cannot calculate the values for day Width/Height with the current configuration.")
             }
@@ -267,7 +268,7 @@ open class CalendarView : RecyclerView {
             if (dayWidth != squareSize || dayHeight != squareSize) {
                 sizedInternally = true
                 dayWidth = squareSize
-                dayHeight = squareSize
+                dayHeight = (((squareSize *3f) / 2f) + 0.5).toInt()
                 sizedInternally = false
                 invalidateViewHolders()
             }
@@ -674,7 +675,7 @@ open class CalendarView : RecyclerView {
 
     companion object {
         /**
-         * A value for [dayWidth] and [dayHeight] which indicates that the day
+         * a value for [dayWidth] and [dayHeight] which indicates that the day
          * cells should have equal width and height. Each view's width and height
          * will be the width of the calender divided by 7.
          */

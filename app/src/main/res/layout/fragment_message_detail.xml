@@ -19,7 +19,7 @@
                 android:layout_height="20dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
-                android:src="@drawable/ic_back"></androidx.appcompat.widget.AppCompatImageView>
+                android:src="@drawable/ic_back"/>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgMessageDetail"

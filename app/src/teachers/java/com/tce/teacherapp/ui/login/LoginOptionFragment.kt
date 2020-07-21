@@ -22,7 +22,6 @@ import com.tce.teacherapp.ui.login.BiometricHelper.Companion.createBiometricProm
 import com.tce.teacherapp.ui.login.BiometricHelper.Companion.createPromptInfo
 import com.tce.teacherapp.ui.login.BiometricHelper.Companion.setupCipher
 import com.tce.teacherapp.ui.login.state.LoginStateEvent
-import com.tce.teacherapp.util.Constants
 import com.tce.teacherapp.util.Constants.Companion.DEFAULT_KEY_NAME
 import com.tce.teacherapp.util.CustomAnimationDrawableNew
 import com.tce.teacherapp.util.MessageConstant

@@ -20,7 +20,6 @@ import com.tce.teacherapp.db.entity.Event
 import com.tce.teacherapp.db.entity.LessonPlanPeriod
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.home.listeners.EventClickListener
-import com.tce.teacherapp.ui.dashboard.messages.state.MESSAGE_VIEW_STATE_BUNDLE_KEY
 import com.tce.teacherapp.ui.dashboard.planner.adapter.dailyPlannerEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.planner.listeners.LessonPlanClickListener
 import com.tce.teacherapp.ui.dashboard.planner.state.PLANNER_VIEW_STATE_BUNDLE_KEY
@@ -62,6 +61,10 @@ constructor(
         return binding.root
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        val viewState = viewModel.viewState.value
+        super.onSaveInstanceState(outState)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

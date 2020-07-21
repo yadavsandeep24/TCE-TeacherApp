@@ -6,7 +6,7 @@
     android:clipChildren="false"
     android:clipToPadding="false"
     android:visibility="visible"
-    app:cardCornerRadius="10dp"
+    app:cardCornerRadius="2dp"
     android:layout_marginTop="2dp"
     app:cardPreventCornerOverlap="false">
 
@@ -20,7 +20,7 @@
         <View
             android:layout_width="4dp"
             android:layout_height="4dp"
-            android:background="#ffd200"></View>
+            android:background="@drawable/ic_oval_yellow"/>
 
         <com.tce.teacherapp.util.RubikMediumTextview
             android:id="@+id/tv_event"

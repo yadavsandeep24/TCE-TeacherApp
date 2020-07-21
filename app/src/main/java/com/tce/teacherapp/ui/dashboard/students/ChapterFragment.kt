@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.tce.teacherapp.R
 
 /**
- * A simple [Fragment] subclass.
+ * a simple [Fragment] subclass.
  */
 class ChapterFragment : Fragment() {
 

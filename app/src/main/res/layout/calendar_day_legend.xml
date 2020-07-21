@@ -14,7 +14,7 @@
             android:layout_height="36dp"
             android:background="#fffad7"
             android:gravity="center"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <com.tce.teacherapp.util.RubikMediumTextview
                 android:id="@+id/tv_month"
@@ -40,70 +40,77 @@
             <com.tce.teacherapp.util.RubikMediumTextview
                 android:id="@+id/legendText1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="S"
+                android:background="@drawable/calender_day_weekend_border"
                 android:textColor="@color/color_black"
                 android:textSize="14sp" />
 
             <com.tce.teacherapp.util.RubikMediumTextview
                 android:id="@+id/legendText2"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="M"
+                android:background="@drawable/calender_day_border"
                 android:textColor="@color/color_black"
                 android:textSize="14sp" />
 
             <com.tce.teacherapp.util.RubikMediumTextview
                 android:id="@+id/legendText3"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="T"
+                android:background="@drawable/calender_day_border"
                 android:textColor="@color/color_black"
                 android:textSize="14sp" />
 
             <com.tce.teacherapp.util.RubikMediumTextview
                 android:id="@+id/legendText4"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="W"
+                android:background="@drawable/calender_day_border"
                 android:textColor="@color/color_black"
                 android:textSize="14sp" />
 
             <com.tce.teacherapp.util.RubikMediumTextview
                 android:id="@+id/legendText5"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="T"
+                android:background="@drawable/calender_day_border"
                 android:textColor="@color/color_black"
                 android:textSize="14sp" />
 
             <com.tce.teacherapp.util.RubikMediumTextview
                 android:id="@+id/legendText6"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="F"
+                android:background="@drawable/calender_day_border"
                 android:textColor="@color/color_black"
                 android:textSize="14sp" />
 
             <com.tce.teacherapp.util.RubikMediumTextview
                 android:id="@+id/legendText7"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="S"
+                android:background="@drawable/calender_day_weekend_border"
                 android:textColor="@color/color_black"
                 android:textSize="14sp" />
 

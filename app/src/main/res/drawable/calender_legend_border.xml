@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/calender_item_view_bg_color" />
+    <stroke
+        android:color="#f0f0ff"
+        android:width="0.6dp" />
+</shape>

@@ -39,7 +39,11 @@
         android:id="@+id/monthlyPlannerFragment"
         android:name="com.tce.teacherapp.ui.dashboard.planner.MonthlyPlannerFragment"
         android:label="fragment_monthly_planner"
-        tools:layout="@layout/fragment_monthly_planner" />
+        tools:layout="@layout/fragment_monthly_planner" >
+        <action
+            android:id="@+id/action_monthlyPlannerFragment_to_plannerFragment"
+            app:destination="@id/plannerFragment" />
+    </fragment>
     <fragment
         android:id="@+id/eventDisplayFragment"
         android:name="com.tce.teacherapp.ui.dashboard.planner.EventDisplayFragment"

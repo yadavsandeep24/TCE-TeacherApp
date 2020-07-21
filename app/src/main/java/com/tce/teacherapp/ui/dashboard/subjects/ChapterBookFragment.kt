@@ -15,6 +15,7 @@ import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.EpoxyVisibilityTracker
 import com.airbnb.epoxy.addGlidePreloader
@@ -33,6 +34,7 @@ import com.tce.teacherapp.util.StateMessageCallback
 import com.tce.teacherapp.util.Utility
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
+import java.util.*
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
@@ -84,6 +86,7 @@ constructor(
         (activity as DashboardActivity).setCustomToolbar(R.layout.subject_list_top_bar)
         (activity as DashboardActivity).expandAppBar(true)
         (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
+        (activity as DashboardActivity).showHideBottomBar(true)
 
         val topBar = (activity as DashboardActivity).binding.toolBar.findViewById<RelativeLayout>(R.id.top_container)
         topBar.setBackgroundColor(resources.getColor(R.color.subject_actionbar_color))
@@ -169,12 +172,29 @@ constructor(
                                 title(chapter.label)
                                 chapter.image?.let { it1 -> imageUrl(it1) }
                                 try {
-                                    Utility.getDrawable("default_chapter", requireContext())
-                                        ?.let { it1 -> imageDrawable(it1) }
-                                }catch (e : Exception) {
+                                    var name = chapter.icon?.substring(0, chapter.icon!!.lastIndexOf("."))
+                                        ?.replace("-","_")
+                                    if(chapter.icon.isNullOrEmpty()){
+                                        name ="default_chapter"
+                                    }
+                                    Log.d("SAN", "name-->$name")
+                                    if(Utility.getDrawable(name?.toLowerCase(Locale.ROOT),
+                                            requireContext()) == null){
+                                        Utility.getDrawable("default_chapter", requireContext())?.let { it1 -> imageDrawable(it1) }
+                                    }else {
+                                        Utility.getDrawable(
+                                            name?.toLowerCase(Locale.ROOT),
+                                            requireContext()
+                                        )?.let { it1 -> imageDrawable(it1) }
+                                    }
+                                } catch (e: Exception) {
                                     e.printStackTrace()
                                 }
                                 listener {
+                                    val bundle = Bundle()
+                                    bundle.putParcelable("chapterdata", chapter)
+                                    findNavController().navigate(R.id.action_selectChapterBookFragment_to_chapterResourceSelectionFragment,bundle)
+
                                 }
                             }
                         }

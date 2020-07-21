@@ -31,7 +31,7 @@ class ChapterResourceTypeResponse(
             icon = icon,
             id = id,
             label = label,
-            resourceList = toResourceList(id, resourceList),
+            resourceList = toResourceList(id, resourceList,chapterId),
             treatment = treatment,
             type = type,
             chapterId = chapterId,
@@ -44,11 +44,12 @@ class ChapterResourceTypeResponse(
 
     private fun toResourceList(
         chapterResourceTypeId: String,
-        resources: List<ResourceResponse>
+        resources: List<ResourceResponse>,
+        chapterId: String
     ): List<Resource> {
         val resourceList: ArrayList<Resource> = ArrayList()
         for (resourceResponse in resources) {
-            resourceList.add(resourceResponse.toResource(chapterResourceTypeId))
+            resourceList.add(resourceResponse.toResource(chapterResourceTypeId,chapterId))
         }
         return resourceList
     }

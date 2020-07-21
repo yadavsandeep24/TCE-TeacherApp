@@ -43,7 +43,7 @@ import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
 
 /**
- * A simple [Fragment] subclass.
+ * a simple [Fragment] subclass.
  */
 @ExperimentalCoroutinesApi
 @FlowPreview

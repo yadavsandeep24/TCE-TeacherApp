@@ -1,12 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/video_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
-    </FrameLayout>
+            android:layout_height="wrap_content">
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_video_thumb"
+                android:layout_width="match_parent"
+                android:layout_height="211dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/topic_resource_bg" />
+
+            <TextView
+                android:id="@+id/tv_back"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="20dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:background="@drawable/ic_thick_arrow_left" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_play"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_video_play" />
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="25dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.tce.teacherapp.util.RubikMediumTextview
+                    android:id="@+id/tv_title"
+                    style="@style/TextAppearance.MaterialComponents.Headline5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="A Day in the Zoo - Modality"
+                    android:textColor="@color/dark"
+                    android:textSize="18dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:background="@drawable/ic_folder" />
+
+                    <com.tce.teacherapp.util.RubikMediumTextview
+                        android:id="@+id/tv_tagging_level"
+                        style="@style/TextAppearance.AppCompat.Body1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="Year  >  Subject  >  Book  >  Chapter"
+                        android:textColor="@color/dark"
+                        android:textSize="@dimen/font_size_12_dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:id="@+id/vw_resource_icon"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:background="@drawable/ic_video" />
+
+                    <com.tce.teacherapp.util.RubikMediumTextview
+                        android:id="@+id/tv_resourceType_label"
+                        style="@style/TextAppearance.AppCompat.Body1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="Video"
+                        android:textColor="@color/dark"
+                        android:textSize="@dimen/font_size_12_dp" />
+
+                </LinearLayout>
+
+                <com.tce.teacherapp.util.RubikMediumTextview
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Skills:"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/font_size_12_dp" />
+
+                <LinearLayout
+                    android:id="@+id/lnr_skills"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:visibility="gone"
+                    android:orientation="horizontal" />
+
+                <com.tce.teacherapp.util.RubikMediumTextview
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:text="Description:"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/font_size_12_dp" />
+
+                <com.tce.teacherapp.util.RubikMediumTextview
+                    android:id="@+id/tv_desc"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididuct  ut labore et dolorare magna aliqua.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+                    android:textColor="@color/blue_grey"
+                    android:textSize="@dimen/font_size_12_dp" />
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
 </layout>
