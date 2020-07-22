@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentEventDisplayBinding
 import com.tce.teacherapp.db.entity.Event
@@ -67,7 +68,13 @@ class EventDisplayFragment : Fragment() {
             binding.tvDate.setText(eventVo!!.date)
             binding.tvNote.setText(eventVo!!.note)
             binding.tvPreview.text = Html.fromHtml("<u>Preview Here</u>")
-            binding.tvImgEvent.setText(eventVo!!.eventImageUrl)
+            eventVo!!.eventImageUrl
+            binding.tvPreview.setOnClickListener(View.OnClickListener {
+                val bundle = Bundle()
+                bundle.putString("url",eventVo!!.eventImageUrl)
+                findNavController().navigate(R.id.action_eventDisplayFragment_to_imageContentFragment2,bundle)
+            })
+            binding.tvImgEvent.setText("SportsDay.jpg")
         }else{
             binding.eventContainer.visibility = View.GONE
             binding.todoContainer.visibility = View.VISIBLE

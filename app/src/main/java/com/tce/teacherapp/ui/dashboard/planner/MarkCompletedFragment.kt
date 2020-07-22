@@ -1,7 +1,9 @@
 package com.tce.teacherapp.ui.dashboard.planner
 
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
@@ -24,10 +26,12 @@ import com.tce.teacherapp.databinding.FragmentEventDisplayBinding
 import com.tce.teacherapp.databinding.FragmentMarkCompletedBinding
 import com.tce.teacherapp.db.entity.Event
 import com.tce.teacherapp.db.entity.LessonPlanPeriod
+import com.tce.teacherapp.db.entity.LessonPlanResource
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.planner.adapter.lessonPlanEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.planner.listeners.LessonPlanClickListener
 import com.tce.teacherapp.ui.login.LauncherActivity
+import com.tce.teacherapp.util.PreferenceKeys
 import com.tce.teacherapp.util.calenderView.utils.yearMonth
 import kotlinx.android.synthetic.main.calendar_day_legend.view.*
 import org.jetbrains.anko.childrenSequence
@@ -48,6 +52,9 @@ class MarkCompletedFragment : Fragment(), LessonPlanClickListener {
     private val today = LocalDate.now()
     private val monthTitleFormatter = DateTimeFormatter.ofPattern("MMMM")
 
+    private lateinit var  sharedPreference : SharedPreferences
+    private lateinit var editor : SharedPreferences.Editor
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -63,6 +70,11 @@ class MarkCompletedFragment : Fragment(), LessonPlanClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        sharedPreference =  requireActivity().getSharedPreferences("MARK_COUNT", Context.MODE_PRIVATE)
+        editor = sharedPreference.edit()
+        editor.putInt("mark_count",0)
+        editor.commit()
+
         val lessonPlanPeriod = arguments?.getParcelable("lessonPlanData") as LessonPlanPeriod?
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             activity?.window!!.statusBarColor = resources.getColor(R.color.color_black, null)
@@ -85,8 +97,6 @@ class MarkCompletedFragment : Fragment(), LessonPlanClickListener {
         tvCount =
             ((activity as DashboardActivity).binding.toolBar.findViewById(R.id.tvCount) as TextView)
 
-        tvDone.visibility = View.VISIBLE
-        tvCount.visibility = View.VISIBLE
 
         tvBack.setOnClickListener(View.OnClickListener {
             (activity as DashboardActivity).onBackPressed()
@@ -127,7 +137,9 @@ class MarkCompletedFragment : Fragment(), LessonPlanClickListener {
 
             val txtTitle = dialog.findViewById(R.id.tv_title) as TextView
 
+            var count : Int  = sharedPreference.getInt("mark_count",0)
 
+            txtTitle.setText(count.toString() + " Resources Marked!")
         })
 
 
@@ -150,6 +162,8 @@ class MarkCompletedFragment : Fragment(), LessonPlanClickListener {
 
             val imgPrevious = dialog.findViewById(R.id.img_previous) as AppCompatImageView
             val imgNext = dialog.findViewById(R.id.img_next) as AppCompatImageView
+
+            legendLayout.month_view.visibility = View.GONE
 
             val daysOfWeek = daysOfWeekFromLocale()
             legendLayout.day_view.childrenSequence().forEachIndexed { index, view ->
@@ -243,12 +257,38 @@ class MarkCompletedFragment : Fragment(), LessonPlanClickListener {
         })
     }
 
+    override fun onResume() {
+        super.onResume()
+
+    }
     override fun onLessonPlanClick(lessonPlanPeriod: LessonPlanPeriod) {
         TODO("Not yet implemented")
     }
 
     override fun onMarkCompletedClick(lessonPlanPeriod: LessonPlanPeriod) {
         TODO("Not yet implemented")
+    }
+
+    override fun onResourceMarkCompletedChecked(resource: LessonPlanResource, isChecked : Boolean) {
+        if(isChecked){
+            var count : Int  = sharedPreference.getInt("mark_count",0)
+            editor.putInt("mark_count",count + 1)
+            editor.commit()
+           }else{
+            var count : Int  = sharedPreference.getInt("mark_count",0)
+            editor.putInt("mark_count",count - 1)
+            editor.commit()
+        }
+
+        var count : Int  = sharedPreference.getInt("mark_count",0)
+        if(count > 0){
+            tvDone.visibility = View.VISIBLE
+            tvCount.visibility = View.VISIBLE
+            tvCount.setText(count.toString())
+        }  else{
+            tvDone.visibility = View.GONE
+            tvCount.visibility = View.GONE
+        }
     }
 
 }

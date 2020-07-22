@@ -49,7 +49,11 @@
         android:name="com.tce.teacherapp.ui.dashboard.planner.EventDisplayFragment"
         android:label="fragment_event_display"
         tools:layout="@layout/fragment_event_display"
-        />
+        >
+        <action
+            android:id="@+id/action_eventDisplayFragment_to_imageContentFragment2"
+            app:destination="@id/imageContentFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/lessonPlanDisplayFragment"
         android:name="com.tce.teacherapp.ui.dashboard.planner.LessonPlanDisplayFragment"
@@ -60,4 +64,8 @@
         android:name="com.tce.teacherapp.ui.dashboard.planner.MarkCompletedFragment"
         android:label="fragment_mark_completed"
         tools:layout="@layout/fragment_mark_completed" />
+    <fragment
+        android:id="@+id/imageContentFragment2"
+        android:name="com.tce.teacherapp.ui.dashboard.planner.ImageContentFragment"
+        android:label="ImageContentFragment" />
 </navigation>

@@ -35,6 +35,11 @@ constructor(
                 MarkCompletedFragment()
             }
 
+            ImageContentFragment::class.java.name -> {
+                ImageContentFragment(viewModelFactory)
+            }
+
+
             else -> {
                 PlannerFragment(viewModelFactory)
             }

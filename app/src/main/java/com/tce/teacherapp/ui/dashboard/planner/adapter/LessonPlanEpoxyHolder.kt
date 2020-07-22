@@ -69,6 +69,7 @@ abstract class LessonPlanEpoxyHolder : EpoxyModelWithHolder<PlanHolder>() {
                         )?.let { it1 ->
                             imageDrawable(it1)
                         }
+                        lessonPLanClickListener(lessonPLanClickListener)
                     }
 
                 }

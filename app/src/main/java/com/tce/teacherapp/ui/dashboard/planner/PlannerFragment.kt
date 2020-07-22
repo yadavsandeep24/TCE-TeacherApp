@@ -21,10 +21,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentPlannerBinding
-import com.tce.teacherapp.db.entity.DailyPlanner
-import com.tce.teacherapp.db.entity.Event
-import com.tce.teacherapp.db.entity.EventData
-import com.tce.teacherapp.db.entity.LessonPlanPeriod
+import com.tce.teacherapp.db.entity.*
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.home.listeners.EventClickListener
 import com.tce.teacherapp.ui.dashboard.messages.state.MESSAGE_VIEW_STATE_BUNDLE_KEY
@@ -331,6 +328,10 @@ constructor(
             R.id.action_plannerFragment_to_markCompletedFragment,
             bundle
         )
+    }
+
+    override fun onResourceMarkCompletedChecked(resource: LessonPlanResource, isChecked : Boolean) {
+        TODO("Not yet implemented")
     }
 
 }

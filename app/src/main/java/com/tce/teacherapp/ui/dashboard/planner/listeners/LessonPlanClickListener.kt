@@ -6,4 +6,5 @@ import com.tce.teacherapp.db.entity.LessonPlanResource
 interface LessonPlanClickListener {
     fun onLessonPlanClick(lessonPlanPeriod: LessonPlanPeriod)
     fun onMarkCompletedClick(lessonPlanPeriod: LessonPlanPeriod)
+    fun onResourceMarkCompletedChecked(resource: LessonPlanResource, isChecked : Boolean)
 }

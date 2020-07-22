@@ -1,5 +1,6 @@
 package com.tce.teacherapp.ui.dashboard.planner.adapter
 
+import android.content.Context
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.CheckBox
@@ -12,6 +13,7 @@ import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.tce.teacherapp.R
 import com.tce.teacherapp.db.entity.LessonPlanResource
+import com.tce.teacherapp.ui.dashboard.planner.listeners.LessonPlanClickListener
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
 import com.tce.teacherapp.util.Utility
 
@@ -26,6 +28,9 @@ abstract class LessonPlanChildItemEpoxyHolder : EpoxyModelWithHolder<PlanChildHo
 
     @EpoxyAttribute
     lateinit var resource:LessonPlanResource
+
+    @EpoxyAttribute
+    lateinit var lessonPLanClickListener: LessonPlanClickListener
 
     override fun bind(holder: PlanChildHolder) {
         super.bind(holder)
@@ -51,7 +56,10 @@ abstract class LessonPlanChildItemEpoxyHolder : EpoxyModelWithHolder<PlanChildHo
         holder.tvTitle.setText(resource.title)
         holder.imgIcon.background = imageDrawable
 
+
+
         holder.chkCompleted.setOnCheckedChangeListener{ buttonView, isChecked ->
+            lessonPLanClickListener.onResourceMarkCompletedChecked(resource, isChecked)
            if(isChecked){
                holder.chkContainer.background = holder.chkContainer.context.resources.getDrawable(R.drawable.green_left_bottom_rounded)
            }else{
