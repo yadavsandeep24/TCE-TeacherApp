@@ -2,6 +2,7 @@ package com.tce.teacherapp.ui.dashboard.planner
 
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,16 +11,26 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.epoxy.EpoxyVisibilityTracker
 import com.airbnb.epoxy.addGlidePreloader
 import com.airbnb.epoxy.glidePreloader
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentPlannerBinding
+import com.tce.teacherapp.db.entity.DailyPlanner
 import com.tce.teacherapp.db.entity.Event
+import com.tce.teacherapp.db.entity.EventData
 import com.tce.teacherapp.db.entity.LessonPlanPeriod
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.home.listeners.EventClickListener
+import com.tce.teacherapp.ui.dashboard.messages.state.MESSAGE_VIEW_STATE_BUNDLE_KEY
+import com.tce.teacherapp.ui.dashboard.planner.adapter.DailyPlannerRvAdapter
+import com.tce.teacherapp.ui.dashboard.planner.adapter.OnLoadMoreListener
+import com.tce.teacherapp.ui.dashboard.planner.adapter.RecyclerViewLoadMoreScroll
 import com.tce.teacherapp.ui.dashboard.planner.adapter.dailyPlannerEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.planner.listeners.LessonPlanClickListener
 import com.tce.teacherapp.ui.dashboard.planner.state.PLANNER_VIEW_STATE_BUNDLE_KEY
@@ -37,10 +48,15 @@ class PlannerFragment
 @Inject
 constructor(
     viewModelFactory: ViewModelProvider.Factory
-) : BasePlannerFragment(R.layout.fragment_planner, viewModelFactory), EventClickListener ,
+) : BasePlannerFragment(R.layout.fragment_planner, viewModelFactory), EventClickListener,
     LessonPlanClickListener {
 
-    private lateinit var binding : FragmentPlannerBinding
+    private lateinit var binding: FragmentPlannerBinding
+    lateinit var itemsCells: ArrayList<DailyPlanner>
+    lateinit var loadMoreItemsCells: ArrayList<DailyPlanner>
+    lateinit var adapterLinear: DailyPlannerRvAdapter
+    lateinit var scrollListener: RecyclerViewLoadMoreScroll
+    lateinit var mLayoutManager: RecyclerView.LayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,6 +95,19 @@ constructor(
 
         viewModel.setStateEvent(PlannerStateEvent.GetPlannerData(""))
 
+        //** Set the data for our ArrayList
+        setItemsData(getPlannerList(1))
+
+        //** Set the adapterLinear of the RecyclerView
+        setAdapter()
+
+        //** Set the Layout Manager of the RecyclerView
+        setRVLayoutManager()
+
+        //** Set the scrollListerner of the RecyclerView
+        setRVScrollListener()
+
+
         binding.rvMainList.layoutManager = GridLayoutManager(activity, 1)
         binding.rvMainList.setHasFixedSize(true)
         val epoxyVisibilityTracker = EpoxyVisibilityTracker()
@@ -92,22 +121,24 @@ constructor(
 
         binding.dailyContainer.setOnClickListener(View.OnClickListener {
             binding.monthlyContainer.background = null
-            binding.dailyContainer.background =  resources.getDrawable(R.drawable.bg_lessaon_daily_left)
+            binding.dailyContainer.background =
+                resources.getDrawable(R.drawable.bg_lessaon_daily_left)
             binding.tvDaily.setTextColor(resources.getColor(R.color.white))
             binding.tvMonthly.setTextColor(resources.getColor(R.color.blue))
-            binding.imgDaily.background =  resources.getDrawable(R.drawable.ic_day)
-            binding.imgMonthly.background =  resources.getDrawable(R.drawable.ic_month_blue)
+            binding.imgDaily.background = resources.getDrawable(R.drawable.ic_day)
+            binding.imgMonthly.background = resources.getDrawable(R.drawable.ic_month_blue)
 
 
         })
 
         binding.monthlyContainer.setOnClickListener(View.OnClickListener {
-            binding.monthlyContainer.background = resources.getDrawable(R.drawable.bg_lessaon_daily_right)
+            binding.monthlyContainer.background =
+                resources.getDrawable(R.drawable.bg_lessaon_daily_right)
             binding.dailyContainer.background = null
             binding.tvDaily.setTextColor(resources.getColor(R.color.blue))
             binding.tvMonthly.setTextColor(resources.getColor(R.color.white))
-            binding.imgDaily.background =  resources.getDrawable(R.drawable.ic_day_blue)
-            binding.imgMonthly.background =  resources.getDrawable(R.drawable.ic_month)
+            binding.imgDaily.background = resources.getDrawable(R.drawable.ic_day_blue)
+            binding.imgMonthly.background = resources.getDrawable(R.drawable.ic_month)
             findNavController().navigate(
                 R.id.action_plannerFragment_to_monthlyPlannerFragment
             )
@@ -115,6 +146,99 @@ constructor(
 
         subscribeObservers()
 
+    }
+
+    private fun setItemsData(list: ArrayList<DailyPlanner>) {
+        itemsCells = ArrayList()
+        itemsCells.addAll(list)
+    }
+
+    private fun setAdapter() {
+        adapterLinear = DailyPlannerRvAdapter(itemsCells, this, this)
+        adapterLinear.notifyDataSetChanged()
+        binding.rvList.adapter = adapterLinear
+    }
+
+    private fun setRVLayoutManager() {
+        mLayoutManager = LinearLayoutManager(requireContext())
+        binding.rvList.layoutManager = mLayoutManager
+        binding.rvList.setHasFixedSize(true)
+    }
+
+    private fun setRVScrollListener() {
+        mLayoutManager = LinearLayoutManager(requireContext())
+        scrollListener = RecyclerViewLoadMoreScroll(mLayoutManager as LinearLayoutManager)
+        scrollListener.setOnLoadMoreListener(object :
+            OnLoadMoreListener {
+            override fun onLoadMore() {
+                LoadMoreData()
+            }
+        })
+        binding.rvList.addOnScrollListener(scrollListener)
+    }
+
+    private fun LoadMoreData() {
+        //Add the Loading View
+        adapterLinear.addLoadingView()
+        //Create the loadMoreItemsCells Arraylist
+        loadMoreItemsCells = ArrayList()
+        //Get the number of the current Items of the main Arraylist
+        val start = adapterLinear.itemCount
+        //Load 16 more items
+        val end = start + 1
+        //Use Handler if the items are loading too fast.
+        //If you remove it, the data will load so fast that you can't even see the LoadingView
+        Handler().postDelayed({
+            loadMoreItemsCells = getPlannerList(end)
+            //Remove the Loading View
+            adapterLinear.removeLoadingView()
+            //We adding the data to our main ArrayList
+            adapterLinear.addData(loadMoreItemsCells)
+            //Change the boolean isLoading to false
+            scrollListener.setLoaded()
+            //Update the recyclerView in the main thread
+            binding.rvList.post {
+                adapterLinear.notifyDataSetChanged()
+            }
+        }, 3000)
+
+    }
+
+    private fun getPlannerList(count: Int): ArrayList<DailyPlanner> {
+        var jsonString = requireActivity().assets.open("json/dailyPlanner.json").bufferedReader()
+            .use { it.readText() }
+        val gson = Gson()
+        val listPlanner = object : TypeToken<ArrayList<DailyPlanner>>() {}.type
+        var list3: ArrayList<DailyPlanner> = gson.fromJson(jsonString, listPlanner)
+
+
+        for (j in 0 until list3.size) {
+            val selectedEventList: ArrayList<Event> = ArrayList()
+
+            val isShowLess = false
+            var nextEventCount = 4
+            if (list3.get(j).eventList.size > 3) {
+                for (i in 0 until 3) {
+                    selectedEventList.add(list3.get(j).eventList[i])
+                }
+                if (list3.get(j).eventList.size < 7) {
+                    nextEventCount = list3.get(j).eventList.size - 3
+                }
+            } else {
+                for (i in 0 until list3.get(j).eventList.size) {
+                    selectedEventList.add(list3.get(j).eventList[i])
+                }
+                nextEventCount = 0
+            }
+            val eventData = EventData(isShowLess, nextEventCount, selectedEventList)
+            list3.get(j).eventData = eventData
+        }
+
+        var plannerList = ArrayList<DailyPlanner>()
+        for (i in 0 until count) {
+            plannerList.add(list3.get(i))
+        }
+        return plannerList;
     }
 
     private fun subscribeObservers() {

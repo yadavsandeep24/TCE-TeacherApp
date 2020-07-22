@@ -123,8 +123,18 @@
             android:id="@+id/rv_main_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="gone"
             android:layout_below="@+id/today_date_container">
 
         </com.airbnb.epoxy.EpoxyRecyclerView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/today_date_container">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
     </RelativeLayout>
 </layout>
