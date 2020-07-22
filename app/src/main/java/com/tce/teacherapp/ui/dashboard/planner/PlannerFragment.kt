@@ -235,9 +235,8 @@ constructor(
         }
 
         var plannerList = ArrayList<DailyPlanner>()
-        for (i in 0 until count) {
-            plannerList.add(list3.get(i))
-        }
+        plannerList.add(list3.get(count - 1))
+
         return plannerList;
     }
 

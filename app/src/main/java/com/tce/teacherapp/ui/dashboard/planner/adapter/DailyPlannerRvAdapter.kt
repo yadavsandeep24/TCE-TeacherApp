@@ -24,7 +24,9 @@ import com.tce.teacherapp.ui.dashboard.home.listeners.EventClickListener
 import com.tce.teacherapp.ui.dashboard.planner.listeners.LessonPlanClickListener
 import com.tce.teacherapp.util.Constants
 import com.tce.teacherapp.util.Utility
+import kotlinx.android.synthetic.main.list_item_planner.view.*
 import kotlinx.android.synthetic.main.progress_loading.view.*
+import kotlinx.android.synthetic.main.progress_loading.view.progressbar
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -33,42 +35,12 @@ import kotlin.collections.ArrayList
 class DailyPlannerRvAdapter(private var itemsCells: ArrayList<DailyPlanner>,
                            private var  evenClickListener: EventClickListener,
                            private var lessonPLanClickListener: LessonPlanClickListener
-) : RecyclerView.Adapter<DailyPlannerRvAdapter.ItemViewHolder>() {
+) : RecyclerView.Adapter< RecyclerView.ViewHolder>() {
 
 
     lateinit var mcontext: Context
 
-    class ItemViewHolder(itemView: View, viewType: Int) : RecyclerView.ViewHolder(itemView){
-        internal var tvShowMore: TextView
-        internal var ivShowMore: ImageView
-        internal var tvDate: TextView
-        internal var rvEvent: EpoxyRecyclerView
-        internal var rvBirthday: EpoxyRecyclerView
-        internal var rvLessonPLan: EpoxyRecyclerView
-        internal var markCompletedContainer: LinearLayout
-        internal var progressLoading: LinearLayout
-        internal var dataContainer: LinearLayout
-
-        init {
-            tvShowMore = itemView.findViewById(R.id.tvShowMore)
-            ivShowMore = itemView.findViewById(R.id.iv_indicator)
-            tvDate = itemView.findViewById(R.id.tv_date)
-            rvEvent = itemView.findViewById(R.id.rv_event)
-            rvBirthday = itemView.findViewById(R.id.rv_birthday)
-            rvLessonPLan = itemView.findViewById(R.id.rv_lessons)
-            markCompletedContainer = itemView.findViewById(R.id.mark_completed_container)
-            progressLoading = itemView.findViewById(R.id.progress_loading)
-            dataContainer = itemView.findViewById(R.id.data_container)
-            if (viewType == Constants.VIEW_TYPE_ITEM) {
-                dataContainer.visibility = View.VISIBLE
-                progressLoading.visibility = View.GONE
-            }else{
-                progressLoading.visibility = View.VISIBLE
-            }
-        }
-
-
-    }
+    class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     class LoadingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -97,20 +69,20 @@ class DailyPlannerRvAdapter(private var itemsCells: ArrayList<DailyPlanner>,
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):  RecyclerView.ViewHolder {
         mcontext = parent.context
-       // return if (viewType == Constants.VIEW_TYPE_ITEM) {
+        return if (viewType == Constants.VIEW_TYPE_ITEM) {
             val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_planner, parent, false)
-           return ItemViewHolder(view, viewType)
-       /* } else {
+           return ItemViewHolder(view)
+        } else {
             val view = LayoutInflater.from(mcontext).inflate(R.layout.progress_loading, parent, false)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 view.progressbar.indeterminateDrawable.colorFilter = BlendModeColorFilter(Color.WHITE, BlendMode.SRC_ATOP)
             } else {
                 view.progressbar.indeterminateDrawable.setColorFilter(Color.WHITE, PorterDuff.Mode.MULTIPLY)
             }
-            ItemViewHolder(view)
-        }*/
+            LoadingViewHolder(view)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -125,41 +97,42 @@ class DailyPlannerRvAdapter(private var itemsCells: ArrayList<DailyPlanner>,
         }
     }
 
-    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder.itemViewType == Constants.VIEW_TYPE_ITEM) {
             var dailyPlanner = itemsCells[position]
-            holder.tvDate.setText(dailyPlanner.date)
+            holder.itemView.tv_date.setText(dailyPlanner.date)
 
             var nextEventCount = dailyPlanner.eventData.nextEventCount
 
+
             if(dailyPlanner.eventData.isShowLess){
-                holder.tvShowMore.text = Html.fromHtml("<u>Show Less</u>")
-                holder.ivShowMore.background = holder.rvEvent.context.resources.getDrawable(R.drawable.ic_line)
+                holder.itemView.tvShowMore.text = Html.fromHtml("<u>Show Less</u>")
+                holder.itemView.iv_indicator.background = holder.itemView.rv_event.context.resources.getDrawable(R.drawable.ic_line)
             }else {
-                holder.tvShowMore.text = Html.fromHtml("<u>Show More ($nextEventCount)</u>")
-                holder.ivShowMore.background = holder.rvEvent.context.resources.getDrawable(R.drawable.ic_add)
+                holder.itemView.tvShowMore.text = Html.fromHtml("<u>Show More ($nextEventCount)</u>")
+                holder.itemView.iv_indicator.background = holder.itemView.rv_event.context.resources.getDrawable(R.drawable.ic_add)
 
             }
-            holder.tvShowMore.setOnClickListener{evenClickListener.onEventShowMoreClick(dailyPlanner.eventData.isShowLess)}
+            holder.itemView.tvShowMore.setOnClickListener{evenClickListener.onEventShowMoreClick(dailyPlanner.eventData.isShowLess)}
 
-            holder.markCompletedContainer.setOnClickListener(View.OnClickListener {
+            holder.itemView.mark_completed_container.setOnClickListener(View.OnClickListener {
                 lessonPLanClickListener.onMarkCompletedClick(dailyPlanner.lessonPlan.PeriodList.get(0))
             })
 
             if(SimpleDateFormat("dd MMMM yyyy EEEE").format(Date()).equals(dailyPlanner.date, ignoreCase = true)){
-                holder.tvDate.visibility = View.GONE
+                holder.itemView.tv_date.visibility = View.GONE
             }else{
-                holder.tvDate.visibility = View.VISIBLE
+                holder.itemView.tv_date.visibility = View.VISIBLE
             }
 
-            val linearLayoutManager1 = LinearLayoutManager(holder.rvEvent.context)
+            val linearLayoutManager1 = LinearLayoutManager(holder.itemView.rv_event.context)
             linearLayoutManager1.orientation = LinearLayoutManager.VERTICAL
-            holder.rvEvent.apply {
+            holder.itemView.rv_event.apply {
                 layoutManager = linearLayoutManager1
                 setHasFixedSize(true)
             }
 
-            holder.rvEvent.withModels {
+            holder.itemView.rv_event.withModels {
                 dailyPlanner.eventData.eventList?.let {
                     for (event in it){
                         lessonEventEpoxyHolder {
@@ -175,7 +148,7 @@ class DailyPlannerRvAdapter(private var itemsCells: ArrayList<DailyPlanner>,
                                 event.imageUrl.substring(
                                     0,
                                     event.imageUrl.lastIndexOf(".")
-                                ), holder.rvEvent.context
+                                ), holder.itemView.rv_event.context
                             )?.let { it1 ->
                                 imageDrawable(it1)
                             }
@@ -190,14 +163,14 @@ class DailyPlannerRvAdapter(private var itemsCells: ArrayList<DailyPlanner>,
             }
 
 
-            val linearLayoutManager2 = LinearLayoutManager(holder.rvBirthday.context)
+            val linearLayoutManager2 = LinearLayoutManager(holder.itemView.rv_birthday.context)
             linearLayoutManager2.orientation = LinearLayoutManager.HORIZONTAL
-            holder.rvBirthday.apply {
+            holder.itemView.rv_birthday.apply {
                 layoutManager = linearLayoutManager2
                 setHasFixedSize(true)
             }
 
-            holder.rvBirthday.withModels {
+            holder.itemView.rv_birthday.withModels {
                 dailyPlanner.birthdayList?.let {
                     for (event in it){
                         birthdayItemEpoxyHolder {
@@ -211,14 +184,14 @@ class DailyPlannerRvAdapter(private var itemsCells: ArrayList<DailyPlanner>,
 
             }
 
-            val linearLayoutManager3 = LinearLayoutManager(holder.rvLessonPLan.context)
+            val linearLayoutManager3 = LinearLayoutManager(holder.itemView.rv_lessons.context)
             linearLayoutManager3.orientation = LinearLayoutManager.VERTICAL
-            holder.rvLessonPLan.apply {
+            holder.itemView.rv_lessons.apply {
                 layoutManager = linearLayoutManager3
                 setHasFixedSize(true)
             }
 
-            holder.rvLessonPLan.withModels {
+            holder.itemView.rv_lessons.withModels {
                 dailyPlanner.lessonPlan?.let {
                     for (event in dailyPlanner.lessonPlan.PeriodList){
                         lessonPlanEpoxyHolder {
