@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/data_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.tce.teacherapp.util.RubikMediumTextview
+            android:id="@+id/tv_date"
+            android:layout_width="250dp"
+            android:layout_height="26dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_grey_fill_rounded"
+            android:gravity="center"
+            android:text="date"
+            android:textColor="@color/white">
+
+        </com.tce.teacherapp.util.RubikMediumTextview>
+
+        <com.airbnb.epoxy.EpoxyRecyclerView
+            android:id="@+id/rv_event"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+        </com.airbnb.epoxy.EpoxyRecyclerView>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/grey">
+
+        </View>
+
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#f5f8ff"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/lessons">
+
+                </androidx.appcompat.widget.AppCompatImageView>
+
+                <com.tce.teacherapp.util.RubikMediumTextview
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="Lessons"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/font_size_14_dp">
+
+                </com.tce.teacherapp.util.RubikMediumTextview>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/mark_completed_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_green_tick">
+
+                </androidx.appcompat.widget.AppCompatImageView>
+
+                <com.tce.teacherapp.util.RubikMediumTextview
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="Mark Completed"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/font_size_12_dp">
+
+                </com.tce.teacherapp.util.RubikMediumTextview>
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <com.airbnb.epoxy.EpoxyRecyclerView
+            android:id="@+id/rv_lessons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#f5f8ff"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="15dp">
+
+        </com.airbnb.epoxy.EpoxyRecyclerView>
+    </LinearLayout>
+
+
+
+</LinearLayout>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_resource"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:visibility="visible"
+        app:cardCornerRadius="20dp"
+        app:cardPreventCornerOverlap="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/lesson_plan_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.tce.teacherapp.util.RubikMediumTextview
+                    android:id="@+id/tv_sequence"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/font_size_12_dp"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:background="@drawable/circular_border_grey"
+                    android:layout_gravity="center_vertical">
+
+                </com.tce.teacherapp.util.RubikMediumTextview>
+
+                <com.tce.teacherapp.util.RubikMediumTextview
+                    android:id="@+id/tv_res_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="?android:attr/actionBarSize"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:text="Circle Time"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/dark_blackish_blue"
+                    android:textSize="@dimen/font_size_12_dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="-">
+
+                </TextView>
+
+                <com.tce.teacherapp.util.RubikRegularTextview
+                    android:id="@+id/tv_res_sub_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="?android:attr/actionBarSize"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:text="Conversation"
+                    android:textColor="@color/dark_blackish_blue"
+                    android:textSize="@dimen/font_size_12_dp"/>
+
+
+            </LinearLayout>
+
+            <com.airbnb.epoxy.EpoxyRecyclerView
+                android:id="@+id/rv_resource_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#e1e6f0"
+                android:minHeight="150dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="20dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="20dp">
+
+            </com.airbnb.epoxy.EpoxyRecyclerView>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</RelativeLayout>

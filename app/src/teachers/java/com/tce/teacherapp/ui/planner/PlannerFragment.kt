@@ -24,10 +24,6 @@ import com.tce.teacherapp.databinding.FragmentPlannerBinding
 import com.tce.teacherapp.db.entity.*
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.home.listeners.EventClickListener
-import com.tce.teacherapp.ui.dashboard.messages.state.MESSAGE_VIEW_STATE_BUNDLE_KEY
-import com.tce.teacherapp.ui.dashboard.planner.adapter.DailyPlannerRvAdapter
-import com.tce.teacherapp.ui.dashboard.planner.adapter.OnLoadMoreListener
-import com.tce.teacherapp.ui.dashboard.planner.adapter.RecyclerViewLoadMoreScroll
 import com.tce.teacherapp.ui.dashboard.planner.adapter.dailyPlannerEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.planner.listeners.LessonPlanClickListener
 import com.tce.teacherapp.ui.dashboard.planner.state.PLANNER_VIEW_STATE_BUNDLE_KEY
@@ -49,11 +45,6 @@ constructor(
     LessonPlanClickListener {
 
     private lateinit var binding: FragmentPlannerBinding
-    lateinit var itemsCells: ArrayList<DailyPlanner>
-    lateinit var loadMoreItemsCells: ArrayList<DailyPlanner>
-    lateinit var adapterLinear: DailyPlannerRvAdapter
-    lateinit var scrollListener: RecyclerViewLoadMoreScroll
-    lateinit var mLayoutManager: RecyclerView.LayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,20 +81,7 @@ constructor(
         (activity as DashboardActivity).expandAppBar(false)
         (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
 
-        viewModel.setStateEvent(PlannerStateEvent.GetPlannerData(""))
-
-        //** Set the data for our ArrayList
-        setItemsData(getPlannerList(1))
-
-        //** Set the adapterLinear of the RecyclerView
-        setAdapter()
-
-        //** Set the Layout Manager of the RecyclerView
-        setRVLayoutManager()
-
-        //** Set the scrollListerner of the RecyclerView
-        setRVScrollListener()
-
+        viewModel.setStateEvent(PlannerStateEvent.GetPlannerData("2"))
 
         binding.rvMainList.layoutManager = GridLayoutManager(activity, 1)
         binding.rvMainList.setHasFixedSize(true)
@@ -145,97 +123,6 @@ constructor(
 
     }
 
-    private fun setItemsData(list: ArrayList<DailyPlanner>) {
-        itemsCells = ArrayList()
-        itemsCells.addAll(list)
-    }
-
-    private fun setAdapter() {
-        adapterLinear = DailyPlannerRvAdapter(itemsCells, this, this)
-        adapterLinear.notifyDataSetChanged()
-        binding.rvList.adapter = adapterLinear
-    }
-
-    private fun setRVLayoutManager() {
-        mLayoutManager = LinearLayoutManager(requireContext())
-        binding.rvList.layoutManager = mLayoutManager
-        binding.rvList.setHasFixedSize(true)
-    }
-
-    private fun setRVScrollListener() {
-        mLayoutManager = LinearLayoutManager(requireContext())
-        scrollListener = RecyclerViewLoadMoreScroll(mLayoutManager as LinearLayoutManager)
-        scrollListener.setOnLoadMoreListener(object :
-            OnLoadMoreListener {
-            override fun onLoadMore() {
-                LoadMoreData()
-            }
-        })
-        binding.rvList.addOnScrollListener(scrollListener)
-    }
-
-    private fun LoadMoreData() {
-        //Add the Loading View
-        adapterLinear.addLoadingView()
-        //Create the loadMoreItemsCells Arraylist
-        loadMoreItemsCells = ArrayList()
-        //Get the number of the current Items of the main Arraylist
-        val start = adapterLinear.itemCount
-        //Load 16 more items
-        val end = start + 1
-        //Use Handler if the items are loading too fast.
-        //If you remove it, the data will load so fast that you can't even see the LoadingView
-        Handler().postDelayed({
-            loadMoreItemsCells = getPlannerList(end)
-            //Remove the Loading View
-            adapterLinear.removeLoadingView()
-            //We adding the data to our main ArrayList
-            adapterLinear.addData(loadMoreItemsCells)
-            //Change the boolean isLoading to false
-            scrollListener.setLoaded()
-            //Update the recyclerView in the main thread
-            binding.rvList.post {
-                adapterLinear.notifyDataSetChanged()
-            }
-        }, 3000)
-
-    }
-
-    private fun getPlannerList(count: Int): ArrayList<DailyPlanner> {
-        var jsonString = requireActivity().assets.open("json/dailyPlanner.json").bufferedReader()
-            .use { it.readText() }
-        val gson = Gson()
-        val listPlanner = object : TypeToken<ArrayList<DailyPlanner>>() {}.type
-        var list3: ArrayList<DailyPlanner> = gson.fromJson(jsonString, listPlanner)
-
-
-        for (j in 0 until list3.size) {
-            val selectedEventList: ArrayList<Event> = ArrayList()
-
-            val isShowLess = false
-            var nextEventCount = 4
-            if (list3.get(j).eventList.size > 3) {
-                for (i in 0 until 3) {
-                    selectedEventList.add(list3.get(j).eventList[i])
-                }
-                if (list3.get(j).eventList.size < 7) {
-                    nextEventCount = list3.get(j).eventList.size - 3
-                }
-            } else {
-                for (i in 0 until list3.get(j).eventList.size) {
-                    selectedEventList.add(list3.get(j).eventList[i])
-                }
-                nextEventCount = 0
-            }
-            val eventData = EventData(isShowLess, nextEventCount, selectedEventList)
-            list3.get(j).eventData = eventData
-        }
-
-        var plannerList = ArrayList<DailyPlanner>()
-        plannerList.add(list3.get(count - 1))
-
-        return plannerList;
-    }
 
     private fun subscribeObservers() {
 
@@ -287,19 +174,9 @@ constructor(
 
     override fun onEventShowMoreClick(isShowLess: Boolean) {
         if (isShowLess) {
-            viewModel.setStateEvent(
-                PlannerStateEvent.GetPlannerEvent(
-                    2,
-                    true
-                )
-            )
+            viewModel.setStateEvent(PlannerStateEvent.GetPlannerData("2"))
         } else {
-            viewModel.setStateEvent(
-                PlannerStateEvent.GetPlannerEvent(
-                    3,
-                    false
-                )
-            )
+            viewModel.setStateEvent(PlannerStateEvent.GetPlannerData("4"))
         }
     }
 

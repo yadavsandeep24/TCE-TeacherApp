@@ -1242,20 +1242,23 @@ constructor(
             for(j in 0 until  list3.size){
                 val selectedEventList: ArrayList<Event> = ArrayList()
 
-                val isShowLess = false
+                var isShowLess = false
                 var nextEventCount = 4
-                if (list3.get(j).eventList.size > 3) {
-                    for (i in 0 until 3) {
+
+                if (list3.get(j).eventList.size > query.toInt()) {
+                    for (i in 0 until query.toInt()) {
                         selectedEventList.add(list3.get(j).eventList[i])
                     }
-                    if (list3.get(j).eventList.size < 7) {
-                        nextEventCount = list3.get(j).eventList.size - 3
+                    if (list3.get(j).eventList.size <= query.toInt() + nextEventCount) {
+                        nextEventCount = list3.get(j).eventList.size
+                        isShowLess = true
                     }
                 } else {
                     for (i in 0 until list3.get(j).eventList.size) {
                         selectedEventList.add(list3.get(j).eventList[i])
                     }
-                    nextEventCount = 0
+                    nextEventCount = list3.get(j).eventList.size - query.toInt()
+                    isShowLess = true
                 }
                 val eventData = EventData(isShowLess, nextEventCount, selectedEventList)
                 list3.get(j).eventData = eventData

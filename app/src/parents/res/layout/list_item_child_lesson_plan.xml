@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_resource"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:visibility="visible"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="8dp"
+    app:cardPreventCornerOverlap="false">
+
+    <RelativeLayout
+        android:id="@+id/main_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/res_container"
+            android:layout_width="135dp"
+            android:layout_height="77dp">
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_video_thumb"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/dummy_video"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_play"
+                android:layout_width="19dp"
+                android:layout_height="20dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_video_play" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_icon"
+                android:layout_width="30dp"
+                android:layout_height="24dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="-5dp"/>
+
+            <LinearLayout
+                android:id="@+id/checkbox_container"
+                android:layout_width="30dp"
+                android:layout_height="24dp"
+                android:background="@drawable/grey_left_bottom_rounded"
+                android:layout_alignParentRight="true"
+                android:gravity="center">
+
+                <CheckBox
+                    android:id="@+id/chk_completed"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:checked="false"
+                    android:button="@null"
+                    android:background="@drawable/lesson_plan_checkbox_selector">
+                </CheckBox>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="135dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/res_container"
+            android:padding="5dp"
+            android:orientation="vertical"
+            android:background="@color/white">
+
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:id="@+id/tv_subject_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="Title Name 1"
+                android:textColor="@color/dark_blackish_blue"
+                android:textSize="@dimen/font_size_12_dp">
+
+            </com.tce.teacherapp.util.RubikMediumTextview>
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</com.google.android.material.card.MaterialCardView>

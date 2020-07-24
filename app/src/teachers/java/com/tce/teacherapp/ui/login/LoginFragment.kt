@@ -91,13 +91,20 @@ constructor(viewModelFactory: ViewModelProvider.Factory) : BaseFragment(R.layout
         binding.edtPassword.setText(MessageConstant.LOGIN_DEFAULT_PASSWORD)
 
         binding.tvLogin.setOnClickListener {
-            viewModel.setStateEvent(
+            /*viewModel.setStateEvent(
                 LoginStateEvent.LoginAttemptEvent(
                     binding.edtSchoolName.text.toString().trim(),
                     binding.edtUserName.text.toString().trim(),
                     binding.edtPassword.text.toString().trim()
                 )
+            )*/
+            val i = Intent(activity, DashboardActivity::class.java)
+            startActivity(i)
+            activity?.overridePendingTransition(
+                R.anim.slide_in_right,
+                R.anim.slide_out_left
             )
+            activity?.finish()
         }
         binding.vwPasswordVisibility.setOnClickListener {
             if (isPassWordVisible) {
