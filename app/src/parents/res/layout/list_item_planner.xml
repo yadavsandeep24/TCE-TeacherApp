@@ -30,7 +30,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:paddingTop="10dp"
-            android:paddingBottom="10dp">
+            android:paddingBottom="20dp">
 
         </com.airbnb.epoxy.EpoxyRecyclerView>
 
@@ -71,7 +71,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="Lessons"
+                    android:text="Lesson Taught"
                     android:textColor="@color/color_black"
                     android:textSize="@dimen/font_size_14_dp">
 
@@ -79,32 +79,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/mark_completed_container"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_green_tick">
-
-                </androidx.appcompat.widget.AppCompatImageView>
-
-                <com.tce.teacherapp.util.RubikMediumTextview
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="Mark Completed"
-                    android:textColor="@color/color_black"
-                    android:textSize="@dimen/font_size_12_dp">
-
-                </com.tce.teacherapp.util.RubikMediumTextview>
-
-
-            </LinearLayout>
 
 
         </RelativeLayout>

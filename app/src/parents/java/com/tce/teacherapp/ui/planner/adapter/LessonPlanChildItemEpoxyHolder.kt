@@ -58,14 +58,6 @@ abstract class LessonPlanChildItemEpoxyHolder : EpoxyModelWithHolder<PlanChildHo
 
 
 
-        holder.chkCompleted.setOnCheckedChangeListener{ buttonView, isChecked ->
-            lessonPLanClickListener.onResourceMarkCompletedChecked(resource, isChecked)
-           if(isChecked){
-               holder.chkContainer.background = holder.chkContainer.context.resources.getDrawable(R.drawable.green_left_bottom_rounded)
-           }else{
-               holder.chkContainer.background = holder.chkContainer.context.resources.getDrawable(R.drawable.grey_left_bottom_rounded)
-           }
-        }
 
     }
 
@@ -76,6 +68,4 @@ class PlanChildHolder : KotlinEpoxyHolder(){
     val imgPlay by bind<AppCompatImageView>(R.id.img_play)
     val tvTitle by bind<TextView>(R.id.tv_subject_name)
     val mainContainer by bind<RelativeLayout>(R.id.main_container)
-    val chkCompleted by bind<CheckBox>(R.id.chk_completed)
-    val chkContainer by bind<LinearLayout>(R.id.checkbox_container)
 }

@@ -27,15 +27,7 @@ abstract class LessonPlanEpoxyHolder : EpoxyModelWithHolder<PlanHolder>() {
     override fun bind(holder: PlanHolder) {
         super.bind(holder)
 
-        if(screenType.equals("markCompleted")){
-            holder.tvSequence.visibility = View.GONE
-            holder.rvResourceItem.layoutManager = GridLayoutManager(holder.rvResourceItem.context, 2)
-            holder.rvResourceItem.setHasFixedSize(true)
-            val epoxyVisibilityTracker = EpoxyVisibilityTracker()
-            epoxyVisibilityTracker.attach(holder.rvResourceItem)
 
-        }else{
-            holder.tvSequence.visibility = View.VISIBLE
             val linearLayoutManager = LinearLayoutManager(holder.rvResourceItem.context)
             linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
             holder.rvResourceItem.apply {
@@ -43,9 +35,7 @@ abstract class LessonPlanEpoxyHolder : EpoxyModelWithHolder<PlanHolder>() {
                 setHasFixedSize(true)
 
             }
-        }
 
-        holder.tvSequence.setText(period.SequenceNo.toString())
         holder.tvTitle.text = period.Topic
         holder.tvSubTitle.text = period.LessonTypeValue
 
@@ -81,7 +71,6 @@ abstract class LessonPlanEpoxyHolder : EpoxyModelWithHolder<PlanHolder>() {
 }
 
 class PlanHolder : KotlinEpoxyHolder(){
-    val tvSequence by bind<TextView>(R.id.tv_sequence)
     val tvTitle by bind<TextView>(R.id.tv_res_title)
     val tvSubTitle by bind<TextView>(R.id.tv_res_sub_title)
     val rvResourceItem by bind<EpoxyRecyclerView>(R.id.rv_resource_item)

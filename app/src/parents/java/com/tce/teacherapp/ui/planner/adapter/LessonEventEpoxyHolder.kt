@@ -2,7 +2,9 @@ package com.tce.teacherapp.ui.planner.adapter
 
 import android.graphics.Color
 import android.graphics.drawable.Drawable
+import android.text.Html
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import com.airbnb.epoxy.EpoxyAttribute
@@ -46,11 +48,11 @@ abstract class LessonEventEpoxyHolder : EpoxyModelWithHolder<LessonEventHolder>(
     override fun bind(holder: LessonEventHolder) {
         super.bind(holder)
 
-
+        holder.tvReadMore.setText(Html.fromHtml("<u>Read More</u>"))
         holder.tvEvent.setText(strEvent)
         holder.tvEventType.setText(strEventType)
-        holder.imgIcon.background = imageDrawable
         holder.tvEvent.setTextColor(Color.parseColor(eventColor))
+        holder.tvReadMore.setTextColor(Color.parseColor(eventColor))
         holder.tvEventType.setTextColor(Color.parseColor(typeColor))
         holder.eventContainer.setBackgroundColor(Color.parseColor(eventBackColor))
         holder.iconContainer.setBackgroundColor(Color.parseColor(iconBackColor))
@@ -67,8 +69,8 @@ abstract class LessonEventEpoxyHolder : EpoxyModelWithHolder<LessonEventHolder>(
 
 class LessonEventHolder : KotlinEpoxyHolder(){
     val tvEvent by bind<TextView>(R.id.tvEventName)
-    val eventContainer by bind<LinearLayout>(R.id.event_container)
+    val eventContainer by bind<RelativeLayout>(R.id.event_container)
     val iconContainer by bind<LinearLayout>(R.id.icon_container)
     val tvEventType by bind<TextView>(R.id.tv_event_type)
-    val imgIcon by bind<AppCompatImageView>(R.id.img_icon)
+    val tvReadMore by bind<TextView>(R.id.tvReadMore)
 }

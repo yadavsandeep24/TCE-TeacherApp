@@ -1,6 +1,9 @@
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <RelativeLayout
         xmlns:tools="http://schemas.android.com/tools"
@@ -15,25 +18,19 @@
             android:background="@color/sandy_yellow">
 
             <LinearLayout
+                android:id="@+id/today_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:gravity="center_vertical"
                 android:layout_marginLeft="@dimen/_30sdp">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:src="@drawable/ic_today">
 
                 </androidx.appcompat.widget.AppCompatImageView>
-
-                <com.tce.teacherapp.util.RubikBoldTextview
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="Today"
-                    android:textColor="@color/blue"
-                    android:textSize="@dimen/font_size_12_dp"></com.tce.teacherapp.util.RubikBoldTextview>
 
 
             </LinearLayout>
@@ -101,6 +98,18 @@
 
             </LinearLayout>
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_student"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/dummy_student"
+                android:layout_alignParentRight="true">
+
+            </androidx.appcompat.widget.AppCompatImageView>
+
+
         </RelativeLayout>
 
         <LinearLayout
@@ -112,6 +121,7 @@
             android:gravity="center">
 
             <com.tce.teacherapp.util.RubikMediumTextview
+                android:id="@+id/tvDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="7 July 2020 Tuesday"
@@ -127,7 +137,95 @@
 
         </com.airbnb.epoxy.EpoxyRecyclerView>
 
+        <FrameLayout
+            android:id="@+id/mask_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"/>
 
 
     </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/bottom_sheet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/filters_sheet_background"
+            android:orientation="vertical"
+            app:behavior_fitToContents="true"
+            app:behavior_hideable="true"
+            app:behavior_peekHeight="0dp"
+            android:visibility="visible"
+            app:layout_behavior="com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior">
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:background="#e1e6f0" />
+
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Switch Profile"
+                android:textColor="@color/color_black"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center_horizontal"
+                android:textSize="@dimen/font_size_14_dp">
+
+            </com.tce.teacherapp.util.RubikMediumTextview>
+
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Choose a child profile to view"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center_horizontal"
+                android:textSize="@dimen/font_size_12_dp">
+
+            </com.tce.teacherapp.util.RubikMediumTextview>
+
+
+            <com.airbnb.epoxy.EpoxyRecyclerView
+                android:id="@+id/rvFilter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                android:minHeight="150dp">
+
+            </com.airbnb.epoxy.EpoxyRecyclerView>
+
+
+            <LinearLayout
+                android:id="@+id/add_child"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                android:gravity="center_vertical"
+                android:paddingLeft="30dp">
+
+                <com.tce.teacherapp.util.RubikBoldTextview
+                    android:layout_width="30dp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:background="@drawable/bg_orange_rounded"
+                    android:text="+"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+                    android:gravity="center" />
+
+                <com.tce.teacherapp.util.RubikMediumTextview
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="Add Another Child"
+                    android:textColor="@color/color_black">
+
+                </com.tce.teacherapp.util.RubikMediumTextview>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

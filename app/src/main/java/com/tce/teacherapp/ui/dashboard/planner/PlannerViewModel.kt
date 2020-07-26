@@ -43,7 +43,19 @@ class PlannerViewModel @Inject constructor(val mainRepository: MainRepository) :
             setMonthlyPlannerList(it)
         }
 
+        data.childList?.let {
+            setChildList(it)
+        }
+
+
     }
+
+    private fun setChildList(list: ArrayList<Student>) {
+        val update = getCurrentViewStateOrNew()
+        update.childList = list
+        setViewState(update)
+    }
+
 
     private fun setEventList(event: EventData) {
         val update = getCurrentViewStateOrNew()

@@ -32,8 +32,8 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_play"
-                android:layout_width="19dp"
-                android:layout_height="20dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:layout_centerInParent="true"
                 android:src="@drawable/ic_video_play" />
 
@@ -45,24 +45,6 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="-5dp"/>
 
-            <LinearLayout
-                android:id="@+id/checkbox_container"
-                android:layout_width="30dp"
-                android:layout_height="24dp"
-                android:background="@drawable/grey_left_bottom_rounded"
-                android:layout_alignParentRight="true"
-                android:gravity="center">
-
-                <CheckBox
-                    android:id="@+id/chk_completed"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:checked="false"
-                    android:button="@null"
-                    android:background="@drawable/lesson_plan_checkbox_selector">
-                </CheckBox>
-
-            </LinearLayout>
 
 
         </RelativeLayout>

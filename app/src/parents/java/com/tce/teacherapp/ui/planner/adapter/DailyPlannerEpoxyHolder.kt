@@ -39,10 +39,6 @@ abstract class DailyPlannerEpoxyHolder : EpoxyModelWithHolder<PlannerHolder>() {
         holder.tvDate.setText(dailyPlanner.date)
 
 
-        holder.markCompletedContainer.setOnClickListener(View.OnClickListener {
-            lessonPLanClickListener.onMarkCompletedClick(dailyPlanner.lessonPlan.PeriodList.get(0))
-        })
-
         if(SimpleDateFormat("dd MMMM yyyy EEEE").format(Date()).equals(dailyPlanner.date, ignoreCase = true)){
             holder.tvDate.visibility = View.GONE
         }else{
@@ -114,6 +110,5 @@ class PlannerHolder : KotlinEpoxyHolder(){
     val tvDate by bind<TextView>(R.id.tv_date)
     val rvEvent by bind<EpoxyRecyclerView>(R.id.rv_event)
     val rvLessonPLan by bind<EpoxyRecyclerView>(R.id.rv_lessons)
-    val markCompletedContainer by bind<LinearLayout>(R.id.mark_completed_container)
 
 }

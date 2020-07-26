@@ -8,6 +8,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.view.*
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
@@ -28,7 +29,7 @@ import com.tce.teacherapp.db.entity.Event
 import com.tce.teacherapp.db.entity.LessonPlanPeriod
 import com.tce.teacherapp.db.entity.LessonPlanResource
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
-import com.tce.teacherapp.ui.dashboard.planner.adapter.lessonPlanEpoxyHolder
+import com.tce.teacherapp.ui.planner.adapter.lessonPlanEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.planner.listeners.LessonPlanClickListener
 import com.tce.teacherapp.ui.login.LauncherActivity
 import com.tce.teacherapp.util.PreferenceKeys
@@ -140,6 +141,12 @@ class MarkCompletedFragment : Fragment(), LessonPlanClickListener {
             var count : Int  = sharedPreference.getInt("mark_count",0)
 
             txtTitle.setText(count.toString() + " Resources Marked!")
+
+            Handler().postDelayed({
+                dialog.dismiss()
+                (activity as DashboardActivity).onBackPressed()
+            }, 1000)
+
         })
 
 

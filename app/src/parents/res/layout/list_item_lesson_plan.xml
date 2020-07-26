@@ -26,18 +26,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <com.tce.teacherapp.util.RubikMediumTextview
-                    android:id="@+id/tv_sequence"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:textColor="@color/color_black"
-                    android:textSize="@dimen/font_size_12_dp"
-                    android:layout_marginLeft="10dp"
-                    android:gravity="center"
-                    android:background="@drawable/circular_border_grey"
-                    android:layout_gravity="center_vertical">
-
-                </com.tce.teacherapp.util.RubikMediumTextview>
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:id="@+id/tv_res_title"

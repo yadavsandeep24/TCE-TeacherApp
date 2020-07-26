@@ -24,7 +24,7 @@ import com.tce.teacherapp.databinding.FragmentPlannerBinding
 import com.tce.teacherapp.db.entity.*
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.home.listeners.EventClickListener
-import com.tce.teacherapp.ui.dashboard.planner.adapter.dailyPlannerEpoxyHolder
+import com.tce.teacherapp.ui.planner.adapter.dailyPlannerEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.planner.listeners.LessonPlanClickListener
 import com.tce.teacherapp.ui.dashboard.planner.state.PLANNER_VIEW_STATE_BUNDLE_KEY
 import com.tce.teacherapp.ui.dashboard.planner.state.PlannerStateEvent
@@ -33,6 +33,8 @@ import com.tce.teacherapp.ui.dashboard.subjects.adapter.SubjectListEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.subjects.loadImage
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
@@ -119,6 +121,10 @@ constructor(
             )
         })
 
+        binding.todayContainer.setOnClickListener(View.OnClickListener {
+            binding.rvMainList.scrollToPosition(0)
+        })
+
         subscribeObservers()
 
     }
@@ -134,6 +140,9 @@ constructor(
                     binding.rvMainList.withModels {
                         for (msg in it) {
                             dailyPlannerEpoxyHolder {
+                                if(SimpleDateFormat("dd MMMM yyyy EEEE").format(Date()).equals(msg.date, ignoreCase = true)){
+                                    binding.tvDate.setText(SimpleDateFormat("dd MMMM yyyy EEEE").format(Date()))
+                                }
                                 id(msg.id.toLong())
                                 dailyPlanner(msg)
                                 evenClickListener(this@PlannerFragment)
@@ -208,7 +217,7 @@ constructor(
     }
 
     override fun onResourceMarkCompletedChecked(resource: LessonPlanResource, isChecked : Boolean) {
-        TODO("Not yet implemented")
+
     }
 
 }

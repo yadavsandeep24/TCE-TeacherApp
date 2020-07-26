@@ -1264,13 +1264,18 @@ constructor(
                 list3.get(j).eventData = eventData
             }
 
+            jsonString = application.assets.open("json/child.json").bufferedReader()
+                .use { it.readText() }
+            val listPersonType = object : TypeToken<ArrayList<Student>>() {}.type
+            val studentList: ArrayList<Student> = gson.fromJson(jsonString, listPersonType)
 
             emit(
                 DataState.data(
                     data = PlannerViewState(lessonPlanList = list,
                                             eventData = eventData,
                                             birthdayList = list2,
-                                            dailyPlannerList = list3
+                                            dailyPlannerList = list3,
+                                            childList = studentList
                     ),
 
                     stateEvent = stateEvent,

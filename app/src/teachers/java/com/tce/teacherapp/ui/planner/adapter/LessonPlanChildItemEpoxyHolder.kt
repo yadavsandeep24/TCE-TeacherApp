@@ -1,4 +1,4 @@
-package com.tce.teacherapp.ui.dashboard.planner.adapter
+package com.tce.teacherapp.ui.planner.adapter
 
 import android.content.Context
 import android.graphics.drawable.Drawable

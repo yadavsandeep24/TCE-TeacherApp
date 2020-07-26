@@ -100,6 +100,19 @@
 
             </LinearLayout>
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_student"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/dummy_student"
+                android:layout_alignParentRight="true"
+                android:visibility="gone">
+
+            </androidx.appcompat.widget.AppCompatImageView>
+
+
         </RelativeLayout>
 
 

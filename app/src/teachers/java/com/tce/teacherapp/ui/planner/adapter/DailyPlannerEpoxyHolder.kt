@@ -1,4 +1,4 @@
-package com.tce.teacherapp.ui.dashboard.planner.adapter
+package com.tce.teacherapp.ui.planner.adapter
 
 import android.text.Html
 import android.view.View
@@ -13,6 +13,8 @@ import com.airbnb.epoxy.EpoxyRecyclerView
 import com.tce.teacherapp.R
 import com.tce.teacherapp.db.entity.DailyPlanner
 import com.tce.teacherapp.ui.dashboard.home.listeners.EventClickListener
+import com.tce.teacherapp.ui.dashboard.planner.adapter.birthdayItemEpoxyHolder
+import com.tce.teacherapp.ui.planner.adapter.lessonEventEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.planner.listeners.LessonPlanClickListener
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
 import com.tce.teacherapp.util.Utility
@@ -37,6 +39,8 @@ abstract class DailyPlannerEpoxyHolder : EpoxyModelWithHolder<PlannerHolder>() {
     override fun bind(holder: PlannerHolder) {
         super.bind(holder)
         holder.tvDate.setText(dailyPlanner.date)
+
+        holder.tvMarkCompleted.text = Html.fromHtml("<u>Mark Completed</u>")
 
         var nextEventCount = dailyPlanner.eventData.nextEventCount
 
@@ -150,5 +154,6 @@ class PlannerHolder : KotlinEpoxyHolder(){
     val rvBirthday by bind<EpoxyRecyclerView>(R.id.rv_birthday)
     val rvLessonPLan by bind<EpoxyRecyclerView>(R.id.rv_lessons)
     val markCompletedContainer by bind<LinearLayout>(R.id.mark_completed_container)
+    val tvMarkCompleted by bind<TextView>(R.id.tvMarkCompleted)
 
 }

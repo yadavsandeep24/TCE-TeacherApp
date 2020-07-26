@@ -1,7 +1,7 @@
 [
   {
     "id": "1",
-    "date": "11 july 2020 Saturday",
+    "date": "27 july 2020 Monday",
     "eventList": [
       {
         "id": "1",
@@ -148,7 +148,237 @@
   },
   {
     "id": "2",
-    "date": "12 july 2020 Sunday",
+    "date": "28 july 2020 Tuesday",
+    "eventList": [
+      {
+        "id": "1",
+        "eventName": "Meet Kiran's Parents",
+        "imageUrl": "bell_icon.png",
+        "type": "TO-DO",
+        "eventColor": "#000000",
+        "typeColor": "#ffaa1e",
+        "iconBackColor": "#ffaa1e",
+        "eventBackColor": "#ffebc8"
+      },
+      {
+        "id": "2",
+        "eventName": "School Sports Day 2020",
+        "imageUrl": "calendar.png",
+        "type": "Event",
+        "eventColor": "#FFFFFF",
+        "typeColor": "#FFFFFF",
+        "iconBackColor": "#1e6eff",
+        "eventBackColor": "#5591ff"
+      }
+    ],
+    "birthdayList": [
+      {
+        "name": "Name 1"
+      },
+      {
+        "name": "Name 2"
+      },
+      {
+        "name": "Name 3"
+      }
+    ],
+    "lessonPlan": {
+      "id": "LP1",
+      "Date": "2020-06-02",
+      "IsHoliday": false,
+      "HolidayMsg": "",
+      "PeriodList": [
+        {
+          "id": "p1",
+          "Topic": "Conversation 2",
+          "ShareToAll": true,
+          "LessonTypeValue": "Circle time",
+          "LessonTypeId": "LT2",
+          "SequenceNo": 1,
+          "Date": "2020-06-02",
+          "ResourceList": [
+            {
+              "id": "IRSC3",
+              "title": "Title Name 1 - Modality",
+              "contenttype": "AV",
+              "image": "ic_video_icon.xml",
+              "SequenceNo": 1,
+              "ResourceOriginator": "TCE",
+              "IsSystemAdded": true
+            },
+            {
+              "id": "ERSC1",
+              "title": "Title Name 2 - Modality",
+              "contenttype": "AV",
+              "image": "ic_video_icon.xml",
+              "SequenceNo": 2,
+              "ResourceOriginator": "Shared",
+              "IsSystemAdded": false
+            }
+          ],
+          "Skills": [
+            "observation",
+            "Language"
+          ],
+          "TeacherFocus": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+          "Activity": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
+        },
+        {
+          "id": "p2",
+          "Topic": "Conversation",
+          "ShareToAll": false,
+          "LessonTypeValue": "Circle time",
+          "LessonTypeId": "LT2",
+          "SequenceNo": 2,
+          "Date": "2020-06-02",
+          "ResourceList": [
+            {
+              "id": "RSS1",
+              "title": "Title Name 1 - Modality",
+              "contenttype": "AV",
+              "image": "ic_video_icon.xml",
+              "SequenceNo": 1,
+              "ResourceOriginator": "TCE",
+              "IsSystemAdded": true
+            },
+            {
+              "id": "RSS2",
+              "title": "Title Name 2 - Modality",
+              "contenttype": "AV",
+              "image": "ic_video_icon.xml",
+              "SequenceNo": 2,
+              "ResourceOriginator": "Shared",
+              "IsSystemAdded": false
+            }
+          ],
+          "Skills": [
+            "observation",
+            "Language"
+          ],
+          "TeacherFocus": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+          "Activity": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
+        }
+      ]
+    }
+  },
+  {
+    "id": "3",
+    "date": "29 july 2020 Wednesday",
+    "eventList": [
+      {
+        "id": "1",
+        "eventName": "Meet Kiran's Parents",
+        "imageUrl": "bell_icon.png",
+        "type": "TO-DO",
+        "eventColor": "#000000",
+        "typeColor": "#ffaa1e",
+        "iconBackColor": "#ffaa1e",
+        "eventBackColor": "#ffebc8"
+      },
+      {
+        "id": "2",
+        "eventName": "School Sports Day 2020",
+        "imageUrl": "calendar.png",
+        "type": "Event",
+        "eventColor": "#FFFFFF",
+        "typeColor": "#FFFFFF",
+        "iconBackColor": "#1e6eff",
+        "eventBackColor": "#5591ff"
+      }
+    ],
+    "birthdayList": [
+      {
+        "name": "Name 1"
+      },
+      {
+        "name": "Name 2"
+      },
+      {
+        "name": "Name 3"
+      }
+    ],
+    "lessonPlan": {
+      "id": "LP1",
+      "Date": "2020-06-02",
+      "IsHoliday": false,
+      "HolidayMsg": "",
+      "PeriodList": [
+        {
+          "id": "p1",
+          "Topic": "Conversation 2",
+          "ShareToAll": true,
+          "LessonTypeValue": "Circle time",
+          "LessonTypeId": "LT2",
+          "SequenceNo": 1,
+          "Date": "2020-06-02",
+          "ResourceList": [
+            {
+              "id": "IRSC3",
+              "title": "Title Name 1 - Modality",
+              "contenttype": "AV",
+              "image": "ic_video_icon.xml",
+              "SequenceNo": 1,
+              "ResourceOriginator": "TCE",
+              "IsSystemAdded": true
+            },
+            {
+              "id": "ERSC1",
+              "title": "Title Name 2 - Modality",
+              "contenttype": "AV",
+              "image": "ic_video_icon.xml",
+              "SequenceNo": 2,
+              "ResourceOriginator": "Shared",
+              "IsSystemAdded": false
+            }
+          ],
+          "Skills": [
+            "observation",
+            "Language"
+          ],
+          "TeacherFocus": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+          "Activity": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
+        },
+        {
+          "id": "p2",
+          "Topic": "Conversation",
+          "ShareToAll": false,
+          "LessonTypeValue": "Circle time",
+          "LessonTypeId": "LT2",
+          "SequenceNo": 2,
+          "Date": "2020-06-02",
+          "ResourceList": [
+            {
+              "id": "RSS1",
+              "title": "Title Name 1 - Modality",
+              "contenttype": "AV",
+              "image": "ic_video_icon.xml",
+              "SequenceNo": 1,
+              "ResourceOriginator": "TCE",
+              "IsSystemAdded": true
+            },
+            {
+              "id": "RSS2",
+              "title": "Title Name 2 - Modality",
+              "contenttype": "AV",
+              "image": "ic_video_icon.xml",
+              "SequenceNo": 2,
+              "ResourceOriginator": "Shared",
+              "IsSystemAdded": false
+            }
+          ],
+          "Skills": [
+            "observation",
+            "Language"
+          ],
+          "TeacherFocus": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+          "Activity": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
+        }
+      ]
+    }
+  },
+  {
+    "id": "4",
+    "date": "30 july 2020 Thursday",
     "eventList": [
       {
         "id": "1",
