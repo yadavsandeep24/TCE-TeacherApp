@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
@@ -45,7 +46,7 @@ class DotIndicatorEventPagerAdapter(private val eventListener: EventClickListene
         internal var imgIcon: AppCompatImageView
         internal var iconContainer: LinearLayout
         internal var eventContainer: LinearLayout
-        internal var mainContainer: LinearLayout
+        internal var mainContainer: RelativeLayout
 
         init {
             tvEventType = itemView.findViewById(R.id.tv_event_type)
@@ -62,7 +63,19 @@ class DotIndicatorEventPagerAdapter(private val eventListener: EventClickListene
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.tvEventName.text = mEventList!!.get(position).eventName
-        holder.tvReadMore.text = Html.fromHtml("<u>Read More</u>")
+
+        holder.tvEventName.maxLines = 1
+        holder.tvReadMore.setText(Html.fromHtml("<u>Read More</u>"))
+        holder.tvReadMore.setOnClickListener(View.OnClickListener {
+            if(holder.tvReadMore.text.toString().equals("Read More", ignoreCase = true)){
+                holder.tvReadMore.setText(Html.fromHtml("<u>Read Less</u>"))
+                holder.tvEventName.maxLines = 5
+            }else{
+                holder.tvReadMore.setText(Html.fromHtml("<u>Read More</u>"))
+                holder.tvEventName.maxLines = 1
+            }
+        })
+
         holder.tvReadMore.setTextColor(Color.parseColor(mEventList!!.get(position).eventColor))
 
         holder.tvEventType.setText(mEventList!!.get(position).type)

@@ -3,6 +3,7 @@ package com.tce.teacherapp.ui.home.adapter
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.text.Html
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
@@ -44,7 +45,20 @@ abstract class EventItemEpoxyHolder : EpoxyModelWithHolder<ItemHolder>() {
     lateinit var event: Event
 
     override fun bind(holder: ItemHolder) {
-        holder.tvEvent.text = strEvent
+        holder.tvEvent.setText(strEvent)
+
+        holder.tvEvent.maxLines = 1
+        holder.tvReadMore.setText(Html.fromHtml("<u>Read More</u>"))
+        holder.tvReadMore.setOnClickListener(View.OnClickListener {
+            if(holder.tvReadMore.text.toString().equals("Read More", ignoreCase = true)){
+                holder.tvReadMore.setText(Html.fromHtml("<u>Read Less</u>"))
+                holder.tvEvent.maxLines = 5
+            }else{
+                holder.tvReadMore.setText(Html.fromHtml("<u>Read More</u>"))
+                holder.tvEvent.maxLines = 1
+            }
+        })
+
         holder.tvEventType.text = strEventType
         holder.imgIcon.background = imageDrawable
         holder.tvEvent.setTextColor(Color.parseColor(eventColor))
@@ -58,8 +72,8 @@ abstract class EventItemEpoxyHolder : EpoxyModelWithHolder<ItemHolder>() {
             R.color.transparent, R.color.transparent, 0
         )
 
-        holder.tvReadMore.text = Html.fromHtml("<u>Read More</u>")
         holder.tvReadMore.setTextColor(Color.parseColor(eventColor))
+
     }
 }
 

@@ -3,6 +3,7 @@ package com.tce.teacherapp.ui.planner.adapter
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.text.Html
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
@@ -48,8 +49,20 @@ abstract class LessonEventEpoxyHolder : EpoxyModelWithHolder<LessonEventHolder>(
     override fun bind(holder: LessonEventHolder) {
         super.bind(holder)
 
-        holder.tvReadMore.setText(Html.fromHtml("<u>Read More</u>"))
         holder.tvEvent.setText(strEvent)
+
+        holder.tvEvent.maxLines = 1
+        holder.tvReadMore.setText(Html.fromHtml("<u>Read More</u>"))
+        holder.tvReadMore.setOnClickListener(View.OnClickListener {
+            if(holder.tvReadMore.text.toString().equals("Read More", ignoreCase = true)){
+                holder.tvReadMore.setText(Html.fromHtml("<u>Read Less</u>"))
+                holder.tvEvent.maxLines = 5
+            }else{
+                holder.tvReadMore.setText(Html.fromHtml("<u>Read More</u>"))
+                holder.tvEvent.maxLines = 1
+            }
+        })
+
         holder.tvEventType.setText(strEventType)
         holder.tvEvent.setTextColor(Color.parseColor(eventColor))
         holder.tvReadMore.setTextColor(Color.parseColor(eventColor))

@@ -78,7 +78,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:ellipsize="end"
-                    android:singleLine="true"
                     android:text="Event"
                     android:textColor="@color/white"
                     android:textSize="@dimen/font_size_12_dp"></com.tce.teacherapp.util.RubikMediumTextview>
