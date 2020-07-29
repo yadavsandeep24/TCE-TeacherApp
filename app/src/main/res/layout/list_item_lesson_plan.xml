@@ -80,7 +80,6 @@
                 android:background="#e1e6f0"
                 android:minHeight="150dp"
                 android:paddingLeft="10dp"
-                android:paddingTop="20dp"
                 android:paddingRight="10dp"
                 android:paddingBottom="20dp">
 

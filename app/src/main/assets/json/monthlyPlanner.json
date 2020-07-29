@@ -85,5 +85,78 @@
       }
     ]
 
+  },
+  {
+    "id": "997",
+    "date": "2020-08-01",
+    "eventList": [
+      {
+        "id": "9996",
+        "eventName": "Meet Rahul's Parents",
+        "imageUrl": "bell_icon.png",
+        "type": "TO-DO",
+        "eventColor": "#000000",
+        "typeColor": "#ffaa1e",
+        "iconBackColor": "#ffaa1e",
+        "eventBackColor": "#ffebc8"
+      },
+      {
+        "id": "9995",
+        "eventName": "School Annual Day 2020",
+        "imageUrl": "calendar.png",
+        "type": "Event",
+        "eventColor": "#FFFFFF",
+        "typeColor": "#FFFFFF",
+        "iconBackColor": "#1e6eff",
+        "eventBackColor": "#5591ff"
+      }
+    ]
+
+  },
+
+  {
+    "id": "998",
+    "date": "2020-08-03",
+    "eventList": [
+      {
+        "id": "9997",
+        "eventName": "Meet Lakhya's Parents",
+        "imageUrl": "bell_icon.png",
+        "type": "TO-DO",
+        "eventColor": "#000000",
+        "typeColor": "#ffaa1e",
+        "iconBackColor": "#ffaa1e",
+        "eventBackColor": "#ffebc8"
+      }
+    ]
+
+  },
+
+  {
+    "id": "999",
+    "date": "2020-08-05",
+    "eventList": [
+      {
+        "id": "9999",
+        "eventName": "Meet Rahul's Parents",
+        "imageUrl": "bell_icon.png",
+        "type": "TO-DO",
+        "eventColor": "#000000",
+        "typeColor": "#ffaa1e",
+        "iconBackColor": "#ffaa1e",
+        "eventBackColor": "#ffebc8"
+      },
+      {
+        "id": "9998",
+        "eventName": "School Annual Day 2020",
+        "imageUrl": "calendar.png",
+        "type": "Event",
+        "eventColor": "#FFFFFF",
+        "typeColor": "#FFFFFF",
+        "iconBackColor": "#1e6eff",
+        "eventBackColor": "#5591ff"
+      }
+    ]
+
   }
 ]

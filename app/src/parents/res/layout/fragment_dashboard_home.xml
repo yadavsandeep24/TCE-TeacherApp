@@ -19,7 +19,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/home_background"
-                tools:context=".ui.home.DashboardHomeFragment">
+                tools:context="com.tce.teacherapp.ui.dashboard.home.DashboardHomeFragment">
 
                     <com.tce.teacherapp.util.CustomCircularImageView
                         android:id="@+id/img_profile"

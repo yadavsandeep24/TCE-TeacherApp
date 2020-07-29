@@ -96,7 +96,7 @@
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="15dp"
                         android:layout_height="15dp"
-                        android:src="@drawable/tick"></androidx.appcompat.widget.AppCompatImageView>
+                        android:src="@drawable/tick"/>
 
                     <com.tce.teacherapp.util.RubikMediumTextview
                         android:layout_width="wrap_content"

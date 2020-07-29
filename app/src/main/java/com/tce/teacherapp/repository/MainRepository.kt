@@ -1,5 +1,6 @@
 package com.tce.teacherapp.repository
 
+import android.app.Application
 import com.tce.teacherapp.db.entity.Grade
 import com.tce.teacherapp.db.entity.Profile
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardViewState
@@ -11,6 +12,8 @@ import com.tce.teacherapp.util.StateEvent
 import kotlinx.coroutines.flow.Flow
 
 interface MainRepository {
+
+    fun getTCEApplication():Application
 
     fun getGrades(
         stateEvent: StateEvent
@@ -135,13 +138,7 @@ interface MainRepository {
         stateEvent: StateEvent
     ): Flow<DataState<SubjectViewState>>
     fun getPlannerData(
-        query: String,
-        stateEvent: StateEvent
-    ): Flow<DataState<PlannerViewState>>
-
-    fun getPlannerEventList(
-        count : Int,
-        showOriginal : Boolean,
+        isShowLess: Boolean,
         stateEvent: StateEvent
     ): Flow<DataState<PlannerViewState>>
 

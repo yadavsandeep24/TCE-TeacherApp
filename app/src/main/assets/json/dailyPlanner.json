@@ -58,17 +58,17 @@
     ],
     "birthdayList": [
       {
-        "name": "Name 1"
+        "name": "Prisa"
       },
       {
-        "name": "Name 2"
+        "name": "Saanvika"
       },
       {
-        "name": "Name 3"
+        "name": "Navya"
       }
     ],
     "lessonPlan": {
-      "id": "LP1",
+      "id": "LP1WER#32",
       "Date": "2020-06-02",
       "IsHoliday": false,
       "HolidayMsg": "",
@@ -86,19 +86,43 @@
               "id": "IRSC3",
               "title": "Title Name 1 - Modality",
               "contenttype": "AV",
-              "image": "ic_video_icon.xml",
+              "image": "https://kohantextilejournal.com/wp-content/uploads/2018/04/video-poster.jpg",
+              "src": "http://vjs.zencdn.net/v/oceans.mp4",
               "SequenceNo": 1,
               "ResourceOriginator": "TCE",
               "IsSystemAdded": true
             },
             {
-              "id": "ERSC1",
-              "title": "Title Name 2 - Modality",
-              "contenttype": "AV",
-              "image": "ic_video_icon.xml",
-              "SequenceNo": 2,
-              "ResourceOriginator": "Shared",
-              "IsSystemAdded": false
+              "id": "IRSC6",
+              "type": "",
+              "contenttype": "Activity",
+              "src": "https://game-templates.web.app/gamesRD/gamefloor1/games/memory_game/index.html",
+              "image": "https://www.ubackground.com/_ph/11/442285041.jpg",
+              "title": "Story Time - Activity",
+              "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+              "skills": [
+                "Observation",
+                "Language"
+              ],
+              "TaggingLevel": "ECE1 > English > Letter & Sound",
+              "ResourceOriginator": "TCE",
+              "SequenceNo": 1
+            },
+            {
+              "id": "IRSC7",
+              "type": "",
+              "contenttype": "ebook",
+              "src": "sample.pdf",
+              "image": "https://kohantextilejournal.com/wp-content/uploads/2018/04/video-poster.jpg",
+              "title": "Story Time - Ebook",
+              "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+              "skills": [
+                "Observation",
+                "Language"
+              ],
+              "TaggingLevel": "ECE1 > English > Letter & Sound",
+              "ResourceOriginator": "TCE",
+              "SequenceNo": 1
             }
           ],
           "Skills": [
@@ -173,17 +197,17 @@
     ],
     "birthdayList": [
       {
-        "name": "Name 1"
+        "name": "Prisa"
       },
       {
-        "name": "Name 2"
+        "name": "Saanvika"
       },
       {
-        "name": "Name 3"
+        "name": "Navya"
       }
     ],
     "lessonPlan": {
-      "id": "LP1",
+      "id": "LP1Qwer23",
       "Date": "2020-06-02",
       "IsHoliday": false,
       "HolidayMsg": "",
@@ -288,17 +312,17 @@
     ],
     "birthdayList": [
       {
-        "name": "Name 1"
+        "name": "Prisa"
       },
       {
-        "name": "Name 2"
+        "name": "Saanvika"
       },
       {
-        "name": "Name 3"
+        "name": "Navya"
       }
     ],
     "lessonPlan": {
-      "id": "LP1",
+      "id": "LP1Asdf123",
       "Date": "2020-06-02",
       "IsHoliday": false,
       "HolidayMsg": "",
@@ -403,17 +427,362 @@
     ],
     "birthdayList": [
       {
-        "name": "Name 1"
+        "name": "Prisa"
       },
       {
-        "name": "Name 2"
+        "name": "Saanvika"
       },
       {
-        "name": "Name 3"
+        "name": "Navya"
       }
     ],
     "lessonPlan": {
-      "id": "LP1",
+      "id": "LP1POidisd23",
+      "Date": "2020-06-02",
+      "IsHoliday": false,
+      "HolidayMsg": "",
+      "PeriodList": [
+        {
+          "id": "p1",
+          "Topic": "Conversation 2",
+          "ShareToAll": true,
+          "LessonTypeValue": "Circle time",
+          "LessonTypeId": "LT2",
+          "SequenceNo": 1,
+          "Date": "2020-06-02",
+          "ResourceList": [
+            {
+              "id": "IRSC3",
+              "title": "Title Name 1 - Modality",
+              "contenttype": "AV",
+              "image": "ic_video_icon.xml",
+              "SequenceNo": 1,
+              "ResourceOriginator": "TCE",
+              "IsSystemAdded": true
+            },
+            {
+              "id": "ERSC1",
+              "title": "Title Name 2 - Modality",
+              "contenttype": "AV",
+              "image": "ic_video_icon.xml",
+              "SequenceNo": 2,
+              "ResourceOriginator": "Shared",
+              "IsSystemAdded": false
+            }
+          ],
+          "Skills": [
+            "observation",
+            "Language"
+          ],
+          "TeacherFocus": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+          "Activity": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
+        },
+        {
+          "id": "p2",
+          "Topic": "Conversation",
+          "ShareToAll": false,
+          "LessonTypeValue": "Circle time",
+          "LessonTypeId": "LT2",
+          "SequenceNo": 2,
+          "Date": "2020-06-02",
+          "ResourceList": [
+            {
+              "id": "RSS1",
+              "title": "Title Name 1 - Modality",
+              "contenttype": "AV",
+              "image": "ic_video_icon.xml",
+              "SequenceNo": 1,
+              "ResourceOriginator": "TCE",
+              "IsSystemAdded": true
+            },
+            {
+              "id": "RSS2",
+              "title": "Title Name 2 - Modality",
+              "contenttype": "AV",
+              "image": "ic_video_icon.xml",
+              "SequenceNo": 2,
+              "ResourceOriginator": "Shared",
+              "IsSystemAdded": false
+            }
+          ],
+          "Skills": [
+            "observation",
+            "Language"
+          ],
+          "TeacherFocus": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+          "Activity": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
+        }
+      ]
+    }
+  },
+  {
+    "id": "5",
+    "date": "1 August 2020 Saturday",
+    "eventList": [
+      {
+        "id": "1",
+        "eventName": "Meet Kiran's Parents",
+        "imageUrl": "bell_icon.png",
+        "type": "TO-DO",
+        "eventColor": "#000000",
+        "typeColor": "#ffaa1e",
+        "iconBackColor": "#ffaa1e",
+        "eventBackColor": "#ffebc8"
+      },
+      {
+        "id": "2",
+        "eventName": "School Sports Day 2020",
+        "imageUrl": "calendar.png",
+        "type": "Event",
+        "eventColor": "#FFFFFF",
+        "typeColor": "#FFFFFF",
+        "iconBackColor": "#1e6eff",
+        "eventBackColor": "#5591ff"
+      }
+    ],
+    "birthdayList": [
+      {
+        "name": "Prisa"
+      },
+      {
+        "name": "Saanvika"
+      },
+      {
+        "name": "Navya"
+      }
+    ],
+    "lessonPlan": {
+      "id": "Oi65GxJo",
+      "Date": "2020-06-02",
+      "IsHoliday": false,
+      "HolidayMsg": "",
+      "PeriodList": [
+        {
+          "id": "p1",
+          "Topic": "Conversation 2",
+          "ShareToAll": true,
+          "LessonTypeValue": "Circle time",
+          "LessonTypeId": "LT2",
+          "SequenceNo": 1,
+          "Date": "2020-06-02",
+          "ResourceList": [
+            {
+              "id": "IRSC3",
+              "title": "Title Name 1 - Modality",
+              "contenttype": "AV",
+              "image": "ic_video_icon.xml",
+              "SequenceNo": 1,
+              "ResourceOriginator": "TCE",
+              "IsSystemAdded": true
+            },
+            {
+              "id": "ERSC1",
+              "title": "Title Name 2 - Modality",
+              "contenttype": "AV",
+              "image": "ic_video_icon.xml",
+              "SequenceNo": 2,
+              "ResourceOriginator": "Shared",
+              "IsSystemAdded": false
+            }
+          ],
+          "Skills": [
+            "observation",
+            "Language"
+          ],
+          "TeacherFocus": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+          "Activity": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
+        },
+        {
+          "id": "p2",
+          "Topic": "Conversation",
+          "ShareToAll": false,
+          "LessonTypeValue": "Circle time",
+          "LessonTypeId": "LT2",
+          "SequenceNo": 2,
+          "Date": "2020-06-02",
+          "ResourceList": [
+            {
+              "id": "RSS1",
+              "title": "Title Name 1 - Modality",
+              "contenttype": "AV",
+              "image": "ic_video_icon.xml",
+              "SequenceNo": 1,
+              "ResourceOriginator": "TCE",
+              "IsSystemAdded": true
+            },
+            {
+              "id": "RSS2",
+              "title": "Title Name 2 - Modality",
+              "contenttype": "AV",
+              "image": "ic_video_icon.xml",
+              "SequenceNo": 2,
+              "ResourceOriginator": "Shared",
+              "IsSystemAdded": false
+            }
+          ],
+          "Skills": [
+            "observation",
+            "Language"
+          ],
+          "TeacherFocus": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+          "Activity": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
+        }
+      ]
+    }
+  },
+  {
+    "id": "6",
+    "date": "3 August 2020 Monday",
+    "eventList": [
+      {
+        "id": "1",
+        "eventName": "Meet Kiran's Parents",
+        "imageUrl": "bell_icon.png",
+        "type": "TO-DO",
+        "eventColor": "#000000",
+        "typeColor": "#ffaa1e",
+        "iconBackColor": "#ffaa1e",
+        "eventBackColor": "#ffebc8"
+      },
+      {
+        "id": "2",
+        "eventName": "School Sports Day 2020",
+        "imageUrl": "calendar.png",
+        "type": "Event",
+        "eventColor": "#FFFFFF",
+        "typeColor": "#FFFFFF",
+        "iconBackColor": "#1e6eff",
+        "eventBackColor": "#5591ff"
+      }
+    ],
+    "birthdayList": [
+      {
+        "name": "Prisa"
+      },
+      {
+        "name": "Saanvika"
+      },
+      {
+        "name": "Navya"
+      }
+    ],
+    "lessonPlan": {
+      "id": "RyL0ST9W",
+      "Date": "2020-06-02",
+      "IsHoliday": false,
+      "HolidayMsg": "",
+      "PeriodList": [
+        {
+          "id": "p1",
+          "Topic": "Conversation 2",
+          "ShareToAll": true,
+          "LessonTypeValue": "Circle time",
+          "LessonTypeId": "LT2",
+          "SequenceNo": 1,
+          "Date": "2020-06-02",
+          "ResourceList": [
+            {
+              "id": "IRSC3",
+              "title": "Title Name 1 - Modality",
+              "contenttype": "AV",
+              "image": "ic_video_icon.xml",
+              "SequenceNo": 1,
+              "ResourceOriginator": "TCE",
+              "IsSystemAdded": true
+            },
+            {
+              "id": "ERSC1",
+              "title": "Title Name 2 - Modality",
+              "contenttype": "AV",
+              "image": "ic_video_icon.xml",
+              "SequenceNo": 2,
+              "ResourceOriginator": "Shared",
+              "IsSystemAdded": false
+            }
+          ],
+          "Skills": [
+            "observation",
+            "Language"
+          ],
+          "TeacherFocus": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+          "Activity": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
+        },
+        {
+          "id": "p2",
+          "Topic": "Conversation",
+          "ShareToAll": false,
+          "LessonTypeValue": "Circle time",
+          "LessonTypeId": "LT2",
+          "SequenceNo": 2,
+          "Date": "2020-06-02",
+          "ResourceList": [
+            {
+              "id": "RSS1",
+              "title": "Title Name 1 - Modality",
+              "contenttype": "AV",
+              "image": "ic_video_icon.xml",
+              "SequenceNo": 1,
+              "ResourceOriginator": "TCE",
+              "IsSystemAdded": true
+            },
+            {
+              "id": "RSS2",
+              "title": "Title Name 2 - Modality",
+              "contenttype": "AV",
+              "image": "ic_video_icon.xml",
+              "SequenceNo": 2,
+              "ResourceOriginator": "Shared",
+              "IsSystemAdded": false
+            }
+          ],
+          "Skills": [
+            "observation",
+            "Language"
+          ],
+          "TeacherFocus": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+          "Activity": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
+        }
+      ]
+    }
+  },
+  {
+    "id": "7",
+    "date": "5 August 2020 Wednesday",
+    "eventList": [
+      {
+        "id": "1",
+        "eventName": "Meet Kiran's Parents",
+        "imageUrl": "bell_icon.png",
+        "type": "TO-DO",
+        "eventColor": "#000000",
+        "typeColor": "#ffaa1e",
+        "iconBackColor": "#ffaa1e",
+        "eventBackColor": "#ffebc8"
+      },
+      {
+        "id": "2",
+        "eventName": "School Sports Day 2020",
+        "imageUrl": "calendar.png",
+        "type": "Event",
+        "eventColor": "#FFFFFF",
+        "typeColor": "#FFFFFF",
+        "iconBackColor": "#1e6eff",
+        "eventBackColor": "#5591ff"
+      }
+    ],
+    "birthdayList": [
+      {
+        "name": "Prisa"
+      },
+      {
+        "name": "Saanvika"
+      },
+      {
+        "name": "Navya"
+      }
+    ],
+    "lessonPlan": {
+      "id": "Dwqwe76",
       "Date": "2020-06-02",
       "IsHoliday": false,
       "HolidayMsg": "",

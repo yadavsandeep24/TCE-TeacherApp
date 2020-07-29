@@ -7,4 +7,5 @@ interface LessonPlanClickListener {
     fun onLessonPlanClick(lessonPlanPeriod: LessonPlanPeriod)
     fun onMarkCompletedClick(lessonPlanPeriod: LessonPlanPeriod)
     fun onResourceMarkCompletedChecked(resource: LessonPlanResource, isChecked : Boolean)
+    fun onLessonPlanResourceItemClick(resource: LessonPlanResource)
 }

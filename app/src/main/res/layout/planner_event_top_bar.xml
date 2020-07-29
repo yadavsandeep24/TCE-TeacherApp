@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/event_top_container"
     android:layout_width="match_parent"
-    android:layout_height="?android:attr/actionBarSize"
+    android:layout_height="60dp"
     android:background="@color/subject_actionbar_color">
 
     <TextView
@@ -36,7 +36,7 @@
         android:textColor="#fa4b28"
         android:textSize="@dimen/font_size_16_dp"
         android:gravity="center"
-        android:visibility="gone"></com.tce.teacherapp.util.RubikMediumTextview>
+        android:visibility="gone"/>
 
     <com.tce.teacherapp.util.RubikMediumTextview
         android:id="@+id/tvCount"
@@ -50,7 +50,7 @@
         android:textColor="@color/color_black"
         android:textSize="@dimen/font_size_12_dp"
         android:gravity="center"
-        android:visibility="gone"></com.tce.teacherapp.util.RubikMediumTextview>
+        android:visibility="gone"/>
 
 
 

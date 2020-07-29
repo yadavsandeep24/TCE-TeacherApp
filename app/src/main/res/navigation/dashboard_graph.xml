@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/dashboardHomeFragment"
-        android:name="com.tce.teacherapp.ui.home.DashboardHomeFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.home.DashboardHomeFragment"
         android:label="fragment_dashboard_home"
         tools:layout="@layout/fragment_dashboard_home" >
         <action
@@ -89,7 +89,7 @@
         tools:layout="@layout/fragment_teacher_profile" />
     <fragment
         android:id="@+id/addChildFragment"
-        android:name="com.tce.teacherapp.ui.home.AddChildFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.home.AddChildFragment"
         android:label="fragment_add_child"
         tools:layout="@layout/fragment_add_child" >
         <action

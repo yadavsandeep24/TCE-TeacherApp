@@ -5,7 +5,7 @@ import com.tce.teacherapp.util.StateEvent
 sealed class PlannerStateEvent : StateEvent {
 
     class GetPlannerData (
-        val query: String
+        val isShowLess: Boolean
     ) : PlannerStateEvent() {
         override fun errorInfo(): String {
             return "Error in getting division info."
@@ -13,19 +13,6 @@ sealed class PlannerStateEvent : StateEvent {
 
         override fun toString(): String {
             return "GetDivisionEvent"
-        }
-    }
-
-    class GetPlannerEvent(
-        val count: Int,
-        val showOriginal: Boolean
-    ) : PlannerStateEvent() {
-        override fun errorInfo(): String {
-            return "Error in getting event info."
-        }
-
-        override fun toString(): String {
-            return "GetDashboardEvent"
         }
     }
 

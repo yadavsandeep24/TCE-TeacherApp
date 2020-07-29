@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
 data class DailyPlanner(
 
     @Expose
-    val id :Int,
+    val id :String,
 
     @Expose
     val date : String,
@@ -17,12 +17,11 @@ data class DailyPlanner(
     val eventList : ArrayList<Event>,
 
     @Expose
-    val birthdayList : ArrayList<StudentBirthDay>,
+    var birthdayList : ArrayList<StudentBirthDay>,
 
     @Expose
     val lessonPlan : LessonPlan,
 
     var eventData : EventData
-
 
     ):Parcelable

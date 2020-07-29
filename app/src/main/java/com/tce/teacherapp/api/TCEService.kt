@@ -4,6 +4,7 @@ import com.tce.teacherapp.api.response.BookResponse
 import com.tce.teacherapp.api.response.GradeResponse
 import com.tce.teacherapp.api.response.LoginResponse
 import com.tce.teacherapp.api.response.ResourceListResponse
+import com.tce.teacherapp.db.entity.DailyPlanner
 import retrofit2.http.Field
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -27,6 +28,9 @@ interface TCEService {
 
     @GET("Resources")
     suspend fun getTopicResources(): List<ResourceListResponse>
+
+    @GET("LessonPlan")
+    suspend fun getLessonPlan(): List<DailyPlanner>
 
 
 }

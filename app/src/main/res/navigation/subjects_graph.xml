@@ -13,10 +13,10 @@
         <action
             android:id="@+id/action_subjectListFragment_to_topicFragment"
             app:destination="@id/topicFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left" />
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/topicFragment"
@@ -26,64 +26,64 @@
         <action
             android:id="@+id/action_topicFragment_to_selectChapterBookFragment"
             app:destination="@id/selectChapterBookFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_topicFragment_to_selectChapterLearnFragment"
             app:destination="@id/selectChapterLearnFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/selectChapterLearnFragment"
         android:name="com.tce.teacherapp.ui.dashboard.subjects.ChapterLearnFragment"
         android:label="fragment_select_chapter_learn"
-        tools:layout="@layout/fragment_chapter_learn" >
+        tools:layout="@layout/fragment_chapter_learn">
         <action
             android:id="@+id/action_selectChapterLearnFragment_to_subjectResourceDetailFragment"
             app:destination="@id/subjectResourceDetailFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_selectChapterLearnFragment_to_pdfFragment"
             app:destination="@id/pdfFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_selectChapterLearnFragment_to_SUbjectPracticeFragment"
             app:destination="@id/SubjectPracticeFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_selectChapterLearnFragment_to_chapterResourceSelectionFragment"
             app:destination="@id/chapterResourceSelectionFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/selectChapterBookFragment"
         android:name="com.tce.teacherapp.ui.dashboard.subjects.ChapterBookFragment"
         android:label="fragment_select_chapter_book"
-        tools:layout="@layout/fragment_select_chapter_book" >
+        tools:layout="@layout/fragment_select_chapter_book">
         <action
             android:id="@+id/action_selectChapterBookFragment_to_chapterResourceSelectionFragment"
             app:destination="@id/chapterResourceSelectionFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/SubjectPracticeFragment"
@@ -94,28 +94,28 @@
         android:id="@+id/subjectResourceDetailFragment"
         android:name="com.tce.teacherapp.ui.dashboard.subjects.SubjectResourceDetailFragment"
         android:label="fragment_subject_resource_detail"
-        tools:layout="@layout/fragment_subject_resource_detail" >
+        tools:layout="@layout/fragment_subject_resource_detail">
         <action
             android:id="@+id/action_subjectResourceDetailFragment_to_videoPlayerFragment"
             app:destination="@id/videoPlayerFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_subjectResourceDetailFragment_to_HTMLContentFragment"
             app:destination="@id/HTMLContentFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_subjectResourceDetailFragment_to_imageContentFragment"
             app:destination="@id/imageContentFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/HTMLContentFragment"
@@ -131,89 +131,89 @@
         android:id="@+id/resourceListFragment"
         android:name="com.tce.teacherapp.ui.dashboard.subjects.ResourceListFragment"
         android:label="fragment_resource_list"
-        tools:layout="@layout/fragment_resource_list" >
+        tools:layout="@layout/fragment_resource_list">
         <action
             android:id="@+id/action_resourceListFragment_to_pdfFragment"
             app:destination="@id/pdfFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_resourceListFragment_to_subjectResourceDetailFragment"
             app:destination="@id/subjectResourceDetailFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_resourceListFragment_to_HTMLContentFragment"
             app:destination="@id/HTMLContentFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_resourceListFragment_to_videoPlayerFragment"
             app:destination="@id/videoPlayerFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/resourceListFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_resourceListFragment_to_imageContentFragment"
             app:destination="@id/imageContentFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/chapterResourceSelectionFragment"
         android:name="com.tce.teacherapp.ui.dashboard.subjects.ChapterResourceSelectionFragment"
-        android:label="ChapterResourceSelectionFragment" >
+        android:label="ChapterResourceSelectionFragment">
         <action
             android:id="@+id/action_chapterResourceSelectionFragment_to_resourceListFragment"
             app:destination="@id/resourceListFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_chapterResourceSelectionFragment_to_videoPlayerFragment"
             app:destination="@id/videoPlayerFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_chapterResourceSelectionFragment_to_HTMLContentFragment"
             app:destination="@id/HTMLContentFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left" />
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_chapterResourceSelectionFragment_to_imageContentFragment"
             app:destination="@id/imageContentFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/videoPlayerFragment"
         android:name="com.tce.teacherapp.ui.dashboard.subjects.VideoPlayerFragment"
-        android:label="VideoPlayerFragment" >
+        android:label="VideoPlayerFragment">
         <action
             android:id="@+id/action_videoPlayerFragment_to_chapterResourceSelectionFragment"
             app:destination="@id/chapterResourceSelectionFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/imageContentFragment"

@@ -25,11 +25,10 @@ import com.tce.teacherapp.util.calenderView.model.DayOwner
 import com.tce.teacherapp.util.calenderView.ui.DayBinder
 import com.tce.teacherapp.util.calenderView.ui.MonthHeaderFooterBinder
 import com.tce.teacherapp.util.calenderView.ui.ViewContainer
-import kotlinx.android.synthetic.main.calendar_day_legend.*
 import kotlinx.android.synthetic.main.calendar_day_legend.view.*
-import kotlinx.android.synthetic.main.list_item_resource.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
+import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.YearMonth
 import javax.inject.Inject
@@ -101,7 +100,8 @@ constructor(
             val strTitle =
                 "${it.yearMonth.month.name.toLowerCase().capitalize()} ${it.yearMonth.year}"
             Log.d("SAN", "strTitle-->$strTitle")
-            //binding.exFiveCalendar.legendLayout.tv_month.text = strTitle
+            binding.exFiveCalendar.legendLayout.tv_month.text = strTitle
+            viewModel.setStateEvent(PlannerStateEvent.GetMonthlyPlannerData(it.yearMonth.toString()))
         }
         class DayViewContainer(view: View) : ViewContainer(view) {
             lateinit var day: CalendarDay // Will be set when this container is bound.
@@ -132,7 +132,7 @@ constructor(
                 val layout = container.binding.exFiveDayLayout
                 textView.text = day.date.dayOfMonth.toString()
                 val strDayOfWeek = day.date.dayOfWeek
-                if (strDayOfWeek.value == 1 || strDayOfWeek.value == 7) {
+                if (strDayOfWeek == DayOfWeek.SUNDAY || strDayOfWeek == DayOfWeek.SATURDAY) {
                     layout.background = resources.getDrawable(R.drawable.calender_day_weekend_border)
                 } else {
                     layout.background = resources.getDrawable(R.drawable.calender_day_border)

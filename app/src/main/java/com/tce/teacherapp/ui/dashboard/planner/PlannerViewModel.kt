@@ -1,6 +1,8 @@
 package com.tce.teacherapp.ui.dashboard.planner
 
-import com.tce.teacherapp.db.entity.*
+import com.tce.teacherapp.db.entity.DailyPlanner
+import com.tce.teacherapp.db.entity.MonthlyPlanner
+import com.tce.teacherapp.db.entity.Student
 import com.tce.teacherapp.repository.MainRepository
 import com.tce.teacherapp.ui.BaseViewModel
 import com.tce.teacherapp.ui.dashboard.planner.state.PlannerStateEvent
@@ -19,24 +21,9 @@ class PlannerViewModel @Inject constructor(val mainRepository: MainRepository) :
     BaseViewModel<PlannerViewState>() {
 
     override fun handleNewData(data: PlannerViewState) {
-        data.lessonPlanList?.let {
-            setPlannerList(it)
-        }
-
-        data.eventList?.let {
-            setEventList(it)
-        }
-
-        data.birthdayList?.let {
-            setBirthdayList(it)
-        }
 
         data.dailyPlannerList?.let {
             setDailyPlannerList(it)
-        }
-
-        data.eventData?.let {
-            setEventList(it)
         }
 
         data.monthlyPlannerList?.let {
@@ -56,13 +43,6 @@ class PlannerViewModel @Inject constructor(val mainRepository: MainRepository) :
         setViewState(update)
     }
 
-
-    private fun setEventList(event: EventData) {
-        val update = getCurrentViewStateOrNew()
-        update.eventData = event
-        setViewState(update)
-    }
-
     private fun setMonthlyPlannerList(list: List<MonthlyPlanner>) {
         val update = getCurrentViewStateOrNew()
         update.monthlyPlannerList = list
@@ -76,34 +56,12 @@ class PlannerViewModel @Inject constructor(val mainRepository: MainRepository) :
         setViewState(update)
     }
 
-    private fun setPlannerList(list: List<LessonPlan>) {
-        val update = getCurrentViewStateOrNew()
-        update.lessonPlanList = list
-        setViewState(update)
-    }
-
-    private fun setEventList(list: List<Event>) {
-        val update = getCurrentViewStateOrNew()
-        update.eventList = list
-        setViewState(update)
-    }
-
-    private fun setBirthdayList(list: List<StudentBirthDay>) {
-        val update = getCurrentViewStateOrNew()
-        update.birthdayList = list
-        setViewState(update)
-    }
-
 
     override fun setStateEvent(stateEvent: StateEvent) {
         val job: Flow<DataState<PlannerViewState>> = when (stateEvent) {
 
             is PlannerStateEvent.GetPlannerData -> {
-               mainRepository.getPlannerData(stateEvent.query,stateEvent = stateEvent)
-            }
-
-            is PlannerStateEvent.GetPlannerEvent -> {
-                mainRepository.getPlannerEventList(stateEvent.count,stateEvent.showOriginal,stateEvent = stateEvent)
+               mainRepository.getPlannerData(stateEvent.isShowLess,stateEvent = stateEvent)
             }
 
             is PlannerStateEvent.GetMonthlyPlannerData -> {

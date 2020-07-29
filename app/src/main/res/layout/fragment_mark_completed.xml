@@ -32,7 +32,7 @@
                     android:layout_height="wrap_content"
                     android:text="I taught the following resources on"
                     android:textColor="@color/color_black"
-                    android:textSize="14dp"></com.tce.teacherapp.util.RubikMediumTextview>
+                    android:textSize="14dp"/>
 
                 <LinearLayout
                     android:id="@+id/date_container"
@@ -50,12 +50,13 @@
                     </androidx.appcompat.widget.AppCompatImageView>
 
                     <com.tce.teacherapp.util.RubikMediumTextview
+                        android:id="@+id/tv_selected_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:text="14 Jan 2020, Thursday"
                         android:textColor="@color/color_black"
-                        android:textSize="@dimen/font_size_12_dp"></com.tce.teacherapp.util.RubikMediumTextview>
+                        android:textSize="@dimen/font_size_12_dp"/>
 
 
                 </LinearLayout>

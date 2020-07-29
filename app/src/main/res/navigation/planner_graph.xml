@@ -7,59 +7,94 @@
 
     <fragment
         android:id="@+id/plannerFragment"
-        android:name="com.tce.teacherapp.ui.planner.PlannerFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.planner.PlannerFragment"
         android:label="fragment_planner"
-        tools:layout="@layout/fragment_planner" >
+        tools:layout="@layout/fragment_planner">
         <action
             android:id="@+id/action_plannerFragment_to_monthlyPlannerFragment"
-            app:destination="@id/monthlyPlannerFragment" />
+            app:destination="@id/monthlyPlannerFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
         <action
             android:id="@+id/action_plannerFragment_to_eventDisplayFragment"
             app:destination="@id/eventDisplayFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_plannerFragment_to_lessonPlanDisplayFragment"
             app:destination="@id/lessonPlanDisplayFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_plannerFragment_to_markCompletedFragment"
             app:destination="@id/markCompletedFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_plannerFragment_to_videoPlayerFragment2"
+            app:destination="@id/videoPlayerFragment2"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_plannerFragment_to_imageContentFragment2"
+            app:destination="@id/imageContentFragment2"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_plannerFragment_to_pdfFragment2"
+            app:destination="@id/pdfFragment2"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_plannerFragment_to_HTMLContentFragment2"
+            app:destination="@id/HTMLContentFragment2"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_plannerFragment_to_addChildFragment2"
-            app:destination="@id/addChildFragment2"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:destination="@id/addChildFragment2" />
     </fragment>
     <fragment
         android:id="@+id/monthlyPlannerFragment"
         android:name="com.tce.teacherapp.ui.dashboard.planner.MonthlyPlannerFragment"
         android:label="fragment_monthly_planner"
-        tools:layout="@layout/fragment_monthly_planner" >
+        tools:layout="@layout/fragment_monthly_planner">
         <action
             android:id="@+id/action_monthlyPlannerFragment_to_plannerFragment"
-            app:destination="@id/plannerFragment" />
+            app:destination="@id/plannerFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/eventDisplayFragment"
         android:name="com.tce.teacherapp.ui.dashboard.planner.EventDisplayFragment"
         android:label="fragment_event_display"
-        tools:layout="@layout/fragment_event_display"
-        >
+        tools:layout="@layout/fragment_event_display">
         <action
             android:id="@+id/action_eventDisplayFragment_to_imageContentFragment2"
-            app:destination="@id/imageContentFragment2" />
+            app:destination="@id/imageContentFragment2"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/lessonPlanDisplayFragment"
@@ -73,10 +108,22 @@
         tools:layout="@layout/fragment_mark_completed" />
     <fragment
         android:id="@+id/imageContentFragment2"
-        android:name="com.tce.teacherapp.ui.dashboard.planner.ImageContentFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.subjects.ImageContentFragment"
         android:label="ImageContentFragment" />
     <fragment
+        android:id="@+id/videoPlayerFragment2"
+        android:name="com.tce.teacherapp.ui.dashboard.subjects.VideoPlayerFragment"
+        android:label="VideoPlayerFragment" />
+    <fragment
+        android:id="@+id/pdfFragment2"
+        android:name="com.tce.teacherapp.ui.dashboard.subjects.PdfFragment"
+        android:label="PdfFragment" />
+    <fragment
+        android:id="@+id/HTMLContentFragment2"
+        android:name="com.tce.teacherapp.ui.dashboard.subjects.HTMLContentFragment"
+        android:label="HTMLContentFragment" />
+    <fragment
         android:id="@+id/addChildFragment2"
-        android:name="com.tce.teacherapp.ui.home.AddChildFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.home.AddChildFragment"
         android:label="AddChildFragment" />
 </navigation>
