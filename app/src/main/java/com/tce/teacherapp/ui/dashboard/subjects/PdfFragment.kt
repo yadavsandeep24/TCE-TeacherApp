@@ -65,5 +65,9 @@ constructor(
         binding.ivClose.setOnClickListener {
             activity?.onBackPressed()
         }
+
+        binding.ibModality.setOnClickListener {
+            activity?.onBackPressed()
+        }
     }
 }

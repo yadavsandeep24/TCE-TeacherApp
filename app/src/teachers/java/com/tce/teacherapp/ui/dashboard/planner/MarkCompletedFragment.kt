@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.*
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
@@ -23,6 +24,7 @@ import com.kizitonwose.calendarview.ui.ViewContainer
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.CalendarDayMarkCompletedBinding
 import com.tce.teacherapp.databinding.FragmentMarkCompletedBinding
+import com.tce.teacherapp.db.entity.LessonPlan
 import com.tce.teacherapp.db.entity.LessonPlanPeriod
 import com.tce.teacherapp.db.entity.LessonPlanResource
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
@@ -79,7 +81,7 @@ constructor(
         editor = sharedPreference.edit()
         editor.putInt("mark_count",0).apply()
 
-        val lessonPlanPeriod = arguments?.getParcelable("lessonPlanData") as LessonPlanPeriod?
+        val lessonPlan= arguments?.getParcelable("lessonPlanData") as LessonPlan?
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             activity?.window!!.statusBarColor = resources.getColor(R.color.color_black, null)
         } else {
@@ -118,17 +120,19 @@ constructor(
         }
 
         binding.rvResource.withModels {
-            lessonPlanPeriod.let {
-                lessonPlanEpoxyHolder {
-                    id(it!!.id)
-                    period(it)
-                    screenType("markCompleted")
-                    lessonPLanClickListener(this@MarkCompletedFragment)
+            lessonPlan?.let {
+                for (event in lessonPlan.PeriodList){
+                    lessonPlanEpoxyHolder {
+                        id(event.id)
+                        period(event)
+                        screenType("markCompleted")
+                        lessonPLanClickListener(this@MarkCompletedFragment)
+                    }
                 }
             }
         }
 
-        tvDone.setOnClickListener(View.OnClickListener {
+        tvDone.setOnClickListener {
             val dialog = Dialog(requireActivity(), android.R.style.Theme_Dialog)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.setContentView(R.layout.custom_success_dialog)
@@ -150,7 +154,7 @@ constructor(
                 (activity as DashboardActivity).onBackPressed()
             }, 1000)
 
-        })
+        }
 
 
 
@@ -207,6 +211,7 @@ constructor(
                         }
                         val formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy EEEE")
                         val formattedString: String = day.date.format(formatter)
+                        Log.d("SAN","formattedString-->"+formattedString)
 
                         binding.tvSelectedDate.text = formattedString
                         dialog.dismiss()
@@ -280,7 +285,7 @@ constructor(
         TODO("Not yet implemented")
     }
 
-    override fun onMarkCompletedClick(lessonPlanPeriod: LessonPlanPeriod) {
+    override fun onMarkCompletedClick(lessonPlanPeriod: LessonPlan) {
         TODO("Not yet implemented")
     }
 

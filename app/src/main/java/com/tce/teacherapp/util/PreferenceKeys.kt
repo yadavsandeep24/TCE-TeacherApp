@@ -16,5 +16,7 @@ class PreferenceKeys {
         const val APP_PREFERENCES_KEY_USER_EMAIL = "com.tce.teacherapp.app_preferences_key_user_email"
         const val APP_PREFERENCES_KEY_PASSWORD = "com.tce.teacherapp.app_preferences_key_password"
         const val APP_PREFERENCES_KEY_USER_ID = "com.tce.teacherapp.app_preferences_key_user_id"
+
+        const val APP_USER_SELECTED_CHILD_POSITION = "com.tce.teacherapp.app_user_selected_child_position"
     }
 }

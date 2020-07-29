@@ -10,8 +10,8 @@ import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.tce.teacherapp.R
 import com.tce.teacherapp.db.entity.Student
-import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.home.listeners.ChildClickListener
+import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
 import com.tce.teacherapp.util.Utility
 
 @EpoxyModelClass(layout = R.layout.list_item_child)
@@ -36,7 +36,7 @@ abstract  class ChildEpoxyHolder : EpoxyModelWithHolder<InfoHolder>(){
         )
 
         holder.lnrMainContainer.setOnClickListener { childClickListener.onChildListItemClick(student) }
-        if(strStudentName.contains("Amit")){
+        if(student.isSelected) {
             holder.iconTick.visibility = View.VISIBLE
             holder.tvStudentName.setTextColor(Color.parseColor("#616fff"))
         }else

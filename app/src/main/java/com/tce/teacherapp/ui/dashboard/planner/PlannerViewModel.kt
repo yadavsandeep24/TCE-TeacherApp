@@ -61,11 +61,19 @@ class PlannerViewModel @Inject constructor(val mainRepository: MainRepository) :
         val job: Flow<DataState<PlannerViewState>> = when (stateEvent) {
 
             is PlannerStateEvent.GetPlannerData -> {
-               mainRepository.getPlannerData(stateEvent.isShowLess,stateEvent = stateEvent)
+               mainRepository.getPlannerData(stateEvent.isShowLess,stateEvent.selectedDate,stateEvent = stateEvent)
             }
 
             is PlannerStateEvent.GetMonthlyPlannerData -> {
                 mainRepository.getMonthlyPlannerData(stateEvent.query,stateEvent = stateEvent)
+            }
+
+            is PlannerStateEvent.GetChildSelectedPosition ->{
+                mainRepository.getSelectedChildPosition(stateEvent = stateEvent)
+            }
+
+            is PlannerStateEvent.SetChildSelectedPosition ->{
+                mainRepository.setSelectedChildPosition(stateEvent.position,stateEvent = stateEvent)
             }
 
             else -> {

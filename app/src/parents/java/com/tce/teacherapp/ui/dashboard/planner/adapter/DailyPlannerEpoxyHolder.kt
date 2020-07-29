@@ -23,6 +23,9 @@ abstract class DailyPlannerEpoxyHolder : EpoxyModelWithHolder<PlannerHolder>() {
     lateinit var dailyPlanner: DailyPlanner
 
     @EpoxyAttribute
+    var selectedDate: String? = null
+
+    @EpoxyAttribute
     lateinit var evenClickListener : EventClickListener
 
     @EpoxyAttribute
@@ -41,7 +44,11 @@ abstract class DailyPlannerEpoxyHolder : EpoxyModelWithHolder<PlannerHolder>() {
         }else{
             holder.tvDate.visibility = View.VISIBLE
         }
-
+        if(selectedDate != null) {
+            holder.tvDate.visibility = View.GONE
+        }else{
+            holder.tvDate.visibility = View.VISIBLE
+        }
         val linearLayoutManager1 = LinearLayoutManager(holder.rvEvent.context)
         linearLayoutManager1.orientation = LinearLayoutManager.VERTICAL
         holder.rvEvent.apply {

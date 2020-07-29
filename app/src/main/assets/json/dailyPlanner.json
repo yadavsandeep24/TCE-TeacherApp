@@ -1,11 +1,11 @@
 [
   {
     "id": "1",
-    "date": "27 july 2020 Monday",
+    "date": "29 july 2020 Wednesday",
     "eventList": [
       {
         "id": "1",
-        "eventName": "School Sports Day 2020 jkdkj lsdjflksd lkdjlsks ldjlssdff skdfldf odjfldsjf osjdssd podookdo psodpossk osdufo spdo;s sspdkkd poidooi ssdopifpsod sspodpodok spsdodpoos ",
+        "eventName": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
         "imageUrl": "calendar.png",
         "type": "Event",
         "eventColor": "#FFFFFF",
@@ -13,12 +13,12 @@
         "iconBackColor" : "#1e6eff",
         "eventBackColor": "#5591ff",
         "date" :  "13 July 2020 Monday",
-        "note": "Ldkkdm ddfkj djlk ljlm laksmdlf kdskn sksd sdkjfhvbsde9uuw iefskj",
+        "note": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
         "eventImageUrl" : "https://cdn.zeplin.io/5e699b90fe113b12d8183577/assets/2FA9D29A-025F-4E82-8FD0-932A9F9A0D8F.png"
       },
       {
         "id": "2",
-        "eventName": "Remind parents to bring sports attire for tommarow's event",
+        "eventName": "Remind parents to bring sports attire for tommarrow's event",
         "imageUrl": "bell_icon.png",
         "type": "TO-DO",
         "eventColor": "#000000",
@@ -62,9 +62,6 @@
       },
       {
         "name": "Saanvika"
-      },
-      {
-        "name": "Navya"
       }
     ],
     "lessonPlan": {
@@ -145,7 +142,8 @@
               "id": "RSS1",
               "title": "Title Name 1 - Modality",
               "contenttype": "AV",
-              "image": "ic_video_icon.xml",
+              "image": "https://kohantextilejournal.com/wp-content/uploads/2018/04/video-poster.jpg",
+              "src": "http://vjs.zencdn.net/v/oceans.mp4",
               "SequenceNo": 1,
               "ResourceOriginator": "TCE",
               "IsSystemAdded": true
@@ -154,122 +152,8 @@
               "id": "RSS2",
               "title": "Title Name 2 - Modality",
               "contenttype": "AV",
-              "image": "ic_video_icon.xml",
-              "SequenceNo": 2,
-              "ResourceOriginator": "Shared",
-              "IsSystemAdded": false
-            }
-          ],
-          "Skills": [
-            "observation",
-            "Language"
-          ],
-          "TeacherFocus": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-          "Activity": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
-        }
-      ]
-    }
-  },
-  {
-    "id": "2",
-    "date": "28 july 2020 Tuesday",
-    "eventList": [
-      {
-        "id": "1",
-        "eventName": "Meet Kiran's Parents",
-        "imageUrl": "bell_icon.png",
-        "type": "TO-DO",
-        "eventColor": "#000000",
-        "typeColor": "#ffaa1e",
-        "iconBackColor": "#ffaa1e",
-        "eventBackColor": "#ffebc8"
-      },
-      {
-        "id": "2",
-        "eventName": "School Sports Day 2020",
-        "imageUrl": "calendar.png",
-        "type": "Event",
-        "eventColor": "#FFFFFF",
-        "typeColor": "#FFFFFF",
-        "iconBackColor": "#1e6eff",
-        "eventBackColor": "#5591ff"
-      }
-    ],
-    "birthdayList": [
-      {
-        "name": "Prisa"
-      },
-      {
-        "name": "Saanvika"
-      },
-      {
-        "name": "Navya"
-      }
-    ],
-    "lessonPlan": {
-      "id": "LP1Qwer23",
-      "Date": "2020-06-02",
-      "IsHoliday": false,
-      "HolidayMsg": "",
-      "PeriodList": [
-        {
-          "id": "p1",
-          "Topic": "Conversation 2",
-          "ShareToAll": true,
-          "LessonTypeValue": "Circle time",
-          "LessonTypeId": "LT2",
-          "SequenceNo": 1,
-          "Date": "2020-06-02",
-          "ResourceList": [
-            {
-              "id": "IRSC3",
-              "title": "Title Name 1 - Modality",
-              "contenttype": "AV",
-              "image": "ic_video_icon.xml",
-              "SequenceNo": 1,
-              "ResourceOriginator": "TCE",
-              "IsSystemAdded": true
-            },
-            {
-              "id": "ERSC1",
-              "title": "Title Name 2 - Modality",
-              "contenttype": "AV",
-              "image": "ic_video_icon.xml",
-              "SequenceNo": 2,
-              "ResourceOriginator": "Shared",
-              "IsSystemAdded": false
-            }
-          ],
-          "Skills": [
-            "observation",
-            "Language"
-          ],
-          "TeacherFocus": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-          "Activity": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
-        },
-        {
-          "id": "p2",
-          "Topic": "Conversation",
-          "ShareToAll": false,
-          "LessonTypeValue": "Circle time",
-          "LessonTypeId": "LT2",
-          "SequenceNo": 2,
-          "Date": "2020-06-02",
-          "ResourceList": [
-            {
-              "id": "RSS1",
-              "title": "Title Name 1 - Modality",
-              "contenttype": "AV",
-              "image": "ic_video_icon.xml",
-              "SequenceNo": 1,
-              "ResourceOriginator": "TCE",
-              "IsSystemAdded": true
-            },
-            {
-              "id": "RSS2",
-              "title": "Title Name 2 - Modality",
-              "contenttype": "AV",
-              "image": "ic_video_icon.xml",
+              "image": "https://kohantextilejournal.com/wp-content/uploads/2018/04/video-poster.jpg",
+              "src": "http://vjs.zencdn.net/v/oceans.mp4",
               "SequenceNo": 2,
               "ResourceOriginator": "Shared",
               "IsSystemAdded": false
@@ -287,7 +171,7 @@
   },
   {
     "id": "3",
-    "date": "29 july 2020 Wednesday",
+    "date": "31 july 2020 Friday",
     "eventList": [
       {
         "id": "1",
@@ -295,6 +179,8 @@
         "imageUrl": "bell_icon.png",
         "type": "TO-DO",
         "eventColor": "#000000",
+        "date" :  "13 July 2020 Monday",
+        "note": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
         "typeColor": "#ffaa1e",
         "iconBackColor": "#ffaa1e",
         "eventBackColor": "#ffebc8"
@@ -304,6 +190,8 @@
         "eventName": "School Sports Day 2020",
         "imageUrl": "calendar.png",
         "type": "Event",
+        "date" :  "13 July 2020 Monday",
+        "note": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
         "eventColor": "#FFFFFF",
         "typeColor": "#FFFFFF",
         "iconBackColor": "#1e6eff",
@@ -313,12 +201,6 @@
     "birthdayList": [
       {
         "name": "Prisa"
-      },
-      {
-        "name": "Saanvika"
-      },
-      {
-        "name": "Navya"
       }
     ],
     "lessonPlan": {
@@ -340,7 +222,8 @@
               "id": "IRSC3",
               "title": "Title Name 1 - Modality",
               "contenttype": "AV",
-              "image": "ic_video_icon.xml",
+              "image": "https://kohantextilejournal.com/wp-content/uploads/2018/04/video-poster.jpg",
+              "src": "http://vjs.zencdn.net/v/oceans.mp4",
               "SequenceNo": 1,
               "ResourceOriginator": "TCE",
               "IsSystemAdded": true
@@ -349,7 +232,8 @@
               "id": "ERSC1",
               "title": "Title Name 2 - Modality",
               "contenttype": "AV",
-              "image": "ic_video_icon.xml",
+              "image": "https://kohantextilejournal.com/wp-content/uploads/2018/04/video-poster.jpg",
+              "src": "http://vjs.zencdn.net/v/oceans.mp4",
               "SequenceNo": 2,
               "ResourceOriginator": "Shared",
               "IsSystemAdded": false
@@ -375,7 +259,8 @@
               "id": "RSS1",
               "title": "Title Name 1 - Modality",
               "contenttype": "AV",
-              "image": "ic_video_icon.xml",
+              "image": "https://kohantextilejournal.com/wp-content/uploads/2018/04/video-poster.jpg",
+              "src": "http://vjs.zencdn.net/v/oceans.mp4",
               "SequenceNo": 1,
               "ResourceOriginator": "TCE",
               "IsSystemAdded": true
@@ -384,7 +269,8 @@
               "id": "RSS2",
               "title": "Title Name 2 - Modality",
               "contenttype": "AV",
-              "image": "ic_video_icon.xml",
+              "image": "https://kohantextilejournal.com/wp-content/uploads/2018/04/video-poster.jpg",
+              "src": "http://vjs.zencdn.net/v/oceans.mp4",
               "SequenceNo": 2,
               "ResourceOriginator": "Shared",
               "IsSystemAdded": false
@@ -402,13 +288,15 @@
   },
   {
     "id": "4",
-    "date": "30 july 2020 Thursday",
+    "date": "01 August 2020 Saturday",
     "eventList": [
       {
         "id": "1",
         "eventName": "Meet Kiran's Parents",
         "imageUrl": "bell_icon.png",
         "type": "TO-DO",
+        "date" :  "13 July 2020 Monday",
+        "note": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
         "eventColor": "#000000",
         "typeColor": "#ffaa1e",
         "iconBackColor": "#ffaa1e",
@@ -419,6 +307,8 @@
         "eventName": "School Sports Day 2020",
         "imageUrl": "calendar.png",
         "type": "Event",
+        "date" :  "13 July 2020 Monday",
+        "note": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
         "eventColor": "#FFFFFF",
         "typeColor": "#FFFFFF",
         "iconBackColor": "#1e6eff",
@@ -427,13 +317,7 @@
     ],
     "birthdayList": [
       {
-        "name": "Prisa"
-      },
-      {
-        "name": "Saanvika"
-      },
-      {
-        "name": "Navya"
+        "name": "Aarav"
       }
     ],
     "lessonPlan": {
@@ -455,7 +339,8 @@
               "id": "IRSC3",
               "title": "Title Name 1 - Modality",
               "contenttype": "AV",
-              "image": "ic_video_icon.xml",
+              "image": "https://kohantextilejournal.com/wp-content/uploads/2018/04/video-poster.jpg",
+              "src": "http://vjs.zencdn.net/v/oceans.mp4",
               "SequenceNo": 1,
               "ResourceOriginator": "TCE",
               "IsSystemAdded": true
@@ -464,7 +349,8 @@
               "id": "ERSC1",
               "title": "Title Name 2 - Modality",
               "contenttype": "AV",
-              "image": "ic_video_icon.xml",
+              "image": "https://kohantextilejournal.com/wp-content/uploads/2018/04/video-poster.jpg",
+              "src": "http://vjs.zencdn.net/v/oceans.mp4",
               "SequenceNo": 2,
               "ResourceOriginator": "Shared",
               "IsSystemAdded": false
@@ -490,7 +376,8 @@
               "id": "RSS1",
               "title": "Title Name 1 - Modality",
               "contenttype": "AV",
-              "image": "ic_video_icon.xml",
+              "image": "https://kohantextilejournal.com/wp-content/uploads/2018/04/video-poster.jpg",
+              "src": "http://vjs.zencdn.net/v/oceans.mp4",
               "SequenceNo": 1,
               "ResourceOriginator": "TCE",
               "IsSystemAdded": true
@@ -499,7 +386,8 @@
               "id": "RSS2",
               "title": "Title Name 2 - Modality",
               "contenttype": "AV",
-              "image": "ic_video_icon.xml",
+              "image": "https://kohantextilejournal.com/wp-content/uploads/2018/04/video-poster.jpg",
+              "src": "http://vjs.zencdn.net/v/oceans.mp4",
               "SequenceNo": 2,
               "ResourceOriginator": "Shared",
               "IsSystemAdded": false
@@ -517,13 +405,15 @@
   },
   {
     "id": "5",
-    "date": "1 August 2020 Saturday",
+    "date": "03 August 2020 Monday",
     "eventList": [
       {
         "id": "1",
         "eventName": "Meet Kiran's Parents",
         "imageUrl": "bell_icon.png",
         "type": "TO-DO",
+        "date" :  "13 July 2020 Monday",
+        "note": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
         "eventColor": "#000000",
         "typeColor": "#ffaa1e",
         "iconBackColor": "#ffaa1e",
@@ -534,6 +424,8 @@
         "eventName": "School Sports Day 2020",
         "imageUrl": "calendar.png",
         "type": "Event",
+        "date" :  "13 July 2020 Monday",
+        "note": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
         "eventColor": "#FFFFFF",
         "typeColor": "#FFFFFF",
         "iconBackColor": "#1e6eff",
@@ -570,7 +462,8 @@
               "id": "IRSC3",
               "title": "Title Name 1 - Modality",
               "contenttype": "AV",
-              "image": "ic_video_icon.xml",
+              "image": "https://kohantextilejournal.com/wp-content/uploads/2018/04/video-poster.jpg",
+              "src": "http://vjs.zencdn.net/v/oceans.mp4",
               "SequenceNo": 1,
               "ResourceOriginator": "TCE",
               "IsSystemAdded": true
@@ -579,7 +472,8 @@
               "id": "ERSC1",
               "title": "Title Name 2 - Modality",
               "contenttype": "AV",
-              "image": "ic_video_icon.xml",
+              "image": "https://kohantextilejournal.com/wp-content/uploads/2018/04/video-poster.jpg",
+              "src": "http://vjs.zencdn.net/v/oceans.mp4",
               "SequenceNo": 2,
               "ResourceOriginator": "Shared",
               "IsSystemAdded": false
@@ -605,7 +499,8 @@
               "id": "RSS1",
               "title": "Title Name 1 - Modality",
               "contenttype": "AV",
-              "image": "ic_video_icon.xml",
+              "image": "https://kohantextilejournal.com/wp-content/uploads/2018/04/video-poster.jpg",
+              "src": "http://vjs.zencdn.net/v/oceans.mp4",
               "SequenceNo": 1,
               "ResourceOriginator": "TCE",
               "IsSystemAdded": true
@@ -614,122 +509,8 @@
               "id": "RSS2",
               "title": "Title Name 2 - Modality",
               "contenttype": "AV",
-              "image": "ic_video_icon.xml",
-              "SequenceNo": 2,
-              "ResourceOriginator": "Shared",
-              "IsSystemAdded": false
-            }
-          ],
-          "Skills": [
-            "observation",
-            "Language"
-          ],
-          "TeacherFocus": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-          "Activity": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
-        }
-      ]
-    }
-  },
-  {
-    "id": "6",
-    "date": "3 August 2020 Monday",
-    "eventList": [
-      {
-        "id": "1",
-        "eventName": "Meet Kiran's Parents",
-        "imageUrl": "bell_icon.png",
-        "type": "TO-DO",
-        "eventColor": "#000000",
-        "typeColor": "#ffaa1e",
-        "iconBackColor": "#ffaa1e",
-        "eventBackColor": "#ffebc8"
-      },
-      {
-        "id": "2",
-        "eventName": "School Sports Day 2020",
-        "imageUrl": "calendar.png",
-        "type": "Event",
-        "eventColor": "#FFFFFF",
-        "typeColor": "#FFFFFF",
-        "iconBackColor": "#1e6eff",
-        "eventBackColor": "#5591ff"
-      }
-    ],
-    "birthdayList": [
-      {
-        "name": "Prisa"
-      },
-      {
-        "name": "Saanvika"
-      },
-      {
-        "name": "Navya"
-      }
-    ],
-    "lessonPlan": {
-      "id": "RyL0ST9W",
-      "Date": "2020-06-02",
-      "IsHoliday": false,
-      "HolidayMsg": "",
-      "PeriodList": [
-        {
-          "id": "p1",
-          "Topic": "Conversation 2",
-          "ShareToAll": true,
-          "LessonTypeValue": "Circle time",
-          "LessonTypeId": "LT2",
-          "SequenceNo": 1,
-          "Date": "2020-06-02",
-          "ResourceList": [
-            {
-              "id": "IRSC3",
-              "title": "Title Name 1 - Modality",
-              "contenttype": "AV",
-              "image": "ic_video_icon.xml",
-              "SequenceNo": 1,
-              "ResourceOriginator": "TCE",
-              "IsSystemAdded": true
-            },
-            {
-              "id": "ERSC1",
-              "title": "Title Name 2 - Modality",
-              "contenttype": "AV",
-              "image": "ic_video_icon.xml",
-              "SequenceNo": 2,
-              "ResourceOriginator": "Shared",
-              "IsSystemAdded": false
-            }
-          ],
-          "Skills": [
-            "observation",
-            "Language"
-          ],
-          "TeacherFocus": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-          "Activity": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old."
-        },
-        {
-          "id": "p2",
-          "Topic": "Conversation",
-          "ShareToAll": false,
-          "LessonTypeValue": "Circle time",
-          "LessonTypeId": "LT2",
-          "SequenceNo": 2,
-          "Date": "2020-06-02",
-          "ResourceList": [
-            {
-              "id": "RSS1",
-              "title": "Title Name 1 - Modality",
-              "contenttype": "AV",
-              "image": "ic_video_icon.xml",
-              "SequenceNo": 1,
-              "ResourceOriginator": "TCE",
-              "IsSystemAdded": true
-            },
-            {
-              "id": "RSS2",
-              "title": "Title Name 2 - Modality",
-              "contenttype": "AV",
-              "image": "ic_video_icon.xml",
+              "image": "https://kohantextilejournal.com/wp-content/uploads/2018/04/video-poster.jpg",
+              "src": "http://vjs.zencdn.net/v/oceans.mp4",
               "SequenceNo": 2,
               "ResourceOriginator": "Shared",
               "IsSystemAdded": false
@@ -747,13 +528,15 @@
   },
   {
     "id": "7",
-    "date": "5 August 2020 Wednesday",
+    "date": "05 August 2020 Wednesday",
     "eventList": [
       {
         "id": "1",
         "eventName": "Meet Kiran's Parents",
         "imageUrl": "bell_icon.png",
         "type": "TO-DO",
+        "date" :  "13 July 2020 Monday",
+        "note": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
         "eventColor": "#000000",
         "typeColor": "#ffaa1e",
         "iconBackColor": "#ffaa1e",
@@ -765,6 +548,8 @@
         "imageUrl": "calendar.png",
         "type": "Event",
         "eventColor": "#FFFFFF",
+        "date" :  "13 July 2020 Monday",
+        "note": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
         "typeColor": "#FFFFFF",
         "iconBackColor": "#1e6eff",
         "eventBackColor": "#5591ff"
@@ -773,9 +558,6 @@
     "birthdayList": [
       {
         "name": "Prisa"
-      },
-      {
-        "name": "Saanvika"
       },
       {
         "name": "Navya"
@@ -800,7 +582,8 @@
               "id": "IRSC3",
               "title": "Title Name 1 - Modality",
               "contenttype": "AV",
-              "image": "ic_video_icon.xml",
+              "image": "https://kohantextilejournal.com/wp-content/uploads/2018/04/video-poster.jpg",
+              "src": "http://vjs.zencdn.net/v/oceans.mp4",
               "SequenceNo": 1,
               "ResourceOriginator": "TCE",
               "IsSystemAdded": true
@@ -809,7 +592,8 @@
               "id": "ERSC1",
               "title": "Title Name 2 - Modality",
               "contenttype": "AV",
-              "image": "ic_video_icon.xml",
+              "image": "https://kohantextilejournal.com/wp-content/uploads/2018/04/video-poster.jpg",
+              "src": "http://vjs.zencdn.net/v/oceans.mp4",
               "SequenceNo": 2,
               "ResourceOriginator": "Shared",
               "IsSystemAdded": false
@@ -835,7 +619,8 @@
               "id": "RSS1",
               "title": "Title Name 1 - Modality",
               "contenttype": "AV",
-              "image": "ic_video_icon.xml",
+              "image": "https://kohantextilejournal.com/wp-content/uploads/2018/04/video-poster.jpg",
+              "src": "http://vjs.zencdn.net/v/oceans.mp4",
               "SequenceNo": 1,
               "ResourceOriginator": "TCE",
               "IsSystemAdded": true
@@ -844,7 +629,8 @@
               "id": "RSS2",
               "title": "Title Name 2 - Modality",
               "contenttype": "AV",
-              "image": "ic_video_icon.xml",
+              "image": "https://kohantextilejournal.com/wp-content/uploads/2018/04/video-poster.jpg",
+              "src": "http://vjs.zencdn.net/v/oceans.mp4",
               "SequenceNo": 2,
               "ResourceOriginator": "Shared",
               "IsSystemAdded": false

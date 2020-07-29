@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentPlannerBinding
 import com.tce.teacherapp.db.entity.Event
+import com.tce.teacherapp.db.entity.LessonPlan
 import com.tce.teacherapp.db.entity.LessonPlanPeriod
 import com.tce.teacherapp.db.entity.LessonPlanResource
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
@@ -31,6 +32,8 @@ import com.tce.teacherapp.ui.dashboard.subjects.loadImage
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 import javax.inject.Inject
 
@@ -44,7 +47,7 @@ constructor(
     LessonPlanClickListener {
 
     private lateinit var binding: FragmentPlannerBinding
-
+    private var selectedDate: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         savedInstanceState?.let { inState ->
@@ -80,9 +83,9 @@ constructor(
         (activity as DashboardActivity).expandAppBar(false)
         (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
         (activity as DashboardActivity).showHideBottomBar(true)
+        selectedDate = arguments?.getString("date")
 
-
-        viewModel.setStateEvent(PlannerStateEvent.GetPlannerData(false))
+        viewModel.setStateEvent(PlannerStateEvent.GetPlannerData(false,selectedDate))
 
         binding.rvMainList.layoutManager = GridLayoutManager(activity, 1)
         binding.rvMainList.setHasFixedSize(true)
@@ -95,7 +98,7 @@ constructor(
             }
         )
 
-        binding.dailyContainer.setOnClickListener(View.OnClickListener {
+        binding.dailyContainer.setOnClickListener {
             binding.monthlyContainer.background = null
             binding.dailyContainer.background =
                 resources.getDrawable(R.drawable.bg_lessaon_daily_left)
@@ -103,11 +106,9 @@ constructor(
             binding.tvMonthly.setTextColor(resources.getColor(R.color.blue))
             binding.imgDaily.background = resources.getDrawable(R.drawable.ic_day)
             binding.imgMonthly.background = resources.getDrawable(R.drawable.ic_month_blue)
+        }
 
-
-        })
-
-        binding.monthlyContainer.setOnClickListener(View.OnClickListener {
+        binding.monthlyContainer.setOnClickListener {
             binding.monthlyContainer.background =
                 resources.getDrawable(R.drawable.bg_lessaon_daily_right)
             binding.dailyContainer.background = null
@@ -115,13 +116,12 @@ constructor(
             binding.tvMonthly.setTextColor(resources.getColor(R.color.white))
             binding.imgDaily.background = resources.getDrawable(R.drawable.ic_day_blue)
             binding.imgMonthly.background = resources.getDrawable(R.drawable.ic_month)
-            findNavController().navigate(
-                R.id.action_plannerFragment_to_monthlyPlannerFragment
-            )
-        })
+            findNavController().navigate(R.id.action_plannerFragment_to_monthlyPlannerFragment)
+        }
 
         binding.todayContainer.setOnClickListener {
-            binding.rvMainList.scrollToPosition(0)
+            selectedDate = null
+            viewModel.setStateEvent(PlannerStateEvent.GetPlannerData(false,null))
         }
 
         subscribeObservers()
@@ -136,19 +136,42 @@ constructor(
 
                 viewState.dailyPlannerList?.let {
                     Log.d("SAN", "plannerList-->" + it.size)
-                    binding.rvMainList.withModels {
-                        for (dailyPlanner in it) {
-                            dailyPlannerEpoxyHolder {
-                                if(SimpleDateFormat("dd MMMM yyyy EEEE").format(Date()).equals(dailyPlanner.date, ignoreCase = true)){
-                                    binding.tvLabelToday.text = SimpleDateFormat("dd MMMM yyyy EEEE").format(Date())
+                    if(it.isNotEmpty()) {
+                        binding.tvNoData.visibility = View.GONE
+                        binding.rvMainList.visibility = View.VISIBLE
+                        binding.todayDateContainer.visibility = View.VISIBLE
+                        binding.rvMainList.withModels {
+                            Log.d("SAn", "selectedDate-->$selectedDate")
+                            for (position in it.indices) {
+                                dailyPlannerEpoxyHolder {
+                                    if (SimpleDateFormat("dd MMMM yyyy EEEE").format(Date())
+                                            .equals(it[position].date, ignoreCase = true)
+                                    ) {
+                                        binding.tvLabelToday.text =
+                                            SimpleDateFormat("dd MMMM yyyy EEEE").format(Date())
+                                    }
+                                    if (selectedDate != null) {
+                                        val selectedLocalDate = LocalDate.parse(selectedDate)
+                                        val formatter =
+                                            DateTimeFormatter.ofPattern("dd MMMM yyyy EEEE")
+                                        val formattedString: String =
+                                            selectedLocalDate.format(formatter)
+                                        binding.tvLabelToday.text = formattedString
+                                    }
+                                    id(it[position].id.toLong())
+                                    selectedDate(selectedDate)
+                                    dailyPlanner(it[position])
+                                    evenClickListener(this@PlannerFragment)
+                                    lessonPLanClickListener(this@PlannerFragment)
                                 }
-                                id(dailyPlanner.id.toLong())
-                                dailyPlanner(dailyPlanner)
-                                evenClickListener(this@PlannerFragment)
-                                lessonPLanClickListener(this@PlannerFragment)
                             }
                         }
 
+                        binding.rvMainList.scrollToPosition(0)
+                    }else{
+                        binding.tvNoData.visibility = View.VISIBLE
+                        binding.rvMainList.visibility = View.GONE
+                        binding.todayDateContainer.visibility = View.GONE
                     }
                 }
             }
@@ -179,7 +202,7 @@ constructor(
     }
 
     override fun onEventShowMoreClick(isShowLess: Boolean) {
-            viewModel.setStateEvent(PlannerStateEvent.GetPlannerData(!isShowLess))
+        viewModel.setStateEvent(PlannerStateEvent.GetPlannerData(!isShowLess, selectedDate))
     }
 
     override fun onEventItemClick(event: Event) {
@@ -197,24 +220,24 @@ constructor(
         )
     }
 
-    override fun onMarkCompletedClick(lessonPlanPeriod: LessonPlanPeriod) {
+    override fun onMarkCompletedClick(lessonPlan: LessonPlan) {
         val bundle = Bundle()
-        bundle.putParcelable("lessonPlanData", lessonPlanPeriod)
+        bundle.putParcelable("lessonPlanData", lessonPlan)
         findNavController().navigate(
             R.id.action_plannerFragment_to_markCompletedFragment,
             bundle
         )
     }
 
-    override fun onResourceMarkCompletedChecked(resource: LessonPlanResource, isChecked : Boolean) {
+    override fun onResourceMarkCompletedChecked(resource: LessonPlanResource, isChecked: Boolean) {
 
     }
 
     override fun onLessonPlanResourceItemClick(resource: LessonPlanResource) {
         val bundle = Bundle()
-        bundle.putString("title",resource.title)
-        bundle.putString("url",resource.src)
-        if(resource.src != null && resource.src.isNotEmpty()) {
+        bundle.putString("title", resource.title)
+        bundle.putString("url", resource.src)
+        if (resource.src != null && resource.src.isNotEmpty()) {
             when {
                 resource.contenttype.equals("av", true) -> {
                     bundle.putBoolean("isModality", true)

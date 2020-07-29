@@ -23,11 +23,6 @@ import com.tce.teacherapp.db.entity.Event
 import com.tce.teacherapp.db.entity.Student
 import com.tce.teacherapp.ui.dashboard.BaseDashboardFragment
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
-import com.tce.teacherapp.ui.dashboard.home.listeners.TodayResourceClickListener
-import com.tce.teacherapp.ui.dashboard.home.state.DASHBOARD_VIEW_STATE_BUNDLE_KEY
-import com.tce.teacherapp.ui.dashboard.home.state.DashboardStateEvent
-import com.tce.teacherapp.ui.dashboard.home.state.DashboardViewState
-import com.tce.teacherapp.ui.dashboard.subjects.loadImage
 import com.tce.teacherapp.ui.dashboard.home.adapter.childEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.home.adapter.eventEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.home.adapter.latestUpdateEpoxyHolder
@@ -35,6 +30,11 @@ import com.tce.teacherapp.ui.dashboard.home.adapter.parentHeaderEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.home.listeners.ChildClickListener
 import com.tce.teacherapp.ui.dashboard.home.listeners.EventClickListener
 import com.tce.teacherapp.ui.dashboard.home.listeners.LatestUpdateClickListeners
+import com.tce.teacherapp.ui.dashboard.home.listeners.TodayResourceClickListener
+import com.tce.teacherapp.ui.dashboard.home.state.DASHBOARD_VIEW_STATE_BUNDLE_KEY
+import com.tce.teacherapp.ui.dashboard.home.state.DashboardStateEvent
+import com.tce.teacherapp.ui.dashboard.home.state.DashboardViewState
+import com.tce.teacherapp.ui.dashboard.subjects.loadImage
 import com.tce.teacherapp.util.Utility
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.parents.fragment_dashboard_home.*

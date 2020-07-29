@@ -14,6 +14,11 @@ data class MonthlyPlanner(
     val date : String,
 
     @Expose
-    val eventList : ArrayList<Event>
+    val eventList : ArrayList<Event>,
+
+    @Expose
+    var birthdayList : ArrayList<StudentBirthDay>,
+
+    var eventTypeList : ArrayList<Event>
 
     ):Parcelable

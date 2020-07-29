@@ -14,7 +14,6 @@ import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.CalendarDayBinding
 import com.tce.teacherapp.databinding.CalendarHeaderBinding
 import com.tce.teacherapp.databinding.FragmentMonthlyPlannerBinding
-import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.planner.adapter.monthlyEventEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.planner.state.PLANNER_VIEW_STATE_BUNDLE_KEY
 import com.tce.teacherapp.ui.dashboard.planner.state.PlannerStateEvent
@@ -31,6 +30,7 @@ import kotlinx.coroutines.FlowPreview
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.YearMonth
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 
@@ -71,18 +71,14 @@ constructor(
         viewModel.setStateEvent(PlannerStateEvent.GetMonthlyPlannerData(""))
 
         binding.dailyContainer.setOnClickListener {
-            binding.monthlyContainer.background = null
-            binding.dailyContainer.background =
-                resources.getDrawable(R.drawable.bg_lessaon_daily_left)
-            binding.tvDaily.setTextColor(resources.getColor(R.color.white))
-            binding.tvMonthly.setTextColor(resources.getColor(R.color.blue))
-            binding.imgDaily.background = resources.getDrawable(R.drawable.ic_day)
-            binding.imgMonthly.background = resources.getDrawable(R.drawable.ic_month_blue)
-            (activity as DashboardActivity).onBackPressed()
+            navigateToDailyFragment(null)
         }
 
-        binding.monthlyContainer.setOnClickListener {
-            navigateToDailyFragment(selectedDate.toString())
+        if (resources.getString(R.string.app_type)
+                .equals(resources.getString(R.string.app_type_parent), true)
+        ) {
+            binding.tvToday.visibility = View.GONE
+            binding.imgStudent.visibility = View.VISIBLE
         }
 
         val daysOfWeek = daysOfWeekFromLocale()
@@ -101,7 +97,7 @@ constructor(
                 "${it.yearMonth.month.name.toLowerCase().capitalize()} ${it.yearMonth.year}"
             Log.d("SAN", "strTitle-->$strTitle")
             binding.exFiveCalendar.legendLayout.tv_month.text = strTitle
-            viewModel.setStateEvent(PlannerStateEvent.GetMonthlyPlannerData(it.yearMonth.toString()))
+            viewModel.setStateEvent(PlannerStateEvent.GetMonthlyPlannerData(""))
         }
         class DayViewContainer(view: View) : ViewContainer(view) {
             lateinit var day: CalendarDay // Will be set when this container is bound.
@@ -112,13 +108,6 @@ constructor(
                     Log.d("SAN", "Calender_Click-->")
                     if (day.owner == DayOwner.THIS_MONTH) {
                         navigateToDailyFragment(day.date.toString())
-                        /*        if (selectedDate != day.date) {
-                                    val oldDate = selectedDate
-                                    selectedDate = day.date
-                                    val binding = this@MonthlyPlannerFragment.binding
-                                    binding.exFiveCalendar.notifyDateChanged(day.date)
-                                    oldDate?.let { binding.exFiveCalendar.notifyDateChanged(it) }
-                                }*/
                     }
                 }
             }
@@ -133,7 +122,8 @@ constructor(
                 textView.text = day.date.dayOfMonth.toString()
                 val strDayOfWeek = day.date.dayOfWeek
                 if (strDayOfWeek == DayOfWeek.SUNDAY || strDayOfWeek == DayOfWeek.SATURDAY) {
-                    layout.background = resources.getDrawable(R.drawable.calender_day_weekend_border)
+                    layout.background =
+                        resources.getDrawable(R.drawable.calender_day_weekend_border)
                 } else {
                     layout.background = resources.getDrawable(R.drawable.calender_day_border)
                 }
@@ -160,28 +150,33 @@ constructor(
                             viewState.monthlyPlannerList?.let { lstMonthlyPlanner ->
                                 if (lstMonthlyPlanner.isNotEmpty()) {
                                     val dayPlanList = lstMonthlyPlanner.filter {
+                                        val formatter =
+                                            DateTimeFormatter.ofPattern("dd MMMM yyyy EEEE")
+                                        val formattedString: String = day.date.format(formatter)
+                                        Log.d("SAN", "formattedString-->$formattedString")
                                         it.date.contains(
-                                            day.date.toString(),
+                                            formattedString,
                                             ignoreCase = true
                                         )
                                     }
-                                    if(dayPlanList.isNotEmpty()) {
-                                    for (plan in dayPlanList) {
-                                        rvEvent.withModels {
-                                            for (event in plan.eventList) {
-                                                monthlyEventEpoxyHolder {
-                                                    id(event.id)
-                                                    strEvent(event.eventName)
-                                                    strEventType(event.type)
-                                                    eventColor(event.eventColor)
-                                                    typeColor(event.typeColor)
-                                                    eventBackColor(event.eventBackColor)
-                                                    iconBackColor(event.iconBackColor)
+                                    if (dayPlanList.isNotEmpty()) {
+                                        for (plan in dayPlanList) {
+                                            rvEvent.withModels {
+                                                for (event in plan.eventTypeList) {
+                                                    monthlyEventEpoxyHolder {
+                                                        id(event.id)
+                                                        strEvent(event.eventName)
+                                                        strEventType(event.type)
+                                                        eventColor(event.eventColor)
+                                                        typeColor(event.typeColor)
+                                                        eventBackColor(event.eventBackColor)
+                                                        iconBackColor(event.iconBackColor)
+                                                        eventCount(event.eventCount)
+                                                    }
                                                 }
                                             }
                                         }
                                     }
-                                }
                                 }
                             }
                         }
@@ -223,9 +218,12 @@ constructor(
                 }
             }
         }
+        binding.tvToday.setOnClickListener {
+            navigateToDailyFragment(null)
+        }
     }
 
-    private fun navigateToDailyFragment(date: String) {
+    private fun navigateToDailyFragment(date: String?) {
         binding.monthlyContainer.background =
             resources.getDrawable(R.drawable.bg_lessaon_daily_right)
         binding.dailyContainer.background = null

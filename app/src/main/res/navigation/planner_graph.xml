@@ -13,10 +13,8 @@
         <action
             android:id="@+id/action_plannerFragment_to_monthlyPlannerFragment"
             app:destination="@id/monthlyPlannerFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/plannerFragment"/>
         <action
             android:id="@+id/action_plannerFragment_to_eventDisplayFragment"
             app:destination="@id/eventDisplayFragment"
@@ -68,7 +66,13 @@
             app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_plannerFragment_to_addChildFragment2"
-            app:destination="@id/addChildFragment2" />
+            app:destination="@id/addChildFragment2"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/addChildFragment2"/>
     </fragment>
     <fragment
         android:id="@+id/monthlyPlannerFragment"
@@ -78,10 +82,8 @@
         <action
             android:id="@+id/action_monthlyPlannerFragment_to_plannerFragment"
             app:destination="@id/plannerFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/monthlyPlannerFragment"/>
     </fragment>
     <fragment
         android:id="@+id/eventDisplayFragment"
@@ -125,5 +127,9 @@
     <fragment
         android:id="@+id/addChildFragment2"
         android:name="com.tce.teacherapp.ui.dashboard.home.AddChildFragment"
-        android:label="AddChildFragment" />
+        android:label="AddChildFragment" >
+        <action
+            android:id="@+id/action_addChildFragment2_to_plannerFragment"
+            app:destination="@id/plannerFragment" />
+    </fragment>
 </navigation>

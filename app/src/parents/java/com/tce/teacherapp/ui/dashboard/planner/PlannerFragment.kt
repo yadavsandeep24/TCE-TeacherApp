@@ -15,25 +15,24 @@ import com.airbnb.epoxy.EpoxyVisibilityTracker
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentPlannerBinding
-import com.tce.teacherapp.db.entity.Event
-import com.tce.teacherapp.db.entity.LessonPlanPeriod
-import com.tce.teacherapp.db.entity.LessonPlanResource
-import com.tce.teacherapp.db.entity.Student
+import com.tce.teacherapp.db.entity.*
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.home.adapter.childEpoxyHolder
+import com.tce.teacherapp.ui.dashboard.home.listeners.ChildClickListener
+import com.tce.teacherapp.ui.dashboard.planner.adapter.dailyPlannerEpoxyHolder
+import com.tce.teacherapp.ui.dashboard.planner.listeners.EventClickListener
 import com.tce.teacherapp.ui.dashboard.planner.listeners.LessonPlanClickListener
 import com.tce.teacherapp.ui.dashboard.planner.state.PLANNER_VIEW_STATE_BUNDLE_KEY
 import com.tce.teacherapp.ui.dashboard.planner.state.PlannerStateEvent
 import com.tce.teacherapp.ui.dashboard.planner.state.PlannerViewState
-import com.tce.teacherapp.ui.dashboard.home.listeners.ChildClickListener
-import com.tce.teacherapp.ui.dashboard.planner.adapter.dailyPlannerEpoxyHolder
-import com.tce.teacherapp.ui.dashboard.planner.listeners.EventClickListener
 import com.tce.teacherapp.util.Utility
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.parents.fragment_dashboard_home.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 import javax.inject.Inject
 
@@ -47,6 +46,7 @@ constructor(
     LessonPlanClickListener , ChildClickListener {
 
     private lateinit var binding: FragmentPlannerBinding
+    private var selectedDate: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,18 +79,19 @@ constructor(
         } else {
             activity?.window!!.statusBarColor = resources.getColor(R.color.color_black)
         }
+        selectedDate = arguments?.getString("date")
         // (activity as DashboardActivity).setCustomToolbar(R.layout.subject_list_top_bar)
         (activity as DashboardActivity).expandAppBar(false)
         (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
         (activity as DashboardActivity).showHideBottomBar(true)
-        viewModel.setStateEvent(PlannerStateEvent.GetPlannerData(false))
+        viewModel.setStateEvent(PlannerStateEvent.GetPlannerData(false,selectedDate))
 
         binding.rvMainList.layoutManager = GridLayoutManager(activity, 1)
         binding.rvMainList.setHasFixedSize(true)
         val epoxyVisibilityTracker = EpoxyVisibilityTracker()
         epoxyVisibilityTracker.attach(binding.rvMainList)
 
-        binding.dailyContainer.setOnClickListener(View.OnClickListener {
+        binding.dailyContainer.setOnClickListener {
             binding.monthlyContainer.background = null
             binding.dailyContainer.background =
                 resources.getDrawable(R.drawable.bg_lessaon_daily_left)
@@ -100,9 +101,9 @@ constructor(
             binding.imgMonthly.background = resources.getDrawable(R.drawable.ic_month_blue)
 
 
-        })
+        }
 
-        binding.monthlyContainer.setOnClickListener(View.OnClickListener {
+        binding.monthlyContainer.setOnClickListener {
             binding.monthlyContainer.background =
                 resources.getDrawable(R.drawable.bg_lessaon_daily_right)
             binding.dailyContainer.background = null
@@ -113,7 +114,7 @@ constructor(
             findNavController().navigate(
                 R.id.action_plannerFragment_to_monthlyPlannerFragment
             )
-        })
+        }
 
         binding.rvFilter.layoutManager = GridLayoutManager(activity, 1)
         binding.rvFilter.setHasFixedSize(true)
@@ -146,8 +147,9 @@ constructor(
             }
         })
 
-        binding.imgStudent.setOnClickListener(View.OnClickListener {
+        binding.imgStudent.setOnClickListener {
             if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
+                viewModel.setStateEvent(PlannerStateEvent.GetChildSelectedPosition)
                 bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
                 binding.maskLayout.setBackgroundColor(resources.getColor(R.color.dim_color_dashboard))
                 (activity as DashboardActivity).bottom_navigation_view.visibility = View.INVISIBLE
@@ -156,11 +158,12 @@ constructor(
                 binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
                 (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
             }
-        })
+        }
 
-        binding.todayContainer.setOnClickListener(View.OnClickListener {
-            binding.rvMainList.scrollToPosition(0)
-        })
+        binding.todayContainer.setOnClickListener {
+            selectedDate = null
+            viewModel.setStateEvent(PlannerStateEvent.GetPlannerData(false,null))
+        }
 
         subscribeObservers()
 
@@ -174,19 +177,42 @@ constructor(
 
                 viewState.dailyPlannerList?.let {
                     Log.d("SAN", "plannerList-->" + it.size)
-                    binding.rvMainList.withModels {
-                        for (msg in it) {
-                            dailyPlannerEpoxyHolder {
-                                if(SimpleDateFormat("dd MMMM yyyy EEEE").format(Date()).equals(msg.date, ignoreCase = true)){
-                                    binding.tvDate.setText(SimpleDateFormat("dd MMMM yyyy EEEE").format(Date()))
-                                }
-                                id(msg.id.toLong())
-                                dailyPlanner(msg)
-                                evenClickListener(this@PlannerFragment)
-                                lessonPLanClickListener(this@PlannerFragment)
-                            }
-                        }
+                    if (it.isNotEmpty()) {
+                        binding.tvNoData.visibility = View.GONE
+                        binding.rvMainList.visibility = View.VISIBLE
+                        binding.todayDateContainer.visibility = View.VISIBLE
+                        binding.rvMainList.withModels {
+                            for (dailyPlanner in it) {
+                                dailyPlannerEpoxyHolder {
 
+                                    if (SimpleDateFormat("dd MMMM yyyy EEEE").format(Date())
+                                            .equals(dailyPlanner.date, ignoreCase = true)
+                                    ) {
+                                        binding.tvDate.text =
+                                            SimpleDateFormat("dd MMMM yyyy EEEE").format(Date())
+                                    }
+                                    if (selectedDate != null) {
+                                        val selectedLocalDate = LocalDate.parse(selectedDate)
+                                        val formatter =
+                                            DateTimeFormatter.ofPattern("dd MMMM yyyy EEEE")
+                                        val formattedString: String =
+                                            selectedLocalDate.format(formatter)
+                                        binding.tvDate.text = formattedString
+                                    }
+                                    id(dailyPlanner.id.toLong())
+                                    selectedDate(selectedDate)
+                                    dailyPlanner(dailyPlanner)
+                                    evenClickListener(this@PlannerFragment)
+                                    lessonPLanClickListener(this@PlannerFragment)
+                                }
+                            }
+
+                        }
+                        binding.rvMainList.scrollToPosition(0)
+                    }else{
+                        binding.tvNoData.visibility = View.VISIBLE
+                        binding.rvMainList.visibility = View.GONE
+                        binding.todayDateContainer.visibility = View.GONE
                     }
                 }
 
@@ -233,7 +259,7 @@ constructor(
     }
 
     override fun onEventShowMoreClick(isShowLess: Boolean) {
-        viewModel.setStateEvent(PlannerStateEvent.GetPlannerData(!isShowLess))
+        viewModel.setStateEvent(PlannerStateEvent.GetPlannerData(!isShowLess,selectedDate))
     }
 
     override fun onEventItemClick(event: Event) {
@@ -254,9 +280,9 @@ constructor(
         )*/
     }
 
-    override fun onMarkCompletedClick(lessonPlanPeriod: LessonPlanPeriod) {
+    override fun onMarkCompletedClick(lessonPlan: LessonPlan) {
         val bundle = Bundle()
-        bundle.putParcelable("lessonPlanData", lessonPlanPeriod)
+        bundle.putParcelable("lessonPlanData", lessonPlan)
         findNavController().navigate(
             R.id.action_plannerFragment_to_markCompletedFragment,
             bundle
@@ -301,7 +327,7 @@ constructor(
     }
 
     override fun onChildListItemClick(student: Student) {
-        //viewModel.setStateEvent(PlannerStateEvent.GetPlannerData(student.id.toString()))
+        viewModel.setStateEvent(PlannerStateEvent.SetChildSelectedPosition(student.id-1))
         val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
         bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
         binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))

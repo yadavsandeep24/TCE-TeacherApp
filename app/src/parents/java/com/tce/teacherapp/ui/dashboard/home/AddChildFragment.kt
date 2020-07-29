@@ -45,7 +45,12 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
         super.onViewCreated(view, savedInstanceState)
 
         binding.tvNext.setOnClickListener {
-            findNavController().navigate(R.id.action_addChildFragment_to_dashboardHomeFragment)
+            if(resources.getString(R.string.app_type).equals(resources.getString(R.string.app_type_parent),true)) {
+                findNavController().navigate(R.id.action_addChildFragment2_to_plannerFragment)
+            }else{
+                findNavController().navigate(R.id.action_addChildFragment_to_dashboardHomeFragment)
+            }
+
         }
     }
 }

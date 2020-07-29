@@ -29,11 +29,13 @@ data class Event(
     val eventBackColor: String,
 
     @Expose
-    val date: String,
+    val date: String?,
     @Expose
-    val note: String,
+    val note: String?,
     @Expose
-    val eventImageUrl: String
+    val eventImageUrl: String?,
+
+    var eventCount: Int
 
 
 

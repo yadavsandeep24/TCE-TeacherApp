@@ -12,8 +12,8 @@ import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.tce.teacherapp.R
 import com.tce.teacherapp.db.entity.Event
-import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.home.listeners.LatestUpdateClickListeners
+import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
 import com.tce.teacherapp.util.Utility
 
 @EpoxyModelClass(layout = R.layout.dashboard_event_list_item)

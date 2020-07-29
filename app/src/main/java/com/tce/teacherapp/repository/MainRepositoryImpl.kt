@@ -27,6 +27,8 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.IOException
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @FlowPreview
@@ -42,7 +44,7 @@ constructor(
 ) : MainRepository {
     private val TAG: String = "AppDebug"
     override fun getTCEApplication(): Application {
-        return  application
+        return application
     }
 
     override fun getGrades(stateEvent: StateEvent): Flow<DataState<SubjectViewState>> = flow {
@@ -73,26 +75,45 @@ constructor(
                                                     subjectDao.insert(subject)
                                                 }
                                             } catch (e: Exception) {
-                                                Log.e(TAG,"updateLocalDb: ${subject.title}. " +"${e.message}")
+                                                Log.e(
+                                                    TAG,
+                                                    "updateLocalDb: ${subject.title}. " + "${e.message}"
+                                                )
                                                 // Could send an error report here or something but I don't think you should throw an error to the UI
                                                 // Since there could be many blog posts being inserted/updated.
                                             }
                                         }
                                     }
                                 } catch (e: Exception) {
-                                    Log.e(TAG,"updateLocalDb: ${grade.gradeTitle}. " + "${e.message}")
+                                    Log.e(
+                                        TAG,
+                                        "updateLocalDb: ${grade.gradeTitle}. " + "${e.message}"
+                                    )
                                     // Could send an error report here or something but I don't think you should throw an error to the UI
                                     // Since there could be many blog posts being inserted/updated.
                                 }
                             }
                         }
                         if (resultObj.isNotEmpty()) {
-                            sharedPrefsEditor.putString(PreferenceKeys.APP_USER_SELECTED_GRADE_ID,resultObj[0].id).commit()
-                            sharedPrefsEditor.putInt(PreferenceKeys.APP_USER_SELECTED_GRADE_POSITION,0).commit()
-                            sharedPrefsEditor.putBoolean(PreferenceKeys.APP_PREFERENCES_NEW_SESSION_GRADES,false).commit()
+                            sharedPrefsEditor.putString(
+                                PreferenceKeys.APP_USER_SELECTED_GRADE_ID,
+                                resultObj[0].id
+                            ).commit()
+                            sharedPrefsEditor.putInt(
+                                PreferenceKeys.APP_USER_SELECTED_GRADE_POSITION,
+                                0
+                            ).commit()
+                            sharedPrefsEditor.putBoolean(
+                                PreferenceKeys.APP_PREFERENCES_NEW_SESSION_GRADES,
+                                false
+                            ).commit()
                         }
                         val viewState = SubjectViewState(gradeList = gradeList)
-                        return DataState.data(response = null, data = viewState, stateEvent = stateEvent)
+                        return DataState.data(
+                            response = null,
+                            data = viewState,
+                            stateEvent = stateEvent
+                        )
 
                     }
                 }.getResult()
@@ -380,7 +401,13 @@ constructor(
                 studentList.filter { it.name.contains(query, ignoreCase = true) }
             }
 
-            emit(DataState.data(data = MessageViewState(studentList = selectedList),stateEvent = stateEvent,response = null))
+            emit(
+                DataState.data(
+                    data = MessageViewState(studentList = selectedList),
+                    stateEvent = stateEvent,
+                    response = null
+                )
+            )
 
         } catch (ioException: IOException) {
             ioException.printStackTrace()
@@ -388,7 +415,10 @@ constructor(
 
     }
 
-    override fun getResourceList(query: String,stateEvent: StateEvent): Flow<DataState<MessageViewState>> = flow {
+    override fun getResourceList(
+        query: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<MessageViewState>> = flow {
         val jsonString: String
         try {
 
@@ -464,7 +494,7 @@ constructor(
 
     override fun getProfile(stateEvent: StateEvent): Flow<DataState<DashboardViewState>> = flow {
         withContext(IO) {
-            val userID = sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID,"")
+            val userID = sharedPreferences.getString(PreferenceKeys.APP_PREFERENCES_KEY_USER_ID, "")
             val userInfo = userID?.let { userDao.getUserByUserId(it) }
             emit(
                 DataState.data(
@@ -542,7 +572,7 @@ constructor(
                     }
                     nextEventCount = 0
                 }
-                val eventData = EventData(isShowLess, nextEventCount, selectedEventList)
+                val eventData = EventData(isShowLess, nextEventCount, selectedEventList, 0, 0, 0)
 
 
                 jsonString = if (id > 1) {
@@ -670,7 +700,7 @@ constructor(
                     }
                     nextEventCount = 0
                 }
-                val eventData = EventData(isShowLess, nextEventCount, selectedEventList)
+                val eventData = EventData(isShowLess, nextEventCount, selectedEventList, 0, 0, 0)
 
 
                 val jsonParentUpdateString: String = if (id > 1) {
@@ -692,6 +722,10 @@ constructor(
                 tempGSON = Gson()
                 val listPersonType = object : TypeToken<ArrayList<Student>>() {}.type
                 val studentList: ArrayList<Student> = tempGSON.fromJson(jsonString, listPersonType)
+                val selectedChildPosition = sharedPreferences.getInt(PreferenceKeys.APP_USER_SELECTED_CHILD_POSITION,0)
+                if(studentList.size>0){
+                  studentList[selectedChildPosition].isSelected = true
+                }
 
                 emit(
                     DataState.data(
@@ -754,7 +788,7 @@ constructor(
                         isShowLess = true
                     }
                 }
-                val eventData = EventData(isShowLess, nextEventCount, selectedList)
+                val eventData = EventData(isShowLess, nextEventCount, selectedList, 0, 0, 0)
                 emit(
                     DataState.data(
                         data = DashboardViewState(eventData = eventData),
@@ -1100,7 +1134,7 @@ constructor(
                         false
                     ).commit()
 
-                    val chapterLearnData = ChapterLearnData(true,resultObj,null)
+                    val chapterLearnData = ChapterLearnData(true, resultObj, null)
                     val viewState = SubjectViewState(chapterLearnData = chapterLearnData)
                     return DataState.data(
                         response = null,
@@ -1120,7 +1154,8 @@ constructor(
         stateEvent: StateEvent
     ): Flow<DataState<SubjectViewState>> = flow {
 
-        val isNewSession = sharedPreferences.getBoolean(PreferenceKeys.APP_PREFERENCES_NEW_SESSION_RESOURCES, true)
+        val isNewSession =
+            sharedPreferences.getBoolean(PreferenceKeys.APP_PREFERENCES_NEW_SESSION_RESOURCES, true)
         if (isNewSession) {
             val apiResult = safeApiCall(IO) {
                 tceService.getTopicResources()
@@ -1131,7 +1166,7 @@ constructor(
                     stateEvent = stateEvent
                 ) {
                     override suspend fun handleSuccess(resultObj: List<ResourceListResponse>): DataState<SubjectViewState> {
-                        val resourceList : ArrayList<Resource> = ArrayList()
+                        val resourceList: ArrayList<Resource> = ArrayList()
                         withContext(IO) {
                             for (topicResourceItem in resultObj) {
                                 try {
@@ -1139,8 +1174,11 @@ constructor(
                                     launch {
                                         val resourceResponseList = topicResourceItem.resourceList
 
-                                        for (resourceItem in resourceResponseList){
-                                            val resource = resourceItem.toResource(topicResourceItem.id,topicResourceItem.id)
+                                        for (resourceItem in resourceResponseList) {
+                                            val resource = resourceItem.toResource(
+                                                topicResourceItem.id,
+                                                topicResourceItem.id
+                                            )
                                             resourceList.add(resource)
                                             try {
                                                 subjectDao.insertResource(resource)
@@ -1155,10 +1193,17 @@ constructor(
                             }
                         }
                         if (resultObj.isNotEmpty()) {
-                            sharedPrefsEditor.putBoolean(PreferenceKeys.APP_PREFERENCES_NEW_SESSION_RESOURCES,false).commit()
+                            sharedPrefsEditor.putBoolean(
+                                PreferenceKeys.APP_PREFERENCES_NEW_SESSION_RESOURCES,
+                                false
+                            ).commit()
                         }
 
-                        val chapterLearnData = ChapterLearnData(false,null,subjectDao.getTopicResourceListData(topicId,chapterId))
+                        val chapterLearnData = ChapterLearnData(
+                            false,
+                            null,
+                            subjectDao.getTopicResourceListData(topicId, chapterId)
+                        )
                         val viewState = SubjectViewState(chapterLearnData = chapterLearnData)
                         return DataState.data(
                             response = null,
@@ -1172,10 +1217,10 @@ constructor(
         } else {
             val apiResult = safeCacheCall(IO) {
 
-                if(query.isEmpty()) {
-                    subjectDao.getTopicResourceListData(topicId,chapterId)
-                }else{
-                    subjectDao.getTopicResourceListData(query,topicId,chapterId)
+                if (query.isEmpty()) {
+                    subjectDao.getTopicResourceListData(topicId, chapterId)
+                } else {
+                    subjectDao.getTopicResourceListData(query, topicId, chapterId)
                 }
             }
             emit(
@@ -1184,7 +1229,7 @@ constructor(
                     stateEvent = stateEvent
                 ) {
                     override suspend fun handleSuccess(resultObj: List<Resource>): DataState<SubjectViewState> {
-                        val chapterLearnData = ChapterLearnData(false,null,resultObj)
+                        val chapterLearnData = ChapterLearnData(false, null, resultObj)
                         return DataState.data(
                             data = SubjectViewState(chapterLearnData = chapterLearnData),
                             response = null,
@@ -1198,6 +1243,7 @@ constructor(
 
     override fun getPlannerData(
         isShowLess: Boolean,
+        selectedDate: String?,
         stateEvent: StateEvent
     ): Flow<DataState<PlannerViewState>> = flow {
         var jsonString: String = ""
@@ -1223,29 +1269,49 @@ constructor(
             jsonString = application.assets.open("json/dailyPlanner.json").bufferedReader()
                 .use { it.readText() }
             val listPlanner = object : TypeToken<List<DailyPlanner>>() {}.type
-            var list3: List<DailyPlanner> = gson.fromJson(jsonString, listPlanner)
+            val list3: List<DailyPlanner> = gson.fromJson(jsonString, listPlanner)
 
-            for(j in list3.indices){
+            for (j in list3.indices) {
                 val selectedEventList: ArrayList<Event> = ArrayList()
-                val eventList = list3[j].eventList
+                val totaEeventList = list3[j].eventList
+
                 if (!isShowLess) {
-                    if(eventList.size>2) {
+                    if (totaEeventList.size > 2) {
                         for (i in 0 until 2) {
-                            selectedEventList.add(eventList[i])
+                            selectedEventList.add(totaEeventList[i])
                         }
-                    }else{
-                        for (element in eventList) {
+                    } else {
+                        for (element in totaEeventList) {
                             selectedEventList.add(element)
                         }
                     }
 
                 } else {
-                    for (element in eventList) {
+                    for (element in totaEeventList) {
                         selectedEventList.add(element)
                     }
                 }
-                val eventData = EventData(isShowLess, 0, selectedEventList)
+                val eventData = EventData(
+                    isShowLess,
+                    0,
+                    selectedEventList,
+                    0,
+                    0,
+                    0
+                )
                 list3[j].eventData = eventData
+            }
+
+            val selectedList: List<DailyPlanner>;
+            selectedList = if (selectedDate == null) {
+                list3
+            } else {
+                val selectedLocalDate = LocalDate.parse(selectedDate)
+                val formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy EEEE")
+                val formattedString: String = selectedLocalDate.format(formatter)
+                Log.d("SAN", "formattedString-->$formattedString")
+                list3.filter {
+                    it.date.contains(formattedString, ignoreCase = true) }
             }
 
             jsonString = application.assets.open("json/child.json").bufferedReader()
@@ -1255,8 +1321,9 @@ constructor(
 
             emit(
                 DataState.data(
-                    data = PlannerViewState(dailyPlannerList = list3,
-                                            childList = studentList
+                    data = PlannerViewState(
+                        dailyPlannerList = selectedList,
+                        childList = studentList
                     ),
 
                     stateEvent = stateEvent,
@@ -1276,17 +1343,90 @@ constructor(
         var jsonString: String = ""
         try {
 
-            jsonString = application.assets.open("json/monthlyPlanner.json").bufferedReader()
+            jsonString = application.assets.open("json/dailyPlanner.json").bufferedReader()
                 .use { it.readText() }
             val gson = Gson()
             val listClass = object : TypeToken<List<MonthlyPlanner>>() {}.type
-            var list: List<MonthlyPlanner> = gson.fromJson(jsonString, listClass)
+            var list3: List<MonthlyPlanner> = gson.fromJson(jsonString, listClass)
+            for (j in list3.indices) {
+                val selectedEventList: ArrayList<Event> = ArrayList()
+                val totaEeventList = list3[j].eventList
+                val eventList =
+                    totaEeventList.filter { it.type.contains("event", ignoreCase = true) }
+                val todoList =
+                    totaEeventList.filter { it.type.contains("TO-DO", ignoreCase = true) }
 
+                val toDoCount = todoList.size
+                var birthDayCount =0
+                if(list3[j].birthdayList != null) {
+                     birthDayCount = list3[j].birthdayList.size
+                }
+                val sportDayCount = eventList.size
+                val eventTypeList: ArrayList<Event> = ArrayList()
+
+                if (sportDayCount > 0) {
+                    eventTypeList.add(
+                        Event(
+                            1,
+                            eventList[0].eventName,
+                            eventList[0].imageUrl,
+                            eventList[0].type,
+                            eventList[0].eventColor,
+                            eventList[0].typeColor,
+                            eventList[0].iconBackColor,
+                            eventList[0].eventBackColor,
+                            eventList[0].date,
+                            eventList[0].note,
+                            eventList[0].eventImageUrl,
+                            sportDayCount
+                        )
+                    )
+                }
+                if (toDoCount > 0) {
+                    eventTypeList.add(
+                        Event(
+                            2,
+                            todoList[0].eventName,
+                            todoList[0].imageUrl,
+                            todoList[0].type,
+                            todoList[0].eventColor,
+                            todoList[0].typeColor,
+                            todoList[0].iconBackColor,
+                            todoList[0].eventBackColor,
+                            todoList[0].date,
+                            todoList.get(0).note,
+                            todoList[0].eventImageUrl,
+                            toDoCount
+                        )
+                    )
+                }
+
+                if(birthDayCount>0) {
+                    eventTypeList.add(
+                        Event(
+                            3,
+                            "Birthday",
+                            "",
+                            "Birthday",
+                            "#000000",
+                            "#ffaa1e",
+                            "#ffaa1e",
+                            "#fffad7",
+                            "",
+                            "",
+                            "",
+                            birthDayCount
+                        )
+                    )
+                }
+                list3[j].eventTypeList = eventTypeList
+            }
             val selectedList: List<MonthlyPlanner>;
             selectedList = if (TextUtils.isEmpty(query)) {
-                list
+                list3
             } else {
-                list.filter { it.date.contains(query, ignoreCase = true) }
+                list3.filter {
+                    it.date.contains(query, ignoreCase = true) }
             }
 
 
@@ -1303,6 +1443,51 @@ constructor(
         }
     }
 
+    override fun setSelectedChildPosition(
+        position: Int,
+        stateEvent: StateEvent
+    ): Flow<DataState<PlannerViewState>> = flow {
+        sharedPrefsEditor.putInt(PreferenceKeys.APP_USER_SELECTED_CHILD_POSITION, position).commit()
+        sharedPrefsEditor.apply()
+        emit(
+            DataState.data(
+                data = PlannerViewState(),
+                stateEvent = stateEvent,
+                response = null
+            )
+        )
+    }
+
+    override fun getSelectedChildPosition(stateEvent: StateEvent): Flow<DataState<PlannerViewState>> = flow {
+        withContext(IO) {
+            var tempGSON: Gson
+            try {
+
+                val jsonString = application.assets.open("json/child.json").bufferedReader()
+                    .use { it.readText() }
+                tempGSON = Gson()
+                val listPersonType = object : TypeToken<ArrayList<Student>>() {}.type
+                val studentList: ArrayList<Student> = tempGSON.fromJson(jsonString, listPersonType)
+                val selectedChildPosition = sharedPreferences.getInt(PreferenceKeys.APP_USER_SELECTED_CHILD_POSITION,0)
+                if(studentList.size>0){
+                    studentList[selectedChildPosition].isSelected = true
+                }
+
+                emit(
+                    DataState.data(
+                        data = PlannerViewState(
+                            childList = studentList
+                        ),
+                        stateEvent = stateEvent,
+                        response = null
+                    )
+                )
+            } catch (ioException: IOException) {
+                ioException.printStackTrace()
+            }
+        }
+    }
+
     override fun getChapterResourceType(
         chapterId: String,
         topicId: String,
@@ -1310,7 +1495,7 @@ constructor(
         stateEvent: StateEvent
     ): Flow<DataState<SubjectViewState>> = flow {
         val apiResult = safeCacheCall(IO) {
-            subjectDao.getChapterResourceTypeData(chapterId,topicId,bookId)
+            subjectDao.getChapterResourceTypeData(chapterId, topicId, bookId)
         }
         emit(
             object : CacheResponseHandler<SubjectViewState, List<ChapterResourceType>>(
@@ -1318,26 +1503,34 @@ constructor(
                 stateEvent = stateEvent
             ) {
                 override suspend fun handleSuccess(resultObj: List<ChapterResourceType>): DataState<SubjectViewState> {
-                    val chapterResourceType = ChapterResourceType("ic_resources.svg","resource","Resource", emptyList(),"","",
+                    val chapterResourceType = ChapterResourceType(
+                        "ic_resources.svg", "resource", "Resource", emptyList(), "", "",
                         chapterId,
-                       topicId,
-                        bookId)
+                        topicId,
+                        bookId
+                    )
                     val listOfResourceTpe: MutableList<ChapterResourceType> = mutableListOf()
                     listOfResourceTpe.addAll(resultObj)
                     listOfResourceTpe.add(chapterResourceType)
-                    Log.d("SAN","listOfResourceTpe-->"+listOfResourceTpe.size)
-                    Log.d("SAN","resultObj-->"+resultObj.size)
+                    Log.d("SAN", "listOfResourceTpe-->" + listOfResourceTpe.size)
+                    Log.d("SAN", "resultObj-->" + resultObj.size)
 
                     for (i in listOfResourceTpe.indices) {
-                        var resourceList = subjectDao.getTopicResourceListData(listOfResourceTpe[i].id,listOfResourceTpe[i].chapterId)
-                        if(listOfResourceTpe[i].id.equals("resource",true)){
-                            resourceList = subjectDao.getTopicResourceListData(listOfResourceTpe[i].topicId,listOfResourceTpe[i].topicId)
+                        var resourceList = subjectDao.getTopicResourceListData(
+                            listOfResourceTpe[i].id,
+                            listOfResourceTpe[i].chapterId
+                        )
+                        if (listOfResourceTpe[i].id.equals("resource", true)) {
+                            resourceList = subjectDao.getTopicResourceListData(
+                                listOfResourceTpe[i].topicId,
+                                listOfResourceTpe[i].topicId
+                            )
                         }
 
                         listOfResourceTpe[i].resourceList = resourceList
                     }
                     return DataState.data(
-                        data = SubjectViewState(chapterResourceTyeList =listOfResourceTpe),
+                        data = SubjectViewState(chapterResourceTyeList = listOfResourceTpe),
                         response = null,
                         stateEvent = stateEvent
                     )
@@ -1350,7 +1543,8 @@ constructor(
     fun toGradeList(grades: List<GradeResponse>): List<Grade> {
         val gradeList: ArrayList<Grade> = ArrayList()
         for (gradeResponse in grades) {
-            gradeList.add(gradeResponse.toGrade()
+            gradeList.add(
+                gradeResponse.toGrade()
             )
         }
         return gradeList
@@ -1359,7 +1553,8 @@ constructor(
     fun toBookList(books: List<BookResponse>): List<Book> {
         val bookList: ArrayList<Book> = ArrayList()
         for (bookResponse in books) {
-            bookList.add(bookResponse.toBook()
+            bookList.add(
+                bookResponse.toBook()
             )
         }
         return bookList

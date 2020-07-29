@@ -25,13 +25,24 @@ abstract class MonthlyEventEpoxyHolder : EpoxyModelWithHolder<MonthlyEventHolder
     @EpoxyAttribute
     lateinit var iconBackColor : String
 
+    @EpoxyAttribute
+    var eventCount : Int= 0
+
 
     override fun bind(holder: MonthlyEventHolder) {
         super.bind(holder)
 
-        holder.tvEvent.text = strEvent
+
         holder.tvEvent.setTextColor(Color.parseColor(eventColor))
         holder.eventContainer.setBackgroundColor(Color.parseColor(eventBackColor))
+        when(eventCount) {
+            1 ->{
+                holder.tvEvent.text = strEvent
+            }
+            else ->{
+                holder.tvEvent.text = "$eventCount $strEvent"
+            }
+        }
 
 
     }

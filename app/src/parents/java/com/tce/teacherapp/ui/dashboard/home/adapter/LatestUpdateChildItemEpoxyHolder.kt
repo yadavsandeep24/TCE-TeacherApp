@@ -12,9 +12,9 @@ import com.airbnb.epoxy.*
 import com.tce.teacherapp.R
 import com.tce.teacherapp.db.entity.DashboardLatestUpdate
 import com.tce.teacherapp.db.entity.LatestUpdateSubList
+import com.tce.teacherapp.ui.dashboard.home.listeners.LatestUpdateClickListeners
 import com.tce.teacherapp.ui.dashboard.home.listeners.TodayResourceClickListener
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
-import com.tce.teacherapp.ui.dashboard.home.listeners.LatestUpdateClickListeners
 import com.tce.teacherapp.util.Utility
 
 @EpoxyModelClass(layout = R.layout.list_item_latest_update)

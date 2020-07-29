@@ -1,30 +1,21 @@
 package com.tce.teacherapp.repository
 
-import com.tce.teacherapp.ui.login.state.LoginFields
 import com.tce.teacherapp.ui.login.state.LoginViewState
 import com.tce.teacherapp.util.DataState
 import com.tce.teacherapp.util.StateEvent
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class FakeLoginRepositoryImpl
 @Inject constructor(): LoginRepository {
 
     override fun attemptLogin(
+        schoolName: String?,
         email: String,
         password: String,
         stateEvent: StateEvent
-    ): Flow<DataState<LoginViewState>>  = flow{
-        resetSession(true)
-        emit(
-             DataState.data(
-                data = LoginViewState(loginFields = LoginFields(email,password)),
-                stateEvent = stateEvent,
-                response = null
-            )
-        )
-
+    ): Flow<DataState<LoginViewState>> {
+        TODO("Not yet implemented")
     }
 
     override fun setFingerPrintMode(
@@ -42,6 +33,29 @@ class FakeLoginRepositoryImpl
     }
 
     override fun checkLoginMode(stateEvent: StateEvent): Flow<DataState<LoginViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getPreUserData(stateEvent: StateEvent): Flow<DataState<LoginViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun setQuickAccessScreen(isShow: Boolean) {
+        TODO("Not yet implemented")
+    }
+
+    override fun resentOTP(
+        strMobileNo: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<LoginViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun registerUser(
+        mobileNo: String,
+        password: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<LoginViewState>> {
         TODO("Not yet implemented")
     }
 

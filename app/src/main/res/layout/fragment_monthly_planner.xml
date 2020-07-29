@@ -15,22 +15,26 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_30sdp"
                 android:layout_centerVertical="true"
+                android:gravity="center_vertical"
                 android:layout_marginLeft="@dimen/_30sdp">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
                     android:src="@drawable/ic_today">
 
                 </androidx.appcompat.widget.AppCompatImageView>
 
                 <com.tce.teacherapp.util.RubikBoldTextview
+                    android:id="@+id/tv_today"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
                     android:text="Today"
+                    android:gravity="center"
                     android:textColor="@color/blue"
                     android:textSize="@dimen/font_size_12_dp"/>
 

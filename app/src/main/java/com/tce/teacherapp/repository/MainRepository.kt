@@ -139,6 +139,7 @@ interface MainRepository {
     ): Flow<DataState<SubjectViewState>>
     fun getPlannerData(
         isShowLess: Boolean,
+        stateEvent1: String?,
         stateEvent: StateEvent
     ): Flow<DataState<PlannerViewState>>
 
@@ -147,6 +148,14 @@ interface MainRepository {
         stateEvent: StateEvent
     ): Flow<DataState<PlannerViewState>>
 
+    fun setSelectedChildPosition(
+        position:Int,
+        stateEvent: StateEvent
+    ):Flow<DataState<PlannerViewState>>
+
+    fun getSelectedChildPosition(
+        stateEvent: StateEvent
+    ):Flow<DataState<PlannerViewState>>
     fun getChapterResourceType(
         chapterId: String,
         topicId: String,

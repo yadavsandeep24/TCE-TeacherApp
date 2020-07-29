@@ -14,7 +14,9 @@ data class Student (
     val name: String,
 
     @Expose
-    val imageUrl: String
+    val imageUrl: String,
+
+    var isSelected : Boolean
 
 
 ) : Parcelable

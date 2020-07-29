@@ -136,6 +136,14 @@
             android:layout_below="@+id/today_date_container">
 
         </com.airbnb.epoxy.EpoxyRecyclerView>
+        <com.tce.teacherapp.util.RubikBoldTextview
+            android:id="@+id/tv_no_data"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/header_container"
+            android:gravity="center"
+            android:text="No data found."
+            android:textSize="@dimen/font_size_16_dp" />
 
         <FrameLayout
             android:id="@+id/mask_layout"

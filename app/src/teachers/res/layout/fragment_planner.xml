@@ -1,9 +1,7 @@
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <RelativeLayout
-        xmlns:tools="http://schemas.android.com/tools"
+    <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="com.tce.teacherapp.ui.dashboard.planner.PlannerFragment">
@@ -17,14 +15,15 @@
             <LinearLayout
                 android:id="@+id/today_container"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
+                android:layout_height="@dimen/_30sdp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/_30sdp">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:scaleType="fitXY"
                     android:src="@drawable/ic_today">
 
                 </androidx.appcompat.widget.AppCompatImageView>
@@ -32,11 +31,12 @@
                 <com.tce.teacherapp.util.RubikBoldTextview
                     android:id="@+id/tvDate"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
                     android:text="Today"
+                    android:gravity="center"
                     android:textColor="@color/blue"
-                    android:textSize="@dimen/font_size_12_dp"/>
+                    android:textSize="@dimen/font_size_12_dp" />
 
 
             </LinearLayout>
@@ -72,7 +72,7 @@
                         android:layout_marginLeft="5dp"
                         android:text="Daily"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/font_size_12_dp"/>
+                        android:textSize="@dimen/font_size_12_dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -98,7 +98,7 @@
                         android:layout_marginLeft="5dp"
                         android:text="Monthly"
                         android:textColor="@color/blue"
-                        android:textSize="@dimen/font_size_12_dp"/>
+                        android:textSize="@dimen/font_size_12_dp" />
                 </LinearLayout>
 
 
@@ -120,7 +120,7 @@
                 android:layout_height="wrap_content"
                 android:text="7 July 2020 Tuesday"
                 android:textColor="@color/color_black"
-                android:textSize="@dimen/font_size_12_dp"/>
+                android:textSize="@dimen/font_size_12_dp" />
         </LinearLayout>
 
         <com.airbnb.epoxy.EpoxyRecyclerView
@@ -131,6 +131,14 @@
 
         </com.airbnb.epoxy.EpoxyRecyclerView>
 
+        <com.tce.teacherapp.util.RubikBoldTextview
+            android:id="@+id/tv_no_data"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/header_container"
+            android:gravity="center"
+            android:text="No data found."
+            android:textSize="@dimen/font_size_16_dp" />
 
 
     </RelativeLayout>

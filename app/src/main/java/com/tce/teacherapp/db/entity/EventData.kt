@@ -7,5 +7,8 @@ import kotlinx.android.parcel.Parcelize
 data class EventData(
     val isShowLess  :Boolean,
     val nextEventCount  :Int,
-    var eventList: ArrayList<Event>
+    var eventList: ArrayList<Event>,
+    var sportdayCount: Int,
+    var birthDayCount: Int,
+    var toDoCount: Int
 ):Parcelable

@@ -17,6 +17,8 @@ import com.tce.teacherapp.ui.dashboard.planner.listeners.LessonPlanClickListener
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
 import com.tce.teacherapp.util.Utility
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 @EpoxyModelClass(layout = R.layout.list_item_planner)
@@ -24,6 +26,9 @@ abstract class DailyPlannerEpoxyHolder : EpoxyModelWithHolder<PlannerHolder>() {
 
     @EpoxyAttribute
     lateinit var dailyPlanner: DailyPlanner
+
+    @EpoxyAttribute
+    var selectedDate: String? = null
 
     @EpoxyAttribute
     lateinit var evenClickListener : EventClickListener
@@ -51,14 +56,19 @@ abstract class DailyPlannerEpoxyHolder : EpoxyModelWithHolder<PlannerHolder>() {
         holder.tvShowMore.setOnClickListener{evenClickListener.onEventShowMoreClick(dailyPlanner.eventData.isShowLess)}
 
         holder.markCompletedContainer.setOnClickListener {
-            lessonPLanClickListener.onMarkCompletedClick(dailyPlanner.lessonPlan.PeriodList.get(0))
+            lessonPLanClickListener.onMarkCompletedClick(dailyPlanner.lessonPlan)
         }
 
         if(SimpleDateFormat("dd MMMM yyyy EEEE").format(Date()).equals(dailyPlanner.date, ignoreCase = true)){
             holder.tvDate.visibility = View.GONE
         }else{
-            holder.tvDate.visibility = View.VISIBLE
+            if(selectedDate != null) {
+                holder.tvDate.visibility = View.GONE
+            }else{
+                holder.tvDate.visibility = View.VISIBLE
+            }
         }
+
 
         val linearLayoutManager1 = LinearLayoutManager(holder.rvEvent.context)
         linearLayoutManager1.orientation = LinearLayoutManager.VERTICAL
@@ -106,7 +116,7 @@ abstract class DailyPlannerEpoxyHolder : EpoxyModelWithHolder<PlannerHolder>() {
         }
 
         holder.rvBirthday.withModels {
-            dailyPlanner.birthdayList.let {
+            dailyPlanner.birthdayList?.let {
                 for (event in it){
                     birthdayItemEpoxyHolder {
                         id(event.name)
@@ -127,7 +137,7 @@ abstract class DailyPlannerEpoxyHolder : EpoxyModelWithHolder<PlannerHolder>() {
         }
 
         holder.rvLessonPLan.withModels {
-            dailyPlanner.lessonPlan.let {
+            dailyPlanner.lessonPlan?.let {
                 for (event in dailyPlanner.lessonPlan.PeriodList){
                     lessonPlanEpoxyHolder {
                         id(event.id)

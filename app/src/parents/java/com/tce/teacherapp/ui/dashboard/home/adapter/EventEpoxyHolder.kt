@@ -9,8 +9,8 @@ import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator
 import com.tce.teacherapp.R
 import com.tce.teacherapp.db.entity.Event
-import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.home.listeners.EventClickListener
+import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
 import com.tce.teacherapp.util.Utility
 import com.tce.teacherapp.util.dotsIndicator.ZoomOutPageTransformer
 import java.util.*
