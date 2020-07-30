@@ -16,11 +16,11 @@ constructor(
         when (className) {
 
             StudentListFragment::class.java.name -> {
-                StudentListFragment()
+                StudentListFragment(viewModelFactory)
             }
 
             else -> {
-                StudentListFragment()
+                StudentListFragment(viewModelFactory)
             }
         }
 

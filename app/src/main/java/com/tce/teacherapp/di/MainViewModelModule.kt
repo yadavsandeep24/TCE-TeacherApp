@@ -6,6 +6,7 @@ import com.tce.teacherapp.di.keys.MainViewModelKey
 import com.tce.teacherapp.ui.dashboard.home.DashboardViewModel
 import com.tce.teacherapp.ui.dashboard.messages.MessageViewModel
 import com.tce.teacherapp.ui.dashboard.planner.PlannerViewModel
+import com.tce.teacherapp.ui.dashboard.students.StudentViewModel
 import com.tce.teacherapp.ui.dashboard.subjects.SubjectsViewModel
 import com.tce.teacherapp.ui.login.LoginViewModel
 import com.tce.teacherapp.viewmodels.MainViewModelFactory
@@ -43,6 +44,12 @@ abstract class MainViewModelModule {
     @IntoMap
     @MainViewModelKey(PlannerViewModel::class)
     abstract fun bindPlannerViewModel(plannerViewModel: PlannerViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @MainViewModelKey(StudentViewModel::class)
+    abstract fun bindStudentListViewModel(studentViewModel: StudentViewModel): ViewModel
+
 }
 
 

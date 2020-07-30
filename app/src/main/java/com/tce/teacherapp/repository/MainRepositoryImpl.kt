@@ -17,6 +17,7 @@ import com.tce.teacherapp.ui.dashboard.home.state.DashboardViewState
 import com.tce.teacherapp.ui.dashboard.home.state.UpdatePasswordFields
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageViewState
 import com.tce.teacherapp.ui.dashboard.planner.state.PlannerViewState
+import com.tce.teacherapp.ui.dashboard.students.state.StudentViewState
 import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectViewState
 import com.tce.teacherapp.ui.login.state.LoginFields
 import com.tce.teacherapp.util.*
@@ -1538,6 +1539,19 @@ constructor(
             }.getResult()
         )
 
+    }
+
+    override fun getStudentData(
+        query: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<StudentViewState>> = flow{
+        emit(
+            DataState.data(
+                data = StudentViewState(messageList = null),
+                stateEvent = stateEvent,
+                response = null
+            )
+        )
     }
 
     fun toGradeList(grades: List<GradeResponse>): List<Grade> {

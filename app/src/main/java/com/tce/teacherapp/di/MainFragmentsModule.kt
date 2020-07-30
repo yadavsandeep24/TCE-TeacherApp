@@ -3,10 +3,7 @@ package com.tce.teacherapp.di
 import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModelProvider
 import com.tce.teacherapp.fragments.login.LoginFragmentFactory
-import com.tce.teacherapp.fragments.main.DashboardFragmentFactory
-import com.tce.teacherapp.fragments.main.MessagesFragmentFactory
-import com.tce.teacherapp.fragments.main.PlannerFragmentFactory
-import com.tce.teacherapp.fragments.main.SubjectsFragmentFactory
+import com.tce.teacherapp.fragments.main.*
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
@@ -62,4 +59,14 @@ object MainFragmentsModule {
     ): FragmentFactory {
         return PlannerFragmentFactory(viewModelFactory)
     }
+
+    @JvmStatic
+    @Provides
+    @Named("StudentsFragmentFactory")
+    fun provideStudentListFactory(
+        viewModelFactory: ViewModelProvider.Factory
+    ): FragmentFactory {
+        return StudentsFragmentFactory(viewModelFactory)
+    }
+
 }
