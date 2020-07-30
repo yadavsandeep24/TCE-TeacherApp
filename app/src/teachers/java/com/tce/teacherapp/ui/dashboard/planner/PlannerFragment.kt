@@ -140,6 +140,8 @@ constructor(
                         binding.tvNoData.visibility = View.GONE
                         binding.rvMainList.visibility = View.VISIBLE
                         binding.todayDateContainer.visibility = View.VISIBLE
+                        binding.tvLabelToday.text =
+                            SimpleDateFormat("dd MMMM yyyy EEEE").format(Date())
                         binding.rvMainList.withModels {
                             Log.d("SAn", "selectedDate-->$selectedDate")
                             for (position in it.indices) {

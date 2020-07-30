@@ -181,6 +181,8 @@ constructor(
                         binding.tvNoData.visibility = View.GONE
                         binding.rvMainList.visibility = View.VISIBLE
                         binding.todayDateContainer.visibility = View.VISIBLE
+                        binding.tvDate.text =
+                            SimpleDateFormat("dd MMMM yyyy EEEE").format(Date())
                         binding.rvMainList.withModels {
                             for (dailyPlanner in it) {
                                 dailyPlannerEpoxyHolder {
