@@ -58,10 +58,40 @@
 
                 </LinearLayout>
 
+                <RelativeLayout
+                    android:id="@+id/edit_attendance_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp">
+
+                    <com.tce.teacherapp.util.RubikBoldTextview
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:text="Edit Attendance"
+                        android:layout_centerInParent="true"
+                        android:textSize="16dp">
+                    </com.tce.teacherapp.util.RubikBoldTextview>
+
+                    <com.tce.teacherapp.util.RubikMediumTextview
+                        android:id="@+id/tvSave"
+                        android:layout_width="75dp"
+                        android:layout_height="30dp"
+                        android:text="Save"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/bg_white_rounded"
+                        android:textColor="#fa4b28"
+                        android:textSize="@dimen/font_size_16_dp"
+                        android:gravity="center"
+                        android:visibility="visible"/>
+
+                </RelativeLayout>
 
             </RelativeLayout>
 
             <LinearLayout
+                android:id="@+id/date_container"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="#f5f8ff"
@@ -86,6 +116,14 @@
                 </com.tce.teacherapp.util.RubikMediumTextview>
 
             </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_attendance"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="20dp"
+                android:layout_below="@+id/date_container">
+            </androidx.recyclerview.widget.RecyclerView>
 
             <FrameLayout
                 android:id="@+id/mask_layout"

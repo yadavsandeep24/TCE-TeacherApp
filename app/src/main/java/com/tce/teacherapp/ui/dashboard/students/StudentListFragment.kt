@@ -3,6 +3,7 @@ package com.tce.teacherapp.ui.dashboard.students
 import android.app.Dialog
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.*
 import android.widget.LinearLayout
@@ -10,6 +11,10 @@ import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.airbnb.epoxy.EpoxyVisibilityTracker
+import com.edgedevstudio.example.recyclerviewmultiselect.MainInterface
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.kizitonwose.calendarview.CalendarView
 import com.kizitonwose.calendarview.model.CalendarDay
@@ -20,6 +25,7 @@ import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.CalendarDayMarkCompletedBinding
 import com.tce.teacherapp.databinding.FragmentMessageListBinding
 import com.tce.teacherapp.databinding.FragmentStudentListBinding
+import com.tce.teacherapp.db.entity.Student
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardStateEvent
 import com.tce.teacherapp.ui.dashboard.messages.BaseMessageFragment
@@ -28,6 +34,7 @@ import com.tce.teacherapp.ui.dashboard.messages.state.MessageStateEvent
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageViewState
 import com.tce.teacherapp.ui.dashboard.planner.daysOfWeekFromLocale
 import com.tce.teacherapp.ui.dashboard.planner.setTextColorRes
+import com.tce.teacherapp.ui.dashboard.students.adapter.AttendanceAdapter
 import com.tce.teacherapp.ui.dashboard.students.state.STUDENT_VIEW_STATE_BUNDLE_KEY
 import com.tce.teacherapp.ui.dashboard.students.state.StudentStateEvent
 import com.tce.teacherapp.ui.dashboard.students.state.StudentViewState
@@ -50,13 +57,19 @@ import javax.inject.Inject
 class StudentListFragment @Inject
 constructor(
     viewModelFactory: ViewModelProvider.Factory
-) : BaseStudentFragment(R.layout.fragment_student_list,viewModelFactory) {
+) : BaseStudentFragment(R.layout.fragment_student_list,viewModelFactory), MainInterface {
 
+     companion object {
+        var isMultiSelectOn = false
+        val TAG = "MainActivity"
+    }
     private lateinit var binding: FragmentStudentListBinding
 
     private val selectedDates = mutableSetOf<LocalDate>()
     private val today = LocalDate.now()
     private val monthTitleFormatter = DateTimeFormatter.ofPattern("MMMM")
+
+    var myAdapter: AttendanceAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,7 +93,7 @@ constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as DashboardActivity).expandAppBar(false)
-        (activity as DashboardActivity).showHideUnderDevelopmentLabel(true)
+        (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
 
         viewModel.setStateEvent(StudentStateEvent.GetStudentEvent(""))
 
@@ -125,6 +138,38 @@ constructor(
              }
          }*/
 
+
+        if (myAdapter?.selectedIds != null && myAdapter?.selectedIds!!.size > 0) {
+            binding.classContainer.visibility = View.GONE
+            binding.editAttendanceContainer.visibility = View.VISIBLE
+        }else{
+            binding.classContainer.visibility = View.VISIBLE
+            binding.editAttendanceContainer.visibility = View.GONE
+        }
+
+        binding.tvSave.setOnClickListener {
+            val dialog = Dialog(requireActivity(), android.R.style.Theme_Dialog)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setContentView(R.layout.custom_success_dialog)
+            dialog.setCanceledOnTouchOutside(false)
+            dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+            dialog.window!!.setBackgroundDrawable(
+                ColorDrawable(resources.getColor(android.R.color.transparent))
+            )
+            dialog.show()
+
+            val txtTitle = dialog.findViewById(R.id.tv_title) as TextView
+            txtTitle.text = "Attendance Updated!"
+
+            Handler().postDelayed({
+                myAdapter?.deleteSelectedIds()
+                myAdapter?.notifyDataSetChanged()
+                binding.classContainer.visibility = View.VISIBLE
+                binding.editAttendanceContainer.visibility = View.GONE
+                dialog.dismiss()
+            }, 1000)
+
+        }
 
 
         calenderDialog()
@@ -186,6 +231,17 @@ constructor(
                     val formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy, EEEE")
                     val formattedString: String = day.date.format(formatter)
                     binding.tvDate.text = formattedString
+
+                    isMultiSelectOn = false
+
+
+                    binding.rvAttendance.layoutManager = GridLayoutManager(activity, 3)
+                    binding.rvAttendance.setHasFixedSize(true)
+                    myAdapter = AttendanceAdapter(requireContext(), this@StudentListFragment)
+                    binding.rvAttendance.adapter = myAdapter
+                    myAdapter?.modelList = getDummyData()
+                    myAdapter?.notifyDataSetChanged()
+
                     dialog.dismiss()
                 }
             }
@@ -248,5 +304,39 @@ constructor(
 
 
     }
+
+    private fun getDummyData(): MutableList<Student> {
+        Log.d(TAG, "inside getDummyData")
+        val list = ArrayList<Student>()
+        list.add(Student(1, "Student 1", "", false))
+        list.add(Student(2, "Student 2", "", false))
+        list.add(Student(3, "Student 3", "", false))
+        list.add(Student(4, "Student 4", "", false))
+        list.add(Student(5, "Student 5", "", false))
+        list.add(Student(6, "Student 6", "", false))
+        list.add(Student(7, "Student 7", "", false))
+        list.add(Student(8, "Student 8", "", false))
+        list.add(Student(9, "Student 9", "", false))
+        list.add(Student(10, "Student 10", "", false))
+        list.add(Student(11, "Student 11", "", false))
+        list.add(Student(12, "Student 12","", false))
+        list.add(Student(13, "Student 13", "", false))
+
+
+        Log.d(TAG, "The size is ${list.size}")
+        return list
+    }
+
+    override fun mainInterface(size: Int) {
+        if (size > 0) {
+            binding.classContainer.visibility = View.GONE
+            binding.editAttendanceContainer.visibility = View.VISIBLE
+        }else{
+            binding.classContainer.visibility = View.VISIBLE
+            binding.editAttendanceContainer.visibility = View.GONE
+        }
+
+    }
+
 
 }
