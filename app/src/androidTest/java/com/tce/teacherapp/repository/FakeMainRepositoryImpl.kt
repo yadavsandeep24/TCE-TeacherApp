@@ -1,10 +1,14 @@
 package com.tce.teacherapp.repository
 
+import android.app.Application
 import com.tce.teacherapp.api.FakeApiService
 import com.tce.teacherapp.api.response.GradeResponse
 import com.tce.teacherapp.db.entity.Grade
+import com.tce.teacherapp.db.entity.Profile
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardViewState
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageViewState
+import com.tce.teacherapp.ui.dashboard.planner.state.PlannerViewState
+import com.tce.teacherapp.ui.dashboard.students.state.StudentViewState
 import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectViewState
 import com.tce.teacherapp.util.ApiResponseHandler
 import com.tce.teacherapp.util.DataState
@@ -24,28 +28,32 @@ import javax.inject.Singleton
 @Singleton
 class FakeMainRepositoryImpl
 @Inject
-constructor(): MainRepository{
+constructor() : MainRepository {
 
     private val CLASS_NAME: String = "FakeMainRepositoryImpl"
 
     lateinit var apiService: FakeApiService
 
-    private fun throwExceptionIfApiServiceNotInitialzied(){
-        if(!::apiService.isInitialized){
+    private fun throwExceptionIfApiServiceNotInitialzied() {
+        if (!::apiService.isInitialized) {
             throw UninitializedPropertyAccessException(
                 "Did you forget to set the ApiService in FakeMainRepositoryImpl?"
             )
         }
     }
 
-    override fun getGrades(stateEvent: StateEvent): Flow<DataState<SubjectViewState>> {
-    throwExceptionIfApiServiceNotInitialzied()
-        return flow{
+    override fun getTCEApplication(): Application {
+        TODO("Not yet implemented")
+    }
 
-            val response = safeApiCall(Dispatchers.IO){apiService.getGrades()}
+    override fun getGrades(stateEvent: StateEvent): Flow<DataState<SubjectViewState>> {
+        throwExceptionIfApiServiceNotInitialzied()
+        return flow {
+
+            val response = safeApiCall(Dispatchers.IO) { apiService.getGrades() }
 
             emit(
-                object: ApiResponseHandler<SubjectViewState, List<GradeResponse>>(
+                object : ApiResponseHandler<SubjectViewState, List<GradeResponse>>(
                     response = response,
                     stateEvent = stateEvent
                 ) {
@@ -69,12 +77,12 @@ constructor(): MainRepository{
         stateEvent: StateEvent
     ): Flow<DataState<SubjectViewState>> {
         throwExceptionIfApiServiceNotInitialzied()
-        return flow{
+        return flow {
 
-            val response = safeApiCall(Dispatchers.IO){apiService.getGrades()}
+            val response = safeApiCall(Dispatchers.IO) { apiService.getGrades() }
 
             emit(
-                object: ApiResponseHandler<SubjectViewState, List<GradeResponse>>(
+                object : ApiResponseHandler<SubjectViewState, List<GradeResponse>>(
                     response = response,
                     stateEvent = stateEvent
                 ) {
@@ -99,12 +107,12 @@ constructor(): MainRepository{
         stateEvent: StateEvent
     ): Flow<DataState<SubjectViewState>> {
         throwExceptionIfApiServiceNotInitialzied()
-        return flow{
+        return flow {
 
-            val response = safeApiCall(Dispatchers.IO){apiService.getGrades()}
+            val response = safeApiCall(Dispatchers.IO) { apiService.getGrades() }
 
             emit(
-                object: ApiResponseHandler<SubjectViewState, List<GradeResponse>>(
+                object : ApiResponseHandler<SubjectViewState, List<GradeResponse>>(
                     response = response,
                     stateEvent = stateEvent
                 ) {
@@ -129,12 +137,12 @@ constructor(): MainRepository{
         stateEvent: StateEvent
     ): Flow<DataState<SubjectViewState>> {
         throwExceptionIfApiServiceNotInitialzied()
-        return flow{
+        return flow {
 
-            val response = safeApiCall(Dispatchers.IO){apiService.getGrades()}
+            val response = safeApiCall(Dispatchers.IO) { apiService.getGrades() }
 
             emit(
-                object: ApiResponseHandler<SubjectViewState, List<GradeResponse>>(
+                object : ApiResponseHandler<SubjectViewState, List<GradeResponse>>(
                     response = response,
                     stateEvent = stateEvent
                 ) {
@@ -186,18 +194,159 @@ constructor(): MainRepository{
         TODO("Not yet implemented")
     }
 
-    override fun setFingerPrintMode(checked: Boolean) {
-        TODO("Not yet implemented")
-    }
-
-    override fun checkFingerPrintEnableMode(stateEvent: StateEvent): Flow<DataState<DashboardViewState>> {
-        TODO("Not yet implemented")
-    }
-
     override fun updateProfilePic(
         resultUri: String,
         stateEvent: StateEvent
     ): Flow<DataState<DashboardViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun setFingerPrintMode(
+        checked: Boolean,
+        stateEvent: StateEvent
+    ): Flow<DataState<DashboardViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getTeacherDashboardData(
+        id: Int,
+        stateEvent: StateEvent
+    ): Flow<DataState<DashboardViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getParentDashboardData(
+        id: Int,
+        stateEvent: StateEvent
+    ): Flow<DataState<DashboardViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getEventList(
+        count: Int,
+        showOriginal: Boolean,
+        stateEvent: StateEvent
+    ): Flow<DataState<DashboardViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getTodayResourceList(
+        count: Int,
+        showOriginal: Boolean,
+        stateEvent: StateEvent
+    ): Flow<DataState<DashboardViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getLastViewedResourceList(
+        count: Int,
+        showOriginal: Boolean,
+        stateEvent: StateEvent
+    ): Flow<DataState<DashboardViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun setFaceIdMode(
+        checked: Boolean,
+        stateEvent: StateEvent
+    ): Flow<DataState<DashboardViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun checkLoginMode(stateEvent: StateEvent): Flow<DataState<DashboardViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun updatePassword(
+        oldPassword: String,
+        newPassword: String,
+        confirmPassword: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<DashboardViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun updateProfile(
+        userInfo: Profile,
+        stateMessage: StateEvent
+    ): Flow<DataState<DashboardViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getUserClassLists(stateEvent: StateEvent): Flow<DataState<DashboardViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getChapterList(
+        query: String,
+        topicId: String,
+        bookId: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<SubjectViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getTopicResourceList(
+        query: String,
+        topicId: String,
+        chapterId: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<SubjectViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getPlannerData(
+        isShowLess: Boolean,
+        stateEvent1: String?,
+        stateEvent: StateEvent
+    ): Flow<DataState<PlannerViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getMonthlyPlannerData(
+        query: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<PlannerViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun setSelectedChildPosition(
+        position: Int,
+        stateEvent: StateEvent
+    ): Flow<DataState<PlannerViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getSelectedChildPosition(stateEvent: StateEvent): Flow<DataState<PlannerViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getChapterResourceType(
+        chapterId: String,
+        topicId: String,
+        bookId: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<SubjectViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getStudentData(stateEvent: StateEvent): Flow<DataState<StudentViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getStudentAttendanceData(stateEvent: StateEvent): Flow<DataState<StudentViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getFeedBackMasterData(stateEvent: StateEvent): Flow<DataState<StudentViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getGalleryData(stateEvent: StateEvent): Flow<DataState<StudentViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getStudentPortfolio(stateEvent: StateEvent): Flow<DataState<StudentViewState>> {
         TODO("Not yet implemented")
     }
 

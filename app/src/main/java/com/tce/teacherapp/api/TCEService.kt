@@ -1,9 +1,6 @@
 package com.tce.teacherapp.api
 
-import com.tce.teacherapp.api.response.BookResponse
-import com.tce.teacherapp.api.response.GradeResponse
-import com.tce.teacherapp.api.response.LoginResponse
-import com.tce.teacherapp.api.response.ResourceListResponse
+import com.tce.teacherapp.api.response.*
 import com.tce.teacherapp.db.entity.DailyPlanner
 import retrofit2.http.Field
 import retrofit2.http.GET
@@ -31,6 +28,21 @@ interface TCEService {
 
     @GET("LessonPlan")
     suspend fun getLessonPlan(): List<DailyPlanner>
+
+    @GET("Students")
+    suspend fun getStudentList(): List<StudentListResponseItem>
+
+    @GET("AttendanceData")
+    suspend fun getStudentAttendanceList(): List<StudentAttendanceResponseItem>
+
+    @GET("FeedbackMaster")
+    suspend fun getFeedbackMaster(): List<FeedbackMasterDataItem>
+
+    @GET("StudentPortfolio")
+    suspend fun getStudentPortFolioData(): List<StudentPortFolioResponseItem>
+
+    @GET("GalleryData")
+    suspend fun getStudentGalleryData(): List<StudentGalleryResponseItem>
 
 
 }

@@ -151,7 +151,7 @@
                 android:layout_height="4dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="5dp"
-                android:background="#e1e6f0"></View>
+                android:background="#e1e6f0"/>
 
             <com.tce.teacherapp.util.RubikMediumTextview
                 android:layout_width="wrap_content"

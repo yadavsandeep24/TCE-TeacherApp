@@ -4,17 +4,54 @@ import com.tce.teacherapp.util.StateEvent
 
 sealed class StudentStateEvent : StateEvent {
 
-    class GetStudentEvent (
-        val query: String
-    ) : StudentStateEvent() {
+    object GetStudentEvent : StudentStateEvent() {
         override fun errorInfo(): String {
-            return "Error in getting division info."
+            return "Error in getting student info."
         }
 
         override fun toString(): String {
-            return "GetDivisionEvent"
+            return "GetStudentEvent"
         }
     }
 
+    object GetAttendanceData : StudentStateEvent() {
+        override fun errorInfo(): String {
+            return "Error in getting attendance info."
+        }
+
+        override fun toString(): String {
+            return "GetAttendanceData"
+        }
+    }
+
+    object GetFeedbackMaster : StudentStateEvent() {
+        override fun errorInfo(): String {
+            return "Error in getting attendance info."
+        }
+
+        override fun toString(): String {
+            return "GetAttendanceData"
+        }
+    }
+
+    object GetStudentPortfolio : StudentStateEvent() {
+        override fun errorInfo(): String {
+            return "Error in getting StudentPortfolio info."
+        }
+
+        override fun toString(): String {
+            return "GetStudentPortfolio"
+        }
+    }
+
+    object GetGalleryData : StudentStateEvent() {
+        override fun errorInfo(): String {
+            return "Error in getting GalleryData info."
+        }
+
+        override fun toString(): String {
+            return "GetGalleryData"
+        }
+    }
 
 }

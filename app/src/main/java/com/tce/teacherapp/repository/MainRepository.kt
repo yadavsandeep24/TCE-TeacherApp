@@ -6,6 +6,7 @@ import com.tce.teacherapp.db.entity.Profile
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardViewState
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageViewState
 import com.tce.teacherapp.ui.dashboard.planner.state.PlannerViewState
+import com.tce.teacherapp.ui.dashboard.students.state.StudentStateEvent
 import com.tce.teacherapp.ui.dashboard.students.state.StudentViewState
 import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectViewState
 import com.tce.teacherapp.util.DataState
@@ -14,7 +15,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface MainRepository {
 
-    fun getTCEApplication():Application
+    fun getTCEApplication(): Application
 
     fun getGrades(
         stateEvent: StateEvent
@@ -83,20 +84,20 @@ interface MainRepository {
     ): Flow<DataState<DashboardViewState>>
 
     fun getEventList(
-        count : Int,
-        showOriginal : Boolean,
+        count: Int,
+        showOriginal: Boolean,
         stateEvent: StateEvent
     ): Flow<DataState<DashboardViewState>>
 
     fun getTodayResourceList(
-        count : Int,
-        showOriginal : Boolean,
+        count: Int,
+        showOriginal: Boolean,
         stateEvent: StateEvent
     ): Flow<DataState<DashboardViewState>>
 
     fun getLastViewedResourceList(
-        count : Int,
-        showOriginal : Boolean,
+        count: Int,
+        showOriginal: Boolean,
         stateEvent: StateEvent
     ): Flow<DataState<DashboardViewState>>
 
@@ -105,7 +106,8 @@ interface MainRepository {
         stateEvent: StateEvent
     ): Flow<DataState<DashboardViewState>>
 
-    fun checkLoginMode(stateEvent: StateEvent
+    fun checkLoginMode(
+        stateEvent: StateEvent
     ): Flow<DataState<DashboardViewState>>
 
     fun updatePassword(
@@ -138,6 +140,7 @@ interface MainRepository {
         chapterId: String,
         stateEvent: StateEvent
     ): Flow<DataState<SubjectViewState>>
+
     fun getPlannerData(
         isShowLess: Boolean,
         stateEvent1: String?,
@@ -150,13 +153,14 @@ interface MainRepository {
     ): Flow<DataState<PlannerViewState>>
 
     fun setSelectedChildPosition(
-        position:Int,
+        position: Int,
         stateEvent: StateEvent
-    ):Flow<DataState<PlannerViewState>>
+    ): Flow<DataState<PlannerViewState>>
 
     fun getSelectedChildPosition(
         stateEvent: StateEvent
-    ):Flow<DataState<PlannerViewState>>
+    ): Flow<DataState<PlannerViewState>>
+
     fun getChapterResourceType(
         chapterId: String,
         topicId: String,
@@ -164,10 +168,11 @@ interface MainRepository {
         stateEvent: StateEvent
     ): Flow<DataState<SubjectViewState>>
 
-    fun getStudentData(
-        query: String,
-        stateEvent: StateEvent
-    ): Flow<DataState<StudentViewState>>
+    fun getStudentData(stateEvent: StateEvent): Flow<DataState<StudentViewState>>
+    fun getStudentAttendanceData(stateEvent: StateEvent): Flow<DataState<StudentViewState>>
+    fun getFeedBackMasterData(stateEvent: StateEvent): Flow<DataState<StudentViewState>>
+    fun getGalleryData(stateEvent: StateEvent): Flow<DataState<StudentViewState>>
+    fun getStudentPortfolio(stateEvent: StateEvent): Flow<DataState<StudentViewState>>
 
 
 }

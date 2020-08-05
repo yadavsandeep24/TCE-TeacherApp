@@ -7,9 +7,7 @@ import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.tce.teacherapp.api.TCEService
-import com.tce.teacherapp.api.response.BookResponse
-import com.tce.teacherapp.api.response.GradeResponse
-import com.tce.teacherapp.api.response.ResourceListResponse
+import com.tce.teacherapp.api.response.*
 import com.tce.teacherapp.db.dao.SubjectsDao
 import com.tce.teacherapp.db.dao.UserDao
 import com.tce.teacherapp.db.entity.*
@@ -1541,16 +1539,113 @@ constructor(
 
     }
 
-    override fun getStudentData(
-        query: String,
-        stateEvent: StateEvent
-    ): Flow<DataState<StudentViewState>> = flow{
+    override fun getStudentData(stateEvent: StateEvent): Flow<DataState<StudentViewState>> = flow{
+        val apiResult = safeApiCall(IO) {
+            tceService.getStudentList()
+        }
         emit(
-            DataState.data(
-                data = StudentViewState(messageList = null),
-                stateEvent = stateEvent,
-                response = null
-            )
+            object : ApiResponseHandler<StudentViewState, List<StudentListResponseItem>>(
+                response = apiResult,
+                stateEvent = stateEvent
+            ) {
+                override suspend fun handleSuccess(resultObj: List<StudentListResponseItem>): DataState<StudentViewState> {
+                    val viewState = StudentViewState(studentListResponse = resultObj)
+                    return DataState.data(
+                        response = null,
+                        data = viewState,
+                        stateEvent = stateEvent
+                    )
+
+                }
+            }.getResult()
+        )
+    }
+
+    override fun getStudentAttendanceData(stateEvent: StateEvent): Flow<DataState<StudentViewState>> = flow {
+        val apiResult = safeApiCall(IO) {
+            tceService.getStudentAttendanceList()
+        }
+        emit(
+            object : ApiResponseHandler<StudentViewState, List<StudentAttendanceResponseItem>>(
+                response = apiResult,
+                stateEvent = stateEvent
+            ) {
+                override suspend fun handleSuccess(resultObj: List<StudentAttendanceResponseItem>): DataState<StudentViewState> {
+                    val viewState = StudentViewState(studentattendancedata = resultObj)
+                    return DataState.data(
+                        response = null,
+                        data = viewState,
+                        stateEvent = stateEvent
+                    )
+
+                }
+            }.getResult()
+        )
+    }
+
+    override fun getFeedBackMasterData(stateEvent: StateEvent): Flow<DataState<StudentViewState>>  = flow{
+        val apiResult = safeApiCall(IO) {
+            tceService.getFeedbackMaster()
+        }
+        emit(
+            object : ApiResponseHandler<StudentViewState, List<FeedbackMasterDataItem>>(
+                response = apiResult,
+                stateEvent = stateEvent
+            ) {
+                override suspend fun handleSuccess(resultObj: List<FeedbackMasterDataItem>): DataState<StudentViewState> {
+                    val viewState = StudentViewState(feedbackMaster = resultObj)
+                    return DataState.data(
+                        response = null,
+                        data = viewState,
+                        stateEvent = stateEvent
+                    )
+
+                }
+            }.getResult()
+        )
+    }
+
+    override fun getGalleryData(stateEvent: StateEvent): Flow<DataState<StudentViewState>> = flow{
+        val apiResult = safeApiCall(IO) {
+            tceService.getStudentGalleryData()
+        }
+        emit(
+            object : ApiResponseHandler<StudentViewState, List<StudentGalleryResponseItem>>(
+                response = apiResult,
+                stateEvent = stateEvent
+            ) {
+                override suspend fun handleSuccess(resultObj: List<StudentGalleryResponseItem>): DataState<StudentViewState> {
+                    val viewState = StudentViewState(studentgallerydata = resultObj)
+                    return DataState.data(
+                        response = null,
+                        data = viewState,
+                        stateEvent = stateEvent
+                    )
+
+                }
+            }.getResult()
+        )
+    }
+
+    override fun getStudentPortfolio(stateEvent: StateEvent): Flow<DataState<StudentViewState>>  = flow{
+        val apiResult = safeApiCall(IO) {
+            tceService.getStudentPortFolioData()
+        }
+        emit(
+            object : ApiResponseHandler<StudentViewState, List<StudentPortFolioResponseItem>>(
+                response = apiResult,
+                stateEvent = stateEvent
+            ) {
+                override suspend fun handleSuccess(resultObj: List<StudentPortFolioResponseItem>): DataState<StudentViewState> {
+                    val viewState = StudentViewState(studentportfolioresponse = resultObj)
+                    return DataState.data(
+                        response = null,
+                        data = viewState,
+                        stateEvent = stateEvent
+                    )
+
+                }
+            }.getResult()
         )
     }
 

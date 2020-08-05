@@ -9,11 +9,9 @@ import android.view.*
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.airbnb.epoxy.EpoxyVisibilityTracker
 import com.edgedevstudio.example.recyclerviewmultiselect.MainInterface
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.kizitonwose.calendarview.CalendarView
@@ -23,15 +21,11 @@ import com.kizitonwose.calendarview.ui.DayBinder
 import com.kizitonwose.calendarview.ui.ViewContainer
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.CalendarDayMarkCompletedBinding
-import com.tce.teacherapp.databinding.FragmentMessageListBinding
 import com.tce.teacherapp.databinding.FragmentStudentListBinding
 import com.tce.teacherapp.db.entity.Student
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardStateEvent
-import com.tce.teacherapp.ui.dashboard.messages.BaseMessageFragment
-import com.tce.teacherapp.ui.dashboard.messages.state.MESSAGE_VIEW_STATE_BUNDLE_KEY
-import com.tce.teacherapp.ui.dashboard.messages.state.MessageStateEvent
-import com.tce.teacherapp.ui.dashboard.messages.state.MessageViewState
+import com.tce.teacherapp.ui.dashboard.planner.adapter.dailyPlannerEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.planner.daysOfWeekFromLocale
 import com.tce.teacherapp.ui.dashboard.planner.setTextColorRes
 import com.tce.teacherapp.ui.dashboard.students.adapter.AttendanceAdapter
@@ -45,6 +39,7 @@ import kotlinx.android.synthetic.teachers.fragment_dashboard_home.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import org.jetbrains.anko.childrenSequence
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
@@ -94,9 +89,6 @@ constructor(
         super.onViewCreated(view, savedInstanceState)
         (activity as DashboardActivity).expandAppBar(false)
         (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
-
-        viewModel.setStateEvent(StudentStateEvent.GetStudentEvent(""))
-
         val bottomSheetBehavior =
             com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
 
@@ -170,10 +162,71 @@ constructor(
             }, 1000)
 
         }
+        binding.dateContainer.setOnClickListener {
+            calenderDialog()
+        }
+        val formattedString: String =  SimpleDateFormat("dd MMMM yyyy EEEE").format(Date())
+        binding.tvDate.text = formattedString
+
+        viewModel.setStateEvent(StudentStateEvent.GetStudentEvent)
+        //viewModel.setStateEvent(StudentStateEvent.GetAttendanceData)
+      //  viewModel.setStateEvent(StudentStateEvent.GetFeedbackMaster)
+       // viewModel.setStateEvent(StudentStateEvent.GetStudentPortfolio)
+       //viewModel.setStateEvent(StudentStateEvent.GetGalleryData)
+
+        subscribeObservers()
+    }
+
+    private fun subscribeObservers() {
+        viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
+            if (viewState != null) {
+
+                viewState.studentListResponse?.let {
+                    Log.d("SAN","it.studentList.size-->"+it.size)
+                    isMultiSelectOn = false
+                    binding.rvAttendance.layoutManager = GridLayoutManager(activity, 3)
+                    binding.rvAttendance.setHasFixedSize(true)
+                    myAdapter = AttendanceAdapter(requireContext(), this@StudentListFragment)
+                    binding.rvAttendance.adapter = myAdapter
+                    myAdapter?.modelList = getDummyData()
+                    myAdapter?.notifyDataSetChanged()
+                }
+                viewState.studentattendancedata?.let {
+                    Log.d("SAN","it.studentAttendanceList.size-->"+it.size)
+                }
+                viewState.feedbackMaster?.let {
+                    Log.d("SAN","it.feedbackList.size-->"+it.size)
+                }
+                viewState.studentportfolioresponse?.let {
+                    Log.d("SAN","it.studentPortFolioList.size-->"+it.size)
+                }
+                viewState.studentgallerydata?.let {
+                    Log.d("SAN","it.galleryList.size-->"+it.size)
+                }
+
+            }
+        })
+
+        viewModel.numActiveJobs.observe(viewLifecycleOwner, Observer {
+            uiCommunicationListener.displayProgressBar(viewModel.areAnyJobsActive())
+        })
 
 
-        calenderDialog()
+        viewModel.stateMessage.observe(viewLifecycleOwner, Observer { stateMessage ->
+            Log.d("SAN", "SubjectListFragment-->viewModel.stateMessage")
 
+            stateMessage?.let {
+
+                /*uiCommunicationListener.onResponseReceived(
+                    response = it.response,
+                    stateMessageCallback = object : StateMessageCallback {
+                        override fun removeMessageFromStack() {
+                            viewModel.clearStateMessage()
+                        }
+                    }
+                )*/
+            }
+        })
 
     }
 
@@ -231,16 +284,6 @@ constructor(
                     val formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy, EEEE")
                     val formattedString: String = day.date.format(formatter)
                     binding.tvDate.text = formattedString
-
-                    isMultiSelectOn = false
-
-
-                    binding.rvAttendance.layoutManager = GridLayoutManager(activity, 3)
-                    binding.rvAttendance.setHasFixedSize(true)
-                    myAdapter = AttendanceAdapter(requireContext(), this@StudentListFragment)
-                    binding.rvAttendance.adapter = myAdapter
-                    myAdapter?.modelList = getDummyData()
-                    myAdapter?.notifyDataSetChanged()
 
                     dialog.dismiss()
                 }

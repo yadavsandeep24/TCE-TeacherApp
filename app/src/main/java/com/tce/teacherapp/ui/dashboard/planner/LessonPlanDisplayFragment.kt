@@ -55,7 +55,7 @@ class LessonPlanDisplayFragment : Fragment() {
         tvBack.setOnClickListener(View.OnClickListener {
             (activity as DashboardActivity).onBackPressed()
         })
-        toolbarTitle.setText("View Lesson Plan")
+        toolbarTitle.text = "View Lesson Plan"
         toolbarTitle.setTextColor(resources.getColor(R.color.color_black))
         topBar.setBackgroundColor(Color.parseColor("#ffaa1e"))
 

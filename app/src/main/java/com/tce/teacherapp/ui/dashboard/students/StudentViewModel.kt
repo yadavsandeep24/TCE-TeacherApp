@@ -1,12 +1,7 @@
 package com.tce.teacherapp.ui.dashboard.students
 
-import com.tce.teacherapp.db.entity.Message
-import com.tce.teacherapp.db.entity.MessageResource
-import com.tce.teacherapp.db.entity.Student
 import com.tce.teacherapp.repository.MainRepository
 import com.tce.teacherapp.ui.BaseViewModel
-import com.tce.teacherapp.ui.dashboard.messages.state.MessageStateEvent
-import com.tce.teacherapp.ui.dashboard.messages.state.MessageViewState
 import com.tce.teacherapp.ui.dashboard.students.state.StudentStateEvent
 import com.tce.teacherapp.ui.dashboard.students.state.StudentViewState
 import com.tce.teacherapp.util.DataState
@@ -23,27 +18,52 @@ class StudentViewModel @Inject constructor(val mainRepository: MainRepository) :
     BaseViewModel<StudentViewState>() {
 
     override fun handleNewData(data: StudentViewState) {
-        data.messageList?.let {
-            setMessageList(it)
+
+        data.studentListResponse?.let {
+            val update = getCurrentViewStateOrNew()
+            update.studentListResponse = it
+            setViewState(update)
         }
-
-
-    }
-
-    private fun setMessageList(messageList: List<Message>) {
-        val update = getCurrentViewStateOrNew()
-        update.messageList = messageList
-        setViewState(update)
+        data.studentattendancedata?.let {
+            val update = getCurrentViewStateOrNew()
+            update.studentattendancedata = it
+            setViewState(update)
+        }
+        data.feedbackMaster?.let {
+            val update = getCurrentViewStateOrNew()
+            update.feedbackMaster = it
+            setViewState(update)
+        }
+        data.studentportfolioresponse?.let {
+            val update = getCurrentViewStateOrNew()
+            update.studentportfolioresponse = it
+            setViewState(update)
+        }
+        data.studentgallerydata?.let {
+            val update = getCurrentViewStateOrNew()
+            update.studentgallerydata = it
+            setViewState(update)
+        }
     }
 
     override fun setStateEvent(stateEvent: StateEvent) {
         val job: Flow<DataState<StudentViewState>> = when (stateEvent) {
 
             is StudentStateEvent.GetStudentEvent -> {
-                mainRepository.getStudentData(stateEvent.query,stateEvent = stateEvent)
+                mainRepository.getStudentData(stateEvent = stateEvent)
             }
-
-
+            is StudentStateEvent.GetAttendanceData -> {
+                mainRepository.getStudentAttendanceData(stateEvent = stateEvent)
+            }
+            is StudentStateEvent.GetFeedbackMaster ->{
+                mainRepository.getFeedBackMasterData(stateEvent = stateEvent)
+            }
+            is StudentStateEvent.GetGalleryData ->{
+                mainRepository.getGalleryData(stateEvent =  stateEvent)
+            }
+            is StudentStateEvent.GetStudentPortfolio ->{
+                mainRepository.getStudentPortfolio(stateEvent =  stateEvent)
+            }
             else -> {
                 flow{
 
