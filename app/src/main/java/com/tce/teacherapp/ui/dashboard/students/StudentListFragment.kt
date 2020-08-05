@@ -7,10 +7,12 @@ import android.os.Handler
 import android.util.Log
 import android.view.*
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.edgedevstudio.example.recyclerviewmultiselect.MainInterface
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -60,6 +62,10 @@ constructor(
     }
     private lateinit var binding: FragmentStudentListBinding
 
+    private lateinit var classContainer : LinearLayout
+    private lateinit var editAttendanceContainer : RelativeLayout
+    private lateinit var tvSave : TextView
+
     private val selectedDates = mutableSetOf<LocalDate>()
     private val today = LocalDate.now()
     private val monthTitleFormatter = DateTimeFormatter.ofPattern("MMMM")
@@ -87,7 +93,7 @@ constructor(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as DashboardActivity).expandAppBar(false)
+        (activity as DashboardActivity).expandAppBar(true)
         (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
         val bottomSheetBehavior =
             com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
@@ -107,7 +113,20 @@ constructor(
             }
         })
 
-        binding.classContainer.setOnClickListener {
+        (activity as DashboardActivity).setCustomToolbar(R.layout.student_header_layout)
+
+        classContainer =
+            ((activity as DashboardActivity).binding.toolBar.findViewById(R.id.class_container) as LinearLayout)
+        editAttendanceContainer =
+            ((activity as DashboardActivity).binding.toolBar.findViewById(R.id.edit_attendance_container) as RelativeLayout)
+        tvSave =
+            ((activity as DashboardActivity).binding.toolBar.findViewById(R.id.tvSave) as TextView)
+        val tvClassTitle =
+            ((activity as DashboardActivity).binding.toolBar.findViewById(R.id.tv_class_title) as TextView)
+
+        tvClassTitle.setText("Attendance")
+
+        classContainer.setOnClickListener {
             viewModel.setStateEvent(DashboardStateEvent.GetUserClassList)
             if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
                 bottomSheetBehavior.state =
@@ -122,6 +141,10 @@ constructor(
             }
         }
 
+        binding.tvPortfolio.setOnClickListener(View.OnClickListener {
+            findNavController().navigate(R.id.action_studentListFragment_to_portfolioFragment)
+        })
+
         /* binding.maskLayout.setOnClickListener{
              if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED) {
                  bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
@@ -132,14 +155,14 @@ constructor(
 
 
         if (myAdapter?.selectedIds != null && myAdapter?.selectedIds!!.size > 0) {
-            binding.classContainer.visibility = View.GONE
-            binding.editAttendanceContainer.visibility = View.VISIBLE
+            classContainer.visibility = View.GONE
+            editAttendanceContainer.visibility = View.VISIBLE
         }else{
-            binding.classContainer.visibility = View.VISIBLE
-            binding.editAttendanceContainer.visibility = View.GONE
+            classContainer.visibility = View.VISIBLE
+            editAttendanceContainer.visibility = View.GONE
         }
 
-        binding.tvSave.setOnClickListener {
+        tvSave.setOnClickListener {
             val dialog = Dialog(requireActivity(), android.R.style.Theme_Dialog)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.setContentView(R.layout.custom_success_dialog)
@@ -156,8 +179,8 @@ constructor(
             Handler().postDelayed({
                 myAdapter?.deleteSelectedIds()
                 myAdapter?.notifyDataSetChanged()
-                binding.classContainer.visibility = View.VISIBLE
-                binding.editAttendanceContainer.visibility = View.GONE
+                classContainer.visibility = View.VISIBLE
+                editAttendanceContainer.visibility = View.GONE
                 dialog.dismiss()
             }, 1000)
 
@@ -372,11 +395,11 @@ constructor(
 
     override fun mainInterface(size: Int) {
         if (size > 0) {
-            binding.classContainer.visibility = View.GONE
-            binding.editAttendanceContainer.visibility = View.VISIBLE
+            classContainer.visibility = View.GONE
+            editAttendanceContainer.visibility = View.VISIBLE
         }else{
-            binding.classContainer.visibility = View.VISIBLE
-            binding.editAttendanceContainer.visibility = View.GONE
+            classContainer.visibility = View.VISIBLE
+            editAttendanceContainer.visibility = View.GONE
         }
 
     }

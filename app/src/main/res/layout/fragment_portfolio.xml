@@ -15,39 +15,89 @@
             tools:context=".ui.dashboard.students.StudentListFragment">
 
 
-            <LinearLayout
-                android:id="@+id/date_container"
+            <RelativeLayout
+                android:id="@+id/feedback_container"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="#f5f8ff"
-                android:gravity="center"
                 android:layout_below="@+id/header_layout">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:src="@drawable/calender_blue">
-
-                </androidx.appcompat.widget.AppCompatImageView>
-
                 <com.tce.teacherapp.util.RubikMediumTextview
-                    android:id="@+id/tvDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="#232337"
-                    android:textSize="@dimen/font_size_12_dp">
+                    android:id="@+id/tvFeedback"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:text="Feedback"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/bg_white_rounded"
+                    android:textColor="#fa4b28"
+                    android:textSize="@dimen/font_size_16_dp"
+                    android:gravity="center"
+                    android:visibility="visible"/>
 
-                </com.tce.teacherapp.util.RubikMediumTextview>
+                <RelativeLayout
+                    android:id="@+id/next_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone">
 
-            </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/select_all_container"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:layout_centerVertical="true">
+
+                        <CheckBox
+                            android:id="@+id/chk_selectall"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:checked="false"
+                            android:button="@null"
+                            android:layout_marginLeft="10dp"
+                            android:background="@drawable/checkbox_selector">
+                        </CheckBox>
+
+                        <com.tce.teacherapp.util.RubikMediumTextview
+                            android:layout_toRightOf="@+id/chk_selectall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_12_dp"
+                            android:textColor="#232337"
+                            android:text="Select all"
+                            android:layout_marginLeft="5dp">
+
+                        </com.tce.teacherapp.util.RubikMediumTextview>
+
+
+                    </LinearLayout>
+
+                    <com.tce.teacherapp.util.RubikMediumTextview
+                        android:id="@+id/tvNext"
+                        android:layout_width="75dp"
+                        android:layout_height="30dp"
+                        android:text="Next"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/bg_orange_rounded"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_size_16_dp"
+                        android:gravity="center"
+                        android:visibility="visible"/>
+
+
+                </RelativeLayout>
+
+            </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_attendance"
+                android:id="@+id/rv_portfolio"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="20dp"
-                android:layout_below="@+id/date_container">
+                android:layout_below="@+id/feedback_container">
             </androidx.recyclerview.widget.RecyclerView>
 
             <FrameLayout
@@ -76,7 +126,7 @@
                 android:layout_height="4dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="5dp"
-                android:background="#e1e6f0"/>
+                android:background="#e1e6f0"></View>
 
             <com.tce.teacherapp.util.RubikMediumTextview
                 android:id="@+id/tv_attendance"

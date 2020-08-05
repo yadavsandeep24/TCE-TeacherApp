@@ -2,6 +2,8 @@ package com.tce.teacherapp.fragments.main
 
 import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModelProvider
+import com.tce.teacherapp.ui.dashboard.students.FeedbackFragment
+import com.tce.teacherapp.ui.dashboard.students.PortfolioFragment
 import com.tce.teacherapp.ui.dashboard.students.StudentListFragment
 import javax.inject.Inject
 
@@ -17,6 +19,14 @@ constructor(
 
             StudentListFragment::class.java.name -> {
                 StudentListFragment(viewModelFactory)
+            }
+
+            PortfolioFragment::class.java.name -> {
+                PortfolioFragment(viewModelFactory)
+            }
+
+            FeedbackFragment::class.java.name -> {
+                FeedbackFragment(viewModelFactory)
             }
 
             else -> {

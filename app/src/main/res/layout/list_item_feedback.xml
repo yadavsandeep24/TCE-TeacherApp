@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.tce.teacherapp.util.RubikBoldTextview
+    android:id="@+id/tvFeedback"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="150dp"
+    android:layout_height="80dp"
+    android:textColor="@color/white"
+    android:background="@drawable/feedback_bg"
+    android:gravity="center"
+    android:layout_margin="10dp"
+    android:textSize="@dimen/font_size_14_dp">
+
+</com.tce.teacherapp.util.RubikBoldTextview>

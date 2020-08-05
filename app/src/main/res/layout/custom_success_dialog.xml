@@ -47,6 +47,7 @@
                 android:text="3 Resources Marked!"
                 android:textColor="#320500"
                 android:visibility="visible"
+                android:gravity="center"
                 android:layout_marginTop="10dp"
                 android:textSize="@dimen/font_size_14_dp"/>
 
