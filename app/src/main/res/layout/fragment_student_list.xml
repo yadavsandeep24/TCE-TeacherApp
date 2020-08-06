@@ -93,7 +93,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#e1e6f0"></View>
+                android:background="#e1e6f0"/>
 
             <com.tce.teacherapp.util.RubikMediumTextview
                 android:id="@+id/tv_portfolio"
@@ -110,7 +110,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#e1e6f0"></View>
+                android:background="#e1e6f0"/>
 
 
             <com.tce.teacherapp.util.RubikMediumTextview

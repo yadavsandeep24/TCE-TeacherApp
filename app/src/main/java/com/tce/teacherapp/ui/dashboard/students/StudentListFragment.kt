@@ -10,8 +10,8 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.edgedevstudio.example.recyclerviewmultiselect.MainInterface
@@ -27,13 +27,10 @@ import com.tce.teacherapp.databinding.FragmentStudentListBinding
 import com.tce.teacherapp.db.entity.Student
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardStateEvent
-import com.tce.teacherapp.ui.dashboard.planner.adapter.dailyPlannerEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.planner.daysOfWeekFromLocale
 import com.tce.teacherapp.ui.dashboard.planner.setTextColorRes
 import com.tce.teacherapp.ui.dashboard.students.adapter.AttendanceAdapter
-import com.tce.teacherapp.ui.dashboard.students.state.STUDENT_VIEW_STATE_BUNDLE_KEY
 import com.tce.teacherapp.ui.dashboard.students.state.StudentStateEvent
-import com.tce.teacherapp.ui.dashboard.students.state.StudentViewState
 import com.tce.teacherapp.util.calenderView.utils.yearMonth
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.calendar_day_legend.view.*
@@ -72,17 +69,6 @@ constructor(
 
     var myAdapter: AttendanceAdapter? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        savedInstanceState?.let { inState ->
-            Log.d(TAG, "StudentViewState: inState is NOT null")
-            (inState[STUDENT_VIEW_STATE_BUNDLE_KEY] as StudentViewState?)?.let { viewState ->
-                Log.d(TAG, "StudentViewState: restoring view state: $viewState")
-                viewModel.setViewState(viewState)
-            }
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -95,16 +81,13 @@ constructor(
         super.onViewCreated(view, savedInstanceState)
         (activity as DashboardActivity).expandAppBar(true)
         (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
-        val bottomSheetBehavior =
-            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
+        val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
 
-        bottomSheetBehavior.state =
-            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+        bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
         bottomSheetBehavior.skipCollapsed = true
         bottomSheetBehavior.isDraggable = false
 
-        bottomSheetBehavior.addBottomSheetCallback(object :
-            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.BottomSheetCallback {
+        bottomSheetBehavior.addBottomSheetCallback(object : com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.BottomSheetCallback {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 if (newState == BottomSheetBehavior.STATE_DRAGGING) {
                     bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
@@ -127,7 +110,6 @@ constructor(
         tvClassTitle.setText("Attendance")
 
         classContainer.setOnClickListener {
-            viewModel.setStateEvent(DashboardStateEvent.GetUserClassList)
             if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
                 bottomSheetBehavior.state =
                     com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
@@ -200,7 +182,7 @@ constructor(
         subscribeObservers()
     }
 
-    private fun subscribeObservers() {
+    fun subscribeObservers() {
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             if (viewState != null) {
 
@@ -371,6 +353,17 @@ constructor(
 
     }
 
+
+    override fun mainInterface(size: Int) {
+        if (size > 0) {
+            classContainer.visibility = View.GONE
+            editAttendanceContainer.visibility = View.VISIBLE
+        }else{
+            classContainer.visibility = View.VISIBLE
+            editAttendanceContainer.visibility = View.GONE
+        }
+
+    }
     private fun getDummyData(): MutableList<Student> {
         Log.d(TAG, "inside getDummyData")
         val list = ArrayList<Student>()
@@ -392,17 +385,5 @@ constructor(
         Log.d(TAG, "The size is ${list.size}")
         return list
     }
-
-    override fun mainInterface(size: Int) {
-        if (size > 0) {
-            classContainer.visibility = View.GONE
-            editAttendanceContainer.visibility = View.VISIBLE
-        }else{
-            classContainer.visibility = View.VISIBLE
-            editAttendanceContainer.visibility = View.GONE
-        }
-
-    }
-
 
 }

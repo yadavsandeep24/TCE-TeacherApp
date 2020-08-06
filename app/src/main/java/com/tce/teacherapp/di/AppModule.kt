@@ -23,10 +23,12 @@ import com.tce.teacherapp.repository.MainRepositoryImpl
 import com.tce.teacherapp.util.PreferenceKeys
 import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.FlowPreview
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
+@FlowPreview
 @Module
 object AppModule {
 
@@ -119,6 +121,7 @@ object AppModule {
             .build()
             .create(TCEService::class.java)
     }
+
 
     @JvmStatic
     @Provides

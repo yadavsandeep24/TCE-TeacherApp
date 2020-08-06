@@ -67,7 +67,7 @@ constructor(
         (activity as DashboardActivity).expandAppBar(true)
         (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
 
-        viewModel.setStateEvent(StudentStateEvent.GetStudentEvent(""))
+        viewModel.setStateEvent(StudentStateEvent.GetStudentEvent)
 
         val bottomSheetBehavior =
             com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
