@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.edgedevstudio.example.recyclerviewmultiselect.MainInterface
+import com.edgedevstudio.example.recyclerviewmultiselect.ViewHolderClickListener
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentPortfolioBinding
@@ -37,7 +38,7 @@ import javax.inject.Inject
 class PortfolioFragment @Inject
 constructor(
     viewModelFactory: ViewModelProvider.Factory
-) : BaseStudentFragment(R.layout.fragment_portfolio, viewModelFactory) {
+) : BaseStudentFragment(R.layout.fragment_portfolio, viewModelFactory), ViewHolderClickListener {
 
     private lateinit var binding: FragmentPortfolioBinding
     private lateinit var classContainer: LinearLayout
@@ -117,7 +118,7 @@ constructor(
 
         binding.rvPortfolio.layoutManager = GridLayoutManager(activity, 3)
         binding.rvPortfolio.setHasFixedSize(true)
-        myAdapter = PortfolioAdapter(requireContext())
+        myAdapter = PortfolioAdapter(requireContext(), this)
         binding.rvPortfolio.adapter = myAdapter
         myAdapter?.modelList = getDummyData()
         myAdapter?.notifyDataSetChanged()
@@ -172,6 +173,14 @@ constructor(
 
         Log.d(TAG, "The size is ${list.size}")
         return list
+    }
+
+    override fun onLongTap(index: Int) {
+
+    }
+
+    override fun onTap(index: Int) {
+        findNavController().navigate(R.id.action_portfolioFragment_to_studentProfileFragment)
     }
 
 

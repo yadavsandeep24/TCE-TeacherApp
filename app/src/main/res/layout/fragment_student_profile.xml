@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/subject_actionbar_color"
+        android:orientation="vertical"
+        tools:context=".ui.dashboard.students.StudentProfileFragment">
+
+        <RelativeLayout
+            android:id="@+id/header_container"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/subject_actionbar_color">
+
+            <TextView
+                android:id="@+id/tv_back"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/ic_thick_arrow_left" />
+
+
+            <com.tce.teacherapp.util.RubikBoldTextview
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Amit's Profile"
+                android:textAllCaps="false"
+                android:textColor="#ffffff"
+                android:textSize="16dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_profile_icon"></androidx.appcompat.widget.AppCompatImageView>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:src="@drawable/ic_change_profile">
+
+            </androidx.appcompat.widget.AppCompatImageView>
+        </RelativeLayout>
+
+        <com.tce.teacherapp.util.RubikBoldTextview
+            android:id="@+id/tvStudentName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="Amit Boaz"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_16_dp">
+
+        </com.tce.teacherapp.util.RubikBoldTextview>
+
+        <com.tce.teacherapp.util.RubikMediumTextview
+            android:id="@+id/tvBloodGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:text="Blood Group : AB+"
+            android:textColor="@color/white"
+            android:textSize="11dp">
+
+        </com.tce.teacherapp.util.RubikMediumTextview>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="90dp"
+            android:layout_height="19dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            app:cardCornerRadius="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#ffeb7d"
+                android:gravity="center">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/font_size_12_dp"
+                    android:layout_height="@dimen/font_size_12_dp"
+                    android:src="@drawable/birthday"></androidx.appcompat.widget.AppCompatImageView>
+
+                <com.tce.teacherapp.util.RubikMediumTextview
+                    android:id="@+id/tvBirthDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="14 Jan 2020"
+                    android:textColor="#232337"
+                    android:textSize="@dimen/font_size_9_dp">
+
+                </com.tce.teacherapp.util.RubikMediumTextview>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <com.tce.teacherapp.util.RubikMediumTextview
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="09"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"></com.tce.teacherapp.util.RubikMediumTextview>
+
+                <com.tce.teacherapp.util.RubikMediumTextview
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Days Present"
+                    android:textColor="@color/white"
+                    android:textSize="11dp"></com.tce.teacherapp.util.RubikMediumTextview>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <com.tce.teacherapp.util.RubikMediumTextview
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="00"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"></com.tce.teacherapp.util.RubikMediumTextview>
+
+                <com.tce.teacherapp.util.RubikMediumTextview
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Days Absent"
+                    android:textColor="@color/white"
+                    android:textSize="11dp"></com.tce.teacherapp.util.RubikMediumTextview>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            app:cardCornerRadius="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="10dp">
+
+                <com.tce.teacherapp.util.RubikMediumTextview
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Note"
+                    android:textColor="#232337"
+                    android:textSize="14dp">
+
+                </com.tce.teacherapp.util.RubikMediumTextview>
+
+                <com.tce.teacherapp.util.RubikRegularTextview
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipisc elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                    android:textColor="#232337"
+                    android:textSize="@dimen/font_size_12_dp">
+
+                </com.tce.teacherapp.util.RubikRegularTextview>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_home_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="25dp"
+            app:cardCornerRadius="5dp">
+
+            <LinearLayout
+                android:id="@+id/main_home_details"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/icon_home"
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:background="@drawable/ic_add">
+
+                    </androidx.appcompat.widget.AppCompatImageView>
+
+                    <com.tce.teacherapp.util.RubikMediumTextview
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="Home Details"
+                        android:textColor="#232337"
+                        android:textSize="14dp">
+
+                    </com.tce.teacherapp.util.RubikMediumTextview>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/parent_details_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/address_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <com.tce.teacherapp.util.RubikMediumTextview
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="Address"
+                        android:textColor="#232337"
+                        android:textSize="12dp">
+
+                    </com.tce.teacherapp.util.RubikMediumTextview>
+
+                    <com.tce.teacherapp.util.RubikRegularTextview
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="Lorem ipsum dolor sit amet, consectetur adipisc elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                        android:textColor="#232337"
+                        android:textSize="@dimen/font_size_12_dp">
+
+                    </com.tce.teacherapp.util.RubikRegularTextview>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_report_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="25dp"
+            app:cardCornerRadius="5dp">
+
+            <LinearLayout
+                android:id="@+id/main_report_details"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/icon_report"
+                        android:layout_width="12dp"
+                        android:layout_height="12dp">
+
+                    </androidx.appcompat.widget.AppCompatImageView>
+
+                    <com.tce.teacherapp.util.RubikMediumTextview
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="Progress Reports"
+                        android:textColor="#232337"
+                        android:textSize="14dp">
+
+                    </com.tce.teacherapp.util.RubikMediumTextview>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/report_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
+</layout>

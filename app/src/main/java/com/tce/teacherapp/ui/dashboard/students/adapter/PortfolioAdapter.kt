@@ -19,7 +19,7 @@ import java.util.*
 /**
  * Created by OPEYEMI OLORUNLEKE on 3/4/2018.
  */
-class PortfolioAdapter(val context: Context) : RecyclerView.Adapter<PortfolioViewHolder>(),
+class PortfolioAdapter(val context: Context, val listener: ViewHolderClickListener) : RecyclerView.Adapter<PortfolioViewHolder>(),
     ViewHolderClickListener {
     var isShowCheckBox: Boolean = false
     var isSelectAll: Boolean = false
@@ -34,8 +34,7 @@ class PortfolioAdapter(val context: Context) : RecyclerView.Adapter<PortfolioVie
         if (StudentListFragment.isMultiSelectOn) {
             addIDIntoSelectedIds(index)
         } else {
-            Toast.makeText(context, "Clicked Item @ Position ${index + 1}", Toast.LENGTH_SHORT)
-                .show()
+            listener.onTap(index)
         }
     }
 

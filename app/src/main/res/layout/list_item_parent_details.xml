@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:gravity="center_vertical">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_child"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:src="@drawable/dummy_student">
+    </androidx.appcompat.widget.AppCompatImageView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toRightOf="@+id/img_child">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp">
+
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:id="@+id/child_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Aishwarya"
+                android:textSize="@dimen/font_size_12_dp"
+                android:textColor="#232337">
+            </com.tce.teacherapp.util.RubikMediumTextview>
+
+            <com.tce.teacherapp.util.RubikRegularTextview
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:textSize="@dimen/font_size_12_dp"
+                android:textColor="#232337"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp">
+            </com.tce.teacherapp.util.RubikRegularTextview>
+
+            <com.tce.teacherapp.util.RubikRegularTextview
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Motheer"
+                android:textSize="@dimen/font_size_12_dp"
+                android:textColor="#232337">
+            </com.tce.teacherapp.util.RubikRegularTextview>
+
+
+        </LinearLayout>
+
+        <com.tce.teacherapp.util.RubikRegularTextview
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="11dp"
+            android:text="+91-945-5576-087"
+            android:textColor="#46465a"
+            android:layout_marginLeft="10dp">
+        </com.tce.teacherapp.util.RubikRegularTextview>
+    </LinearLayout>
+</RelativeLayout>
