@@ -36,6 +36,10 @@ constructor(
                 ShareMediaFragment()
             }
 
+            ProgressCardFragment::class.java.name -> {
+                ProgressCardFragment()
+            }
+
 
             else -> {
                 StudentListFragment(viewModelFactory)

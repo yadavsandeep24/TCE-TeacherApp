@@ -36,9 +36,16 @@
         <action
             android:id="@+id/action_studentProfileFragment_to_shareMediaFragment"
             app:destination="@id/shareMediaFragment" />
+        <action
+            android:id="@+id/action_studentProfileFragment_to_progressCardFragment"
+            app:destination="@id/progressCardFragment" />
     </fragment>
     <fragment
         android:id="@+id/shareMediaFragment"
         android:name="com.tce.teacherapp.ui.dashboard.students.ShareMediaFragment"
         android:label="ShareMediaFragment" />
+    <fragment
+        android:id="@+id/progressCardFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.students.ProgressCardFragment"
+        android:label="ProgressCardFragment" />
 </navigation>

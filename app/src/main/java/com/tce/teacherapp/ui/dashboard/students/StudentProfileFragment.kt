@@ -83,6 +83,9 @@ class StudentProfileFragment : Fragment() {
                     val view = LayoutInflater.from(context).inflate(R.layout.list_item_progress_reports, null, false)
                     val tvStudent = view.findViewById(R.id.tv_term) as TextView
                     tvStudent.setText(student.name)
+                    tvStudent.setOnClickListener(View.OnClickListener {
+                        findNavController().navigate(R.id.action_studentProfileFragment_to_progressCardFragment)
+                    })
                     binding.reportContainer.addView(view)
                 }
 
