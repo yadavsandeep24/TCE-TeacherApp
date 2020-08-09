@@ -2,10 +2,7 @@ package com.tce.teacherapp.fragments.main
 
 import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModelProvider
-import com.tce.teacherapp.ui.dashboard.students.FeedbackFragment
-import com.tce.teacherapp.ui.dashboard.students.PortfolioFragment
-import com.tce.teacherapp.ui.dashboard.students.StudentListFragment
-import com.tce.teacherapp.ui.dashboard.students.StudentProfileFragment
+import com.tce.teacherapp.ui.dashboard.students.*
 import javax.inject.Inject
 
 class StudentsFragmentFactory
@@ -34,6 +31,11 @@ constructor(
             StudentProfileFragment::class.java.name -> {
                 StudentProfileFragment()
             }
+
+            ShareMediaFragment::class.java.name -> {
+                ShareMediaFragment()
+            }
+
 
             else -> {
                 StudentListFragment(viewModelFactory)

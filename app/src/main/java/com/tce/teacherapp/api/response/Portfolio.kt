@@ -11,5 +11,8 @@ data class Portfolio(
     val Feedback: List<Feedback>,
 
     @Expose
+    val Gallery: List<StudentGalleryData>,
+
+    @Expose
     val TeacherNote: String
 )

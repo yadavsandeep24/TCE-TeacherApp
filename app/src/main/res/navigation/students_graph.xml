@@ -32,5 +32,13 @@
     <fragment
         android:id="@+id/studentProfileFragment"
         android:name="com.tce.teacherapp.ui.dashboard.students.StudentProfileFragment"
-        android:label="StudentProfileFragment" />
+        android:label="StudentProfileFragment" >
+        <action
+            android:id="@+id/action_studentProfileFragment_to_shareMediaFragment"
+            app:destination="@id/shareMediaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shareMediaFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.students.ShareMediaFragment"
+        android:label="ShareMediaFragment" />
 </navigation>
