@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.tce.teacherapp.util.RubikMediumTextview
+        android:id="@+id/tvObjective"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_size_12_dp"
+        android:text="Name"
+        android:textColor="#232337"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:layout_toLeftOf="@+id/smily_container"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp">
+    </com.tce.teacherapp.util.RubikMediumTextview>
+
+    <LinearLayout
+        android:id="@+id/smily_container"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="#f5f8ff"
+        android:layout_alignTop="@+id/tvObjective"
+        android:layout_alignBottom="@+id/tvObjective"
+        android:layout_alignParentRight="true">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ok">
+        </androidx.appcompat.widget.AppCompatImageView>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#e1e6f0"
+        android:layout_below="@+id/tvObjective">
+
+    </View>
+
+</RelativeLayout>
