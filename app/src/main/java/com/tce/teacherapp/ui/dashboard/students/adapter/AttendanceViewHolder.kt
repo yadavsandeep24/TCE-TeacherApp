@@ -1,7 +1,6 @@
 package com.tce.teacherapp.ui.dashboard.students.adapter
 
 import android.view.View
-import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView

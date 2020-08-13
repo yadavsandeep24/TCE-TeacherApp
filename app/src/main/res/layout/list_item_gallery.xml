@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="25dp"
+    android:layout_marginEnd="25dp"
+    android:layout_marginTop="10dp"
+    android:background="#fcfcfc"
+    android:orientation="horizontal">
+
+    <com.tce.teacherapp.util.RubikBoldTextview
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="14 January 2020"
+        android:layout_marginTop="10dp"
+        android:textColor="#46465a"
+        android:textSize="@dimen/font_size_14_dp"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@+id/tvDate"
+        android:id="@+id/rv_gallary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"/>
+
+</RelativeLayout>

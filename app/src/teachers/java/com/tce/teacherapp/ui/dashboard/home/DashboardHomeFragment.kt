@@ -81,7 +81,6 @@ constructor(
         }
         uiCommunicationListener.displayProgressBar(false)
         (activity as DashboardActivity).expandAppBar(false)
-        (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
 
         binding.imgSetting.setOnClickListener {
             (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE

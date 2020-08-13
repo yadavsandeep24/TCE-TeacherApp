@@ -126,7 +126,7 @@
                 android:layout_height="4dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="5dp"
-                android:background="#e1e6f0"></View>
+                android:background="#e1e6f0"/>
 
             <com.tce.teacherapp.util.RubikMediumTextview
                 android:id="@+id/tv_attendance"
@@ -143,7 +143,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#e1e6f0"></View>
+                android:background="#e1e6f0"/>
 
             <com.tce.teacherapp.util.RubikMediumTextview
                 android:id="@+id/tv_portfolio"
@@ -160,7 +160,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#e1e6f0"></View>
+                android:background="#e1e6f0"/>
 
 
             <com.tce.teacherapp.util.RubikMediumTextview

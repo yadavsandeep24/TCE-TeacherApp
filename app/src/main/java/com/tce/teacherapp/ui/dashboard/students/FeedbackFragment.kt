@@ -6,24 +6,20 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.*
-import androidx.fragment.app.Fragment
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.edgedevstudio.example.recyclerviewmultiselect.MainInterface
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentFeedbackBinding
-import com.tce.teacherapp.databinding.FragmentPortfolioBinding
 import com.tce.teacherapp.db.entity.Student
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
-import com.tce.teacherapp.ui.dashboard.students.adapter.AttendanceAdapter
 import com.tce.teacherapp.ui.dashboard.students.adapter.FeedbackAdapter
-import com.tce.teacherapp.ui.dashboard.students.adapter.PortfolioAdapter
 import com.tce.teacherapp.ui.dashboard.students.state.STUDENT_VIEW_STATE_BUNDLE_KEY
 import com.tce.teacherapp.ui.dashboard.students.state.StudentViewState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import java.util.ArrayList
+import java.util.*
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
@@ -64,7 +60,6 @@ constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as DashboardActivity).expandAppBar(false)
-        (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
 
         binding.rvFeedback.layoutManager = GridLayoutManager(activity, 2)
         binding.rvFeedback.setHasFixedSize(true)

@@ -72,7 +72,6 @@ constructor(
             activity?.window!!.statusBarColor = resources.getColor(R.color.color_black)
         }
         (activity as DashboardActivity).expandAppBar(false)
-        (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
         (activity as DashboardActivity).showHideBottomBar(false)
 
         binding.playerView.iv_close.setOnClickListener {

@@ -85,7 +85,6 @@ constructor(
         }
         // (activity as DashboardActivity).setCustomToolbar(R.layout.subject_list_top_bar)
         (activity as DashboardActivity).expandAppBar(false)
-        (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
 
         uiCommunicationListener.displayProgressBar(true)
 

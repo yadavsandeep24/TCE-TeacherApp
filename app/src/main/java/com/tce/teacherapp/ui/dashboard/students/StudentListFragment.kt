@@ -26,7 +26,6 @@ import com.tce.teacherapp.databinding.CalendarDayMarkCompletedBinding
 import com.tce.teacherapp.databinding.FragmentStudentListBinding
 import com.tce.teacherapp.db.entity.Student
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
-import com.tce.teacherapp.ui.dashboard.home.state.DashboardStateEvent
 import com.tce.teacherapp.ui.dashboard.planner.daysOfWeekFromLocale
 import com.tce.teacherapp.ui.dashboard.planner.setTextColorRes
 import com.tce.teacherapp.ui.dashboard.students.adapter.AttendanceAdapter
@@ -48,7 +47,8 @@ import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 @FlowPreview
-class StudentListFragment @Inject
+class StudentListFragment
+@Inject
 constructor(
     viewModelFactory: ViewModelProvider.Factory
 ) : BaseStudentFragment(R.layout.fragment_student_list,viewModelFactory), MainInterface {
@@ -59,7 +59,7 @@ constructor(
     }
     private lateinit var binding: FragmentStudentListBinding
 
-    private lateinit var classContainer : LinearLayout
+    private lateinit var classContainer : RelativeLayout
     private lateinit var editAttendanceContainer : RelativeLayout
     private lateinit var tvSave : TextView
 
@@ -80,7 +80,6 @@ constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as DashboardActivity).expandAppBar(true)
-        (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
         val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
 
         bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
@@ -99,7 +98,7 @@ constructor(
         (activity as DashboardActivity).setCustomToolbar(R.layout.student_header_layout)
 
         classContainer =
-            ((activity as DashboardActivity).binding.toolBar.findViewById(R.id.class_container) as LinearLayout)
+            (activity as DashboardActivity).binding.toolBar.findViewById(R.id.class_container)
         editAttendanceContainer =
             ((activity as DashboardActivity).binding.toolBar.findViewById(R.id.edit_attendance_container) as RelativeLayout)
         tvSave =
@@ -107,7 +106,7 @@ constructor(
         val tvClassTitle =
             ((activity as DashboardActivity).binding.toolBar.findViewById(R.id.tv_class_title) as TextView)
 
-        tvClassTitle.setText("Attendance")
+        tvClassTitle.text = "Attendance"
 
         classContainer.setOnClickListener {
             if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
@@ -123,9 +122,15 @@ constructor(
             }
         }
 
-        binding.tvPortfolio.setOnClickListener(View.OnClickListener {
+        binding.tvPortfolio.setOnClickListener {
+            (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
             findNavController().navigate(R.id.action_studentListFragment_to_portfolioFragment)
-        })
+        }
+
+        binding.tvGallary.setOnClickListener {
+            (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
+            findNavController().navigate(R.id.action_studentListFragment_to_studentGalleryFragment)
+        }
 
         /* binding.maskLayout.setOnClickListener{
              if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED) {
@@ -235,7 +240,7 @@ constructor(
 
     }
 
-    private fun calenderDialog(){
+    private fun calenderDialog() {
         val dialog = Dialog(requireActivity(), android.R.style.Theme_Dialog)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.calender_mark_completed)
@@ -348,9 +353,6 @@ constructor(
                 }
             }
         }
-
-
-
     }
 
 
@@ -362,8 +364,8 @@ constructor(
             classContainer.visibility = View.VISIBLE
             editAttendanceContainer.visibility = View.GONE
         }
-
     }
+
     private fun getDummyData(): MutableList<Student> {
         Log.d(TAG, "inside getDummyData")
         val list = ArrayList<Student>()
@@ -385,5 +387,7 @@ constructor(
         Log.d(TAG, "The size is ${list.size}")
         return list
     }
+
+
 
 }

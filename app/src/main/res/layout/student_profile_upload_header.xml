@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/header_layout"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@color/pale_grey_three">
+<RelativeLayout
+    android:id="@+id/header_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgBack"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/ic_back_black"/>
+
+    <com.tce.teacherapp.util.RubikMediumTextview
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Recent"
+        android:textColor="@color/color_black"
+        android:textSize="@dimen/font_size_16_dp"
+        android:textStyle="bold"/>
+
+
+
+    <com.tce.teacherapp.util.RubikMediumTextview
+        android:id="@+id/tvDone"
+        android:layout_width="75dp"
+        android:layout_height="30dp"
+        android:text="Done"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/bg_white_rounded"
+        android:textColor="#fa4b28"
+        android:textSize="@dimen/font_size_16_dp"
+        android:elevation="2dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:visibility="visible"/>
+    <com.tce.teacherapp.util.RubikMediumTextview
+        android:id="@+id/tvCount"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:text="1"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
+        android:elevation="2dp"
+        android:background="@drawable/yellow_round_count"
+        android:textColor="@color/color_black"
+        android:textSize="@dimen/font_size_12_dp"
+        android:gravity="center"
+        android:visibility="visible"/>
+
+
+</RelativeLayout>
+</RelativeLayout>

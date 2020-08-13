@@ -27,7 +27,6 @@
     <color name="dark">#232337</color>
     <color name="gunmetal">#46465a</color>
     <color name="very_light_blue">#e1e6f0</color>
-    <color name="pale_grey">#f5f8ff</color>
     <color name="sandy_yellow">#ffeb7d</color>
     <color name="blue">#5a69ff</color>
     <color name="pale">#fffad7</color>
@@ -38,5 +37,7 @@
     <color name="calender_text_grey">#232337</color>
     <color name="calender_text_grey_light">#a0a5b9</color>
     <color name="blue_grey">#8c91a5</color>
+
     <color name="pale_grey_three">#fafaff</color>
+    <color name="pale_grey_two">#f5f8ff</color>
 </resources>

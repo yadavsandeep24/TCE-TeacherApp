@@ -19,14 +19,14 @@
             android:layout_width="140dp"
             android:layout_height="105dp"
             android:scaleType="fitXY"
-            android:src="@drawable/dummy_video"></androidx.appcompat.widget.AppCompatImageView>
+            android:src="@drawable/dummy_video"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_play"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_centerInParent="true"
-            android:src="@drawable/ic_video_play"></androidx.appcompat.widget.AppCompatImageView>
+            android:src="@drawable/ic_video_play"/>
 
         <CheckBox
             android:id="@+id/chk_gallary"
@@ -37,7 +37,7 @@
             android:background="@drawable/checkbox_filled_selector"
             android:button="@null"
             android:checked="false"
-            android:visibility="gone"></CheckBox>
+            android:visibility="gone"/>
         .
     </RelativeLayout>
 

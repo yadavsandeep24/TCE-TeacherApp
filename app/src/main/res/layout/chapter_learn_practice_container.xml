@@ -6,7 +6,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:background="@color/pale_grey"
+        android:background="@color/pale_grey_two"
         android:layout_marginTop="55dp"
         android:layout_alignParentTop="true"
         android:orientation="horizontal"

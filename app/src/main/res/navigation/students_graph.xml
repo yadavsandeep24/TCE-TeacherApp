@@ -12,7 +12,14 @@
         tools:layout="@layout/fragment_student_list" >
         <action
             android:id="@+id/action_studentListFragment_to_portfolioFragment"
-            app:destination="@id/portfolioFragment" />
+            app:destination="@id/portfolioFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/studentListFragment"/>
+        <action
+            android:id="@+id/action_studentListFragment_to_studentGalleryFragment"
+            app:destination="@id/studentGalleryFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/studentListFragment"/>
     </fragment>
     <fragment
         android:id="@+id/portfolioFragment"
@@ -24,6 +31,16 @@
         <action
             android:id="@+id/action_portfolioFragment_to_studentProfileFragment"
             app:destination="@id/studentProfileFragment" />
+        <action
+            android:id="@+id/action_portfolioFragment_to_studentListFragment"
+            app:destination="@id/studentListFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/portfolioFragment"/>
+        <action
+            android:id="@+id/action_portfolioFragment_to_studentGalleryFragment"
+            app:destination="@id/studentGalleryFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/portfolioFragment"/>
     </fragment>
     <fragment
         android:id="@+id/feedbackFragment"
@@ -48,4 +65,73 @@
         android:id="@+id/progressCardFragment"
         android:name="com.tce.teacherapp.ui.dashboard.students.ProgressCardFragment"
         android:label="ProgressCardFragment" />
+    <fragment
+        android:id="@+id/studentGalleryFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.students.StudentGalleryFragment"
+        android:label="fragment_student_gallery"
+        tools:layout="@layout/fragment_student_gallery" >
+        <action
+            android:id="@+id/action_studentGalleryFragment_to_studentListFragment"
+            app:destination="@id/studentListFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/studentGalleryFragment"/>
+        <action
+            android:id="@+id/action_studentGalleryFragment_to_portfolioFragment"
+            app:destination="@id/portfolioFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/studentGalleryFragment"/>
+        <action
+            android:id="@+id/action_studentGalleryFragment_to_studentProfileUploadResouceSelectionFragment"
+            app:destination="@id/studentProfileUploadResouceSelectionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/studentGalleryImagePostFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.students.StudentGalleryImagePostFragment"
+        android:label="fragment_student_gallery_image_post"
+        tools:layout="@layout/fragment_student_gallery_image_post" />
+    <fragment
+        android:id="@+id/studentGalleryImagePostDetailFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.students.StudentGalleryImagePostDetailFragment"
+        android:label="fragment_student_gallery_image_post_detail"
+        tools:layout="@layout/fragment_student_gallery_image_post_detail" />
+    <fragment
+        android:id="@+id/studentGalleryTagStudentFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.students.StudentGalleryTagStudentFragment"
+        android:label="fragment_student_gallery_tag_student"
+        tools:layout="@layout/fragment_student_gallery_tag_student" />
+    <fragment
+        android:id="@+id/studentGalleryTaggedStudentFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.students.StudentGalleryTaggedStudentFragment"
+        android:label="fragment_student_gallery_tagged_student"
+        tools:layout="@layout/fragment_student_gallery_tagged_student" />
+    <fragment
+        android:id="@+id/studentGalleryVideoPostFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.students.StudentGalleryVideoPostFragment"
+        android:label="fragment_student_gallery_video_post"
+        tools:layout="@layout/fragment_student_gallery_video_post" />
+    <fragment
+        android:id="@+id/studentGalleryVideoPostDetailFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.students.StudentGalleryVideoPostDetailFragment"
+        android:label="fragment_student_gallery_video_post_detail"
+        tools:layout="@layout/fragment_student_gallery_video_post_detail" />
+    <fragment
+        android:id="@+id/studentGalleryShareMediaFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.students.StudentGalleryShareMediaFragment"
+        android:label="fragment_student_gallery_share_media"
+        tools:layout="@layout/fragment_student_gallery_share_media" />
+    <fragment
+        android:id="@+id/studentGallerSharingChatFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.students.StudentGallerSharingChatFragment"
+        android:label="fragment_student_galler_sharing_chat"
+        tools:layout="@layout/fragment_student_galler_sharing_chat" />
+    <fragment
+        android:id="@+id/studentGalleryShareChatSentFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.students.StudentGalleryShareChatSentFragment"
+        android:label="fragment_student_gallery_share_chat_sent"
+        tools:layout="@layout/fragment_student_gallery_share_chat_sent" />
+    <fragment
+        android:id="@+id/studentProfileUploadResouceSelectionFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.students.StudentProfileUploadResourceSelectionFragment"
+        android:label="fragment_student_profile_upload_resouce_selection"
+        tools:layout="@layout/fragment_student_profile_upload_resouce_selection" />
 </navigation>

@@ -2,21 +2,19 @@ package com.tce.teacherapp.ui.dashboard.students
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import com.tce.teacherapp.R
 import com.tce.teacherapp.api.response.Feedback
 import com.tce.teacherapp.api.response.Portfolio
 import com.tce.teacherapp.api.response.SharedListItem
 import com.tce.teacherapp.api.response.StudentGalleryData
 import com.tce.teacherapp.databinding.FragmentShareMediaBinding
-import com.tce.teacherapp.databinding.FragmentStudentProfileBinding
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.students.adapter.StudentPortfolioAdapter
-import java.util.ArrayList
+import java.util.*
 
 
 class ShareMediaFragment : Fragment() {
@@ -39,14 +37,13 @@ class ShareMediaFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as DashboardActivity).expandAppBar(false)
-        (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
 
         binding.rvPortfolio.layoutManager = GridLayoutManager(activity, 1)
         binding.rvPortfolio.setHasFixedSize(true)
-        var myAdapter = StudentPortfolioAdapter(requireContext(), true)
+        val myAdapter = StudentPortfolioAdapter(requireContext(), true)
         binding.rvPortfolio.adapter = myAdapter
-        myAdapter?.modelList = getPortfolioData()
-        myAdapter?.notifyDataSetChanged()
+        myAdapter.modelList = getPortfolioData()
+        myAdapter.notifyDataSetChanged()
 
     }
 

@@ -25,7 +25,7 @@
                     android:layout_height="20dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="20dp"
-                    android:src="@drawable/ic_back"></androidx.appcompat.widget.AppCompatImageView>
+                    android:src="@drawable/ic_back"/>
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/imgMessageDetail"
@@ -54,7 +54,7 @@
                         android:text="title"
                         android:textColor="@color/white"
                         android:textSize="@dimen/font_size_16_dp"
-                        android:textStyle="bold"></com.tce.teacherapp.util.RubikMediumTextview>
+                        android:textStyle="bold"/>
 
                     <com.tce.teacherapp.util.RubikRegularTextview
                         android:id="@+id/tvSubTitle1"
@@ -63,7 +63,7 @@
                         android:text="subTitle"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@color/white"
-                        android:visibility="visible"></com.tce.teacherapp.util.RubikRegularTextview>
+                        android:visibility="visible"/>
                 </LinearLayout>
             </RelativeLayout>
 
@@ -77,7 +77,7 @@
                 android:text="4 June 2020"
                 android:textColor="#8c91a5"
                 android:textSize="@dimen/font_size_16_dp"
-                android:textStyle="bold"></com.tce.teacherapp.util.RubikMediumTextview>
+                android:textStyle="bold"/>
 
 
             <RelativeLayout
@@ -143,7 +143,7 @@
                     android:orientation="vertical"
                     android:visibility="gone">
 
-                    <com.picker.gallery.utils.scroll.FastScrollRecyclerView
+                    <com.tce.teacherapp.util.gallerypicker.utils.scroll.FastScrollRecyclerView
                         android:id="@+id/imageGrid"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -155,12 +155,6 @@
                         app:fastScrollPopupTextColor="#ffffff"
                         app:fastScrollPopupTextSize="20dp"
                         app:fastScrollThumbColor="#2962ff" />
-
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/albumsrecyclerview"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
 
@@ -179,7 +173,7 @@
                         android:layout_height="4dp"
                         android:background="@color/grey"
                         android:layout_marginTop="10dp"
-                        android:layout_centerHorizontal="true"></View>
+                        android:layout_centerHorizontal="true"/>
 
                     <com.tce.teacherapp.util.RubikBoldTextview
                        android:id="@+id/tv_record_time"
@@ -235,7 +229,7 @@
                 android:layout_height="4dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="5dp"
-                android:background="#e1e6f0"></View>
+                android:background="#e1e6f0"/>
 
             <LinearLayout
                 android:id="@+id/resource_container"
@@ -248,7 +242,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginRight="10dp"
-                    android:src="@drawable/ic_resource"></androidx.appcompat.widget.AppCompatImageView>
+                    android:src="@drawable/ic_resource"/>
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:layout_width="wrap_content"
@@ -264,7 +258,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#e1e6f0"></View>
+                android:background="#e1e6f0"/>
 
             <LinearLayout
                 android:id="@+id/photo_container"
@@ -277,7 +271,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginRight="10dp"
-                    android:src="@drawable/ic_photo"></androidx.appcompat.widget.AppCompatImageView>
+                    android:src="@drawable/ic_photo"/>
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:layout_width="wrap_content"
@@ -293,7 +287,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#e1e6f0"></View>
+                android:background="#e1e6f0"/>
 
             <LinearLayout
                 android:id="@+id/voice_container"
@@ -306,7 +300,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginRight="10dp"
-                    android:src="@drawable/ic_voice"></androidx.appcompat.widget.AppCompatImageView>
+                    android:src="@drawable/ic_voice"/>
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:layout_width="wrap_content"
@@ -322,7 +316,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#e1e6f0"></View>
+                android:background="#e1e6f0"/>
 
             <LinearLayout
                 android:id="@+id/video_container"
@@ -335,7 +329,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginRight="10dp"
-                    android:src="@drawable/ic_video"></androidx.appcompat.widget.AppCompatImageView>
+                    android:src="@drawable/ic_video"/>
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:layout_width="wrap_content"
@@ -351,7 +345,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#e1e6f0"></View>
+                android:background="#e1e6f0"/>
 
             <LinearLayout
                 android:id="@+id/file_container"
@@ -364,7 +358,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginRight="10dp"
-                    android:src="@drawable/ic_file"></androidx.appcompat.widget.AppCompatImageView>
+                    android:src="@drawable/ic_file"/>
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:layout_width="wrap_content"

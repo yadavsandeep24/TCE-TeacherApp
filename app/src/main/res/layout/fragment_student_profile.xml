@@ -457,7 +457,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:descendantFocusability="blocksDescendants"
-                    android:background="#fafaff"></androidx.recyclerview.widget.RecyclerView>
+                    android:background="#fafaff"/>
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>

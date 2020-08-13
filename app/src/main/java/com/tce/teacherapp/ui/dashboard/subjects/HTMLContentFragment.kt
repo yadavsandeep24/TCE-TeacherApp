@@ -50,7 +50,6 @@ constructor(
             activity?.window!!.statusBarColor = resources.getColor(R.color.color_black)
         }
         (activity as DashboardActivity).expandAppBar(false)
-        (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
         (activity as DashboardActivity).showHideBottomBar(false)
         val url = arguments?.getString("url")
         setProperties(binding.wvHtml)

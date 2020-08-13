@@ -2,26 +2,21 @@ package com.tce.teacherapp.ui.dashboard.students
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.edgedevstudio.example.recyclerviewmultiselect.MainInterface
 import com.edgedevstudio.example.recyclerviewmultiselect.ViewHolderClickListener
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentPortfolioBinding
-import com.tce.teacherapp.databinding.FragmentStudentListBinding
 import com.tce.teacherapp.db.entity.Student
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardStateEvent
-import com.tce.teacherapp.ui.dashboard.students.adapter.AttendanceAdapter
 import com.tce.teacherapp.ui.dashboard.students.adapter.PortfolioAdapter
 import com.tce.teacherapp.ui.dashboard.students.state.STUDENT_VIEW_STATE_BUNDLE_KEY
 import com.tce.teacherapp.ui.dashboard.students.state.StudentStateEvent
@@ -30,7 +25,7 @@ import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.teachers.fragment_dashboard_home.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import java.util.ArrayList
+import java.util.*
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
@@ -41,7 +36,7 @@ constructor(
 ) : BaseStudentFragment(R.layout.fragment_portfolio, viewModelFactory), ViewHolderClickListener {
 
     private lateinit var binding: FragmentPortfolioBinding
-    private lateinit var classContainer: LinearLayout
+    private lateinit var classContainer: RelativeLayout
     var myAdapter: PortfolioAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,15 +61,10 @@ constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as DashboardActivity).expandAppBar(true)
-        (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
-
         viewModel.setStateEvent(StudentStateEvent.GetStudentEvent)
+        val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
 
-        val bottomSheetBehavior =
-            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
-
-        bottomSheetBehavior.state =
-            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+        bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
         bottomSheetBehavior.skipCollapsed = true
         bottomSheetBehavior.isDraggable = false
 
@@ -91,10 +81,10 @@ constructor(
         (activity as DashboardActivity).setCustomToolbar(R.layout.student_header_layout)
 
         classContainer =
-            ((activity as DashboardActivity).binding.toolBar.findViewById(R.id.class_container) as LinearLayout)
+            (activity as DashboardActivity).binding.toolBar.findViewById(R.id.class_container)
         val tvClassTitle =
             ((activity as DashboardActivity).binding.toolBar.findViewById(R.id.tv_class_title) as TextView)
-        tvClassTitle.setText("Portfolio")
+        tvClassTitle.text = "Portfolio"
 
         classContainer.setOnClickListener {
             viewModel.setStateEvent(DashboardStateEvent.GetUserClassList)
@@ -111,10 +101,16 @@ constructor(
             }
         }
 
-        binding.tvAttendance.setOnClickListener(View.OnClickListener {
-            (activity as DashboardActivity).onBackPressed()
-        })
+        binding.tvAttendance.setOnClickListener {
+            (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
+           findNavController().navigate(R.id.action_portfolioFragment_to_studentListFragment)
+        }
 
+
+        binding.tvGallary.setOnClickListener {
+            (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
+            findNavController().navigate(R.id.action_portfolioFragment_to_studentGalleryFragment)
+        }
 
         binding.rvPortfolio.layoutManager = GridLayoutManager(activity, 3)
         binding.rvPortfolio.setHasFixedSize(true)
@@ -138,9 +134,9 @@ constructor(
             }
         })
 
-        binding.tvNext.setOnClickListener(View.OnClickListener {
+        binding.tvNext.setOnClickListener {
             findNavController().navigate(R.id.action_portfolioFragment_to_feedbackFragment)
-        })
+        }
 
         /* binding.maskLayout.setOnClickListener{
              if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED) {

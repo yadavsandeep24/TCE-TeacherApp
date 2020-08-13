@@ -16,7 +16,6 @@ import com.tce.teacherapp.R
 import com.tce.teacherapp.api.response.Feedback
 import com.tce.teacherapp.api.response.Portfolio
 import com.tce.teacherapp.api.response.StudentGalleryData
-import com.tce.teacherapp.db.entity.Student
 import java.util.*
 
 

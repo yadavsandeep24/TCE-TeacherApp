@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_main"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="10dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    app:cardCornerRadius="5dp">
+
+
+    <RelativeLayout
+        android:layout_width="105dp"
+        android:layout_height="78dp">
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_gallary"
+            android:layout_width="140dp"
+            android:layout_height="105dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/dummy_video"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_play"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_video_play"/>
+
+        <CheckBox
+            android:id="@+id/chk_gallary"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/checkbox_filled_selector"
+            android:button="@null"
+            android:checked="false"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

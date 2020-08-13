@@ -39,7 +39,12 @@ constructor(
             ProgressCardFragment::class.java.name -> {
                 ProgressCardFragment()
             }
-
+            StudentGalleryFragment::class.java.name ->{
+                StudentGalleryFragment(viewModelFactory)
+            }
+            StudentProfileUploadResourceSelectionFragment::class.java.name ->{
+                StudentProfileUploadResourceSelectionFragment(viewModelFactory)
+            }
 
             else -> {
                 StudentListFragment(viewModelFactory)

@@ -2,11 +2,11 @@ package com.tce.teacherapp.ui.dashboard.students
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.tce.teacherapp.R
@@ -14,13 +14,11 @@ import com.tce.teacherapp.api.response.Feedback
 import com.tce.teacherapp.api.response.Portfolio
 import com.tce.teacherapp.api.response.SharedListItem
 import com.tce.teacherapp.api.response.StudentGalleryData
-import com.tce.teacherapp.databinding.FragmentPortfolioBinding
 import com.tce.teacherapp.databinding.FragmentStudentProfileBinding
 import com.tce.teacherapp.db.entity.Student
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
-import com.tce.teacherapp.ui.dashboard.students.adapter.PortfolioAdapter
 import com.tce.teacherapp.ui.dashboard.students.adapter.StudentPortfolioAdapter
-import java.util.ArrayList
+import java.util.*
 
 
 class StudentProfileFragment : Fragment() {
@@ -42,7 +40,6 @@ class StudentProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as DashboardActivity).expandAppBar(false)
-        (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
 
         binding.iconHome.background == resources.getDrawable(R.drawable.ic_add)
         binding.iconHome.setTag(1)

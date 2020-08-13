@@ -41,7 +41,6 @@ constructor(
         super.onViewCreated(view, savedInstanceState)
 
         (activity as DashboardActivity).expandAppBar(false)
-        (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
         (activity as DashboardActivity).showHideBottomBar(false)
 
         // Bind data.

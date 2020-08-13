@@ -1,22 +1,17 @@
 package com.tce.teacherapp.ui.dashboard.students.adapter
 
 import android.content.Context
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.tce.teacherapp.R
-import com.tce.teacherapp.api.response.*
-import com.tce.teacherapp.db.entity.Student
-import org.w3c.dom.Text
+import com.tce.teacherapp.api.response.Objective
+import com.tce.teacherapp.api.response.ProgressData
 import java.util.*
 
 

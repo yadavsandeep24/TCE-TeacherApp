@@ -24,22 +24,22 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gabriel.soundrecorder.recorder.RecorderViewModel
 import com.example.gabriel.soundrecorder.util.InjectorUtils
-import com.picker.gallery.model.GalleryAlbums
-import com.picker.gallery.model.GalleryData
-import com.picker.gallery.presenter.PhotosPresenterImpl
-import com.picker.gallery.presenter.VideosPresenterImpl
-import com.picker.gallery.utils.MLog
-import com.picker.gallery.utils.RunOnUiThread
-import com.picker.gallery.view.ImagePickerContract
-import com.picker.gallery.view.OnPhoneImagesObtained
-import com.picker.gallery.view.adapters.AlbumAdapter
-import com.picker.gallery.view.adapters.ImageGridAdapter
-import com.picker.gallery.view.adapters.VideoGridAdapter
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentGroupChatBinding
 import com.tce.teacherapp.db.entity.Student
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior
+import com.tce.teacherapp.util.gallerypicker.model.GalleryAlbums
+import com.tce.teacherapp.util.gallerypicker.model.GalleryData
+import com.tce.teacherapp.util.gallerypicker.presenter.PhotosPresenterImpl
+import com.tce.teacherapp.util.gallerypicker.presenter.VideosPresenterImpl
+import com.tce.teacherapp.util.gallerypicker.utils.MLog
+import com.tce.teacherapp.util.gallerypicker.utils.RunOnUiThread
+import com.tce.teacherapp.util.gallerypicker.view.ImagePickerContract
+import com.tce.teacherapp.util.gallerypicker.view.OnPhoneImagesObtained
+import com.tce.teacherapp.util.gallerypicker.view.adapters.AlbumAdapter
+import com.tce.teacherapp.util.gallerypicker.view.adapters.ImageGridAdapter
+import com.tce.teacherapp.util.gallerypicker.view.adapters.VideoGridAdapter
 import kotlinx.android.synthetic.main.fragment_group_chat.*
 import org.jetbrains.anko.doAsync
 import java.io.File
@@ -96,8 +96,6 @@ class GroupChatFragment : Fragment(), ImagePickerContract {
     }
 
     override fun initRecyclerViews() {
-        binding.albumsrecyclerview.layoutManager = LinearLayoutManager(ctx)
-        binding.albumsrecyclerview.adapter = AlbumAdapter(java.util.ArrayList(), this)
         if(strFileType.equals("Photo")) {
             binding.imageGrid.adapter = ImageGridAdapter(imageList = photoList, threshold = 0)
         }else{
@@ -178,7 +176,6 @@ class GroupChatFragment : Fragment(), ImagePickerContract {
         }
         // (activity as DashboardActivity).setCustomToolbar(R.layout.subject_list_top_bar)
         (activity as DashboardActivity).expandAppBar(false)
-        (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
 
         var studentNames = ""
         for (student in studentList){
@@ -209,29 +206,29 @@ class GroupChatFragment : Fragment(), ImagePickerContract {
             }
         })
 
-        binding.imgAttachment.setOnClickListener(View.OnClickListener {
+        binding.imgAttachment.setOnClickListener {
             if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN) {
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             } else {
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
             }
-        })
+        }
 
-        binding.mainContainer.setOnClickListener(View.OnClickListener {
+        binding.mainContainer.setOnClickListener {
             if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
             }
 
-        })
+        }
 
-        binding.imgBack.setOnClickListener(View.OnClickListener {
+        binding.imgBack.setOnClickListener {
             if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
             }
             activity?.onBackPressed()
-        })
+        }
 
-        binding.photoContainer.setOnClickListener(View.OnClickListener {
+        binding.photoContainer.setOnClickListener {
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
             val bottomUp: Animation = AnimationUtils.loadAnimation(
                 context,
@@ -243,9 +240,9 @@ class GroupChatFragment : Fragment(), ImagePickerContract {
             strFileType = "Photo"
             initViews()
 
-        })
+        }
 
-        binding.videoContainer.setOnClickListener(View.OnClickListener {
+        binding.videoContainer.setOnClickListener {
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
             val bottomUp: Animation = AnimationUtils.loadAnimation(
                 context,
@@ -257,15 +254,15 @@ class GroupChatFragment : Fragment(), ImagePickerContract {
             strFileType = "Video"
             initViews()
 
-        })
+        }
 
-        binding.resourceContainer.setOnClickListener(View.OnClickListener {
+        binding.resourceContainer.setOnClickListener {
             findNavController().navigate(
                 R.id.action_groupChatFragment_to_resourceFragment
             )
-        })
+        }
 
-        binding.fileContainer.setOnClickListener(View.OnClickListener {
+        binding.fileContainer.setOnClickListener {
 
             val mimeTypes = arrayOf("application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document", // .doc & .docx
                 "application/pdf", "application/mp4")
@@ -286,9 +283,9 @@ class GroupChatFragment : Fragment(), ImagePickerContract {
             }
             startActivityForResult(Intent.createChooser(intent, "Select File"), 1000)
 
-        })
+        }
 
-        binding.voiceContainer.setOnClickListener(View.OnClickListener {
+        binding.voiceContainer.setOnClickListener {
             println("Requesting permission")
             if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -308,17 +305,16 @@ class GroupChatFragment : Fragment(), ImagePickerContract {
                 binding.attachmentContainer.visibility = View.GONE
                 initRecorderUI()
             }
-        })
+        }
 
-        binding.tvRecord.setOnClickListener(View.OnClickListener {
+        binding.tvRecord.setOnClickListener {
             if(binding.tvRecord.text.toString().equals("Record", ignoreCase = true)){
                 startRecording()
             }else{
                 stopRecording()
             }
 
-        })
-
+        }
 
     }
 
@@ -371,7 +367,7 @@ class GroupChatFragment : Fragment(), ImagePickerContract {
 
 
 
-    @TargetApi(android.os.Build.VERSION_CODES.JELLY_BEAN)
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     fun checkReadWritePermission(): Boolean {
         requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE), PERMISSIONS_READ_WRITE)
         return true

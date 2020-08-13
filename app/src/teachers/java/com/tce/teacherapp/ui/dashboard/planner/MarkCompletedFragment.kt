@@ -89,7 +89,6 @@ constructor(
         }
         (activity as DashboardActivity).setCustomToolbar(R.layout.planner_event_top_bar)
         (activity as DashboardActivity).expandAppBar(true)
-        (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
 
         val topBar =
             (activity as DashboardActivity).binding.toolBar.findViewById<RelativeLayout>(R.id.event_top_container)

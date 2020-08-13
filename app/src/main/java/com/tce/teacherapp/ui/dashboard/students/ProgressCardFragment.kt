@@ -2,19 +2,17 @@ package com.tce.teacherapp.ui.dashboard.students
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import com.tce.teacherapp.R
-import com.tce.teacherapp.api.response.*
+import com.tce.teacherapp.api.response.Objective
+import com.tce.teacherapp.api.response.ProgressData
 import com.tce.teacherapp.databinding.FragmentProgressCardBinding
-import com.tce.teacherapp.databinding.FragmentStudentProfileBinding
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.students.adapter.ProgressCardAdapter
-import com.tce.teacherapp.ui.dashboard.students.adapter.StudentPortfolioAdapter
-import java.util.ArrayList
+import java.util.*
 
 
 class ProgressCardFragment : Fragment() {
@@ -37,7 +35,6 @@ class ProgressCardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as DashboardActivity).expandAppBar(false)
-        (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
 
 
         binding.rvProgress.layoutManager = GridLayoutManager(activity, 1)

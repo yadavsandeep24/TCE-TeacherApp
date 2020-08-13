@@ -10,7 +10,7 @@
         android:layout_width="5dp"
         android:layout_height="20dp"
         android:layout_marginLeft="25dp"
-        android:background="#e1e6f0"></FrameLayout>
+        android:background="#e1e6f0"/>
 
     <LinearLayout
         android:id="@+id/date_container"
@@ -25,7 +25,7 @@
             android:id="@+id/dot_indicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_portfolio_blue_dot"></androidx.appcompat.widget.AppCompatImageView>
+            android:background="@drawable/ic_portfolio_blue_dot"/>
 
         <com.tce.teacherapp.util.RubikMediumTextview
             android:id="@+id/tvDate"
@@ -47,7 +47,7 @@
         android:layout_alignBottom="@+id/data_container"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="-10dp"
-        android:background="#e1e6f0"></FrameLayout>
+        android:background="#e1e6f0"/>
 
 
     <LinearLayout
@@ -73,7 +73,7 @@
                 android:background="@drawable/checkbox_filled_selector"
                 android:button="@null"
                 android:checked="false"
-                android:visibility="gone"></CheckBox>
+                android:visibility="gone"/>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_gallary"
@@ -93,7 +93,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"></androidx.recyclerview.widget.RecyclerView>
+                        android:layout_marginRight="10dp"/>
 
                     <LinearLayout
                         android:id="@+id/view_all_container"
@@ -105,7 +105,7 @@
                         <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_view_all"></androidx.appcompat.widget.AppCompatImageView>
+                            android:src="@drawable/ic_view_all"/>
 
                         <com.tce.teacherapp.util.RubikMediumTextview
                             android:layout_width="wrap_content"
@@ -139,7 +139,7 @@
                 android:background="@drawable/checkbox_filled_selector"
                 android:button="@null"
                 android:checked="false"
-                android:visibility="gone"></CheckBox>
+                android:visibility="gone"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_feddback"
@@ -163,7 +163,7 @@
                 android:background="@drawable/checkbox_filled_selector"
                 android:button="@null"
                 android:checked="false"
-                android:visibility="gone"></CheckBox>
+                android:visibility="gone"/>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_teacher_note"

@@ -53,7 +53,6 @@ constructor(viewModelFactory: ViewModelProvider.Factory
 
         (activity as DashboardActivity).setCustomToolbar(R.layout.parent_profile_header)
         (activity as DashboardActivity).expandAppBar(true)
-        (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
 
         val tvBack = (activity as DashboardActivity).binding.toolBar.findViewById<TextView>(R.id.tv_back)
         tvBack.visibility = View.VISIBLE
