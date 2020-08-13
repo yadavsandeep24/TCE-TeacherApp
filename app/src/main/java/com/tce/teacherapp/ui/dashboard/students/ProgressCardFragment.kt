@@ -1,18 +1,28 @@
 package com.tce.teacherapp.ui.dashboard.students
 
+import android.app.Dialog
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.tce.teacherapp.api.response.Objective
 import com.tce.teacherapp.api.response.ProgressData
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.tce.teacherapp.R
+import com.tce.teacherapp.api.response.*
 import com.tce.teacherapp.databinding.FragmentProgressCardBinding
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.students.adapter.ProgressCardAdapter
 import java.util.*
+import com.tce.teacherapp.ui.dashboard.students.adapter.StudentPortfolioAdapter
+import kotlinx.android.synthetic.main.activity_dashboard.*
+import kotlinx.android.synthetic.teachers.fragment_dashboard_home.*
+import java.util.ArrayList
 
 
 class ProgressCardFragment : Fragment() {
@@ -34,7 +44,98 @@ class ProgressCardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as DashboardActivity).expandAppBar(false)
+        (activity as DashboardActivity).expandAppBar(true)
+
+        val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
+
+        bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+        bottomSheetBehavior.skipCollapsed = true
+        bottomSheetBehavior.isDraggable = false
+
+        bottomSheetBehavior.addBottomSheetCallback(object : com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.BottomSheetCallback {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if (newState == BottomSheetBehavior.STATE_DRAGGING) {
+                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+                }
+
+            }
+        })
+
+        binding.imgUpload.setOnClickListener {
+            if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
+                bottomSheetBehavior.state =
+                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
+                binding.maskLayout.setBackgroundColor(resources.getColor(R.color.dim_color_dashboard))
+                (activity as DashboardActivity).bottom_navigation_view.visibility = View.INVISIBLE
+            } else {
+                bottomSheetBehavior.state =
+                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
+                (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
+            }
+        }
+
+        binding.chatContainer.setOnClickListener {
+            val dialog = Dialog(requireActivity(), android.R.style.Theme_Dialog)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setContentView(R.layout.custom_yesno_dialog)
+            dialog.setCanceledOnTouchOutside(false)
+            dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+            dialog.window!!.setBackgroundDrawable(
+                ColorDrawable(resources.getColor(android.R.color.transparent))
+            )
+            dialog.show()
+
+            bottomSheetBehavior.state =
+                com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+
+            val patternContainer = dialog.findViewById(R.id.pattern_container) as LinearLayout
+            patternContainer.visibility = View.GONE
+
+            val txtTitle = dialog.findViewById(R.id.tv_title) as TextView
+            txtTitle.visibility = View.VISIBLE
+            val txtMessage = dialog.findViewById(R.id.tv_message) as TextView
+
+            txtMessage.gravity = Gravity.CENTER
+
+            txtTitle.text = "Share to Chat"
+            txtMessage.text = "Do you want to share Term 1 Progress Card to Amit Boaz chat group?"
+
+            val dataContainer = dialog.findViewById(R.id.data_container) as LinearLayout
+            dataContainer.setPadding(10,0,10,0)
+
+            val txtYes = dialog.findViewById(R.id.tvYes) as TextView
+            val txtNo = dialog.findViewById(R.id.tvNo) as TextView
+
+            txtYes.setOnClickListener(View.OnClickListener {
+                binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
+                dialog.dismiss()
+
+                val dialog = Dialog(requireActivity(), android.R.style.Theme_Dialog)
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                dialog.setContentView(R.layout.custom_success_dialog)
+                dialog.setCanceledOnTouchOutside(false)
+                dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+                dialog.window!!.setBackgroundDrawable(
+                    ColorDrawable(resources.getColor(android.R.color.transparent))
+                )
+                dialog.show()
+
+                val txtTitle = dialog.findViewById(R.id.tv_title) as TextView
+
+                txtTitle.text = "Report card sent!"
+
+                Handler().postDelayed({
+                    dialog.dismiss()
+                }, 1000)
+
+            })
+
+            txtNo.setOnClickListener(View.OnClickListener {
+                binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
+                dialog.dismiss()
+            })
+        }
 
 
         binding.rvProgress.layoutManager = GridLayoutManager(activity, 1)
@@ -43,7 +144,6 @@ class ProgressCardFragment : Fragment() {
         binding.rvProgress.adapter = myAdapter
         myAdapter?.modelList = getProgressData()
         myAdapter?.notifyDataSetChanged()
-
 
     }
 

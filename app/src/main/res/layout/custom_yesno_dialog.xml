@@ -19,6 +19,7 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/pattern_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/ic_alert_pattern"
@@ -33,6 +34,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/data_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#fffad7"
