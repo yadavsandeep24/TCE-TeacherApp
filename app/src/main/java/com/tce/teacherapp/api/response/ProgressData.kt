@@ -1,7 +1,11 @@
 package com.tce.teacherapp.api.response
 
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
+import kotlinx.android.parcel.Parcelize
 
+
+@Parcelize
 data class ProgressData(
 
     @Expose
@@ -24,4 +28,4 @@ data class ProgressData(
 
     @Expose
     val totalpages: Int
-)
+):Parcelable

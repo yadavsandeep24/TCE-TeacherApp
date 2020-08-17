@@ -6,49 +6,46 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.edgedevstudio.example.recyclerviewmultiselect.MainInterface
-import com.edgedevstudio.example.recyclerviewmultiselect.ViewHolderClickListener
+import com.tce.teacherapp.ui.dashboard.students.interfaces.MainInterface
+import com.tce.teacherapp.ui.dashboard.students.interfaces.ViewHolderClickListener
 import com.tce.teacherapp.R
-import com.tce.teacherapp.db.entity.Student
+import com.tce.teacherapp.api.response.FeedbackMasterDataItem
+import com.tce.teacherapp.api.response.StudentListResponseItem
 import com.tce.teacherapp.ui.dashboard.students.FeedbackFragment
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import java.util.*
 
 
+@FlowPreview
+@ExperimentalCoroutinesApi
 class FeedbackAdapter(val context: Context, val mainInterface: MainInterface) : RecyclerView.Adapter<FeedbackAdapter.FeedbackViewHolder>(),
     ViewHolderClickListener {
+
     override fun onLongTap(index: Int) {
-        if (!FeedbackFragment.isMultiSelectOn) {
-            FeedbackFragment.isMultiSelectOn = true
-        }
-        addIDIntoSelectedIds(index)
     }
 
-    override fun onTap(index: Int) {
-        if (FeedbackFragment.isMultiSelectOn) {
+    override fun onTap(index: Int,item : StudentListResponseItem?) {
             addIDIntoSelectedIds(index)
-        } else {
-            Toast.makeText(context, "Clicked Item @ Position ${index + 1}", Toast.LENGTH_SHORT).show()
-        }
     }
 
     fun addIDIntoSelectedIds(index: Int) {
-        val id = modelList[index].id
-        if (selectedIds.contains(id.toString())) {
-            var selectedIndex = selectedIds.indexOf(id.toString())
+        val id = modelList[index].Id
+        if (selectedIds.contains(id)) {
+            val selectedIndex = selectedIds.indexOf(id)
             selectedIds.removeAt(selectedIndex)
         }
         else {
-            selectedIds.add(id.toString())
+            selectedIds.add(id)
         }
         notifyItemChanged(index)
         if (selectedIds.size < 1) FeedbackFragment.isMultiSelectOn = false
         mainInterface.mainInterface(selectedIds.size)
     }
 
-    var modelList: MutableList<Student> = ArrayList<Student>()
-    val selectedIds: MutableList<String> = ArrayList<String>()
+    var modelList: MutableList<FeedbackMasterDataItem> = ArrayList()
+    val selectedIds: MutableList<String> = ArrayList()
 
     override fun getItemCount() = modelList.size
 
@@ -62,10 +59,10 @@ class FeedbackAdapter(val context: Context, val mainInterface: MainInterface) : 
             val selectedItemID = selectedIdIteration.next()
             Log.d(FeedbackFragment.TAG, "The ID is $selectedItemID")
             var indexOfModelList = 0
-            val modelListIteration: MutableListIterator<Student> = modelList.listIterator();
+            val modelListIteration: MutableListIterator<FeedbackMasterDataItem> = modelList.listIterator();
             while (modelListIteration.hasNext()) {
                 val model = modelListIteration.next()
-                if (selectedItemID.equals(model.id)) {
+                if (selectedItemID.equals(model.Id,true)) {
                     modelListIteration.remove()
                     selectedIdIteration.remove()
                     notifyItemRemoved(indexOfModelList)
@@ -79,21 +76,21 @@ class FeedbackAdapter(val context: Context, val mainInterface: MainInterface) : 
 
 
     override fun onBindViewHolder(holder: FeedbackViewHolder, position: Int) {
-        holder?.tvFeedback?.setText(modelList[position].name)
+        holder.tvFeedback.text = modelList[position].Name
 
-        val id = modelList[position].id
+        val id = modelList[position].Id
 
-        if (selectedIds.contains(id.toString())) {
+        if (selectedIds.contains(id)) {
             //if item is selected then,set foreground color of FrameLayout.
-           holder?.tvFeedback?.background = context.resources.getDrawable(R.drawable.feedback_selected)
+           holder.tvFeedback.background = context.resources.getDrawable(R.drawable.feedback_selected)
         } else {
             //else remove selected item color.
-           holder?.tvFeedback?.background = context.resources.getDrawable(R.drawable.feedback_bg)
+           holder.tvFeedback.background = context.resources.getDrawable(R.drawable.feedback_bg)
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedbackViewHolder {
-        val inflater = LayoutInflater.from(parent?.context)
+        val inflater = LayoutInflater.from(parent.context)
         val itemView = inflater.inflate(R.layout.list_item_feedback, parent, false)
         return FeedbackViewHolder(itemView, this)
     }
@@ -101,17 +98,16 @@ class FeedbackAdapter(val context: Context, val mainInterface: MainInterface) : 
     class FeedbackViewHolder(itemView: View, val r_tap: ViewHolderClickListener) : RecyclerView.ViewHolder(itemView),
         View.OnLongClickListener, View.OnClickListener {
 
-        val tvFeedback: TextView
+        val tvFeedback: TextView = itemView.findViewById(R.id.tvFeedback)
 
 
         init {
-            tvFeedback = itemView.findViewById(R.id.tvFeedback)
             tvFeedback.setOnClickListener(this)
             tvFeedback.setOnLongClickListener(this)
         }
 
         override fun onClick(v: View?) {
-            r_tap.onTap(adapterPosition)
+            r_tap.onTap(adapterPosition,null)
         }
 
         override fun onLongClick(v: View?): Boolean {

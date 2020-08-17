@@ -14,7 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.edgedevstudio.example.recyclerviewmultiselect.MainInterface
+import com.tce.teacherapp.ui.dashboard.students.interfaces.MainInterface
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.kizitonwose.calendarview.CalendarView
 import com.kizitonwose.calendarview.model.CalendarDay
@@ -24,7 +24,6 @@ import com.kizitonwose.calendarview.ui.ViewContainer
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.CalendarDayMarkCompletedBinding
 import com.tce.teacherapp.databinding.FragmentStudentListBinding
-import com.tce.teacherapp.db.entity.Student
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.planner.daysOfWeekFromLocale
 import com.tce.teacherapp.ui.dashboard.planner.setTextColorRes
@@ -132,6 +131,13 @@ constructor(
             findNavController().navigate(R.id.action_studentListFragment_to_studentGalleryFragment)
         }
 
+        binding.tvAttendance.setOnClickListener {
+            bottomSheetBehavior.state =
+                com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+            binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
+            (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
+        }
+
         /* binding.maskLayout.setOnClickListener{
              if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED) {
                  bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
@@ -164,7 +170,7 @@ constructor(
             txtTitle.text = "Attendance Updated!"
 
             Handler().postDelayed({
-                myAdapter?.deleteSelectedIds()
+               // myAdapter?.deleteSelectedIds()
                 myAdapter?.notifyDataSetChanged()
                 classContainer.visibility = View.VISIBLE
                 editAttendanceContainer.visibility = View.GONE
@@ -198,7 +204,7 @@ constructor(
                     binding.rvAttendance.setHasFixedSize(true)
                     myAdapter = AttendanceAdapter(requireContext(), this@StudentListFragment)
                     binding.rvAttendance.adapter = myAdapter
-                    myAdapter?.modelList = getDummyData()
+                    myAdapter?.modelList = it.toMutableList()
                     myAdapter?.notifyDataSetChanged()
                 }
                 viewState.studentattendancedata?.let {
@@ -364,28 +370,6 @@ constructor(
             classContainer.visibility = View.VISIBLE
             editAttendanceContainer.visibility = View.GONE
         }
-    }
-
-    private fun getDummyData(): MutableList<Student> {
-        Log.d(TAG, "inside getDummyData")
-        val list = ArrayList<Student>()
-        list.add(Student(1, "Student 1", "", false))
-        list.add(Student(2, "Student 2", "", false))
-        list.add(Student(3, "Student 3", "", false))
-        list.add(Student(4, "Student 4", "", false))
-        list.add(Student(5, "Student 5", "", false))
-        list.add(Student(6, "Student 6", "", false))
-        list.add(Student(7, "Student 7", "", false))
-        list.add(Student(8, "Student 8", "", false))
-        list.add(Student(9, "Student 9", "", false))
-        list.add(Student(10, "Student 10", "", false))
-        list.add(Student(11, "Student 11", "", false))
-        list.add(Student(12, "Student 12","", false))
-        list.add(Student(13, "Student 13", "", false))
-
-
-        Log.d(TAG, "The size is ${list.size}")
-        return list
     }
 
 

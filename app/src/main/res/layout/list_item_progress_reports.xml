@@ -8,6 +8,7 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="16dp"
         android:layout_height="16dp"
+        android:scaleType="fitXY"
         android:src="@drawable/ic_yellow_star">
 
     </androidx.appcompat.widget.AppCompatImageView>

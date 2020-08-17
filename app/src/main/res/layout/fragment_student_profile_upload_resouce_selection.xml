@@ -1,25 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-<FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.dashboard.students.StudentProfileUploadResourceSelectionFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.tce.teacherapp.util.gallerypicker.utils.scroll.FastScrollRecyclerView
-        android:id="@+id/imageGrid"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginTop="10dp"
-        android:overScrollMode="never"
-        app:fastScrollPopupBackgroundSize="@dimen/_30sdp"
-        app:fastScrollPopupBgColor="#2962ff"
-        app:fastScrollPopupTextColor="#ffffff"
-        app:fastScrollPopupTextSize="20dp"
-        app:fastScrollThumbColor="#2962ff" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.dashboard.students.StudentProfileUploadResourceSelectionFragment">
+
+            <com.tce.teacherapp.util.gallerypicker.utils.scroll.FastScrollRecyclerView
+                android:id="@+id/imageGrid"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="5dp"
+                android:overScrollMode="never"
+                app:fastScrollPopupBackgroundSize="@dimen/_30sdp"
+                app:fastScrollPopupBgColor="#2962ff"
+                app:fastScrollPopupTextColor="#ffffff"
+                app:fastScrollPopupTextSize="20dp"
+                app:fastScrollThumbColor="#2962ff" />
+            <FrameLayout
+                android:id="@+id/mask_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/transparent" />
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/bottom_sheet_filter_by"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="100dp"
+            android:background="@drawable/filters_sheet_background"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:behavior_fitToContents="true"
+            app:behavior_hideable="true"
+            app:behavior_peekHeight="0dp"
+            app:layout_behavior="com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior">
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:background="#e1e6f0" />
+
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:text="Filter Gallery by:"
+                android:textSize="9dp" />
+
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:id="@+id/tv_photos"
+                android:layout_width="wrap_content"
+                android:layout_height="?android:attr/actionBarSize"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="Photos"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/font_size_16_dp">
+
+            </com.tce.teacherapp.util.RubikMediumTextview>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#e1e6f0" />
+
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:id="@+id/tv_videos"
+                android:layout_width="wrap_content"
+                android:layout_height="?android:attr/actionBarSize"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="Videos"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/font_size_16_dp">
+
+            </com.tce.teacherapp.util.RubikMediumTextview>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#e1e6f0" />
+
+
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:id="@+id/tv_show_all"
+                android:layout_width="wrap_content"
+                android:layout_height="?android:attr/actionBarSize"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="Show All"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/font_size_16_dp">
+
+            </com.tce.teacherapp.util.RubikMediumTextview>
+
+
+        </LinearLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

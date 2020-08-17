@@ -40,4 +40,6 @@
 
     <color name="pale_grey_three">#fafaff</color>
     <color name="pale_grey_two">#f5f8ff</color>
+    <color name="light_grey_blue">#a0a5b9</color>
+    <color name="soft_blue">#5591ff</color>
 </resources>

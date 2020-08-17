@@ -1,7 +1,10 @@
 package com.tce.teacherapp.api.response
 
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class StudentGalleryData(
 
     @Expose
@@ -27,4 +30,4 @@ data class StudentGalleryData(
 
     @Expose
     val type: String
-)
+):Parcelable

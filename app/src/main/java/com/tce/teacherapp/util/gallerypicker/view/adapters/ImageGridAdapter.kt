@@ -89,8 +89,8 @@ class ImageGridAdapter() : RecyclerView.Adapter<ImageGridAdapter.MyViewHolder>()
             holder.durationLabel.text = DateUtil().millisToTime(mimageList[holder.adapterPosition].duration.toLong())
         } else holder.durationFrame.visibility = View.GONE
 
-        if (mimageList[holder.adapterPosition].isSelected) holder.checkbox.setImageResource(R.drawable.tick)
-        else holder.checkbox.setImageResource(R.drawable.round)
+        if (mimageList[holder.adapterPosition].isSelected) holder.checkbox.setImageResource(R.drawable.ic_filled_checkbox)
+        else holder.checkbox.setImageResource(R.drawable.transparent)
 
         holder.image.setOnClickListener {
             if (THRESHOLD != 0) {
@@ -98,7 +98,7 @@ class ImageGridAdapter() : RecyclerView.Adapter<ImageGridAdapter.MyViewHolder>()
                     getSelectedCount() <= THRESHOLD -> {
                         if (mimageList[holder.adapterPosition].isSelected) {
                             mimageList[holder.adapterPosition].isSelected = false
-                            holder.checkbox.setImageResource(R.drawable.round)
+                            holder.checkbox.setImageResource(R.drawable.transparent)
                             if (getSelectedCount() == (THRESHOLD - 1) && !mimageList[holder.adapterPosition].isSelected) {
                                 mimageList.forEach { it.isEnabled = true }
                                 for ((index, item) in mimageList.withIndex()) {
@@ -107,7 +107,7 @@ class ImageGridAdapter() : RecyclerView.Adapter<ImageGridAdapter.MyViewHolder>()
                             }
                         } else {
                             mimageList[holder.adapterPosition].isSelected = true
-                            holder.checkbox.setImageResource(R.drawable.tick)
+                            holder.checkbox.setImageResource(R.drawable.ic_filled_checkbox)
                             if (getSelectedCount() == THRESHOLD && mimageList[holder.adapterPosition].isSelected) {
                                 mimageList.filterNot { it.isSelected }.forEach { it.isEnabled = false }
                                 for ((index, item) in mimageList.withIndex()) {
@@ -127,11 +127,11 @@ class ImageGridAdapter() : RecyclerView.Adapter<ImageGridAdapter.MyViewHolder>()
             } else {
                 if (mimageList[holder.adapterPosition].isSelected) {
                     mimageList[holder.adapterPosition].isSelected = false
-                    holder.checkbox.setImageResource(R.drawable.round)
+                    holder.checkbox.setImageResource(R.drawable.transparent)
                     notifyItemChanged(holder.adapterPosition)
                 } else {
                     mimageList[holder.adapterPosition].isSelected = true
-                    holder.checkbox.setImageResource(R.drawable.tick)
+                    holder.checkbox.setImageResource(R.drawable.ic_filled_checkbox)
                     notifyItemChanged(holder.adapterPosition)
                 }
             }

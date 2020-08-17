@@ -49,7 +49,7 @@ class StudentGalleryAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentPortfolioViewHolder {
-        val inflater = LayoutInflater.from(parent?.context)
+        val inflater = LayoutInflater.from(parent.context)
         val itemView = inflater.inflate(R.layout.list_item_gallery, parent, false)
         return StudentPortfolioViewHolder(itemView)
     }

@@ -26,10 +26,7 @@ abstract class MessageDetailEpoxyHolder:EpoxyModelWithHolder<Holder>() {
     lateinit var strMessageType : String
 
     override fun bind(holder: Holder) {
-
-
-
-        if(strMessageType.equals("1")){
+        if(strMessageType.equals("1")) {
             holder.rlLeftMessageContainer.visibility = View.VISIBLE
             holder.rlRightMessageContainer.visibility = View.GONE
             holder.tvDetail.text = strDetail
@@ -39,7 +36,7 @@ abstract class MessageDetailEpoxyHolder:EpoxyModelWithHolder<Holder>() {
             holder.tvRightMessage.text = strDetail
         }
 
-        if(TextUtils.isEmpty(strVideoUrl)){
+        if(TextUtils.isEmpty(strVideoUrl)) {
             holder.cardVideo.visibility = View.GONE
         }else{
             holder.cardVideo.visibility = View.VISIBLE
@@ -53,8 +50,7 @@ abstract class MessageDetailEpoxyHolder:EpoxyModelWithHolder<Holder>() {
     }
 }
 
-class Holder : KotlinEpoxyHolder(){
-
+class Holder : KotlinEpoxyHolder() {
     val tvDetail by bind<TextView>(R.id.tvDetail)
     val tvRightMessage by bind<TextView>(R.id.tvRightDetail)
     val rlLeftMessageContainer by bind<RelativeLayout> (R.id.left_message_container)

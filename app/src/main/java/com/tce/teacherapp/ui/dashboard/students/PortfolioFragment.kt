@@ -7,16 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.edgedevstudio.example.recyclerviewmultiselect.ViewHolderClickListener
+import com.tce.teacherapp.ui.dashboard.students.interfaces.ViewHolderClickListener
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tce.teacherapp.R
+import com.tce.teacherapp.api.response.StudentListResponseItem
 import com.tce.teacherapp.databinding.FragmentPortfolioBinding
-import com.tce.teacherapp.db.entity.Student
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
-import com.tce.teacherapp.ui.dashboard.home.state.DashboardStateEvent
 import com.tce.teacherapp.ui.dashboard.students.adapter.PortfolioAdapter
 import com.tce.teacherapp.ui.dashboard.students.state.STUDENT_VIEW_STATE_BUNDLE_KEY
 import com.tce.teacherapp.ui.dashboard.students.state.StudentStateEvent
@@ -25,12 +25,12 @@ import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.teachers.fragment_dashboard_home.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import java.util.*
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 @FlowPreview
-class PortfolioFragment @Inject
+class PortfolioFragment
+@Inject
 constructor(
     viewModelFactory: ViewModelProvider.Factory
 ) : BaseStudentFragment(R.layout.fragment_portfolio, viewModelFactory), ViewHolderClickListener {
@@ -87,7 +87,6 @@ constructor(
         tvClassTitle.text = "Portfolio"
 
         classContainer.setOnClickListener {
-            viewModel.setStateEvent(DashboardStateEvent.GetUserClassList)
             if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
                 bottomSheetBehavior.state =
                     com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
@@ -106,77 +105,93 @@ constructor(
            findNavController().navigate(R.id.action_portfolioFragment_to_studentListFragment)
         }
 
+        binding.tvPortfolio.setOnClickListener {
+            bottomSheetBehavior.state =
+                com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+            binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
+            (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
+        }
 
         binding.tvGallary.setOnClickListener {
             (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
             findNavController().navigate(R.id.action_portfolioFragment_to_studentGalleryFragment)
         }
 
-        binding.rvPortfolio.layoutManager = GridLayoutManager(activity, 3)
-        binding.rvPortfolio.setHasFixedSize(true)
-        myAdapter = PortfolioAdapter(requireContext(), this)
-        binding.rvPortfolio.adapter = myAdapter
-        myAdapter?.modelList = getDummyData()
-        myAdapter?.notifyDataSetChanged()
 
-        binding.tvFeedback.setOnClickListener(View.OnClickListener {
+
+        binding.tvFeedback.setOnClickListener {
             myAdapter!!.setIsShowCheckBox(true)
             binding.nextContainer.visibility = View.VISIBLE
             binding.tvFeedback.visibility = View.GONE
-        })
-        binding.selectAllContainer.setOnClickListener(View.OnClickListener {
-            if(binding.chkSelectall.isChecked == true){
+        }
+        binding.selectAllContainer.setOnClickListener {
+            if(binding.chkSelectall.isChecked){
                 binding.chkSelectall.isChecked = false
                 myAdapter!!.setIsSelectAll(false)
             }else{
                 binding.chkSelectall.isChecked = true
                 myAdapter!!.setIsSelectAll(true)
             }
-        })
+        }
 
         binding.tvNext.setOnClickListener {
             findNavController().navigate(R.id.action_portfolioFragment_to_feedbackFragment)
         }
 
-        /* binding.maskLayout.setOnClickListener{
-             if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED) {
-                 bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
-                 binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
-                 (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
-             }
-         }*/
-
+        viewModel.setStateEvent(StudentStateEvent.GetStudentEvent)
+        subscribeObservers()
 
     }
 
-    private fun getDummyData(): MutableList<Student> {
-        Log.d(TAG, "inside getDummyData")
-        val list = ArrayList<Student>()
-        list.add(Student(1, "Student 1", "", false))
-        list.add(Student(2, "Student 2", "", false))
-        list.add(Student(3, "Student 3", "", false))
-        list.add(Student(4, "Student 4", "", false))
-        list.add(Student(5, "Student 5", "", false))
-        list.add(Student(6, "Student 6", "", false))
-        list.add(Student(7, "Student 7", "", false))
-        list.add(Student(8, "Student 8", "", false))
-        list.add(Student(9, "Student 9", "", false))
-        list.add(Student(10, "Student 10", "", false))
-        list.add(Student(11, "Student 11", "", false))
-        list.add(Student(12, "Student 12", "", false))
-        list.add(Student(13, "Student 13", "", false))
+
+    fun subscribeObservers() {
+        viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
+            if (viewState != null) {
+                viewState.studentListResponse?.let {
+                    Log.d("SAN","it.studentList.size-->"+it.size)
+                    StudentListFragment.isMultiSelectOn = false
+                    binding.rvPortfolio.layoutManager = GridLayoutManager(activity, 3)
+                    binding.rvPortfolio.setHasFixedSize(true)
+                    myAdapter = PortfolioAdapter(requireContext(), this)
+                    binding.rvPortfolio.adapter = myAdapter
+                    myAdapter?.modelList =it.toMutableList()
+                    myAdapter?.notifyDataSetChanged()
+                }
+            }
+        })
+
+        viewModel.numActiveJobs.observe(viewLifecycleOwner, Observer {
+            uiCommunicationListener.displayProgressBar(viewModel.areAnyJobsActive())
+        })
 
 
-        Log.d(TAG, "The size is ${list.size}")
-        return list
+        viewModel.stateMessage.observe(viewLifecycleOwner, Observer { stateMessage ->
+            Log.d("SAN", "SubjectListFragment-->viewModel.stateMessage")
+
+            stateMessage?.let {
+
+                /*uiCommunicationListener.onResponseReceived(
+                    response = it.response,
+                    stateMessageCallback = object : StateMessageCallback {
+                        override fun removeMessageFromStack() {
+                            viewModel.clearStateMessage()
+                        }
+                    }
+                )*/
+            }
+        })
+
     }
+
 
     override fun onLongTap(index: Int) {
 
     }
 
-    override fun onTap(index: Int) {
-        findNavController().navigate(R.id.action_portfolioFragment_to_studentProfileFragment)
+    override fun onTap(index: Int,item : StudentListResponseItem?) {
+        val bundle = Bundle()
+        bundle.putParcelable("studentdata", item)
+        findNavController().navigate(R.id.action_portfolioFragment_to_studentProfileFragment,bundle)
     }
 
 

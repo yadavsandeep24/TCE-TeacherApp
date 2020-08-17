@@ -82,4 +82,10 @@ class PhotosInteractorImpl(var presenter: PhotosPresenterImpl) : PhotosInteracto
         }
     }
 
+    override fun getPhonePhotos() {
+    }
+
+    override fun getPhoneVideos() {
+    }
+
 }

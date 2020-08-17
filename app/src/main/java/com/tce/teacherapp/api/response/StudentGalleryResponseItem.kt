@@ -7,7 +7,7 @@ data class StudentGalleryResponseItem(
 
     @Expose
     @SerializedName("DataList")
-    val studentGalleryDataList: List<StudentGalleryData>,
+    var studentGalleryDataList: List<StudentGalleryData>,
 
     @Expose
     val Date: String

@@ -25,7 +25,7 @@ class StudentPortfolioGallaryAdapter(val context: Context, val isShowCheckBox: B
     override fun onBindViewHolder(holder: GalllaryAdapter, position: Int) {
 
         Glide.with(context)
-            .load(modelList[position].src)
+            .load(modelList[position].image)
             .placeholder(R.drawable.dummy_video)
             .into(holder.imgGallary)
 
@@ -50,15 +50,9 @@ class StudentPortfolioGallaryAdapter(val context: Context, val isShowCheckBox: B
 
     class GalllaryAdapter(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val imgGallary: AppCompatImageView
-        val imgPlay: AppCompatImageView
-        val chkGallary: CheckBox
-        init {
-            imgGallary = itemView.findViewById(R.id.img_gallary)
-            imgPlay = itemView.findViewById(R.id.img_play)
-            chkGallary = itemView.findViewById(R.id.chk_gallary)
-
-        }
+        val imgGallary: AppCompatImageView = itemView.findViewById(R.id.img_gallary)
+        val imgPlay: AppCompatImageView = itemView.findViewById(R.id.img_play)
+        val chkGallary: CheckBox = itemView.findViewById(R.id.chk_gallary)
 
 
     }

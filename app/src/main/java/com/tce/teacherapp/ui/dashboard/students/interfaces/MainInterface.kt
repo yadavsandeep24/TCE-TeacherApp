@@ -1,8 +1,5 @@
-package com.edgedevstudio.example.recyclerviewmultiselect
+package com.tce.teacherapp.ui.dashboard.students.interfaces
 
-/**
- * Created by OPEYEMI OLORUNLEKE on 3/2/2018.
- */
 interface MainInterface {
     fun mainInterface (size : Int)
 }

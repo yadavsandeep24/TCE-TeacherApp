@@ -1,6 +1,8 @@
 package com.tce.teacherapp.util.gallerypicker.model.interactor
 
+import android.os.Build
 import android.provider.MediaStore
+import androidx.annotation.RequiresApi
 import com.tce.teacherapp.util.gallerypicker.model.GalleryAlbums
 import com.tce.teacherapp.util.gallerypicker.model.GalleryData
 import com.tce.teacherapp.util.gallerypicker.presenter.VideosPresenterImpl
@@ -9,6 +11,7 @@ import java.io.File
 
 class VideosInteractorImpl(var presenter: VideosPresenterImpl) : VideosInteractor {
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun getPhoneAlbums() {
         val galleryAlbums: ArrayList<GalleryAlbums> = ArrayList()
         val albumsNames: ArrayList<String> = ArrayList()

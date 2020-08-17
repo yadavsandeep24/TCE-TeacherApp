@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/very_light_blue"
+    tools:context=".ui.dashboard.students.StudentProfileShareChatFragment">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_share_chat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="?android:attr/actionBarSize"/>
+
+    <RelativeLayout
+        android:id="@+id/send_message"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_alignParentBottom="true"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
+        android:background="@color/white"
+        android:gravity="center_vertical">
+
+        <EditText
+            android:id="@+id/edtTypeMessage"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/imgSendMessage"
+            android:background="@drawable/bg_grey_rounded"
+            android:hint="Type a message"
+            android:paddingLeft="10dp"
+            android:textSize="@dimen/font_size_14_dp">
+
+
+        </EditText>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgSendMessage"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_send_button" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
+</layout>

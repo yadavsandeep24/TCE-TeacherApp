@@ -1,9 +1,8 @@
-package com.edgedevstudio.example.recyclerviewmultiselect
+package com.tce.teacherapp.ui.dashboard.students.interfaces
 
-/**
- * Created by OPEYEMI OLORUNLEKE on 3/2/2018.
- */
+import com.tce.teacherapp.api.response.StudentListResponseItem
+
 interface ViewHolderClickListener {
     fun onLongTap(index : Int)
-    fun onTap(index : Int)
+    fun onTap(index : Int,item: StudentListResponseItem?)
 }

@@ -8,18 +8,19 @@ import android.util.Log
 import android.view.*
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import com.edgedevstudio.example.recyclerviewmultiselect.MainInterface
+import com.tce.teacherapp.ui.dashboard.students.interfaces.MainInterface
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentFeedbackBinding
-import com.tce.teacherapp.db.entity.Student
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.students.adapter.FeedbackAdapter
 import com.tce.teacherapp.ui.dashboard.students.state.STUDENT_VIEW_STATE_BUNDLE_KEY
+import com.tce.teacherapp.ui.dashboard.students.state.StudentStateEvent
 import com.tce.teacherapp.ui.dashboard.students.state.StudentViewState
+import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import java.util.*
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
@@ -60,13 +61,11 @@ constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as DashboardActivity).expandAppBar(false)
-
+        (activity as DashboardActivity).bottom_navigation_view.visibility = View.GONE
         binding.rvFeedback.layoutManager = GridLayoutManager(activity, 2)
         binding.rvFeedback.setHasFixedSize(true)
         myAdapter = FeedbackAdapter(requireContext(), this)
         binding.rvFeedback.adapter = myAdapter
-        myAdapter?.modelList = getDummyData()
-        myAdapter?.notifyDataSetChanged()
 
         binding.tvSave.setOnClickListener {
             val dialog = Dialog(requireActivity(), android.R.style.Theme_Dialog)
@@ -89,30 +88,49 @@ constructor(
             }, 1000)
 
         }
+        binding.tvBack.setOnClickListener {
+            (activity as DashboardActivity).onBackPressed()
+        }
+          viewModel.setStateEvent(StudentStateEvent.GetFeedbackMaster)
+
+        subscribeObservers()
 
 
     }
+    fun subscribeObservers() {
+        viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
+            if (viewState != null) {
+                viewState.feedbackMaster?.let {
+                    Log.d("SAN","it.feedbackList.size-->"+it.size)
+                    myAdapter?.modelList = it.toMutableList()
+                    myAdapter?.notifyDataSetChanged()
 
-    private fun getDummyData(): MutableList<Student> {
-        Log.d(TAG, "inside getDummyData")
-        val list = ArrayList<Student>()
-        list.add(Student(1, "Student 1", "", false))
-        list.add(Student(2, "Student 2", "", false))
-        list.add(Student(3, "Student 3", "", false))
-        list.add(Student(4, "Student 4", "", false))
-        list.add(Student(5, "Student 5", "", false))
-        list.add(Student(6, "Student 6", "", false))
-        list.add(Student(7, "Student 7", "", false))
-        list.add(Student(8, "Student 8", "", false))
-        list.add(Student(9, "Student 9", "", false))
-        list.add(Student(10, "Student 10", "", false))
-        list.add(Student(11, "Student 11", "", false))
-        list.add(Student(12, "Student 12", "", false))
-        list.add(Student(13, "Student 13", "", false))
+                }
+
+            }
+        })
+
+        viewModel.numActiveJobs.observe(viewLifecycleOwner, Observer {
+            uiCommunicationListener.displayProgressBar(viewModel.areAnyJobsActive())
+        })
 
 
-        Log.d(TAG, "The size is ${list.size}")
-        return list
+        viewModel.stateMessage.observe(viewLifecycleOwner, Observer { stateMessage ->
+            Log.d("SAN", "SubjectListFragment-->viewModel.stateMessage")
+
+            stateMessage?.let {
+
+                /*uiCommunicationListener.onResponseReceived(
+                    response = it.response,
+                    stateMessageCallback = object : StateMessageCallback {
+                        override fun removeMessageFromStack() {
+                            viewModel.clearStateMessage()
+                        }
+                    }
+                )*/
+            }
+        })
+
     }
 
     override fun mainInterface(size: Int) {

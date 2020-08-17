@@ -10,7 +10,7 @@ data class StudentPortFolioResponseItem(
     val DaysPresent: String,
 
     @Expose
-    val Note: String,
+    val Note: String?,
 
     @Expose
     val Portfolio: List<Portfolio>,

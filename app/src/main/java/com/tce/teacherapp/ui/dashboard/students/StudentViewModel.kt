@@ -59,7 +59,7 @@ class StudentViewModel @Inject constructor(val mainRepository: MainRepository) :
                 mainRepository.getFeedBackMasterData(stateEvent = stateEvent)
             }
             is StudentStateEvent.GetGalleryData ->{
-                mainRepository.getGalleryData(stateEvent =  stateEvent)
+                mainRepository.getGalleryData(stateEvent.type,stateEvent =  stateEvent)
             }
             is StudentStateEvent.GetStudentPortfolio ->{
                 mainRepository.getStudentPortfolio(stateEvent =  stateEvent)

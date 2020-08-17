@@ -34,7 +34,8 @@ import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 @FlowPreview
-class NewMessageFragment @Inject
+class NewMessageFragment
+@Inject
 constructor(
     viewModelFactory: ViewModelProvider.Factory
 ) : BaseMessageFragment(R.layout.fragment_new_message, viewModelFactory) {

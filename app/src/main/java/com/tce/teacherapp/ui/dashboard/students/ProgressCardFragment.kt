@@ -8,24 +8,30 @@ import android.util.Log
 import android.view.*
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.tce.teacherapp.api.response.Objective
 import com.tce.teacherapp.api.response.ProgressData
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tce.teacherapp.R
-import com.tce.teacherapp.api.response.*
 import com.tce.teacherapp.databinding.FragmentProgressCardBinding
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.students.adapter.ProgressCardAdapter
-import java.util.*
-import com.tce.teacherapp.ui.dashboard.students.adapter.StudentPortfolioAdapter
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.teachers.fragment_dashboard_home.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import java.util.ArrayList
+import javax.inject.Inject
 
 
-class ProgressCardFragment : Fragment() {
+@FlowPreview
+@ExperimentalCoroutinesApi
+class ProgressCardFragment
+@Inject
+constructor(
+    viewModelFactory: ViewModelProvider.Factory
+) : BaseStudentFragment(R.layout.fragment_progress_card, viewModelFactory){
 
     private lateinit var binding: FragmentProgressCardBinding
 
@@ -33,6 +39,7 @@ class ProgressCardFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,7 +51,7 @@ class ProgressCardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as DashboardActivity).expandAppBar(true)
+        (activity as DashboardActivity).expandAppBar(false)
 
         val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
 
@@ -140,10 +147,14 @@ class ProgressCardFragment : Fragment() {
 
         binding.rvProgress.layoutManager = GridLayoutManager(activity, 1)
         binding.rvProgress.setHasFixedSize(true)
-        var myAdapter = ProgressCardAdapter(requireContext())
+        val myAdapter = ProgressCardAdapter(requireContext())
         binding.rvProgress.adapter = myAdapter
         myAdapter?.modelList = getProgressData()
         myAdapter?.notifyDataSetChanged()
+
+        binding.tvBack.setOnClickListener {
+            (activity as DashboardActivity).onBackPressed()
+        }
 
     }
 

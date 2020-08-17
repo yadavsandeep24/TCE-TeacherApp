@@ -21,7 +21,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gabriel.soundrecorder.recorder.RecorderViewModel
 import com.example.gabriel.soundrecorder.util.InjectorUtils
 import com.tce.teacherapp.R
@@ -37,7 +36,6 @@ import com.tce.teacherapp.util.gallerypicker.utils.MLog
 import com.tce.teacherapp.util.gallerypicker.utils.RunOnUiThread
 import com.tce.teacherapp.util.gallerypicker.view.ImagePickerContract
 import com.tce.teacherapp.util.gallerypicker.view.OnPhoneImagesObtained
-import com.tce.teacherapp.util.gallerypicker.view.adapters.AlbumAdapter
 import com.tce.teacherapp.util.gallerypicker.view.adapters.ImageGridAdapter
 import com.tce.teacherapp.util.gallerypicker.view.adapters.VideoGridAdapter
 import kotlinx.android.synthetic.main.fragment_group_chat.*
@@ -92,7 +90,7 @@ class GroupChatFragment : Fragment(), ImagePickerContract {
         binding.imageGrid.itemAnimator = null
         val bundle = this.arguments
         if (bundle != null) photoids = if (bundle.containsKey("photoids")) bundle.getIntegerArrayList("photoids")!! else java.util.ArrayList()
-        galleryOperation()
+        galleryOperation(0)
     }
 
     override fun initRecyclerViews() {
@@ -103,7 +101,7 @@ class GroupChatFragment : Fragment(), ImagePickerContract {
         }
     }
 
-    override fun galleryOperation() {
+    override fun galleryOperation(type: Int) {
         doAsync {
             albumList = java.util.ArrayList()
             listener = object : OnPhoneImagesObtained {
@@ -133,7 +131,7 @@ class GroupChatFragment : Fragment(), ImagePickerContract {
             }
 
             doAsync {
-                getPhoneAlbums(ctx, listener)
+                getPhoneAlbums(ctx, listener, type)
             }
             }
     }
@@ -142,7 +140,11 @@ class GroupChatFragment : Fragment(), ImagePickerContract {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getPhoneAlbums(context: Context, listener: OnPhoneImagesObtained) {
+    override fun getPhoneAlbums(
+        context: Context,
+        listener: OnPhoneImagesObtained,
+        type: Int
+    ) {
         if(strFileType.equals("Photo")) {
             imagePickerPresenter.getPhoneAlbums()
         }else{

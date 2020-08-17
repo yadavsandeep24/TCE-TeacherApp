@@ -16,6 +16,7 @@ import com.tce.teacherapp.databinding.ActivityDashboardBinding
 import com.tce.teacherapp.ui.BaseActivity
 import com.tce.teacherapp.util.BottomNavController
 import com.tce.teacherapp.util.setUpNavigation
+import kotlinx.android.synthetic.main.activity_dashboard.*
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -128,7 +129,10 @@ class DashboardActivity : BaseActivity(), BottomNavController.OnNavigationResele
 
     }
 
-    override fun onBackPressed() = bottomNavController.onBackPressed()
+    override fun onBackPressed(){
+       binding.bottomNavigationView.visibility = View.VISIBLE
+        bottomNavController.onBackPressed()
+    }
     override fun onGraphChange() {
 
     }

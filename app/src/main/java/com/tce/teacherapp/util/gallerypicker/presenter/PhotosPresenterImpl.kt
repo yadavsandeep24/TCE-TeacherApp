@@ -8,4 +8,10 @@ class PhotosPresenterImpl(var photosFragment: GroupChatFragment): PhotosPresente
     override fun getPhoneAlbums() {
         interactor.getPhoneAlbums()
     }
+
+    override fun getPhonePhotos() {
+    }
+
+    override fun getPhoneVideos() {
+    }
 }

@@ -22,7 +22,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
-                android:background="#d7d7d7"
+                android:background="@drawable/bg_gallery_image"
+                android:padding="2dp"
+                android:layout_margin="2dp"
                 android:foreground="@drawable/textview_transparent_ripple"
                 android:longClickable="true" />
 
@@ -30,10 +32,11 @@
                 android:id="@+id/checkbox"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
-                android:layout_alignParentStart="true"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
-                android:layout_margin="3dp"
-                android:src="@drawable/round" />
+                android:src="@drawable/transparent" />
 
             <FrameLayout
                 android:id="@+id/durationFrame"

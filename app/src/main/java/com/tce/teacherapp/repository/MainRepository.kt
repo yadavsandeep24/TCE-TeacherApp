@@ -170,7 +170,7 @@ interface MainRepository {
     fun getStudentData(stateEvent: StateEvent): Flow<DataState<StudentViewState>>
     fun getStudentAttendanceData(stateEvent: StateEvent): Flow<DataState<StudentViewState>>
     fun getFeedBackMasterData(stateEvent: StateEvent): Flow<DataState<StudentViewState>>
-    fun getGalleryData(stateEvent: StateEvent): Flow<DataState<StudentViewState>>
+    fun getGalleryData(type :Int,stateEvent: StateEvent): Flow<DataState<StudentViewState>>
     fun getStudentPortfolio(stateEvent: StateEvent): Flow<DataState<StudentViewState>>
 
 

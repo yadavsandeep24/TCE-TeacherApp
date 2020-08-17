@@ -10,23 +10,25 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.view.*
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentStudentProfileUploadResouceSelectionBinding
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.util.gallerypicker.model.GalleryAlbums
 import com.tce.teacherapp.util.gallerypicker.model.GalleryData
-import com.tce.teacherapp.util.gallerypicker.presenter.PhotosPresenterImpl
 import com.tce.teacherapp.util.gallerypicker.presenter.StudentProfilePhotosPresenterImpl
-import com.tce.teacherapp.util.gallerypicker.presenter.VideosPresenterImpl
 import com.tce.teacherapp.util.gallerypicker.utils.MLog
 import com.tce.teacherapp.util.gallerypicker.utils.RunOnUiThread
 import com.tce.teacherapp.util.gallerypicker.view.ImagePickerContract
 import com.tce.teacherapp.util.gallerypicker.view.OnPhoneImagesObtained
 import com.tce.teacherapp.util.gallerypicker.view.adapters.ImageGridAdapter
-import com.tce.teacherapp.util.gallerypicker.view.adapters.VideoGridAdapter
+import kotlinx.android.synthetic.main.activity_dashboard.*
+import kotlinx.android.synthetic.main.fragment_student_gallery.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import org.jetbrains.anko.doAsync
@@ -67,7 +69,7 @@ constructor(
         super.onViewCreated(view, savedInstanceState)
         (activity as DashboardActivity).expandAppBar(true)
         (activity as DashboardActivity).setCustomToolbar(R.layout.student_profile_upload_header)
-        initViews()
+        initViews(0)
         val tvDone = ((activity as DashboardActivity).binding.toolBar.findViewById(R.id.tvDone) as TextView)
         tvDone.setOnClickListener {
             val dialog = Dialog(requireActivity(), android.R.style.Theme_Dialog)
@@ -88,32 +90,87 @@ constructor(
             dialog.dismiss()
         }, 1000)
         }
+        val tvBack = (activity as DashboardActivity).binding.toolBar.findViewById<AppCompatImageView>(R.id.imgBack)
+        tvBack.setOnClickListener {
+            activity?.onBackPressed()
+        }
+        val bottomSheetBehaviorFilterContainer = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet_filter_by)
 
+        bottomSheetBehaviorFilterContainer.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+        bottomSheetBehaviorFilterContainer.skipCollapsed = true
+        bottomSheetBehaviorFilterContainer.isDraggable = false
+
+        bottomSheetBehaviorFilterContainer.addBottomSheetCallback(object : com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.BottomSheetCallback {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if (newState == BottomSheetBehavior.STATE_DRAGGING) {
+                    bottomSheetBehaviorFilterContainer.state = BottomSheetBehavior.STATE_EXPANDED
+                }
+
+            }
+        })
+        val filterContainer = (activity as DashboardActivity).binding.toolBar.findViewById<LinearLayout>(R.id.ll_filter)
+        filterContainer.setOnClickListener {
+            if (bottomSheetBehaviorFilterContainer.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
+                bottomSheetBehaviorFilterContainer.state =
+                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
+                binding.maskLayout.setBackgroundColor(resources.getColor(R.color.dim_color_dashboard))
+                (activity as DashboardActivity).bottom_navigation_view.visibility = View.INVISIBLE
+            } else {
+                bottomSheetBehaviorFilterContainer.state =
+                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
+                (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
+            }
+        }
+
+        binding.tvPhotos.setOnClickListener {
+            bottomSheetBehaviorFilterContainer.state =
+                com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+            binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
+            (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
+            initViews(1)
+        }
+
+        binding.tvVideos.setOnClickListener {
+            bottomSheetBehaviorFilterContainer.state =
+                com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+            binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
+            (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
+            initViews(2)
+        }
+
+        binding.tvShowAll.setOnClickListener {
+            bottomSheetBehaviorFilterContainer.state =
+                com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+            binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
+            (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
+            initViews(0)
+        }
 
     }
-    fun initViews() {
+    fun initViews(type: Int) {
         photoList.clear()
         albumList.clear()
         photoids.clear()
-        if (isReadWritePermitted()) initGalleryViews() else checkReadWritePermission()
+        if (isReadWritePermitted()) initGalleryViews(type) else checkReadWritePermission()
     }
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     fun checkReadWritePermission(): Boolean {
         requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE), PERMISSIONS_READ_WRITE)
         return true
     }
-    fun initGalleryViews() {
+    fun initGalleryViews(type: Int) {
         glm = GridLayoutManager(requireContext(), 4)
         binding.imageGrid.itemAnimator = null
         val bundle = this.arguments
         if (bundle != null) photoids = if (bundle.containsKey("photoids")) bundle.getIntegerArrayList("photoids")!! else java.util.ArrayList()
-        galleryOperation()
+        galleryOperation(type)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         when (requestCode) {
             PERMISSIONS_READ_WRITE -> if (grantResults.isNotEmpty() && grantResults[0] ==
-                PackageManager.PERMISSION_GRANTED) initGalleryViews()
+                PackageManager.PERMISSION_GRANTED) initGalleryViews(0)
         }
     }
 
@@ -121,7 +178,7 @@ constructor(
             binding.imageGrid.adapter = ImageGridAdapter(imageList = photoList, threshold = 0)
     }
 
-    override fun galleryOperation() {
+    override fun galleryOperation(type: Int) {
         doAsync {
             albumList = java.util.ArrayList()
             listener = object : OnPhoneImagesObtained {
@@ -151,21 +208,33 @@ constructor(
             }
 
             doAsync {
-                getPhoneAlbums(requireContext(), listener)
+                getPhoneAlbums(requireContext(), listener,type)
             }
         }
     }
 
     override fun toggleDropdown() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getPhoneAlbums(context: Context, listener: OnPhoneImagesObtained) {
-            imagePickerPresenter.getPhoneAlbums()
+    override fun getPhoneAlbums(
+        context: Context,
+        listener: OnPhoneImagesObtained,
+        type: Int
+    ) {
+        when (type) {
+            0 -> {
+                imagePickerPresenter.getPhoneAlbums()
+            }
+            1 -> {
+                imagePickerPresenter.getPhonePhotos()
+            }
+            2 -> {
+                imagePickerPresenter.getPhoneVideos()
+            }
+        }
     }
 
     override fun updateTitle(galleryAlbums: GalleryAlbums) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun updateSelectedPhotos(selectedlist: ArrayList<GalleryData>) {

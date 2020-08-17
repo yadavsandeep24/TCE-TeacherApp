@@ -32,12 +32,7 @@ class StudentPortfolioFeedbackAdapter(val context: Context) :
 
     class FeedbackAdapter(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val tvFeedback: TextView
-
-        init {
-            tvFeedback = itemView.findViewById(R.id.tv_feedback)
-
-        }
+        val tvFeedback: TextView = itemView.findViewById(R.id.tv_feedback)
 
 
     }

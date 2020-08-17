@@ -82,11 +82,11 @@ constructor(
 
         viewModel.setStateEvent(MessageStateEvent.GetStudentEvent(""))
 
-        binding.imgClose.setOnClickListener(View.OnClickListener {
+        binding.imgClose.setOnClickListener {
             activity?.onBackPressed()
-        })
+        }
 
-        binding.tvTitle1.setText(messageVo!!.title)
+        binding.tvTitle1.text = messageVo!!.title
 
         if(messageVo!!.NoOfMember == 0)
         {
@@ -95,7 +95,7 @@ constructor(
             binding.tvSubTitle1.visibility= View.VISIBLE
 
         }
-        binding.tvSubTitle1.setText(messageVo!!.NoOfMember.toString() + " Members")
+        binding.tvSubTitle1.text = messageVo!!.NoOfMember.toString() + " Members"
 
         Utility.getDrawable(
             messageVo!!.icon.substring(

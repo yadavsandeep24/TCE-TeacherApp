@@ -5,7 +5,7 @@ import com.tce.teacherapp.api.response.*
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.parcel.RawValue
 
-const val STUDENT_VIEW_STATE_BUNDLE_KEY = "com.tce.teacherapp.ui.auth.state.StudentViewState"
+const val STUDENT_VIEW_STATE_BUNDLE_KEY = "com.tce.teacherapp.ui.dashboard.student.state.StudentViewState"
 
 @Parcelize
 data class StudentViewState (

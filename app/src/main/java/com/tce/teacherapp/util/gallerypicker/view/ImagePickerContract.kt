@@ -6,9 +6,13 @@ import com.tce.teacherapp.util.gallerypicker.model.GalleryData
 
 interface ImagePickerContract {
     fun initRecyclerViews()
-    fun galleryOperation()
+    fun galleryOperation(type: Int)
     fun toggleDropdown()
-    fun getPhoneAlbums(context: Context, listener: OnPhoneImagesObtained)
+    fun getPhoneAlbums(
+        context: Context,
+        listener: OnPhoneImagesObtained,
+        type: Int
+    )
     fun updateTitle(galleryAlbums: GalleryAlbums = GalleryAlbums())
     fun updateSelectedPhotos(selectedlist: ArrayList<GalleryData> = ArrayList())
 }

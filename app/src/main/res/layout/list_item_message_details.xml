@@ -17,7 +17,7 @@
             android:layout_height="40dp"
             android:layout_below="@+id/tv_time_user_name"
             android:layout_marginRight="20dp"
-            android:src="@drawable/ic_dummy_user"></androidx.appcompat.widget.AppCompatImageView>
+            android:src="@drawable/ic_dummy_user"/>
 
         <com.tce.teacherapp.util.RubikRegularTextview
             android:id="@+id/tv_time_user_name"
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:layout_toRightOf="@+id/img_user"
-            android:text="Aishwarya : 1.49 PM"></com.tce.teacherapp.util.RubikRegularTextview>
+            android:text="Aishwarya : 1.49 PM"/>
 
         <com.tce.teacherapp.util.RubikRegularTextview
             android:id="@+id/tvDetail"
@@ -37,7 +37,7 @@
             android:text="detail"
             android:padding="20dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/white"></com.tce.teacherapp.util.RubikRegularTextview>
+            android:textColor="@color/white"/>
 
 
     </RelativeLayout>
@@ -55,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:text="Aishwarya : 1.49 PM"></com.tce.teacherapp.util.RubikRegularTextview>
+            android:text="Aishwarya : 1.49 PM"/>
 
         <com.tce.teacherapp.util.RubikRegularTextview
             android:id="@+id/tvRightDetail"
@@ -66,7 +66,7 @@
             android:text="detail"
             android:padding="20dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/white"></com.tce.teacherapp.util.RubikRegularTextview>
+            android:textColor="@color/white"/>
 
     </RelativeLayout>
 
@@ -97,14 +97,14 @@
                     android:id="@+id/img_video_thumb"
                     android:layout_width="156dp"
                     android:layout_height="88dp"
-                    android:src="@drawable/dummy_video"></androidx.appcompat.widget.AppCompatImageView>
+                    android:src="@drawable/dummy_video"/>
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/img_play"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_centerInParent="true"
-                    android:src="@drawable/ic_video_play"></androidx.appcompat.widget.AppCompatImageView>
+                    android:src="@drawable/ic_video_play"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -159,7 +159,7 @@
             android:id="@+id/img_image"
             android:layout_width="190dp"
             android:layout_height="146dp"
-            android:src="@drawable/dummy_image"></androidx.appcompat.widget.AppCompatImageView>
+            android:src="@drawable/dummy_image"/>
 
     </com.google.android.material.card.MaterialCardView>
 

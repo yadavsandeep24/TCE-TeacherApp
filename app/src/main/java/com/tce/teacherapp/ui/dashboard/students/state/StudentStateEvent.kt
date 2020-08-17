@@ -44,7 +44,9 @@ sealed class StudentStateEvent : StateEvent {
         }
     }
 
-    object GetGalleryData : StudentStateEvent() {
+    class GetGalleryData(
+        val type :Int
+    ) : StudentStateEvent() {
         override fun errorInfo(): String {
             return "Error in getting GalleryData info."
         }

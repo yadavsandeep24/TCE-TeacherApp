@@ -1,7 +1,10 @@
 package com.tce.teacherapp.api.response
 
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class ProgressCard(
 
     @Expose
@@ -15,4 +18,4 @@ data class ProgressCard(
 
     @Expose
     val id: Int
-)
+):Parcelable

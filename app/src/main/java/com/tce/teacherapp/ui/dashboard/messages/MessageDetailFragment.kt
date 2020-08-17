@@ -108,7 +108,7 @@ constructor(
             binding.imgMessageDetail.background = it1
         }
 
-        binding.headerContainer.setOnClickListener(View.OnClickListener {
+        binding.headerContainer.setOnClickListener {
             if (messageVo!!.NoOfMember != 0) {
                 val bundle = Bundle()
                 bundle.putParcelable("messageData", messageVo)
@@ -117,7 +117,7 @@ constructor(
                     bundle
                 )
             }
-        })
+        }
 
         binding.imgBack.setOnClickListener(View.OnClickListener {
             activity?.onBackPressed()

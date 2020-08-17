@@ -6,7 +6,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.edgedevstudio.example.recyclerviewmultiselect.ViewHolderClickListener
+import com.tce.teacherapp.ui.dashboard.students.interfaces.ViewHolderClickListener
 import com.tce.teacherapp.R
 
 /**
@@ -15,22 +15,18 @@ import com.tce.teacherapp.R
 class PortfolioViewHolder(itemView: View, val r_tap: ViewHolderClickListener) : RecyclerView.ViewHolder(itemView),
         View.OnLongClickListener, View.OnClickListener {
 
-    val tvStudentName: TextView
-    val mainContainer: LinearLayout
-    val imgStudent : AppCompatImageView
-    val chkSelect : CheckBox
+    val tvStudentName: TextView = itemView.findViewById(R.id.tv_student_name)
+    val mainContainer: LinearLayout = itemView.findViewById(R.id.root_layout)
+    val imgStudent = itemView.findViewById<AppCompatImageView>(R.id.img_student)
+    val chkSelect : CheckBox = itemView.findViewById(R.id.chk_completed)
 
     init {
-        tvStudentName = itemView.findViewById(R.id.tv_student_name)
-        mainContainer = itemView.findViewById(R.id.root_layout)
-        imgStudent = itemView.findViewById(R.id.img_student)
-        chkSelect = itemView.findViewById(R.id.chk_completed)
         mainContainer.setOnClickListener(this)
         mainContainer.setOnLongClickListener(this)
     }
 
     override fun onClick(v: View?) {
-        r_tap.onTap(adapterPosition)
+        r_tap.onTap(adapterPosition,null)
     }
 
     override fun onLongClick(v: View?): Boolean {

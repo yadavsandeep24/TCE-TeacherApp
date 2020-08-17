@@ -1605,7 +1605,9 @@ constructor(
         )
     }
 
-    override fun getGalleryData(stateEvent: StateEvent): Flow<DataState<StudentViewState>> = flow{
+    override fun getGalleryData(
+        type :Int,
+        stateEvent: StateEvent): Flow<DataState<StudentViewState>> = flow{
         val apiResult = safeApiCall(IO) {
             tceService.getStudentGalleryData()
         }
@@ -1615,12 +1617,56 @@ constructor(
                 stateEvent = stateEvent
             ) {
                 override suspend fun handleSuccess(resultObj: List<StudentGalleryResponseItem>): DataState<StudentViewState> {
-                    val viewState = StudentViewState(studentgallerydata = resultObj)
-                    return DataState.data(
-                        response = null,
-                        data = viewState,
-                        stateEvent = stateEvent
-                    )
+
+
+                    when (type) {
+                        1 -> {
+                            val tempGalleryItems :MutableList<StudentGalleryResponseItem> = arrayListOf()
+                            for(galleryItem in resultObj){
+                                val tempStudentGallerydata :MutableList<StudentGalleryData> = arrayListOf()
+                                for(dataList in galleryItem.studentGalleryDataList){
+                                    if(dataList.contenttype.equals("Image",true)) {
+                                        tempStudentGallerydata.add(dataList)
+                                    }
+                                }
+                                galleryItem.studentGalleryDataList = tempStudentGallerydata
+                                tempGalleryItems.add(galleryItem)
+                            }
+                            val viewState = StudentViewState(studentgallerydata = tempGalleryItems)
+                            return DataState.data(
+                                response = null,
+                                data = viewState,
+                                stateEvent = stateEvent
+                            )
+                        }
+                        2 -> {
+                            val tempGalleryItems :MutableList<StudentGalleryResponseItem> = arrayListOf()
+                            for(galleryItem in resultObj){
+                                val tempStudentGallerydata :MutableList<StudentGalleryData> = arrayListOf()
+                                for(dataList in galleryItem.studentGalleryDataList){
+                                    if(dataList.contenttype.equals("av",true)) {
+                                        tempStudentGallerydata.add(dataList)
+                                    }
+                                }
+                                galleryItem.studentGalleryDataList = tempStudentGallerydata
+                                tempGalleryItems.add(galleryItem)
+                            }
+                            val viewState = StudentViewState(studentgallerydata = tempGalleryItems)
+                            return DataState.data(
+                                response = null,
+                                data = viewState,
+                                stateEvent = stateEvent
+                            )
+                        }
+                        else -> {
+                            val viewState = StudentViewState(studentgallerydata = resultObj)
+                            return DataState.data(
+                                response = null,
+                                data = viewState,
+                                stateEvent = stateEvent
+                            )
+                        }
+                    }
 
                 }
             }.getResult()

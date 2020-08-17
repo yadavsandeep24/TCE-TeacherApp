@@ -45,9 +45,10 @@
             </com.tce.teacherapp.util.RubikRegularTextview>
 
             <com.tce.teacherapp.util.RubikRegularTextview
+                android:id="@+id/tv_relation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Motheer"
+                android:text="Mother"
                 android:textSize="@dimen/font_size_12_dp"
                 android:textColor="#232337">
             </com.tce.teacherapp.util.RubikRegularTextview>
@@ -56,6 +57,7 @@
         </LinearLayout>
 
         <com.tce.teacherapp.util.RubikRegularTextview
+            android:id="@+id/tv_contact_no"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="11dp"
