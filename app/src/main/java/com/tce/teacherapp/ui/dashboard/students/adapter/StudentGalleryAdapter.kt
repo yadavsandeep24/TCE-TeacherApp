@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +17,8 @@ import java.util.*
 
 class StudentGalleryAdapter(
     val context: Context,
-    val listener: IStudentGalleryClickListener
+    val listener: IStudentGalleryClickListener,
+    val isShowCheckBox: Boolean
 ) :
     RecyclerView.Adapter<StudentGalleryAdapter.StudentPortfolioViewHolder>(),IStudentGalleryClickListener {
 
@@ -34,12 +36,25 @@ class StudentGalleryAdapter(
 
         val formattedString: String =  SimpleDateFormat("dd MMMM yyyy EEEE").format(date)
         holder.tvDate.text = formattedString
+        if(isShowCheckBox){
+            holder.chkDate.visibility = View.VISIBLE
+            holder.chkDate.setOnCheckedChangeListener { _, isChecked ->
+                for (item in modelList[position].studentGalleryDataList){
+                    item.isSelected = isChecked
+                }
+                listener.onDateCheckBoxClicked(modelList[position])
+                notifyDataSetChanged()
+            }
+        }else{
+            holder.chkDate.visibility = View.GONE
+        }
+
 
         if(modelList[position].studentGalleryDataList!= null  && modelList[position].studentGalleryDataList.isNotEmpty()){
             holder.rvGallary.visibility = View.VISIBLE
             holder.rvGallary.layoutManager = GridLayoutManager(context, 3)
             holder.rvGallary.setHasFixedSize(true)
-            val myAdapter = StudentDateWiseGalleryAdapter(context, false,this)
+            val myAdapter = StudentDateWiseGalleryAdapter(context, isShowCheckBox,this)
             holder.rvGallary.adapter = myAdapter
             myAdapter.modelList = modelList[position].studentGalleryDataList as MutableList<StudentGalleryData>
             myAdapter.notifyDataSetChanged()
@@ -58,6 +73,7 @@ class StudentGalleryAdapter(
 
         val tvDate: TextView = itemView.findViewById(R.id.tvDate)
         val rvGallary : RecyclerView = itemView.findViewById(R.id.rv_gallary)
+        val chkDate: CheckBox = itemView.findViewById(R.id.chk_date)
 
     }
 
@@ -65,9 +81,18 @@ class StudentGalleryAdapter(
         listener.onItemClick(item)
     }
 
+    override fun onCheckBoxClicked(item: StudentGalleryData) {
+        listener.onCheckBoxClicked(item)
+    }
+
+    override fun onDateCheckBoxClicked(item: StudentGalleryResponseItem) {
+    }
+
 }
 
 interface IStudentGalleryClickListener{
     fun onItemClick(item: StudentGalleryData)
+    fun onCheckBoxClicked(item: StudentGalleryData)
+    fun onDateCheckBoxClicked(item:StudentGalleryResponseItem)
 
 }

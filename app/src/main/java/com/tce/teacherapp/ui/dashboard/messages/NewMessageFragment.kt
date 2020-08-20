@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.airbnb.epoxy.EpoxyVisibilityTracker
 import com.tce.teacherapp.R
+import com.tce.teacherapp.api.response.StudentListResponseItem
 import com.tce.teacherapp.databinding.FragmentNewMessageBinding
 import com.tce.teacherapp.db.entity.Student
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
@@ -41,7 +42,7 @@ constructor(
 ) : BaseMessageFragment(R.layout.fragment_new_message, viewModelFactory) {
 
     private lateinit var binding: FragmentNewMessageBinding
-    private var studentList: ArrayList<Student>? = ArrayList()
+    private var studentList: ArrayList<StudentListResponseItem>? = ArrayList()
     private var mainList: ArrayList<Student>? = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -87,7 +88,6 @@ constructor(
         // (activity as DashboardActivity).setCustomToolbar(R.layout.subject_list_top_bar)
         (activity as DashboardActivity).expandAppBar(false)
 
-        uiCommunicationListener.displayProgressBar(true)
 
         val searchText: TextView =
             binding.svNewMessage.findViewById(R.id.search_src_text) as TextView
@@ -134,7 +134,7 @@ constructor(
         epoxyVisibilityTracker.attach(binding.rvNewMessage)
         subscribeObservers()
 
-        binding.tvNext.setOnClickListener(View.OnClickListener {
+        binding.tvNext.setOnClickListener {
 
             val bundle = Bundle()
             bundle.putParcelableArrayList("studentList", studentList!!)
@@ -143,7 +143,7 @@ constructor(
                 bundle
             )
 
-        })
+        }
 
     }
 
@@ -161,77 +161,7 @@ constructor(
 
 
     private fun subscribeObservers() {
-
-
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
-
-            //getting crash while come back on this page , thats why  comment this code
-            /*if (viewState != null) {
-
-                viewState.studentList?.let {
-                    for (msg in it) {
-                        mainList!!.add(msg)
-                    }
-                }
-                mainList?.let {
-                    Log.d("SAN", "messageList-->" + it.size)
-                    binding.rvNewMessage.withModels {
-                        for (msg in it) {
-                            newMessageEpoxyHolder {
-                                id(msg.id.toLong())
-                                strStudentName(msg.name)
-                                listener {
-                                    if (studentList!!.size == 0) {
-                                        binding.rvSelectedStudent.visibility =
-                                            View.GONE
-                                        binding.tvNext.visibility = View.GONE
-                                    } else {
-                                        binding.rvSelectedStudent.visibility =
-                                            View.VISIBLE
-                                        binding.tvNext.visibility = View.VISIBLE
-                                    }
-                                    val isExist = studentList!!.any{ it.id ==  msg.id }
-                                    if(!isExist) {
-                                        studentList!!.add(msg)
-                                        mainList!!.remove(msg)
-                                        requestModelBuild()
-
-                                        binding.rvSelectedStudent.visibility = View.VISIBLE
-                                        binding.rvSelectedStudent.withModels {
-                                            for (student in studentList!!) {
-                                                selectedStudentEpoxyHolder {
-                                                    id(student.id.toLong())
-                                                    strName(student.name)
-                                                    listener {
-                                                        studentList!!.remove(student)
-                                                        mainList!!.add(student)
-                                                        requestModelBuild()
-
-
-                                                        if (studentList!!.size == 0) {
-                                                            studentList!!.clear()
-                                                            binding.rvSelectedStudent.visibility =
-                                                                View.GONE
-                                                        } else {
-                                                            binding.rvSelectedStudent.visibility =
-                                                                View.VISIBLE
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-
-                                    }
-                                }
-                            }
-                        }
-
-                    }
-                }
-
-
-            }*/
-
             if (viewState != null) {
 
                 viewState.studentList?.let {
@@ -240,7 +170,7 @@ constructor(
                         for (msg in it) {
                             newMessageEpoxyHolder {
                                 id(msg.id.toLong())
-                                strStudentName(msg.name)
+                                studentVo(msg)
                                 listener {
                                     if (studentList!!.size == 0) {
                                         binding.rvSelectedStudent.visibility =
@@ -259,7 +189,7 @@ constructor(
                                             for (student in studentList!!) {
                                                 selectedStudentEpoxyHolder {
                                                     id(student.id.toLong())
-                                                    strName(student.name)
+                                                    strName(student.Name)
                                                     listener {
                                                         studentList!!.remove(student)
                                                         requestModelBuild()

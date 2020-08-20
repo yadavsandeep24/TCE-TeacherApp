@@ -1,16 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-<FrameLayout
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/sandy_yellow"
     tools:context=".ui.dashboard.students.StudentGalleryImagePostDetailFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ImageView
+        android:id="@+id/iv_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:scaleType="fitXY"
+        android:layout_height="match_parent"/>
 
-</FrameLayout>
+    <com.tce.teacherapp.util.RubikMediumTextview
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        android:text="Image"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_gallery_player_control"
+        android:layout_marginBottom="15dp"
+        android:padding="10dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+
+        <ImageButton android:id="@id/exo_prev"
+            android:visibility="visible"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/ic_previous"/>
+        <ImageButton android:id="@id/exo_next"
+            android:visibility="visible"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/ic_next"/>
+
+        <ImageButton android:id="@+id/img_collapse"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:visibility="visible"
+            android:backgroundTint="@color/white"
+            android:background="@drawable/ic_minimise"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
 </layout>

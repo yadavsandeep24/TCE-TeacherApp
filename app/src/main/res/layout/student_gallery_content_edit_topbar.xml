@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/event_top_container"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:paddingStart="25dp"
+    android:paddingEnd="25dp"
+    android:background="@color/color_black">
+
+    <TextView
+        android:id="@+id/tv_back"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_centerVertical="true"
+        android:background="@drawable/ic_thick_arrow_left" />
+    <com.tce.teacherapp.util.RubikBoldTextview
+        android:id="@+id/top_bar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Edit Caption"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:visibility="gone"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/tv_tag"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/tv_edit"
+        android:layout_marginEnd="20dp"
+        android:visibility="visible"
+        android:layout_alignWithParentIfMissing="true"
+        android:background="@drawable/ic_tag" />
+
+    <TextView
+        android:id="@+id/tv_edit"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/tv_delete"
+        android:visibility="visible"
+        android:layout_alignWithParentIfMissing="true"
+        android:background="@drawable/ic_thick_edit" />
+    <TextView
+        android:id="@+id/tv_delete"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="visible"
+        android:background="@drawable/delete" />
+    <com.tce.teacherapp.util.RubikMediumTextview
+        android:id="@+id/tv_save"
+        android:layout_width="75dp"
+        android:layout_height="30dp"
+        android:text="Save"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/bg_white_rounded"
+        android:textColor="#fa4b28"
+        android:textSize="@dimen/font_size_14_dp"
+        android:gravity="center"
+        android:visibility="gone"/>
+
+</RelativeLayout>

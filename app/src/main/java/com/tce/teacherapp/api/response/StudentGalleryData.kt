@@ -2,12 +2,14 @@ package com.tce.teacherapp.api.response
 
 import android.os.Parcelable
 import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class StudentGalleryData(
 
     @Expose
+    @SerializedName("SharedList")
     val sharedItemList: List<SharedListItem>,
 
     @Expose
@@ -29,5 +31,7 @@ data class StudentGalleryData(
     val title: String,
 
     @Expose
-    val type: String
-):Parcelable
+    val type: String,
+
+    var isSelected: Boolean
+) : Parcelable

@@ -8,6 +8,7 @@ import android.widget.CheckBox
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.material.card.MaterialCardView
 import com.tce.teacherapp.R
 import com.tce.teacherapp.api.response.StudentGalleryData
 import java.util.*
@@ -33,14 +34,20 @@ class StudentDateWiseGalleryAdapter(
             .placeholder(R.drawable.dummy_video)
             .into(holder.imgGallary)
 
-        if(modelList[position].contenttype.equals("AV", ignoreCase = true)){
+        if (modelList[position].contenttype.equals("AV", ignoreCase = true)) {
             holder.imgPlay.visibility = View.VISIBLE
-        }else{
+        } else {
             holder.imgPlay.visibility = View.GONE
         }
-        if(isShowCheckBox){
+        if (isShowCheckBox) {
             holder.chkGallary.visibility = View.VISIBLE
-        }else{
+            holder.chkGallary.isChecked = modelList[position].isSelected
+            holder.chkGallary.setOnCheckedChangeListener { _, isChecked ->
+                modelList[position].isSelected = isChecked
+                listener.onCheckBoxClicked(modelList[position])
+                notifyDataSetChanged()
+            }
+        } else {
             holder.chkGallary.visibility = View.GONE
         }
 
@@ -57,7 +64,7 @@ class StudentDateWiseGalleryAdapter(
     }
 
     class GalllaryAdapter(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
+        val cardMain: MaterialCardView = itemView.findViewById(R.id.cv_main)
         val imgGallary: AppCompatImageView = itemView.findViewById(R.id.img_gallary)
         val imgPlay: AppCompatImageView = itemView.findViewById(R.id.img_play)
         val chkGallary: CheckBox = itemView.findViewById(R.id.chk_gallary)

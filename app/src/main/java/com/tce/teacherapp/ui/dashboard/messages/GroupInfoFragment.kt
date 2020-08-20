@@ -26,7 +26,8 @@ import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 @FlowPreview
-class GroupInfoFragment @Inject
+class GroupInfoFragment
+@Inject
 constructor(
     viewModelFactory: ViewModelProvider.Factory
 ) : BaseMessageFragment(R.layout.fragment_group_info, viewModelFactory) {
@@ -126,7 +127,7 @@ constructor(
                         for (msg in it) {
                             groupInfoEpoxyHolder {
                                 id(msg.id.toLong())
-                                strStudentName(msg.name)
+                                strStudentName(msg.Name)
                                 listener {
 
 

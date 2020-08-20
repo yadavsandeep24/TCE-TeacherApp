@@ -14,7 +14,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.tce.teacherapp.ui.dashboard.students.interfaces.MainInterface
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.kizitonwose.calendarview.CalendarView
 import com.kizitonwose.calendarview.model.CalendarDay
@@ -28,6 +27,7 @@ import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.planner.daysOfWeekFromLocale
 import com.tce.teacherapp.ui.dashboard.planner.setTextColorRes
 import com.tce.teacherapp.ui.dashboard.students.adapter.AttendanceAdapter
+import com.tce.teacherapp.ui.dashboard.students.interfaces.MainInterface
 import com.tce.teacherapp.ui.dashboard.students.state.StudentStateEvent
 import com.tce.teacherapp.util.calenderView.utils.yearMonth
 import kotlinx.android.synthetic.main.activity_dashboard.*

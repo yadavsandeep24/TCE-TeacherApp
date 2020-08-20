@@ -2,16 +2,26 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-<FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.dashboard.students.StudentGalleryTaggedStudentFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@color/white"
+        tools:context=".ui.dashboard.students.StudentGalleryImagePostFragment">
 
-</FrameLayout>
+    <include
+        android:id="@+id/top_bar"
+        layout="@layout/student_gallery_content_edit_topbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_tagged_student"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/top_bar"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp" />
+    </RelativeLayout>
+
 </layout>

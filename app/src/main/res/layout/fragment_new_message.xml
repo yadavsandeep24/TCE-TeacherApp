@@ -20,7 +20,7 @@
                 android:layout_height="20dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"
-                android:src="@drawable/ic_back"></androidx.appcompat.widget.AppCompatImageView>
+                android:src="@drawable/ic_back"/>
 
             <com.tce.teacherapp.util.RubikMediumTextview
                 android:layout_width="wrap_content"
@@ -29,7 +29,7 @@
                 android:text="New Message"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_size_16_dp"
-                android:textStyle="bold"></com.tce.teacherapp.util.RubikMediumTextview>
+                android:textStyle="bold"/>
 
             <com.tce.teacherapp.util.RubikMediumTextview
                 android:id="@+id/tvNext"
@@ -43,7 +43,7 @@
                 android:textColor="#fa4b28"
                 android:textSize="@dimen/font_size_16_dp"
                 android:gravity="center"
-                android:visibility="gone"></com.tce.teacherapp.util.RubikMediumTextview>
+                android:visibility="gone"/>
         </RelativeLayout>
 
         <LinearLayout
@@ -85,21 +85,21 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/font_size_16_dp"
                     android:textColor="#46465a"
-                    android:text="Filter : "></com.tce.teacherapp.util.RubikRegularTextview>
+                    android:text="Filter : "/>
 
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Junior KG A"
                     android:textSize="@dimen/font_size_16_dp"
-                    android:layout_marginLeft="10dp"></CheckBox>
+                    android:layout_marginLeft="10dp"/>
 
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Junior KG B"
                     android:textSize="@dimen/font_size_16_dp"
-                    android:layout_marginLeft="10dp"></CheckBox>
+                    android:layout_marginLeft="10dp"/>
 
             </LinearLayout>
 

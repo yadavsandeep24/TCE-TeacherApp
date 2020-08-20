@@ -6,6 +6,7 @@ import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.tce.teacherapp.R
+import com.tce.teacherapp.api.response.StudentListResponseItem
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
 
 
@@ -13,14 +14,21 @@ import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
 abstract class NewMessageEpoxyHolder: EpoxyModelWithHolder<Holder2>() {
 
     @EpoxyAttribute
-    lateinit var strStudentName : String
+    lateinit var studentVo : StudentListResponseItem
+
     @EpoxyAttribute
     lateinit var listener: () -> Unit
 
+
     override fun bind(holder: Holder2) {
 
-        holder.tvStudentName.text = strStudentName
+        holder.tvStudentName.text = studentVo.Name
         holder.lnrMainContainer.setOnClickListener { listener() }
+        if (studentVo.isSelected) {
+            holder.lnrMainContainer.setBackgroundColor(holder.lnrMainContainer.resources.getColor(studentVo.selectedColor))
+        }else{
+            holder.lnrMainContainer.setBackgroundColor(holder.lnrMainContainer.resources.getColor(R.color.transparent))
+        }
     }
 }
 

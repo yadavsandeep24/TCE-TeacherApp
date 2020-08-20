@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/student_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_gravity="center"
+    android:padding="10dp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/img_user"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/dummy_student"/>
+
+    <com.tce.teacherapp.util.RubikMediumTextview
+        android:id="@+id/tv_student_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/dark"
+        android:textSize="@dimen/font_size_14_dp"
+        android:layout_marginEnd="15dp"
+        android:layout_toLeftOf="@+id/vw_cancel"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/img_user"
+        android:text="Student Name 1"/>
+    
+    <View
+        android:id="@+id/vw_cancel"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="end"
+        android:visibility="gone"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/ic_cancel_button_grey_bg"/>
+
+</RelativeLayout>

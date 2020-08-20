@@ -10,10 +10,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.tce.teacherapp.api.response.Objective
-import com.tce.teacherapp.api.response.ProgressData
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tce.teacherapp.R
+import com.tce.teacherapp.api.response.Objective
+import com.tce.teacherapp.api.response.ProgressData
 import com.tce.teacherapp.databinding.FragmentProgressCardBinding
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.students.adapter.ProgressCardAdapter
@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.teachers.fragment_dashboard_home.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import java.util.ArrayList
+import java.util.*
 import javax.inject.Inject
 
 

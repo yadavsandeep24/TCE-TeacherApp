@@ -55,7 +55,6 @@ constructor(
         super.onViewCreated(view, savedInstanceState)
         (activity as DashboardActivity).expandAppBar(true)
         val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
-
         bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
         bottomSheetBehavior.skipCollapsed = true
         bottomSheetBehavior.isDraggable = false
@@ -165,6 +164,10 @@ constructor(
             findNavController().navigate(R.id.action_studentGalleryFragment_to_studentProfileUploadResouceSelectionFragment)
         }
 
+        binding.btnShare.setOnClickListener {
+            findNavController().navigate(R.id.action_studentGalleryFragment_to_studentGalleryShareMediaFragment)
+        }
+
         viewModel.setStateEvent(StudentStateEvent.GetGalleryData(0))
 
         subscribeObservers()
@@ -177,7 +180,7 @@ constructor(
                 viewState.studentgallerydata?.let {
                     binding.rvStudentGallery.layoutManager = GridLayoutManager(activity, 1)
                     binding.rvStudentGallery.setHasFixedSize(true)
-                    val myAdapter = StudentGalleryAdapter(requireContext(),this)
+                    val myAdapter = StudentGalleryAdapter(requireContext(),this,false)
                     binding.rvStudentGallery.adapter = myAdapter
                     myAdapter.modelList = it as MutableList<StudentGalleryResponseItem>
                     myAdapter.notifyDataSetChanged()
@@ -210,7 +213,27 @@ constructor(
     }
 
     override fun onItemClick(item: StudentGalleryData) {
+        val bundle = Bundle()
+        bundle.putParcelable("studentGalleryData",item)
+        if(item.contenttype.equals("AV",true)) {
+            findNavController().navigate(
+                R.id.action_studentGalleryFragment_to_studentGalleryVideoPostFragment,
+                bundle
+            )
+        }else if(item.contenttype.equals("image",true)){
+            findNavController().navigate(
+                R.id.action_studentGalleryFragment_to_studentGalleryImagePostFragment,
+                bundle
+            )
+        }
 
+    }
+
+    override fun onCheckBoxClicked(item: StudentGalleryData) {
+
+    }
+
+    override fun onDateCheckBoxClicked(item: StudentGalleryResponseItem) {
     }
 
 }

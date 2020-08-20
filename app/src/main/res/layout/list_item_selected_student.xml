@@ -11,26 +11,25 @@
     app:cardElevation="8dp"
     app:cardPreventCornerOverlap="false"
     app:strokeColor="#e1e6f0"
-    app:strokeWidth="3dp"
+    app:strokeWidth="2dp"
     android:layout_marginLeft="10dp"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="45dp"
+        android:layout_height="40dp"
         android:background="#e1e6f0"
         android:gravity="center_vertical"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp">
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_user"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_below="@+id/tv_time_user_name"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginRight="10dp"
-            android:src="@drawable/dummy_student"></androidx.appcompat.widget.AppCompatImageView>
+            android:src="@drawable/dummy_student"/>
 
         <com.tce.teacherapp.util.RubikMediumTextview
             android:id="@+id/tv_student_name"
@@ -38,15 +37,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:text="Student Name 1"
-            android:textColor="@color/color_black"
-            android:textSize="@dimen/font_size_16_dp"></com.tce.teacherapp.util.RubikMediumTextview>
+            android:textColor="@color/dark"
+            android:textSize="@dimen/font_size_12_dp"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_close"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/ic_close"></androidx.appcompat.widget.AppCompatImageView>
+            android:src="@drawable/ic_close"/>
 
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

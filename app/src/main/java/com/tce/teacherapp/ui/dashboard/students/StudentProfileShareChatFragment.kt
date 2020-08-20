@@ -6,18 +6,15 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.view.*
-import androidx.fragment.app.Fragment
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.tce.teacherapp.DataBinderMapperImpl
 import com.tce.teacherapp.R
 import com.tce.teacherapp.api.response.Portfolio
 import com.tce.teacherapp.api.response.StudentListResponseItem
 import com.tce.teacherapp.databinding.FragmentStudentProfileShareChatBinding
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
-import com.tce.teacherapp.ui.dashboard.students.adapter.StudentPortfolioAdapter
 import com.tce.teacherapp.ui.dashboard.students.adapter.StudentProfileShareChatAdapter
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -32,6 +29,7 @@ constructor(
 ) : BaseStudentFragment(R.layout.fragment_student_profile_share_chat, viewModelFactory) {
 
     private lateinit var binding : FragmentStudentProfileShareChatBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

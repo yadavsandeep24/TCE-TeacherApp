@@ -8,7 +8,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,8 +15,8 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -25,7 +24,6 @@ import com.example.gabriel.soundrecorder.recorder.RecorderViewModel
 import com.example.gabriel.soundrecorder.util.InjectorUtils
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentGroupChatBinding
-import com.tce.teacherapp.db.entity.Student
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior
 import com.tce.teacherapp.util.gallerypicker.model.GalleryAlbums
@@ -38,15 +36,23 @@ import com.tce.teacherapp.util.gallerypicker.view.ImagePickerContract
 import com.tce.teacherapp.util.gallerypicker.view.OnPhoneImagesObtained
 import com.tce.teacherapp.util.gallerypicker.view.adapters.ImageGridAdapter
 import com.tce.teacherapp.util.gallerypicker.view.adapters.VideoGridAdapter
+import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.fragment_group_chat.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import org.jetbrains.anko.doAsync
 import java.io.File
+import javax.inject.Inject
 
 
-class GroupChatFragment : Fragment(), ImagePickerContract {
+@FlowPreview
+@ExperimentalCoroutinesApi
+class GroupChatFragment @Inject
+constructor(
+    viewModelFactory: ViewModelProvider.Factory
+) : BaseMessageFragment(R.layout.fragment_group_chat, viewModelFactory), ImagePickerContract {
 
    private lateinit var binding : FragmentGroupChatBinding
-    private lateinit var studentList : ArrayList<Student>
      var PICK_FILE_FROM_GALLARY : Int = 100
 
     var photoList: java.util.ArrayList<GalleryData> = java.util.ArrayList()
@@ -168,9 +174,7 @@ class GroupChatFragment : Fragment(), ImagePickerContract {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        studentList = arguments?.getParcelableArrayList<Student>("studentList") as  ArrayList<Student>
-
-
+        (activity as DashboardActivity).bottom_navigation_view.visibility = View.GONE
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             activity?.window!!.statusBarColor = resources.getColor(R.color.color_black, null)
         } else {
@@ -179,17 +183,9 @@ class GroupChatFragment : Fragment(), ImagePickerContract {
         // (activity as DashboardActivity).setCustomToolbar(R.layout.subject_list_top_bar)
         (activity as DashboardActivity).expandAppBar(false)
 
-        var studentNames = ""
-        for (student in studentList){
-          studentNames = studentNames + ", " + student.name
-        }
 
-        if(!TextUtils.isEmpty(studentNames)){
-          studentNames = studentNames.replaceFirst(",","")
-        }
-
-        binding.tvTitle1.setText(studentNames)
-        binding.tvSubTitle1.setText(studentList.size.toString() + " Members")
+        binding.tvTitle1.text = "Class Apple"
+        binding.tvSubTitle1.text = "30 Members"
 
         val bottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet)
 

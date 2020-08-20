@@ -1,17 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.dashboard.students.StudentGallerySharingChatFragment">
-
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+            android:background="#fafaff">
 
-    </FrameLayout>
+            <LinearLayout
+                android:id="@+id/search_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fffad7"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/sv_new_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_grey_rounded"
+                    android:focusable="true"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    app:iconifiedByDefault="false"
+                    app:queryBackground="@drawable/bg_white_rounded"
+                    app:queryHint="Search by Name or Class" />
+
+                <com.airbnb.epoxy.EpoxyRecyclerView
+                    android:id="@+id/rv_selected_student"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp">
+
+                    <com.tce.teacherapp.util.RubikMediumTextview
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_size_12_dp"
+                        android:textColor="#46465a"
+                        android:text="Filter : "/>
+
+                    <com.tce.teacherapp.util.RubikMediumCheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Junior KG A"
+                        android:paddingLeft="3dp"
+                        android:button="@drawable/checkbox_filled_selector"
+                        android:textSize="@dimen/font_size_12_dp"
+                        android:layout_marginLeft="10dp"/>
+
+                    <com.tce.teacherapp.util.RubikMediumCheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Junior KG B"
+                        android:paddingLeft="3dp"
+                        android:button="@drawable/checkbox_filled_selector"
+                        android:textSize="@dimen/font_size_12_dp"
+                        android:layout_marginLeft="15dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:id="@+id/tvSuggested"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/search_container"
+                android:text="Suggested"
+                android:textColor="@color/light_grey_blue"
+                android:textSize="@dimen/font_size_14_dp"
+                android:layout_margin="20dp">
+            </com.tce.teacherapp.util.RubikMediumTextview>
+
+            <com.airbnb.epoxy.EpoxyRecyclerView
+                android:id="@+id/rv_new_message"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/tvSuggested"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp" />
+
+
+        </RelativeLayout>
+
+
 </layout>

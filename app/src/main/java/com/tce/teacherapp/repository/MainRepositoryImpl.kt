@@ -384,34 +384,26 @@ constructor(
         query: String,
         stateEvent: StateEvent
     ): Flow<DataState<MessageViewState>> = flow {
-        var jsonString = ""
-        try {
 
-            jsonString = application.assets.open("json/student.json").bufferedReader()
-                .use { it.readText() }
-            val gson = Gson()
-            val listPersonType = object : TypeToken<List<Student>>() {}.type
-            val studentList: List<Student> = gson.fromJson(jsonString, listPersonType)
-
-            val selectedList: List<Student>;
-            selectedList = if (TextUtils.isEmpty(query)) {
-                studentList
-            } else {
-                studentList.filter { it.name.contains(query, ignoreCase = true) }
-            }
-
-            emit(
-                DataState.data(
-                    data = MessageViewState(studentList = selectedList),
-                    stateEvent = stateEvent,
-                    response = null
-                )
-            )
-
-        } catch (ioException: IOException) {
-            ioException.printStackTrace()
+        val apiResult = safeApiCall(IO) {
+            tceService.getStudentList()
         }
+        emit(
+            object : ApiResponseHandler<MessageViewState, List<StudentListResponseItem>>(
+                response = apiResult,
+                stateEvent = stateEvent
+            ) {
+                override suspend fun handleSuccess(resultObj: List<StudentListResponseItem>): DataState<MessageViewState> {
+                    val viewState = MessageViewState(studentList = resultObj)
+                    return DataState.data(
+                        response = null,
+                        data = viewState,
+                        stateEvent = stateEvent
+                    )
 
+                }
+            }.getResult()
+        )
     }
 
     override fun getResourceList(

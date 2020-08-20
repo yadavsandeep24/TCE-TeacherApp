@@ -1,8 +1,8 @@
 package com.tce.teacherapp.ui.dashboard.messages
 
+import com.tce.teacherapp.api.response.StudentListResponseItem
 import com.tce.teacherapp.db.entity.Message
 import com.tce.teacherapp.db.entity.MessageResource
-import com.tce.teacherapp.db.entity.Student
 import com.tce.teacherapp.repository.MainRepository
 import com.tce.teacherapp.ui.BaseViewModel
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageStateEvent
@@ -55,7 +55,7 @@ class MessageViewModel @Inject constructor(val mainRepository: MainRepository) :
         setViewState(update)
     }
 
-    private fun setStudentList(studentList: List<Student>) {
+    private fun setStudentList(studentList: List<StudentListResponseItem>) {
         val update = getCurrentViewStateOrNew()
         update.studentList = studentList
         setViewState(update)

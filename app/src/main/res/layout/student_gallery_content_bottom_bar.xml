@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bottom_bar_main_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="25dp"
+    android:paddingEnd="25dp"
+    android:paddingBottom="30dp"
+    android:paddingTop="20dp"
+    android:gravity="bottom"
+    android:layout_alignParentBottom="true"
+    android:background="@color/color_black">
+    <com.tce.teacherapp.util.RubikMediumTextview
+    android:id="@+id/tv_title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@color/white"
+    android:textSize="@dimen/font_size_14_dp"
+    android:text="Teacher’s Description"/>
+
+    <com.tce.teacherapp.util.RubikRegularEditTextview
+        android:id="@+id/edt_caption"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/tv_title"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:layout_marginTop="10dp"
+        android:textSize="@dimen/font_size_14_dp"
+        android:textColor="@color/dark"
+        android:visibility="gone"/>
+
+    <com.tce.teacherapp.util.RubikRegularTextview
+        android:id="@+id/tv_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/tv_title"
+        android:textSize="@dimen/font_size_12_dp"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipisc elit, dsd  ds sdrer"/>
+</RelativeLayout>

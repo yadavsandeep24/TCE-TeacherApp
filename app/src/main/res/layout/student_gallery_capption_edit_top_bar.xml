@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/event_top_container"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@color/color_black">
+
+    <TextView
+        android:id="@+id/tv_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/ic_thick_arrow_left" />
+
+
+    <com.tce.teacherapp.util.RubikBoldTextview
+        android:id="@+id/toolbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/title_subjects"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:textSize="16dp" />
+
+    <com.tce.teacherapp.util.RubikMediumTextview
+        android:id="@+id/tvDone"
+        android:layout_width="75dp"
+        android:layout_height="30dp"
+        android:text="Save"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/bg_white_rounded"
+        android:textColor="#fa4b28"
+        android:textSize="@dimen/font_size_14_dp"
+        android:gravity="center"
+        android:visibility="visible"/>
+
+</RelativeLayout>

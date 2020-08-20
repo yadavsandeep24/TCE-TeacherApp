@@ -2,6 +2,8 @@ package com.tce.teacherapp.fragments.main
 
 import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModelProvider
+import com.tce.teacherapp.ui.dashboard.messages.GroupChatFragment
+import com.tce.teacherapp.ui.dashboard.messages.ResourceFragment
 import com.tce.teacherapp.ui.dashboard.students.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -88,6 +90,12 @@ constructor(
 
             StudentProfileUploadResourceSelectionFragment::class.java.name -> {
                 StudentProfileUploadResourceSelectionFragment(viewModelFactory)
+            }
+            GroupChatFragment::class.java.name -> {
+                GroupChatFragment(viewModelFactory)
+            }
+            ResourceFragment::class.java.name -> {
+                ResourceFragment(viewModelFactory)
             }
 
             else -> {

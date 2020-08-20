@@ -10,5 +10,7 @@ data class StudentGalleryResponseItem(
     var studentGalleryDataList: List<StudentGalleryData>,
 
     @Expose
-    val Date: String
+    val Date: String,
+
+    val isSelected: Boolean
 )

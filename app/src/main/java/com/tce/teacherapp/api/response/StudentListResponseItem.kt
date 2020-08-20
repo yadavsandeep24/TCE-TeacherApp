@@ -48,5 +48,8 @@ data class StudentListResponseItem(
     val school: String,
 
     @Expose
-    val teacher: String
-):Parcelable
+    val teacher: String,
+
+    var isSelected: Boolean,
+var selectedColor : Int
+) : Parcelable

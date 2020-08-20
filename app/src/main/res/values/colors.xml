@@ -5,8 +5,8 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="subject_actionbar_color">#5a69ff</color>
     <color name="bottom_navigation_color">#5a69ff</color>
-    <color name="color_black">#000000</color>
-    <color name="white">#ffffff</color>
+    <color name="color_black">#050505</color>
+    <color name="white">#fcfcfc</color>
     <color name="grey">#CBD4E8</color>
     <color name="dark_grey">#BBC2D3</color>
     <color name="dim_color">#3C707079</color>
@@ -42,4 +42,7 @@
     <color name="pale_grey_two">#f5f8ff</color>
     <color name="light_grey_blue">#a0a5b9</color>
     <color name="soft_blue">#5591ff</color>
+    <color name="soft_white">#fcfcfc</color>
+    <color name="ice">#e6faf5</color>
+    <color name="turquoise">#00c8af</color>
 </resources>

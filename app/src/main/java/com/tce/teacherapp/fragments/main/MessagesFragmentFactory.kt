@@ -28,7 +28,7 @@ constructor(
             }
 
             GroupChatFragment::class.java.name -> {
-                GroupChatFragment()
+                GroupChatFragment(viewModelFactory)
             }
 
             ResourceFragment::class.java.name -> {

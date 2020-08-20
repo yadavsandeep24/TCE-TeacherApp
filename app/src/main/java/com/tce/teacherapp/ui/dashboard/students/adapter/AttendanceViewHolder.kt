@@ -6,8 +6,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.tce.teacherapp.ui.dashboard.students.interfaces.ViewHolderClickListener
 import com.tce.teacherapp.R
+import com.tce.teacherapp.ui.dashboard.students.interfaces.ViewHolderClickListener
 
 
 class AttendanceViewHolder(itemView: View, val r_tap: ViewHolderClickListener) : RecyclerView.ViewHolder(itemView),

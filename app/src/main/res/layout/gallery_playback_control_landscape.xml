@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<RelativeLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent">
+    <com.tce.teacherapp.util.RubikMediumTextview
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="Video"
+        android:textColor="@color/white"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:textSize="18dp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_gallery_player_control"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="15dp"
+        android:padding="10dp"
+        android:layout_alignParentBottom="true">
+
+        <ImageButton android:id="@id/exo_prev"
+            android:visibility="visible"
+            android:layout_width="20dp"
+            android:layout_centerVertical="true"
+            android:layout_height="20dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/ic_previous"/>
+
+        <ImageButton android:id="@id/exo_play"
+            android:layout_toEndOf="@+id/exo_prev"
+            android:layout_width="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_play"
+            android:layout_height="20dp"/>
+
+        <ImageButton android:id="@id/exo_pause"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_pause"
+            android:layout_toEndOf="@+id/exo_play"/>
+
+        <ImageButton android:id="@id/exo_rew"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_rewind"
+            android:layout_toEndOf="@+id/exo_pause"/>
+        <ImageButton android:id="@id/exo_next"
+            android:visibility="visible"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="5dp"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/exo_rew"
+            android:background="@drawable/ic_next"/>
+
+        <com.google.android.exoplayer2.ui.DefaultTimeBar
+            android:id="@id/exo_progress"
+            android:layout_width="match_parent"
+            android:layout_toEndOf="@id/exo_next"
+            android:layout_centerVertical="true"
+            android:backgroundTint="#f64b30"
+            app:played_color="#f64b30"
+            app:scrubber_color="#f64b30"
+            app:unplayed_color="#b4b4bd"
+            android:layout_toStartOf="@id/exo_position"
+            android:layout_height="wrap_content"/>
+        <com.tce.teacherapp.util.RubikMediumTextview
+            android:id="@id/exo_position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:paddingLeft="5dp"
+            android:layout_centerVertical="true"
+            android:includeFontPadding="false"
+            android:layout_toStartOf="@+id/tv_divide"
+            android:textColor="@color/white"/>
+        <TextView
+            android:id="@+id/tv_divide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/exo_duration"
+            android:textColor="@color/white"/>
+
+        <com.tce.teacherapp.util.RubikMediumTextview
+            android:id="@id/exo_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:paddingRight="10dp"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_toStartOf="@+id/img_minimize"
+            android:textColor="@color/white"/>
+
+        <ImageButton android:id="@+id/img_minimize"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_centerVertical="true"
+            android:visibility="visible"
+            android:backgroundTint="@color/white"
+            android:background="@drawable/ic_minimise"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
+</layout>

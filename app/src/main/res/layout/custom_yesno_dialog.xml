@@ -40,6 +40,7 @@
             android:background="#fffad7"
             android:layout_gravity="center"
             android:gravity="center"
+            android:layout_marginTop="5dp"
             android:orientation="vertical">
 
             <com.tce.teacherapp.util.RubikBoldTextview
@@ -49,7 +50,7 @@
                 android:text="Confirm Logout"
                 android:textColor="#320500"
                 android:visibility="gone"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:textSize="@dimen/font_size_14_dp"/>
 
             <com.tce.teacherapp.util.RubikMediumTextview
@@ -58,7 +59,8 @@
                 android:layout_height="wrap_content"
                 android:text="You will return to the login screen"
                 android:textColor="#320500"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
                 android:textSize="@dimen/font_size_12_dp"/>
 
             <LinearLayout
