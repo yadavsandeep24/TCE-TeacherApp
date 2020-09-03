@@ -94,6 +94,8 @@ constructor(
             if(studentGallerydata.sharedItemList != null  && studentGallerydata.sharedItemList.isNotEmpty()){
                 binding.tvSharedName.text = studentGallerydata.sharedItemList[0].Name
                 binding.tvSharedCount.text = (studentGallerydata.sharedItemList.size -1).toString()+" others"
+            }else{
+                binding.llSharedUserContainer.visibility = View.GONE
             }
         }
         var lblCaption = studentGallerydata?.description
@@ -172,7 +174,9 @@ constructor(
             }
         }
         binding.bottomBar.tv_desc.text = lblCaption
-        makeTextViewResizable(binding.bottomBar.tv_desc, 1, "see more", true)
+        if(binding.bottomBar.tv_desc.text.isNotEmpty()) {
+            makeTextViewResizable(binding.bottomBar.tv_desc, 1, "see more", true)
+        }
     }
     fun makeTextViewResizable(tv: TextView, maxLine: Int, expandText: String, viewMore: Boolean) {
         if (tv.tag == null) {
@@ -312,6 +316,12 @@ constructor(
                 .build()
         }
         binding.playerView.player = player
+        if (studentGallerydata != null) {
+            if(studentGallerydata.contenttype.equals("audio",true)){
+                binding.playerView.controllerHideOnTouch = false
+                binding.playerView.controllerShowTimeoutMs =0
+            }
+        }
         val uri = Uri.parse(url)
         val mediaSource = buildMediaSource(uri)
         player!!.playWhenReady = playWhenReady

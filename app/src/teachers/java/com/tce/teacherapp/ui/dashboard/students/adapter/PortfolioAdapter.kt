@@ -4,7 +4,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.tce.teacherapp.R
 import com.tce.teacherapp.api.response.StudentListResponseItem
 import com.tce.teacherapp.ui.dashboard.students.StudentListFragment
@@ -18,25 +23,9 @@ import java.util.*
  */
 @FlowPreview
 @ExperimentalCoroutinesApi
-class PortfolioAdapter(val context: Context, val listener: ViewHolderClickListener) : RecyclerView.Adapter<PortfolioViewHolder>(),
-    ViewHolderClickListener {
-    var isShowCheckBox: Boolean = false
-    var isSelectAll: Boolean = false
-
-    override fun onLongTap(index: Int) {
-        if (!StudentListFragment.isMultiSelectOn) {
-            StudentListFragment.isMultiSelectOn = true
-        }
-        addIDIntoSelectedIds(index)
-    }
-
-    override fun onTap(index: Int,item: StudentListResponseItem?) {
-        if (StudentListFragment.isMultiSelectOn) {
-            addIDIntoSelectedIds(index)
-        } else {
-            listener.onTap(index,modelList[index])
-        }
-    }
+class PortfolioAdapter(val context: Context, val listener: ViewHolderClickListener) :
+    RecyclerView.Adapter<PortfolioViewHolder>() {
+    private var isShowCheckBox: Boolean = false
 
     fun setIsShowCheckBox(isShow: Boolean) {
         isShowCheckBox = isShow
@@ -44,7 +33,9 @@ class PortfolioAdapter(val context: Context, val listener: ViewHolderClickListen
     }
 
     fun setIsSelectAll(isSelect: Boolean) {
-        isSelectAll = isSelect
+        for (item in modelList) {
+            item.isSelected = isSelect
+        }
         notifyDataSetChanged()
     }
 
@@ -52,7 +43,7 @@ class PortfolioAdapter(val context: Context, val listener: ViewHolderClickListen
     fun addIDIntoSelectedIds(index: Int) {
         val id = modelList[index].id
         if (selectedIds.contains(id.toString())) {
-            var selectedIndex = selectedIds.indexOf(id.toString())
+            val selectedIndex = selectedIds.indexOf(id)
             selectedIds.removeAt(selectedIndex)
         } else {
             selectedIds.add(id.toString())
@@ -80,11 +71,16 @@ class PortfolioAdapter(val context: Context, val listener: ViewHolderClickListen
             holder.chkSelect.visibility = View.GONE
         }
 
-        holder.chkSelect.isChecked = isSelectAll
+        holder.chkSelect.isChecked = modelList[position].isSelected
+
+        holder.chkSelect.setOnCheckedChangeListener { _, isChecked ->
+            modelList[position].isSelected = isChecked
+            listener.onCheckBoxClicked(modelList[position])
+        }
 
         val id = modelList[position].id
 
-        if (selectedIds.contains(id.toString())) {
+        if (selectedIds.contains(id)) {
             //if item is selected then,set foreground color of FrameLayout.
             // holder?.mainContainer?.background = ColorDrawable(ContextCompat.getColor(context, R.color.dim_color))
             holder.mainContainer.alpha = 0.5F
@@ -97,13 +93,40 @@ class PortfolioAdapter(val context: Context, val listener: ViewHolderClickListen
             holder.tvStudentName.alpha = 1F
             holder.imgStudent.alpha = 1F
         }
+        Glide.with(context)
+            .load(modelList[position].ImagePath)
+            .placeholder(R.drawable.ic_profile_icon_present)
+            .into(holder.imgStudent)
+
+        holder.mainContainer.setOnClickListener {
+            if (StudentListFragment.isMultiSelectOn) {
+                addIDIntoSelectedIds(position)
+            } else {
+                listener.onTap(position, modelList[position])
+            }
+        }
+        holder.mainContainer.setOnLongClickListener {
+            if (!StudentListFragment.isMultiSelectOn) {
+                StudentListFragment.isMultiSelectOn = true
+            }
+            addIDIntoSelectedIds(position)
+            true
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PortfolioViewHolder {
         val inflater = LayoutInflater.from(parent?.context)
         val itemView = inflater.inflate(R.layout.portfolio_list_item, parent, false)
-        return PortfolioViewHolder(itemView, this)
+        return PortfolioViewHolder(itemView)
     }
 
 
+}
+
+class PortfolioViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+    val tvStudentName: TextView = itemView.findViewById(R.id.tv_student_name)
+    val mainContainer: LinearLayout = itemView.findViewById(R.id.root_layout)
+    val imgStudent = itemView.findViewById<AppCompatImageView>(R.id.img_student)
+    val chkSelect: CheckBox = itemView.findViewById(R.id.chk_completed)
 }

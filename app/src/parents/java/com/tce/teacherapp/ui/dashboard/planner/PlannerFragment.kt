@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.EpoxyVisibilityTracker
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tce.teacherapp.R
+import com.tce.teacherapp.api.response.StudentListResponseItem
 import com.tce.teacherapp.databinding.FragmentPlannerBinding
 import com.tce.teacherapp.db.entity.*
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
@@ -82,7 +83,6 @@ constructor(
         selectedDate = arguments?.getString("date")
         // (activity as DashboardActivity).setCustomToolbar(R.layout.subject_list_top_bar)
         (activity as DashboardActivity).expandAppBar(false)
-        (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
         (activity as DashboardActivity).showHideBottomBar(true)
         viewModel.setStateEvent(PlannerStateEvent.GetPlannerData(false,selectedDate))
 
@@ -223,7 +223,7 @@ constructor(
                         for (child in it) {
                             childEpoxyHolder {
                                 id(child.id)
-                                strStudentName(child.name)
+                                strStudentName(child.Name)
                                 student(child)
                                 childClickListener(this@PlannerFragment)
                             }
@@ -328,8 +328,8 @@ constructor(
         }
     }
 
-    override fun onChildListItemClick(student: Student) {
-        viewModel.setStateEvent(PlannerStateEvent.SetChildSelectedPosition(student.id-1))
+    override fun onChildListItemClick(student: StudentListResponseItem) {
+        viewModel.setStateEvent(PlannerStateEvent.SetChildSelectedPosition(student.id.toInt()-1))
         val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
         bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
         binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))

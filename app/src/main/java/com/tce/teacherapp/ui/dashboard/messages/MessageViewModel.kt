@@ -82,7 +82,7 @@ class MessageViewModel @Inject constructor(val mainRepository: MainRepository) :
             }
 
             is MessageStateEvent.GetStudentEvent -> {
-                mainRepository.getStudentList(stateEvent.query,stateEvent = stateEvent)
+                mainRepository.getStudentList(stateEvent.classID,stateEvent.query,stateEvent = stateEvent)
             }
 
             is MessageStateEvent.GetMessageConversionEvent -> {

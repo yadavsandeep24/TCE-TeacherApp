@@ -68,8 +68,21 @@ constructor(
         if (studentGallerydata != null) {
             for (sharedItem in studentGallerydata.sharedItemList) {
                 val student = StudentListResponseItem(
+                    emptyList(),
                     "", "", "", "", sharedItem.Name, emptyList(),
-                    emptyList(), false, false, "", "", sharedItem.id, "", "", false, 0
+                    emptyList(), emptyList(),
+                    Term1ReportStatus = false,
+                    Term2ReportStatus = false,
+                    studentClass = "",
+                    grade_division_id = "",
+                    id = sharedItem.id,
+                    school = "",
+                    schooladdress = "",
+                    schoolcontact = "",
+                    teacher = "",
+                    Term1ReportPDF = "",
+                    Term2ReportPDF = "",
+                    isSelected = false
                 )
                 studentList.add(student)
             }
@@ -91,7 +104,11 @@ constructor(
     override fun onLongTap(index: Int) {
     }
 
-    override fun onTap(index: Int, item: StudentListResponseItem?) {
+    override fun onTap(index: Int, item: StudentListResponseItem) {
         activity?.onBackPressed()
+    }
+
+    override fun onCheckBoxClicked(item: StudentListResponseItem) {
+
     }
 }

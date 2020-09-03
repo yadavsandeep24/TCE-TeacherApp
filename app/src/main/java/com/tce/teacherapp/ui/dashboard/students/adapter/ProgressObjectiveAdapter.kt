@@ -32,12 +32,7 @@ class ProgressObjectiveAdapter(val context: Context) :
 
     class ObjectiveAdapter(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val tvObjective: TextView
-
-        init {
-            tvObjective = itemView.findViewById(R.id.tvObjective)
-
-        }
+        val tvObjective: TextView = itemView.findViewById(R.id.tvObjective)
 
 
     }

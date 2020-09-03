@@ -4,7 +4,10 @@
     android:id="@+id/student_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp">
+    android:paddingStart="25dp"
+    android:paddingEnd="25dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_user"

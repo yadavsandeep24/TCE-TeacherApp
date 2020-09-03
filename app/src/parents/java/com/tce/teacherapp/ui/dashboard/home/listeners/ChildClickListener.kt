@@ -1,7 +1,7 @@
 package com.tce.teacherapp.ui.dashboard.home.listeners
 
-import com.tce.teacherapp.db.entity.Student
+import com.tce.teacherapp.api.response.StudentListResponseItem
 
 interface ChildClickListener {
-    fun onChildListItemClick(student : Student)
+    fun onChildListItemClick(student: StudentListResponseItem)
 }

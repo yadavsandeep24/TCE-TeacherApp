@@ -18,7 +18,7 @@ import com.tce.teacherapp.databinding.FragmentProgressCardBinding
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.students.adapter.ProgressCardAdapter
 import kotlinx.android.synthetic.main.activity_dashboard.*
-import kotlinx.android.synthetic.teachers.fragment_dashboard_home.*
+import kotlinx.android.synthetic.main.fragment_progress_card.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import java.util.*
@@ -52,7 +52,7 @@ constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as DashboardActivity).expandAppBar(false)
-
+        (activity as DashboardActivity).bottom_navigation_view.visibility = View.GONE
         val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
 
         bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
@@ -72,16 +72,20 @@ constructor(
             if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
                 bottomSheetBehavior.state =
                     com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
+                binding.maskLayout.visibility = View.VISIBLE
                 binding.maskLayout.setBackgroundColor(resources.getColor(R.color.dim_color_dashboard))
-                (activity as DashboardActivity).bottom_navigation_view.visibility = View.INVISIBLE
             } else {
                 bottomSheetBehavior.state =
                     com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                binding.maskLayout.visibility = View.GONE
                 binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
-                (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
             }
         }
-
+        binding.maskLayout.setOnClickListener {
+            bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+            bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+            binding.maskLayout.visibility = View.GONE
+        }
         binding.chatContainer.setOnClickListener {
             val dialog = Dialog(requireActivity(), android.R.style.Theme_Dialog)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -114,7 +118,8 @@ constructor(
             val txtYes = dialog.findViewById(R.id.tvYes) as TextView
             val txtNo = dialog.findViewById(R.id.tvNo) as TextView
 
-            txtYes.setOnClickListener(View.OnClickListener {
+            txtYes.setOnClickListener {
+                binding.maskLayout.visibility = View.GONE
                 binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
                 dialog.dismiss()
 
@@ -136,7 +141,7 @@ constructor(
                     dialog.dismiss()
                 }, 1000)
 
-            })
+            }
 
             txtNo.setOnClickListener(View.OnClickListener {
                 binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
@@ -149,8 +154,8 @@ constructor(
         binding.rvProgress.setHasFixedSize(true)
         val myAdapter = ProgressCardAdapter(requireContext())
         binding.rvProgress.adapter = myAdapter
-        myAdapter?.modelList = getProgressData()
-        myAdapter?.notifyDataSetChanged()
+        myAdapter.modelList = getProgressData()
+        myAdapter.notifyDataSetChanged()
 
         binding.tvBack.setOnClickListener {
             (activity as DashboardActivity).onBackPressed()

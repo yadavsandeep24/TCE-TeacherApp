@@ -18,7 +18,7 @@
     </style>
 
     <style name="Widget.BottomNavigationView" parent="Widget.Design.BottomNavigationView">
-        <item name="fontFamily">@fonts/RobotoSlab-Regular</item>
+        <item name="fontFamily">@fonts/Rubik-Regular</item>
     </style>
 
     <style name="MyCardView" parent="@style/Widget.MaterialComponents.CardView">

@@ -25,7 +25,7 @@ abstract class NewMessageEpoxyHolder: EpoxyModelWithHolder<Holder2>() {
         holder.tvStudentName.text = studentVo.Name
         holder.lnrMainContainer.setOnClickListener { listener() }
         if (studentVo.isSelected) {
-            holder.lnrMainContainer.setBackgroundColor(holder.lnrMainContainer.resources.getColor(studentVo.selectedColor))
+            holder.lnrMainContainer.setBackgroundColor(holder.lnrMainContainer.resources.getColor(R.color.transparent))
         }else{
             holder.lnrMainContainer.setBackgroundColor(holder.lnrMainContainer.resources.getColor(R.color.transparent))
         }

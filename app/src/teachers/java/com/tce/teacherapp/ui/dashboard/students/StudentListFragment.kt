@@ -32,7 +32,7 @@ import com.tce.teacherapp.ui.dashboard.students.state.StudentStateEvent
 import com.tce.teacherapp.util.calenderView.utils.yearMonth
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.calendar_day_legend.view.*
-import kotlinx.android.synthetic.teachers.fragment_dashboard_home.*
+import kotlinx.android.synthetic.main.fragment_student_list.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import org.jetbrains.anko.childrenSequence
@@ -184,7 +184,7 @@ constructor(
         val formattedString: String =  SimpleDateFormat("dd MMMM yyyy EEEE").format(Date())
         binding.tvDate.text = formattedString
 
-        viewModel.setStateEvent(StudentStateEvent.GetStudentEvent)
+        viewModel.setStateEvent(StudentStateEvent.GetStudentEvent(0,""))
         //viewModel.setStateEvent(StudentStateEvent.GetAttendanceData)
       //  viewModel.setStateEvent(StudentStateEvent.GetFeedbackMaster)
        // viewModel.setStateEvent(StudentStateEvent.GetStudentPortfolio)

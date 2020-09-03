@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/exFiveDayLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/calender_day_border">
+
+        <View
+            android:id="@+id/vw_close"
+            android:layout_width="@dimen/font_size_16_dp"
+            android:layout_height="@dimen/font_size_16_dp"
+            android:background="@drawable/ic_icon_absent_close"
+            android:visibility="gone"
+            android:layout_alignParentEnd="true"/>
+
+        <com.tce.teacherapp.util.RubikMediumTextview
+            android:id="@+id/exFiveDayText"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="9dp"
+            android:textColor="@color/calender_text_grey"
+            android:textSize="14sp"
+            tools:text="24"
+            android:gravity="center"
+            android:layout_alignParentTop="true"/>
+
+        <com.tce.teacherapp.util.RubikMediumTextview
+            android:id="@+id/tv_event"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:text="Diwali Holid"
+            android:layout_marginTop="9dp"
+            android:gravity="center"
+            android:visibility="gone"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/exFiveDayText"
+            android:textColor="@color/white"
+            android:background="@color/clear_blue"
+            android:textSize="@dimen/font_size_9_dp"/>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

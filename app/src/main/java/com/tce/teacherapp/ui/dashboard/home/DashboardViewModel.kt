@@ -1,5 +1,6 @@
 package com.tce.teacherapp.ui.dashboard.home
 
+import com.tce.teacherapp.api.response.StudentListResponseItem
 import com.tce.teacherapp.db.entity.*
 import com.tce.teacherapp.repository.MainRepository
 import com.tce.teacherapp.ui.BaseViewModel
@@ -53,7 +54,7 @@ class DashboardViewModel @Inject constructor(val mainRepository: MainRepository)
         }
     }
 
-    private fun setChildList(it: ArrayList<Student>) {
+    private fun setChildList(it: ArrayList<StudentListResponseItem>) {
         val update = getCurrentViewStateOrNew()
         update.childList = it
         setViewState(update)

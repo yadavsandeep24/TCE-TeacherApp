@@ -8,10 +8,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
-import android.text.Html
-import android.text.SpannableStringBuilder
-import android.text.Spanned
-import android.text.TextPaint
+import android.text.*
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.*
@@ -65,42 +62,59 @@ constructor(
         } else {
             activity?.window!!.statusBarColor = resources.getColor(R.color.color_black)
         }
-        val studentGallerydata = arguments?.getParcelable("studentGalleryData") as StudentGalleryData?
+        val studentGallerydata =
+            arguments?.getParcelable("studentGalleryData") as StudentGalleryData?
         (activity as DashboardActivity).expandAppBar(false)
         (activity as DashboardActivity).bottom_navigation_view.visibility = View.GONE
 
         binding.topBar.tv_back.setOnClickListener {
             activity?.onBackPressed()
         }
+        var src = studentGallerydata!!.image
+        if(!studentGallerydata.src.isBlank()) {
+            src = studentGallerydata.src
+        }
 
         if (studentGallerydata != null) {
             Glide.with(requireContext())
-                .load(studentGallerydata.image)
+                .load(src)
                 .placeholder(R.drawable.dummy_video)
                 .into(binding.ivGallery)
 
-            if(studentGallerydata.sharedItemList != null  && studentGallerydata.sharedItemList.isNotEmpty()){
+            if (studentGallerydata.sharedItemList != null && studentGallerydata.sharedItemList.isNotEmpty()) {
                 binding.tvSharedName.text = studentGallerydata.sharedItemList[0].Name
-                binding.tvSharedCount.text = (studentGallerydata.sharedItemList.size -1).toString()+" others"
+                binding.tvSharedCount.text =
+                    (studentGallerydata.sharedItemList.size - 1).toString() + " others"
+            }else {
+                binding.llSharedUserContainer.visibility = View.GONE
             }
         }
         var lblCaption = studentGallerydata?.description
 
         binding.topBar.tv_tag.setOnClickListener {
             val bundle = Bundle()
-            bundle.putParcelable("studentGalleryData",studentGallerydata)
-            findNavController().navigate(R.id.action_studentGalleryImagePostFragment_to_studentGalleryTagStudentFragment,bundle)
+            bundle.putParcelable("studentGalleryData", studentGallerydata)
+            findNavController().navigate(
+                R.id.action_studentGalleryImagePostFragment_to_studentGalleryTagStudentFragment,
+                bundle
+            )
         }
         binding.flExpandContainer.setOnClickListener {
             val bundle = Bundle()
-            bundle.putParcelable("studentGalleryData",studentGallerydata)
-            findNavController().navigate(R.id.action_studentGalleryImagePostFragment_to_studentGalleryImagePostDetailFragment,bundle)
+            bundle.putParcelable("studentGalleryData", studentGallerydata)
+            findNavController().navigate(
+                R.id.action_studentGalleryImagePostFragment_to_studentGalleryImagePostDetailFragment,
+                bundle
+            )
         }
 
         binding.llSharedUserContainer.setOnClickListener {
             val bundle = Bundle()
-            bundle.putParcelable("studentGalleryData",studentGallerydata)
-            findNavController().navigate(R.id.action_studentGalleryImagePostFragment_to_studentGalleryTaggedStudentFragment,bundle)
+            bundle.putParcelable("studentGalleryData", studentGallerydata)
+            findNavController().navigate(
+                R.id.action_studentGalleryImagePostFragment_to_studentGalleryTaggedStudentFragment,
+                bundle
+            )
         }
         binding.topBar.tv_edit.setOnClickListener {
             binding.bottomBar.background = resources.getDrawable(R.color.white)
@@ -113,10 +127,30 @@ constructor(
             binding.bottomBar.tv_desc.visibility = View.GONE
             binding.bottomBar.edt_caption.visibility = View.VISIBLE
             binding.bottomBar.edt_caption.setText(lblCaption)
-            lblCaption?.length?.let { it1 -> binding.bottomBar.edt_caption.setSelection(it1) }
+            if(binding.bottomBar.edt_caption.text!!.isNotEmpty()) {
+                lblCaption.length.let { it1 -> binding.bottomBar.edt_caption.setSelection(it1) }
+            }
             binding.bottomBar.edt_caption.requestFocus()
         }
+        binding.topBar.tv_save.isEnabled = false
+        binding.topBar.tv_save.alpha  =0.4f
+        binding.bottomBar.edt_caption.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if(s.isNullOrEmpty()){
+                    binding.topBar.tv_save.isEnabled = false
+                    binding.topBar.tv_save.alpha  =0.4f
+                }else{
+                    binding.topBar.tv_save.isEnabled = true
+                    binding.topBar.tv_save.alpha  =1f
+                }
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
+            }
+            override fun afterTextChanged(s: Editable) {
+
+            }
+        })
         binding.topBar.tv_save.setOnClickListener {
             lblCaption = binding.bottomBar.edt_caption.text.toString().trim()
             binding.bottomBar.tv_desc.text = lblCaption
@@ -161,7 +195,9 @@ constructor(
             }
         }
         binding.bottomBar.tv_desc.text = lblCaption
-        makeTextViewResizable(binding.bottomBar.tv_desc, 1, "see more", true)
+        if(binding.bottomBar.tv_desc.text.isNotEmpty()) {
+            makeTextViewResizable(binding.bottomBar.tv_desc, 1, "see more", true)
+        }
 
     }
 

@@ -1,8 +1,8 @@
 package com.tce.teacherapp.ui.dashboard.planner
 
+import com.tce.teacherapp.api.response.StudentListResponseItem
 import com.tce.teacherapp.db.entity.DailyPlanner
 import com.tce.teacherapp.db.entity.MonthlyPlanner
-import com.tce.teacherapp.db.entity.Student
 import com.tce.teacherapp.repository.MainRepository
 import com.tce.teacherapp.ui.BaseViewModel
 import com.tce.teacherapp.ui.dashboard.planner.state.PlannerStateEvent
@@ -37,7 +37,7 @@ class PlannerViewModel @Inject constructor(val mainRepository: MainRepository) :
 
     }
 
-    private fun setChildList(list: ArrayList<Student>) {
+    private fun setChildList(list: ArrayList<StudentListResponseItem>) {
         val update = getCurrentViewStateOrNew()
         update.childList = list
         setViewState(update)

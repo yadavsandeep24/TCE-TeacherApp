@@ -15,14 +15,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.airbnb.epoxy.EpoxyVisibilityTracker
 import com.tce.teacherapp.R
 import com.tce.teacherapp.api.response.StudentListResponseItem
 import com.tce.teacherapp.databinding.FragmentStudentGalleryTagStudentBinding
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
-import com.tce.teacherapp.ui.dashboard.messages.adapter.newMessageEpoxyHolder
+import com.tce.teacherapp.ui.dashboard.messages.adapter.NewMessageAdapter
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageStateEvent
-import com.tce.teacherapp.ui.dashboard.students.adapter.selectedStudentTagEpoxyHolder
+import com.tce.teacherapp.ui.dashboard.students.adapter.SelectedStudenttagAdapter
+import com.tce.teacherapp.ui.dashboard.students.adapter.iSelectedStudentrClickListener
+import com.tce.teacherapp.ui.dashboard.students.interfaces.ViewHolderClickListener
 import com.tce.teacherapp.ui.dashboard.students.state.StudentStateEvent
 import com.tce.teacherapp.util.StateMessageCallback
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -35,7 +36,8 @@ class StudentGalleryTagStudentFragment
 @Inject
 constructor(
     viewModelFactory: ViewModelProvider.Factory
-) : BaseStudentFragment(R.layout.fragment_student_gallery_tag_student, viewModelFactory) {
+) : BaseStudentFragment(R.layout.fragment_student_gallery_tag_student, viewModelFactory),
+    ViewHolderClickListener, iSelectedStudentrClickListener {
 
     private lateinit var binding: FragmentStudentGalleryTagStudentBinding
     private var studentList: ArrayList<StudentListResponseItem>? = ArrayList()
@@ -87,7 +89,7 @@ constructor(
             uiCommunicationListener.hideSoftKeyboard()
             binding.svNewMessage.setQuery("", false)
             binding.svNewMessage.clearFocus()
-            viewModel.setStateEvent(MessageStateEvent.GetStudentEvent(""))
+            viewModel.setStateEvent(MessageStateEvent.GetStudentEvent(0,""))
             false
         }
 
@@ -103,12 +105,14 @@ constructor(
             layoutManager = linearLayoutManager
             setHasFixedSize(true)
         }
+        val selectedStudentAdapter = SelectedStudenttagAdapter(requireContext(),this)
+        binding.rvSelectedStudent.adapter = selectedStudentAdapter
 
         binding.rvNewMessage.layoutManager = GridLayoutManager(activity, 1)
         binding.rvNewMessage.setHasFixedSize(true)
-        val epoxyVisibilityTracker = EpoxyVisibilityTracker()
-        epoxyVisibilityTracker.attach(binding.rvNewMessage)
-        viewModel.setStateEvent(StudentStateEvent.GetStudentEvent)
+        val newMessageAdapter = NewMessageAdapter(requireContext(),R.color.ice,this)
+        binding.rvNewMessage.adapter = newMessageAdapter
+        viewModel.setStateEvent(StudentStateEvent.GetStudentEvent(0,""))
         subscribeObservers()
 
         tvSend = (activity as DashboardActivity).binding.toolBar.findViewById(R.id.tvDone)
@@ -136,9 +140,11 @@ constructor(
 
                 viewState.studentListResponse?.let { mainSList ->
                     mainStudentList = mainSList
-                    binding.rvNewMessage.withModels {
+                    val adapter = binding.rvNewMessage.adapter  as NewMessageAdapter
+                    adapter.setData(mainSList)
+              /*      binding.rvNewMessage.withModels {
                         for (msg in mainStudentList!!) {
-                            msg.selectedColor = R.color.ice
+                            //msg.selectedColor = R.color.ice
                             newMessageEpoxyHolder {
                                 id(msg.id.toLong())
                                 studentVo(msg)
@@ -182,7 +188,7 @@ constructor(
                             }
                         }
 
-                    }
+                    }*/
 
                 }
 
@@ -213,6 +219,40 @@ constructor(
         })
 
 
+    }
+
+    override fun onLongTap(index: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onTap(index: Int, item: StudentListResponseItem) {
+        val adapter = binding.rvSelectedStudent.adapter  as SelectedStudenttagAdapter
+        binding.rvSelectedStudent.visibility = View.VISIBLE
+        tvSend.visibility = View.VISIBLE
+        val isExist = adapter.modelList.any{ it.id ==  item.id }
+        if(!isExist) {
+            adapter.modelList.add(item)
+        }
+        adapter.notifyDataSetChanged()
+    }
+
+    override fun onCheckBoxClicked(item: StudentListResponseItem) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onClose(item: StudentListResponseItem) {
+        val selectedStudentAdapter = binding.rvSelectedStudent.adapter  as SelectedStudenttagAdapter
+        val newMessageAdapter = binding.rvNewMessage.adapter  as NewMessageAdapter
+        selectedStudentAdapter.modelList.remove(item)
+        selectedStudentAdapter.notifyDataSetChanged()
+        if (selectedStudentAdapter.modelList.isEmpty()) {
+            binding.rvSelectedStudent.visibility = View.GONE
+            tvSend.visibility = View.GONE
+        } else {
+            binding.rvSelectedStudent.visibility = View.VISIBLE
+            tvSend.visibility = View.VISIBLE
+        }
+        newMessageAdapter.updateListItem(item)
     }
 
 }

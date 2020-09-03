@@ -208,7 +208,7 @@ constructor(viewModelFactory: ViewModelProvider.Factory) : BaseFragment(R.layout
 
         override fun updateDrawState(ds: TextPaint) {
             super.updateDrawState(ds)
-            ds.color = resources.getColor(R.color.login_support_mail)
+            ds.color = resources.getColor(R.color.orangey_red)
             ds.isUnderlineText = false
         }
 

@@ -42,6 +42,13 @@ class StudentDateWiseGalleryAdapter(
         if (isShowCheckBox) {
             holder.chkGallary.visibility = View.VISIBLE
             holder.chkGallary.isChecked = modelList[position].isSelected
+            if (modelList[position].isSelected) {
+                holder.cardMain.strokeWidth =
+                    context.resources.getDimension(R.dimen.card_stroke_width_3dp).toInt()
+            } else {
+                holder.cardMain.strokeWidth =
+                    context.resources.getDimension(R.dimen.card_stroke_width_0dp).toInt()
+            }
             holder.chkGallary.setOnCheckedChangeListener { _, isChecked ->
                 modelList[position].isSelected = isChecked
                 listener.onCheckBoxClicked(modelList[position])

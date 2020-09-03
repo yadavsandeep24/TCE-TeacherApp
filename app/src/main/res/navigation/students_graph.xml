@@ -9,22 +9,22 @@
         android:id="@+id/studentListFragment"
         android:name="com.tce.teacherapp.ui.dashboard.students.StudentListFragment"
         android:label="fragment_student_list"
-        tools:layout="@layout/fragment_student_list" >
+        tools:layout="@layout/fragment_student_list">
         <action
             android:id="@+id/action_studentListFragment_to_portfolioFragment"
             app:destination="@id/portfolioFragment"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/studentListFragment"/>
+            app:popUpTo="@id/studentListFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_studentListFragment_to_studentGalleryFragment"
             app:destination="@id/studentGalleryFragment"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/studentListFragment"/>
+            app:popUpTo="@id/studentListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/portfolioFragment"
         android:name="com.tce.teacherapp.ui.dashboard.students.PortfolioFragment"
-        android:label="PortfolioFragment" >
+        android:label="PortfolioFragment">
         <action
             android:id="@+id/action_portfolioFragment_to_feedbackFragment"
             app:destination="@id/feedbackFragment"
@@ -42,13 +42,13 @@
         <action
             android:id="@+id/action_portfolioFragment_to_studentListFragment"
             app:destination="@id/studentListFragment"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/portfolioFragment"/>
+            app:popUpTo="@id/portfolioFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_portfolioFragment_to_studentGalleryFragment"
             app:destination="@id/studentGalleryFragment"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/portfolioFragment"/>
+            app:popUpTo="@id/portfolioFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/feedbackFragment"
@@ -57,7 +57,7 @@
     <fragment
         android:id="@+id/studentProfileFragment"
         android:name="com.tce.teacherapp.ui.dashboard.students.StudentProfileFragment"
-        android:label="StudentProfileFragment" >
+        android:label="StudentProfileFragment">
         <action
             android:id="@+id/action_studentProfileFragment_to_shareMediaFragment"
             app:destination="@id/shareMediaFragment"
@@ -78,19 +78,47 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_studentProfileFragment_to_studentGalleryVideoPostFragment"
+            app:destination="@id/studentGalleryVideoPostFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_studentProfileFragment_to_studentGalleryImagePostFragment"
+            app:destination="@id/studentGalleryImagePostFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/shareMediaFragment"
         android:name="com.tce.teacherapp.ui.dashboard.students.StudentProfileShareMediaFragment"
-        android:label="ShareMediaFragment" >
+        android:label="ShareMediaFragment">
         <action
             android:id="@+id/action_shareMediaFragment_to_studentProfileShareChatFragment"
             app:destination="@id/studentProfileShareChatFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_shareMediaFragment_to_studentGalleryVideoPostFragment"
+            app:destination="@id/studentGalleryVideoPostFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_shareMediaFragment_to_studentGalleryImagePostFragment"
+            app:destination="@id/studentGalleryImagePostFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/progressCardFragment"
@@ -100,16 +128,16 @@
         android:id="@+id/studentGalleryFragment"
         android:name="com.tce.teacherapp.ui.dashboard.students.StudentGalleryFragment"
         android:label="fragment_student_gallery"
-        tools:layout="@layout/fragment_student_gallery" >
+        tools:layout="@layout/fragment_student_gallery">
         <action
             android:id="@+id/action_studentGalleryFragment_to_studentListFragment"
             app:destination="@id/studentListFragment"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/studentGalleryFragment"/>
+            app:popUpTo="@id/studentGalleryFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_studentGalleryFragment_to_portfolioFragment"
             app:destination="@id/portfolioFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_studentGalleryFragment_to_studentProfileUploadResouceSelectionFragment"
             app:destination="@id/studentProfileUploadResouceSelectionFragment"
@@ -123,54 +151,54 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_studentGalleryFragment_to_studentGalleryImagePostFragment"
             app:destination="@id/studentGalleryImagePostFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_studentGalleryFragment_to_studentGalleryVideoPostFragment"
             app:destination="@id/studentGalleryVideoPostFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/studentGalleryImagePostFragment"
         android:name="com.tce.teacherapp.ui.dashboard.students.StudentGalleryImagePostFragment"
         android:label="fragment_student_gallery_image_post"
-        tools:layout="@layout/fragment_student_gallery_image_post" >
+        tools:layout="@layout/fragment_student_gallery_image_post">
         <action
             android:id="@+id/action_studentGalleryImagePostFragment_to_studentGalleryImagePostDetailFragment"
             app:destination="@id/studentGalleryImagePostDetailFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_studentGalleryImagePostFragment_to_studentGalleryTagStudentFragment"
             app:destination="@id/studentGalleryTagStudentFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_studentGalleryImagePostFragment_to_studentGalleryTaggedStudentFragment"
             app:destination="@id/studentGalleryTaggedStudentFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/studentGalleryImagePostDetailFragment"
         android:name="com.tce.teacherapp.ui.dashboard.students.StudentGalleryImagePostDetailFragment"
         android:label="fragment_student_gallery_image_post_detail"
-        tools:layout="@layout/fragment_student_gallery_image_post_detail" >
+        tools:layout="@layout/fragment_student_gallery_image_post_detail">
         <action
             android:id="@+id/action_studentGalleryImagePostDetailFragment_to_studentGalleryImagePostFragment"
             app:destination="@id/studentGalleryImagePostFragment"
@@ -178,8 +206,8 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/studentGalleryImagePostFragment"/>
+            app:popUpTo="@id/studentGalleryImagePostFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/studentGalleryTagStudentFragment"
@@ -190,47 +218,47 @@
         android:id="@+id/studentGalleryTaggedStudentFragment"
         android:name="com.tce.teacherapp.ui.dashboard.students.StudentGalleryTaggedStudentFragment"
         android:label="fragment_student_gallery_tagged_student"
-        tools:layout="@layout/fragment_student_gallery_tagged_student" >
+        tools:layout="@layout/fragment_student_gallery_tagged_student">
         <action
             android:id="@+id/action_studentGalleryTaggedStudentFragment_to_studentGalleryTagStudentFragment"
             app:destination="@id/studentGalleryTagStudentFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/studentGalleryVideoPostFragment"
         android:name="com.tce.teacherapp.ui.dashboard.students.StudentGalleryVideoPostFragment"
         android:label="fragment_student_gallery_video_post"
-        tools:layout="@layout/fragment_student_gallery_video_post" >
+        tools:layout="@layout/fragment_student_gallery_video_post">
         <action
             android:id="@+id/action_studentGalleryVideoPostFragment_to_studentGalleryVideoPostDetailFragment"
             app:destination="@id/studentGalleryVideoPostDetailFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_studentGalleryVideoPostFragment_to_studentGalleryTagStudentFragment"
             app:destination="@id/studentGalleryTagStudentFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_studentGalleryVideoPostFragment_to_studentGalleryTaggedStudentFragment"
             app:destination="@id/studentGalleryTaggedStudentFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/studentGalleryVideoPostDetailFragment"
         android:name="com.tce.teacherapp.ui.dashboard.students.StudentGalleryVideoPostDetailFragment"
         android:label="fragment_student_gallery_video_post_detail"
-        tools:layout="@layout/fragment_student_gallery_video_post_detail" >
+        tools:layout="@layout/fragment_student_gallery_video_post_detail">
         <action
             android:id="@+id/action_studentGalleryVideoPostDetailFragment_to_studentGalleryVideoPostFragment"
             app:destination="@id/studentGalleryVideoPostFragment"
@@ -238,34 +266,48 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/studentGalleryVideoPostFragment"/>
+            app:popUpTo="@id/studentGalleryVideoPostFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/studentGalleryShareMediaFragment"
         android:name="com.tce.teacherapp.ui.dashboard.students.StudentGalleryShareMediaFragment"
         android:label="fragment_student_gallery_share_media"
-        tools:layout="@layout/fragment_student_gallery_share_media" >
+        tools:layout="@layout/fragment_student_gallery_share_media">
         <action
             android:id="@+id/action_studentGalleryShareMediaFragment_to_studentGallerSharingChatFragment"
             app:destination="@id/studentGallerSharingChatFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_studentGalleryShareMediaFragment_to_studentGalleryImagePostFragment"
+            app:destination="@id/studentGalleryImagePostFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_studentGalleryShareMediaFragment_to_studentGalleryVideoPostFragment"
+            app:destination="@id/studentGalleryVideoPostFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/studentGallerSharingChatFragment"
         android:name="com.tce.teacherapp.ui.dashboard.students.StudentGallerySharingChatFragment"
         android:label="fragment_student_galler_sharing_chat"
-        tools:layout="@layout/fragment_student_gallery_sharing_chat" >
+        tools:layout="@layout/fragment_student_gallery_sharing_chat">
         <action
             android:id="@+id/action_studentGallerSharingChatFragment_to_studentGalleryShareChatSentFragment"
             app:destination="@id/studentGalleryShareChatSentFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_studentGallerSharingChatFragment_to_groupChatFragment2"
             app:destination="@id/groupChatFragment2" />
@@ -284,21 +326,21 @@
         android:id="@+id/studentProfileShareChatFragment"
         android:name="com.tce.teacherapp.ui.dashboard.students.StudentProfileShareChatFragment"
         android:label="fragment_student_profile_share_chat"
-        tools:layout="@layout/fragment_student_profile_share_chat" >
+        tools:layout="@layout/fragment_student_profile_share_chat">
         <action
             android:id="@+id/action_studentProfileShareChatFragment_to_studentProfileFragment"
             app:destination="@id/studentProfileFragment"
-            app:popUpTo="@id/studentProfileFragment"
-            app:popUpToInclusive="true"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/studentProfileFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/groupChatFragment2"
         android:name="com.tce.teacherapp.ui.dashboard.messages.GroupChatFragment"
-        android:label="GroupChatFragment" >
+        android:label="GroupChatFragment">
         <action
             android:id="@+id/action_groupChatFragment2_to_resourceFragment2"
             app:destination="@id/resourceFragment2" />

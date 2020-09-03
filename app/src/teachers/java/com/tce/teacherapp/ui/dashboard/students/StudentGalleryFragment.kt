@@ -21,8 +21,6 @@ import com.tce.teacherapp.ui.dashboard.students.adapter.IStudentGalleryClickList
 import com.tce.teacherapp.ui.dashboard.students.adapter.StudentGalleryAdapter
 import com.tce.teacherapp.ui.dashboard.students.state.StudentStateEvent
 import kotlinx.android.synthetic.main.activity_dashboard.*
-import kotlinx.android.synthetic.main.fragment_student_gallery.*
-import kotlinx.android.synthetic.teachers.fragment_dashboard_home.bottom_sheet
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
@@ -54,7 +52,7 @@ constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as DashboardActivity).expandAppBar(true)
-        val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
+        val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(binding.bottomSheet)
         bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
         bottomSheetBehavior.skipCollapsed = true
         bottomSheetBehavior.isDraggable = false
@@ -79,14 +77,16 @@ constructor(
 
         classContainer.setOnClickListener {
             if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
-                bottomSheetBehavior.state =
-                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
+                bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
+                binding.botomSheetSubFilterContainer.visibility = View.GONE
+                binding.botomSheetMainFilterContainer.visibility = View.VISIBLE
+                binding.maskLayout.visibility = View.VISIBLE
                 binding.maskLayout.setBackgroundColor(resources.getColor(R.color.dim_color_dashboard))
                 (activity as DashboardActivity).bottom_navigation_view.visibility = View.INVISIBLE
             } else {
                 bottomSheetBehavior.state =
                     com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
-                binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
+                binding.maskLayout.visibility = View.GONE
                 (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
             }
         }
@@ -107,63 +107,49 @@ constructor(
             (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
         }
 
-
-
-        val bottomSheetBehaviorFilterContainer = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet_filter_by)
-
-        bottomSheetBehaviorFilterContainer.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
-        bottomSheetBehaviorFilterContainer.skipCollapsed = true
-        bottomSheetBehaviorFilterContainer.isDraggable = false
-
-        bottomSheetBehaviorFilterContainer.addBottomSheetCallback(object : com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.BottomSheetCallback {
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                if (newState == BottomSheetBehavior.STATE_DRAGGING) {
-                    bottomSheetBehaviorFilterContainer.state = BottomSheetBehavior.STATE_EXPANDED
-                }
-
-            }
-        })
-
         binding.sortContainer.setOnClickListener {
-            if (bottomSheetBehaviorFilterContainer.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
-                bottomSheetBehaviorFilterContainer.state =
-                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
+            if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
+                bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
+                binding.botomSheetSubFilterContainer.visibility = View.VISIBLE
+                binding.botomSheetMainFilterContainer.visibility = View.GONE
+                binding.maskLayout.visibility = View.VISIBLE
                 binding.maskLayout.setBackgroundColor(resources.getColor(R.color.dim_color_dashboard))
                 (activity as DashboardActivity).bottom_navigation_view.visibility = View.INVISIBLE
             } else {
-                bottomSheetBehaviorFilterContainer.state =
-                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
-                binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
+                bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                binding.maskLayout.visibility = View.GONE
                 (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
             }
         }
         binding.tvPhotos.setOnClickListener {
-            bottomSheetBehaviorFilterContainer.state =
+            bottomSheetBehavior.state =
                 com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
-            binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
-            (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
+            binding.maskLayout.visibility = View.GONE
             viewModel.setStateEvent(StudentStateEvent.GetGalleryData(1))
         }
 
         binding.tvVideos.setOnClickListener {
-            bottomSheetBehaviorFilterContainer.state =
+            bottomSheetBehavior.state =
                 com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
-            binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
+            binding.maskLayout.visibility = View.GONE
             (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
             viewModel.setStateEvent(StudentStateEvent.GetGalleryData(2))
         }
 
         binding.tvShowAll.setOnClickListener {
-            bottomSheetBehaviorFilterContainer.state =
-                com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
-            binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
+            bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+            binding.maskLayout.visibility = View.GONE
             (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
             viewModel.setStateEvent(StudentStateEvent.GetGalleryData(0))
         }
         binding.btnUpload.setOnClickListener {
             findNavController().navigate(R.id.action_studentGalleryFragment_to_studentProfileUploadResouceSelectionFragment)
         }
-
+        binding.maskLayout.setOnClickListener {
+            bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+            binding.maskLayout.visibility = View.GONE
+            (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
+        }
         binding.btnShare.setOnClickListener {
             findNavController().navigate(R.id.action_studentGalleryFragment_to_studentGalleryShareMediaFragment)
         }

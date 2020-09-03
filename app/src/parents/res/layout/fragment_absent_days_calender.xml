@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <com.tce.teacherapp.util.calenderView.CalendarView
+            android:id="@+id/exFiveCalendar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cv_dayViewResource="@layout/calendar__absent_day"
+            app:cv_monthHeaderResource="@layout/calendar_header"
+            app:cv_orientation="vertical"
+            app:cv_outDateStyle="endOfGrid"
+            app:cv_scrollMode="continuous"/>
+
+    </RelativeLayout>
+</layout>

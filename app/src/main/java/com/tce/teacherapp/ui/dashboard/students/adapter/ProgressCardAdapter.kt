@@ -19,15 +19,24 @@ class ProgressCardAdapter(val context: Context) :
     RecyclerView.Adapter<ProgressCardAdapter.ProgressAdapter>() {
 
 
-    var modelList: MutableList<ProgressData> = ArrayList<ProgressData>()
+    var modelList: List<ProgressData> = ArrayList()
 
     override fun getItemCount() = modelList.size
 
 
     override fun onBindViewHolder(holder: ProgressAdapter, position: Int) {
-        holder.tvName.setText(modelList[position].Name)
-
-        holder.cardContainer.setOnClickListener(View.OnClickListener {
+        holder.tvName.text = modelList[position].Name
+        if(position ==0){
+            holder.imgArraow.background = context.resources.getDrawable(R.drawable.arrow_up)
+            holder.rvObjective.visibility = View.VISIBLE
+            holder.rvObjective.layoutManager = GridLayoutManager(context, 1)
+            holder.rvObjective.setHasFixedSize(true)
+            val myAdapter = ProgressObjectiveAdapter(context)
+            holder.rvObjective.adapter = myAdapter
+            myAdapter.modelList = modelList[0].Objectives as MutableList<Objective>
+            myAdapter.notifyDataSetChanged()
+        }
+        holder.cardContainer.setOnClickListener {
             if (holder.rvObjective.visibility == View.VISIBLE) {
                 holder.imgArraow.background = context.resources.getDrawable(R.drawable.arrow_down)
                 holder.rvObjective.visibility = View.GONE
@@ -37,13 +46,14 @@ class ProgressCardAdapter(val context: Context) :
 
                 holder.rvObjective.layoutManager = GridLayoutManager(context, 1)
                 holder.rvObjective.setHasFixedSize(true)
-                var myAdapter = ProgressObjectiveAdapter(context)
+                val myAdapter = ProgressObjectiveAdapter(context)
                 holder.rvObjective.adapter = myAdapter
-                myAdapter?.modelList = modelList[position].Objectives as MutableList<Objective>
-                myAdapter?.notifyDataSetChanged()
+                myAdapter.modelList = modelList[position].Objectives as MutableList<Objective>
+                myAdapter.notifyDataSetChanged()
 
             }
-        })
+        }
+
 
     }
 
@@ -55,17 +65,10 @@ class ProgressCardAdapter(val context: Context) :
 
     class ProgressAdapter(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val tvName: TextView
-        val imgArraow: AppCompatImageView
-        val rvObjective: RecyclerView
-        val cardContainer: RelativeLayout
-
-        init {
-            tvName = itemView.findViewById(R.id.tvName)
-            imgArraow = itemView.findViewById(R.id.img_arrow)
-            rvObjective = itemView.findViewById(R.id.rv_objective)
-            cardContainer = itemView.findViewById(R.id.card_container)
-        }
+        val tvName: TextView = itemView.findViewById(R.id.tvName)
+        val imgArraow: AppCompatImageView = itemView.findViewById(R.id.img_arrow)
+        val rvObjective: RecyclerView = itemView.findViewById(R.id.rv_objective)
+        val cardContainer: RelativeLayout = itemView.findViewById(R.id.card_container)
 
 
     }

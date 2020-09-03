@@ -23,9 +23,7 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/dashboardHomeFragment"/>
+            app:exitAnim="@anim/slide_out_left"/>
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -98,8 +96,6 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/addChildFragment"/>
+            app:exitAnim="@anim/slide_out_left"/>
     </fragment>
 </navigation>

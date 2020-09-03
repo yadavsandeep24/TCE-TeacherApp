@@ -12,11 +12,11 @@
     <color name="dim_color">#3C707079</color>
     <color name="dim_color_dashboard">#99141423</color>
     <color name="transparent">#00000000</color>
-    <color name="login_support_mail">#1e6eff</color>
+    <color name="clear_blue">#1e6eff</color>
     <color name="setting_actionbar_color">#46465b</color>
     <color name="orange">#fa6636</color>
     <color name="dashboard_back">#f5f8ff</color>
-    <color name="forget_password_text">#fa4b28</color>
+    <color name="orangey_red">#fa4b28</color>
     <color name="terms_text">#232337</color>
     <color name="deep_brown">#320500</color>
     <color name="dark_blackish_blue">#232337</color>
@@ -45,4 +45,5 @@
     <color name="soft_white">#fcfcfc</color>
     <color name="ice">#e6faf5</color>
     <color name="turquoise">#00c8af</color>
+    <color name="pale_grey">#f0f0ff</color>
 </resources>

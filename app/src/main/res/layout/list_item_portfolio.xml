@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@color/pale_grey_three">
 
     <FrameLayout
         android:id="@+id/view_line"
@@ -42,6 +43,7 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_marginStart="10dp"
+            android:visibility="gone"
             android:background="@drawable/ic_birthday_icon" />
     </LinearLayout>
 
@@ -74,8 +76,8 @@
                 android:id="@+id/chk_gallary"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
-                android:layout_alignParentBottom="true"
                 android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/checkbox_filled_selector"
                 android:button="@null"
                 android:checked="false"
@@ -86,7 +88,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:elevation="5dp"
-                app:cardCornerRadius="5dp">
+                app:cardCornerRadius="5dp"
+                android:layout_margin="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -96,10 +99,9 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_gallary"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp" />
+                        android:layout_gravity="center"/>
 
                     <LinearLayout
                         android:id="@+id/view_all_container"
@@ -136,16 +138,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
 
-            <CheckBox
-                android:id="@+id/chk_feedback"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/checkbox_filled_selector"
-                android:button="@null"
-                android:checked="false"
-                android:visibility="visible" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_feddback"

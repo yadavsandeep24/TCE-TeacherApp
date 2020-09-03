@@ -1,0 +1,740 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/subject_actionbar_color"
+            android:orientation="vertical"
+            tools:context=".ui.dashboard.students.StudentProfileFragment">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:orientation="vertical">
+
+                            <com.tce.teacherapp.util.RubikBoldTextview
+                                android:id="@+id/tvStudentName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Amit Boaz"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/font_size_16_dp">
+
+                            </com.tce.teacherapp.util.RubikBoldTextview>
+
+                            <com.tce.teacherapp.util.RubikMediumTextview
+                                android:id="@+id/tvBloodGroup"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="5dp"
+                                android:text="Blood Group : AB+"
+                                android:textColor="@color/white"
+                                android:textSize="11dp">
+
+                            </com.tce.teacherapp.util.RubikMediumTextview>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="90dp"
+                                android:layout_height="19dp"
+                                android:layout_marginTop="5dp"
+                                app:cardCornerRadius="5dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="#ffeb7d"
+                                    android:gravity="center">
+
+                                    <androidx.appcompat.widget.AppCompatImageView
+                                        android:layout_width="@dimen/font_size_12_dp"
+                                        android:layout_height="@dimen/font_size_12_dp"
+                                        android:src="@drawable/birthday" />
+
+                                    <com.tce.teacherapp.util.RubikMediumTextview
+                                        android:id="@+id/tvBirthDate"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="5dp"
+                                        android:text="14 Jan 2020"
+                                        android:textColor="#232337"
+                                        android:textSize="@dimen/font_size_9_dp">
+
+                                    </com.tce.teacherapp.util.RubikMediumTextview>
+                                </LinearLayout>
+
+                            </androidx.cardview.widget.CardView>
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/filter_container"
+                            android:layout_width="80dp"
+                            android:layout_height="60dp"
+                            android:layout_alignParentEnd="true"
+                            android:background="@drawable/dashboard_filter_bg">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="40dp"
+                                android:src="@drawable/dummy_student">
+
+                            </androidx.appcompat.widget.AppCompatImageView>
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="10dp"
+                                android:src="@drawable/dummy_student">
+
+                            </androidx.appcompat.widget.AppCompatImageView>
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_right_arrow">
+
+                            </androidx.appcompat.widget.AppCompatImageView>
+
+                        </RelativeLayout>
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center">
+
+                            <com.tce.teacherapp.util.RubikMediumTextview
+                                android:id="@+id/tv_present_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="00"
+                                android:textColor="@color/white"
+                                android:textSize="20dp" />
+
+                            <com.tce.teacherapp.util.RubikMediumTextview
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:text="Days Present"
+                                android:textColor="@color/white"
+                                android:textSize="11dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center">
+
+                            <com.tce.teacherapp.util.RubikMediumTextview
+                                android:id="@+id/tv_absent_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="00"
+                                android:textColor="@color/white"
+                                android:textSize="20dp" />
+
+                            <com.tce.teacherapp.util.RubikMediumTextview
+                                android:id="@+id/lbl_days_absent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:text="Days Absent"
+                                android:textColor="@color/white"
+                                android:textSize="11dp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_home_details"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="25dp"
+                        app:cardCornerRadius="5dp">
+
+                        <LinearLayout
+                            android:id="@+id/main_home_details"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical"
+                            android:paddingLeft="20dp"
+                            android:paddingTop="10dp"
+                            android:paddingRight="20dp"
+                            android:paddingBottom="10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:id="@+id/icon_home"
+                                    android:layout_width="12dp"
+                                    android:layout_height="12dp"
+                                    android:background="@drawable/ic_add">
+
+                                </androidx.appcompat.widget.AppCompatImageView>
+
+                                <com.tce.teacherapp.util.RubikMediumTextview
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="10dp"
+                                    android:text="All Information"
+                                    android:textColor="#232337"
+                                    android:textSize="14dp">
+
+                                </com.tce.teacherapp.util.RubikMediumTextview>
+
+                            </LinearLayout>
+
+                            <include
+                                android:id="@+id/note_container"
+                                layout="@layout/note_container"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:visibility="gone" />
+
+                            <com.tce.teacherapp.util.RubikMediumTextview
+                                android:id="@+id/tv_lbl_home_details"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:text="Home Details"
+                                android:textColor="#232337"
+                                android:textSize="14dp"
+                                android:visibility="gone" />
+
+                            <LinearLayout
+                                android:id="@+id/parent_details_container"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:orientation="vertical"
+                                android:visibility="gone">
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/address_container"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:layout_marginTop="5dp"
+                                android:orientation="vertical"
+                                android:visibility="gone">
+
+                                <com.tce.teacherapp.util.RubikMediumTextview
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Address"
+                                    android:textColor="#232337"
+                                    android:textSize="12dp">
+
+                                </com.tce.teacherapp.util.RubikMediumTextview>
+
+                                <com.tce.teacherapp.util.RubikRegularTextview
+                                    android:id="@+id/tv_address"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Lorem ipsum dolor sit amet, consectetur adipisc elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                                    android:textColor="#232337"
+                                    android:textSize="@dimen/font_size_12_dp">
+
+                                </com.tce.teacherapp.util.RubikRegularTextview>
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_school_contact_details"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="25dp"
+                        app:cardCornerRadius="5dp">
+
+                        <LinearLayout
+                            android:id="@+id/main_school_contact_details"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical"
+                            android:paddingLeft="20dp"
+                            android:paddingTop="10dp"
+                            android:paddingRight="20dp"
+                            android:paddingBottom="10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:id="@+id/icon_school_contact"
+                                    android:layout_width="12dp"
+                                    android:layout_height="12dp"
+                                    android:background="@drawable/ic_add">
+
+                                </androidx.appcompat.widget.AppCompatImageView>
+
+                                <com.tce.teacherapp.util.RubikMediumTextview
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="10dp"
+                                    android:text="School Contact Information"
+                                    android:textColor="#232337"
+                                    android:textSize="14dp">
+
+                                </com.tce.teacherapp.util.RubikMediumTextview>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/school_contact_details_container"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:orientation="vertical"
+                                android:visibility="gone">
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/school_address_container"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:layout_marginTop="5dp"
+                                android:orientation="vertical"
+                                android:visibility="gone">
+
+                                <com.tce.teacherapp.util.RubikMediumTextview
+                                    android:id="@+id/tv_school_name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Address"
+                                    android:textColor="#232337"
+                                    android:textSize="12dp" />
+
+                                <com.tce.teacherapp.util.RubikRegularTextview
+                                    android:id="@+id/tv_school_address"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Lorem ipsum dolor sit amet, consectetur adipisc elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                                    android:textColor="#232337"
+                                    android:textSize="@dimen/font_size_12_dp" />
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_report_details"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="25dp"
+                        app:cardCornerRadius="5dp">
+
+                        <LinearLayout
+                            android:id="@+id/main_report_details"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical"
+                            android:paddingLeft="20dp"
+                            android:paddingTop="10dp"
+                            android:paddingRight="20dp"
+                            android:paddingBottom="10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:id="@+id/icon_report"
+                                    android:layout_width="12dp"
+                                    android:layout_height="12dp"
+                                    android:background="@drawable/ic_add">
+
+                                </androidx.appcompat.widget.AppCompatImageView>
+
+                                <com.tce.teacherapp.util.RubikMediumTextview
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:text="Progress Reports"
+                                    android:textColor="#232337"
+                                    android:textSize="14dp">
+
+                                </com.tce.teacherapp.util.RubikMediumTextview>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/report_container"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:visibility="gone">
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="20dp"
+                        android:background="#ffeb7d"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="25dp">
+
+                        <LinearLayout
+                            android:id="@+id/sort_container"
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/portfolio_selector"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingRight="10dp"
+                            android:paddingBottom="5dp">
+
+                            <com.tce.teacherapp.util.RubikBoldTextview
+                                android:id="@+id/tv_class_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:text="Sort by"
+                                android:textColor="@color/color_black"
+                                android:textSize="@dimen/font_size_14_dp">
+
+                            </com.tce.teacherapp.util.RubikBoldTextview>
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:layout_marginLeft="10dp"
+                                android:src="@drawable/down_arrow_black">
+
+                            </androidx.appcompat.widget.AppCompatImageView>
+
+                        </LinearLayout>
+
+                        <com.tce.teacherapp.util.RubikMediumTextview
+                            android:id="@+id/btnShare"
+                            android:layout_width="94dp"
+                            android:layout_height="35dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="25dp"
+                            android:background="@drawable/ic_share_portfolio"
+                            android:gravity="right|center_vertical"
+                            android:paddingRight="20dp"
+                            android:paddingBottom="5dp"
+                            android:text="Share"
+                            android:textColor="#fa4b28"
+                            android:textSize="@dimen/font_size_14_dp">
+
+                        </com.tce.teacherapp.util.RubikMediumTextview>
+
+
+                    </RelativeLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_portfolio"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#fafaff"
+                        android:descendantFocusability="blocksDescendants" />
+                </LinearLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/mask_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent" />
+
+        <LinearLayout
+            android:id="@+id/bottom_sheet"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="@drawable/filters_sheet_background"
+            android:orientation="vertical"
+            android:visibility="visible"
+            app:behavior_fitToContents="true"
+            app:behavior_hideable="true"
+            app:behavior_peekHeight="0dp"
+            app:layout_behavior="com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <View
+                    android:id="@+id/vw_top_divider"
+                    android:layout_width="50dp"
+                    android:layout_height="4dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="5dp"
+                    android:background="#e1e6f0" />
+
+                <com.tce.teacherapp.util.RubikMediumTextview
+                    android:id="@+id/tv_top_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/vw_top_divider"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="5dp"
+                    android:text="Switch Profile"
+                    android:textColor="@color/dark"
+                    android:textSize="@dimen/font_size_16_dp">
+
+                </com.tce.teacherapp.util.RubikMediumTextview>
+
+                <com.tce.teacherapp.util.RubikRegularTextview
+                    android:id="@+id/tv_top_sublabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_top_label"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="5dp"
+                    android:text="Choose a child profile to view"
+                    android:textColor="@color/gunmetal"
+                    android:textSize="11dp">
+
+                </com.tce.teacherapp.util.RubikRegularTextview>
+
+
+                <com.airbnb.epoxy.EpoxyRecyclerView
+                    android:id="@+id/rvFilter"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignWithParentIfMissing="true"
+                    android:layout_above="@+id/add_child"
+                    android:layout_below="@+id/tv_top_sublabel"
+                    android:minHeight="150dp"
+                    android:overScrollMode="never">
+
+                </com.airbnb.epoxy.EpoxyRecyclerView>
+
+
+                <LinearLayout
+                    android:id="@+id/add_child"
+                    android:layout_width="match_parent"
+                    android:layout_height="?android:attr/actionBarSize"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="30dp">
+
+                    <com.tce.teacherapp.util.RubikBoldTextview
+                        android:layout_width="30dp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:background="@drawable/bg_orange_rounded"
+                        android:gravity="center"
+                        android:text="+"
+                        android:textColor="@color/white"
+                        android:textSize="20dp" />
+
+                    <com.tce.teacherapp.util.RubikMediumTextview
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Add Another Child"
+                        android:textColor="@color/color_black">
+
+                    </com.tce.teacherapp.util.RubikMediumTextview>
+
+                </LinearLayout>
+            </RelativeLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/bottom_sheet_filter_by"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="100dp"
+            android:background="@drawable/filters_sheet_background"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:behavior_fitToContents="true"
+            app:behavior_hideable="true"
+            app:behavior_peekHeight="0dp"
+            app:layout_behavior="com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior">
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="4dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:background="#e1e6f0" />
+
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:text="Sort by:"
+                android:textSize="9dp" />
+
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:id="@+id/tv_all"
+                android:layout_width="wrap_content"
+                android:layout_height="?android:attr/actionBarSize"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="All"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/font_size_16_dp">
+
+            </com.tce.teacherapp.util.RubikMediumTextview>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#e1e6f0" />
+
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:id="@+id/tv_feedback"
+                android:layout_width="wrap_content"
+                android:layout_height="?android:attr/actionBarSize"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="Feedback"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/font_size_16_dp">
+
+            </com.tce.teacherapp.util.RubikMediumTextview>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#e1e6f0" />
+
+
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:id="@+id/tv_video"
+                android:layout_width="wrap_content"
+                android:layout_height="?android:attr/actionBarSize"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="Video"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/font_size_16_dp">
+
+            </com.tce.teacherapp.util.RubikMediumTextview>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#e1e6f0" />
+
+
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:id="@+id/tv_audio"
+                android:layout_width="wrap_content"
+                android:layout_height="?android:attr/actionBarSize"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="Audio"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/font_size_16_dp">
+
+            </com.tce.teacherapp.util.RubikMediumTextview>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#e1e6f0" />
+
+
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:id="@+id/tv_image"
+                android:layout_width="wrap_content"
+                android:layout_height="?android:attr/actionBarSize"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="Image"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/font_size_16_dp">
+
+            </com.tce.teacherapp.util.RubikMediumTextview>
+        </LinearLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

@@ -46,7 +46,7 @@ sealed class DashboardStateEvent : StateEvent {
     }
 
 
-    class GetParentDashboardData (val id : Int): DashboardStateEvent() {
+    class GetParentDashboardData(val id: String): DashboardStateEvent() {
         override fun errorInfo(): String {
             return "Error in getting parent dashboard info."
         }

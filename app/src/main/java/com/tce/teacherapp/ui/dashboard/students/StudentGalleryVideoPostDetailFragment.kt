@@ -119,6 +119,12 @@ constructor(
                 .setTrackSelector(trackSelector)
                 .build()
         }
+        if (studentGallerydata != null) {
+            if(studentGallerydata.contenttype.equals("audio",true)){
+                binding.playerView.controllerHideOnTouch = false
+                binding.playerView.controllerShowTimeoutMs =0
+            }
+        }
         binding.playerView.player = player
         val uri = Uri.parse(url)
         val mediaSource = buildMediaSource(uri)

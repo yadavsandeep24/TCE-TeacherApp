@@ -15,6 +15,7 @@
     <string name="title_messages">Messages</string>
     <string name="title_subjects">Subjects</string>
     <string name="title_students">Students</string>
+    <string name="title_portfolio">PortFolio</string>
     <string name="title_planner">Planner</string>
 
     <string name="text_error">Error</string>

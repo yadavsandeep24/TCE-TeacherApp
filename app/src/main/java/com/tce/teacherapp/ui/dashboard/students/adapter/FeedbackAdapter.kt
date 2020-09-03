@@ -9,10 +9,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.tce.teacherapp.R
 import com.tce.teacherapp.api.response.FeedbackMasterDataItem
-import com.tce.teacherapp.api.response.StudentListResponseItem
 import com.tce.teacherapp.ui.dashboard.students.FeedbackFragment
 import com.tce.teacherapp.ui.dashboard.students.interfaces.MainInterface
-import com.tce.teacherapp.ui.dashboard.students.interfaces.ViewHolderClickListener
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import java.util.*
@@ -20,15 +18,7 @@ import java.util.*
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-class FeedbackAdapter(val context: Context, val mainInterface: MainInterface) : RecyclerView.Adapter<FeedbackAdapter.FeedbackViewHolder>(),
-    ViewHolderClickListener {
-
-    override fun onLongTap(index: Int) {
-    }
-
-    override fun onTap(index: Int,item : StudentListResponseItem?) {
-            addIDIntoSelectedIds(index)
-    }
+class FeedbackAdapter(val context: Context, val mainInterface: MainInterface) : RecyclerView.Adapter<FeedbackAdapter.FeedbackViewHolder>(){
 
     fun addIDIntoSelectedIds(index: Int) {
         val id = modelList[index].Id
@@ -87,33 +77,20 @@ class FeedbackAdapter(val context: Context, val mainInterface: MainInterface) : 
             //else remove selected item color.
            holder.tvFeedback.background = context.resources.getDrawable(R.drawable.feedback_bg)
         }
+
+        holder.tvFeedback.setOnClickListener {
+            addIDIntoSelectedIds(position)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedbackViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val itemView = inflater.inflate(R.layout.list_item_feedback, parent, false)
-        return FeedbackViewHolder(itemView, this)
+        return FeedbackViewHolder(itemView)
     }
 
-    class FeedbackViewHolder(itemView: View, val r_tap: ViewHolderClickListener) : RecyclerView.ViewHolder(itemView),
-        View.OnLongClickListener, View.OnClickListener {
-
+    class FeedbackViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvFeedback: TextView = itemView.findViewById(R.id.tvFeedback)
-
-
-        init {
-            tvFeedback.setOnClickListener(this)
-            tvFeedback.setOnLongClickListener(this)
-        }
-
-        override fun onClick(v: View?) {
-            r_tap.onTap(adapterPosition,null)
-        }
-
-        override fun onLongClick(v: View?): Boolean {
-            r_tap.onLongTap(adapterPosition)
-            return true
-        }
     }
 
 

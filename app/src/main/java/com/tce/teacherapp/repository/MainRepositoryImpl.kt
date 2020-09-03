@@ -381,6 +381,7 @@ constructor(
     }
 
     override fun getStudentList(
+        classId: Int,
         query: String,
         stateEvent: StateEvent
     ): Flow<DataState<MessageViewState>> = flow {
@@ -394,7 +395,31 @@ constructor(
                 stateEvent = stateEvent
             ) {
                 override suspend fun handleSuccess(resultObj: List<StudentListResponseItem>): DataState<MessageViewState> {
-                    val viewState = MessageViewState(studentList = resultObj)
+                    var selectedList: List<StudentListResponseItem> = ArrayList()
+                    if (classId != 0) {
+                        val tempStudentselectedList: MutableList<StudentListResponseItem> =
+                            mutableListOf()
+                        for (student in resultObj) {
+                            if (classId == student.grade_division_id.toInt()) {
+                                tempStudentselectedList.add(student)
+                            }
+                        }
+                        selectedList = if (TextUtils.isEmpty(query)) {
+                            tempStudentselectedList
+                        } else {
+                            selectedList.filter { it.Name.contains(query, ignoreCase = true) }
+
+                        }
+                    } else {
+                        selectedList = if (TextUtils.isEmpty(query)) {
+                            resultObj
+                        } else {
+                            selectedList.filter { it.Name.contains(query, ignoreCase = true) }
+
+                        }
+                    }
+
+                    val viewState = MessageViewState(studentList = selectedList)
                     return DataState.data(
                         response = null,
                         data = viewState,
@@ -653,7 +678,7 @@ constructor(
     }
 
     override fun getParentDashboardData(
-        id: Int,
+        id: String,
         stateEvent: StateEvent
     ): Flow<DataState<DashboardViewState>> = flow {
         Log.d("SAN", "id-->$id")
@@ -664,7 +689,7 @@ constructor(
             var tempGSON: Gson
 
             try {
-                var jsonString: String = if (id > 1) {
+                var jsonString: String = if (id.toInt() > 1) {
                     application.assets.open("json/event1.json").bufferedReader()
                         .use { it.readText() }
                 } else {
@@ -694,7 +719,7 @@ constructor(
                 val eventData = EventData(isShowLess, nextEventCount, selectedEventList, 0, 0, 0)
 
 
-                val jsonParentUpdateString: String = if (id > 1) {
+                val jsonParentUpdateString: String = if (id.toInt() > 1) {
                     application.assets.open("json/parentLatestUpdate1.json").bufferedReader()
                         .use { it.readText() }
                 } else {
@@ -711,11 +736,14 @@ constructor(
                 jsonString = application.assets.open("json/child.json").bufferedReader()
                     .use { it.readText() }
                 tempGSON = Gson()
-                val listPersonType = object : TypeToken<ArrayList<Student>>() {}.type
-                val studentList: ArrayList<Student> = tempGSON.fromJson(jsonString, listPersonType)
-                val selectedChildPosition = sharedPreferences.getInt(PreferenceKeys.APP_USER_SELECTED_CHILD_POSITION,0)
-                if(studentList.size>0){
-                  studentList[selectedChildPosition].isSelected = true
+                val listPersonType =
+                    object : TypeToken<ArrayList<StudentListResponseItem>>() {}.type
+                val studentList: ArrayList<StudentListResponseItem> =
+                    tempGSON.fromJson(jsonString, listPersonType)
+                val selectedChildPosition =
+                    sharedPreferences.getInt(PreferenceKeys.APP_USER_SELECTED_CHILD_POSITION, 0)
+                if (studentList.size > 0) {
+                    studentList[selectedChildPosition].isSelected = true
                 }
 
                 emit(
@@ -1302,13 +1330,15 @@ constructor(
                 val formattedString: String = selectedLocalDate.format(formatter)
                 Log.d("SAN", "formattedString-->$formattedString")
                 list3.filter {
-                    it.date.contains(formattedString, ignoreCase = true) }
+                    it.date.contains(formattedString, ignoreCase = true)
+                }
             }
 
             jsonString = application.assets.open("json/child.json").bufferedReader()
                 .use { it.readText() }
-            val listPersonType = object : TypeToken<ArrayList<Student>>() {}.type
-            val studentList: ArrayList<Student> = gson.fromJson(jsonString, listPersonType)
+            val listPersonType = object : TypeToken<ArrayList<StudentListResponseItem>>() {}.type
+            val studentList: ArrayList<StudentListResponseItem> =
+                gson.fromJson(jsonString, listPersonType)
 
             emit(
                 DataState.data(
@@ -1348,9 +1378,9 @@ constructor(
                     totaEeventList.filter { it.type.contains("TO-DO", ignoreCase = true) }
 
                 val toDoCount = todoList.size
-                var birthDayCount =0
-                if(list3[j].birthdayList != null) {
-                     birthDayCount = list3[j].birthdayList.size
+                var birthDayCount = 0
+                if (list3[j].birthdayList != null) {
+                    birthDayCount = list3[j].birthdayList.size
                 }
                 val sportDayCount = eventList.size
                 val eventTypeList: ArrayList<Event> = ArrayList()
@@ -1392,7 +1422,7 @@ constructor(
                     )
                 }
 
-                if(birthDayCount>0) {
+                if (birthDayCount > 0) {
                     eventTypeList.add(
                         Event(
                             3,
@@ -1417,7 +1447,8 @@ constructor(
                 list3
             } else {
                 list3.filter {
-                    it.date.contains(query, ignoreCase = true) }
+                    it.date.contains(query, ignoreCase = true)
+                }
             }
 
 
@@ -1449,35 +1480,39 @@ constructor(
         )
     }
 
-    override fun getSelectedChildPosition(stateEvent: StateEvent): Flow<DataState<PlannerViewState>> = flow {
-        withContext(IO) {
-            var tempGSON: Gson
-            try {
+    override fun getSelectedChildPosition(stateEvent: StateEvent): Flow<DataState<PlannerViewState>> =
+        flow {
+            withContext(IO) {
+                var tempGSON: Gson
+                try {
 
-                val jsonString = application.assets.open("json/child.json").bufferedReader()
-                    .use { it.readText() }
-                tempGSON = Gson()
-                val listPersonType = object : TypeToken<ArrayList<Student>>() {}.type
-                val studentList: ArrayList<Student> = tempGSON.fromJson(jsonString, listPersonType)
-                val selectedChildPosition = sharedPreferences.getInt(PreferenceKeys.APP_USER_SELECTED_CHILD_POSITION,0)
-                if(studentList.size>0){
-                    studentList[selectedChildPosition].isSelected = true
-                }
+                    val jsonString = application.assets.open("json/child.json").bufferedReader()
+                        .use { it.readText() }
+                    tempGSON = Gson()
+                    val listPersonType =
+                        object : TypeToken<ArrayList<StudentListResponseItem>>() {}.type
+                    val studentList: ArrayList<StudentListResponseItem> =
+                        tempGSON.fromJson(jsonString, listPersonType)
+                    val selectedChildPosition =
+                        sharedPreferences.getInt(PreferenceKeys.APP_USER_SELECTED_CHILD_POSITION, 0)
+                    if (studentList.size > 0) {
+                        studentList[selectedChildPosition].isSelected = true
+                    }
 
-                emit(
-                    DataState.data(
-                        data = PlannerViewState(
-                            childList = studentList
-                        ),
-                        stateEvent = stateEvent,
-                        response = null
+                    emit(
+                        DataState.data(
+                            data = PlannerViewState(
+                                childList = studentList
+                            ),
+                            stateEvent = stateEvent,
+                            response = null
+                        )
                     )
-                )
-            } catch (ioException: IOException) {
-                ioException.printStackTrace()
+                } catch (ioException: IOException) {
+                    ioException.printStackTrace()
+                }
             }
         }
-    }
 
     override fun getChapterResourceType(
         chapterId: String,
@@ -1531,7 +1566,11 @@ constructor(
 
     }
 
-    override fun getStudentData(stateEvent: StateEvent): Flow<DataState<StudentViewState>> = flow{
+    override fun getStudentData(
+        classId: Int,
+        query: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<StudentViewState>> = flow {
         val apiResult = safeApiCall(IO) {
             tceService.getStudentList()
         }
@@ -1541,7 +1580,30 @@ constructor(
                 stateEvent = stateEvent
             ) {
                 override suspend fun handleSuccess(resultObj: List<StudentListResponseItem>): DataState<StudentViewState> {
-                    val viewState = StudentViewState(studentListResponse = resultObj)
+                    var selectedList: List<StudentListResponseItem> = ArrayList()
+                    if (classId != 0) {
+                        val tempStudentselectedList: MutableList<StudentListResponseItem> =
+                            mutableListOf()
+                        for (student in resultObj) {
+                            if (classId == student.grade_division_id.toInt()) {
+                                tempStudentselectedList.add(student)
+                            }
+                        }
+                        selectedList = if (TextUtils.isEmpty(query)) {
+                            tempStudentselectedList
+                        } else {
+                            selectedList.filter { it.Name.contains(query, ignoreCase = true) }
+
+                        }
+                    } else {
+                        selectedList = if (TextUtils.isEmpty(query)) {
+                            resultObj
+                        } else {
+                            selectedList.filter { it.Name.contains(query, ignoreCase = true) }
+
+                        }
+                    }
+                    val viewState = StudentViewState(studentListResponse = selectedList)
                     return DataState.data(
                         response = null,
                         data = viewState,
@@ -1553,53 +1615,56 @@ constructor(
         )
     }
 
-    override fun getStudentAttendanceData(stateEvent: StateEvent): Flow<DataState<StudentViewState>> = flow {
-        val apiResult = safeApiCall(IO) {
-            tceService.getStudentAttendanceList()
+    override fun getStudentAttendanceData(stateEvent: StateEvent): Flow<DataState<StudentViewState>> =
+        flow {
+            val apiResult = safeApiCall(IO) {
+                tceService.getStudentAttendanceList()
+            }
+            emit(
+                object : ApiResponseHandler<StudentViewState, List<StudentAttendanceResponseItem>>(
+                    response = apiResult,
+                    stateEvent = stateEvent
+                ) {
+                    override suspend fun handleSuccess(resultObj: List<StudentAttendanceResponseItem>): DataState<StudentViewState> {
+                        val viewState = StudentViewState(studentattendancedata = resultObj)
+                        return DataState.data(
+                            response = null,
+                            data = viewState,
+                            stateEvent = stateEvent
+                        )
+
+                    }
+                }.getResult()
+            )
         }
-        emit(
-            object : ApiResponseHandler<StudentViewState, List<StudentAttendanceResponseItem>>(
-                response = apiResult,
-                stateEvent = stateEvent
-            ) {
-                override suspend fun handleSuccess(resultObj: List<StudentAttendanceResponseItem>): DataState<StudentViewState> {
-                    val viewState = StudentViewState(studentattendancedata = resultObj)
-                    return DataState.data(
-                        response = null,
-                        data = viewState,
-                        stateEvent = stateEvent
-                    )
 
-                }
-            }.getResult()
-        )
-    }
+    override fun getFeedBackMasterData(stateEvent: StateEvent): Flow<DataState<StudentViewState>> =
+        flow {
+            val apiResult = safeApiCall(IO) {
+                tceService.getFeedbackMaster()
+            }
+            emit(
+                object : ApiResponseHandler<StudentViewState, List<FeedbackMasterDataItem>>(
+                    response = apiResult,
+                    stateEvent = stateEvent
+                ) {
+                    override suspend fun handleSuccess(resultObj: List<FeedbackMasterDataItem>): DataState<StudentViewState> {
+                        val viewState = StudentViewState(feedbackMaster = resultObj)
+                        return DataState.data(
+                            response = null,
+                            data = viewState,
+                            stateEvent = stateEvent
+                        )
 
-    override fun getFeedBackMasterData(stateEvent: StateEvent): Flow<DataState<StudentViewState>>  = flow{
-        val apiResult = safeApiCall(IO) {
-            tceService.getFeedbackMaster()
+                    }
+                }.getResult()
+            )
         }
-        emit(
-            object : ApiResponseHandler<StudentViewState, List<FeedbackMasterDataItem>>(
-                response = apiResult,
-                stateEvent = stateEvent
-            ) {
-                override suspend fun handleSuccess(resultObj: List<FeedbackMasterDataItem>): DataState<StudentViewState> {
-                    val viewState = StudentViewState(feedbackMaster = resultObj)
-                    return DataState.data(
-                        response = null,
-                        data = viewState,
-                        stateEvent = stateEvent
-                    )
-
-                }
-            }.getResult()
-        )
-    }
 
     override fun getGalleryData(
-        type :Int,
-        stateEvent: StateEvent): Flow<DataState<StudentViewState>> = flow{
+        type: Int,
+        stateEvent: StateEvent
+    ): Flow<DataState<StudentViewState>> = flow {
         val apiResult = safeApiCall(IO) {
             tceService.getStudentGalleryData()
         }
@@ -1613,11 +1678,13 @@ constructor(
 
                     when (type) {
                         1 -> {
-                            val tempGalleryItems :MutableList<StudentGalleryResponseItem> = arrayListOf()
-                            for(galleryItem in resultObj){
-                                val tempStudentGallerydata :MutableList<StudentGalleryData> = arrayListOf()
-                                for(dataList in galleryItem.studentGalleryDataList){
-                                    if(dataList.contenttype.equals("Image",true)) {
+                            val tempGalleryItems: MutableList<StudentGalleryResponseItem> =
+                                arrayListOf()
+                            for (galleryItem in resultObj) {
+                                val tempStudentGallerydata: MutableList<StudentGalleryData> =
+                                    arrayListOf()
+                                for (dataList in galleryItem.studentGalleryDataList) {
+                                    if (dataList.contenttype.equals("Image", true)) {
                                         tempStudentGallerydata.add(dataList)
                                     }
                                 }
@@ -1632,11 +1699,13 @@ constructor(
                             )
                         }
                         2 -> {
-                            val tempGalleryItems :MutableList<StudentGalleryResponseItem> = arrayListOf()
-                            for(galleryItem in resultObj){
-                                val tempStudentGallerydata :MutableList<StudentGalleryData> = arrayListOf()
-                                for(dataList in galleryItem.studentGalleryDataList){
-                                    if(dataList.contenttype.equals("av",true)) {
+                            val tempGalleryItems: MutableList<StudentGalleryResponseItem> =
+                                arrayListOf()
+                            for (galleryItem in resultObj) {
+                                val tempStudentGallerydata: MutableList<StudentGalleryData> =
+                                    arrayListOf()
+                                for (dataList in galleryItem.studentGalleryDataList) {
+                                    if (dataList.contenttype.equals("av", true)) {
                                         tempStudentGallerydata.add(dataList)
                                     }
                                 }
@@ -1665,7 +1734,10 @@ constructor(
         )
     }
 
-    override fun getStudentPortfolio(stateEvent: StateEvent): Flow<DataState<StudentViewState>>  = flow{
+    override fun getStudentPortfolio(
+        type: Int,
+        stateEvent: StateEvent
+    ): Flow<DataState<StudentViewState>> = flow {
         val apiResult = safeApiCall(IO) {
             tceService.getStudentPortFolioData()
         }
@@ -1675,12 +1747,118 @@ constructor(
                 stateEvent = stateEvent
             ) {
                 override suspend fun handleSuccess(resultObj: List<StudentPortFolioResponseItem>): DataState<StudentViewState> {
-                    val viewState = StudentViewState(studentportfolioresponse = resultObj)
-                    return DataState.data(
-                        response = null,
-                        data = viewState,
-                        stateEvent = stateEvent
-                    )
+
+
+                    when (type) {
+                        1 -> {
+
+                            val viewState = StudentViewState(studentportfolioresponse = resultObj)
+                            return DataState.data(
+                                response = null,
+                                data = viewState,
+                                stateEvent = stateEvent
+                            )
+
+                        }
+                        2 -> {
+                            for (portFolioItem in resultObj) {
+                                for (dataList in portFolioItem.Portfolio) {
+                                    dataList.Gallery = emptyList()
+                                }
+                            }
+                            val viewState = StudentViewState(studentportfolioresponse = resultObj)
+                            return DataState.data(
+                                response = null,
+                                data = viewState,
+                                stateEvent = stateEvent
+                            )
+                        }
+
+                        3 -> {
+                            for (portFolioItem in resultObj) {
+                                for (dataList in portFolioItem.Portfolio) {
+                                    if (dataList?.Gallery != null && dataList.Gallery.isNotEmpty()) {
+                                        val tempStudentGallerydata: MutableList<StudentGalleryData> =
+                                            arrayListOf()
+                                        for (galleryItem in dataList.Gallery) {
+                                            if (galleryItem.contenttype.equals("av", true)) {
+                                                tempStudentGallerydata.add(galleryItem)
+                                            }
+                                        }
+                                        dataList.Gallery = emptyList()
+                                        dataList.Gallery = tempStudentGallerydata
+                                    }
+                                    dataList.Feedback = emptyList()
+                                    dataList.TeacherNote = ""
+                                }
+                            }
+                            val viewState = StudentViewState(studentportfolioresponse = resultObj)
+                            return DataState.data(
+                                response = null,
+                                data = viewState,
+                                stateEvent = stateEvent
+                            )
+                        }
+                        4 -> {
+                            for (portFolioItem in resultObj) {
+                                for (dataList in portFolioItem.Portfolio) {
+                                    if (dataList?.Gallery != null && dataList.Gallery.isNotEmpty()) {
+                                        val tempStudentGallerydata: MutableList<StudentGalleryData> =
+                                            arrayListOf()
+                                        for (galleryItem in dataList.Gallery) {
+                                            if (galleryItem.contenttype.equals("audio", true)) {
+                                                tempStudentGallerydata.add(galleryItem)
+                                            }
+                                        }
+                                        dataList.Gallery = emptyList()
+                                        dataList.Gallery = tempStudentGallerydata
+                                    }
+                                    dataList.Feedback = emptyList()
+                                    dataList.TeacherNote = ""
+                                }
+                            }
+                            val viewState = StudentViewState(studentportfolioresponse = resultObj)
+                            return DataState.data(
+                                response = null,
+                                data = viewState,
+                                stateEvent = stateEvent
+                            )
+                        }
+                        5 -> {
+                            for (portFolioItem in resultObj) {
+                                for (dataList in portFolioItem.Portfolio) {
+                                    if (dataList?.Gallery != null && dataList.Gallery.isNotEmpty()) {
+                                        val tempStudentGallerydata: MutableList<StudentGalleryData> =
+                                            arrayListOf()
+                                        for (galleryItem in dataList.Gallery) {
+                                            if (galleryItem.contenttype.equals("Image", true)) {
+                                                tempStudentGallerydata.add(galleryItem)
+                                            }
+                                        }
+                                        dataList.Gallery = emptyList()
+                                        dataList.Gallery = tempStudentGallerydata
+                                    }
+                                    dataList.Feedback = emptyList()
+                                    dataList.TeacherNote = ""
+                                }
+                            }
+                            val viewState = StudentViewState(studentportfolioresponse = resultObj)
+                            return DataState.data(
+                                response = null,
+                                data = viewState,
+                                stateEvent = stateEvent
+                            )
+                        }
+                        else -> {
+                            val viewState = StudentViewState(studentportfolioresponse = resultObj)
+                            return DataState.data(
+                                response = null,
+                                data = viewState,
+                                stateEvent = stateEvent
+                            )
+                        }
+                    }
+
 
                 }
             }.getResult()

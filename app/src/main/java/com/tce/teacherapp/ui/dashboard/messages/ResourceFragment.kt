@@ -119,9 +119,9 @@ constructor(
 
         }
 
-        binding.imgBack.setOnClickListener(View.OnClickListener {
+        binding.imgBack.setOnClickListener {
             activity?.onBackPressed()
-        })
+        }
 
         binding.rvResource.layoutManager = GridLayoutManager(activity, 1)
         binding.rvResource.setHasFixedSize(true)

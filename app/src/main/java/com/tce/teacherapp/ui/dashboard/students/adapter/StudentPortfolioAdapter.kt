@@ -20,7 +20,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class StudentPortfolioAdapter(val context: Context, val isShowCheckBox : Boolean) :
+class StudentPortfolioAdapter(val context: Context,
+                              val isShowCheckBox : Boolean,
+                              val listener: IStudentGalleryClickListener) :
     RecyclerView.Adapter<StudentPortfolioAdapter.StudentPortfolioViewHolder>() {
 
 
@@ -49,14 +51,26 @@ class StudentPortfolioAdapter(val context: Context, val isShowCheckBox : Boolean
             holder.cardGallary.visibility = View.VISIBLE
             holder.rvGallary.layoutManager = GridLayoutManager(context, 2)
             holder.rvGallary.setHasFixedSize(true)
-            val myAdapter = StudentPortfolioGallaryAdapter(context, isShowCheckBox)
+            val myAdapter = StudentPortfolioGallaryAdapter(context, isShowCheckBox,listener)
             holder.rvGallary.adapter = myAdapter
             myAdapter.modelList = modelList[position].Gallery as MutableList<StudentGalleryData>
             myAdapter.notifyDataSetChanged()
             if(isShowCheckBox) {
                 holder.chkGallary.visibility = View.VISIBLE
+                holder.chkGallary.setOnCheckedChangeListener { _, isChecked ->
+                    for (item in modelList[position].Gallery){
+                        item.isSelected = isChecked
+                    }
+                   // listener.onDateCheckBoxClicked(modelList[position])
+                    notifyDataSetChanged()
+                }
             }else{
                 holder.chkGallary.visibility = View.GONE
+            }
+            if(modelList[position].Gallery.size>4){
+                holder.viewAllContainer.visibility = View.VISIBLE
+            }else{
+                holder.viewAllContainer.visibility = View.GONE
             }
         }else{
             holder.chkGallary.visibility = View.GONE
@@ -67,17 +81,11 @@ class StudentPortfolioAdapter(val context: Context, val isShowCheckBox : Boolean
             holder.rvFeedback.visibility = View.VISIBLE
             holder.rvFeedback.layoutManager = GridLayoutManager(context, 1)
             holder.rvFeedback.setHasFixedSize(true)
-            val myAdapter = StudentPortfolioFeedbackAdapter(context)
+            val myAdapter = StudentPortfolioFeedbackAdapter(context,isShowCheckBox)
             holder.rvFeedback.adapter = myAdapter
             myAdapter.modelList = modelList[position].Feedback as MutableList<Feedback>
             myAdapter.notifyDataSetChanged()
-            if(isShowCheckBox) {
-                holder.chkFeedback.visibility = View.VISIBLE
-            }else{
-                holder.chkFeedback.visibility = View.GONE
-            }
         }else{
-            holder.chkFeedback.visibility = View.GONE
             holder.rvFeedback.visibility = View.GONE
         }
 
@@ -112,7 +120,6 @@ class StudentPortfolioAdapter(val context: Context, val isShowCheckBox : Boolean
         val cardTeacherNote : CardView = itemView.findViewById(R.id.card_teacher_note)
         val tvTeacherNote: TextView = itemView.findViewById(R.id.tv_teacher_note)
         val chkGallary: CheckBox = itemView.findViewById(R.id.chk_gallary)
-        val chkFeedback: CheckBox = itemView.findViewById(R.id.chk_feedback)
         val chkTeacherNote :CheckBox = itemView.findViewById(R.id.chk_teacher_note)
 
 

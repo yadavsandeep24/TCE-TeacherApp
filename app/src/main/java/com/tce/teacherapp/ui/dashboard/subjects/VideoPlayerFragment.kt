@@ -124,6 +124,7 @@ constructor(
                 .build()
         }
         binding.playerView.player = player
+
         val uri = Uri.parse(url)
         val mediaSource = buildMediaSource(uri)
         player!!.playWhenReady = playWhenReady

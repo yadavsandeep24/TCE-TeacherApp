@@ -43,6 +43,7 @@ interface MainRepository {
     ): Flow<DataState<MessageViewState>>
 
     fun getStudentList(
+        classId: Int,
         query: String,
         stateEvent: StateEvent
     ): Flow<DataState<MessageViewState>>
@@ -78,7 +79,7 @@ interface MainRepository {
     ): Flow<DataState<DashboardViewState>>
 
     fun getParentDashboardData(
-        id: Int,
+        id: String,
         stateEvent: StateEvent
     ): Flow<DataState<DashboardViewState>>
 
@@ -167,11 +168,15 @@ interface MainRepository {
         stateEvent: StateEvent
     ): Flow<DataState<SubjectViewState>>
 
-    fun getStudentData(stateEvent: StateEvent): Flow<DataState<StudentViewState>>
+    fun getStudentData(
+        classId: Int,
+        query: String, stateEvent: StateEvent
+    ): Flow<DataState<StudentViewState>>
+
     fun getStudentAttendanceData(stateEvent: StateEvent): Flow<DataState<StudentViewState>>
     fun getFeedBackMasterData(stateEvent: StateEvent): Flow<DataState<StudentViewState>>
-    fun getGalleryData(type :Int,stateEvent: StateEvent): Flow<DataState<StudentViewState>>
-    fun getStudentPortfolio(stateEvent: StateEvent): Flow<DataState<StudentViewState>>
+    fun getGalleryData(type: Int, stateEvent: StateEvent): Flow<DataState<StudentViewState>>
+    fun getStudentPortfolio(type: Int, stateEvent: StateEvent): Flow<DataState<StudentViewState>>
 
 
 }

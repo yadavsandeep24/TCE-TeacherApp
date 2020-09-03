@@ -10,7 +10,9 @@ import androidx.navigation.fragment.findNavController
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentAddChildBinding
 import com.tce.teacherapp.ui.BaseFragment
+import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.login.LoginViewModel
+import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
@@ -19,8 +21,8 @@ import javax.inject.Inject
 @FlowPreview
 class AddChildFragment
 @Inject
-constructor(viewModelFactory: ViewModelProvider.Factory)
-    : BaseFragment(R.layout.fragment_add_child) {
+constructor(viewModelFactory: ViewModelProvider.Factory) :
+    BaseFragment(R.layout.fragment_add_child) {
 
     private lateinit var binding: FragmentAddChildBinding
 
@@ -43,13 +45,19 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        if (resources.getString(R.string.app_type)
+                .equals(resources.getString(R.string.app_type_parent), true)
+        ) {
+            (activity as DashboardActivity).bottom_navigation_view.visibility = View.GONE
+        }
         binding.tvNext.setOnClickListener {
-            if(resources.getString(R.string.app_type).equals(resources.getString(R.string.app_type_parent),true)) {
-                findNavController().navigate(R.id.action_addChildFragment2_to_plannerFragment)
-            }else{
-                findNavController().navigate(R.id.action_addChildFragment_to_dashboardHomeFragment)
-            }
+            uiCommunicationListener.hideSoftKeyboard()
+                    activity?.onBackPressed()
+            /*          if(resources.getString(R.string.app_type).equals(resources.getString(R.string.app_type_parent),true)) {
+                          findNavController().navigate(R.id.action_addChildFragment2_to_plannerFragment)
+                      }else{
+                          findNavController().navigate(R.id.action_addChildFragment_to_dashboardHomeFragment)
+                      }*/
 
         }
     }

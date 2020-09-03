@@ -16,10 +16,10 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import com.tce.teacherapp.R
-import java.io.File
-import java.io.FileInputStream
-import java.io.FileOutputStream
+import java.io.*
+import java.net.HttpURLConnection
 import java.net.URISyntaxException
+import java.net.URL
 import java.util.*
 
 
@@ -33,7 +33,7 @@ open class Utility {
                 val resourceId: Int = context.resources
                     .getIdentifier(name, "drawable", context.packageName)
                 context.resources.getDrawable(resourceId, null)
-            }catch (e:java.lang.Exception) {
+            }catch (e: java.lang.Exception) {
                 e.printStackTrace()
                 null
             }
@@ -112,7 +112,10 @@ open class Utility {
             val selection: String? = null
             val selectionArgs: Array<String>? = null
             // Uri is different in versions after KITKAT (Android 4.4), we need to
-            if (Build.VERSION.SDK_INT >= 19 && DocumentsContract.isDocumentUri(context.applicationContext, uri)) {
+            if (Build.VERSION.SDK_INT >= 19 && DocumentsContract.isDocumentUri(
+                    context.applicationContext,
+                    uri
+                )) {
                 return getRealPathFromURI_API19(context, uri)
             }
             if ("content".equals(uri.scheme!!, ignoreCase = true)) {
@@ -137,7 +140,10 @@ open class Utility {
 
         fun getRealPathFromURI_API19(context: Context, uri: Uri): String? {
             var filePath = ""
-            if (Build.VERSION.SDK_INT >= 19 && DocumentsContract.isDocumentUri(context.applicationContext, uri)) {
+            if (Build.VERSION.SDK_INT >= 19 && DocumentsContract.isDocumentUri(
+                    context.applicationContext,
+                    uri
+                )) {
                 // ExternalStorageProvider
                 if (isExternalStorageDocument(uri)) {
                     val docId = DocumentsContract.getDocumentId(uri)
@@ -165,14 +171,22 @@ open class Utility {
                     // DownloadsProvider
                     val id = DocumentsContract.getDocumentId(uri)
                     val contentUri = ContentUris.withAppendedId(
-                        Uri.parse("content://downloads/public_downloads"), java.lang.Long.valueOf(id))
+                        Uri.parse("content://downloads/public_downloads"),
+                        java.lang.Long.valueOf(id)
+                    )
 
                     var cursor: Cursor? = null
                     val column = "_data"
                     val projection = arrayOf(column)
 
                     try {
-                        cursor = context.contentResolver.query(contentUri, projection, null, null, null)
+                        cursor = context.contentResolver.query(
+                            contentUri,
+                            projection,
+                            null,
+                            null,
+                            null
+                        )
                         if (cursor != null && cursor.moveToFirst()) {
                             val index = cursor.getColumnIndexOrThrow(column)
                             val result = cursor.getString(index)
@@ -211,8 +225,10 @@ open class Utility {
                     val selectionArgs = arrayOf(id)
                     val column = "_data"
                     val projection = arrayOf(column)
-                    val cursor = context.contentResolver.query(contentUri!!,
-                        projection, selection, selectionArgs, null)
+                    val cursor = context.contentResolver.query(
+                        contentUri!!,
+                        projection, selection, selectionArgs, null
+                    )
 
                     if (cursor != null) {
                         val columnIndex = cursor.getColumnIndex(column)
@@ -268,7 +284,12 @@ open class Utility {
             return str
         }
 
-        fun getRectangleBorder(solidColor: Int, radius: FloatArray, strokeWidth: Int, strokeColor: Int): GradientDrawable {
+        fun getRectangleBorder(
+            solidColor: Int,
+            radius: FloatArray,
+            strokeWidth: Int,
+            strokeColor: Int
+        ): GradientDrawable {
             val gradientDrawable = GradientDrawable()
             gradientDrawable.setColor(solidColor)
             gradientDrawable.shape = GradientDrawable.RECTANGLE
@@ -334,7 +355,7 @@ open class Utility {
 
             states.addState(
                 intArrayOf(android.R.attr.state_pressed), getRectangleBorder(
-                   Color.parseColor(PressedSolidColor),
+                    Color.parseColor(PressedSolidColor),
                     floatArrayOf(
                         radius.toFloat(),
                         radius.toFloat(),
@@ -371,7 +392,7 @@ open class Utility {
             v.setBackgroundDrawable(states)
 
         }
-        fun calculateNumberOfColumns(base: Int,context: Context): Int {
+        fun calculateNumberOfColumns(base: Int, context: Context): Int {
             var columns = base
             val screenSize = getScreenSizeCategory(context)
             if (screenSize == "small") {
@@ -417,6 +438,58 @@ open class Utility {
                     "xlarge"
                 else -> "undefined"
             }
+        }
+
+        fun downloadFile(stUrl: String, destnUrl: String): String {
+            var str = "fail"
+            try {
+                val url = URL(stUrl)
+                val c: HttpURLConnection = url.openConnection() as HttpURLConnection
+                val response: Int = c.responseCode
+                if (createDirIfNotExists(destnUrl)) {
+                    val fileName = stUrl.substring(stUrl.lastIndexOf("/") + 1)
+                    val outfile = File(destnUrl, fileName)
+                    outfile.delete()
+                    val f = FileOutputStream(File(destnUrl, fileName))
+                    val input = c.inputStream
+                    val inStream = BufferedInputStream(input, 1024 * 5)
+                    val buffer = ByteArray(7 * 1024)
+                    var len: Int
+                    while (inStream.read(buffer).also { len = it } != -1) {
+                        f.write(buffer, 0, len)
+                    }
+                    f.flush()
+                    f.close()
+                    input.close()
+             /*       val outputFile = File(File(destnUrl), fileName)
+                    val fos = FileOutputStream(outputFile)
+                    val input = BufferedInputStream(url.openStream(), 8192)
+                    val buffer = ByteArray(1024)
+                    var len1 = 0
+                    while ({ len1 = input.read(buffer); len1 }() != -1) {
+                        fos.write(buffer, 0, len1)
+                    }
+                    // flushing output
+                    fos.flush()
+
+                    fos.close()
+                    input.close()*/
+                    str = destnUrl + fileName
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+            return str
+        }
+        private fun createDirIfNotExists(path: String): Boolean {
+            var ret = true
+            val file = File(path)
+            if (!file.exists()) {
+                if (!file.mkdirs()) {
+                    ret = false
+                }
+            }
+            return ret
         }
     }
 

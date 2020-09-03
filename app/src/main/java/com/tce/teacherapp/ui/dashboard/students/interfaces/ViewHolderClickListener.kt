@@ -4,5 +4,6 @@ import com.tce.teacherapp.api.response.StudentListResponseItem
 
 interface ViewHolderClickListener {
     fun onLongTap(index : Int)
-    fun onTap(index : Int,item: StudentListResponseItem?)
+    fun onTap(index : Int,item: StudentListResponseItem)
+    fun onCheckBoxClicked(item: StudentListResponseItem)
 }

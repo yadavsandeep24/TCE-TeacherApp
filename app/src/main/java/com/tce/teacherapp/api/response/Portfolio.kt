@@ -11,11 +11,11 @@ data class Portfolio(
     val Date: String,
 
     @Expose
-    val Feedback: List<Feedback>,
+    var Feedback: List<Feedback>,
 
     @Expose
-    val Gallery: List<StudentGalleryData>,
+    var Gallery: List<StudentGalleryData>,
 
     @Expose
-    val TeacherNote: String
+    var TeacherNote: String
 ):Parcelable

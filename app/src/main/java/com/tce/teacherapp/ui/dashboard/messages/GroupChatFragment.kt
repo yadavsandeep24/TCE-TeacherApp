@@ -52,8 +52,8 @@ constructor(
     viewModelFactory: ViewModelProvider.Factory
 ) : BaseMessageFragment(R.layout.fragment_group_chat, viewModelFactory), ImagePickerContract {
 
-   private lateinit var binding : FragmentGroupChatBinding
-     var PICK_FILE_FROM_GALLARY : Int = 100
+    private lateinit var binding: FragmentGroupChatBinding
+    var PICK_FILE_FROM_GALLARY: Int = 100
 
     var photoList: java.util.ArrayList<GalleryData> = java.util.ArrayList()
     var albumList: java.util.ArrayList<GalleryAlbums> = java.util.ArrayList()
@@ -66,7 +66,7 @@ constructor(
 
     lateinit var ctx: Context
 
-    private var strFileType : String = "Photo"
+    private var strFileType: String = "Photo"
 
     private var viewModelRecorder: RecorderViewModel? = null
 
@@ -95,14 +95,15 @@ constructor(
         glm = GridLayoutManager(ctx, 4)
         binding.imageGrid.itemAnimator = null
         val bundle = this.arguments
-        if (bundle != null) photoids = if (bundle.containsKey("photoids")) bundle.getIntegerArrayList("photoids")!! else java.util.ArrayList()
+        if (bundle != null) photoids =
+            if (bundle.containsKey("photoids")) bundle.getIntegerArrayList("photoids")!! else java.util.ArrayList()
         galleryOperation(0)
     }
 
     override fun initRecyclerViews() {
-        if(strFileType.equals("Photo")) {
+        if (strFileType.equals("Photo")) {
             binding.imageGrid.adapter = ImageGridAdapter(imageList = photoList, threshold = 0)
-        }else{
+        } else {
             binding.imageGrid.adapter = VideoGridAdapter(imageList = photoList, threshold = 0)
         }
     }
@@ -139,7 +140,7 @@ constructor(
             doAsync {
                 getPhoneAlbums(ctx, listener, type)
             }
-            }
+        }
     }
 
     override fun toggleDropdown() {
@@ -151,9 +152,9 @@ constructor(
         listener: OnPhoneImagesObtained,
         type: Int
     ) {
-        if(strFileType.equals("Photo")) {
+        if (strFileType.equals("Photo")) {
             imagePickerPresenter.getPhoneAlbums()
-        }else{
+        } else {
             videoPickerPresenter.getPhoneAlbums()
         }
     }
@@ -192,7 +193,8 @@ constructor(
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         bottomSheetBehavior.skipCollapsed = true
 
-        bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback {
+        bottomSheetBehavior.addBottomSheetCallback(object :
+            BottomSheetBehavior.BottomSheetCallback {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 val rotation = when (newState) {
                     BottomSheetBehavior.STATE_EXPANDED -> 0f
@@ -255,15 +257,26 @@ constructor(
         }
 
         binding.resourceContainer.setOnClickListener {
-            findNavController().navigate(
-                R.id.action_groupChatFragment_to_resourceFragment
-            )
+            val flowType = arguments?.getInt("flowType")
+            if (flowType == 1) {
+                findNavController().navigate(
+                    R.id.action_groupChatFragment2_to_resourceFragment2
+                )
+            } else {
+                findNavController().navigate(
+                    R.id.action_groupChatFragment_to_resourceFragment
+                )
+            }
         }
 
         binding.fileContainer.setOnClickListener {
 
-            val mimeTypes = arrayOf("application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document", // .doc & .docx
-                "application/pdf", "application/mp4")
+            val mimeTypes = arrayOf(
+                "application/msword",
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document", // .doc & .docx
+                "application/pdf",
+                "application/mp4"
+            )
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.addCategory(Intent.CATEGORY_OPENABLE)
             var mimeTypesStr = ""
@@ -285,14 +298,30 @@ constructor(
 
         binding.voiceContainer.setOnClickListener {
             println("Requesting permission")
-            if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.RECORD_AUDIO)
-                != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(
+                    requireActivity(),
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                )
+                != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
+                    requireActivity(),
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
+                != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
+                    requireActivity(),
+                    Manifest.permission.RECORD_AUDIO
+                )
+                != PackageManager.PERMISSION_GRANTED
+            ) {
                 println("Requesting permission")
-                ActivityCompat.requestPermissions(requireActivity(),
-                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO), 0)
-            }else{
+                ActivityCompat.requestPermissions(
+                    requireActivity(),
+                    arrayOf(
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.RECORD_AUDIO
+                    ), 0
+                )
+            } else {
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
                 val bottomUp: Animation = AnimationUtils.loadAnimation(
                     context,
@@ -306,9 +335,9 @@ constructor(
         }
 
         binding.tvRecord.setOnClickListener {
-            if(binding.tvRecord.text.toString().equals("Record", ignoreCase = true)){
+            if (binding.tvRecord.text.toString().equals("Record", ignoreCase = true)) {
                 startRecording()
-            }else{
+            } else {
                 stopRecording()
             }
 
@@ -343,7 +372,7 @@ constructor(
     }
 
     @SuppressLint("RestrictedApi")
-    private fun stopRecording(){
+    private fun stopRecording() {
         viewModelRecorder?.stopRecording()
 
         binding.tvRecord.background = resources.getDrawable(R.drawable.bg_orange_rounded)
@@ -353,60 +382,72 @@ constructor(
 
     @TargetApi(Build.VERSION_CODES.N)
     @SuppressLint("RestrictedApi")
-    private fun pauseRecording(){
+    private fun pauseRecording() {
         viewModelRecorder?.pauseRecording()
     }
 
     @TargetApi(Build.VERSION_CODES.N)
     @SuppressLint("RestrictedApi")
-    private fun resumeRecording(){
+    private fun resumeRecording() {
         viewModelRecorder?.resumeRecording()
     }
 
 
-
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     fun checkReadWritePermission(): Boolean {
-        requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE), PERMISSIONS_READ_WRITE)
+        requestPermissions(
+            arrayOf(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ), PERMISSIONS_READ_WRITE
+        )
         return true
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
         when (requestCode) {
             PERMISSIONS_READ_WRITE -> if (grantResults.isNotEmpty() && grantResults[0] ==
-                PackageManager.PERMISSION_GRANTED) initGalleryViews()
+                PackageManager.PERMISSION_GRANTED
+            ) initGalleryViews()
         }
     }
 
-    private fun isReadWritePermitted(): Boolean = (context?.checkCallingOrSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED && context?.checkCallingOrSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
+    private fun isReadWritePermitted(): Boolean =
+        (context?.checkCallingOrSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED && context?.checkCallingOrSelfPermission(
+            android.Manifest.permission.READ_EXTERNAL_STORAGE
+        ) == PackageManager.PERMISSION_GRANTED)
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-      /*  if (resultCode == RESULT_OK) {
-            val selectedImageUri: Uri?
-            if (data!!.data == null) {
-                val path = MediaStore.Images.Media.insertImage(
-                    requireActivity().contentResolver,
-                    data.extras!!.get("data") as Bitmap,
-                    "Title",
-                    null
-                )
-                selectedImageUri = Uri.parse(path)
-            } else {
-                selectedImageUri = data.data
-            }
-            var selectedPath: String? = null
-            if (selectedImageUri != null) {
-                if (requestCode == PICK_FILE_FROM_GALLARY) {
-                    selectedPath = Utility.getRealPathFromURI(requireActivity(), selectedImageUri)
-                    if (!TextUtils.isEmpty(selectedPath)) {
-                        if (!StringUtils.containsIgnoreCase(selectedPath, ".png")
-                            && !StringUtils.containsIgnoreCase(selectedPath, ".jpg")
-                            && !StringUtils.containsIgnoreCase(selectedPath, ".bmp")
-                            && !StringUtils.containsIgnoreCase(selectedPath, ".jpeg")
-                        ) {
-                           *//* Utility.showToast(
+        /*  if (resultCode == RESULT_OK) {
+              val selectedImageUri: Uri?
+              if (data!!.data == null) {
+                  val path = MediaStore.Images.Media.insertImage(
+                      requireActivity().contentResolver,
+                      data.extras!!.get("data") as Bitmap,
+                      "Title",
+                      null
+                  )
+                  selectedImageUri = Uri.parse(path)
+              } else {
+                  selectedImageUri = data.data
+              }
+              var selectedPath: String? = null
+              if (selectedImageUri != null) {
+                  if (requestCode == PICK_FILE_FROM_GALLARY) {
+                      selectedPath = Utility.getRealPathFromURI(requireActivity(), selectedImageUri)
+                      if (!TextUtils.isEmpty(selectedPath)) {
+                          if (!StringUtils.containsIgnoreCase(selectedPath, ".png")
+                              && !StringUtils.containsIgnoreCase(selectedPath, ".jpg")
+                              && !StringUtils.containsIgnoreCase(selectedPath, ".bmp")
+                              && !StringUtils.containsIgnoreCase(selectedPath, ".jpeg")
+                          ) {
+                             *//* Utility.showToast(
                                 activity!!,
                                 getString(com.zl.baseapp.R.string.invalid_file_images),
                                 Toast.LENGTH_LONG,

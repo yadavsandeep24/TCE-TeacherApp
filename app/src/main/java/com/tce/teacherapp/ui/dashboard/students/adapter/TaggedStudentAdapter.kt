@@ -17,16 +17,8 @@ import java.util.*
  */
 @FlowPreview
 @ExperimentalCoroutinesApi
-class TaggedStudentAdapter(val context: Context, val listener: ViewHolderClickListener) : RecyclerView.Adapter<TaggedStudentViewHolder>(),
-    ViewHolderClickListener {
+class TaggedStudentAdapter(val context: Context, val listener: ViewHolderClickListener) : RecyclerView.Adapter<TaggedStudentViewHolder>(){
     private var isShowCancelIcon: Boolean = false
-
-    override fun onLongTap(index: Int) {
-    }
-
-    override fun onTap(index: Int,item: StudentListResponseItem?) {
-            listener.onTap(index,modelList[index])
-    }
 
     fun setIsShowCancelIcon(isShow: Boolean) {
         isShowCancelIcon = isShow
@@ -44,12 +36,15 @@ class TaggedStudentAdapter(val context: Context, val listener: ViewHolderClickLi
         }else{
             holder.vwCancel.visibility = View.GONE
         }
+        holder.vwCancel.setOnClickListener {
+            listener.onTap(position,modelList[position])
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaggedStudentViewHolder {
         val inflater = LayoutInflater.from(parent?.context)
         val itemView = inflater.inflate(R.layout.list_item_tagged_student, parent, false)
-        return TaggedStudentViewHolder(itemView, this)
+        return TaggedStudentViewHolder(itemView)
     }
 
 

@@ -50,7 +50,7 @@ class StudentViewModel @Inject constructor(val mainRepository: MainRepository) :
         val job: Flow<DataState<StudentViewState>> = when (stateEvent) {
 
             is StudentStateEvent.GetStudentEvent -> {
-                mainRepository.getStudentData(stateEvent = stateEvent)
+                mainRepository.getStudentData(stateEvent.classID,stateEvent.query,stateEvent = stateEvent)
             }
             is StudentStateEvent.GetAttendanceData -> {
                 mainRepository.getStudentAttendanceData(stateEvent = stateEvent)
@@ -62,7 +62,7 @@ class StudentViewModel @Inject constructor(val mainRepository: MainRepository) :
                 mainRepository.getGalleryData(stateEvent.type,stateEvent =  stateEvent)
             }
             is StudentStateEvent.GetStudentPortfolio ->{
-                mainRepository.getStudentPortfolio(stateEvent =  stateEvent)
+                mainRepository.getStudentPortfolio(stateEvent.type,stateEvent =  stateEvent)
             }
             else -> {
                 flow{

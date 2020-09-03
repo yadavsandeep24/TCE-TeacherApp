@@ -61,6 +61,8 @@ class StudentGalleryAdapter(
         }else{
             holder.rvGallary.visibility = View.GONE
         }
+
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentPortfolioViewHolder {

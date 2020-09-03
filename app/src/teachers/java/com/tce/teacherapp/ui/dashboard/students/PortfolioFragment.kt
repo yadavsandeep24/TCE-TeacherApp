@@ -22,7 +22,7 @@ import com.tce.teacherapp.ui.dashboard.students.state.STUDENT_VIEW_STATE_BUNDLE_
 import com.tce.teacherapp.ui.dashboard.students.state.StudentStateEvent
 import com.tce.teacherapp.ui.dashboard.students.state.StudentViewState
 import kotlinx.android.synthetic.main.activity_dashboard.*
-import kotlinx.android.synthetic.teachers.fragment_dashboard_home.*
+import kotlinx.android.synthetic.main.fragment_portfolio.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
@@ -61,10 +61,12 @@ constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as DashboardActivity).expandAppBar(true)
-        viewModel.setStateEvent(StudentStateEvent.GetStudentEvent)
-        val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
+        viewModel.setStateEvent(StudentStateEvent.GetStudentEvent(0,""))
+        val bottomSheetBehavior =
+            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
 
-        bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+        bottomSheetBehavior.state =
+            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
         bottomSheetBehavior.skipCollapsed = true
         bottomSheetBehavior.isDraggable = false
 
@@ -102,7 +104,7 @@ constructor(
 
         binding.tvAttendance.setOnClickListener {
             (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
-           findNavController().navigate(R.id.action_portfolioFragment_to_studentListFragment)
+            findNavController().navigate(R.id.action_portfolioFragment_to_studentListFragment)
         }
 
         binding.tvPortfolio.setOnClickListener {
@@ -117,28 +119,20 @@ constructor(
             findNavController().navigate(R.id.action_portfolioFragment_to_studentGalleryFragment)
         }
 
-
-
         binding.tvFeedback.setOnClickListener {
             myAdapter!!.setIsShowCheckBox(true)
             binding.nextContainer.visibility = View.VISIBLE
             binding.tvFeedback.visibility = View.GONE
         }
-        binding.selectAllContainer.setOnClickListener {
-            if(binding.chkSelectall.isChecked){
-                binding.chkSelectall.isChecked = false
-                myAdapter!!.setIsSelectAll(false)
-            }else{
-                binding.chkSelectall.isChecked = true
-                myAdapter!!.setIsSelectAll(true)
-            }
+        binding.chkSelectall.setOnCheckedChangeListener { _, isChecked ->
+                myAdapter!!.setIsSelectAll(isChecked)
+                setNextButtonState(isChecked)
         }
 
         binding.tvNext.setOnClickListener {
             findNavController().navigate(R.id.action_portfolioFragment_to_feedbackFragment)
         }
-
-        viewModel.setStateEvent(StudentStateEvent.GetStudentEvent)
+        viewModel.setStateEvent(StudentStateEvent.GetStudentEvent(0,""))
         subscribeObservers()
 
     }
@@ -148,13 +142,13 @@ constructor(
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             if (viewState != null) {
                 viewState.studentListResponse?.let {
-                    Log.d("SAN","it.studentList.size-->"+it.size)
+                    Log.d("SAN", "it.studentList.size-->" + it.size)
                     StudentListFragment.isMultiSelectOn = false
                     binding.rvPortfolio.layoutManager = GridLayoutManager(activity, 3)
                     binding.rvPortfolio.setHasFixedSize(true)
                     myAdapter = PortfolioAdapter(requireContext(), this)
                     binding.rvPortfolio.adapter = myAdapter
-                    myAdapter?.modelList =it.toMutableList()
+                    myAdapter?.modelList = it.toMutableList()
                     myAdapter?.notifyDataSetChanged()
                 }
             }
@@ -188,10 +182,40 @@ constructor(
 
     }
 
-    override fun onTap(index: Int,item : StudentListResponseItem?) {
+    override fun onTap(index: Int, item: StudentListResponseItem) {
         val bundle = Bundle()
         bundle.putParcelable("studentdata", item)
-        findNavController().navigate(R.id.action_portfolioFragment_to_studentProfileFragment,bundle)
+        findNavController().navigate(
+            R.id.action_portfolioFragment_to_studentProfileFragment,
+            bundle
+        )
+    }
+
+    override fun onCheckBoxClicked(item: StudentListResponseItem) {
+        var isNextButtonEnabled = false
+        var selectedCheckBoxCount = 0
+        for (studentItem in myAdapter!!.modelList) {
+            if (studentItem.isSelected) {
+                isNextButtonEnabled = true
+                selectedCheckBoxCount += 1
+            }
+        }
+        if(selectedCheckBoxCount == myAdapter!!.modelList.size) {
+            binding.chkSelectall.isChecked = true
+        }else if(selectedCheckBoxCount == 0) {
+            binding.chkSelectall.isChecked = false
+        }
+        setNextButtonState(isNextButtonEnabled)
+    }
+
+    private fun setNextButtonState(nextButtonEnabled: Boolean) {
+        if (nextButtonEnabled) {
+            binding.tvNext.isEnabled = true
+            binding.tvNext.alpha = 1f
+        } else {
+            binding.tvNext.isEnabled = false
+            binding.tvNext.alpha = 0.4f
+        }
     }
 
 

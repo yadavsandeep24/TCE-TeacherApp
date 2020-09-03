@@ -6,30 +6,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.tce.teacherapp.R
 import com.tce.teacherapp.api.response.StudentListResponseItem
 import com.tce.teacherapp.ui.dashboard.students.StudentListFragment
 import com.tce.teacherapp.ui.dashboard.students.interfaces.MainInterface
-import com.tce.teacherapp.ui.dashboard.students.interfaces.ViewHolderClickListener
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import java.util.*
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-class AttendanceAdapter(val context: Context, val mainInterface: MainInterface) : RecyclerView.Adapter<AttendanceViewHolder>(),
-    ViewHolderClickListener {
-
-    override fun onLongTap(index: Int) {
-        if (!StudentListFragment.isMultiSelectOn) {
-            StudentListFragment.isMultiSelectOn = true
-        }
-        addIDIntoSelectedIds(index)
-    }
-
-    override fun onTap(index: Int,item : StudentListResponseItem?) {
-            addIDIntoSelectedIds(index)
-    }
+class AttendanceAdapter(val context: Context, val mainInterface: MainInterface) : RecyclerView.Adapter<AttendanceViewHolder>(){
 
     fun addIDIntoSelectedIds(index: Int) {
         val id = modelList[index].id
@@ -86,7 +74,11 @@ class AttendanceAdapter(val context: Context, val mainInterface: MainInterface) 
 
         if (selectedIds.contains(id)) {
             holder.flIndicator.background = holder.flIndicator.context.getDrawable(R.drawable.bg_student_profile_absent)
-            holder.imgStudent.background = holder.flIndicator.context.getDrawable(R.drawable.ic_profile_icon_absent)
+
+            Glide.with(context)
+                .load(modelList[position].ImagePath)
+                .placeholder(R.drawable.ic_profile_icon_absent)
+                .into(holder.imgStudent)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 holder.tvStudentName.setTextColor(holder.flIndicator.context.resources.getColor(R.color.light_grey_blue,null))
             }else{
@@ -95,19 +87,37 @@ class AttendanceAdapter(val context: Context, val mainInterface: MainInterface) 
         } else {
             //else remove selected item color.
             holder.flIndicator.background = holder.flIndicator.context.getDrawable(R.drawable.bg_student_profile_present)
-            holder.imgStudent.background = holder.flIndicator.context.getDrawable(R.drawable.ic_profile_icon_present)
+            Glide.with(context)
+                .load(modelList[position].ImagePath)
+                .placeholder(R.drawable.ic_profile_icon_present)
+                .into(holder.imgStudent)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 holder.tvStudentName.setTextColor(holder.flIndicator.context.resources.getColor(R.color.dark,null))
             }else{
                 holder.tvStudentName.setTextColor(holder.flIndicator.context.resources.getColor(R.color.dark))
             }
         }
+
+        holder.mainContainer.setOnClickListener {
+            addIDIntoSelectedIds(position)
+        }
+
+    holder.mainContainer.setOnLongClickListener {
+
+        if (!StudentListFragment.isMultiSelectOn) {
+            StudentListFragment.isMultiSelectOn = true
+        }
+        addIDIntoSelectedIds(position)
+        true
+    }
+
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AttendanceViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val itemView = inflater.inflate(R.layout.student_list_item, parent, false)
-        return AttendanceViewHolder(itemView, this)
+        return AttendanceViewHolder(itemView)
     }
 
 

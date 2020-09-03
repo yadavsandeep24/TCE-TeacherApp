@@ -135,9 +135,11 @@ constructor(
 
     override fun mainInterface(size: Int) {
         if (size > 0) {
-           binding.tvSave.visibility = View.VISIBLE
+            binding.tvSave.isEnabled = true
+            binding.tvSave.alpha =1f
         }else{
-            binding.tvSave.visibility = View.GONE
+            binding.tvSave.isEnabled = false
+            binding.tvSave.alpha =0.4f
         }
     }
 

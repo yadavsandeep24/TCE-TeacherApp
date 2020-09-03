@@ -16,11 +16,11 @@ import com.airbnb.epoxy.EpoxyVisibilityTracker
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tce.teacherapp.R
+import com.tce.teacherapp.api.response.StudentListResponseItem
 import com.tce.teacherapp.databinding.FragmentDashboardHomeBinding
 import com.tce.teacherapp.db.entity.DashboardLatestUpdate
 import com.tce.teacherapp.db.entity.DashboardResourceType
 import com.tce.teacherapp.db.entity.Event
-import com.tce.teacherapp.db.entity.Student
 import com.tce.teacherapp.ui.dashboard.BaseDashboardFragment
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.home.adapter.childEpoxyHolder
@@ -94,7 +94,6 @@ constructor(
         }
         uiCommunicationListener.displayProgressBar(false)
         (activity as DashboardActivity).expandAppBar(false)
-        (activity as DashboardActivity).showHideUnderDevelopmentLabel(false)
 
         binding.imgSetting.setOnClickListener {
             findNavController().navigate(R.id.action_dashboardHomeFragment_to_settingsFragment)
@@ -136,7 +135,7 @@ constructor(
             }
         })
 
-        viewModel.setStateEvent(DashboardStateEvent.GetParentDashboardData(1))
+        viewModel.setStateEvent(DashboardStateEvent.GetParentDashboardData(1.toString()))
         subscribeObservers()
 
     }
@@ -194,7 +193,7 @@ constructor(
                             for (child in it) {
                                 childEpoxyHolder {
                                     id(child.id)
-                                    strStudentName(child.name)
+                                    strStudentName(child.Name)
                                     student(child)
                                     childClickListener(this@DashboardHomeFragment)
                                 }
@@ -215,7 +214,7 @@ constructor(
         Toast.makeText(requireContext(), "Track Location" , Toast.LENGTH_LONG).show()
     }
 
-    override fun onChildListItemClick(student : Student) {
+    override fun onChildListItemClick(student : StudentListResponseItem) {
         viewModel.setStateEvent(DashboardStateEvent.GetParentDashboardData(student.id))
         val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
         bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN

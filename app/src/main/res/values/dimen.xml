@@ -10,4 +10,8 @@
     <dimen name="font_size_16_dp">16dp</dimen>
 
     <dimen name="_30sdp">30.00dp</dimen>
+
+    <dimen name="card_stroke_width_2dp">2dp</dimen>
+    <dimen name="card_stroke_width_3dp">3dp</dimen>
+    <dimen name="card_stroke_width_0dp">0dp</dimen>
 </resources>

@@ -74,9 +74,7 @@ constructor(
             navigateToDailyFragment(null)
         }
 
-        if (resources.getString(R.string.app_type)
-                .equals(resources.getString(R.string.app_type_parent), true)
-        ) {
+        if (resources.getString(R.string.app_type).equals(resources.getString(R.string.app_type_parent), true)) {
             binding.tvToday.visibility = View.GONE
             binding.imgStudent.visibility = View.VISIBLE
         }

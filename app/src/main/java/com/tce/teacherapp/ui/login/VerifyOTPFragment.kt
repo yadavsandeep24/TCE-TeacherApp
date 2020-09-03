@@ -167,7 +167,7 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
 
         override fun updateDrawState(ds: TextPaint) {
             super.updateDrawState(ds)
-            ds.color = resources.getColor(R.color.forget_password_text)
+            ds.color = resources.getColor(R.color.orangey_red)
         }
 
     }
@@ -180,7 +180,7 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
 
         override fun updateDrawState(ds: TextPaint) {
             super.updateDrawState(ds)
-            ds.color = resources.getColor(R.color.forget_password_text)
+            ds.color = resources.getColor(R.color.orangey_red)
         }
 
     }

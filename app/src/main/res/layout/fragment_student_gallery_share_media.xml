@@ -42,8 +42,8 @@
                 android:layout_height="50dp"
                 android:layout_below="@+id/top_container"
                 android:elevation="2dp"
-                android:gravity="center_vertical"
-                android:paddingLeft="25dp">
+                android:paddingStart="25dp"
+                android:paddingEnd="25dp">
 
                 <LinearLayout
                     android:id="@+id/sort_container"
@@ -54,14 +54,13 @@
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
                     android:paddingTop="5dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="5dp">
+                    android:paddingBottom="5dp"
+                    android:paddingRight="10dp">
 
                     <com.tce.teacherapp.util.RubikBoldTextview
                         android:id="@+id/tv_class_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
                         android:text="Filter by"
                         android:textColor="@color/dark"
                         android:textSize="@dimen/font_size_12_dp">
@@ -71,7 +70,7 @@
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="10dp"
                         android:layout_height="10dp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="5dp"
                         android:src="@drawable/down_arrow_black">
 
                     </androidx.appcompat.widget.AppCompatImageView>
@@ -84,7 +83,6 @@
                     android:layout_height="30dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="20dp"
                     android:background="@drawable/bg_white_rounded"
                     android:elevation="2dp"
                     android:gravity="center"
@@ -99,7 +97,6 @@
                     android:layout_height="20dp"
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="5dp"
-                    android:layout_marginRight="20dp"
                     android:background="@drawable/yellow_round_count"
                     android:elevation="2dp"
                     android:gravity="center"
@@ -130,79 +127,11 @@
                 android:id="@+id/mask_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:visibility="gone"
                 android:background="@color/transparent" />
 
 
         </RelativeLayout>
-
-        <LinearLayout
-            android:id="@+id/bottom_sheet"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="100dp"
-            android:background="@drawable/filters_sheet_background"
-            android:orientation="vertical"
-            app:behavior_fitToContents="true"
-            app:behavior_hideable="true"
-            app:behavior_peekHeight="0dp"
-            app:layout_behavior="com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior">
-
-            <View
-                android:layout_width="50dp"
-                android:layout_height="4dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="5dp"
-                android:background="#e1e6f0" />
-
-            <com.tce.teacherapp.util.RubikMediumTextview
-                android:id="@+id/tv_attendance"
-                android:layout_width="wrap_content"
-                android:layout_height="?android:attr/actionBarSize"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="Attendance"
-                android:textColor="@color/color_black"
-                android:textSize="@dimen/font_size_16_dp">
-
-            </com.tce.teacherapp.util.RubikMediumTextview>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#e1e6f0" />
-
-            <com.tce.teacherapp.util.RubikMediumTextview
-                android:id="@+id/tv_portfolio"
-                android:layout_width="wrap_content"
-                android:layout_height="?android:attr/actionBarSize"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="Portfolio"
-                android:textColor="@color/color_black"
-                android:textSize="@dimen/font_size_16_dp">
-
-            </com.tce.teacherapp.util.RubikMediumTextview>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#e1e6f0" />
-
-
-            <com.tce.teacherapp.util.RubikMediumTextview
-                android:id="@+id/tv_gallary"
-                android:layout_width="wrap_content"
-                android:layout_height="?android:attr/actionBarSize"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="Gallary"
-                android:textColor="@color/color_black"
-                android:textSize="@dimen/font_size_16_dp">
-
-            </com.tce.teacherapp.util.RubikMediumTextview>
-
-
-        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/bottom_sheet_filter_by"
@@ -216,7 +145,9 @@
             app:behavior_fitToContents="true"
             app:behavior_hideable="true"
             app:behavior_peekHeight="0dp"
-            app:layout_behavior="com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior">
+            android:clickable="true"
+            app:layout_behavior="com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior"
+            android:focusable="true">
 
             <View
                 android:layout_width="50dp"

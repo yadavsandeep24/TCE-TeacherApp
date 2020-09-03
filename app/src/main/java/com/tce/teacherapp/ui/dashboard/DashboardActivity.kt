@@ -2,6 +2,8 @@ package com.tce.teacherapp.ui.dashboard
 
 import android.content.res.Configuration
 import android.os.Bundle
+import android.os.Handler
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.databinding.DataBindingUtil
@@ -9,6 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
+import com.google.android.material.bottomnavigation.BottomNavigationItemView
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.tce.teacherapp.R
 import com.tce.teacherapp.TCEApplication
@@ -118,6 +122,22 @@ class DashboardActivity : BaseActivity(), BottomNavController.OnNavigationResele
 
     private fun setupBottomNavigationView() {
         bottomNavigationView = findViewById(R.id.bottom_navigation_view)
+
+        val mbottomNavigationMenuView =
+            bottomNavigationView.getChildAt(0) as BottomNavigationMenuView
+
+        val view = mbottomNavigationMenuView.getChildAt(1)
+
+        val itemView = view as BottomNavigationItemView
+
+        val cart_badge: View = LayoutInflater.from(this)
+            .inflate(
+                R.layout.bottom_icon_msg_notification,
+                mbottomNavigationMenuView, false
+            )
+
+        itemView.addView(cart_badge)
+
         bottomNavigationView.setUpNavigation(bottomNavController, this)
         // if (savedInstanceState == null) {
         bottomNavController.setupBottomNavigationBackStack(null)
@@ -129,7 +149,10 @@ class DashboardActivity : BaseActivity(), BottomNavController.OnNavigationResele
     }
 
     override fun onBackPressed(){
-       binding.bottomNavigationView.visibility = View.VISIBLE
+        Handler().postDelayed({
+            binding.bottomNavigationView.visibility = View.VISIBLE
+        }, 200)
+
         bottomNavController.onBackPressed()
     }
     override fun onGraphChange() {

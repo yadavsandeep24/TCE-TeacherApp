@@ -4,7 +4,10 @@ import com.tce.teacherapp.util.StateEvent
 
 sealed class StudentStateEvent : StateEvent {
 
-    object GetStudentEvent : StudentStateEvent() {
+    class GetStudentEvent(
+        val classID:Int,
+        val query: String
+    ) : StudentStateEvent() {
         override fun errorInfo(): String {
             return "Error in getting student info."
         }
@@ -34,7 +37,7 @@ sealed class StudentStateEvent : StateEvent {
         }
     }
 
-    object GetStudentPortfolio : StudentStateEvent() {
+    class GetStudentPortfolio(val type:Int) : StudentStateEvent() {
         override fun errorInfo(): String {
             return "Error in getting StudentPortfolio info."
         }

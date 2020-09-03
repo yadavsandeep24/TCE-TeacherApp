@@ -1,6 +1,7 @@
 package com.tce.teacherapp.ui.dashboard.home.state
 
 import android.os.Parcelable
+import com.tce.teacherapp.api.response.StudentListResponseItem
 import com.tce.teacherapp.db.entity.*
 import com.tce.teacherapp.util.MessageConstant
 import kotlinx.android.parcel.Parcelize
@@ -21,7 +22,7 @@ data class DashboardViewState (
     var isPasswordUpdated: Boolean? = null,
     var classList: List<ClassListsItem>? = null,
     var latestUpdateList : ArrayList<DashboardLatestUpdate>? =null,
-    var childList : ArrayList<Student>? =null
+    var childList : ArrayList<StudentListResponseItem>? =null
 ) : Parcelable
 
 

@@ -7,28 +7,26 @@ import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.tce.teacherapp.R
-import com.tce.teacherapp.ui.dashboard.students.interfaces.ViewHolderClickListener
 
 
-class AttendanceViewHolder(itemView: View, val r_tap: ViewHolderClickListener) : RecyclerView.ViewHolder(itemView),
-        View.OnLongClickListener, View.OnClickListener {
+class AttendanceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     val tvStudentName: TextView = itemView.findViewById(R.id.tv_student_name)
     val mainContainer: LinearLayout = itemView.findViewById(R.id.root_layout)
     val imgStudent : AppCompatImageView = itemView.findViewById(R.id.img_student)
     val flIndicator : FrameLayout =  itemView.findViewById(R.id.fl_indicator)
 
-    init {
+    /*init {
         mainContainer.setOnClickListener(this)
         mainContainer.setOnLongClickListener(this)
-    }
+    }*/
 
-    override fun onClick(v: View?) {
+/*    override fun onClick(v: View?) {
         r_tap.onTap(adapterPosition,null)
     }
 
     override fun onLongClick(v: View?): Boolean {
         r_tap.onLongTap(adapterPosition)
         return true
-    }
+    }*/
 }

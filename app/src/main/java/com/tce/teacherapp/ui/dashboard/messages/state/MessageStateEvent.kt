@@ -17,6 +17,7 @@ sealed class MessageStateEvent : StateEvent {
     }
 
     class GetStudentEvent (
+        val classID:Int,
         val query: String
     ) : MessageStateEvent() {
         override fun errorInfo(): String {

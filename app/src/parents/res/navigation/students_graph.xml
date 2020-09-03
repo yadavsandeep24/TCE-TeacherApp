@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/students_graph"
+    app:startDestination="@id/studentProfileFragment">
+
+    <fragment
+        android:id="@+id/studentProfileFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.students.StudentProfileFragment"
+        android:label="StudentProfileFragment" >
+        <action
+            android:id="@+id/action_studentProfileFragment_to_shareMediaFragment"
+            app:destination="@id/shareMediaFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_studentProfileFragment_to_progressCardFragment"
+            app:destination="@id/progressCardFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_studentProfileFragment_to_studentProfileUploadResouceSelectionFragment"
+            app:destination="@id/studentProfileUploadResouceSelectionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_studentProfileFragment_to_addChildFragment3"
+            app:destination="@id/addChildFragment3"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_studentProfileFragment_to_studentGalleryVideoPostFragment"
+            app:destination="@id/studentGalleryVideoPostFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_studentProfileFragment_to_studentGalleryImagePostFragment"
+            app:destination="@id/studentGalleryImagePostFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_studentProfileFragment_to_absentDaysCalenderFragment"
+            app:destination="@id/absentDaysCalenderFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+
+    </fragment>
+    <fragment
+        android:id="@+id/shareMediaFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.students.StudentProfileShareMediaFragment"
+        android:label="ShareMediaFragment" >
+        <action
+            android:id="@+id/action_shareMediaFragment_to_studentProfileFragment"
+            app:destination="@id/studentProfileFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/studentProfileFragment"/>
+        <action
+            android:id="@+id/action_shareMediaFragment_to_studentGalleryVideoPostFragment"
+            app:destination="@id/studentGalleryVideoPostFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_shareMediaFragment_to_studentGalleryImagePostFragment"
+            app:destination="@id/studentGalleryImagePostFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/progressCardFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.students.ProgressCardFragment"
+        android:label="ProgressCardFragment" >
+        <action
+            android:id="@+id/action_progressCardFragment_to_studentProfileFragment"
+            app:destination="@id/studentProfileFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/studentProfileFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/studentGalleryImagePostFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.students.StudentGalleryImagePostFragment"
+        android:label="fragment_student_gallery_image_post"
+        tools:layout="@layout/fragment_student_gallery_image_post" >
+        <action
+            android:id="@+id/action_studentGalleryImagePostFragment_to_studentGalleryImagePostDetailFragment"
+            app:destination="@id/studentGalleryImagePostDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_studentGalleryImagePostFragment_to_studentGalleryTagStudentFragment"
+            app:destination="@id/studentGalleryTagStudentFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_studentGalleryImagePostFragment_to_studentGalleryTaggedStudentFragment"
+            app:destination="@id/studentGalleryTaggedStudentFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/studentGalleryImagePostDetailFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.students.StudentGalleryImagePostDetailFragment"
+        android:label="fragment_student_gallery_image_post_detail"
+        tools:layout="@layout/fragment_student_gallery_image_post_detail" >
+        <action
+            android:id="@+id/action_studentGalleryImagePostDetailFragment_to_studentGalleryImagePostFragment"
+            app:destination="@id/studentGalleryImagePostFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/studentGalleryImagePostFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/studentGalleryTagStudentFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.students.StudentGalleryTagStudentFragment"
+        android:label="fragment_student_gallery_tag_student"
+        tools:layout="@layout/fragment_student_gallery_tag_student" />
+    <fragment
+        android:id="@+id/studentGalleryTaggedStudentFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.students.StudentGalleryTaggedStudentFragment"
+        android:label="fragment_student_gallery_tagged_student"
+        tools:layout="@layout/fragment_student_gallery_tagged_student" >
+        <action
+            android:id="@+id/action_studentGalleryTaggedStudentFragment_to_studentGalleryTagStudentFragment"
+            app:destination="@id/studentGalleryTagStudentFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/studentGalleryVideoPostFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.students.StudentGalleryVideoPostFragment"
+        android:label="fragment_student_gallery_video_post"
+        tools:layout="@layout/fragment_student_gallery_video_post" >
+        <action
+            android:id="@+id/action_studentGalleryVideoPostFragment_to_studentGalleryVideoPostDetailFragment"
+            app:destination="@id/studentGalleryVideoPostDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_studentGalleryVideoPostFragment_to_studentGalleryTagStudentFragment"
+            app:destination="@id/studentGalleryTagStudentFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_studentGalleryVideoPostFragment_to_studentGalleryTaggedStudentFragment"
+            app:destination="@id/studentGalleryTaggedStudentFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/studentGalleryVideoPostDetailFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.students.StudentGalleryVideoPostDetailFragment"
+        android:label="fragment_student_gallery_video_post_detail"
+        tools:layout="@layout/fragment_student_gallery_video_post_detail" >
+        <action
+            android:id="@+id/action_studentGalleryVideoPostDetailFragment_to_studentGalleryVideoPostFragment"
+            app:destination="@id/studentGalleryVideoPostFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/studentGalleryVideoPostFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/studentProfileUploadResouceSelectionFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.students.StudentProfileUploadResourceSelectionFragment"
+        android:label="fragment_student_profile_upload_resouce_selection"
+        tools:layout="@layout/fragment_student_profile_upload_resouce_selection" />
+    <fragment
+        android:id="@+id/addChildFragment3"
+        android:name="com.tce.teacherapp.ui.dashboard.home.AddChildFragment"
+        android:label="AddChildFragment" />
+    <fragment
+        android:id="@+id/absentDaysCalenderFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.students.AbsentDaysCalenderFragment"
+        android:label="fragment_absent_days_calender"
+        tools:layout="@layout/fragment_absent_days_calender" />
+    <fragment
+        android:id="@+id/groupChatFragment2"
+        android:name="com.tce.teacherapp.ui.dashboard.messages.GroupChatFragment"
+        android:label="GroupChatFragment">
+        <action
+            android:id="@+id/action_groupChatFragment2_to_resourceFragment2"
+            app:destination="@id/resourceFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/resourceFragment2"
+        android:name="com.tce.teacherapp.ui.dashboard.messages.ResourceFragment"
+        android:label="ResourceFragment" />
+</navigation>

@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.tce.teacherapp.R
@@ -11,7 +12,7 @@ import com.tce.teacherapp.api.response.Feedback
 import java.util.*
 
 
-class StudentPortfolioFeedbackAdapter(val context: Context) :
+class StudentPortfolioFeedbackAdapter(val context: Context, val isShowCheckBox: Boolean) :
     RecyclerView.Adapter<StudentPortfolioFeedbackAdapter.FeedbackAdapter>() {
 
 
@@ -21,7 +22,12 @@ class StudentPortfolioFeedbackAdapter(val context: Context) :
 
 
     override fun onBindViewHolder(holder: FeedbackAdapter, position: Int) {
-       holder.tvFeedback.setText(modelList[position].Name)
+        holder.tvFeedback.text = modelList[position].Name
+        if(isShowCheckBox){
+            holder.chkFeedback.visibility = View.VISIBLE
+        }else{
+            holder.chkFeedback.visibility = View.GONE
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedbackAdapter {
@@ -33,7 +39,7 @@ class StudentPortfolioFeedbackAdapter(val context: Context) :
     class FeedbackAdapter(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val tvFeedback: TextView = itemView.findViewById(R.id.tv_feedback)
-
+        val chkFeedback: CheckBox = itemView.findViewById(R.id.chk_feedback)
 
     }
 

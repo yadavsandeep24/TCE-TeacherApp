@@ -9,6 +9,7 @@ import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.tce.teacherapp.R
+import com.tce.teacherapp.api.response.StudentListResponseItem
 import com.tce.teacherapp.db.entity.Student
 import com.tce.teacherapp.ui.dashboard.home.listeners.ChildClickListener
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
@@ -21,7 +22,7 @@ abstract  class ChildEpoxyHolder : EpoxyModelWithHolder<InfoHolder>(){
     lateinit var strStudentName : String
 
     @EpoxyAttribute
-    lateinit var student : Student
+    lateinit var student : StudentListResponseItem
 
     @EpoxyAttribute
     lateinit var childClickListener: ChildClickListener
