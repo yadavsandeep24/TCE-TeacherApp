@@ -87,103 +87,112 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="20dp"
-                                android:layout_marginTop="10dp">
-
-                                <androidx.appcompat.widget.AppCompatImageView
-                                    android:layout_width="62dp"
-                                    android:layout_height="62dp"
-                                    android:src="@drawable/ic_profile_icon" />
+                                android:orientation="vertical"
+                                android:layout_marginBottom="1dp"
+                                android:background="@drawable/porgress_student_info_container_bg">
 
                                 <LinearLayout
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="10dp"
-                                    android:orientation="vertical">
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginTop="10dp">
 
-                                    <com.tce.teacherapp.util.RubikBoldTextview
-                                        android:id="@+id/tv_Student_name"
+                                    <androidx.appcompat.widget.AppCompatImageView
+                                        android:layout_width="62dp"
+                                        android:layout_height="62dp"
+                                        android:src="@drawable/ic_profile_icon" />
+
+                                    <LinearLayout
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginTop="10dp"
-                                        android:text="Amit Boaz"
-                                        android:textColor="#320500"
-                                        android:textSize="@dimen/font_size_14_dp" />
+                                        android:layout_marginLeft="10dp"
+                                        android:orientation="vertical">
 
-                                    <com.tce.teacherapp.util.RubikMediumTextview
-                                        android:id="@+id/tv_student_age"
-                                        android:layout_width="wrap_content"
+                                        <com.tce.teacherapp.util.RubikBoldTextview
+                                            android:id="@+id/tv_Student_name"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="10dp"
+                                            android:text=""
+                                            android:textColor="#320500"
+                                            android:textSize="@dimen/font_size_14_dp" />
+
+                                        <com.tce.teacherapp.util.RubikMediumTextview
+                                            android:id="@+id/tv_student_age"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="2.5 year old"
+                                            android:textColor="#320500"
+                                            android:textSize="11dp" />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="20dp"
+                                    android:layout_marginBottom="20dp"
+                                    android:weightSum="2">
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:text="2.5 year old"
-                                        android:textColor="#320500"
-                                        android:textSize="11dp" />
+                                        android:layout_weight="1"
+                                        android:gravity="center">
+
+                                        <com.tce.teacherapp.util.RubikMediumTextview
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="09"
+                                            android:textColor="#232337"
+                                            android:textSize="20dp" />
+
+                                        <com.tce.teacherapp.util.RubikMediumTextview
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="5dp"
+                                            android:text="Days Present"
+                                            android:textColor="#232337"
+                                            android:textSize="11dp" />
+
+                                    </LinearLayout>
+
+                                    <View
+                                        android:layout_width="1dp"
+                                        android:layout_height="15dp"
+                                        android:layout_gravity="center"
+                                        android:background="#a0a5b9" />
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="center">
+
+                                        <com.tce.teacherapp.util.RubikMediumTextview
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="00"
+                                            android:textColor="#a0a5b9"
+                                            android:textSize="20dp" />
+
+                                        <com.tce.teacherapp.util.RubikMediumTextview
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="5dp"
+                                            android:text="Days Absent"
+                                            android:textColor="#a0a5b9"
+                                            android:textSize="11dp" />
+
+                                    </LinearLayout>
+
                                 </LinearLayout>
                             </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="20dp"
-                                android:layout_marginBottom="20dp"
-                                android:weightSum="2">
-
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:gravity="center">
-
-                                    <com.tce.teacherapp.util.RubikMediumTextview
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="09"
-                                        android:textColor="#232337"
-                                        android:textSize="20dp" />
-
-                                    <com.tce.teacherapp.util.RubikMediumTextview
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="5dp"
-                                        android:text="Days Present"
-                                        android:textColor="#232337"
-                                        android:textSize="11dp" />
-
-                                </LinearLayout>
-
-                                <View
-                                    android:layout_width="1dp"
-                                    android:layout_height="15dp"
-                                    android:background="#a0a5b9" />
-
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:gravity="center">
-
-                                    <com.tce.teacherapp.util.RubikMediumTextview
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="00"
-                                        android:textColor="#a0a5b9"
-                                        android:textSize="20dp" />
-
-                                    <com.tce.teacherapp.util.RubikMediumTextview
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="5dp"
-                                        android:text="Days Absent"
-                                        android:textColor="#a0a5b9"
-                                        android:textSize="11dp" />
-
-                                </LinearLayout>
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="#f5f8ff"
+                                android:background="@color/pale_grey_two"
                                 android:orientation="vertical"
                                 android:paddingLeft="@dimen/_30sdp"
                                 android:paddingTop="20dp"
@@ -194,7 +203,7 @@
                                     android:layout_height="wrap_content">
 
                                     <com.tce.teacherapp.util.RubikMediumTextview
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="80dp"
                                         android:layout_height="wrap_content"
                                         android:text="School:"
                                         android:textColor="#232337"
@@ -204,7 +213,6 @@
                                         android:id="@+id/tv_school_name"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginLeft="20dp"
                                         android:text="St. John’s Preschool"
                                         android:textColor="#232337"
                                         android:textSize="@dimen/font_size_12_dp" />
@@ -218,16 +226,16 @@
                                     android:layout_marginTop="10dp">
 
                                     <com.tce.teacherapp.util.RubikMediumTextview
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="80dp"
                                         android:layout_height="wrap_content"
                                         android:text="Class:"
                                         android:textColor="#232337"
                                         android:textSize="11dp" />
 
                                     <com.tce.teacherapp.util.RubikBoldTextview
+                                        android:id="@+id/tv_class_name"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginLeft="20dp"
                                         android:text="Junior KG A"
                                         android:textColor="#232337"
                                         android:textSize="@dimen/font_size_12_dp" />
@@ -241,16 +249,16 @@
                                     android:layout_marginTop="10dp">
 
                                     <com.tce.teacherapp.util.RubikMediumTextview
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="80dp"
                                         android:layout_height="wrap_content"
                                         android:text="Teacher:"
                                         android:textColor="#232337"
                                         android:textSize="11dp" />
 
                                     <com.tce.teacherapp.util.RubikBoldTextview
+                                        android:id="@+id/tv_teacher_name"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginLeft="20dp"
                                         android:text="Payal Rajput"
                                         android:textColor="#232337"
                                         android:textSize="@dimen/font_size_12_dp" />
@@ -260,7 +268,6 @@
 
 
                             </LinearLayout>
-
 
                         </LinearLayout>
 
@@ -377,7 +384,8 @@
                 android:id="@+id/mask_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/transparent" />
+                android:visibility="gone"
+                android:background="@color/dim_color_dashboard" />
 
         </RelativeLayout>
 

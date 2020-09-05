@@ -195,7 +195,7 @@ constructor(
         }
     }
 
-    override fun onCheckBoxClicked(item: StudentGalleryData) {
+    override fun onCheckBoxClicked(date:String?,item: StudentGalleryData) {
         if (item.isSelected) {
             val count: Int = sharedPreference.getInt("mark_count", 0)
             editor.putInt("mark_count", count + 1)

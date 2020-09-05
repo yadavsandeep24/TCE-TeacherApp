@@ -14,11 +14,12 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tce.teacherapp.R
 import com.tce.teacherapp.api.response.Objective
 import com.tce.teacherapp.api.response.ProgressData
+import com.tce.teacherapp.api.response.StudentListResponseItem
 import com.tce.teacherapp.databinding.FragmentProgressCardBinding
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.students.adapter.ProgressCardAdapter
+import com.tce.teacherapp.util.Utility
 import kotlinx.android.synthetic.main.activity_dashboard.*
-import kotlinx.android.synthetic.main.fragment_progress_card.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import java.util.*
@@ -53,7 +54,8 @@ constructor(
         super.onViewCreated(view, savedInstanceState)
         (activity as DashboardActivity).expandAppBar(false)
         (activity as DashboardActivity).bottom_navigation_view.visibility = View.GONE
-        val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
+        val studentVo = arguments?.getParcelable("studentdata") as StudentListResponseItem?
+        val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(binding.bottomSheet)
 
         bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
         bottomSheetBehavior.skipCollapsed = true
@@ -73,12 +75,10 @@ constructor(
                 bottomSheetBehavior.state =
                     com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
                 binding.maskLayout.visibility = View.VISIBLE
-                binding.maskLayout.setBackgroundColor(resources.getColor(R.color.dim_color_dashboard))
             } else {
                 bottomSheetBehavior.state =
                     com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
                 binding.maskLayout.visibility = View.GONE
-                binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
             }
         }
         binding.maskLayout.setOnClickListener {
@@ -143,10 +143,15 @@ constructor(
 
             }
 
-            txtNo.setOnClickListener(View.OnClickListener {
+            txtNo.setOnClickListener {
                 binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
                 dialog.dismiss()
-            })
+            }
+            binding.maskLayout.setOnClickListener {
+                bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                binding.maskLayout.visibility = View.GONE
+            }
         }
 
 
@@ -154,42 +159,22 @@ constructor(
         binding.rvProgress.setHasFixedSize(true)
         val myAdapter = ProgressCardAdapter(requireContext())
         binding.rvProgress.adapter = myAdapter
-        myAdapter.modelList = getProgressData()
+        if (studentVo != null) {
+            binding.tvStudentName.text = studentVo.Name
+            binding.tvSchoolName.text = studentVo.school
+            if(!studentVo.studentClass.isNullOrEmpty()) {
+                binding.tvClassName.text = studentVo.studentClass
+            }
+            binding.tvStudentAge.text = "${Utility.getAge(studentVo.DOB)} years old"
+            binding.tvTeacherName.text = studentVo.teacher
+            myAdapter.modelList = studentVo.ProgressCard[0].ProgressData
+        }
         myAdapter.notifyDataSetChanged()
 
         binding.tvBack.setOnClickListener {
             (activity as DashboardActivity).onBackPressed()
         }
 
-    }
-
-    private fun getProgressData(): MutableList<ProgressData> {
-        Log.d("TAG", "inside getDummyData")
-        val list = ArrayList<ProgressData>()
-        val obectiveList = ArrayList<Objective>()
-        obectiveList.add(Objective("1", "Identifies letters", 1, ""))
-        obectiveList.add(Objective("2", "Tries to associate letter sound with letter", 2, ""))
-        obectiveList.add(Objective("3", "Responds to questions when askedr", 2, ""))
-        obectiveList.add(Objective("4", "Attempts to speak clearly", 2, ""))
-        obectiveList.add(Objective("5", "Attempts to pronounce difficult words", 2, ""))
-
-        list.add(ProgressData("1", "Language Skills", obectiveList, 1, true, 1, 1))
-        list.add(ProgressData("2", "Numeracy Skills", obectiveList, 1, true, 1, 1))
-        list.add(ProgressData("3", "Cognitive Skills", obectiveList, 1, true, 1, 1))
-        list.add(
-            ProgressData(
-                "4",
-                "Personal, Social & Emotional Skills",
-                obectiveList,
-                1,
-                true,
-                1,
-                1
-            )
-        )
-
-        Log.d("TAG", "The size is ${list.size}")
-        return list
     }
 
 }

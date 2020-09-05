@@ -39,7 +39,7 @@
                                 android:id="@+id/tvStudentName"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Amit Boaz"
+                                android:text=""
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/font_size_16_dp">
 
@@ -525,7 +525,8 @@
             android:id="@+id/mask_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/transparent" />
+            android:visibility="gone"
+            android:background="@color/dim_color_dashboard" />
 
         <LinearLayout
             android:id="@+id/bottom_sheet"

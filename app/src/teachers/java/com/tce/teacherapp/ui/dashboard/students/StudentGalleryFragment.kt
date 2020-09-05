@@ -81,7 +81,6 @@ constructor(
                 binding.botomSheetSubFilterContainer.visibility = View.GONE
                 binding.botomSheetMainFilterContainer.visibility = View.VISIBLE
                 binding.maskLayout.visibility = View.VISIBLE
-                binding.maskLayout.setBackgroundColor(resources.getColor(R.color.dim_color_dashboard))
                 (activity as DashboardActivity).bottom_navigation_view.visibility = View.INVISIBLE
             } else {
                 bottomSheetBehavior.state =
@@ -103,7 +102,7 @@ constructor(
         binding.tvGallary.setOnClickListener {
             bottomSheetBehavior.state =
                 com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
-            binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
+            binding.maskLayout.visibility = View.GONE
             (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
         }
 
@@ -113,7 +112,6 @@ constructor(
                 binding.botomSheetSubFilterContainer.visibility = View.VISIBLE
                 binding.botomSheetMainFilterContainer.visibility = View.GONE
                 binding.maskLayout.visibility = View.VISIBLE
-                binding.maskLayout.setBackgroundColor(resources.getColor(R.color.dim_color_dashboard))
                 (activity as DashboardActivity).bottom_navigation_view.visibility = View.INVISIBLE
             } else {
                 bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
@@ -215,7 +213,7 @@ constructor(
 
     }
 
-    override fun onCheckBoxClicked(item: StudentGalleryData) {
+    override fun onCheckBoxClicked(date:String?,item: StudentGalleryData) {
 
     }
 

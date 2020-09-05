@@ -104,12 +104,10 @@ constructor(
                 bottomSheetBehavior.state =
                     com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
                 binding.maskLayout.visibility = View.VISIBLE
-                binding.maskLayout.setBackgroundColor(resources.getColor(R.color.dim_color_dashboard))
             } else {
                 bottomSheetBehavior.state =
                     com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
                 binding.maskLayout.visibility = View.GONE
-                binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
             }
         }
         binding.tvSavePhone.setOnClickListener {
@@ -160,7 +158,6 @@ constructor(
                 bottomSheetBehaviorFilterContainer.state =
                     com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
                 binding.maskLayout.visibility = View.VISIBLE
-                binding.maskLayout.setBackgroundColor(resources.getColor(R.color.dim_color_dashboard))
             } else {
                 bottomSheetBehaviorFilterContainer.state =
                     com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
@@ -426,7 +423,7 @@ constructor(
         }
     }
 
-    override fun onCheckBoxClicked(item: StudentGalleryData) {
+    override fun onCheckBoxClicked(date: String?,item: StudentGalleryData) {
     }
 
     override fun onDateCheckBoxClicked(item: StudentGalleryResponseItem) {

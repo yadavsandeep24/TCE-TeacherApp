@@ -54,7 +54,7 @@ class StudentGalleryAdapter(
             holder.rvGallary.visibility = View.VISIBLE
             holder.rvGallary.layoutManager = GridLayoutManager(context, 3)
             holder.rvGallary.setHasFixedSize(true)
-            val myAdapter = StudentDateWiseGalleryAdapter(context, isShowCheckBox,this)
+            val myAdapter = StudentDateWiseGalleryAdapter(modelList[position].Date,context, isShowCheckBox,this)
             holder.rvGallary.adapter = myAdapter
             myAdapter.modelList = modelList[position].studentGalleryDataList as MutableList<StudentGalleryData>
             myAdapter.notifyDataSetChanged()
@@ -83,8 +83,8 @@ class StudentGalleryAdapter(
         listener.onItemClick(item)
     }
 
-    override fun onCheckBoxClicked(item: StudentGalleryData) {
-        listener.onCheckBoxClicked(item)
+    override fun onCheckBoxClicked(date:String?,item: StudentGalleryData) {
+        listener.onCheckBoxClicked(date,item)
     }
 
     override fun onDateCheckBoxClicked(item: StudentGalleryResponseItem) {
@@ -94,7 +94,7 @@ class StudentGalleryAdapter(
 
 interface IStudentGalleryClickListener{
     fun onItemClick(item: StudentGalleryData)
-    fun onCheckBoxClicked(item: StudentGalleryData)
+    fun onCheckBoxClicked(date: String?,item: StudentGalleryData)
     fun onDateCheckBoxClicked(item:StudentGalleryResponseItem)
 
 }

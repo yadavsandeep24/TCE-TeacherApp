@@ -223,7 +223,6 @@ constructor(
                 bottomSheetBehaviorFilterContainer.state =
                     com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
                 binding.maskLayout.visibility = View.VISIBLE
-                binding.maskLayout.setBackgroundColor(resources.getColor(R.color.dim_color_dashboard))
             } else {
                 bottomSheetBehaviorFilterContainer.state =
                     com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
@@ -436,12 +435,10 @@ constructor(
         }
     }
 
-    override fun onCheckBoxClicked(item: StudentGalleryData) {
-        TODO("Not yet implemented")
+    override fun onCheckBoxClicked(date:String?,item: StudentGalleryData) {
     }
 
     override fun onDateCheckBoxClicked(item: StudentGalleryResponseItem) {
-        TODO("Not yet implemented")
     }
 
 }

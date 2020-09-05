@@ -1,5 +1,6 @@
 package com.tce.teacherapp.ui.dashboard.students
 
+import android.annotation.SuppressLint
 import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.ResolveInfo
@@ -52,6 +53,7 @@ constructor(
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as DashboardActivity).expandAppBar(false)
@@ -81,12 +83,10 @@ constructor(
                 bottomSheetBehavior.state =
                     com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
                 binding.maskLayout.visibility = View.VISIBLE
-                binding.maskLayout.setBackgroundColor(resources.getColor(R.color.dim_color_dashboard))
             } else {
                 bottomSheetBehavior.state =
                     com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
                 binding.maskLayout.visibility = View.GONE
-                binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
             }
         }
 
@@ -97,6 +97,13 @@ constructor(
         val myAdapter = ProgressCardAdapter(requireContext())
         binding.rvProgress.adapter = myAdapter
         if (studentVo != null) {
+            binding.tvStudentName.text = studentVo.Name
+            binding.tvSchoolName.text = studentVo.school
+            if(!studentVo.studentClass.isNullOrEmpty()) {
+                binding.tvClassName.text = studentVo.studentClass
+            }
+            binding.tvStudentAge.text = "${Utility.getAge(studentVo.DOB)} years old"
+            binding.tvTeacherName.text = studentVo.teacher
             myAdapter.modelList = studentVo.ProgressCard[0].ProgressData
         }
         myAdapter.notifyDataSetChanged()

@@ -111,12 +111,12 @@ constructor(
             if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
                 bottomSheetBehavior.state =
                     com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
-                binding.maskLayout.setBackgroundColor(resources.getColor(R.color.dim_color_dashboard))
+                binding.maskLayout.visibility = View.VISIBLE
                 (activity as DashboardActivity).bottom_navigation_view.visibility = View.INVISIBLE
             } else {
                 bottomSheetBehavior.state =
                     com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
-                binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
+                binding.maskLayout.visibility = View.GONE
                 (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
             }
         }
@@ -134,17 +134,17 @@ constructor(
         binding.tvAttendance.setOnClickListener {
             bottomSheetBehavior.state =
                 com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
-            binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
+            binding.maskLayout.visibility = View.GONE
             (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
         }
 
-        /* binding.maskLayout.setOnClickListener{
+         binding.maskLayout.setOnClickListener{
              if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED) {
                  bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
-                 binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
+                 binding.maskLayout.visibility = View.GONE
                  (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
              }
-         }*/
+         }
 
 
         if (myAdapter?.selectedIds != null && myAdapter?.selectedIds!!.size > 0) {

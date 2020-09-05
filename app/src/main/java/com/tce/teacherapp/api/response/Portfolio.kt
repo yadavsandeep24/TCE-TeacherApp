@@ -17,5 +17,7 @@ data class Portfolio(
     var Gallery: List<StudentGalleryData>,
 
     @Expose
-    var TeacherNote: String
+    var TeacherNote: String,
+
+    var isGalleryCheckBoxSelected: Boolean
 ):Parcelable

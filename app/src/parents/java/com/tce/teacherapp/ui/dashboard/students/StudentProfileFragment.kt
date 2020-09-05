@@ -101,12 +101,10 @@ constructor(
             if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
                 bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
                 binding.maskLayout.visibility = View.VISIBLE
-                binding.maskLayout.setBackgroundColor(resources.getColor(R.color.dim_color_dashboard))
                 (activity as DashboardActivity).bottom_navigation_view.visibility = View.INVISIBLE
             } else {
                 bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
                 binding.maskLayout.visibility = View.GONE
-                binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
                 (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
             }
         }
@@ -134,7 +132,6 @@ constructor(
                 bottomSheetBehaviorFilterContainer.state =
                     com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
                 binding.maskLayout.visibility = View.VISIBLE
-                binding.maskLayout.setBackgroundColor(resources.getColor(R.color.dim_color_dashboard))
             } else {
                 bottomSheetBehaviorFilterContainer.state =
                     com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
@@ -420,7 +417,7 @@ constructor(
         viewModel.setStateEvent(StudentStateEvent.GetStudentEvent(0,""))
         val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
         bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
-        binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
+        binding.maskLayout.visibility = View.GONE
         (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
     }
 
@@ -452,7 +449,7 @@ constructor(
         }
     }
 
-    override fun onCheckBoxClicked(item: StudentGalleryData) {
+    override fun onCheckBoxClicked(date:String?,item: StudentGalleryData) {
     }
 
     override fun onDateCheckBoxClicked(item: StudentGalleryResponseItem) {

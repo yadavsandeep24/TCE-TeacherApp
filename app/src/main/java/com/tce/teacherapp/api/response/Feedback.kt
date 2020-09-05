@@ -11,5 +11,7 @@ data class Feedback(
     val Id: String,
 
     @Expose
-    val Name: String
+    val Name: String,
+
+    var isSelected: Boolean
 ):Parcelable

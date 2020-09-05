@@ -20,6 +20,8 @@ import java.io.*
 import java.net.HttpURLConnection
 import java.net.URISyntaxException
 import java.net.URL
+import java.text.ParseException
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -490,6 +492,60 @@ open class Utility {
                 }
             }
             return ret
+        }
+
+         fun getAge(dobString: String): Int {
+            var date: Date? = null
+            val sdf = SimpleDateFormat("yyyy-MM-dd")
+            try {
+                date = sdf.parse(dobString)
+            } catch (e: ParseException) {
+                e.printStackTrace()
+            }
+            if (date == null) return 0
+            val dob = Calendar.getInstance()
+            val today = Calendar.getInstance()
+            dob.time = date
+            val year = dob[Calendar.YEAR]
+            val month = dob[Calendar.MONTH]
+            val day = dob[Calendar.DAY_OF_MONTH]
+            dob[year, month + 1] = day
+            var age = today[Calendar.YEAR] - dob[Calendar.YEAR]
+            if (today[Calendar.DAY_OF_YEAR] < dob[Calendar.DAY_OF_YEAR]) {
+                age--
+            }
+            return age
+        }
+
+        fun getAgeFromLong(birthday: String?): String? {
+            val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+            val dobCal = Calendar.getInstance()
+            dobCal.time = sdf.parse(birthday)
+            val diffCal = Calendar.getInstance()
+            diffCal.timeInMillis =
+                Calendar.getInstance().timeInMillis - dobCal.timeInMillis
+            var ageS = ""
+            var age = diffCal[Calendar.YEAR] - 1970
+            //Check if less than a year
+            if (age == 0) {
+                age = diffCal[Calendar.MONTH]
+                //Check if less than a month
+                if (age == 0) {
+                    age = diffCal[Calendar.WEEK_OF_YEAR]
+                    //Check if less than a week
+                    if (age == 1) {
+                        age = diffCal[Calendar.DAY_OF_YEAR]
+                        ageS = (age - 1).toString() + " Days"
+                    } else {
+                        ageS = (age - 1).toString() + " Weeks"
+                    }
+                } else {
+                    ageS = "$age Months"
+                }
+            } else {
+                ageS = "$age Years"
+            }
+            return ageS
         }
     }
 

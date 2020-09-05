@@ -15,6 +15,7 @@ import java.util.*
 
 
 class StudentDateWiseGalleryAdapter(
+    val date:String,
     val context: Context,
     val isShowCheckBox: Boolean,
     val listener: IStudentGalleryClickListener
@@ -51,7 +52,7 @@ class StudentDateWiseGalleryAdapter(
             }
             holder.chkGallary.setOnCheckedChangeListener { _, isChecked ->
                 modelList[position].isSelected = isChecked
-                listener.onCheckBoxClicked(modelList[position])
+                listener.onCheckBoxClicked(date,modelList[position])
                 notifyDataSetChanged()
             }
         } else {

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -19,9 +18,9 @@
                 android:id="@+id/date_container"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_below="@+id/header_layout"
                 android:background="#f5f8ff"
-                android:gravity="center"
-                android:layout_below="@+id/header_layout">
+                android:gravity="center">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="22dp"
@@ -46,15 +45,15 @@
                 android:id="@+id/rv_attendance"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="20dp"
-                android:layout_below="@+id/date_container">
-            </androidx.recyclerview.widget.RecyclerView>
+                android:layout_below="@+id/date_container"
+                android:padding="20dp"/>
 
             <FrameLayout
                 android:id="@+id/mask_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/transparent"/>
+                android:visibility="gone"
+                android:background="@color/dim_color_dashboard" />
 
 
         </RelativeLayout>
@@ -75,16 +74,16 @@
                 android:layout_height="4dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="5dp"
-                android:background="#e1e6f0"/>
+                android:background="#e1e6f0" />
 
             <com.tce.teacherapp.util.RubikMediumTextview
                 android:id="@+id/tv_attendance"
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
-                android:text="Attendance"
                 android:gravity="center_vertical"
-                android:textColor="@color/color_black"
                 android:paddingLeft="10dp"
+                android:text="Attendance"
+                android:textColor="@color/color_black"
                 android:textSize="@dimen/font_size_16_dp">
 
             </com.tce.teacherapp.util.RubikMediumTextview>
@@ -92,16 +91,16 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#e1e6f0"/>
+                android:background="#e1e6f0" />
 
             <com.tce.teacherapp.util.RubikMediumTextview
                 android:id="@+id/tv_portfolio"
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
-                android:text="Portfolio"
                 android:gravity="center_vertical"
-                android:textColor="@color/color_black"
                 android:paddingLeft="10dp"
+                android:text="Portfolio"
+                android:textColor="@color/color_black"
                 android:textSize="@dimen/font_size_16_dp">
 
             </com.tce.teacherapp.util.RubikMediumTextview>
@@ -109,28 +108,22 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#e1e6f0"/>
+                android:background="#e1e6f0" />
 
 
             <com.tce.teacherapp.util.RubikMediumTextview
                 android:id="@+id/tv_gallary"
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
-                android:text="Gallary"
                 android:gravity="center_vertical"
-                android:textColor="@color/color_black"
                 android:paddingLeft="10dp"
+                android:text="Gallary"
+                android:textColor="@color/color_black"
                 android:textSize="@dimen/font_size_16_dp">
 
             </com.tce.teacherapp.util.RubikMediumTextview>
 
-
-
-
-
         </LinearLayout>
-
-
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

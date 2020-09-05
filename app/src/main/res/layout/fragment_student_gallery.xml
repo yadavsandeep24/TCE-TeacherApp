@@ -110,7 +110,8 @@
                 android:id="@+id/mask_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/transparent" />
+                android:visibility="gone"
+                android:background="@color/dim_color_dashboard" />
 
 
         </RelativeLayout>
@@ -153,7 +154,7 @@
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:id="@+id/tv_photos"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="?android:attr/actionBarSize"
                     android:layout_marginTop="10dp"
                     android:gravity="center_vertical"
@@ -171,7 +172,7 @@
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:id="@+id/tv_videos"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="?android:attr/actionBarSize"
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
@@ -189,7 +190,7 @@
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:id="@+id/tv_show_all"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="?android:attr/actionBarSize"
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
@@ -215,7 +216,7 @@
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:id="@+id/tv_attendance"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="?android:attr/actionBarSize"
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
@@ -232,7 +233,7 @@
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:id="@+id/tv_portfolio"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="?android:attr/actionBarSize"
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
@@ -250,7 +251,7 @@
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:id="@+id/tv_gallary"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="?android:attr/actionBarSize"
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"

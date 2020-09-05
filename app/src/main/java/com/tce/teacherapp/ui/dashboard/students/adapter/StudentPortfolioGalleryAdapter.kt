@@ -14,8 +14,13 @@ import com.tce.teacherapp.api.response.StudentGalleryData
 import java.util.*
 
 
-class StudentPortfolioGallaryAdapter(val context: Context, val isShowCheckBox: Boolean,val listener: IStudentGalleryClickListener) :
-    RecyclerView.Adapter<StudentPortfolioGallaryAdapter.GalllaryAdapter>() {
+class StudentPortfolioGalleryAdapter(
+    val date: String,
+    val context: Context,
+    private val isShowCheckBox: Boolean,
+    val listener: IStudentGalleryClickListener
+) :
+    RecyclerView.Adapter<StudentPortfolioGalleryAdapter.GalleryAdapter>() {
 
 
     var modelList: MutableList<StudentGalleryData> = ArrayList()
@@ -23,19 +28,19 @@ class StudentPortfolioGallaryAdapter(val context: Context, val isShowCheckBox: B
     override fun getItemCount() = modelList.size
 
 
-    override fun onBindViewHolder(holder: GalllaryAdapter, position: Int) {
+    override fun onBindViewHolder(holder: GalleryAdapter, position: Int) {
 
         Glide.with(context)
             .load(modelList[position].image)
             .placeholder(R.drawable.dummy_video)
             .into(holder.imgGallary)
 
-        if(modelList[position].contenttype.equals("AV", ignoreCase = true)){
+        if (modelList[position].contenttype.equals("AV", ignoreCase = true)) {
             holder.imgPlay.visibility = View.VISIBLE
-        }else{
+        } else {
             holder.imgPlay.visibility = View.GONE
         }
-        if(isShowCheckBox) {
+        if (isShowCheckBox) {
             holder.chkGallary.visibility = View.VISIBLE
             holder.chkGallary.isChecked = modelList[position].isSelected
             if (modelList[position].isSelected) {
@@ -47,10 +52,10 @@ class StudentPortfolioGallaryAdapter(val context: Context, val isShowCheckBox: B
             }
             holder.chkGallary.setOnCheckedChangeListener { _, isChecked ->
                 modelList[position].isSelected = isChecked
-                listener.onCheckBoxClicked(modelList[position])
+                listener.onCheckBoxClicked(date,modelList[position])
                 notifyDataSetChanged()
             }
-        }else{
+        } else {
             holder.chkGallary.visibility = View.GONE
         }
 
@@ -60,20 +65,16 @@ class StudentPortfolioGallaryAdapter(val context: Context, val isShowCheckBox: B
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GalllaryAdapter {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GalleryAdapter {
         val inflater = LayoutInflater.from(parent?.context)
         val itemView = inflater.inflate(R.layout.list_item_portfolio_gallary, parent, false)
-        return GalllaryAdapter(itemView)
+        return GalleryAdapter(itemView)
     }
 
-    class GalllaryAdapter(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class GalleryAdapter(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val cardMain: MaterialCardView = itemView.findViewById(R.id.cv_main)
         val imgGallary: AppCompatImageView = itemView.findViewById(R.id.img_gallary)
         val imgPlay: AppCompatImageView = itemView.findViewById(R.id.img_play)
         val chkGallary: CheckBox = itemView.findViewById(R.id.chk_gallary)
-
-
     }
-
-
 }

@@ -112,12 +112,12 @@ constructor(
             if (bottomSheetBehaviorFilterContainer.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
                 bottomSheetBehaviorFilterContainer.state =
                     com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
-                binding.maskLayout.setBackgroundColor(resources.getColor(R.color.dim_color_dashboard))
+                binding.maskLayout.visibility = View.VISIBLE
                 (activity as DashboardActivity).bottom_navigation_view.visibility = View.INVISIBLE
             } else {
                 bottomSheetBehaviorFilterContainer.state =
                     com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
-                binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
+                binding.maskLayout.visibility = View.GONE
                 (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
             }
         }
@@ -125,7 +125,7 @@ constructor(
         binding.tvPhotos.setOnClickListener {
             bottomSheetBehaviorFilterContainer.state =
                 com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
-            binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
+            binding.maskLayout.visibility = View.GONE
             (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
             initViews(1)
         }
@@ -133,7 +133,7 @@ constructor(
         binding.tvVideos.setOnClickListener {
             bottomSheetBehaviorFilterContainer.state =
                 com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
-            binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
+            binding.maskLayout.visibility = View.GONE
             (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
             initViews(2)
         }
@@ -141,11 +141,15 @@ constructor(
         binding.tvShowAll.setOnClickListener {
             bottomSheetBehaviorFilterContainer.state =
                 com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
-            binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
+            binding.maskLayout.visibility = View.GONE
             (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
             initViews(0)
         }
-
+        binding.maskLayout.setOnClickListener {
+            bottomSheetBehaviorFilterContainer.state =
+                com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+            binding.maskLayout.visibility = View.GONE
+        }
     }
     fun initViews(type: Int) {
         photoList.clear()

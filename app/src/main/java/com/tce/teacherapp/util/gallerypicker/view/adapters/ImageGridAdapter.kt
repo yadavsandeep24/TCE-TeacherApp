@@ -89,8 +89,16 @@ class ImageGridAdapter() : RecyclerView.Adapter<ImageGridAdapter.MyViewHolder>()
             holder.durationLabel.text = DateUtil().millisToTime(mimageList[holder.adapterPosition].duration.toLong())
         } else holder.durationFrame.visibility = View.GONE
 
-        if (mimageList[holder.adapterPosition].isSelected) holder.checkbox.setImageResource(R.drawable.ic_filled_checkbox)
-        else holder.checkbox.setImageResource(R.drawable.transparent)
+        if (mimageList[holder.adapterPosition].isSelected) {
+            holder.checkbox.setImageResource(R.drawable.ic_filled_checkbox)
+            holder.cardMain.strokeWidth =
+                ctx.resources.getDimension(R.dimen.card_stroke_width_2dp).toInt()
+        }
+        else {
+            holder.checkbox.setImageResource(R.drawable.transparent)
+            holder.cardMain.strokeWidth =
+                ctx.resources.getDimension(R.dimen.card_stroke_width_0dp).toInt()
+        }
 
         holder.image.setOnClickListener {
             if (THRESHOLD != 0) {
@@ -99,6 +107,8 @@ class ImageGridAdapter() : RecyclerView.Adapter<ImageGridAdapter.MyViewHolder>()
                         if (mimageList[holder.adapterPosition].isSelected) {
                             mimageList[holder.adapterPosition].isSelected = false
                             holder.checkbox.setImageResource(R.drawable.transparent)
+                            holder.cardMain.strokeWidth =
+                                ctx.resources.getDimension(R.dimen.card_stroke_width_0dp).toInt()
                             if (getSelectedCount() == (THRESHOLD - 1) && !mimageList[holder.adapterPosition].isSelected) {
                                 mimageList.forEach { it.isEnabled = true }
                                 for ((index, item) in mimageList.withIndex()) {
@@ -108,6 +118,8 @@ class ImageGridAdapter() : RecyclerView.Adapter<ImageGridAdapter.MyViewHolder>()
                         } else {
                             mimageList[holder.adapterPosition].isSelected = true
                             holder.checkbox.setImageResource(R.drawable.ic_filled_checkbox)
+                            holder.cardMain.strokeWidth =
+                                ctx.resources.getDimension(R.dimen.card_stroke_width_2dp).toInt()
                             if (getSelectedCount() == THRESHOLD && mimageList[holder.adapterPosition].isSelected) {
                                 mimageList.filterNot { it.isSelected }.forEach { it.isEnabled = false }
                                 for ((index, item) in mimageList.withIndex()) {
@@ -128,10 +140,14 @@ class ImageGridAdapter() : RecyclerView.Adapter<ImageGridAdapter.MyViewHolder>()
                 if (mimageList[holder.adapterPosition].isSelected) {
                     mimageList[holder.adapterPosition].isSelected = false
                     holder.checkbox.setImageResource(R.drawable.transparent)
+                    holder.cardMain.strokeWidth =
+                        ctx.resources.getDimension(R.dimen.card_stroke_width_0dp).toInt()
                     notifyItemChanged(holder.adapterPosition)
                 } else {
                     mimageList[holder.adapterPosition].isSelected = true
                     holder.checkbox.setImageResource(R.drawable.ic_filled_checkbox)
+                    holder.cardMain.strokeWidth =
+                        ctx.resources.getDimension(R.dimen.card_stroke_width_2dp).toInt()
                     notifyItemChanged(holder.adapterPosition)
                 }
             }
@@ -170,6 +186,7 @@ class ImageGridAdapter() : RecyclerView.Adapter<ImageGridAdapter.MyViewHolder>()
         var frame = view.frame
         val durationFrame = view.durationFrame
         val durationLabel = view.durationLabel
+        val cardMain = view.crd_main
     }
 
     override fun getSectionName(position: Int): String = DateUtil().getMonthAndYearString(mimageList[position].dateAdded.toLong() * 1000)

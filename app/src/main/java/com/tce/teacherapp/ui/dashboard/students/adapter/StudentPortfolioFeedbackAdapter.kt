@@ -12,11 +12,11 @@ import com.tce.teacherapp.api.response.Feedback
 import java.util.*
 
 
-class StudentPortfolioFeedbackAdapter(val context: Context, val isShowCheckBox: Boolean) :
+class StudentPortfolioFeedbackAdapter(val context: Context, val isShowCheckBox: Boolean,val listener: IFeedbackListener) :
     RecyclerView.Adapter<StudentPortfolioFeedbackAdapter.FeedbackAdapter>() {
 
 
-    var modelList: MutableList<Feedback> = ArrayList<Feedback>()
+    var modelList: MutableList<Feedback> = ArrayList()
 
     override fun getItemCount() = modelList.size
 
@@ -25,6 +25,12 @@ class StudentPortfolioFeedbackAdapter(val context: Context, val isShowCheckBox: 
         holder.tvFeedback.text = modelList[position].Name
         if(isShowCheckBox){
             holder.chkFeedback.visibility = View.VISIBLE
+            holder.chkFeedback.isChecked = modelList[position].isSelected
+            holder.chkFeedback.setOnCheckedChangeListener { _, isChecked ->
+                    modelList[position].isSelected = isChecked
+                 listener.onFeedbackCheckBoxClickListener(modelList[position])
+                notifyDataSetChanged()
+            }
         }else{
             holder.chkFeedback.visibility = View.GONE
         }
@@ -43,5 +49,8 @@ class StudentPortfolioFeedbackAdapter(val context: Context, val isShowCheckBox: 
 
     }
 
+}
 
+interface IFeedbackListener{
+    fun onFeedbackCheckBoxClickListener(item : Feedback)
 }
