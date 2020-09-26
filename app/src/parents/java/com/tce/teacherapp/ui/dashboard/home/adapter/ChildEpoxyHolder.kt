@@ -10,7 +10,6 @@ import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.tce.teacherapp.R
 import com.tce.teacherapp.api.response.StudentListResponseItem
-import com.tce.teacherapp.db.entity.Student
 import com.tce.teacherapp.ui.dashboard.home.listeners.ChildClickListener
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
 import com.tce.teacherapp.util.Utility

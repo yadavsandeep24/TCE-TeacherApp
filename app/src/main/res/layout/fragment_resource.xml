@@ -22,14 +22,13 @@
                 android:layout_marginLeft="20dp"
                 android:src="@drawable/ic_back_black"/>
 
-            <com.tce.teacherapp.util.RubikMediumTextview
+            <com.tce.teacherapp.util.RubikBoldTextview
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="Attach Resource"
-                android:textColor="@color/color_black"
-                android:textSize="@dimen/font_size_16_dp"
-                android:textStyle="bold"/>
+                android:textColor="@color/deep_brown"
+                android:textSize="@dimen/font_size_16_dp" />
 
             <com.tce.teacherapp.util.RubikMediumTextview
                 android:id="@+id/tvSend"
@@ -43,12 +42,12 @@
                 android:textColor="#fa4b28"
                 android:textSize="@dimen/font_size_16_dp"
                 android:gravity="center"
-                android:visibility="visible"/>
+                android:visibility="gone"/>
             <com.tce.teacherapp.util.RubikMediumTextview
                 android:id="@+id/tvCount"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:text="1"
+                android:text="0"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="5dp"
@@ -56,7 +55,7 @@
                 android:textColor="@color/color_black"
                 android:textSize="@dimen/font_size_12_dp"
                 android:gravity="center"
-                android:visibility="visible"/>
+                android:visibility="gone"/>
 
 
         </RelativeLayout>
@@ -103,7 +102,7 @@
                     android:visibility="visible"/>
 
 
-                <com.airbnb.epoxy.EpoxyRecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_resource_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -115,21 +114,26 @@
 
         <com.tce.teacherapp.util.RubikMediumTextview
             android:id="@+id/tvTotalResource"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/search_container"
-            android:text="3 file found"
-            android:textSize="@dimen/font_size_16_dp"
-            android:layout_margin="20dp">
+            android:text="0 file found"
+            android:textColor="@color/dark"
+            android:textSize="@dimen/font_size_12_dp"
+            android:background="@color/very_light_blue"
+            android:paddingTop="20dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp">
         </com.tce.teacherapp.util.RubikMediumTextview>
 
-        <com.airbnb.epoxy.EpoxyRecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_resource"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/tvTotalResource"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp" />
+            android:paddingStart="10dp"
+            android:background="@color/very_light_blue"
+            android:paddingEnd="10dp" />
 
 
     </RelativeLayout>

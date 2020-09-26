@@ -7,22 +7,22 @@ import kotlinx.android.parcel.Parcelize
 
 @Entity(
     tableName = "Resource",
-    primaryKeys = ["resource_id", "chapterResourceType_id","chapter_id"]
+    primaryKeys = ["resource_id", "chapterResourceType_id", "chapter_id"]
 )
 @Parcelize
 data class Resource(
 
     @ColumnInfo(name = "resource_originator")
-    var ResourceOriginator: String,
+    var ResourceOriginator: String?,
 
     @ColumnInfo(name = "tagging_level")
-    var TaggingLevel: String,
+    var TaggingLevel: String?,
 
     @ColumnInfo(name = "content_type")
     var contenttype: String,
 
     @ColumnInfo(name = "description")
-    var description: String,
+    var description: String?,
 
     @ColumnInfo(name = "resource_id")
     var id: String,
@@ -31,7 +31,7 @@ data class Resource(
     var image: String?,
 
     @ColumnInfo(name = "skills")
-    var skills: List<String>,
+    var skills: List<String>?,
 
     @ColumnInfo(name = "src")
     var src: String,
@@ -46,6 +46,9 @@ data class Resource(
     var chapterResourceTypeId: String,
 
     @ColumnInfo(name = "chapter_id")
-    var chapterId: String
+    var chapterId: String,
+
+    @ColumnInfo(name = "isAdded",defaultValue = "0")
+    var isAdded: Boolean
 
 ) : Parcelable

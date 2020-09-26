@@ -25,7 +25,7 @@
                     android:layout_height="20dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="20dp"
-                    android:src="@drawable/ic_back"/>
+                    android:src="@drawable/ic_back" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/imgMessageDetail"
@@ -45,7 +45,7 @@
                     android:layout_toRightOf="@+id/imgMessageDetail"
                     android:orientation="vertical">
 
-                    <com.tce.teacherapp.util.RubikMediumTextview
+                    <com.tce.teacherapp.util.RubikBoldTextview
                         android:id="@+id/tvTitle1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -54,16 +54,16 @@
                         android:text="title"
                         android:textColor="@color/white"
                         android:textSize="@dimen/font_size_16_dp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
-                    <com.tce.teacherapp.util.RubikRegularTextview
+                    <com.tce.teacherapp.util.RubikMediumTextview
                         android:id="@+id/tvSubTitle1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="subTitle"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:textColor="@color/white"
-                        android:visibility="visible"/>
+                        android:textColor="@color/pale_grey_two"
+                        android:textSize="11dp"
+                        android:visibility="visible" />
                 </LinearLayout>
             </RelativeLayout>
 
@@ -77,7 +77,7 @@
                 android:text="4 June 2020"
                 android:textColor="#8c91a5"
                 android:textSize="@dimen/font_size_16_dp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
 
             <RelativeLayout
@@ -97,10 +97,11 @@
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/imgAttachment"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:padding="8dp"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="30dp"
+                        android:layout_marginStart="30dp"
                         android:scaleType="fitXY"
                         android:src="@drawable/ic_attachment" />
 
@@ -121,16 +122,15 @@
 
                     </EditText>
 
-                    <androidx.appcompat.widget.AppCompatImageView
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/imgSendMessage"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_alignParentRight="true"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="30dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/ic_send_message" />
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@drawable/ic_send_message" />
                 </RelativeLayout>
 
                 <LinearLayout
@@ -170,20 +170,20 @@
                         android:id="@+id/divider"
                         android:layout_width="50dp"
                         android:layout_height="4dp"
-                        android:background="@color/grey"
+                        android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
-                        android:layout_centerHorizontal="true"/>
+                        android:background="@color/grey" />
 
                     <com.tce.teacherapp.util.RubikBoldTextview
-                       android:id="@+id/tv_record_time"
+                        android:id="@+id/tv_record_time"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textColor="#a0a5b9"
-                        android:text="0:00"
-                        android:textSize="@dimen/_30sdp"
-                        android:gravity="center"
+                        android:layout_above="@+id/tvRecord"
                         android:layout_below="@+id/divider"
-                        android:layout_above="@+id/tvRecord">
+                        android:gravity="center"
+                        android:text="0:00"
+                        android:textColor="#a0a5b9"
+                        android:textSize="@dimen/_30sdp">
 
                     </com.tce.teacherapp.util.RubikBoldTextview>
 
@@ -191,14 +191,14 @@
                         android:id="@+id/tvRecord"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:text="Record"
-                        android:textColor="@color/white"
-                        android:gravity="center"
+                        android:layout_alignParentBottom="true"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
-                        android:textSize="@dimen/font_size_16_dp"
-                        android:layout_alignParentBottom="true"
-                        android:background="@drawable/bg_orange_rounded">
+                        android:background="@drawable/bg_orange_rounded"
+                        android:gravity="center"
+                        android:text="Record"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_size_16_dp">
 
                     </com.tce.teacherapp.util.RubikMediumTextview>
 
@@ -210,6 +210,12 @@
 
 
         </RelativeLayout>
+        <FrameLayout
+            android:id="@+id/mask_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:background="@color/dim_color_dashboard"/>
 
         <LinearLayout
             android:id="@+id/bottom_sheet"
@@ -228,7 +234,7 @@
                 android:layout_height="4dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="5dp"
-                android:background="#e1e6f0"/>
+                android:background="#e1e6f0" />
 
             <LinearLayout
                 android:id="@+id/resource_container"
@@ -241,7 +247,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginRight="10dp"
-                    android:src="@drawable/ic_resource"/>
+                    android:src="@drawable/ic_resource" />
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:layout_width="wrap_content"
@@ -255,9 +261,10 @@
             </LinearLayout>
 
             <View
+                android:id="@+id/divider1"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#e1e6f0"/>
+                android:background="#e1e6f0" />
 
             <LinearLayout
                 android:id="@+id/photo_container"
@@ -270,7 +277,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginRight="10dp"
-                    android:src="@drawable/ic_photo"/>
+                    android:src="@drawable/ic_photo" />
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:layout_width="wrap_content"
@@ -286,7 +293,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#e1e6f0"/>
+                android:background="#e1e6f0" />
 
             <LinearLayout
                 android:id="@+id/voice_container"
@@ -299,7 +306,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginRight="10dp"
-                    android:src="@drawable/ic_voice"/>
+                    android:src="@drawable/ic_voice" />
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:layout_width="wrap_content"
@@ -315,7 +322,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#e1e6f0"/>
+                android:background="#e1e6f0" />
 
             <LinearLayout
                 android:id="@+id/video_container"
@@ -328,7 +335,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginRight="10dp"
-                    android:src="@drawable/ic_video"/>
+                    android:src="@drawable/ic_video" />
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:layout_width="wrap_content"
@@ -344,7 +351,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#e1e6f0"/>
+                android:background="#e1e6f0" />
 
             <LinearLayout
                 android:id="@+id/file_container"
@@ -357,7 +364,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginRight="10dp"
-                    android:src="@drawable/ic_file"/>
+                    android:src="@drawable/ic_file" />
 
                 <com.tce.teacherapp.util.RubikMediumTextview
                     android:layout_width="wrap_content"

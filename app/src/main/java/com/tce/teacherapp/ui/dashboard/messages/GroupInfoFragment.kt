@@ -1,5 +1,6 @@
 package com.tce.teacherapp.ui.dashboard.messages
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -11,15 +12,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.EpoxyVisibilityTracker
 import com.tce.teacherapp.R
+import com.tce.teacherapp.api.response.MessageListResponseItem
 import com.tce.teacherapp.databinding.FragmentGroupInfoBinding
-import com.tce.teacherapp.db.entity.Message
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.messages.adapter.groupInfoEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.messages.state.MESSAGE_VIEW_STATE_BUNDLE_KEY
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageStateEvent
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageViewState
 import com.tce.teacherapp.util.StateMessageCallback
-import com.tce.teacherapp.util.Utility
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
@@ -34,7 +34,7 @@ constructor(
 
     private lateinit var binding : FragmentGroupInfoBinding
 
-    var messageVo : Message? = null
+    var messageVo : MessageListResponseItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,7 +71,7 @@ constructor(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        messageVo = arguments?.getParcelable("messageData") as Message?
+        messageVo = arguments?.getParcelable("messageData") as MessageListResponseItem?
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             activity?.window!!.statusBarColor = resources.getColor(R.color.color_black, null)
@@ -84,28 +84,29 @@ constructor(
         viewModel.setStateEvent(MessageStateEvent.GetStudentEvent(0,""))
 
         binding.imgClose.setOnClickListener {
-            activity?.onBackPressed()
+            (activity as DashboardActivity).onBackPressed(false)
         }
 
-        binding.tvTitle1.text = messageVo!!.title
+        binding.tvTitle1.text = messageVo!!.Title
 
-        if(messageVo!!.NoOfMember == 0)
+        if(messageVo!!.unReadCount == 0)
         {
             binding.tvSubTitle1.visibility= View.GONE
         }else{
             binding.tvSubTitle1.visibility= View.VISIBLE
 
         }
-        binding.tvSubTitle1.text = messageVo!!.NoOfMember.toString() + " Members"
+        binding.imgMessageDetail.background =
+            requireContext().getDrawable(R.drawable.ic_dummy_class_apple)
 
-        Utility.getDrawable(
+/*        Utility.getDrawable(
             messageVo!!.icon.substring(
                 0,
                 messageVo!!.icon.lastIndexOf(".")
             ), requireContext()
         )?.let { it1 ->
             binding.imgMessageDetail.background = it1
-        }
+        }*/
 
         binding.rvGroupInfo.layoutManager = GridLayoutManager(activity, 1)
         binding.rvGroupInfo.setHasFixedSize(true)
@@ -115,6 +116,7 @@ constructor(
 
     }
 
+    @SuppressLint("SetTextI18n")
     private fun subscribeObservers() {
 
 
@@ -123,6 +125,7 @@ constructor(
 
                 viewState.studentList?.let {
                     Log.d("SAN", "messageList-->" + it.size)
+                    binding.tvSubTitle1.text = it.size.toString() + " Members"
                     binding.rvGroupInfo.withModels {
                         for (msg in it) {
                             groupInfoEpoxyHolder {

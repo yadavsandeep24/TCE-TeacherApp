@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="5dp"
     android:layout_marginTop="10dp"
     android:id="@+id/main_container">
@@ -11,6 +11,8 @@
         android:id="@+id/imgMessage"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:elevation="10dp"
+        app:elevation= "10dp"
         android:scaleType="fitXY" />
 
     <LinearLayout
@@ -50,9 +52,10 @@
         android:id="@+id/tvTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-       android:textSize="@dimen/font_size_14_dp"
+       android:textSize="@dimen/font_size_12_dp"
         android:text="time"
         android:layout_alignParentRight="true"
+        android:textColor="@color/blue_grey"
         android:layout_alignTop="@+id/imgMessage"
         android:layout_marginLeft="10dp"/>
 

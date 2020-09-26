@@ -3,6 +3,9 @@ package com.tce.teacherapp.fragments.main
 import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModelProvider
 import com.tce.teacherapp.ui.dashboard.messages.*
+import com.tce.teacherapp.ui.dashboard.subjects.HTMLContentFragment
+import com.tce.teacherapp.ui.dashboard.subjects.ImageContentFragment
+import com.tce.teacherapp.ui.dashboard.subjects.VideoPlayerFragment
 import javax.inject.Inject
 
 class MessagesFragmentFactory
@@ -37,6 +40,15 @@ constructor(
 
             GroupInfoFragment::class.java.name -> {
                 GroupInfoFragment(viewModelFactory)
+            }
+            ImageContentFragment::class.java.name ->{
+                ImageContentFragment(viewModelFactory)
+            }
+            VideoPlayerFragment::class.java.name -> {
+                VideoPlayerFragment(viewModelFactory)
+            }
+            HTMLContentFragment::class.java.name -> {
+                HTMLContentFragment(viewModelFactory)
             }
 
             else -> {

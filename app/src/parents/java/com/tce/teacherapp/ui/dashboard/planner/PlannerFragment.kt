@@ -16,7 +16,10 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tce.teacherapp.R
 import com.tce.teacherapp.api.response.StudentListResponseItem
 import com.tce.teacherapp.databinding.FragmentPlannerBinding
-import com.tce.teacherapp.db.entity.*
+import com.tce.teacherapp.db.entity.Event
+import com.tce.teacherapp.db.entity.LessonPlan
+import com.tce.teacherapp.db.entity.LessonPlanPeriod
+import com.tce.teacherapp.db.entity.LessonPlanResource
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.home.adapter.childEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.home.listeners.ChildClickListener

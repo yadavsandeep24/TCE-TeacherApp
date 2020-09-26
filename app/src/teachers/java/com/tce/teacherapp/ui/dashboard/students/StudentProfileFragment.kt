@@ -128,7 +128,7 @@ constructor(
         }
 
         if (studentVo != null) {
-            if (!studentVo.Term2ReportStatus && !studentVo.Term1ReportStatus) {
+            if (!studentVo.Term2ReportStatus!! && !studentVo.Term1ReportStatus!!) {
                 binding.cardReportDetails.visibility = View.GONE
             } else {
                 binding.cardReportDetails.visibility = View.VISIBLE

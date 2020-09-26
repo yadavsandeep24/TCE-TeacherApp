@@ -1,26 +1,30 @@
-  package com.tce.teacherapp.ui.dashboard.messages
+package com.tce.teacherapp.ui.dashboard.messages
 
+import android.annotation.SuppressLint
+import android.app.Dialog
 import android.graphics.Typeface
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.airbnb.epoxy.EpoxyVisibilityTracker
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentResourceBinding
+import com.tce.teacherapp.db.entity.Resource
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
-import com.tce.teacherapp.ui.dashboard.messages.adapter.resourceEpoxyHolder
-import com.tce.teacherapp.ui.dashboard.messages.adapter.resourceTypeEpoxyHolder
+import com.tce.teacherapp.ui.dashboard.messages.adapter.IResourceItemSelectedListener
+import com.tce.teacherapp.ui.dashboard.messages.adapter.IResourceTypeItemSelectedListener
+import com.tce.teacherapp.ui.dashboard.messages.adapter.ResourceAdapter
+import com.tce.teacherapp.ui.dashboard.messages.adapter.ResourceTypeAdapter
 import com.tce.teacherapp.ui.dashboard.messages.state.MESSAGE_VIEW_STATE_BUNDLE_KEY
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageStateEvent
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageViewState
@@ -35,9 +39,14 @@ import javax.inject.Inject
 class ResourceFragment @Inject
 constructor(
     viewModelFactory: ViewModelProvider.Factory
-) : BaseMessageFragment(R.layout.fragment_resource, viewModelFactory) {
+) : BaseMessageFragment(R.layout.fragment_resource, viewModelFactory),
+    IResourceTypeItemSelectedListener, IResourceItemSelectedListener {
 
-    private lateinit var binding : FragmentResourceBinding
+    private lateinit var binding: FragmentResourceBinding
+
+    private var selectedType = "All"
+    private var selectedPosition = -1
+    private var addedCount = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,6 +83,7 @@ constructor(
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -84,7 +94,6 @@ constructor(
         // (activity as DashboardActivity).setCustomToolbar(R.layout.subject_list_top_bar)
         (activity as DashboardActivity).expandAppBar(false)
 
-        viewModel.setStateEvent(MessageStateEvent.GetResourceEvent(""))
 
         val searchText: TextView =
             binding.svResources.findViewById(R.id.search_src_text) as TextView
@@ -102,12 +111,15 @@ constructor(
             binding.svResources.findViewById(R.id.search_close_btn) as ImageView
 
         closeButton.setOnClickListener {
-            val t: Toast = Toast.makeText(activity, "close", Toast.LENGTH_SHORT)
-            t.show()
             uiCommunicationListener.hideSoftKeyboard()
             binding.svResources.setQuery("", false)
             binding.svResources.clearFocus()
-            viewModel.setStateEvent(MessageStateEvent.GetResourceEvent(""))
+            viewModel.setStateEvent(
+                MessageStateEvent.GetResourceSelectionEvent(
+                    "",
+                    selectedType
+                )
+            )
             false
         }
 
@@ -116,17 +128,62 @@ constructor(
         binding.rvResourceType.apply {
             layoutManager = linearLayoutManager
             setHasFixedSize(true)
-
         }
+        val resourceTypeAdapter = ResourceTypeAdapter(requireContext(), this)
+        binding.rvResourceType.adapter = resourceTypeAdapter
 
         binding.imgBack.setOnClickListener {
-            activity?.onBackPressed()
+            (activity as DashboardActivity).onBackPressed(false)
+        }
+
+        binding.tvSend.setOnClickListener {
+            val dialog = Dialog(requireActivity(), android.R.style.Theme_Dialog)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setContentView(R.layout.custom_success_dialog)
+            dialog.setCanceledOnTouchOutside(false)
+            dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+            dialog.window!!.setBackgroundDrawable(
+                ColorDrawable(resources.getColor(android.R.color.transparent))
+            )
+            dialog.show()
+
+            val txtTitle = dialog.findViewById(R.id.tv_title) as TextView
+
+            txtTitle.text = "$addedCount resource added successfully."
+
+            Handler().postDelayed({
+                dialog.dismiss()
+                (activity as DashboardActivity).onBackPressed(false)
+            }, 1000)
+
+
         }
 
         binding.rvResource.layoutManager = GridLayoutManager(activity, 1)
         binding.rvResource.setHasFixedSize(true)
-        val epoxyVisibilityTracker = EpoxyVisibilityTracker()
-        epoxyVisibilityTracker.attach(binding.rvResource)
+        val resourceAdapter = ResourceAdapter(requireContext(), this)
+        binding.rvResource.adapter = resourceAdapter
+
+
+        if(!selectedType.equals("All",true)){
+            binding.tvAll.background = resources.getDrawable(R.drawable.transparent)
+        }else{
+            binding.tvAll.background = resources.getDrawable(R.drawable.bg_yellow_white_rounded)
+        }
+        binding.tvAll.setOnClickListener {
+            selectedPosition = -1
+            selectedType ="All"
+            binding.tvAll.background = resources.getDrawable(R.drawable.bg_yellow_white_rounded)
+            val adapter = binding.rvResourceType.adapter as ResourceTypeAdapter
+            adapter.setResourceTypeSelectedPosition(selectedPosition)
+            viewModel.setStateEvent(
+                MessageStateEvent.GetResourceSelectionEvent(
+                    "",
+                    ""
+                )
+            )
+        }
+        viewModel.setStateEvent(MessageStateEvent.GetResourceTypeEvent)
         subscribeObservers()
 
     }
@@ -137,82 +194,36 @@ constructor(
         }
 
         override fun onQueryTextChange(newText: String): Boolean {
-            viewModel.setStateEvent(MessageStateEvent.GetResourceEvent(newText))
+            viewModel.setStateEvent(
+                MessageStateEvent.GetResourceSelectionEvent(
+                    newText,
+                    selectedType
+                )
+            )
             return true
 
         }
     }
 
 
+    @SuppressLint("SetTextI18n")
     private fun subscribeObservers() {
 
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             if (viewState != null) {
-
-                viewState.resourceList?.let {
-                    Log.d("SAN", "messageList-->" + it.size)
-                    binding.rvResourceType.withModels {
-                        for (res in it) {
-                            resourceTypeEpoxyHolder {
-                                id(res.id.toLong())
-                                strType(res.Type)
-                                listener {
-                                    viewModel.setStateEvent(MessageStateEvent.GetResourceSelectionEvent("",res.typeId))
-                                    requestModelBuild()
-
-                                }
-                            }
-                        }
-
-                    }
+                viewState.resourceTypeList?.let {
+                    val adapter = binding.rvResourceType.adapter as ResourceTypeAdapter
+                    adapter.setData(it, selectedPosition)
+                    viewModel.setStateEvent(
+                        MessageStateEvent.GetResourceSelectionEvent(
+                            "", ""
+                        )
+                    )
                 }
-
-                viewState.resourceList?.let {
-
-                    binding.rvResource.withModels {
-                        for (resource in it!!) {
-                            resourceEpoxyHolder {
-                                id(resource.id.toLong())
-                                strTitle(resource.title)
-                                listener {
-                                }
-                            }
-                        }
-                    }
-
-
-                    viewState.selectedResourceList?.let {
-                        binding.tvTotalResource.setText("" + it.size + " file found")
-                        binding.rvResource.withModels {
-                            for (resource in it!!) {
-                                resourceEpoxyHolder {
-                                    id(resource.id.toLong())
-                                    strTitle(resource.title)
-                                    listener {
-
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    binding.tvAll.setOnClickListener(View.OnClickListener {
-                        viewState.resourceList?.let {
-                            binding.tvTotalResource.setText("" + it.size + " file found")
-                            binding.rvResource.withModels {
-                                for (resource in it!!) {
-                                    resourceEpoxyHolder {
-                                        id(resource.id.toLong())
-                                        strTitle(resource.title)
-                                        listener {
-
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    })
-
+                viewState.selectedResourceList?.let {
+                    binding.tvTotalResource.text = "" + it.size + " file found"
+                    val adapter = binding.rvResource.adapter as ResourceAdapter
+                    adapter.setData(it)
                 }
             }
         })
@@ -237,9 +248,67 @@ constructor(
                 )
             }
         })
+    }
 
+    override fun onResourceSelected(resource: Resource) {
+        val bundle = Bundle()
+        bundle.putString("title", resource.title)
+        bundle.putString("url", resource.src)
+        when {
+            resource.contenttype.equals("av", true) -> {
+                bundle.putBoolean("isModality", true)
+                findNavController().navigate(
+                    R.id.action_resourceFragment_to_videoPlayerFragment3,
+                    bundle
+                )
+            }
+            resource.contenttype.equals("Image", true) -> {
+                findNavController().navigate(
+                    R.id.action_resourceFragment_to_imageContentFragment3,
+                    bundle
+                )
+            }
+            resource.contenttype.equals("activity", true) -> {
+                findNavController().navigate(
+                    R.id.action_resourceFragment_to_HTMLContentFragment3,
+                    bundle
+                )
+            }
+            resource.contenttype.equals("audio", true) -> {
+            }
+        }
+    }
 
+    override fun onAddedClicked(item: Resource) {
+        if (item.isAdded) {
+            addedCount += 1
+        } else {
+            addedCount -= 1
+        }
+        if (addedCount < 1) {
+            binding.tvSend.visibility = View.GONE
+            binding.tvCount.visibility = View.GONE
+        } else {
+            binding.tvCount.text = addedCount.toString()
+            binding.tvSend.visibility = View.VISIBLE
+            binding.tvCount.visibility = View.VISIBLE
+        }
 
     }
+
+    override fun onResourceTypeSelected(item: Resource, position: Int) {
+        selectedType = item.ResourceOriginator.toString()
+        selectedPosition = position
+        binding.tvAll.background = resources.getDrawable(R.drawable.transparent)
+        val adapter = binding.rvResourceType.adapter as ResourceTypeAdapter
+        adapter.notifyDataSetChanged()
+        viewModel.setStateEvent(
+            MessageStateEvent.GetResourceSelectionEvent(
+                "",
+                item.ResourceOriginator!!
+            )
+        )
+    }
+
 
 }

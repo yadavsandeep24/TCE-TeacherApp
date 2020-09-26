@@ -1,5 +1,6 @@
 package com.tce.teacherapp.ui.dashboard.messages
 
+import android.annotation.SuppressLint
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
@@ -19,6 +20,7 @@ import com.airbnb.epoxy.EpoxyVisibilityTracker
 import com.airbnb.epoxy.addGlidePreloader
 import com.airbnb.epoxy.glidePreloader
 import com.bumptech.glide.Glide
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentMessageListBinding
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
@@ -28,7 +30,8 @@ import com.tce.teacherapp.ui.dashboard.messages.state.MessageStateEvent
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageViewState
 import com.tce.teacherapp.ui.dashboard.subjects.adapter.SubjectListEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.subjects.loadImage
-import com.tce.teacherapp.util.Utility
+import com.tce.teacherapp.util.StateMessageCallback
+import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.message_bottom_filter.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -40,7 +43,7 @@ import javax.inject.Inject
 class MessageListFragment @Inject
 constructor(
     viewModelFactory: ViewModelProvider.Factory
-) : BaseMessageFragment(R.layout.fragment_message_list,viewModelFactory) {
+) : BaseMessageFragment(R.layout.fragment_message_list, viewModelFactory) {
 
     private lateinit var binding: FragmentMessageListBinding
 
@@ -63,19 +66,6 @@ constructor(
         return binding.root
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        val viewState = viewModel.viewState.value
-
-        //clear the list. Don't want to save a large list to bundle.
-        viewState?.messageList = ArrayList()
-
-
-        outState.putParcelable(
-            MESSAGE_VIEW_STATE_BUNDLE_KEY,
-            viewState
-        )
-        super.onSaveInstanceState(outState)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -84,12 +74,19 @@ constructor(
         } else {
             activity?.window!!.statusBarColor = resources.getColor(R.color.color_black)
         }
-       // (activity as DashboardActivity).setCustomToolbar(R.layout.subject_list_top_bar)
         (activity as DashboardActivity).expandAppBar(false)
+        if (resources.getString(R.string.app_type)
+                .equals(resources.getString(R.string.app_type_parent))
+        ) {
+            binding.ivUser.visibility = View.VISIBLE
+            binding.imgNewMessageLeft.visibility = View.VISIBLE
+            binding.imgNewMessage.visibility = View.GONE
 
-
-       uiCommunicationListener.displayProgressBar(false)
-
+        } else {
+            binding.ivUser.visibility = View.GONE
+            binding.imgNewMessageLeft.visibility = View.GONE
+            binding.imgNewMessage.visibility = View.VISIBLE
+        }
         val searchText: TextView = binding.svMessage.findViewById(R.id.search_src_text) as TextView
         val myCustomFont: Typeface =
             Typeface.createFromAsset(requireActivity().assets, "fonts/Rubik-Medium.ttf")
@@ -116,40 +113,59 @@ constructor(
 
         viewModel.setStateEvent(MessageStateEvent.GetMessageEvent(""))
 
-        val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet_layout)
+        val bottomSheetBehavior =
+            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet_layout)
 
-        bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_COLLAPSED
+        bottomSheetBehavior.state =
+            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_COLLAPSED
         bottomSheetBehavior.skipCollapsed = true
 
-        bottomSheetBehavior.addBottomSheetCallback(object : com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.BottomSheetCallback {
+        bottomSheetBehavior.addBottomSheetCallback(object :
+            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.BottomSheetCallback {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
-                val rotation = when (newState) {
-                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED -> 0f
-                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_COLLAPSED -> 180f
-                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN -> 180f
-                    else -> return
+                if (newState == BottomSheetBehavior.STATE_DRAGGING) {
+                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
                 }
 
             }
         })
-        binding.imgFilter.setOnClickListener(View.OnClickListener {
+        binding.imgFilter.setOnClickListener {
             if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
-                binding.mainCordinator.setBackgroundColor(resources.getColor(R.color.dim_color))
-                bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
+                binding.maskLayout.visibility = View.VISIBLE
+                bottomSheetBehavior.state =
+                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
+                (activity as DashboardActivity).bottom_navigation_view.visibility = View.GONE
             } else {
-                binding.mainCordinator.setBackgroundColor(resources.getColor(R.color.transparent))
-                bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                binding.maskLayout.visibility = View.GONE
+                bottomSheetBehavior.state =
+                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
             }
-        })
-
-        binding.imgNewMessage.setOnClickListener(View.OnClickListener {
-           /* val bundle = Bundle()
-            bundle.putParcelable("messageData", )*/
+        }
+        binding.maskLayout.setOnClickListener {
+            bottomSheetBehavior.state =
+                com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+            binding.maskLayout.visibility = View.GONE
+        }
+        binding.imgNewMessage.setOnClickListener {
+            /* val bundle = Bundle()
+             bundle.putParcelable("messageData", )*/
+            uiCommunicationListener.hideSoftKeyboard()
             findNavController().navigate(
                 R.id.action_messageListFragment_to_newMessageFragment
                 //bundle
             )
-        })
+        }
+
+        binding.imgNewMessageLeft.setOnClickListener {
+            /* val bundle = Bundle()
+             bundle.putParcelable("messageData", )*/
+            uiCommunicationListener.hideSoftKeyboard()
+            findNavController().navigate(
+                R.id.action_messageListFragment_to_newMessageFragment
+                //bundle
+            )
+        }
 
         binding.rvMessage.layoutManager = GridLayoutManager(activity, 1)
         binding.rvMessage.setHasFixedSize(true)
@@ -161,9 +177,8 @@ constructor(
                 requestManager.loadImage(model.imageUrl)
             }
         )
+        uiCommunicationListener.hideSoftKeyboard()
         subscribeObservers()
-
-
     }
 
     private val queryTextListener = object : SearchView.OnQueryTextListener {
@@ -178,29 +193,27 @@ constructor(
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun subscribeObservers() {
 
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             if (viewState != null) {
 
-                viewState.messageList?.let {
-                    Log.d("SAN", "messageList-->" + it.size)
+                viewState.messageResponse?.let {
+                    Log.d("SAN", "messageList-->" + (it.messageList?.size ?: 0))
+                    uiCommunicationListener.hideSoftKeyboard()
+                    binding.tvSubTitle.text = "(" + it.totalUnReadCount + " Unread)"
                     binding.rvMessage.withModels {
-                        for (msg in it) {
+                        var postion = 0
+                        for (msg in it.messageList!!) {
+                            postion += 1
                             messageListEpoxyHolder {
-                                id(msg.id.toLong())
-                                strMessage(msg.title)
-                                strDetail(msg.detail)
-                                strCount(msg.count)
-                                strTime(msg.time)
-                                Utility.getDrawable(
-                                    msg.icon.substring(
-                                        0,
-                                        msg.icon.lastIndexOf(".")
-                                    ), requireContext()
-                                )?.let { it1 ->
-                                    imageDrawable(it1)
-                                }
+                                id(postion)
+                                strMessage(msg.Title)
+                                strDetail(if (msg.Message.isNullOrEmpty()) "" else msg.Message)
+                                strCount(msg.unReadCount.toString())
+                                strTime(msg.SendDate)
+                                messageType(msg.Type)
                                 listener {
                                     val bundle = Bundle()
                                     bundle.putParcelable("messageData", msg)
@@ -220,46 +233,26 @@ constructor(
         })
 
         viewModel.numActiveJobs.observe(viewLifecycleOwner, Observer {
-           // uiCommunicationListener.displayProgressBar(viewModel.areAnyJobsActive())
+            uiCommunicationListener.displayProgressBar(viewModel.areAnyJobsActive())
         })
 
 
         viewModel.stateMessage.observe(viewLifecycleOwner, Observer { stateMessage ->
             Log.d("SAN", "SubjectListFragment-->viewModel.stateMessage")
 
+
             stateMessage?.let {
 
-                /*uiCommunicationListener.onResponseReceived(
+                uiCommunicationListener.onResponseReceived(
                     response = it.response,
                     stateMessageCallback = object : StateMessageCallback {
                         override fun removeMessageFromStack() {
                             viewModel.clearStateMessage()
                         }
                     }
-                )*/
+                )
             }
         })
-
-        /*val messageList = listOf(
-            (com.tce.teacherapp.db.entity.Message(1,"School Announcement", "Hi teacher, please take note that school will be closed on the 20th feb. ", resources.getDrawable(R.drawable.ic_dummy_school),"1.49 pm","1")),
-            (com.tce.teacherapp.db.entity.Message(2,"Class Apple", "Hi Parents, I am sharing what we have learnt in class.", resources.getDrawable(R.drawable.ic_dummy_class_apple),"1.49 pm","2"))
-        )
-
-        binding.rvMessage.withModels {
-            for (msg in messageList) {
-                messageListEpoxyHolder {
-                    id(msg.id)
-                    strMessage(msg.title)
-                    strDetail(msg.detail)
-                    strCount(msg.count)
-                    strTime(msg.time)
-                    imageDrawable(msg.icon)
-
-
-                }
-            }
-
-        }*/
 
     }
 

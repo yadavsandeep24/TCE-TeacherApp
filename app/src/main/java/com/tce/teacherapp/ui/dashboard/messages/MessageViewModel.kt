@@ -1,8 +1,11 @@
 package com.tce.teacherapp.ui.dashboard.messages
 
+import android.util.Log
+import com.tce.teacherapp.api.response.MessageListResponse
 import com.tce.teacherapp.api.response.StudentListResponseItem
 import com.tce.teacherapp.db.entity.Message
 import com.tce.teacherapp.db.entity.MessageResource
+import com.tce.teacherapp.db.entity.Resource
 import com.tce.teacherapp.repository.MainRepository
 import com.tce.teacherapp.ui.BaseViewModel
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageStateEvent
@@ -21,7 +24,8 @@ class MessageViewModel @Inject constructor(val mainRepository: MainRepository) :
     BaseViewModel<MessageViewState>() {
 
     override fun handleNewData(data: MessageViewState) {
-        data.messageList?.let {
+        Log.d("SAN","MessageViewModel-->handleNewData")
+        data.messageResponse?.let {
             setMessageList(it)
         }
 
@@ -40,12 +44,15 @@ class MessageViewModel @Inject constructor(val mainRepository: MainRepository) :
         data.selectedResourceList?.let {
             setSelectedResourceList(it)
         }
+        data.resourceTypeList?.let {
+            setResourceTypeList(it)
+        }
 
     }
 
-    private fun setMessageList(messageList: List<Message>) {
+    private fun setMessageList(messageResponse:MessageListResponse) {
         val update = getCurrentViewStateOrNew()
-        update.messageList = messageList
+        update.messageResponse = messageResponse
         setViewState(update)
     }
 
@@ -67,12 +74,17 @@ class MessageViewModel @Inject constructor(val mainRepository: MainRepository) :
         setViewState(update)
     }
 
-    private fun setSelectedResourceList(resourceList: List<MessageResource>) {
+    private fun setSelectedResourceList(resourceList: List<Resource>) {
         val update = getCurrentViewStateOrNew()
         update.selectedResourceList = resourceList
         setViewState(update)
     }
 
+    private fun setResourceTypeList(resourceList: List<Resource>) {
+        val update = getCurrentViewStateOrNew()
+        update.resourceTypeList = resourceList
+        setViewState(update)
+    }
 
     override fun setStateEvent(stateEvent: StateEvent) {
         val job: Flow<DataState<MessageViewState>> = when (stateEvent) {
@@ -86,17 +98,20 @@ class MessageViewModel @Inject constructor(val mainRepository: MainRepository) :
             }
 
             is MessageStateEvent.GetMessageConversionEvent -> {
-                mainRepository.getMessage(stateEvent.query,stateEvent = stateEvent)
+                mainRepository.getMessageConversationList(stateEvent.type,stateEvent.messageId,stateEvent = stateEvent)
             }
 
             is MessageStateEvent.GetResourceSelectionEvent -> {
-                mainRepository.getSelectedResourceList(stateEvent.query,stateEvent.typeId, stateEvent = stateEvent)
+                mainRepository.getSelectedResourceList(stateEvent.query,stateEvent.type, stateEvent = stateEvent)
             }
-
 
             is MessageStateEvent.GetResourceEvent -> {
                 mainRepository.getResourceList(stateEvent.query,stateEvent = stateEvent)
             }
+            is MessageStateEvent.GetResourceTypeEvent ->{
+                mainRepository.getMessageResourceTypeList(stateEvent = stateEvent)
+            }
+
 
             else -> {
                 flow{

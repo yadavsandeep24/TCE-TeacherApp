@@ -60,7 +60,7 @@ constructor(
         (activity as DashboardActivity).bottom_navigation_view.visibility = View.GONE
         val studentVo = arguments?.getParcelable("studentdata") as StudentListResponseItem?
         if (studentVo != null) {
-            reportPath = studentVo.Term1ReportPDF
+            reportPath = studentVo.Term1ReportPDF.toString()
         }
         val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(binding.bottomSheet)
 
@@ -104,7 +104,9 @@ constructor(
             }
             binding.tvStudentAge.text = "${Utility.getAge(studentVo.DOB)} years old"
             binding.tvTeacherName.text = studentVo.teacher
-            myAdapter.modelList = studentVo.ProgressCard[0].ProgressData
+            if(studentVo.ProgressCard != null ) {
+                myAdapter.modelList = studentVo.ProgressCard[0].ProgressData
+            }
         }
         myAdapter.notifyDataSetChanged()
 

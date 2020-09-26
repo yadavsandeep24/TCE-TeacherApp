@@ -27,8 +27,10 @@ data class MessageConversion(
 
     @Expose
     val time: String,
+
     @Expose
     val messageType: String,
+
     @Expose
     val messageFrom: String
 

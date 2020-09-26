@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentAddChildBinding
 import com.tce.teacherapp.ui.BaseFragment

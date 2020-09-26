@@ -20,9 +20,9 @@ import com.tce.teacherapp.R
 import com.tce.teacherapp.api.response.StudentListResponseItem
 import com.tce.teacherapp.databinding.FragmentStudentGallerySharingChatBinding
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
+import com.tce.teacherapp.ui.dashboard.messages.adapter.ISelectedStudentClickListener
 import com.tce.teacherapp.ui.dashboard.messages.adapter.NewMessageAdapter
 import com.tce.teacherapp.ui.dashboard.messages.adapter.SelectedStudentAdapter
-import com.tce.teacherapp.ui.dashboard.messages.adapter.iSelectedStudentrClickListener
 import com.tce.teacherapp.ui.dashboard.students.interfaces.ViewHolderClickListener
 import com.tce.teacherapp.ui.dashboard.students.state.StudentStateEvent
 import com.tce.teacherapp.util.StateMessageCallback
@@ -37,7 +37,7 @@ class StudentGallerySharingChatFragment
 constructor(
     viewModelFactory: ViewModelProvider.Factory
 ) : BaseStudentFragment(R.layout.fragment_student_gallery_sharing_chat, viewModelFactory),
-    ViewHolderClickListener, iSelectedStudentrClickListener {
+    ViewHolderClickListener, ISelectedStudentClickListener {
 
     private lateinit var binding: FragmentStudentGallerySharingChatBinding
 
@@ -127,7 +127,7 @@ constructor(
         viewModel.setStateEvent(StudentStateEvent.GetStudentEvent(0,""))
         subscribeObservers()
 
-        tvSend= (activity as DashboardActivity).binding.toolBar.findViewById<TextView>(R.id.tvSend)
+        tvSend= (activity as DashboardActivity).binding.toolBar.findViewById(R.id.tvSend)
         tvSend.visibility = View.GONE
         tvSend.setOnClickListener {
             val bundle = Bundle()

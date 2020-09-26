@@ -9,24 +9,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.airbnb.epoxy.EpoxyVisibilityTracker
 import com.tce.teacherapp.R
 import com.tce.teacherapp.api.response.StudentListResponseItem
 import com.tce.teacherapp.databinding.FragmentNewMessageBinding
-import com.tce.teacherapp.db.entity.Student
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
-import com.tce.teacherapp.ui.dashboard.messages.adapter.newMessageEpoxyHolder
-import com.tce.teacherapp.ui.dashboard.messages.adapter.selectedStudentEpoxyHolder
+import com.tce.teacherapp.ui.dashboard.messages.adapter.ISelectedStudentClickListener
+import com.tce.teacherapp.ui.dashboard.messages.adapter.NewMessageAdapter
+import com.tce.teacherapp.ui.dashboard.messages.adapter.SelectedStudentAdapter
 import com.tce.teacherapp.ui.dashboard.messages.state.MESSAGE_VIEW_STATE_BUNDLE_KEY
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageStateEvent
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageViewState
+import com.tce.teacherapp.ui.dashboard.students.interfaces.ViewHolderClickListener
 import com.tce.teacherapp.util.StateMessageCallback
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -39,11 +38,11 @@ class NewMessageFragment
 @Inject
 constructor(
     viewModelFactory: ViewModelProvider.Factory
-) : BaseMessageFragment(R.layout.fragment_new_message, viewModelFactory) {
+) : BaseMessageFragment(R.layout.fragment_new_message, viewModelFactory), ViewHolderClickListener,
+    ISelectedStudentClickListener {
 
     private lateinit var binding: FragmentNewMessageBinding
-    private var studentList: ArrayList<StudentListResponseItem>? = ArrayList()
-    private var mainList: ArrayList<Student>? = ArrayList()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,7 +86,16 @@ constructor(
         }
         // (activity as DashboardActivity).setCustomToolbar(R.layout.subject_list_top_bar)
         (activity as DashboardActivity).expandAppBar(false)
+        if (resources.getString(R.string.app_type)
+                .equals(resources.getString(R.string.app_type_parent))
+        ) {
+            binding.rvSelectedStudent.visibility = View.GONE
+            binding.filterContainer.visibility = View.GONE
 
+        } else {
+            binding.rvSelectedStudent.visibility = View.VISIBLE
+            binding.filterContainer.visibility = View.VISIBLE
+        }
 
         val searchText: TextView =
             binding.svNewMessage.findViewById(R.id.search_src_text) as TextView
@@ -105,16 +113,12 @@ constructor(
             binding.svNewMessage.findViewById(R.id.search_close_btn) as ImageView
 
         closeButton.setOnClickListener {
-            val t: Toast = Toast.makeText(activity, "close", Toast.LENGTH_SHORT)
-            t.show()
             uiCommunicationListener.hideSoftKeyboard()
             binding.svNewMessage.setQuery("", false)
             binding.svNewMessage.clearFocus()
-            viewModel.setStateEvent(MessageStateEvent.GetStudentEvent(0,""))
+            viewModel.setStateEvent(MessageStateEvent.GetStudentEvent(0, ""))
             false
         }
-
-        viewModel.setStateEvent(MessageStateEvent.GetStudentEvent(0,""))
 
         binding.imgBack.setOnClickListener(View.OnClickListener {
             activity?.onBackPressed()
@@ -128,21 +132,67 @@ constructor(
 
         }
 
+        val selectedStudentAdapter = SelectedStudentAdapter(requireContext(), this)
+        binding.rvSelectedStudent.adapter = selectedStudentAdapter
+
         binding.rvNewMessage.layoutManager = GridLayoutManager(activity, 1)
         binding.rvNewMessage.setHasFixedSize(true)
-        val epoxyVisibilityTracker = EpoxyVisibilityTracker()
-        epoxyVisibilityTracker.attach(binding.rvNewMessage)
+        val newMessageAdapter = NewMessageAdapter(requireContext(), R.color.pale_grey, this)
+        binding.rvNewMessage.adapter = newMessageAdapter
+
+        viewModel.setStateEvent(MessageStateEvent.GetStudentEvent(0, ""))
         subscribeObservers()
 
+        binding.tvNext.visibility = View.GONE
         binding.tvNext.setOnClickListener {
-
+            val selectedStudentAdapter = binding.rvSelectedStudent.adapter as SelectedStudentAdapter
             val bundle = Bundle()
-            bundle.putParcelableArrayList("studentList", studentList!!)
+            bundle.putParcelableArrayList(
+                "studentList",
+                ArrayList(selectedStudentAdapter.modelList)
+            )
             findNavController().navigate(
                 R.id.action_newMessageFragment_to_groupChatFragment,
                 bundle
             )
+        }
 
+        binding.class1.setOnCheckedChangeListener { _, isChecked ->
+            val isClass2Checked = binding.class2.isChecked
+            if (isChecked) {
+                if (isClass2Checked) {
+                    viewModel.setStateEvent(MessageStateEvent.GetStudentEvent(0, ""))
+                } else {
+                    viewModel.setStateEvent(MessageStateEvent.GetStudentEvent(1, ""))
+                }
+            } else {
+                if (isClass2Checked) {
+                    viewModel.setStateEvent(MessageStateEvent.GetStudentEvent(5, ""))
+                } else {
+                    val adapter = binding.rvNewMessage.adapter as NewMessageAdapter
+                    adapter.setData(emptyList())
+                }
+
+            }
+        }
+
+        binding.class2.setOnCheckedChangeListener { _, isChecked ->
+            val isClass1Checked = binding.class1.isChecked
+            if (isChecked) {
+                if (isClass1Checked) {
+                    viewModel.setStateEvent(MessageStateEvent.GetStudentEvent(0, ""))
+                } else {
+                    viewModel.setStateEvent(MessageStateEvent.GetStudentEvent(5, ""))
+                }
+            } else {
+                if (isClass1Checked) {
+                    viewModel.setStateEvent(MessageStateEvent.GetStudentEvent(1, ""))
+                } else {
+                    val adapter = binding.rvNewMessage.adapter as NewMessageAdapter
+                    adapter.setData(emptyList())
+                }
+
+            }
         }
 
     }
@@ -153,7 +203,18 @@ constructor(
         }
 
         override fun onQueryTextChange(newText: String): Boolean {
-              viewModel.setStateEvent(MessageStateEvent.GetStudentEvent(0,newText))
+            val isClass1Selected =  binding.class1.isChecked
+            val isClass2Selected =  binding.class2.isChecked
+            if(isClass1Selected && isClass2Selected) {
+                viewModel.setStateEvent(MessageStateEvent.GetStudentEvent(0,newText))
+            }else if(isClass1Selected) {
+                viewModel.setStateEvent(MessageStateEvent.GetStudentEvent(1,newText))
+            }else if(isClass2Selected) {
+                viewModel.setStateEvent(MessageStateEvent.GetStudentEvent(5,newText))
+            }else{
+                val adapter = binding.rvNewMessage.adapter  as NewMessageAdapter
+                adapter.setData(emptyList())
+            }
             return true
 
         }
@@ -164,54 +225,9 @@ constructor(
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             if (viewState != null) {
 
-                viewState.studentList?.let {
-                    Log.d("SAN", "messageList-->" + it.size)
-                    binding.rvNewMessage.withModels {
-                        for (msg in it) {
-                            newMessageEpoxyHolder {
-                                id(msg.id.toLong())
-                                studentVo(msg)
-                                listener {
-                                    if (studentList!!.size == 0) {
-                                        binding.rvSelectedStudent.visibility =
-                                            View.GONE
-                                        binding.tvNext.visibility = View.GONE
-                                    } else {
-                                        binding.rvSelectedStudent.visibility =
-                                            View.VISIBLE
-                                        binding.tvNext.visibility = View.VISIBLE
-                                    }
-                                    val isExist = studentList!!.any{ it.id ==  msg.id }
-                                    if(!isExist) {
-                                        studentList!!.add(msg)
-                                        binding.rvSelectedStudent.visibility = View.VISIBLE
-                                        binding.rvSelectedStudent.withModels {
-                                            for (student in studentList!!) {
-                                                selectedStudentEpoxyHolder {
-                                                    id(student.id.toLong())
-                                                    strName(student.Name)
-                                                    listener {
-                                                        studentList!!.remove(student)
-                                                        requestModelBuild()
-
-                                                        if (studentList!!.size == 0) {
-                                                            studentList!!.clear()
-                                                            binding.rvSelectedStudent.visibility =
-                                                                View.GONE
-                                                        } else {
-                                                            binding.rvSelectedStudent.visibility =
-                                                                View.VISIBLE
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                    }
+                viewState.studentList?.let { mainStudentList ->
+                    val adapter = binding.rvNewMessage.adapter as NewMessageAdapter
+                    adapter.setData(mainStudentList)
                 }
 
 
@@ -240,8 +256,45 @@ constructor(
             }
         })
 
+    }
 
+    override fun onLongTap(index: Int) {
+    }
 
+    override fun onTap(index: Int, item: StudentListResponseItem) {
+        val adapter = binding.rvSelectedStudent.adapter as SelectedStudentAdapter
+
+        if (resources.getString(R.string.app_type)
+                .equals(resources.getString(R.string.app_type_teacher))
+        ) {
+            binding.rvSelectedStudent.visibility = View.VISIBLE
+        }
+        binding.tvNext.visibility = View.VISIBLE
+        val isExist = adapter.modelList.any { it.id == item.id }
+        if (!isExist) {
+            adapter.modelList.add(item)
+        }
+        adapter.notifyDataSetChanged()
+
+    }
+
+    override fun onCheckBoxClicked(item: StudentListResponseItem) {
+
+    }
+
+    override fun onClose(item: StudentListResponseItem) {
+        val selectedStudentAdapter = binding.rvSelectedStudent.adapter as SelectedStudentAdapter
+        val newMessageAdapter = binding.rvNewMessage.adapter as NewMessageAdapter
+        selectedStudentAdapter.modelList.remove(item)
+        selectedStudentAdapter.notifyDataSetChanged()
+        if (selectedStudentAdapter.modelList.isEmpty()) {
+            binding.rvSelectedStudent.visibility = View.GONE
+            binding.tvNext.visibility = View.GONE
+        } else {
+            binding.rvSelectedStudent.visibility = View.VISIBLE
+            binding.tvNext.visibility = View.VISIBLE
+        }
+        newMessageAdapter.updateListItem(item)
     }
 
 

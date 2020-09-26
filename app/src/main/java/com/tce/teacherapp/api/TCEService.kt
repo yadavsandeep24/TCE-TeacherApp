@@ -44,6 +44,10 @@ interface TCEService {
     @GET("GalleryData")
     suspend fun getStudentGalleryData(): List<StudentGalleryResponseItem>
 
+    @GET("Message")
+    suspend fun getMessageList():List<MessageListResponseItem>
+
+
 
 }
 

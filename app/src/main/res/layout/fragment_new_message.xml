@@ -69,37 +69,45 @@
                 app:queryBackground="@drawable/bg_white_rounded"
                 app:queryHint="Search by Name or Class" />
 
-            <com.airbnb.epoxy.EpoxyRecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_selected_student"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-
             <LinearLayout
+                android:id="@+id/filter_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp">
 
-                <com.tce.teacherapp.util.RubikRegularTextview
+                <com.tce.teacherapp.util.RubikMediumTextview
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/font_size_16_dp"
+                    android:textSize="@dimen/font_size_12_dp"
                     android:textColor="#46465a"
                     android:text="Filter : "/>
 
-                <CheckBox
+                <com.tce.teacherapp.util.RubikMediumCheckBox
+                    android:id="@+id/class1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Junior KG A"
-                    android:textSize="@dimen/font_size_16_dp"
+                    android:paddingLeft="3dp"
+                    android:button="@drawable/checkbox_filled_selector"
+                    android:textSize="@dimen/font_size_12_dp"
+                    android:checked="true"
                     android:layout_marginLeft="10dp"/>
 
-                <CheckBox
+                <com.tce.teacherapp.util.RubikMediumCheckBox
+                    android:id="@+id/class2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Junior KG B"
-                    android:textSize="@dimen/font_size_16_dp"
-                    android:layout_marginLeft="10dp"/>
+                    android:paddingLeft="3dp"
+                    android:button="@drawable/checkbox_filled_selector"
+                    android:textSize="@dimen/font_size_12_dp"
+                    android:checked="true"
+                    android:layout_marginLeft="15dp"/>
 
             </LinearLayout>
 
@@ -111,17 +119,16 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/search_container"
             android:text="Suggested"
-            android:textSize="@dimen/font_size_16_dp"
+            android:textColor="@color/light_grey_blue"
+            android:textSize="@dimen/font_size_14_dp"
             android:layout_margin="20dp">
         </com.tce.teacherapp.util.RubikMediumTextview>
 
-        <com.airbnb.epoxy.EpoxyRecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_new_message"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/tvSuggested"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp" />
+            android:layout_below="@+id/tvSuggested" />
 
 
     </RelativeLayout>

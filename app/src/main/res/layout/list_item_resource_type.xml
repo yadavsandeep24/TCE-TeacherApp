@@ -4,18 +4,19 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <com.tce.teacherapp.util.RubikMediumTextview
+    <com.tce.teacherapp.util.RubikBoldTextview
         android:id="@+id/tvresource"
         android:layout_width="wrap_content"
         android:layout_height="42dp"
         android:text="All"
-        android:textColor="@color/color_black"
-        android:textSize="@dimen/font_size_16_dp"
+        android:textColor="@color/dark"
+        android:textSize="@dimen/font_size_14_dp"
         android:gravity="center"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
+        android:paddingStart="15dp"
+        android:background="@drawable/bg_yellow_white_rounded"
+        android:paddingEnd="15dp"
         android:layout_marginLeft="10dp"
-        android:visibility="visible"></com.tce.teacherapp.util.RubikMediumTextview>
+        android:visibility="visible"/>
 
 
 </LinearLayout>

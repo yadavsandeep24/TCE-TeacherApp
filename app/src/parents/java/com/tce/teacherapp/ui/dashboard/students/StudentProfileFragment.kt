@@ -215,7 +215,7 @@ constructor(
                                 if (studentVo.Term1ReportStatus!!) {
                                     list.add("Term 1 (Jan - May 2020)")
                                 }
-                                if (studentVo.Term2ReportStatus) {
+                                if (studentVo.Term2ReportStatus!!) {
                                     list.add("Term 2 (Jun - Oct 2020)")
                                 }
                                 for (strLabel: String in list) {
@@ -350,9 +350,11 @@ constructor(
 
                     binding.lblDaysAbsent.setOnClickListener {
                         val bundle = Bundle()
-                        val list = studentVo.AbsentData.toList()
+                        val list = studentVo.AbsentData?.toList()
                         val arrList = ArrayList<AbsentData>()
-                        arrList.addAll(list)
+                        if (list != null) {
+                            arrList.addAll(list)
+                        }
                         bundle.putParcelableArrayList("absentListData",arrList)
                         findNavController().navigate(R.id.action_studentProfileFragment_to_absentDaysCalenderFragment,bundle)
                     }

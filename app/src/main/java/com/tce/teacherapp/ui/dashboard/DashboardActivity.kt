@@ -148,11 +148,20 @@ class DashboardActivity : BaseActivity(), BottomNavController.OnNavigationResele
 
     }
 
-    override fun onBackPressed(){
+    override fun onBackPressed() {
         Handler().postDelayed({
             binding.bottomNavigationView.visibility = View.VISIBLE
         }, 200)
 
+        bottomNavController.onBackPressed()
+    }
+
+     fun onBackPressed(isVisible:Boolean){
+         if(isVisible) {
+             Handler().postDelayed({
+                 binding.bottomNavigationView.visibility = View.VISIBLE
+             }, 200)
+         }
         bottomNavController.onBackPressed()
     }
     override fun onGraphChange() {

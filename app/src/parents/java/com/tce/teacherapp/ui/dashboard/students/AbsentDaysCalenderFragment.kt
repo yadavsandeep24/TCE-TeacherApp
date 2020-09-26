@@ -14,7 +14,6 @@ import com.tce.teacherapp.databinding.CalendarAbsentDayBinding
 import com.tce.teacherapp.databinding.CalendarHeaderBinding
 import com.tce.teacherapp.databinding.FragmentAbsentDaysCalenderBinding
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
-import com.tce.teacherapp.ui.dashboard.planner.adapter.monthlyEventEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.planner.daysOfWeekFromLocale
 import com.tce.teacherapp.ui.dashboard.planner.setTextColorRes
 import com.tce.teacherapp.util.calenderView.model.CalendarDay
@@ -29,7 +28,6 @@ import kotlinx.coroutines.FlowPreview
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.YearMonth
-import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @FlowPreview

@@ -11,6 +11,7 @@ import com.tce.teacherapp.api.response.*
 import com.tce.teacherapp.db.dao.SubjectsDao
 import com.tce.teacherapp.db.dao.UserDao
 import com.tce.teacherapp.db.entity.*
+import com.tce.teacherapp.db.entity.Resource
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardViewState
 import com.tce.teacherapp.ui.dashboard.home.state.UpdatePasswordFields
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageViewState
@@ -347,36 +348,144 @@ constructor(
         stateEvent: StateEvent
     ): Flow<DataState<MessageViewState>> = flow {
 
-        withContext(IO) {
-            var jsonString: String = ""
-            try {
+        val apiResult = safeApiCall(IO) {
+            tceService.getMessageList()
+        }
+        emit(
+            object : ApiResponseHandler<MessageViewState, List<MessageListResponseItem>>(
+                response = apiResult,
+                stateEvent = stateEvent
+            ) {
+                override suspend fun handleSuccess(resultObj: List<MessageListResponseItem>): DataState<MessageViewState> {
+                    val mainListList: MutableList<MessageListResponseItem> = mutableListOf()
+                    var totalUnReadCount = 0
+                    val result = resultObj.groupBy { it.Type }
+                    val broadCastList = result["2"]?.sortedByDescending { it.SendDate }
+                    var unReadCount = 0
+                    if (broadCastList != null) {
+                        for (message in broadCastList) {
+                            if (!message.isRead) {
+                                unReadCount += 1
+                            }
+                        }
+                        broadCastList[0].unReadCount = unReadCount
+                        totalUnReadCount += unReadCount
+                        mainListList.add(broadCastList[0])
+                    }
+                    val classList = result["3"]?.sortedByDescending { it.SendDate }
 
-                jsonString = application.assets.open("json/messaage.json").bufferedReader()
-                    .use { it.readText() }
-                val gson = Gson()
-                val listPersonType = object : TypeToken<List<Message>>() {}.type
-                val messageList: List<Message> = gson.fromJson(jsonString, listPersonType)
+                    if (classList != null && classList.isNotEmpty()) {
+                        var unReadCount = 0
+                        for (message in classList) {
+                            if (!message.isRead) {
+                                unReadCount += 1
+                            }
+                        }
 
-                val selectedList: List<Message>;
-                if (TextUtils.isEmpty(query)) {
-                    selectedList = messageList
-                } else {
-                    selectedList =
-                        messageList.filter { it.title.contains(query, ignoreCase = true) }
+                        classList[0].unReadCount = unReadCount
+                        totalUnReadCount += unReadCount
+                        mainListList.add(classList[0])
+                    }
+
+                    val studentListMap = result["1"]?.groupBy { it.ToId }
+                    studentListMap?.forEach { (k, v) ->
+                        if (v.isNotEmpty()) {
+                            var unReadCount = 0
+                            for (message in v) {
+                                if (!message.isRead) {
+                                    unReadCount += 1
+                                }
+                            }
+
+                            v[0].unReadCount = unReadCount
+                            totalUnReadCount += unReadCount
+                            mainListList.add(v[0])
+                        }
+                    }
+
+                    return if (TextUtils.isEmpty(query)) {
+                        val messageResponse = MessageListResponse(
+                            messageList = mainListList,
+                            totalUnReadCount = totalUnReadCount
+                        )
+
+                        DataState.data(
+                            data = MessageViewState(messageResponse = messageResponse),
+                            stateEvent = stateEvent,
+                            response = null
+                        )
+                    } else {
+                        val selectedList: List<MessageListResponseItem> = mainListList.filter {
+                            it.Title.contains(
+                                query,
+                                ignoreCase = true
+                            )
+                        }
+                        var unReadCount = 0
+                        for (message in selectedList) {
+                            unReadCount += message.unReadCount
+                        }
+                        val messageResponse = MessageListResponse(
+                            messageList = selectedList,
+                            totalUnReadCount = unReadCount
+                        )
+                        DataState.data(
+                            data = MessageViewState(messageResponse = messageResponse),
+                            stateEvent = stateEvent,
+                            response = null
+                        )
+                    }
+
+
                 }
+            }.getResult()
+        )
 
-                emit(
-                    DataState.data(
-                        data = MessageViewState(messageList = selectedList),
+    }
+    override fun getMessageConversationList(
+        type:String,
+        messageId: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<MessageViewState>> = flow {
+
+        val apiResult = safeApiCall(IO) {
+            tceService.getMessageList()
+        }
+        emit(
+            object : ApiResponseHandler<MessageViewState, List<MessageListResponseItem>>(
+                response = apiResult,
+                stateEvent = stateEvent
+            ) {
+                override suspend fun handleSuccess(resultObj: List<MessageListResponseItem>): DataState<MessageViewState> {
+                    var mainListList: MutableList<MessageListResponseItem> = mutableListOf()
+                    var totalUnReadCount = 0
+                    val result = resultObj.groupBy { it.Type }
+
+                    if (type.equals("2", false) || type.equals("3", false)) {
+                        val broadCastList = result[type]?.sortedByDescending { it.SendDate }
+                        if (broadCastList != null) {
+                            mainListList = broadCastList.toMutableList()
+                        }
+                    } else {
+                        val studentListMap = result["1"]?.groupBy { it.ToId }
+                        studentListMap?.forEach { (k, v) ->
+                            if (k.equals(messageId)) {
+                                mainListList = v.toMutableList()
+                            }
+                        }
+                    }
+                    val messageResponse = MessageListResponse(
+                        messageList = mainListList,
+                        totalUnReadCount = totalUnReadCount
+                    )
+                    return DataState.data(
+                        data = MessageViewState(messageResponse = messageResponse),
                         stateEvent = stateEvent,
                         response = null
                     )
-                )
-
-            } catch (ioException: IOException) {
-                ioException.printStackTrace()
-            }
-        }
+                }
+            }.getResult()
+        )
 
     }
 
@@ -400,21 +509,26 @@ constructor(
                         val tempStudentselectedList: MutableList<StudentListResponseItem> =
                             mutableListOf()
                         for (student in resultObj) {
-                            if (classId == student.grade_division_id.toInt()) {
+                            if (classId == student.grade_division_id?.toInt() ?: 0) {
                                 tempStudentselectedList.add(student)
                             }
                         }
                         selectedList = if (TextUtils.isEmpty(query)) {
                             tempStudentselectedList
                         } else {
-                            selectedList.filter { it.Name.contains(query, ignoreCase = true) }
+                            tempStudentselectedList.filter {
+                                it.Name.contains(
+                                    query,
+                                    ignoreCase = true
+                                )
+                            }
 
                         }
                     } else {
                         selectedList = if (TextUtils.isEmpty(query)) {
                             resultObj
                         } else {
-                            selectedList.filter { it.Name.contains(query, ignoreCase = true) }
+                            resultObj.filter { it.Name.contains(query, ignoreCase = true) }
 
                         }
                     }
@@ -468,42 +582,77 @@ constructor(
 
     override fun getSelectedResourceList(
         query: String,
-        typeId: Int,
+        type: String,
         stateEvent: StateEvent
     ): Flow<DataState<MessageViewState>> = flow {
-
-        val jsonString: String
-        try {
-            jsonString =
-                application.assets.open("json/resource.json").bufferedReader().use { it.readText() }
-            val gson = Gson()
-            val listPersonType = object : TypeToken<List<MessageResource>>() {}.type
-            val resourceList: List<MessageResource> = gson.fromJson(jsonString, listPersonType)
-
-            val selectedList: List<MessageResource>;
-
-            selectedList = if (TextUtils.isEmpty(query)) {
-                resourceList.filter { it.typeId == typeId }
-            } else {
-                resourceList.filter {
-                    it.title.contains(
-                        query,
-                        ignoreCase = true
-                    ) && it.typeId == typeId
-                }
-            }
-
-            emit(
-                DataState.data(
-                    data = MessageViewState(selectedResourceList = selectedList),
-                    stateEvent = stateEvent,
-                    response = null
-                )
-            )
-
-        } catch (ioException: IOException) {
-            ioException.printStackTrace()
+        val apiResult = safeApiCall(IO) {
+            tceService.getTopicResources()
         }
+        emit(
+            object : ApiResponseHandler<MessageViewState, List<ResourceListResponse>>(
+                response = apiResult,
+                stateEvent = stateEvent
+            ) {
+                override suspend fun handleSuccess(resultObj: List<ResourceListResponse>): DataState<MessageViewState> {
+                    val resourceList: ArrayList<Resource> = ArrayList()
+                    for (topicResponse in resultObj) {
+                        val result = topicResponse.resourceList
+                        result.forEach {
+                            resourceList.add(it.toResource(it.id, it.id))
+                        }
+                    }
+                    var finalResourceList: ArrayList<Resource> = ArrayList()
+                    if(type.isEmpty() && query.isEmpty()){
+                        finalResourceList = resourceList
+                    }else {
+                        if (type.isNotEmpty()) {
+                            for (resource in resourceList) {
+                                if (resource.ResourceOriginator != null) {
+                                    var isTypePresent = false
+                                    if (resource.ResourceOriginator.equals(type,true)) {
+                                        isTypePresent = true
+                                    }
+                                    if (isTypePresent) {
+                                        finalResourceList.add(resource)
+                                    }
+                                }
+                            }
+                            if(query.isNotEmpty()) {
+                               val queryList =  finalResourceList.filter {
+                                    it.title.contains(query, ignoreCase = true)
+                                }
+
+                                finalResourceList.clear()
+                                finalResourceList.addAll(queryList)
+                            }
+                        }
+                    }
+
+                    if(query.isEmpty()){
+                        val viewState = MessageViewState(selectedResourceList = finalResourceList)
+                        return DataState.data(
+                            response = null,
+                            data = viewState,
+                            stateEvent = stateEvent
+                        )
+                    }else{
+                        val queryResult = resourceList.filter {
+                            it.title.contains(query, ignoreCase = true)
+                        }
+                        val viewState = MessageViewState(selectedResourceList = queryResult)
+                        return DataState.data(
+                            response = null,
+                            data = viewState,
+                            stateEvent = stateEvent
+                        )
+                    }
+
+
+
+
+                }
+            }.getResult()
+        )
 
 
     }
@@ -1859,6 +2008,59 @@ constructor(
                         }
                     }
 
+
+                }
+            }.getResult()
+        )
+    }
+
+    override fun getMessageResourceTypeList(
+        stateEvent: StateEvent
+    ): Flow<DataState<MessageViewState>> = flow {
+        val apiResult = safeApiCall(IO) {
+            tceService.getTopicResources()
+        }
+        emit(
+            object : ApiResponseHandler<MessageViewState, List<ResourceListResponse>>(
+                response = apiResult,
+                stateEvent = stateEvent
+            ) {
+                override suspend fun handleSuccess(resultObj: List<ResourceListResponse>): DataState<MessageViewState> {
+                    val TempResourceList: ArrayList<Resource> = ArrayList()
+                    for (topicResponse in resultObj) {
+                        val result =
+                            topicResponse.resourceList?.groupBy { it.ResourceOriginator }
+                        result?.forEach { (k, v) ->
+                            TempResourceList.add(v[0].toResource(v[0].id, v[0].id))
+                        }
+
+                    }
+                    val resourceList: ArrayList<Resource> = ArrayList()
+
+                    for (resource in TempResourceList) {
+                        if (resource.ResourceOriginator != null) {
+                            var isTypePresent = false
+                            for (tempRes in resourceList) {
+                                if (tempRes.ResourceOriginator.equals(
+                                        resource.ResourceOriginator,
+                                        true
+                                    )
+                                ) {
+                                    isTypePresent = true
+                                }
+                            }
+                            if (!isTypePresent) {
+                                resourceList.add(resource)
+                            }
+                        }
+                    }
+
+                    val viewState = MessageViewState(resourceTypeList = resourceList)
+                    return DataState.data(
+                        response = null,
+                        data = viewState,
+                        stateEvent = stateEvent
+                    )
 
                 }
             }.getResult()

@@ -29,7 +29,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginRight="10dp"
-            android:src="@drawable/dummy_student"/>
+            android:src="@drawable/ic_profile_icon"/>
 
         <com.tce.teacherapp.util.RubikMediumTextview
             android:id="@+id/tv_student_name"

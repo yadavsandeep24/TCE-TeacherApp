@@ -38,6 +38,27 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_messageDetailFragment_to_resourceFragment"
+            app:destination="@id/resourceFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_messageDetailFragment_to_videoPlayerFragment3"
+            app:destination="@id/videoPlayerFragment3"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_messageDetailFragment_to_imageContentFragment3"
+            app:destination="@id/imageContentFragment3"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/newMessageFragment"
@@ -64,16 +85,59 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_groupChatFragment_to_messageListFragment"
+            app:destination="@id/messageListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpToInclusive="true"
+            popUpTo="@@id/messageListFragment"/>
     </fragment>
     <fragment
         android:id="@+id/resourceFragment"
         android:name="com.tce.teacherapp.ui.dashboard.messages.ResourceFragment"
         android:label="fragment_resource"
-        tools:layout="@layout/fragment_resource" />
+        tools:layout="@layout/fragment_resource" >
+        <action
+            android:id="@+id/action_resourceFragment_to_videoPlayerFragment3"
+            app:destination="@id/videoPlayerFragment3"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_resourceFragment_to_imageContentFragment3"
+            app:destination="@id/imageContentFragment3"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_resourceFragment_to_HTMLContentFragment3"
+            app:destination="@id/HTMLContentFragment3"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
     <fragment
         android:id="@+id/groupInfoFragment"
         android:name="com.tce.teacherapp.ui.dashboard.messages.GroupInfoFragment"
         android:label="GroupInfoFragment" />
+    <fragment
+        android:id="@+id/videoPlayerFragment3"
+        android:name="com.tce.teacherapp.ui.dashboard.subjects.VideoPlayerFragment"
+        android:label="VideoPlayerFragment" />
+    <fragment
+        android:id="@+id/imageContentFragment3"
+        android:name="com.tce.teacherapp.ui.dashboard.subjects.ImageContentFragment"
+        android:label="ImageContentFragment" />
+    <fragment
+        android:id="@+id/HTMLContentFragment3"
+        android:name="com.tce.teacherapp.ui.dashboard.subjects.HTMLContentFragment"
+        android:label="HTMLContentFragment" />
 
 
 </navigation>

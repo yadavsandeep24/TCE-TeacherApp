@@ -12,7 +12,7 @@
         android:layout_height="50dp"
         android:layout_below="@+id/tv_time_user_name"
         android:layout_marginRight="20dp"
-        android:src="@drawable/dummy_student"></androidx.appcompat.widget.AppCompatImageView>
+        android:src="@drawable/ic_profile_icon"/>
 
     <com.tce.teacherapp.util.RubikMediumTextview
         android:id="@+id/tv_student_name"
@@ -21,6 +21,6 @@
         android:layout_gravity="center_vertical"
         android:textColor="@color/color_black"
         android:textSize="@dimen/font_size_16_dp"
-        android:text="Student Name 1"></com.tce.teacherapp.util.RubikMediumTextview>
+        android:text="Student Name 1"/>
 
 </LinearLayout>

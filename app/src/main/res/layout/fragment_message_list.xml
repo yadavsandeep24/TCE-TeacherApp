@@ -12,6 +12,7 @@
             android:id="@+id/main_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#fcfcfc"
             android:visibility="visible">
 
             <RelativeLayout
@@ -20,6 +21,14 @@
                 android:layout_height="?android:attr/actionBarSize"
                 android:background="@color/subject_actionbar_color">
 
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/img_new_message_left"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="25dp"
+                    android:src="@drawable/ic_new_message"/>
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -27,21 +36,21 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <TextView
+                    <com.tce.teacherapp.util.RubikBoldTextview
                         android:id="@+id/tvTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Messages"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textSize="16dp"
                         android:textColor="@color/white"/>
 
-                    <TextView
+                    <com.tce.teacherapp.util.RubikMediumTextview
                         android:id="@+id/tvSubTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="(2 Unread)"
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:textColor="@color/white"/>
+                        android:textSize="11dp"
+                        android:textColor="@color/pale_grey_two"/>
                 </LinearLayout>
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -50,8 +59,17 @@
                     android:layout_height="20dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginRight="25dp"
                     android:src="@drawable/ic_new_message"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_user"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/dummy_student" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -59,7 +77,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/actionBarSize"
                 android:layout_below="@+id/header_container"
-                android:background="@color/grey">
+                android:background="@color/very_light_blue">
 
                 <androidx.appcompat.widget.SearchView
                     android:id="@+id/sv_message"
@@ -102,7 +120,12 @@
 
 
         </RelativeLayout>
-
+        <FrameLayout
+            android:id="@+id/mask_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:background="@color/dim_color_dashboard" />
 
         <include  layout="@layout/message_bottom_filter" />
 

@@ -16,7 +16,7 @@ abstract class ResourceEpoxyHolder  : EpoxyModelWithHolder<ResourceHolder>(){
     lateinit var listener: () -> Unit
 
     override fun bind(holder: ResourceHolder) {
-        holder.tvTitle.setText(strTitle)
+        holder.tvTitle.text = strTitle
         holder.tvAdd.setOnClickListener {
             listener()
         }

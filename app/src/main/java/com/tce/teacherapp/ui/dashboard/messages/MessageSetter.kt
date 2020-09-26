@@ -1,13 +1,13 @@
 package com.tce.teacherapp.ui.dashboard.messages
 
-import com.tce.teacherapp.db.entity.Message
+import com.tce.teacherapp.api.response.MessageListResponse
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 
 @FlowPreview
 @UseExperimental(ExperimentalCoroutinesApi::class)
-fun MessageViewModel.setMessageList(messageList: List<Message>) {
+fun MessageViewModel.setMessageList(messageResponse: MessageListResponse) {
     val update = getCurrentViewStateOrNew()
-    update.messageList = messageList
+    update.messageResponse = messageResponse
     setViewState(update)
 }

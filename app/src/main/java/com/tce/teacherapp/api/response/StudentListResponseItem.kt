@@ -9,31 +9,31 @@ import kotlinx.android.parcel.Parcelize
 data class StudentListResponseItem(
 
     @Expose
-    val AbsentData: List<AbsentData>,
+    val AbsentData: List<AbsentData>?,
 
     @Expose
-    val Address: String,
+    val Address: String?,
 
     @Expose
-    val BloodGroup: String,
+    val BloodGroup: String?,
 
     @Expose
     val DOB: String,
 
     @Expose
-    val ImagePath: String,
+    val ImagePath: String?,
 
     @Expose
     val Name: String,
 
     @Expose
-    val ParentList: List<Parent>,
+    val ParentList: List<Parent>?,
 
     @Expose
-    val ProgressCard: List<ProgressCard>,
+    val ProgressCard: List<ProgressCard>?,
 
     @Expose
-    val TeacherList: List<Teacher>,
+    val TeacherList: List<Teacher>?,
 
     @Expose
     val Term1ReportStatus: Boolean,
@@ -42,7 +42,7 @@ data class StudentListResponseItem(
     val Term2ReportStatus: Boolean,
 
     @Expose
-    val studentClass: String,
+    val studentClass: String?,
 
     @Expose
     val grade_division_id: String,
@@ -51,22 +51,22 @@ data class StudentListResponseItem(
     val id: String,
 
     @Expose
-    val school: String,
+    val school: String?,
 
     @Expose
-    val schooladdress: String,
+    val schooladdress: String?,
 
     @Expose
-    val schoolcontact: String,
+    val schoolcontact: String?,
 
     @Expose
-    val teacher: String,
+    val teacher: String?,
 
     @Expose
-    val Term1ReportPDF:String,
+    val Term1ReportPDF:String?,
 
     @Expose
-    val Term2ReportPDF:String,
+    val Term2ReportPDF:String?,
 
     var isSelected: Boolean
 ) : Parcelable

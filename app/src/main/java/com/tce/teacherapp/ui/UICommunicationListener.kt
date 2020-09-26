@@ -12,9 +12,11 @@ interface UICommunicationListener {
 
     fun displayProgressBar(isLoading: Boolean)
 
-    fun expandAppBar(value :Boolean)
+    fun expandAppBar(value: Boolean)
 
     fun hideSoftKeyboard()
 
     fun isStoragePermissionGranted(): Boolean
+
+    fun onBackPressed()
 }

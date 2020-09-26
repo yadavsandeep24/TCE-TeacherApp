@@ -16,6 +16,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.tce.teacherapp.R
 import com.tce.teacherapp.fragments.main.*
 import kotlinx.android.parcel.Parcelize
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+
 
 /**
  * Class credit: Allan Veloso
@@ -45,18 +48,22 @@ class BottomNavController(
         }
     }
 
+
     fun setupBottomNavigationBackStack(previousBackStack: BackStack?) {
         navigationBackStack = previousBackStack?.let {
             it
         } ?: BackStack.of(appStartDestinationId)
     }
 
+    @FlowPreview
+    @ExperimentalCoroutinesApi
     fun onNavigationItemSelected(menuItemId: Int = navigationBackStack.last()): Boolean {
 
         Log.d(TAG, "onNavigationItemSelected ")
         // Replace fragment representing a navigation item
         val fragment = fragmentManager.findFragmentByTag(menuItemId.toString())
             ?: createNavHost(menuItemId)
+
         fragmentManager.beginTransaction()
             .setCustomAnimations(
                 R.anim.fade_in,
@@ -67,7 +74,6 @@ class BottomNavController(
             .replace(containerId, fragment, menuItemId.toString())
             .addToBackStack(null)
             .commit()
-
         // Add to back stack
         navigationBackStack.moveLast(menuItemId)
 
@@ -191,6 +197,7 @@ class BottomNavController(
 
 }
 
+
 // Convenience extension to set up the navigation
 fun BottomNavigationView.setUpNavigation(
     bottomNavController: BottomNavController,
@@ -219,6 +226,7 @@ fun BottomNavigationView.setUpNavigation(
     bottomNavController.setOnItemNavigationChanged { itemId ->
         menu.findItem(itemId).isChecked = true
     }
+
 }
 
 

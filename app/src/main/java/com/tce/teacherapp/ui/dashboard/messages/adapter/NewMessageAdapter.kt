@@ -8,6 +8,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.tce.teacherapp.R
 import com.tce.teacherapp.api.response.StudentListResponseItem
 import com.tce.teacherapp.ui.dashboard.students.interfaces.ViewHolderClickListener
@@ -44,7 +45,10 @@ class NewMessageAdapter(val context: Context, val bgSelectionColor:Int,val liste
         holder.tvStudentName.text = modelList[position].Name
 
         val id = modelList[position].id
-
+        Glide.with(context)
+            .load(modelList[position].ImagePath)
+            .placeholder(R.drawable.ic_profile_icon)
+            .into(holder.ivStudent)
         if (modelList[position].isSelected) {
             holder.lnrMainContainer.setBackgroundColor(holder.lnrMainContainer.resources.getColor(bgSelectionColor))
         }else{

@@ -1,4 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_video"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:clipChildren="true"
+    android:clipToPadding="true"
+    android:visibility="visible"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="8dp"
+    app:cardPreventCornerOverlap="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/video_container"
+            android:layout_width="120dp"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_video_thumb"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/topic_resource_bg" />
+
+            <com.tce.teacherapp.util.RubikMediumTextview
+                android:id="@+id/tv_resource_generator"
+                android:layout_width="60dp"
+                android:layout_height="20dp"
+                android:background="@drawable/ic_label_orange"
+                android:gravity="center"
+                android:text="Shared"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_9_dp" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_play"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_video_play" />
+
+            <View
+                android:id="@+id/vw_resource_type"
+                android:layout_width="30dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/ic_media_type_video" />
+        </RelativeLayout>
+
+
+        <com.tce.teacherapp.util.RubikMediumTextview
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="A Day in the Zoo"
+            android:textColor="@color/dark"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toLeftOf="@+id/tvAdd"
+            android:layout_toRightOf="@+id/video_container"
+            android:textSize="@dimen/font_size_14_dp" />
+
+        <com.tce.teacherapp.util.RubikMediumTextview
+            android:id="@+id/tvAdd"
+            android:layout_width="68dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/ic_add_resource"
+            android:gravity="center_vertical|end"
+            android:paddingEnd="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>
+
+
+
+
+
+
+<!--
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_video"
@@ -70,3 +162,4 @@
     </RelativeLayout>
 
 </com.google.android.material.card.MaterialCardView>
+-->

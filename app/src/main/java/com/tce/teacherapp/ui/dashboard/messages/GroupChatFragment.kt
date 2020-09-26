@@ -3,16 +3,24 @@ package com.tce.teacherapp.ui.dashboard.messages
 import android.Manifest
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.os.Handler
+import android.text.Editable
+import android.text.TextUtils
+import android.text.TextWatcher
+import android.view.*
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
@@ -23,6 +31,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.gabriel.soundrecorder.recorder.RecorderViewModel
 import com.example.gabriel.soundrecorder.util.InjectorUtils
 import com.tce.teacherapp.R
+import com.tce.teacherapp.api.response.StudentListResponseItem
 import com.tce.teacherapp.databinding.FragmentGroupChatBinding
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior
@@ -42,6 +51,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import org.jetbrains.anko.doAsync
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 
@@ -84,6 +95,7 @@ constructor(
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     fun initViews() {
         photoList.clear()
         albumList.clear()
@@ -91,6 +103,7 @@ constructor(
         if (isReadWritePermitted()) initGalleryViews() else checkReadWritePermission()
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     fun initGalleryViews() {
         glm = GridLayoutManager(ctx, 4)
         binding.imageGrid.itemAnimator = null
@@ -108,6 +121,7 @@ constructor(
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun galleryOperation(type: Int) {
         doAsync {
             albumList = java.util.ArrayList()
@@ -147,6 +161,7 @@ constructor(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun getPhoneAlbums(
         context: Context,
         listener: OnPhoneImagesObtained,
@@ -160,7 +175,6 @@ constructor(
     }
 
     override fun updateTitle(galleryAlbums: GalleryAlbums) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun updateSelectedPhotos(selectedlist: ArrayList<GalleryData>) {
@@ -170,12 +184,15 @@ constructor(
                 photo.isEnabled = selected.id == photo.id
             }
         }
+        binding.imgSendMessage.alpha = 1.0f
+        binding.imgSendMessage.isEnabled = true
     }
 
 
+    @SuppressLint("SetTextI18n")
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as DashboardActivity).bottom_navigation_view.visibility = View.GONE
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             activity?.window!!.statusBarColor = resources.getColor(R.color.color_black, null)
         } else {
@@ -183,24 +200,44 @@ constructor(
         }
         // (activity as DashboardActivity).setCustomToolbar(R.layout.subject_list_top_bar)
         (activity as DashboardActivity).expandAppBar(false)
+        val studentList: ArrayList<StudentListResponseItem>? =
+            arguments?.getParcelableArrayList("studentList")
+        if (studentList != null && studentList.size > 0) {
+            var studentNames = ""
+            for (student in studentList) {
+                studentNames = studentNames + ", " + student.Name
+            }
+
+            if (!TextUtils.isEmpty(studentNames)) {
+                studentNames = studentNames.replaceFirst(",", "").trim()
+            }
+
+            binding.tvTitle1.text = studentNames
+            binding.tvSubTitle1.text = studentList.size.toString() + " Members"
+        } else {
+            binding.tvTitle1.text = "Class Apple"
+            binding.tvSubTitle1.text = "30 Members"
+        }
+        val formattedString: String = SimpleDateFormat("dd MMM yyyy").format(Date())
+        binding.tvDate.text = formattedString
 
 
-        binding.tvTitle1.text = "Class Apple"
-        binding.tvSubTitle1.text = "30 Members"
+        if (resources.getString(R.string.app_type)
+                .equals(resources.getString(R.string.app_type_parent),true)) {
+            binding.resourceContainer.visibility = GONE
+            binding.divider1.visibility = GONE
+        }
+        val bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
 
-        val bottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet)
-
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         bottomSheetBehavior.skipCollapsed = true
+        bottomSheetBehavior.isDraggable = false
 
         bottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
-                val rotation = when (newState) {
-                    BottomSheetBehavior.STATE_EXPANDED -> 0f
-                    BottomSheetBehavior.STATE_COLLAPSED -> 180f
-                    BottomSheetBehavior.STATE_HIDDEN -> 180f
-                    else -> return
+                if (newState == com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_DRAGGING) {
+                    bottomSheetBehavior.state = com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
                 }
 
             }
@@ -209,16 +246,17 @@ constructor(
         binding.imgAttachment.setOnClickListener {
             if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN) {
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+                uiCommunicationListener.hideSoftKeyboard()
+                binding.maskLayout.visibility = VISIBLE
             } else {
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                binding.maskLayout.visibility = GONE
             }
         }
 
-        binding.mainContainer.setOnClickListener {
-            if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
-                bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-            }
-
+        binding.maskLayout.setOnClickListener {
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+            binding.maskLayout.visibility = GONE
         }
 
         binding.imgBack.setOnClickListener {
@@ -228,15 +266,51 @@ constructor(
             activity?.onBackPressed()
         }
 
+        binding.edtTypeMessage.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+        })
+
+        binding.imgSendMessage.setOnClickListener {
+            uiCommunicationListener.hideSoftKeyboard()
+
+            val dialog = Dialog(requireActivity(), android.R.style.Theme_Dialog)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setContentView(R.layout.custom_success_dialog)
+            dialog.setCanceledOnTouchOutside(false)
+            dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+            dialog.window!!.setBackgroundDrawable(
+                ColorDrawable(resources.getColor(android.R.color.transparent))
+            )
+            dialog.show()
+
+            val txtTitle = dialog.findViewById(R.id.tv_title) as TextView
+
+            txtTitle.text = "Message sent successfully."
+
+            Handler().postDelayed({
+                dialog.dismiss()
+                findNavController().navigate(R.id.action_groupChatFragment_to_messageListFragment)
+            }, 1000)
+
+        }
+
         binding.photoContainer.setOnClickListener {
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+            binding.maskLayout.visibility = GONE
             val bottomUp: Animation = AnimationUtils.loadAnimation(
                 context,
                 R.anim.bottom_up
             )
             binding.attachmentContainer.startAnimation(bottomUp)
             binding.attachmentContainer.visibility = View.VISIBLE
-            binding.attachmentVoiceContainer.visibility = View.GONE
+            binding.attachmentVoiceContainer.visibility = GONE
             strFileType = "Photo"
             initViews()
 
@@ -244,19 +318,22 @@ constructor(
 
         binding.videoContainer.setOnClickListener {
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+            binding.maskLayout.visibility = GONE
             val bottomUp: Animation = AnimationUtils.loadAnimation(
                 context,
                 R.anim.bottom_up
             )
             binding.attachmentContainer.startAnimation(bottomUp)
             binding.attachmentContainer.visibility = View.VISIBLE
-            binding.attachmentVoiceContainer.visibility = View.GONE
+            binding.attachmentVoiceContainer.visibility = GONE
             strFileType = "Video"
             initViews()
 
         }
 
         binding.resourceContainer.setOnClickListener {
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+            binding.maskLayout.visibility = GONE
             val flowType = arguments?.getInt("flowType")
             if (flowType == 1) {
                 findNavController().navigate(
@@ -270,7 +347,8 @@ constructor(
         }
 
         binding.fileContainer.setOnClickListener {
-
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+            binding.maskLayout.visibility = GONE
             val mimeTypes = arrayOf(
                 "application/msword",
                 "application/vnd.openxmlformats-officedocument.wordprocessingml.document", // .doc & .docx
@@ -323,13 +401,14 @@ constructor(
                 )
             } else {
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                binding.maskLayout.visibility = GONE
                 val bottomUp: Animation = AnimationUtils.loadAnimation(
                     context,
                     R.anim.bottom_up
                 )
                 binding.attachmentVoiceContainer.startAnimation(bottomUp)
                 binding.attachmentVoiceContainer.visibility = View.VISIBLE
-                binding.attachmentContainer.visibility = View.GONE
+                binding.attachmentContainer.visibility = GONE
                 initRecorderUI()
             }
         }
@@ -349,7 +428,6 @@ constructor(
     private fun initRecorderUI() {
         //Get the viewmodel factory
         val factory = InjectorUtils.provideRecorderViewModelFactory()
-
         //Getting the viewmodel
         viewModelRecorder = ViewModelProviders.of(this, factory).get(RecorderViewModel::class.java)
 
@@ -365,7 +443,6 @@ constructor(
     @SuppressLint("RestrictedApi")
     private fun startRecording() {
         viewModelRecorder?.startRecording()
-
         binding.tvRecord.background = resources.getDrawable(R.drawable.bg_grey_rounded)
         binding.tvRecord.setText("Cancel")
         binding.tvRecord.setTextColor(resources.getColor(R.color.orange))
@@ -374,10 +451,11 @@ constructor(
     @SuppressLint("RestrictedApi")
     private fun stopRecording() {
         viewModelRecorder?.stopRecording()
-
         binding.tvRecord.background = resources.getDrawable(R.drawable.bg_orange_rounded)
         binding.tvRecord.setText("Record")
         binding.tvRecord.setTextColor(resources.getColor(R.color.white))
+        binding.imgSendMessage.alpha = 1.0f
+        binding.imgSendMessage.isEnabled = true
     }
 
     @TargetApi(Build.VERSION_CODES.N)
@@ -404,6 +482,7 @@ constructor(
         return true
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>,
@@ -416,6 +495,11 @@ constructor(
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        (activity as DashboardActivity).bottom_navigation_view.visibility = GONE
+    }
+
     private fun isReadWritePermitted(): Boolean =
         (context?.checkCallingOrSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED && context?.checkCallingOrSelfPermission(
             android.Manifest.permission.READ_EXTERNAL_STORAGE
@@ -423,106 +507,9 @@ constructor(
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        binding.imgSendMessage.alpha = 1.0f
+        binding.imgSendMessage.isEnabled = true
 
-        /*  if (resultCode == RESULT_OK) {
-              val selectedImageUri: Uri?
-              if (data!!.data == null) {
-                  val path = MediaStore.Images.Media.insertImage(
-                      requireActivity().contentResolver,
-                      data.extras!!.get("data") as Bitmap,
-                      "Title",
-                      null
-                  )
-                  selectedImageUri = Uri.parse(path)
-              } else {
-                  selectedImageUri = data.data
-              }
-              var selectedPath: String? = null
-              if (selectedImageUri != null) {
-                  if (requestCode == PICK_FILE_FROM_GALLARY) {
-                      selectedPath = Utility.getRealPathFromURI(requireActivity(), selectedImageUri)
-                      if (!TextUtils.isEmpty(selectedPath)) {
-                          if (!StringUtils.containsIgnoreCase(selectedPath, ".png")
-                              && !StringUtils.containsIgnoreCase(selectedPath, ".jpg")
-                              && !StringUtils.containsIgnoreCase(selectedPath, ".bmp")
-                              && !StringUtils.containsIgnoreCase(selectedPath, ".jpeg")
-                          ) {
-                             *//* Utility.showToast(
-                                activity!!,
-                                getString(com.zl.baseapp.R.string.invalid_file_images),
-                                Toast.LENGTH_LONG,
-                                Gravity.CENTER
-                            )*//*
-                            selectedPath = null
-                        }
-                    }
-                } else {
-                    try {
-                        selectedPath = Utility.getFilePath(requireActivity(), selectedImageUri)
-                    } catch (e: URISyntaxException) {
-                        e.printStackTrace()
-                    }
-
-                    if (!TextUtils.isEmpty(selectedPath)) {
-                        if (!StringUtils.containsIgnoreCase(selectedPath, ".doc")
-                            && !StringUtils.containsIgnoreCase(selectedPath, ".docx")
-                            && !StringUtils.containsIgnoreCase(selectedPath, ".pdf")
-                            && !StringUtils.containsIgnoreCase(selectedPath, ".mp4")
-                        ) {
-                           *//* Utility.showToast(
-                                requireActivity(),
-                                "invalid file",
-                                Toast.LENGTH_LONG,
-                                Gravity.CENTER
-                            )*//*
-                            selectedPath = null
-                        }
-                    }
-                }
-                if (!TextUtils.isEmpty(selectedPath)) {
-                    val file = File(selectedPath!!)
-                    val size = file.length() / 1024
-                    val file_size =
-                        Integer.parseInt(size.toString()) // Dividing by 1024 converts the size from bytes to kilobytes.
-                    if (StringUtils.containsIgnoreCase(
-                            selectedPath,
-                            ".mp4"
-                        ) && file_size > 5 * 1000
-                    ) {
-                        *//*Utility.showToast(
-                            activity!!, String.format(
-                                getString(com.zl.baseapp.R.string.msg_video_file_size_exceed),
-                                resources.getInteger(com.zl.baseapp.R.integer.message_video_size_limitation)
-                                    .toString()
-                            ), Toast.LENGTH_LONG, Gravity.CENTER
-                        )*//*
-                    } else if (!StringUtils.containsIgnoreCase(
-                            selectedPath,
-                            ".mp4"
-                        ) && file_size > 5 * 1000
-                    ) { // 5 mb = 5000 kb
-                       *//* Utility.showToast(
-                            activity!!, String.format(
-                                getString(com.zl.baseapp.R.string.msg_comman_file_size_exceed),
-                                resources.getInteger(com.zl.baseapp.R.integer.message_any_file_type_size_limitation)
-                                    .toString()
-                            ), Toast.LENGTH_LONG, Gravity.CENTER
-                        )*//*
-                    } else {
-                        val endIndex = selectedPath.lastIndexOf("/")
-                        if (endIndex != -1) {
-                            val pdfName = selectedPath.substring(endIndex + 1, selectedPath.length)
-                         *//*   addAttachmentBox(
-                                pdfName,
-                                generateReplyAttachmentJson(selectedPath),
-                                selectedImageUri
-                            )
-                            mTvMsgSendIcon.isEnabled = true*//*
-                        }
-                    }
-                }
-            }
-        }*/
 
     }
 

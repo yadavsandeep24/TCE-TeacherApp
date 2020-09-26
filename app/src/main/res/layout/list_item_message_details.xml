@@ -4,6 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+    <com.tce.teacherapp.util.RubikMediumTextview
+        android:id="@+id/tv_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="17 january 2020"
+        android:gravity="center"
+        android:textSize="14dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/blue_grey"
+        />
 
     <RelativeLayout
         android:id="@+id/left_message_container"
@@ -53,14 +63,25 @@
         <com.tce.teacherapp.util.RubikRegularTextview
             android:id="@+id/tv_right_time_user_name"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="16dp"
             android:layout_marginBottom="5dp"
+            android:layout_marginEnd="3dp"
+            android:layout_toLeftOf="@+id/vw_tick"
             android:text="Aishwarya : 1.49 PM"/>
+
+        <View
+            android:id="@+id/vw_tick"
+            android:layout_width="17dp"
+            android:layout_height="12dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignBottom="@+id/tv_right_time_user_name"
+            android:backgroundTint="@color/blue_grey"
+            android:background="@drawable/ic_icon_double_tick"/>
 
         <com.tce.teacherapp.util.RubikRegularTextview
             android:id="@+id/tvRightDetail"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/tv_right_time_user_name"
             android:background="@drawable/right_msg_bg"
             android:text="detail"
@@ -76,11 +97,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:layout_margin="20dp"
+        android:layout_margin="10dp"
         android:clipChildren="false"
         android:clipToPadding="false"
-        android:visibility="visible"
-        app:cardCornerRadius="20dp"
+        android:visibility="gone"
+        app:cardCornerRadius="10dp"
         app:cardElevation="8dp"
         app:cardPreventCornerOverlap="false">
 
@@ -119,6 +140,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
                         android:text="English"
+                        android:visibility="gone"
                         android:textSize="@dimen/font_size_12_dp">
 
                     </com.tce.teacherapp.util.RubikRegularTextview>
@@ -150,7 +172,7 @@
         android:layout_margin="20dp"
         android:clipChildren="false"
         android:clipToPadding="false"
-        android:visibility="visible"
+        android:visibility="gone"
         app:cardCornerRadius="20dp"
         app:cardElevation="8dp"
         app:cardPreventCornerOverlap="false">

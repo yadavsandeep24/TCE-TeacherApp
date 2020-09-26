@@ -9,40 +9,55 @@
     app:behavior_fitToContents="true"
     app:behavior_hideable="true"
     app:behavior_peekHeight="0dp"
-    android:layout_marginBottom="100dp"
     app:layout_behavior="com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior">
 
     <View
-        android:layout_width="70dp"
-        android:layout_height="8dp"
-        android:background="#e1e6f0"
+        android:layout_width="50dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:layout_gravity="center_horizontal"/>
-    <TextView
+        android:background="#e1e6f0" />
+
+    <com.tce.teacherapp.util.RubikRegularTextview
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:gravity="center"
         android:text="Filter Chats by"
-        android:layout_marginTop="5dp"
-        android:textSize="12dp"/>
-    <TextView
+        android:textSize="9dp" />
+
+    <com.tce.teacherapp.util.RubikMediumTextview
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
         android:gravity="center"
         android:text="Recent Chats"
-        android:textSize="20sp" />
-    <TextView
+        android:textColor="@color/dark"
+        android:textSize="14dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#e1e6f0" />
+
+    <com.tce.teacherapp.util.RubikMediumTextview
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
         android:gravity="center"
         android:text="Unread Chats"
-        android:textSize="20sp" />
-    <TextView
+        android:textColor="@color/dark"
+        android:textSize="14dp" />
+
+    <View
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="1dp"
+        android:background="#e1e6f0" />
+
+    <com.tce.teacherapp.util.RubikMediumTextview
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
         android:gravity="center"
         android:text="Class Name"
-        android:paddingBottom="20dp"
-        android:textSize="18sp" />
+        android:textColor="@color/dark"
+        android:textSize="14dp" />
 
 </LinearLayout>

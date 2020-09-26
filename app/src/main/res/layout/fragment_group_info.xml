@@ -34,19 +34,17 @@
                     android:id="@+id/tvTitle1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="title"
                     android:textColor="@color/white"
                     android:textSize="@dimen/font_size_16_dp"
-                    android:textStyle="bold"></com.tce.teacherapp.util.RubikMediumTextview>
+                    android:textStyle="bold"/>
 
                 <com.tce.teacherapp.util.RubikRegularTextview
                     android:id="@+id/tvSubTitle1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="subTitle"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="@color/white"
-                    android:visibility="visible"></com.tce.teacherapp.util.RubikRegularTextview>
+                    android:visibility="visible"/>
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -56,7 +54,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="20dp"
                 android:layout_alignParentRight="true"
-                android:src="@drawable/ic_close_white"></androidx.appcompat.widget.AppCompatImageView>
+                android:src="@drawable/ic_close_white"/>
 
 
         </RelativeLayout>

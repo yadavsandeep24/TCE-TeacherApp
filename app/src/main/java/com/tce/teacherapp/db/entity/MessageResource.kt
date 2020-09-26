@@ -11,6 +11,6 @@ data class MessageResource (
     val title : String,
     val typeId : Int,
     val Type : String,
-    val isAdded : Boolean
-
+    val isAdded : Boolean,
+    val isSelected : Boolean
 ): Parcelable

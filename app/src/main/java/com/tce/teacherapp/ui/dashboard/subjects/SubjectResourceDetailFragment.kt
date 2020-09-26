@@ -80,9 +80,9 @@ constructor(
 
                 }
             }
-            if(resourceVo.skills.isNotEmpty()) {
+            if(!resourceVo.skills.isNullOrEmpty()) {
                 binding.lnrSkills.visibility = View.VISIBLE
-                for (skill in resourceVo.skills) {
+                for (skill in resourceVo.skills!!) {
                     val skillView = LayoutInflater.from(context).inflate(R.layout.list_item_skills, binding.lnrSkills, false)
                     val tvName = skillView.findViewById(R.id.tv_skill_name) as TextView
                     val container = skillView.findViewById(R.id.container) as LinearLayout

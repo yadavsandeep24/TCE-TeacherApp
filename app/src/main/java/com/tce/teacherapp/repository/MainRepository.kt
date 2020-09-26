@@ -42,6 +42,12 @@ interface MainRepository {
         stateEvent: StateEvent
     ): Flow<DataState<MessageViewState>>
 
+    fun getMessageConversationList(
+        type: String,
+        messageId: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<MessageViewState>>
+
     fun getStudentList(
         classId: Int,
         query: String,
@@ -55,7 +61,7 @@ interface MainRepository {
 
     fun getSelectedResourceList(
         query: String,
-        typeId: Int,
+        type: String,
         stateEvent: StateEvent
     ): Flow<DataState<MessageViewState>>
 
@@ -177,6 +183,7 @@ interface MainRepository {
     fun getFeedBackMasterData(stateEvent: StateEvent): Flow<DataState<StudentViewState>>
     fun getGalleryData(type: Int, stateEvent: StateEvent): Flow<DataState<StudentViewState>>
     fun getStudentPortfolio(type: Int, stateEvent: StateEvent): Flow<DataState<StudentViewState>>
+    fun getMessageResourceTypeList(stateEvent: StateEvent): Flow<DataState<MessageViewState>>
 
 
 }

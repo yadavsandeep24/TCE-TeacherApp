@@ -51,7 +51,8 @@ class ResourceResponse(
             title = title,
             type = type,
             chapterResourceTypeId = chapterResourceTypeId,
-            chapterId = chapterId
+            chapterId = chapterId,
+            isAdded = false
         )
     }
 }

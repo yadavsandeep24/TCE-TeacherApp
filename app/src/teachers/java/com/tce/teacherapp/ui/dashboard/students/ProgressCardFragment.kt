@@ -1,10 +1,10 @@
 package com.tce.teacherapp.ui.dashboard.students
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.*
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -12,8 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tce.teacherapp.R
-import com.tce.teacherapp.api.response.Objective
-import com.tce.teacherapp.api.response.ProgressData
 import com.tce.teacherapp.api.response.StudentListResponseItem
 import com.tce.teacherapp.databinding.FragmentProgressCardBinding
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
@@ -22,7 +20,6 @@ import com.tce.teacherapp.util.Utility
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import java.util.*
 import javax.inject.Inject
 
 
@@ -50,6 +47,7 @@ constructor(
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as DashboardActivity).expandAppBar(false)
@@ -167,7 +165,9 @@ constructor(
             }
             binding.tvStudentAge.text = "${Utility.getAge(studentVo.DOB)} years old"
             binding.tvTeacherName.text = studentVo.teacher
-            myAdapter.modelList = studentVo.ProgressCard[0].ProgressData
+            if(studentVo.ProgressCard != null) {
+                myAdapter.modelList = studentVo.ProgressCard[0].ProgressData
+            }
         }
         myAdapter.notifyDataSetChanged()
 
