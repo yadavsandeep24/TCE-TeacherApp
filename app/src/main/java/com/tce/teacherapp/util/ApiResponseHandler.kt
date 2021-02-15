@@ -29,9 +29,11 @@ abstract class ApiResponseHandler<ViewState, Data> (
                         stateEvent = stateEvent
                     )
                 }else {
+                    val json = JSONObject(response.errorMessage.toString())
+                    val erroMessage = json.getString("errorMessage")
                     DataState.error(
                         response = Response(
-                            message = "${stateEvent?.errorInfo()}\n\nReason: ${response.errorMessage.toString()}",
+                            message = "${stateEvent?.errorInfo()}\n\nReason: $erroMessage",
                             uiComponentType = UIComponentType.Dialog,
                             messageType = MessageType.Error(),
                             serviceTypes = RequestTypes.GENERIC

@@ -24,7 +24,7 @@ sealed class LoginStateEvent : StateEvent {
     ) : LoginStateEvent() {
 
         override fun errorInfo(): String {
-            return "school name fetch failed."
+            return "School name fetch failed."
         }
 
         override fun toString(): String {
@@ -35,7 +35,7 @@ sealed class LoginStateEvent : StateEvent {
     object  ClientIdEvent : LoginStateEvent() {
 
         override fun errorInfo(): String {
-            return "client id fetch failed."
+            return "Client id fetch failed."
         }
 
         override fun toString(): String {
@@ -45,7 +45,7 @@ sealed class LoginStateEvent : StateEvent {
 
     object CheckLoginEnabledMode : LoginStateEvent() {
         override fun errorInfo(): String {
-            return "Error in checking FingerPrint mode."
+            return "Error in checking fingerPrint mode."
         }
 
         override fun toString(): String {
