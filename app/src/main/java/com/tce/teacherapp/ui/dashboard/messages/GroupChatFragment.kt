@@ -34,7 +34,6 @@ import com.tce.teacherapp.R
 import com.tce.teacherapp.api.response.StudentListResponseItem
 import com.tce.teacherapp.databinding.FragmentGroupChatBinding
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
-import com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior
 import com.tce.teacherapp.util.gallerypicker.model.GalleryAlbums
 import com.tce.teacherapp.util.gallerypicker.model.GalleryData
 import com.tce.teacherapp.util.gallerypicker.presenter.PhotosPresenterImpl
@@ -45,8 +44,8 @@ import com.tce.teacherapp.util.gallerypicker.view.ImagePickerContract
 import com.tce.teacherapp.util.gallerypicker.view.OnPhoneImagesObtained
 import com.tce.teacherapp.util.gallerypicker.view.adapters.ImageGridAdapter
 import com.tce.teacherapp.util.gallerypicker.view.adapters.VideoGridAdapter
+import com.tce.teacherapp.util.sheets.BottomSheetBehavior
 import kotlinx.android.synthetic.main.activity_dashboard.*
-import kotlinx.android.synthetic.main.fragment_group_chat.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import org.jetbrains.anko.doAsync

@@ -2,11 +2,11 @@ package com.tce.teacherapp.fragments.main
 
 import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModelProvider
+import com.tce.teacherapp.ui.dashboard.home.DashboardHomeFragment
 import com.tce.teacherapp.ui.dashboard.home.profile.ProfileFragment
 import com.tce.teacherapp.ui.dashboard.home.profile.SettingsFragment
 import com.tce.teacherapp.ui.dashboard.home.profile.TeacherProfileFragment
 import com.tce.teacherapp.ui.dashboard.home.profile.UpdatePasswordFragment
-import com.tce.teacherapp.ui.home.DashboardHomeFragment
 import javax.inject.Inject
 
 class DashboardFragmentFactory

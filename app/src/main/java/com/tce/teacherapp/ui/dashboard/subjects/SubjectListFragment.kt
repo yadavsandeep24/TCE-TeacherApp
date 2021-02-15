@@ -1,5 +1,6 @@
 package com.tce.teacherapp.ui.dashboard.subjects
 
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.Bitmap
 import android.graphics.Typeface
@@ -14,7 +15,6 @@ import android.view.ViewGroup
 import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
 import androidx.appcompat.widget.AppCompatSpinner
-import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -37,6 +37,8 @@ import com.tce.teacherapp.ui.dashboard.subjects.adapter.subjectListEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.subjects.state.SUBJECT_VIEW_STATE_BUNDLE_KEY
 import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectStateEvent
 import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectViewState
+import com.tce.teacherapp.ui.login.LauncherActivity
+import com.tce.teacherapp.util.MessageType
 import com.tce.teacherapp.util.StateMessageCallback
 import com.tce.teacherapp.util.Utility
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -50,7 +52,7 @@ class SubjectListFragment
 @Inject
 constructor(
     viewModelFactory: ViewModelProvider.Factory
-) : BaseSubjectFragment(R.layout.fragment_subject_list,viewModelFactory) {
+) : BaseSubjectFragment(R.layout.fragment_subject_list, viewModelFactory) {
 
     private lateinit var binding: FragmentSubjectListBinding
     private lateinit var spnDivision: AppCompatSpinner
@@ -104,11 +106,14 @@ constructor(
         (activity as DashboardActivity).expandAppBar(true)
         (activity as DashboardActivity).showHideBottomBar(true)
 
-        val topBar = (activity as DashboardActivity).binding.toolBar.findViewById<RelativeLayout>(R.id.top_container)
+        val topBar =
+            (activity as DashboardActivity).binding.toolBar.findViewById<RelativeLayout>(R.id.top_container)
         topBar.setBackgroundColor(resources.getColor(R.color.subject_actionbar_color))
 
-        spnDivision =  (activity as DashboardActivity).binding.toolBar.findViewById(R.id.spn_division)
-        ((activity as DashboardActivity).binding.toolBar.findViewById(R.id.tv_back) as TextView).visibility = View.GONE
+        spnDivision =
+            (activity as DashboardActivity).binding.toolBar.findViewById(R.id.spn_division)
+        ((activity as DashboardActivity).binding.toolBar.findViewById(R.id.tv_back) as TextView).visibility =
+            View.GONE
 
         uiCommunicationListener.displayProgressBar(true)
         val searchText: TextView = binding.svSubjects.findViewById(R.id.search_src_text) as TextView
@@ -120,8 +125,13 @@ constructor(
         val searchIcon = binding.svSubjects.findViewById(R.id.search_mag_icon) as ImageView
         searchIcon.setImageResource(R.drawable.search)
 
+        binding.svSubjects.inputType = 0x00000000
+        binding.svSubjects.isEnabled = false
 
-        binding.svSubjects.setOnQueryTextListener(queryTextListener)
+        binding.vwSearch.setOnClickListener {
+            findNavController().navigate(R.id.action_subjectListFragment_to_resourceSearchFragment)
+        }
+        /// binding.svSubjects.setOnQueryTextListener(queryTextListener)
         // Get the search close button image view
         val closeButton: ImageView =
             binding.svSubjects.findViewById(R.id.search_close_btn) as ImageView
@@ -136,9 +146,10 @@ constructor(
             false
         }
 
-        viewModel.setStateEvent(SubjectStateEvent.GetDivisionEvent)
+        viewModel.setStateEvent(SubjectStateEvent.CurriculumEvent)
 
-        binding.rvSubjects.layoutManager = GridLayoutManager(activity, Utility.calculateNumberOfColumns(2,requireContext()))
+        binding.rvSubjects.layoutManager =
+            GridLayoutManager(activity, Utility.calculateNumberOfColumns(2, requireContext()))
         binding.rvSubjects.setHasFixedSize(true)
         val epoxyVisibilityTracker = EpoxyVisibilityTracker()
         epoxyVisibilityTracker.attach(binding.rvSubjects)
@@ -149,18 +160,6 @@ constructor(
             }
         )
         subscribeObservers()
-    }
-
-    private val queryTextListener = object : SearchView.OnQueryTextListener {
-        override fun onQueryTextSubmit(query: String): Boolean {
-            return false
-        }
-
-        override fun onQueryTextChange(newText: String): Boolean {
-            viewModel.setStateEvent(SubjectStateEvent.GetSubjectEvent(newText))
-            return true
-
-        }
     }
 
     class SpinnerInteractionListener(
@@ -190,12 +189,12 @@ constructor(
                     Log.d("SAN", "onItemSelected-->$position")
                     val selectedGrade = adapter?.getItem(position)
                     selectedGrade?.let {
-                        viewModel.setStateEvent(
+                    /*    viewModel.setStateEvent(
                             SubjectStateEvent.DivisionSelectionEvent(
                                 it,
                                 position
                             )
-                        )
+                        )*/
                     }
                     userSelect = false
                 }
@@ -207,17 +206,66 @@ constructor(
 
         viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
             if (viewState != null) {
+                 viewState.curriculumVo?.let {
+
+                     if(it.grades.isNotEmpty()){
+                         ((activity as DashboardActivity).binding.toolBar.findViewById(R.id.tv_back) as TextView).visibility =
+                             View.GONE
+                         val tvTopicTitle =
+                             (activity as DashboardActivity).binding.toolBar.findViewById<TextView>(R.id.toolbar_title)
+                         tvTopicTitle.text = resources.getString(R.string.title_subjects)
+                         spnDivision.visibility = View.VISIBLE
+
+
+                         Log.d("SAN", "gradeList-->" + it.grades)
+                         adapter = activity?.let { it1 ->
+                             CustomSpinnerAdapter(it1, R.layout.spinner_dropdown, R.id.text1, it.grades)
+                         }
+                         spnDivision.adapter = adapter
+
+                         val listener =
+                             adapter?.let { it1 -> SpinnerInteractionListener(it1, viewModel) }
+                         spnDivision.setOnTouchListener(listener)
+                         spnDivision.onItemSelectedListener = listener
+                     }
+                     binding.rvSubjects.withModels {
+                         for (subj in it.grades[0].subjects) {
+                             subjectListEpoxyHolder {
+                                 id(subj.subjectId)
+                                 title(subj.title)
+                                 Utility.getDrawable(
+                                     subj.title.toLowerCase(), requireContext()
+                                 )?.let { it1 ->
+                                     imageDrawable(it1)
+                                 }
+
+                                 listener {
+                                     val bundle = Bundle()
+                                     bundle.putParcelable("subjectdata", subj)
+                                     findNavController().navigate(
+                                         R.id.action_subjectListFragment_to_topicFragment,
+                                         bundle
+                                     )
+                                 }
+                             }
+                         }
+                     }
+
+                 }
+
                 viewState.gradeList?.let {
-                    ((activity as DashboardActivity).binding.toolBar.findViewById(R.id.tv_back) as TextView).visibility = View.GONE
-                    val tvTopicTitle = (activity as DashboardActivity).binding.toolBar.findViewById<TextView>(R.id.toolbar_title)
+                    ((activity as DashboardActivity).binding.toolBar.findViewById(R.id.tv_back) as TextView).visibility =
+                        View.GONE
+                    val tvTopicTitle =
+                        (activity as DashboardActivity).binding.toolBar.findViewById<TextView>(R.id.toolbar_title)
                     tvTopicTitle.text = resources.getString(R.string.title_subjects)
                     spnDivision.visibility = View.VISIBLE
 
 
                     Log.d("SAN", "gradeList-->" + it.size)
-                    adapter = activity?.let { it1 ->
+               /*     adapter = activity?.let { it1 ->
                         CustomSpinnerAdapter(it1, R.layout.spinner_dropdown, R.id.text1, it)
-                    }
+                    }*/
                     spnDivision.adapter = adapter
 
                     val listener =
@@ -228,7 +276,7 @@ constructor(
                 }
                 viewState.selectedGradePosition?.let {
                     Log.d("SAN", "selectedGradePosition-->$it")
-                     spnDivision.setSelection(it)
+                    spnDivision.setSelection(it)
                 }
                 viewState.subjectList?.let {
                     Log.d("SAN", "subjectList-->" + it.size)
@@ -256,8 +304,6 @@ constructor(
                                 }
                             }
                         }
-
-
                     }
                 }
 
@@ -270,7 +316,7 @@ constructor(
         })
 
 
-        viewModel.stateMessage.observe(viewLifecycleOwner, Observer { stateMessage ->
+        viewModel.stateMessage.observe(viewLifecycleOwner, { stateMessage ->
             Log.d("SAN", "SubjectListFragment-->viewModel.stateMessage")
 
             stateMessage?.let {
@@ -280,6 +326,12 @@ constructor(
                     stateMessageCallback = object : StateMessageCallback {
                         override fun removeMessageFromStack() {
                             viewModel.clearStateMessage()
+                            if(stateMessage.response.messageType == MessageType.AccessDenied()) {
+                                val i = Intent(activity, LauncherActivity::class.java)
+                                startActivity(i)
+                                activity?.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+                                activity?.finish()
+                            }
                         }
                     }
                 )

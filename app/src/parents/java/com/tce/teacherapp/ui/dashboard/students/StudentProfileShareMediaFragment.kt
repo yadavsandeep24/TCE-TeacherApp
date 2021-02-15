@@ -50,8 +50,8 @@ constructor(
 
     private lateinit var binding: FragmentShareMediaBinding
     private lateinit var studentID: String
-    private lateinit var bottomSheetBehavior : com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior<*>
-    private lateinit var bottomSheetBehaviorFilterContainer : com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior<*>
+    private lateinit var bottomSheetBehavior : com.tce.teacherapp.util.sheets.BottomSheetBehavior<*>
+    private lateinit var bottomSheetBehaviorFilterContainer : com.tce.teacherapp.util.sheets.BottomSheetBehavior<*>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,14 +83,14 @@ constructor(
             activity?.onBackPressed()
         }
          bottomSheetBehavior =
-            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(binding.bottomSheet)
+            com.tce.teacherapp.util.sheets.BottomSheetBehavior.from(binding.bottomSheet)
 
-        bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+        bottomSheetBehavior.state = com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
         bottomSheetBehavior.skipCollapsed = true
         bottomSheetBehavior.isDraggable = false
 
         bottomSheetBehavior.addBottomSheetCallback(object :
-            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.BottomSheetCallback {
+            com.tce.teacherapp.util.sheets.BottomSheetBehavior.BottomSheetCallback {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 if (newState == BottomSheetBehavior.STATE_DRAGGING) {
                     bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
@@ -101,13 +101,13 @@ constructor(
 
         binding.tvSend.setOnClickListener {
             val list = ((binding.rvPortfolio.adapter as StudentPortfolioAdapter).modelList).toList()
-            if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
+            if (bottomSheetBehavior.state == com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN) {
                 bottomSheetBehavior.state =
-                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
+                    com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_EXPANDED
                 binding.maskLayout.visibility = View.VISIBLE
             } else {
                 bottomSheetBehavior.state =
-                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                    com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
                 binding.maskLayout.visibility = View.GONE
             }
         }
@@ -136,15 +136,15 @@ constructor(
             binding.rvShareOptions.adapter = AppAdapter(apps, this)
         }
          bottomSheetBehaviorFilterContainer =
-            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(binding.bottomSheetFilterBy)
+            com.tce.teacherapp.util.sheets.BottomSheetBehavior.from(binding.bottomSheetFilterBy)
 
         bottomSheetBehaviorFilterContainer.state =
-            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+            com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
         bottomSheetBehaviorFilterContainer.skipCollapsed = true
         bottomSheetBehaviorFilterContainer.isDraggable = false
 
         bottomSheetBehaviorFilterContainer.addBottomSheetCallback(object :
-            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.BottomSheetCallback {
+            com.tce.teacherapp.util.sheets.BottomSheetBehavior.BottomSheetCallback {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 if (newState == BottomSheetBehavior.STATE_DRAGGING) {
                     bottomSheetBehaviorFilterContainer.state = BottomSheetBehavior.STATE_EXPANDED
@@ -155,55 +155,55 @@ constructor(
 
         binding.sortContainer.setOnClickListener {
 
-            if (bottomSheetBehaviorFilterContainer.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
+            if (bottomSheetBehaviorFilterContainer.state == com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN) {
                 bottomSheetBehaviorFilterContainer.state =
-                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
+                    com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_EXPANDED
                 binding.maskLayout.visibility = View.VISIBLE
             } else {
                 bottomSheetBehaviorFilterContainer.state =
-                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                    com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
                 binding.maskLayout.visibility = View.GONE
             }
         }
         binding.tvAll.setOnClickListener {
             bottomSheetBehaviorFilterContainer.state =
-                com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
             binding.maskLayout.visibility = View.GONE
             viewModel.setStateEvent(StudentStateEvent.GetStudentPortfolio(1))
         }
         binding.tvFeedback.setOnClickListener {
             bottomSheetBehaviorFilterContainer.state =
-                com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
             binding.maskLayout.visibility = View.GONE
             viewModel.setStateEvent(StudentStateEvent.GetStudentPortfolio(2))
         }
 
         binding.tvVideo.setOnClickListener {
             bottomSheetBehaviorFilterContainer.state =
-                com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
             binding.maskLayout.visibility = View.GONE
             viewModel.setStateEvent(StudentStateEvent.GetStudentPortfolio(3))
         }
 
         binding.tvAudio.setOnClickListener {
             bottomSheetBehaviorFilterContainer.state =
-                com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
             binding.maskLayout.visibility = View.GONE
             viewModel.setStateEvent(StudentStateEvent.GetStudentPortfolio(4))
         }
 
         binding.tvImage.setOnClickListener {
             bottomSheetBehaviorFilterContainer.state =
-                com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
             binding.maskLayout.visibility = View.GONE
             viewModel.setStateEvent(StudentStateEvent.GetStudentPortfolio(5))
         }
 
         binding.maskLayout.setOnClickListener {
             bottomSheetBehaviorFilterContainer.state =
-                com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
             bottomSheetBehavior.state =
-                com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
             binding.maskLayout.visibility = View.GONE
         }
         viewModel.setStateEvent(StudentStateEvent.GetStudentPortfolio(1))
@@ -273,9 +273,9 @@ constructor(
                 task.cancel(false)
                 dialog.dismiss()
                 bottomSheetBehaviorFilterContainer.state =
-                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                    com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
                 bottomSheetBehavior.state =
-                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                    com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
                 binding.maskLayout.visibility = View.GONE
             }
         }
@@ -288,8 +288,8 @@ constructor(
             val dialog: Dialog,
             val binding: FragmentShareMediaBinding,
             val app: App?,
-            val bottomSheetBehavior: com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior<*>,
-            private val bottomSheetBehaviorFilterContainer: com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior<*>
+            val bottomSheetBehavior: com.tce.teacherapp.util.sheets.BottomSheetBehavior<*>,
+            private val bottomSheetBehaviorFilterContainer: com.tce.teacherapp.util.sheets.BottomSheetBehavior<*>
         ) : AsyncTask<Void, String, ArrayList<Uri>>() {
 
             private val txtTitle = dialog.findViewById(R.id.tv_title) as TextView
@@ -377,9 +377,9 @@ constructor(
                     context.startActivity(sendIntent)
                 }else{
                     bottomSheetBehaviorFilterContainer.state =
-                        com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                        com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
                     bottomSheetBehavior.state =
-                        com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                        com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
                     binding.maskLayout.visibility = View.GONE
                 }
 

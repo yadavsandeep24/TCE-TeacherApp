@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.tce.teacherapp.R
-import com.tce.teacherapp.db.entity.Grade
+import com.tce.teacherapp.api.response.tceapi.Grade
 
 
 class CustomSpinnerAdapter(context: Context, resouceId: Int, textviewId: Int, list: List<Grade?>) :

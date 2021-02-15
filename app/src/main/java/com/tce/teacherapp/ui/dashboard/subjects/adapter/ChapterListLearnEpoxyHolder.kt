@@ -1,13 +1,17 @@
 package com.tce.teacherapp.ui.dashboard.subjects.adapter
 
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.PictureDrawable
 import androidx.appcompat.widget.AppCompatImageView
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.model.GlideUrl
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.tce.teacherapp.R
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
+import com.tce.teacherapp.util.glide.SvgSoftwareLayerSetter
 
 // This more traditional style uses an Epoxy view holder pattern.
 // The KotlinHolder is used to cache the view look ups, but uses property delegates to simplify it.
@@ -19,18 +23,22 @@ abstract class ChapterListLearnEpoxyHolder : EpoxyModelWithHolder<ChapterListLea
     @EpoxyAttribute
     lateinit var listener: () -> Unit
     @EpoxyAttribute
-    lateinit var imageUrl: String
+    lateinit var imageUrl: GlideUrl
     @EpoxyAttribute
     lateinit var imageDrawable: Drawable
 
     override fun bind(holder: ChapterListLearnHolder) {
         holder.cardMain.setOnClickListener { listener() }
-        holder.imageView.background = imageDrawable
+        //holder.imageView.background = imageDrawable
+        val requestBuilder = Glide.with(holder.imageView.context)
+            .`as`(PictureDrawable::class.java)
+            .transition(DrawableTransitionOptions.withCrossFade())
+            .listener(SvgSoftwareLayerSetter())
+        requestBuilder.load(imageUrl).into(holder.imageView)
     }
 }
 
 class ChapterListLearnHolder : KotlinEpoxyHolder() {
     val cardMain by bind<com.google.android.material.card.MaterialCardView>(R.id.card_chapter_learn)
     val imageView by bind<AppCompatImageView>(R.id.iv_chapter_learn)
-    val glide by lazy { Glide.with(imageView.context) }
 }

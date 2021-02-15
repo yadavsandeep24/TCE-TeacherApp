@@ -1,6 +1,7 @@
 package com.tce.teacherapp.ui.login.state
 
 import android.os.Parcelable
+import com.tce.teacherapp.api.response.tceapi.ClientIDResponse
 import com.tce.teacherapp.db.entity.Profile
 import com.tce.teacherapp.util.MessageConstant
 import kotlinx.android.parcel.Parcelize
@@ -14,8 +15,10 @@ data class LoginViewState(
     var loginFields: LoginFields? = null,
     var isFingerPrintLoginEnabled: Boolean? = null,
     var isFaceLoginEnabled: Boolean? = null,
-    var profile: Profile?= null,
-    var registerFields: RegisterUserFields? = null
+    var profile: Profile? = null,
+    var registerFields: RegisterUserFields? = null,
+    var SchoolResponse: List<String>? = null,
+    var clientIdRes:ClientIDResponse?= null
 ) : Parcelable
 
 @Parcelize
@@ -23,30 +26,31 @@ data class LoginFields(
     var login_email: String? = null,
     var login_password: String? = null,
     val login_schoolName: String? = null,
-   var login_mode_fingePrint_Enabled:Boolean? = null,
-   var login_mode_faceId_Enabled:Boolean? = null,
+    var login_mode_fingePrint_Enabled: Boolean? = null,
+    var login_mode_faceId_Enabled: Boolean? = null,
     var isQuickAccessScreenShow: Boolean? = null
-) : Parcelable{
+) : Parcelable {
     class LoginError {
 
         companion object {
 
-            fun mustFillAllFields(): String{
+            fun mustFillAllFields(): String {
                 return MessageConstant.LOGIN_MANDATORY_FIELD
             }
 
-            fun none():String{
+            fun none(): String {
                 return "None"
             }
 
         }
     }
-    fun isValidForLogin(): String{
-        if(login_email != null && login_email!!.isEmpty()) {
-                return LoginError.mustFillAllFields()
-        }else if(login_password != null && login_password!!.isEmpty()) {
+
+    fun isValidForLogin(): String {
+        if (login_email != null && login_email!!.isEmpty()) {
             return LoginError.mustFillAllFields()
-        }else if(login_schoolName != null && login_schoolName.isEmpty()) {
+        } else if (login_password != null && login_password!!.isEmpty()) {
+            return LoginError.mustFillAllFields()
+        } else if (login_schoolName != null && login_schoolName.isEmpty()) {
             return LoginError.mustFillAllFields()
         }
 
@@ -61,23 +65,24 @@ data class LoginFields(
 @Parcelize
 data class ForgetPasswordFields(
     var mobile_no: String? = null
-) : Parcelable{
+) : Parcelable {
     class LoginError {
 
         companion object {
 
-            fun mustFillAllFields(): String{
+            fun mustFillAllFields(): String {
                 return MessageConstant.LOGIN_MANDATORY_FIELD
             }
 
-            fun none():String{
+            fun none(): String {
                 return "None"
             }
 
         }
     }
+
     fun isValidMobileNo(): String {
-        if(mobile_no != null && mobile_no!!.isEmpty()) {
+        if (mobile_no != null && mobile_no!!.isEmpty()) {
             return LoginError.mustFillAllFields()
         }
         return LoginError.none()
@@ -88,26 +93,28 @@ data class ForgetPasswordFields(
 data class RegisterUserFields(
     var mobile_no: String? = null,
     var password: String? = null
-) : Parcelable{
+) : Parcelable {
     class LoginError {
 
         companion object {
 
-            fun mustFillAllFields(): String{
+            fun mustFillAllFields(): String {
                 return MessageConstant.LOGIN_MANDATORY_FIELD
             }
-            fun isValidPassword() : String{
+
+            fun isValidPassword(): String {
                 return MessageConstant.UPDATE_PASSWORD_VALIDATION
             }
 
-            fun none():String{
+            fun none(): String {
                 return "None"
             }
 
         }
     }
+
     fun checkValidRegistration(): String {
-        if(password != null) {
+        if (password != null) {
             val pattern: Pattern
             val matcher: Matcher
 
@@ -115,7 +122,7 @@ data class RegisterUserFields(
 
             pattern = Pattern.compile(PASSWORD_PATTERN)
             matcher = pattern.matcher(password)
-            if(!matcher.matches()) {
+            if (!matcher.matches()) {
                 return LoginError.isValidPassword()
             }
         }

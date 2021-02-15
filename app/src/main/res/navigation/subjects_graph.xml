@@ -17,6 +17,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_subjectListFragment_to_resourceSearchFragment"
+            app:destination="@id/resourceSearchFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/topicFragment"
@@ -37,6 +44,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_topicFragment_to_HTMLContentFragment"
+            app:destination="@id/HTMLContentFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/selectChapterLearnFragment"
@@ -71,6 +85,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_selectChapterLearnFragment_to_HTMLContentFragment"
+            app:destination="@id/HTMLContentFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/selectChapterBookFragment"
@@ -219,4 +240,8 @@
         android:id="@+id/imageContentFragment"
         android:name="com.tce.teacherapp.ui.dashboard.subjects.ImageContentFragment"
         android:label="ImageContentFragment" />
+    <fragment
+        android:id="@+id/resourceSearchFragment"
+        android:name="com.tce.teacherapp.ui.dashboard.subjects.ResourceSearchFragment"
+        android:label="ResourceSearchFragment" />
 </navigation>

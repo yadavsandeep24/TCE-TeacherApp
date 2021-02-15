@@ -126,7 +126,7 @@
             app:behavior_hideable="true"
             app:behavior_peekHeight="0dp"
             android:clickable="true"
-            app:layout_behavior="com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior"
+            app:layout_behavior="com.tce.teacherapp.util.sheets.BottomSheetBehavior"
             android:focusable="true">
 
             <LinearLayout

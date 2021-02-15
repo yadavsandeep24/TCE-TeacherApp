@@ -74,6 +74,7 @@ class DashboardActivity : BaseActivity(), BottomNavController.OnNavigationResele
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dashboard)
         setupActionBar()
         setupBottomNavigationView()
+
     }
 
     override fun displayProgressBar(isLoading: Boolean) {
@@ -112,9 +113,9 @@ class DashboardActivity : BaseActivity(), BottomNavController.OnNavigationResele
         binding.toolBar.addView(logo)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        when (item?.itemId) {
+        when (item.itemId) {
             android.R.id.home -> onBackPressed()
         }
         return super.onOptionsItemSelected(item)

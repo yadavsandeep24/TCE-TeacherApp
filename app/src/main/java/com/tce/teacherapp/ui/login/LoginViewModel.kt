@@ -1,5 +1,8 @@
 package com.tce.teacherapp.ui.login
 
+import android.content.Context
+import com.tce.teacherapp.api.receivers.AlarmReceiver
+import com.tce.teacherapp.api.response.tceapi.ClientIDResponse
 import com.tce.teacherapp.db.entity.Profile
 import com.tce.teacherapp.repository.LoginRepository
 import com.tce.teacherapp.ui.BaseViewModel
@@ -29,7 +32,26 @@ class LoginViewModel @Inject constructor(val loginRepository: LoginRepository) :
         data.registerFields?.let {
             setRegisterData(it)
         }
+        data.SchoolResponse?.let {
+            setSchoolListInfo(it)
+        }
+        data.clientIdRes?.let {
+            setClientIdResponse(it)
+        }
         setProfileData(data.profile)
+
+    }
+
+    private fun setClientIdResponse(it: ClientIDResponse) {
+        val update = getCurrentViewStateOrNew()
+        update.clientIdRes = it
+        setViewState(update)
+    }
+
+    private fun setSchoolListInfo(it: List<String>) {
+        val update = getCurrentViewStateOrNew()
+        update.SchoolResponse = it
+        setViewState(update)
     }
 
     private fun setProfileData(it: Profile?) {
@@ -64,7 +86,15 @@ class LoginViewModel @Inject constructor(val loginRepository: LoginRepository) :
         val job: Flow<DataState<LoginViewState>> = when (stateEvent) {
 
             is LoginStateEvent.LoginAttemptEvent -> {
+            /*
                 loginRepository.attemptLogin(
+                    stateEvent.schoolName,
+                    stateEvent.email,
+                    stateEvent.password,
+                    stateEvent = stateEvent
+                )*/
+
+                loginRepository.tceLogin(
                     stateEvent.schoolName,
                     stateEvent.email,
                     stateEvent.password,
@@ -88,6 +118,12 @@ class LoginViewModel @Inject constructor(val loginRepository: LoginRepository) :
             }
             is LoginStateEvent.RegisterUserEvent ->{
                 loginRepository.registerUser(stateEvent.mobileNo,stateEvent.password,stateEvent =stateEvent)
+            }
+            is LoginStateEvent.SchoolNameEvent ->{
+                loginRepository.getSchoolList(stateEvent.schoolName,stateEvent =stateEvent)
+            }
+            is LoginStateEvent.ClientIdEvent ->{
+                loginRepository.getClientID(stateEvent = stateEvent)
             }
             else -> {
                 flow {
@@ -120,6 +156,10 @@ class LoginViewModel @Inject constructor(val loginRepository: LoginRepository) :
 
     fun setQuickAccessScreenShow(isShow: Boolean) {
         loginRepository.setQuickAccessScreen(isShow)
+    }
+
+    fun setAlarm(requireActivity: Context) {
+        AlarmReceiver.setAlarm(requireActivity,loginRepository.getAPISessionTimeOut().toInt())
     }
 
 

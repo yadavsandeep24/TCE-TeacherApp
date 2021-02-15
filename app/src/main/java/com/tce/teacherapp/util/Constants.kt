@@ -3,6 +3,7 @@ package com.tce.teacherapp.util
 interface Constants {
 
     companion object {
+        const val APP_DEBUG_FLAG: Boolean = true
         const val TAG = "SAN" // Tag for logs
         const val NETWORK_TIMEOUT = 6000L
         const val CACHE_TIMEOUT = 2000L

@@ -52,12 +52,12 @@ constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as DashboardActivity).expandAppBar(true)
-        val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(binding.bottomSheet)
-        bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+        val bottomSheetBehavior = com.tce.teacherapp.util.sheets.BottomSheetBehavior.from(binding.bottomSheet)
+        bottomSheetBehavior.state = com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
         bottomSheetBehavior.skipCollapsed = true
         bottomSheetBehavior.isDraggable = false
 
-        bottomSheetBehavior.addBottomSheetCallback(object : com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.BottomSheetCallback {
+        bottomSheetBehavior.addBottomSheetCallback(object : com.tce.teacherapp.util.sheets.BottomSheetBehavior.BottomSheetCallback {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 if (newState == BottomSheetBehavior.STATE_DRAGGING) {
                     bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
@@ -76,15 +76,15 @@ constructor(
         tvClassTitle.text = "Gallery"
 
         classContainer.setOnClickListener {
-            if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
-                bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
+            if (bottomSheetBehavior.state == com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN) {
+                bottomSheetBehavior.state = com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_EXPANDED
                 binding.botomSheetSubFilterContainer.visibility = View.GONE
                 binding.botomSheetMainFilterContainer.visibility = View.VISIBLE
                 binding.maskLayout.visibility = View.VISIBLE
                 (activity as DashboardActivity).bottom_navigation_view.visibility = View.INVISIBLE
             } else {
                 bottomSheetBehavior.state =
-                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                    com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
                 binding.maskLayout.visibility = View.GONE
                 (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
             }
@@ -101,41 +101,41 @@ constructor(
         }
         binding.tvGallary.setOnClickListener {
             bottomSheetBehavior.state =
-                com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
             binding.maskLayout.visibility = View.GONE
             (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
         }
 
         binding.sortContainer.setOnClickListener {
-            if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
-                bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
+            if (bottomSheetBehavior.state == com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN) {
+                bottomSheetBehavior.state = com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_EXPANDED
                 binding.botomSheetSubFilterContainer.visibility = View.VISIBLE
                 binding.botomSheetMainFilterContainer.visibility = View.GONE
                 binding.maskLayout.visibility = View.VISIBLE
                 (activity as DashboardActivity).bottom_navigation_view.visibility = View.INVISIBLE
             } else {
-                bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                bottomSheetBehavior.state = com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
                 binding.maskLayout.visibility = View.GONE
                 (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
             }
         }
         binding.tvPhotos.setOnClickListener {
             bottomSheetBehavior.state =
-                com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
             binding.maskLayout.visibility = View.GONE
             viewModel.setStateEvent(StudentStateEvent.GetGalleryData(1))
         }
 
         binding.tvVideos.setOnClickListener {
             bottomSheetBehavior.state =
-                com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
             binding.maskLayout.visibility = View.GONE
             (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
             viewModel.setStateEvent(StudentStateEvent.GetGalleryData(2))
         }
 
         binding.tvShowAll.setOnClickListener {
-            bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+            bottomSheetBehavior.state = com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
             binding.maskLayout.visibility = View.GONE
             (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
             viewModel.setStateEvent(StudentStateEvent.GetGalleryData(0))
@@ -144,7 +144,7 @@ constructor(
             findNavController().navigate(R.id.action_studentGalleryFragment_to_studentProfileUploadResouceSelectionFragment)
         }
         binding.maskLayout.setOnClickListener {
-            bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+            bottomSheetBehavior.state = com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
             binding.maskLayout.visibility = View.GONE
             (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
         }

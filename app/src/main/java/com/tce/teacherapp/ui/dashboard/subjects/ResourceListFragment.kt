@@ -14,11 +14,11 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentResourceListBinding
+import com.tce.teacherapp.db.entity.Resource
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.subjects.adapter.topicResourceEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectStateEvent
 import com.tce.teacherapp.util.StateMessageCallback
-import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import javax.inject.Inject
@@ -31,6 +31,7 @@ constructor(
     viewModelFactory: ViewModelProvider.Factory
 ) : BaseSubjectFragment(R.layout.fragment_resource_list,viewModelFactory) {
     private lateinit var binding: FragmentResourceListBinding
+    private var  chapterLabel:String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -49,6 +50,7 @@ constructor(
         super.onViewCreated(view, savedInstanceState)
         val parent1Id = arguments?.getString("parent1Id")
         val parent2Id = arguments?.getString("parent2Id")
+        chapterLabel = arguments?.getString("chapterLabel")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             activity?.window!!.statusBarColor = resources.getColor(R.color.color_black, null)
         } else {
@@ -58,7 +60,6 @@ constructor(
         (activity as DashboardActivity).showHideBottomBar(false)
         Glide.with(requireActivity())
             .load(R.drawable.group)
-            .transform(BlurTransformation(200,2))
             .into(binding.ivContainer)
         viewModel.setStateEvent(SubjectStateEvent.GetTopicResourceEvent("", parent1Id!!,parent2Id!!))
 
@@ -86,7 +87,14 @@ constructor(
                                     resourceVo(resource)
                                     listener {
                                         val bundle = Bundle()
-                                        bundle.putString("title",resource.title)
+                                        val allTopicResourceList:ArrayList<Resource>? = arguments?.getParcelableArrayList("resourceList")
+                                        bundle.putParcelableArrayList("resourceList",allTopicResourceList)
+                                        bundle.putParcelable("resourceVo",resource)
+                                        if(chapterLabel.isNullOrEmpty()) {
+                                            bundle.putString("title", resource.title)
+                                        }else{
+                                            bundle.putString("title", chapterLabel+"—"+resource.title)
+                                        }
                                         bundle.putString("url",resource.src)
                                         when {
                                             resource.contenttype.equals("av", true) -> {

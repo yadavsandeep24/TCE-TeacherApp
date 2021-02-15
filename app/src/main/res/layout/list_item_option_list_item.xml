@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_main_container"
+    android:layout_width="match_parent"
+    android:layout_height="55dp">
+
+    <LinearLayout
+        android:id="@+id/select_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical">
+
+        <CheckBox
+            android:id="@+id/chk_select"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:background="@drawable/checkbox_selector"
+            android:button="@null"
+            android:checked="false"/>
+
+        <com.tce.teacherapp.util.RubikMediumTextview
+            android:id="@+id/tv_option_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="Name"
+            android:textColor="#232337"
+            android:textSize="@dimen/font_size_12_dp">
+
+        </com.tce.teacherapp.util.RubikMediumTextview>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/select_container"
+        android:background="#f5f5f5" />
+</RelativeLayout>

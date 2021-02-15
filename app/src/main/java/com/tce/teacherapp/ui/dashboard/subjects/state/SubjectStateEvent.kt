@@ -15,6 +15,16 @@ sealed class SubjectStateEvent : StateEvent {
         }
     }
 
+    object CurriculumEvent : SubjectStateEvent() {
+        override fun errorInfo(): String {
+            return "Error in getting curriculum info."
+        }
+
+        override fun toString(): String {
+            return "CurriculumEvent"
+        }
+    }
+
     class DivisionSelectionEvent(
         val grade: Grade,
         val position: Int
@@ -38,6 +48,13 @@ sealed class SubjectStateEvent : StateEvent {
         }
     }
 
+    object GetYearOptionListEvent : SubjectStateEvent() {
+        override fun errorInfo(): String {
+            return "Error in subject selection event"
+        }
+
+    }
+
     class GetSubjectEvent(
         val query: String
     ) : SubjectStateEvent() {
@@ -51,16 +68,16 @@ sealed class SubjectStateEvent : StateEvent {
 
     }
 
-    class GetTopicEvent(
+    class GetBookEvent(
         val query: String,
         val bookId: String
     ) : SubjectStateEvent() {
         override fun errorInfo(): String {
-            return "Error in getting topic info."
+            return "Error in getting book info."
         }
 
         override fun toString(): String {
-            return "GetTopicEvent"
+            return "GetBookEvent"
         }
 
     }
@@ -95,6 +112,20 @@ sealed class SubjectStateEvent : StateEvent {
 
     }
 
+    class GetPracticeResourceEvent(
+        val topicId: String,
+        val chapterId: String
+    ) : SubjectStateEvent() {
+        override fun errorInfo(): String {
+            return "Error in getting practice resource info."
+        }
+
+        override fun toString(): String {
+            return "GetPracticeResourceEvent"
+        }
+
+    }
+
     class GetChapterResourceTypeEvent(
         val chapterId: String,
         val topicId: String,
@@ -106,6 +137,19 @@ sealed class SubjectStateEvent : StateEvent {
 
         override fun toString(): String {
             return "GetChapterResourceTypeEvent"
+        }
+
+    }
+    class GetTopicEvent(
+        val topicId: String,
+        val subjctID: String
+    ) : SubjectStateEvent() {
+        override fun errorInfo(): String {
+            return "Error in getting topic info."
+        }
+
+        override fun toString(): String {
+            return "GetTopicEvent"
         }
 
     }

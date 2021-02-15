@@ -24,10 +24,10 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentVideoPlayerBinding
+import com.tce.teacherapp.db.entity.Resource
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import kotlinx.android.synthetic.main.custom_playback_control.view.*
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
@@ -44,6 +44,8 @@ constructor(
     private var currentWindow = 0
     private var playbackPosition: Long = 0
     private var playbackStateListener: PlaybackStateListener? = null
+    var selectedResourceVo:Resource? =null
+    var allTopicResourceList:ArrayList<Resource>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,13 +59,16 @@ constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val tvTitle = arguments?.getString("title")
-        val videoType = arguments?.getString("tpe")
         val isShowModalityIcon = arguments?.getBoolean("isModality")
+        allTopicResourceList = arguments?.getParcelableArrayList("resourceList")
+        selectedResourceVo = arguments?.getParcelable("resourceVo")
+
         if(isShowModalityIcon != null && !isShowModalityIcon) {
             binding.playerView.ib_modality.visibility = View.GONE
         }else{
             binding.playerView.ib_modality.visibility = View.VISIBLE
         }
+        setNextAndPreviousButtonVisibility()
         binding.playerView.tv_title.text = tvTitle
         playbackStateListener = PlaybackStateListener()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -83,10 +88,116 @@ constructor(
         }
     }
 
+    private fun setNextAndPreviousButtonVisibility() {
+        GlobalScope.launch(Dispatchers.Main) {
+            val currentResourcePosition = withContext(Dispatchers.IO) {
+                if (allTopicResourceList != null) {
+                    for (i in 0 until allTopicResourceList!!.size){
+                        val resource = allTopicResourceList!![i]
+                        if (selectedResourceVo != null) {
+                            if(resource.id.equals(selectedResourceVo!!.id,true)) {
+                                return@withContext i
+                            }
+
+                        }
+                    }
+                }else{
+                    return@withContext  -1
+                }
+            }
+
+            if(currentResourcePosition == -1){
+                binding.playerView.ib_prev.isEnabled = false
+                binding.playerView.ib_next.isEnabled = false
+                binding.playerView.ib_prev.alpha =0.4f
+                binding.playerView.ib_next.alpha =0.4f
+            }else{
+                if(currentResourcePosition ==0){
+                    binding.playerView.ib_prev.isEnabled = false
+                    binding.playerView.ib_prev.alpha =0.4f
+                }else{
+                    if (allTopicResourceList != null) {
+                        if(currentResourcePosition == allTopicResourceList!!.size-1) {
+                            binding.playerView.ib_next.isEnabled = false
+                            binding.playerView.ib_next.alpha =0.4f
+                        }else{
+                            binding.playerView.ib_prev.isEnabled = true
+                            binding.playerView.ib_next.isEnabled = true
+                            binding.playerView.ib_prev.alpha =1f
+                            binding.playerView.ib_next.alpha =1f
+                            binding.playerView.ib_prev.setOnClickListener {
+                                val prevPos = currentResourcePosition as Int -1
+                                Log.d("SAN", allTopicResourceList!![prevPos].title)
+                                val resource = allTopicResourceList!![prevPos]
+                                val bundle = Bundle()
+                                val arrList = ArrayList<Resource>()
+                                arrList.addAll(allTopicResourceList!!)
+                                bundle.putParcelableArrayList("resourceList",arrList)
+                                bundle.putParcelable("resourceVo",resource)
+                                bundle.putString("title","-"+resource.title)
+                                bundle.putString("url",resource.src)
+                                when {
+                                    resource.contenttype.equals("av", true) -> {
+                                        binding.playerView.tv_title.text = resource.title
+                                        selectedResourceVo = resource
+                                        setNextAndPreviousButtonVisibility()
+                                        initializePlayer(resource.src)
+                                    }
+                                    resource.contenttype.equals("Image", true) -> {
+                                        //findNavController().navigate(R.id.action_chapterResourceSelectionFragment_to_imageContentFragment,bundle)
+                                    }
+                                    resource.contenttype.equals("activity", true) -> {
+                                       // findNavController().navigate(R.id.action_chapterResourceSelectionFragment_to_HTMLContentFragment,bundle)
+                                    }
+
+                                }
+                            }
+                            binding.playerView.ib_next.setOnClickListener {
+                                val nextPos = currentResourcePosition as Int +1
+                                Log.d("SAN", allTopicResourceList!![nextPos].title!!)
+                                val resource = allTopicResourceList!![nextPos]
+                                val bundle = Bundle()
+                                val arrList = ArrayList<Resource>()
+                                arrList.addAll(allTopicResourceList!!)
+                                bundle.putParcelableArrayList("resourceList",arrList)
+                                bundle.putParcelable("resourceVo",resource)
+                                bundle.putString("title","-"+resource.title)
+                                bundle.putString("url",resource.src)
+                                when {
+                                    resource.contenttype.equals("av", true) -> {
+                                        binding.playerView.tv_title.text = resource.title
+                                        selectedResourceVo = resource
+                                        setNextAndPreviousButtonVisibility()
+                                        initializePlayer(resource.src)
+                                    }
+                                    resource.contenttype.equals("Image", true) -> {
+                                        //findNavController().navigate(R.id.action_chapterResourceSelectionFragment_to_imageContentFragment,bundle)
+                                    }
+                                    resource.contenttype.equals("activity", true) -> {
+                                        //findNavController().navigate(R.id.action_chapterResourceSelectionFragment_to_HTMLContentFragment,bundle)
+                                    }
+                                    resource.contenttype.equals("audio", true) -> {
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                }
+
+            }
+
+
+
+        }
+
+    }
+
     override fun onStart() {
         super.onStart()
         if (Util.SDK_INT > 23) {
-            initializePlayer()
+            val url = arguments?.getString("url")
+            initializePlayer(url)
         }
     }
 
@@ -94,7 +205,8 @@ constructor(
         super.onResume()
       //  hideSystemUi()
         if (Util.SDK_INT <= 23 || player == null) {
-            initializePlayer()
+            val url = arguments?.getString("url")
+            initializePlayer(url)
         }
     }
 
@@ -112,8 +224,7 @@ constructor(
         }
     }
 
-    private fun initializePlayer() {
-        val url = arguments?.getString("url")
+    private fun initializePlayer(url:String?) {
         val trackSelector = DefaultTrackSelector(requireActivity())
         trackSelector.setParameters(
             trackSelector.buildUponParameters().setMaxVideoSizeSd()

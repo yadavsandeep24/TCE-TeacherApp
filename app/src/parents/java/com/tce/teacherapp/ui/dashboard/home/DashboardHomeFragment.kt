@@ -119,14 +119,14 @@ constructor(
             findNavController().navigate(R.id.action_dashboardHomeFragment_to_addChildFragment)
         }
 
-        val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
+        val bottomSheetBehavior = com.tce.teacherapp.util.sheets.BottomSheetBehavior.from(bottom_sheet)
 
-        bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+        bottomSheetBehavior.state = com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
         bottomSheetBehavior.skipCollapsed = true
         bottomSheetBehavior.isDraggable = false
 
         bottomSheetBehavior.addBottomSheetCallback(object :
-            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.BottomSheetCallback {
+            com.tce.teacherapp.util.sheets.BottomSheetBehavior.BottomSheetCallback {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 if (newState == BottomSheetBehavior.STATE_DRAGGING) {
                     bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
@@ -152,13 +152,13 @@ constructor(
                             val glide by lazy { Glide.with(binding.imgProfile.context) }
                             glide.loadImage(it.imageUrl).into(binding.imgProfile)
                             listener {
-                                val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
-                                if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
-                                    bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
+                                val bottomSheetBehavior = com.tce.teacherapp.util.sheets.BottomSheetBehavior.from(bottom_sheet)
+                                if (bottomSheetBehavior.state == com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN) {
+                                    bottomSheetBehavior.state = com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_EXPANDED
                                     binding.maskLayout.setBackgroundColor(resources.getColor(R.color.dim_color_dashboard))
                                     (activity as DashboardActivity).bottom_navigation_view.visibility = View.INVISIBLE
                                 } else {
-                                    bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                                    bottomSheetBehavior.state = com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
                                     binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
                                     (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
                                 }
@@ -216,8 +216,8 @@ constructor(
 
     override fun onChildListItemClick(student : StudentListResponseItem) {
         viewModel.setStateEvent(DashboardStateEvent.GetParentDashboardData(student.id))
-        val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
-        bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+        val bottomSheetBehavior = com.tce.teacherapp.util.sheets.BottomSheetBehavior.from(bottom_sheet)
+        bottomSheetBehavior.state = com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
         binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
         (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
     }

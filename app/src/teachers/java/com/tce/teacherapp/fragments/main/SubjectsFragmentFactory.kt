@@ -60,6 +60,9 @@ constructor(
             ImageContentFragment::class.java.name ->{
                 ImageContentFragment(viewModelFactory)
             }
+            ResourceSearchFragment::class.java.name ->{
+                ResourceSearchFragment(viewModelFactory)
+            }
             else -> {
                 SubjectListFragment(viewModelFactory)
             }

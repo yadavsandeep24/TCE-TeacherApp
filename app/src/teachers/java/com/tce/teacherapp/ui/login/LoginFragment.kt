@@ -3,8 +3,10 @@ package com.tce.teacherapp.ui.login
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
 import android.text.SpannableString
 import android.text.TextPaint
+import android.text.TextWatcher
 import android.text.method.LinkMovementMethod
 import android.text.method.PasswordTransformationMethod
 import android.text.method.SingleLineTransformationMethod
@@ -68,13 +70,12 @@ constructor(viewModelFactory: ViewModelProvider.Factory) : BaseFragment(R.layout
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d("SAN", "LoginFragment-->onViewCreated")
-        setKeyboardVisibilityListener(binding.root,this)
+        setKeyboardVisibilityListener(binding.root, this)
         val isForceFullLogin = arguments?.getBoolean("isForceFullLoginShow")
         Log.d("SAN", "isForceFullLogin-->$isForceFullLogin")
         if (isForceFullLogin != null && isForceFullLogin) {
             binding.srContainer.visibility = View.VISIBLE
             binding.ivLogo.visibility = View.VISIBLE
-            binding.flBottom.visibility = View.VISIBLE
         } else {
             viewModel.setStateEvent(LoginStateEvent.CheckLoginEnabledMode)
         }
@@ -91,6 +92,7 @@ constructor(viewModelFactory: ViewModelProvider.Factory) : BaseFragment(R.layout
         binding.edtPassword.setText(MessageConstant.LOGIN_DEFAULT_PASSWORD)
 
         binding.tvLogin.setOnClickListener {
+            uiCommunicationListener.hideSoftKeyboard()
             viewModel.setStateEvent(
                 LoginStateEvent.LoginAttemptEvent(
                     binding.edtSchoolName.text.toString().trim(),
@@ -119,13 +121,31 @@ constructor(viewModelFactory: ViewModelProvider.Factory) : BaseFragment(R.layout
             requireActivity(), android.R.layout.simple_dropdown_item_1line,
             resources.getStringArray(R.array.school_name)
         )
+        binding.edtSchoolName.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if(s.toString().length >2) {
+                    viewModel.setStateEvent(
+                        LoginStateEvent.SchoolNameEvent(
+                            s.toString()
+                        )
+                    )
+                }
+            }
 
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+        })
         binding.edtSchoolName.setAdapter(arrayAdapter)
         binding.edtSchoolName.setOnClickListener { binding.edtSchoolName.showDropDown() }
 
         binding.tvWelcome.text = getBannerDayMessage(requireContext())
-
+        viewModel.setStateEvent(LoginStateEvent.ClientIdEvent)
         subscribeObservers()
+
     }
 
 
@@ -139,6 +159,7 @@ constructor(viewModelFactory: ViewModelProvider.Factory) : BaseFragment(R.layout
                             viewState.loginFields = null
                             findNavController().navigate(R.id.action_loginFragment_to_quickAccessSettingFragment)
                         } else {
+                            viewModel.setAlarm(requireActivity())
                             viewState.loginFields = null
                             val i = Intent(activity, DashboardActivity::class.java)
                             startActivity(i)
@@ -150,6 +171,7 @@ constructor(viewModelFactory: ViewModelProvider.Factory) : BaseFragment(R.layout
                         }
 
                     } else {
+                        viewModel.setAlarm(requireActivity())
                         val i = Intent(activity, DashboardActivity::class.java)
                         startActivity(i)
                         activity?.overridePendingTransition(
@@ -167,8 +189,20 @@ constructor(viewModelFactory: ViewModelProvider.Factory) : BaseFragment(R.layout
                     } else {
                         binding.srContainer.visibility = View.VISIBLE
                         binding.ivLogo.visibility = View.VISIBLE
-                        binding.flBottom.visibility = View.VISIBLE
                     }
+                }
+                viewState.SchoolResponse?.let {
+                    Log.d("SAN",it.size.toString())
+                    val arrayAdapter = ArrayAdapter(
+                        requireActivity(), android.R.layout.simple_dropdown_item_1line,
+                        it
+                    )
+                    binding.edtSchoolName.setAdapter(arrayAdapter)
+                    viewState.SchoolResponse = null
+                }
+
+                viewState.clientIdRes?.let {
+                    Log.d("SAN","it.apiVersion-->"+it.apiVersion)
                 }
             }
         })
@@ -215,11 +249,6 @@ constructor(viewModelFactory: ViewModelProvider.Factory) : BaseFragment(R.layout
     }
 
     override fun onVisibilityChanged(visible: Boolean) {
-        if(visible) {
-            binding.flBottom.visibility = View.GONE
-        }else{
-            binding.flBottom.visibility = View.VISIBLE
-        }
 
     }
 

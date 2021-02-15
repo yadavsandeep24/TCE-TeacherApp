@@ -61,9 +61,9 @@ class BottomNavController(
 
         Log.d(TAG, "onNavigationItemSelected ")
         // Replace fragment representing a navigation item
-        val fragment = fragmentManager.findFragmentByTag(menuItemId.toString())
-            ?: createNavHost(menuItemId)
-
+/*        val fragment = fragmentManager.findFragmentByTag(menuItemId.toString())
+            ?: createNavHost(menuItemId)*/
+        val fragment =  createNavHost(menuItemId)
         fragmentManager.beginTransaction()
             .setCustomAnimations(
                 R.anim.fade_in,

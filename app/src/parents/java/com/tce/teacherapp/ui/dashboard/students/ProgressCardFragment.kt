@@ -62,14 +62,14 @@ constructor(
         if (studentVo != null) {
             reportPath = studentVo.Term1ReportPDF.toString()
         }
-        val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(binding.bottomSheet)
+        val bottomSheetBehavior = com.tce.teacherapp.util.sheets.BottomSheetBehavior.from(binding.bottomSheet)
 
-        bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+        bottomSheetBehavior.state = com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
         bottomSheetBehavior.skipCollapsed = true
         bottomSheetBehavior.isDraggable = false
 
         bottomSheetBehavior.addBottomSheetCallback(object :
-            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.BottomSheetCallback {
+            com.tce.teacherapp.util.sheets.BottomSheetBehavior.BottomSheetCallback {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 if (newState == BottomSheetBehavior.STATE_DRAGGING) {
                     bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
@@ -79,13 +79,13 @@ constructor(
         })
 
         binding.imgUpload.setOnClickListener {
-            if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
+            if (bottomSheetBehavior.state == com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN) {
                 bottomSheetBehavior.state =
-                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
+                    com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_EXPANDED
                 binding.maskLayout.visibility = View.VISIBLE
             } else {
                 bottomSheetBehavior.state =
-                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                    com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
                 binding.maskLayout.visibility = View.GONE
             }
         }
@@ -140,8 +140,8 @@ constructor(
             binding.rvShareOptions.adapter = AppAdapter(apps, this)
         }
         binding.maskLayout.setOnClickListener {
-            bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
-            bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+            bottomSheetBehavior.state = com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
+            bottomSheetBehavior.state = com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
             binding.maskLayout.visibility = View.GONE
         }
     }

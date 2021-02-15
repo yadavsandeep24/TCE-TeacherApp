@@ -1,5 +1,6 @@
 package com.tce.teacherapp.ui.dashboard.subjects
 
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
@@ -18,18 +19,17 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.EpoxyVisibilityTracker
-import com.airbnb.epoxy.addGlidePreloader
-import com.airbnb.epoxy.glidePreloader
-import com.bumptech.glide.Glide
+import com.bumptech.glide.load.model.GlideUrl
+import com.bumptech.glide.load.model.LazyHeaders
 import com.tce.teacherapp.R
+import com.tce.teacherapp.api.response.tceapi.NodeX
 import com.tce.teacherapp.databinding.FragmentSelectChapterBookBinding
-import com.tce.teacherapp.db.entity.Topic
 import com.tce.teacherapp.ui.dashboard.DashboardActivity
-import com.tce.teacherapp.ui.dashboard.subjects.adapter.SubjectListEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.subjects.adapter.chapterListEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.subjects.state.SUBJECT_VIEW_STATE_BUNDLE_KEY
-import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectStateEvent
 import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectViewState
+import com.tce.teacherapp.ui.login.LauncherActivity
+import com.tce.teacherapp.util.MessageType
 import com.tce.teacherapp.util.StateMessageCallback
 import com.tce.teacherapp.util.Utility
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -47,7 +47,10 @@ constructor(
 
     private lateinit var binding: FragmentSelectChapterBookBinding
 
-    var topicVo: Topic? = null
+    var topicVo: NodeX? = null
+    var iconPath: String? = null
+    var subjctID: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         savedInstanceState?.let { inState ->
@@ -77,7 +80,9 @@ constructor(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        topicVo = arguments?.getParcelable("topicdata") as Topic?
+        topicVo = arguments?.getParcelable("topicdata") as NodeX?
+        subjctID = arguments?.getString("subjectID")
+        iconPath = arguments?.getString("iconpath")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             activity?.window!!.statusBarColor = resources.getColor(R.color.color_black, null)
         } else {
@@ -123,26 +128,91 @@ constructor(
             binding.svChapterBook.setQuery("", false)
             binding.svChapterBook.clearFocus()
             if (topicVo != null) {
-                viewModel.setStateEvent(SubjectStateEvent.GetChapterEvent("", topicVo!!.id,topicVo!!.bookId))
+                setChapterData(topicVo!!)
+                //viewModel.setStateEvent(SubjectStateEvent.GetChapterEvent("", topicVo!!.id,topicVo!!.bookId))
             }
             false
         }
 
         if (topicVo != null) {
-            viewModel.setStateEvent(SubjectStateEvent.GetChapterEvent("", topicVo!!.id,topicVo!!.bookId))
+            setChapterData(topicVo!!)
+            //viewModel.setStateEvent(SubjectStateEvent.GetChapterEvent("", topicVo!!.id,topicVo!!.bookId))
         }
 
         binding.rvChapterBook.layoutManager = GridLayoutManager(activity, 2)
         binding.rvChapterBook.setHasFixedSize(true)
         val epoxyVisibilityTracker = EpoxyVisibilityTracker()
         epoxyVisibilityTracker.attach(binding.rvChapterBook)
-        binding.rvChapterBook.addGlidePreloader(
+/*        binding.rvChapterBook.addGlidePreloader(
             Glide.with(this),
             preloader = glidePreloader { requestManager, model: SubjectListEpoxyHolder, _ ->
                 requestManager.loadImage(model.imageUrl)
             }
-        )
+        )*/
         subscribeObservers()
+    }
+
+    private fun setChapterData(topicVo: NodeX) {
+        binding.rvChapterBook.withModels {
+            for (chapter in topicVo.node) {
+                var iconName = ""
+                if (chapter.node.isNotEmpty()) {
+                    if (chapter.node[chapter.node.size - 1].type.equals(
+                            "icon",
+                            true
+                        )
+                    ) {
+                        iconName = chapter.node[chapter.node.size - 1].label
+                    }
+                }
+                val url = GlideUrl(
+                    "http://172.18.1.57:8080/tce-repo-api/1/web/1/content/fileservice/$iconPath/icon/$iconName",
+                    LazyHeaders.Builder()
+                        .addHeader("Cookie", "access_token=${viewModel.getAccessToken()}")
+                        .build()
+                )
+                if(chapter.id.isNotEmpty()) {
+                    chapterListEpoxyHolder {
+                        id(chapter.id)
+                        title(chapter.label)
+                        imageUrl(url)
+                        /*          chapter.image?.let { it1 -> imageUrl(it1) }
+                    try {
+                        var name = chapter.icon?.substring(0, chapter.icon!!.lastIndexOf("."))
+                            ?.replace("-","_")
+                        if(chapter.icon.isNullOrEmpty()){
+                            name ="default_chapter"
+                        }
+                        Log.d("SAN", "name-->$name")
+                        if(Utility.getDrawable(name?.toLowerCase(Locale.ROOT),
+                                requireContext()) == null){
+                            Utility.getDrawable("default_chapter", requireContext())?.let { it1 -> imageDrawable(it1) }
+                        }else {
+                            Utility.getDrawable(
+                                name?.toLowerCase(Locale.ROOT),
+                                requireContext()
+                            )?.let { it1 -> imageDrawable(it1) }
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }*/
+                        listener {
+                            val bundle = Bundle()
+                            bundle.putParcelable("chapterdata", chapter)
+                            bundle.putString("subjectID", subjctID)
+                            bundle.putString("topicID", chapter.node[0].id)
+                            bundle.putString("iconpath", iconPath)
+                            findNavController().navigate(
+                                R.id.action_selectChapterBookFragment_to_chapterResourceSelectionFragment,
+                                bundle
+                            )
+
+                        }
+                    }
+                }
+            }
+
+        }
     }
 
     private val queryTextListener = object : SearchView.OnQueryTextListener {
@@ -152,7 +222,7 @@ constructor(
 
         override fun onQueryTextChange(newText: String): Boolean {
             if (topicVo != null) {
-                viewModel.setStateEvent(SubjectStateEvent.GetChapterEvent(newText, topicVo!!.id,topicVo!!.bookId))
+                //viewModel.setStateEvent(SubjectStateEvent.GetChapterEvent(newText, topicVo!!.id,topicVo!!.bookId))
             }
             return true
 
@@ -169,7 +239,7 @@ constructor(
                             chapterListEpoxyHolder {
                                 id(chapter.id)
                                 title(chapter.label)
-                                chapter.image?.let { it1 -> imageUrl(it1) }
+                               // chapter.image?.let { it1 -> imageUrl(it1) }
                                 try {
                                     var name = chapter.icon?.substring(0, chapter.icon!!.lastIndexOf("."))
                                         ?.replace("-","_")
@@ -219,6 +289,12 @@ constructor(
                     stateMessageCallback = object : StateMessageCallback {
                         override fun removeMessageFromStack() {
                             viewModel.clearStateMessage()
+                            if(stateMessage.response.messageType == MessageType.AccessDenied()) {
+                                val i = Intent(activity, LauncherActivity::class.java)
+                                startActivity(i)
+                                activity?.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+                                activity?.finish()
+                            }
                         }
                     }
                 )

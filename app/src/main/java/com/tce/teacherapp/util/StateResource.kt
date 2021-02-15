@@ -33,6 +33,8 @@ sealed class MessageType {
     class Info : MessageType()
 
     class None : MessageType()
+
+    class AccessDenied : MessageType()
 }
 
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.tce.teacherapp.util.bottomSheet
+package com.tce.teacherapp.util.sheets
 
 import android.os.Parcel
 

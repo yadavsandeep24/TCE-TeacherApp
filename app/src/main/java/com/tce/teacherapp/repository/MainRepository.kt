@@ -7,6 +7,7 @@ import com.tce.teacherapp.ui.dashboard.home.state.DashboardViewState
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageViewState
 import com.tce.teacherapp.ui.dashboard.planner.state.PlannerViewState
 import com.tce.teacherapp.ui.dashboard.students.state.StudentViewState
+import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectStateEvent
 import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectViewState
 import com.tce.teacherapp.util.DataState
 import com.tce.teacherapp.util.StateEvent
@@ -31,7 +32,7 @@ interface MainRepository {
         stateEvent: StateEvent
     ): Flow<DataState<SubjectViewState>>
 
-    fun getTopicList(
+    fun getBookDetailList(
         query: String,
         bookID: String,
         stateEvent: StateEvent
@@ -184,6 +185,21 @@ interface MainRepository {
     fun getGalleryData(type: Int, stateEvent: StateEvent): Flow<DataState<StudentViewState>>
     fun getStudentPortfolio(type: Int, stateEvent: StateEvent): Flow<DataState<StudentViewState>>
     fun getMessageResourceTypeList(stateEvent: StateEvent): Flow<DataState<MessageViewState>>
+    fun getCurriculumData(stateEvent: SubjectStateEvent): Flow<DataState<SubjectViewState>>
+    fun getTCEBookDetailList(
+        query: String,
+        bookId: String,
+        stateEvent: SubjectStateEvent
+    ): Flow<DataState<SubjectViewState>>
 
+    fun getTopicList(
+        topicId: String,
+        subjectID: String,
+        stateEvent: SubjectStateEvent
+    ): Flow<DataState<SubjectViewState>>
+
+    fun getAccessToken(): String
+    fun getRefreshToken(): String
+    fun getSessionTimeOut():String
 
 }

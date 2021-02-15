@@ -1,4 +1,4 @@
-package com.tce.teacherapp.ui.home
+package com.tce.teacherapp.ui.dashboard.home
 
 import android.content.pm.ActivityInfo
 import android.os.Build
@@ -88,15 +88,15 @@ constructor(
         }
 
         val bottomSheetBehavior =
-            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
+            com.tce.teacherapp.util.sheets.BottomSheetBehavior.from(bottom_sheet)
 
         bottomSheetBehavior.state =
-            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+            com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
         bottomSheetBehavior.skipCollapsed = true
         bottomSheetBehavior.isDraggable = false
 
         bottomSheetBehavior.addBottomSheetCallback(object :
-            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.BottomSheetCallback {
+            com.tce.teacherapp.util.sheets.BottomSheetBehavior.BottomSheetCallback {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 if (newState == BottomSheetBehavior.STATE_DRAGGING) {
                     bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
@@ -107,14 +107,14 @@ constructor(
 
         binding.classContainer.setOnClickListener {
             viewModel.setStateEvent(DashboardStateEvent.GetUserClassList)
-            if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
+            if (bottomSheetBehavior.state == com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN) {
                 bottomSheetBehavior.state =
-                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
+                    com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_EXPANDED
                 binding.maskLayout.setBackgroundColor(resources.getColor(R.color.dim_color_dashboard))
                 (activity as DashboardActivity).bottom_navigation_view.visibility = View.INVISIBLE
             } else {
                 bottomSheetBehavior.state =
-                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                    com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
                 binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
                 (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
             }
@@ -236,8 +236,8 @@ constructor(
             binding.tvClassIcon.background = it1
         }
         binding.tvClassTitle.text = item.name
-        val bottomSheetBehavior = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet)
-        bottomSheetBehavior.state = com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+        val bottomSheetBehavior = com.tce.teacherapp.util.sheets.BottomSheetBehavior.from(bottom_sheet)
+        bottomSheetBehavior.state = com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
         binding.maskLayout.setBackgroundColor(resources.getColor(R.color.transparent))
         (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
         viewModel.setStateEvent(DashboardStateEvent.GetTeacherDashboardData(item.id.toInt()))

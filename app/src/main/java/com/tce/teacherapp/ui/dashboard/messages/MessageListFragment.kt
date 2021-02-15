@@ -17,9 +17,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.EpoxyVisibilityTracker
-import com.airbnb.epoxy.addGlidePreloader
-import com.airbnb.epoxy.glidePreloader
-import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tce.teacherapp.R
 import com.tce.teacherapp.databinding.FragmentMessageListBinding
@@ -28,8 +25,6 @@ import com.tce.teacherapp.ui.dashboard.messages.adapter.messageListEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.messages.state.MESSAGE_VIEW_STATE_BUNDLE_KEY
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageStateEvent
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageViewState
-import com.tce.teacherapp.ui.dashboard.subjects.adapter.SubjectListEpoxyHolder
-import com.tce.teacherapp.ui.dashboard.subjects.loadImage
 import com.tce.teacherapp.util.StateMessageCallback
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.message_bottom_filter.*
@@ -114,14 +109,14 @@ constructor(
         viewModel.setStateEvent(MessageStateEvent.GetMessageEvent(""))
 
         val bottomSheetBehavior =
-            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(bottom_sheet_layout)
+            com.tce.teacherapp.util.sheets.BottomSheetBehavior.from(bottom_sheet_layout)
 
         bottomSheetBehavior.state =
-            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_COLLAPSED
+            com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_COLLAPSED
         bottomSheetBehavior.skipCollapsed = true
 
         bottomSheetBehavior.addBottomSheetCallback(object :
-            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.BottomSheetCallback {
+            com.tce.teacherapp.util.sheets.BottomSheetBehavior.BottomSheetCallback {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 if (newState == BottomSheetBehavior.STATE_DRAGGING) {
                     bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
@@ -130,21 +125,21 @@ constructor(
             }
         })
         binding.imgFilter.setOnClickListener {
-            if (bottomSheetBehavior.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
+            if (bottomSheetBehavior.state == com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN) {
                 binding.maskLayout.visibility = View.VISIBLE
                 bottomSheetBehavior.state =
-                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
+                    com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_EXPANDED
                 (activity as DashboardActivity).bottom_navigation_view.visibility = View.GONE
             } else {
                 binding.maskLayout.visibility = View.GONE
                 bottomSheetBehavior.state =
-                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                    com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
                 (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
             }
         }
         binding.maskLayout.setOnClickListener {
             bottomSheetBehavior.state =
-                com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
             binding.maskLayout.visibility = View.GONE
         }
         binding.imgNewMessage.setOnClickListener {
@@ -171,12 +166,12 @@ constructor(
         binding.rvMessage.setHasFixedSize(true)
         val epoxyVisibilityTracker = EpoxyVisibilityTracker()
         epoxyVisibilityTracker.attach(binding.rvMessage)
-        binding.rvMessage.addGlidePreloader(
+/*        binding.rvMessage.addGlidePreloader(
             Glide.with(this),
             preloader = glidePreloader { requestManager, model: SubjectListEpoxyHolder, _ ->
                 requestManager.loadImage(model.imageUrl)
             }
-        )
+        )*/
         uiCommunicationListener.hideSoftKeyboard()
         subscribeObservers()
     }

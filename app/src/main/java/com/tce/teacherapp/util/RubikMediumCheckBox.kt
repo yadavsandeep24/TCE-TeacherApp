@@ -6,7 +6,7 @@ import android.util.AttributeSet
 
 
 class RubikMediumCheckBox : androidx.appcompat.widget.AppCompatCheckBox {
-    constructor(context: Context?, attrs: AttributeSet?, defStyle: Int) : super(
+    constructor(context: Context, attrs: AttributeSet?, defStyle: Int) : super(
         context,
         attrs,
         defStyle
@@ -14,11 +14,11 @@ class RubikMediumCheckBox : androidx.appcompat.widget.AppCompatCheckBox {
         init()
     }
 
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         init()
     }
 
-    constructor(context: Context?) : super(context) {
+    constructor(context: Context) : super(context) {
         init()
     }
 

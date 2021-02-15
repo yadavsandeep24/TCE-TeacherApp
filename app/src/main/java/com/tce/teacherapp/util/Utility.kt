@@ -37,7 +37,9 @@ open class Utility {
                 context.resources.getDrawable(resourceId, null)
             }catch (e: java.lang.Exception) {
                 e.printStackTrace()
-                null
+                val resourceId: Int = context.resources
+                    .getIdentifier("icon_2", "drawable", context.packageName)
+                context.resources.getDrawable(resourceId, null)
             }
         }
 

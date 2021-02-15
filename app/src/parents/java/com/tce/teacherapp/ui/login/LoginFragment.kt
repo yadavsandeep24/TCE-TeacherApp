@@ -64,7 +64,6 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
         if (isForceFullLogin != null && isForceFullLogin) {
             binding.srContainer.visibility = View.VISIBLE
             binding.ivLogo.visibility = View.VISIBLE
-            binding.flBottom.visibility = View.VISIBLE
             binding.dividerContainer.visibility = View.VISIBLE
             binding.tvRegister.visibility = View.VISIBLE
         } else {
@@ -83,11 +82,15 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
         uiCommunicationListener.hideSoftKeyboard()
 
         binding.tvLogin.setOnClickListener {
-            viewModel.setStateEvent(LoginStateEvent.LoginAttemptEvent(null,binding.edtUserName.text.toString().trim(),
-                binding.edtPassword.text.toString().trim()))
+            uiCommunicationListener.hideSoftKeyboard()
+            viewModel.setStateEvent(LoginStateEvent.LoginAttemptEvent("tcdeli-lxplm","school.admin",
+               "123"))
+/*            viewModel.setStateEvent(LoginStateEvent.LoginAttemptEvent("",binding.edtUserName.text.toString().trim(),
+                binding.edtPassword.text.toString().trim()))*/
         }
 
         binding.tvRegister.setOnClickListener {
+            uiCommunicationListener.hideSoftKeyboard()
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
         binding.vwPasswordVisibility.setOnClickListener {
@@ -104,12 +107,13 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
 
         }
         binding.tvWelcome.text = Utility.getBannerDayMessage(requireActivity())
+        viewModel.setStateEvent(LoginStateEvent.ClientIdEvent)
         subscribeObservers()
     }
 
     private fun subscribeObservers() {
 
-        viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
+        viewModel.viewState.observe(viewLifecycleOwner, { viewState ->
             if (viewState != null) {
                 viewState.loginFields?.let {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -117,6 +121,7 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
                             viewState.loginFields = null
                             findNavController().navigate(R.id.action_loginFragment_to_quickAccessSettingFragment)
                         }else{
+                            viewModel.setAlarm(requireActivity())
                             viewState.loginFields = null
                             val i = Intent(activity, DashboardActivity::class.java)
                             startActivity(i)
@@ -125,17 +130,19 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
                         }
 
                     }else{
+                        viewModel.setAlarm(requireActivity())
                       val i = Intent(activity, DashboardActivity::class.java)
                         startActivity(i)
                         activity?.overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left)
                         activity?.finish()
                     }
                 }
-
+                viewState.clientIdRes?.let {
+                    Log.d("SAN","it.apiVersion-->"+it.apiVersion)
+                }
                 if(viewState.profile == null) {
                     binding.srContainer.visibility = View.VISIBLE
                     binding.ivLogo.visibility = View.VISIBLE
-                    binding.flBottom.visibility = View.VISIBLE
                     binding.dividerContainer.visibility = View.VISIBLE
                     binding.tvRegister.visibility = View.VISIBLE
                 }else {
@@ -146,7 +153,6 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
                         } else {
                             binding.srContainer.visibility = View.VISIBLE
                             binding.ivLogo.visibility = View.VISIBLE
-                            binding.flBottom.visibility = View.VISIBLE
                             binding.dividerContainer.visibility = View.VISIBLE
                             binding.tvRegister.visibility = View.VISIBLE
                             val userName = it.email
@@ -206,11 +212,9 @@ constructor(viewModelFactory: ViewModelProvider.Factory)
 
     override fun onVisibilityChanged(visible: Boolean) {
         if (visible) {
-            binding.flBottom.visibility = View.GONE
             binding.dividerContainer.visibility = View.GONE
             binding.tvRegister.visibility = View.GONE
         }else{
-            binding.flBottom.visibility = View.VISIBLE
             binding.dividerContainer.visibility = View.VISIBLE
             binding.tvRegister.visibility = View.VISIBLE
         }

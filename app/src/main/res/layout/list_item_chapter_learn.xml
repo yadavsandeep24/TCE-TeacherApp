@@ -13,6 +13,6 @@
     android:id="@+id/iv_chapter_learn"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/b"
+    android:background="@drawable/s"
     android:scaleType="fitXY"/>
 </com.google.android.material.card.MaterialCardView>

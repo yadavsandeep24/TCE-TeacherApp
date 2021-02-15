@@ -71,8 +71,8 @@
 
         <com.tce.teacherapp.util.RubikMediumTextview
             android:id="@+id/tvAdd"
-            android:layout_width="68dp"
-            android:layout_height="30dp"
+            android:layout_width="70dp"
+            android:layout_height="32dp"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
             android:background="@drawable/ic_add_resource"
@@ -84,82 +84,3 @@
     </RelativeLayout>
 
 </com.google.android.material.card.MaterialCardView>
-
-
-
-
-
-
-<!--
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/card_video"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:clipChildren="true"
-    android:clipToPadding="true"
-    android:visibility="visible"
-    app:cardCornerRadius="20dp"
-    android:layout_margin="10dp"
-    app:cardElevation="8dp"
-    app:cardPreventCornerOverlap="true">
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <RelativeLayout
-            android:id="@+id/video_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/img_video_thumb"
-                android:layout_width="120dp"
-                android:layout_height="80dp"
-                android:src="@drawable/dummy_video"/>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/img_play"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_centerInParent="true"
-                android:src="@drawable/ic_video_play"/>
-        </RelativeLayout>
-
-        <com.tce.teacherapp.util.RubikMediumTextview
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/video_container"
-            android:text="Title hhfhfjkhk"
-            android:textColor="@color/color_black"
-            android:textSize="@dimen/font_size_16_dp"
-            android:layout_toLeftOf="@+id/tvAdd"
-            android:layout_marginLeft="10dp">
-
-        </com.tce.teacherapp.util.RubikMediumTextview>
-
-
-        <com.tce.teacherapp.util.RubikMediumTextview
-            android:id="@+id/tvAdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/ic_add_res"
-            android:text="Add"
-            android:textColor="@color/white"
-            android:gravity="right|center"
-            android:paddingRight="10dp"
-            android:textSize="@dimen/font_size_16_dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="5dp">
-
-        </com.tce.teacherapp.util.RubikMediumTextview>
-
-    </RelativeLayout>
-
-</com.google.android.material.card.MaterialCardView>
--->

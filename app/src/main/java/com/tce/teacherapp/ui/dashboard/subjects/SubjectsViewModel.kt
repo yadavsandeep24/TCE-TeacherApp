@@ -42,7 +42,20 @@ class SubjectsViewModel @Inject constructor(val mainRepository: MainRepository) 
         data.chapterResourceTyeList?.let {
             setChapterResourceTypeData(it)
         }
+        data.allTopicResourceList?.let {
+            setAllTopicResourceList(it)
+        }
+        data.curriculumVo?.let {
+            setCurriculumData(it)
+        }
+        data.tceBookResponse?.let {
+            setTCEBookResponse(it)
+        }
+        data.tceTopicResponse?.let {
+            setTceTopicResponse(it)
+        }
     }
+
 
 
     override fun setStateEvent(stateEvent: StateEvent) {
@@ -64,8 +77,14 @@ class SubjectsViewModel @Inject constructor(val mainRepository: MainRepository) 
                 mainRepository.getSubjects(stateEvent.query, stateEvent = stateEvent)
             }
 
-            is SubjectStateEvent.GetTopicEvent -> {
-                mainRepository.getTopicList(
+            is SubjectStateEvent.GetBookEvent -> {
+
+              /*  mainRepository.getTopicList(
+                    stateEvent.query,
+                    stateEvent.bookId,
+                    stateEvent = stateEvent
+                )*/
+                mainRepository.getTCEBookDetailList(
                     stateEvent.query,
                     stateEvent.bookId,
                     stateEvent = stateEvent
@@ -87,6 +106,8 @@ class SubjectsViewModel @Inject constructor(val mainRepository: MainRepository) 
                     stateEvent = stateEvent
                 )
             }
+
+
             is SubjectStateEvent.GetChapterResourceTypeEvent ->{
                 mainRepository.getChapterResourceType(
                     stateEvent.chapterId,
@@ -94,6 +115,13 @@ class SubjectsViewModel @Inject constructor(val mainRepository: MainRepository) 
                     stateEvent.bookId,
                     stateEvent = stateEvent
                 )
+            }
+
+            is SubjectStateEvent.CurriculumEvent ->{
+                mainRepository.getCurriculumData(stateEvent =stateEvent)
+            }
+            is SubjectStateEvent.GetTopicEvent ->{
+                mainRepository.getTopicList(stateEvent.topicId,stateEvent.subjctID,stateEvent = stateEvent)
             }
             else -> {
                 flow {
@@ -126,6 +154,17 @@ class SubjectsViewModel @Inject constructor(val mainRepository: MainRepository) 
             cleared = true
             job.cancel()
         }
+    }
+
+    fun getAccessToken():String{
+        return mainRepository.getAccessToken()
+    }
+    fun getRefreshToken():String{
+        return mainRepository.getRefreshToken()
+    }
+
+    fun getSessionTImeOut():String{
+        return mainRepository.getSessionTimeOut()
     }
     companion object {
         const val FILENAME = "sample.pdf"

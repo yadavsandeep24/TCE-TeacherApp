@@ -14,4 +14,9 @@
     <dimen name="card_stroke_width_2dp">2dp</dimen>
     <dimen name="card_stroke_width_3dp">3dp</dimen>
     <dimen name="card_stroke_width_0dp">0dp</dimen>
+
+    <integer name="right_sheet_slide_duration">150</integer>
+    <dimen name="design_right_sheet_modal_elevation">16dp</dimen>
+    <dimen name="design_right_sheet_elevation">8dp</dimen>
+    <dimen name="design_right_sheet_peek_height_min">64dp</dimen>
 </resources>

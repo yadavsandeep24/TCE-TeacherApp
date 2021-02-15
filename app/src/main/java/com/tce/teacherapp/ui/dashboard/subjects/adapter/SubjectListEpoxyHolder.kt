@@ -9,28 +9,41 @@ import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.bumptech.glide.Glide
 import com.tce.teacherapp.R
 import com.tce.teacherapp.ui.helpers.KotlinEpoxyHolder
+import com.tce.teacherapp.util.Utility
 
 // This more traditional style uses an Epoxy view holder pattern.
 // The KotlinHolder is used to cache the view look ups, but uses property delegates to simplify it.
 // The annotations allow for code generation of a subclass, which has equals/hashcode, and some other
 // helpers. An extension function is also generated to make it easier to use this in an EpoxyController.
 @EpoxyModelClass(layout = R.layout.list_item_subjects)
+
 abstract class SubjectListEpoxyHolder : EpoxyModelWithHolder<Holder1>() {
 
     @EpoxyAttribute
     lateinit var listener: () -> Unit
+
     @EpoxyAttribute
     lateinit var title: String
+
     @EpoxyAttribute
     lateinit var imageUrl: String
+
     @EpoxyAttribute
-    lateinit var imageDrawable: Drawable
+    var imageDrawable: Drawable? = null
 
     override fun bind(holder: Holder1) {
         holder.tvTitle.text = title
         holder.cardMain.setOnClickListener { listener() }
-        holder.imageView.background = imageDrawable
+
+        if(imageDrawable == null) {
+            holder.imageView.background =   Utility.getDrawable(
+                "icon_4", holder.tvTitle.context
+            )
+        }else{
+            holder.imageView.background = imageDrawable
+        }
         //  holder.glide.loadImage(imageUrl).into(holder.imageView)
+
     }
 }
 

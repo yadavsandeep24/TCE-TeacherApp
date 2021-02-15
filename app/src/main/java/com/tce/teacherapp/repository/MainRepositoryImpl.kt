@@ -8,15 +8,19 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.tce.teacherapp.api.TCEService
 import com.tce.teacherapp.api.response.*
+import com.tce.teacherapp.api.response.tceapi.*
 import com.tce.teacherapp.db.dao.SubjectsDao
 import com.tce.teacherapp.db.dao.UserDao
 import com.tce.teacherapp.db.entity.*
+import com.tce.teacherapp.db.entity.Grade
 import com.tce.teacherapp.db.entity.Resource
+import com.tce.teacherapp.db.entity.Subject
 import com.tce.teacherapp.ui.dashboard.home.state.DashboardViewState
 import com.tce.teacherapp.ui.dashboard.home.state.UpdatePasswordFields
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageViewState
 import com.tce.teacherapp.ui.dashboard.planner.state.PlannerViewState
 import com.tce.teacherapp.ui.dashboard.students.state.StudentViewState
+import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectStateEvent
 import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectViewState
 import com.tce.teacherapp.ui.login.state.LoginFields
 import com.tce.teacherapp.util.*
@@ -31,6 +35,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
+
 @FlowPreview
 class MainRepositoryImpl
 @Inject
@@ -38,6 +43,7 @@ constructor(
     val subjectDao: SubjectsDao,
     val userDao: UserDao,
     val tceService: TCEService,
+    val zlService: TCEService,
     val sharedPreferences: SharedPreferences,
     val sharedPrefsEditor: SharedPreferences.Editor,
     val application: Application
@@ -53,7 +59,7 @@ constructor(
             sharedPreferences.getBoolean(PreferenceKeys.APP_PREFERENCES_NEW_SESSION_GRADES, true)
         if (isNewSession) {
             val apiResult = safeApiCall(IO) {
-                tceService.getGrades()
+                zlService.getGrades()
             }
             emit(
                 object : ApiResponseHandler<SubjectViewState, List<GradeResponse>>(
@@ -230,7 +236,7 @@ constructor(
         )
     }
 
-    override fun getTopicList(
+    override fun getBookDetailList(
         query: String,
         bookID: String,
         stateEvent: StateEvent
@@ -239,7 +245,7 @@ constructor(
             sharedPreferences.getBoolean(PreferenceKeys.APP_PREFERENCES_NEW_SESSION_BOOKS, true)
         if (isNewSession) {
             val apiResult = safeApiCall(IO) {
-                tceService.getBooks()
+                zlService.getBooks()
             }
             emit(
                 object : ApiResponseHandler<SubjectViewState, List<BookResponse>>(
@@ -349,7 +355,7 @@ constructor(
     ): Flow<DataState<MessageViewState>> = flow {
 
         val apiResult = safeApiCall(IO) {
-            tceService.getMessageList()
+            zlService.getMessageList()
         }
         emit(
             object : ApiResponseHandler<MessageViewState, List<MessageListResponseItem>>(
@@ -443,13 +449,13 @@ constructor(
 
     }
     override fun getMessageConversationList(
-        type:String,
+        type: String,
         messageId: String,
         stateEvent: StateEvent
     ): Flow<DataState<MessageViewState>> = flow {
 
         val apiResult = safeApiCall(IO) {
-            tceService.getMessageList()
+            zlService.getMessageList()
         }
         emit(
             object : ApiResponseHandler<MessageViewState, List<MessageListResponseItem>>(
@@ -496,7 +502,7 @@ constructor(
     ): Flow<DataState<MessageViewState>> = flow {
 
         val apiResult = safeApiCall(IO) {
-            tceService.getStudentList()
+            zlService.getStudentList()
         }
         emit(
             object : ApiResponseHandler<MessageViewState, List<StudentListResponseItem>>(
@@ -586,7 +592,7 @@ constructor(
         stateEvent: StateEvent
     ): Flow<DataState<MessageViewState>> = flow {
         val apiResult = safeApiCall(IO) {
-            tceService.getTopicResources()
+            zlService.getTopicResources()
         }
         emit(
             object : ApiResponseHandler<MessageViewState, List<ResourceListResponse>>(
@@ -602,14 +608,14 @@ constructor(
                         }
                     }
                     var finalResourceList: ArrayList<Resource> = ArrayList()
-                    if(type.isEmpty() && query.isEmpty()){
+                    if (type.isEmpty() && query.isEmpty()) {
                         finalResourceList = resourceList
-                    }else {
+                    } else {
                         if (type.isNotEmpty()) {
                             for (resource in resourceList) {
                                 if (resource.ResourceOriginator != null) {
                                     var isTypePresent = false
-                                    if (resource.ResourceOriginator.equals(type,true)) {
+                                    if (resource.ResourceOriginator.equals(type, true)) {
                                         isTypePresent = true
                                     }
                                     if (isTypePresent) {
@@ -617,8 +623,8 @@ constructor(
                                     }
                                 }
                             }
-                            if(query.isNotEmpty()) {
-                               val queryList =  finalResourceList.filter {
+                            if (query.isNotEmpty()) {
+                                val queryList = finalResourceList.filter {
                                     it.title.contains(query, ignoreCase = true)
                                 }
 
@@ -628,14 +634,14 @@ constructor(
                         }
                     }
 
-                    if(query.isEmpty()){
+                    if (query.isEmpty()) {
                         val viewState = MessageViewState(selectedResourceList = finalResourceList)
                         return DataState.data(
                             response = null,
                             data = viewState,
                             stateEvent = stateEvent
                         )
-                    }else{
+                    } else {
                         val queryResult = resourceList.filter {
                             it.title.contains(query, ignoreCase = true)
                         }
@@ -646,8 +652,6 @@ constructor(
                             stateEvent = stateEvent
                         )
                     }
-
-
 
 
                 }
@@ -1161,7 +1165,7 @@ constructor(
             val dbOldPassword = userId?.let { userDao.getOldPassword(it) }
             if (oldPassword.isEmpty() || newPassword.isEmpty() || confirmPassword.isEmpty()) {
                 emit(
-                    DataState.error(
+                    DataState.error<DashboardViewState>(
                         response = Response(
                             MessageConstant.LOGIN_MANDATORY_FIELD,
                             UIComponentType.Dialog,
@@ -1173,7 +1177,7 @@ constructor(
                 )
             } else if (!newPassword.equals(confirmPassword, false)) {
                 emit(
-                    DataState.error(
+                    DataState.error<DashboardViewState>(
                         response = Response(
                             MessageConstant.UPDATE_PASSWORD_NEW_CONFIRM_MISMATCH,
                             UIComponentType.Dialog,
@@ -1185,7 +1189,7 @@ constructor(
                 )
             } else if (oldPassword.isNotEmpty() && !dbOldPassword.equals(oldPassword, false)) {
                 emit(
-                    DataState.error(
+                    DataState.error<DashboardViewState>(
                         response = Response(
                             "Old Password mismatch.",
                             UIComponentType.Dialog,
@@ -1196,12 +1200,16 @@ constructor(
                     )
                 )
             } else if (updatepasswordErrors != LoginFields.LoginError.none()) {
-                Log.d("SAN", "emitting error: ${updatepasswordErrors}")
+                Log.d("SAN", "emitting error: $updatepasswordErrors")
                 emit(
-                    buildError(
-                        updatepasswordErrors,
-                        UIComponentType.Dialog,
-                        stateEvent
+                    DataState.error<DashboardViewState>(
+                        response = Response(
+                            message = updatepasswordErrors,
+                            uiComponentType = UIComponentType.Dialog,
+                            messageType = MessageType.Error(),
+                            serviceTypes = RequestTypes.GENERIC
+                        ),
+                        stateEvent = stateEvent
                     )
                 )
             } else {
@@ -1211,7 +1219,7 @@ constructor(
                     newPassword
                 ).commit()
                 emit(
-                    DataState.error(
+                    DataState.error<DashboardViewState>(
                         response = Response(
                             "Password changed successfully.",
                             UIComponentType.Dialog,
@@ -1240,7 +1248,7 @@ constructor(
             }
             userDao.insertUser(userInfo)
             emit(
-                DataState.error(
+                DataState.error<DashboardViewState>(
                     response = Response(
                         "Profile updated successfully.",
                         UIComponentType.Dialog,
@@ -1326,7 +1334,7 @@ constructor(
             sharedPreferences.getBoolean(PreferenceKeys.APP_PREFERENCES_NEW_SESSION_RESOURCES, true)
         if (isNewSession) {
             val apiResult = safeApiCall(IO) {
-                tceService.getTopicResources()
+                zlService.getTopicResources()
             }
             emit(
                 object : ApiResponseHandler<SubjectViewState, List<ResourceListResponse>>(
@@ -1470,8 +1478,7 @@ constructor(
                 list3[j].eventData = eventData
             }
 
-            val selectedList: List<DailyPlanner>;
-            selectedList = if (selectedDate == null) {
+            val selectedList: List<DailyPlanner> = if (selectedDate == null) {
                 list3
             } else {
                 val selectedLocalDate = LocalDate.parse(selectedDate)
@@ -1685,6 +1692,7 @@ constructor(
                         bookId
                     )
                     val listOfResourceTpe: MutableList<ChapterResourceType> = mutableListOf()
+                    val allChapterResourceList: MutableList<Resource> = mutableListOf()
                     listOfResourceTpe.addAll(resultObj)
                     listOfResourceTpe.add(chapterResourceType)
                     Log.d("SAN", "listOfResourceTpe-->" + listOfResourceTpe.size)
@@ -1701,11 +1709,14 @@ constructor(
                                 listOfResourceTpe[i].topicId
                             )
                         }
-
                         listOfResourceTpe[i].resourceList = resourceList
+                        allChapterResourceList.addAll(resourceList)
                     }
                     return DataState.data(
-                        data = SubjectViewState(chapterResourceTyeList = listOfResourceTpe),
+                        data = SubjectViewState(
+                            chapterResourceTyeList = listOfResourceTpe,
+                            allTopicResourceList = allChapterResourceList
+                        ),
                         response = null,
                         stateEvent = stateEvent
                     )
@@ -1721,7 +1732,7 @@ constructor(
         stateEvent: StateEvent
     ): Flow<DataState<StudentViewState>> = flow {
         val apiResult = safeApiCall(IO) {
-            tceService.getStudentList()
+            zlService.getStudentList()
         }
         emit(
             object : ApiResponseHandler<StudentViewState, List<StudentListResponseItem>>(
@@ -1767,7 +1778,7 @@ constructor(
     override fun getStudentAttendanceData(stateEvent: StateEvent): Flow<DataState<StudentViewState>> =
         flow {
             val apiResult = safeApiCall(IO) {
-                tceService.getStudentAttendanceList()
+                zlService.getStudentAttendanceList()
             }
             emit(
                 object : ApiResponseHandler<StudentViewState, List<StudentAttendanceResponseItem>>(
@@ -1790,7 +1801,7 @@ constructor(
     override fun getFeedBackMasterData(stateEvent: StateEvent): Flow<DataState<StudentViewState>> =
         flow {
             val apiResult = safeApiCall(IO) {
-                tceService.getFeedbackMaster()
+                zlService.getFeedbackMaster()
             }
             emit(
                 object : ApiResponseHandler<StudentViewState, List<FeedbackMasterDataItem>>(
@@ -1815,7 +1826,7 @@ constructor(
         stateEvent: StateEvent
     ): Flow<DataState<StudentViewState>> = flow {
         val apiResult = safeApiCall(IO) {
-            tceService.getStudentGalleryData()
+            zlService.getStudentGalleryData()
         }
         emit(
             object : ApiResponseHandler<StudentViewState, List<StudentGalleryResponseItem>>(
@@ -1888,7 +1899,7 @@ constructor(
         stateEvent: StateEvent
     ): Flow<DataState<StudentViewState>> = flow {
         val apiResult = safeApiCall(IO) {
-            tceService.getStudentPortFolioData()
+            zlService.getStudentPortFolioData()
         }
         emit(
             object : ApiResponseHandler<StudentViewState, List<StudentPortFolioResponseItem>>(
@@ -2018,7 +2029,7 @@ constructor(
         stateEvent: StateEvent
     ): Flow<DataState<MessageViewState>> = flow {
         val apiResult = safeApiCall(IO) {
-            tceService.getTopicResources()
+            zlService.getTopicResources()
         }
         emit(
             object : ApiResponseHandler<MessageViewState, List<ResourceListResponse>>(
@@ -2065,6 +2076,131 @@ constructor(
                 }
             }.getResult()
         )
+    }
+
+    override fun getCurriculumData(stateEvent: SubjectStateEvent): Flow<DataState<SubjectViewState>> = flow{
+        withContext(IO) {
+            val curriculumResult = safeApiCall(IO) {
+
+                val token = "Bearer " + sharedPreferences.getString(
+                    PreferenceKeys.APP_USER_ACCESSTOKEN,
+                    ""
+                )
+                tceService.getCurriculum(token, "1", "ece")
+            }
+            emit(
+                object : ApiResponseHandler<SubjectViewState, CurriculumResponse>(
+                    response = curriculumResult,
+                    stateEvent = stateEvent
+                ) {
+                    override suspend fun handleSuccess(resultObj: CurriculumResponse): DataState<SubjectViewState> {
+                        val viewState = SubjectViewState(curriculumVo = resultObj.curriculumVO)
+                        sharedPrefsEditor.putString(PreferenceKeys.APP_USER_SELECTED_GRADE_ID, resultObj.curriculumVO.grades[0].gradeId).commit()
+                        return DataState.data(
+                            response = null,
+                            data = viewState,
+                            stateEvent = stateEvent
+                        )
+
+                    }
+                }.getResult()
+            )
+        }
+
+    }
+
+    override fun getTCEBookDetailList(
+        query: String,
+        bookId: String,
+        stateEvent: SubjectStateEvent
+    ): Flow<DataState<SubjectViewState>> = flow {
+        withContext(IO) {
+            val bookResult = safeApiCall(IO) {
+
+                val token = "Bearer " + sharedPreferences.getString(
+                    PreferenceKeys.APP_USER_ACCESSTOKEN,
+                    ""
+                )
+                tceService.getTCEBook(token, "1", bookId)
+            }
+            emit(
+                object : ApiResponseHandler<SubjectViewState, TCEBookResponse>(
+                    response = bookResult,
+                    stateEvent = stateEvent
+                ) {
+                    override suspend fun handleSuccess(resultObj: TCEBookResponse): DataState<SubjectViewState> {
+                        resultObj.booJsonResponse = Gson().fromJson(resultObj.json, BookJsonResponse::class.java)
+                        resultObj.accessToken = sharedPreferences.getString(
+                            PreferenceKeys.APP_USER_ACCESSTOKEN,
+                            "")!!
+                        val viewState = SubjectViewState(tceBookResponse = resultObj)
+                        return DataState.data(
+                            response = null,
+                            data = viewState,
+                            stateEvent = stateEvent
+                        )
+
+                    }
+                }.getResult()
+            )
+        }
+    }
+
+    override fun getTopicList(
+        topicId: String,
+        subjectID: String,
+        stateEvent: SubjectStateEvent
+    ): Flow<DataState<SubjectViewState>> = flow{
+
+        withContext(IO) {
+            val topicResult = safeApiCall(IO) {
+
+                val token = "Bearer " + sharedPreferences.getString(
+                    PreferenceKeys.APP_USER_ACCESSTOKEN,
+                    ""
+                )
+                val gardeId = sharedPreferences.getString(PreferenceKeys.APP_USER_SELECTED_GRADE_ID,"")
+                tceService.getTCETopic(token, "1", gardeId!!,subjectID,topicId)
+            }
+            emit(
+                object : ApiResponseHandler<SubjectViewState, List<TCETopicResponseItem>>(
+                    response = topicResult,
+                    stateEvent = stateEvent
+                ) {
+                    override suspend fun handleSuccess(resultObj: List<TCETopicResponseItem>): DataState<SubjectViewState> {
+                        var selectedTopic: TCETopicResponseItem? = null
+
+                        for (topicItem in resultObj){
+                            topicItem.topicJsonResponse = Gson().fromJson(topicItem.playlistJson, TopicJsonResponse::class.java)
+
+                            if(topicId.equals(topicItem.id,true)){
+                                selectedTopic =  topicItem
+                            }
+                        }
+                        val viewState = SubjectViewState(tceTopicResponse = selectedTopic)
+                        return DataState.data(
+                            response = null,
+                            data = viewState,
+                            stateEvent = stateEvent
+                        )
+
+                    }
+                }.getResult()
+            )
+        }
+    }
+
+    override fun getAccessToken(): String {
+        return sharedPreferences.getString(PreferenceKeys.APP_USER_ACCESSTOKEN,"").toString()
+    }
+
+    override fun getRefreshToken(): String {
+        return sharedPreferences.getString(PreferenceKeys.APP_USER_REFRESHTOKEN,"").toString()
+
+    }
+
+    override fun getSessionTimeOut(): String {
+        return sharedPreferences.getString(PreferenceKeys.APP_API_SESSION_TIMEOUT,"300").toString()
     }
 
     fun toGradeList(grades: List<GradeResponse>): List<Grade> {

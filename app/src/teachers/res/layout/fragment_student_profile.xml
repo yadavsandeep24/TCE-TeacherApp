@@ -474,7 +474,7 @@
             app:behavior_fitToContents="true"
             app:behavior_hideable="true"
             app:behavior_peekHeight="0dp"
-            app:layout_behavior="com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior">
+            app:layout_behavior="com.tce.teacherapp.util.sheets.BottomSheetBehavior">
 
             <View
                 android:layout_width="50dp"

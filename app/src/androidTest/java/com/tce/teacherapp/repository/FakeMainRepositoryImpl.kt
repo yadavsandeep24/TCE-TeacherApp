@@ -9,6 +9,7 @@ import com.tce.teacherapp.ui.dashboard.home.state.DashboardViewState
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageViewState
 import com.tce.teacherapp.ui.dashboard.planner.state.PlannerViewState
 import com.tce.teacherapp.ui.dashboard.students.state.StudentViewState
+import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectStateEvent
 import com.tce.teacherapp.ui.dashboard.subjects.state.SubjectViewState
 import com.tce.teacherapp.util.ApiResponseHandler
 import com.tce.teacherapp.util.DataState
@@ -131,7 +132,7 @@ constructor() : MainRepository {
         }
     }
 
-    override fun getTopicList(
+    override fun getBookDetailList(
         query: String,
         bookID: String,
         stateEvent: StateEvent
@@ -168,7 +169,16 @@ constructor() : MainRepository {
         TODO("Not yet implemented")
     }
 
+    override fun getMessageConversationList(
+        type: String,
+        messageId: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<MessageViewState>> {
+        TODO("Not yet implemented")
+    }
+
     override fun getStudentList(
+        classId: Int,
         query: String,
         stateEvent: StateEvent
     ): Flow<DataState<MessageViewState>> {
@@ -184,11 +194,12 @@ constructor() : MainRepository {
 
     override fun getSelectedResourceList(
         query: String,
-        typeId: Int,
+        type: String,
         stateEvent: StateEvent
     ): Flow<DataState<MessageViewState>> {
         TODO("Not yet implemented")
     }
+
 
     override fun getProfile(stateEvent: StateEvent): Flow<DataState<DashboardViewState>> {
         TODO("Not yet implemented")
@@ -216,11 +227,12 @@ constructor() : MainRepository {
     }
 
     override fun getParentDashboardData(
-        id: Int,
+        id: String,
         stateEvent: StateEvent
     ): Flow<DataState<DashboardViewState>> {
         TODO("Not yet implemented")
     }
+
 
     override fun getEventList(
         count: Int,
@@ -330,7 +342,11 @@ constructor() : MainRepository {
         TODO("Not yet implemented")
     }
 
-    override fun getStudentData(stateEvent: StateEvent): Flow<DataState<StudentViewState>> {
+    override fun getStudentData(
+        classId: Int,
+        query: String,
+        stateEvent: StateEvent
+    ): Flow<DataState<StudentViewState>> {
         TODO("Not yet implemented")
     }
 
@@ -342,13 +358,28 @@ constructor() : MainRepository {
         TODO("Not yet implemented")
     }
 
-    override fun getGalleryData(stateEvent: StateEvent): Flow<DataState<StudentViewState>> {
+    override fun getGalleryData(
+        type: Int,
+        stateEvent: StateEvent
+    ): Flow<DataState<StudentViewState>> {
         TODO("Not yet implemented")
     }
 
-    override fun getStudentPortfolio(stateEvent: StateEvent): Flow<DataState<StudentViewState>> {
+    override fun getStudentPortfolio(
+        type: Int,
+        stateEvent: StateEvent
+    ): Flow<DataState<StudentViewState>> {
         TODO("Not yet implemented")
     }
+
+    override fun getMessageResourceTypeList(stateEvent: StateEvent): Flow<DataState<MessageViewState>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getCurriculumData(stateEvent: SubjectStateEvent): Flow<DataState<SubjectViewState>> {
+        TODO("Not yet implemented")
+    }
+
 
 /*    @Throws(UninitializedPropertyAccessException::class)
     override fun getBlogs(stateEvent: StateEvent, category: String): Flow<DataState<SubjectViewState>> {

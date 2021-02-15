@@ -50,6 +50,8 @@ abstract class MainViewModelModule {
     @MainViewModelKey(StudentViewModel::class)
     abstract fun bindStudentListViewModel(studentViewModel: StudentViewModel): ViewModel
 
+
+
 }
 
 

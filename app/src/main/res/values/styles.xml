@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -47,6 +47,58 @@
 
     </style>
 
+    <style name="Theme.Design.Light.RightSheetDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowAnimationStyle">@style/Animation.Design.RightSheetDialog</item>
+        <item name="bottomAppBarStyle">@style/Widget.Design.RightSheet.Modal</item>
+    </style>
 
+    <style name="Animation.Design.RightSheetDialog" parent="Animation.AppCompat.Dialog">
+        <item name="android:windowEnterAnimation">@anim/design_right_sheet_slide_in</item>
+        <item name="android:windowExitAnimation">@anim/design_right_sheet_slide_out</item>
+    </style>
+
+    <style name="Animation.MaterialComponents.RightSheetDialog" parent="Animation.AppCompat.Dialog">
+        <item name="android:windowEnterAnimation">@anim/mtrl_right_sheet_slide_in</item>
+        <item name="android:windowExitAnimation">@anim/mtrl_right_sheet_slide_out</item>
+    </style>
+
+    <style name="Widget.Design.RightSheet.Modal" parent="android:Widget">
+        <item name="enforceMaterialTheme">false</item>
+        <item name="android:background">?android:attr/colorBackground</item>
+        <item name="android:elevation" tools:ignore="NewApi">
+            @dimen/design_right_sheet_modal_elevation
+        </item>
+        <item name="behavior_peekHeight">auto</item>
+        <item name="behavior_hideable">true</item>
+        <item name="behavior_skipCollapsed">false</item>
+        <item name="shapeAppearance">@null</item>
+        <item name="shapeAppearanceOverlay">@null</item>
+        <item name="backgroundTint">?android:attr/colorBackground</item>
+    </style>
+
+    <style name="Widget.MaterialComponents.RightSheet" parent="Widget.Design.RightSheet.Modal">
+        <item name="enforceMaterialTheme">true</item>
+        <item name="android:background">@null</item>
+        <item name="shapeAppearance">?attr/shapeAppearanceLargeComponent</item>
+        <item name="shapeAppearanceOverlay">
+            @style/ShapeAppearanceOverlay.MaterialComponents.RightSheet
+        </item>
+        <item name="backgroundTint">?attr/colorSurface</item>
+        <item name="android:elevation" tools:ignore="NewApi">
+            @dimen/design_right_sheet_elevation
+        </item>
+    </style>
+
+    <style name="Widget.MaterialComponents.RightSheet.Modal" parent="Widget.MaterialComponents.RightSheet">
+        <item name="android:elevation" tools:ignore="NewApi">
+            @dimen/design_right_sheet_modal_elevation
+        </item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.MaterialComponents.RightSheet" parent="">
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
 
 </resources>

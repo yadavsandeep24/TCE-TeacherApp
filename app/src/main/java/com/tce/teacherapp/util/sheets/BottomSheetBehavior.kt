@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.tce.teacherapp.util.bottomSheet
+package com.tce.teacherapp.util.sheets
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -336,7 +336,7 @@ class BottomSheetBehavior<V : View> : CoordinatorLayout.Behavior<V> {
                     R.dimen.design_bottom_sheet_peek_height_min
                 )
             }
-            lastPeekHeight = Math.max(peekHeightMin, parentHeight - parent.width * 9 / 16)
+            lastPeekHeight = peekHeightMin.coerceAtLeast(parentHeight - parent.width * 9 / 16)
         } else {
             lastPeekHeight = _peekHeight
         }

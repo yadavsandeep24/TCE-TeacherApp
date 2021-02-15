@@ -39,10 +39,6 @@ constructor(
     private lateinit var sharedPreference: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -74,15 +70,15 @@ constructor(
             findNavController().navigate(R.id.action_studentGalleryShareMediaFragment_to_studentGallerSharingChatFragment)
         }
         val bottomSheetBehaviorFilterContainer =
-            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.from(binding.bottomSheetFilterBy)
+            com.tce.teacherapp.util.sheets.BottomSheetBehavior.from(binding.bottomSheetFilterBy)
 
         bottomSheetBehaviorFilterContainer.state =
-            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+            com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
         bottomSheetBehaviorFilterContainer.skipCollapsed = true
         bottomSheetBehaviorFilterContainer.isDraggable = false
 
         bottomSheetBehaviorFilterContainer.addBottomSheetCallback(object :
-            com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.BottomSheetCallback {
+            com.tce.teacherapp.util.sheets.BottomSheetBehavior.BottomSheetCallback {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 if (newState == BottomSheetBehavior.STATE_DRAGGING) {
                     bottomSheetBehaviorFilterContainer.state = BottomSheetBehavior.STATE_EXPANDED
@@ -93,22 +89,22 @@ constructor(
 
         binding.sortContainer.setOnClickListener {
 
-            if (bottomSheetBehaviorFilterContainer.state == com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN) {
+            if (bottomSheetBehaviorFilterContainer.state == com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN) {
                 bottomSheetBehaviorFilterContainer.state =
-                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_EXPANDED
+                    com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_EXPANDED
                 binding.maskLayout.visibility = View.VISIBLE
                 binding.maskLayout.setBackgroundColor(resources.getColor(R.color.dim_color_dashboard))
                 (activity as DashboardActivity).bottom_navigation_view.visibility = View.INVISIBLE
             } else {
                 bottomSheetBehaviorFilterContainer.state =
-                    com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                    com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
                 binding.maskLayout.visibility = View.GONE
                 (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
             }
         }
         binding.tvPhotos.setOnClickListener {
             bottomSheetBehaviorFilterContainer.state =
-                com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
             binding.maskLayout.visibility = View.GONE
             (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
             viewModel.setStateEvent(StudentStateEvent.GetGalleryData(1))
@@ -116,7 +112,7 @@ constructor(
 
         binding.tvVideos.setOnClickListener {
             bottomSheetBehaviorFilterContainer.state =
-                com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
             binding.maskLayout.visibility = View.GONE
             (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
             viewModel.setStateEvent(StudentStateEvent.GetGalleryData(2))
@@ -124,7 +120,7 @@ constructor(
 
         binding.tvShowAll.setOnClickListener {
             bottomSheetBehaviorFilterContainer.state =
-                com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
             binding.maskLayout.visibility = View.GONE
             (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
             viewModel.setStateEvent(StudentStateEvent.GetGalleryData(0))
@@ -134,7 +130,7 @@ constructor(
 
         binding.maskLayout.setOnClickListener {
             bottomSheetBehaviorFilterContainer.state =
-                com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior.STATE_HIDDEN
+                com.tce.teacherapp.util.sheets.BottomSheetBehavior.STATE_HIDDEN
             binding.maskLayout.visibility = View.GONE
             (activity as DashboardActivity).bottom_navigation_view.visibility = View.VISIBLE
         }

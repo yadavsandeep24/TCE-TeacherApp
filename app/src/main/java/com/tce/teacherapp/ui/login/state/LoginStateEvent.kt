@@ -5,7 +5,7 @@ import com.tce.teacherapp.util.StateEvent
 sealed class LoginStateEvent : StateEvent {
 
     data class LoginAttemptEvent(
-        val schoolName: String?,
+        val schoolName: String,
         val email: String,
         val password: String
     ) : LoginStateEvent() {
@@ -16,6 +16,30 @@ sealed class LoginStateEvent : StateEvent {
 
         override fun toString(): String {
             return "LoginAttemptEvent"
+        }
+    }
+
+    data class SchoolNameEvent(
+        val schoolName: String
+    ) : LoginStateEvent() {
+
+        override fun errorInfo(): String {
+            return "school name fetch failed."
+        }
+
+        override fun toString(): String {
+            return "SchoolNameEvent"
+        }
+    }
+
+    object  ClientIdEvent : LoginStateEvent() {
+
+        override fun errorInfo(): String {
+            return "client id fetch failed."
+        }
+
+        override fun toString(): String {
+            return "ClientIdEvent"
         }
     }
 

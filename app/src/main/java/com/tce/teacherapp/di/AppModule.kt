@@ -10,8 +10,11 @@ import com.bumptech.glide.request.RequestOptions
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.tce.teacherapp.R
+import com.tce.teacherapp.api.AddCookiesInterceptor
+import com.tce.teacherapp.api.ReceivedCookiesInterceptor
 import com.tce.teacherapp.api.TCEService
 import com.tce.teacherapp.api.TCEService.Companion.BASE_URL
+import com.tce.teacherapp.api.TCEService.Companion.BASE_URL_ZL
 import com.tce.teacherapp.db.AppDatabase
 import com.tce.teacherapp.db.AppDatabase.Companion.DATABASE_NAME
 import com.tce.teacherapp.db.dao.SubjectsDao
@@ -24,8 +27,11 @@ import com.tce.teacherapp.util.PreferenceKeys
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.FlowPreview
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
+import javax.inject.Named
 import javax.inject.Singleton
 
 @FlowPreview
@@ -66,10 +72,31 @@ object AppModule {
     @JvmStatic
     @Singleton
     @Provides
-    fun provideRetrofitBuilder(gsonBuilder: Gson): Retrofit.Builder {
+    @Named("tceapi")
+    fun provideRetrofitBuilder(gsonBuilder: Gson,application: Application): Retrofit.Builder {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gsonBuilder))
+            .client(
+                OkHttpClient().newBuilder().readTimeout(2, TimeUnit.MINUTES).connectTimeout(2,
+                    TimeUnit.MINUTES)
+                .addInterceptor(AddCookiesInterceptor(provideSharedPreferences(application)))
+                .addInterceptor(ReceivedCookiesInterceptor(provideSharedPreferences(application))).build())
+    }
+
+    @JvmStatic
+    @Singleton
+    @Provides
+    @Named("zlapi")
+    fun provideRetrofitBuilderZL(gsonBuilder: Gson,application: Application): Retrofit.Builder {
+        return Retrofit.Builder()
+            .baseUrl(BASE_URL_ZL)
+            .addConverterFactory(GsonConverterFactory.create(gsonBuilder))
+            .client(
+                OkHttpClient().newBuilder().readTimeout(2, TimeUnit.MINUTES).connectTimeout(2,
+                    TimeUnit.MINUTES)
+                    .addInterceptor(AddCookiesInterceptor(provideSharedPreferences(application)))
+                    .addInterceptor(ReceivedCookiesInterceptor(provideSharedPreferences(application))).build())
     }
 
     @JvmStatic
@@ -116,11 +143,22 @@ object AppModule {
 
     @JvmStatic
     @Provides
-    fun provideTceService(retrofitBuilder: Retrofit.Builder): TCEService {
+    @Named("tce")
+    fun provideTceService(@Named("tceapi") retrofitBuilder: Retrofit.Builder): TCEService {
         return retrofitBuilder
             .build()
             .create(TCEService::class.java)
     }
+
+    @JvmStatic
+    @Provides
+    @Named("zl")
+    fun provideZLService(@Named("zlapi") retrofitBuilder: Retrofit.Builder): TCEService {
+        return retrofitBuilder
+            .build()
+            .create(TCEService::class.java)
+    }
+
 
 
     @JvmStatic
@@ -128,7 +166,8 @@ object AppModule {
     fun provideMainRepository(
         subjectDao: SubjectsDao,
         userDao: UserDao,
-        tceService: TCEService,
+        @Named("tce") tceService: TCEService,
+        @Named("zl") zlService: TCEService,
         preferences: SharedPreferences,
         editor: SharedPreferences.Editor,
         application: Application
@@ -137,6 +176,7 @@ object AppModule {
             subjectDao,
             userDao,
             tceService,
+            zlService,
             preferences,
             editor,
             application
@@ -147,7 +187,8 @@ object AppModule {
     @Provides
     fun provideLoginRepository(
         userDao: UserDao,
-        tceService: TCEService,
+        @Named("tce") tceService: TCEService,
+        @Named("zl") zlService: TCEService,
         preferences: SharedPreferences,
         editor: SharedPreferences.Editor,
         application: Application
@@ -155,10 +196,12 @@ object AppModule {
         return LoginRepositoryImpl(
             userDao,
             tceService,
+            zlService,
             preferences,
             editor,
             application
         )
     }
+
 
 }

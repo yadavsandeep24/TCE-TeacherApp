@@ -27,9 +27,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.epoxy.EpoxyVisibilityTracker
-import com.airbnb.epoxy.addGlidePreloader
-import com.airbnb.epoxy.glidePreloader
-import com.bumptech.glide.Glide
 import com.example.gabriel.soundrecorder.recorder.RecorderViewModel
 import com.example.gabriel.soundrecorder.util.InjectorUtils
 import com.tce.teacherapp.R
@@ -40,10 +37,7 @@ import com.tce.teacherapp.ui.dashboard.DashboardActivity
 import com.tce.teacherapp.ui.dashboard.messages.adapter.ISelectedResourceClickListener
 import com.tce.teacherapp.ui.dashboard.messages.adapter.messageDetailEpoxyHolder
 import com.tce.teacherapp.ui.dashboard.messages.state.MessageStateEvent
-import com.tce.teacherapp.ui.dashboard.subjects.adapter.SubjectListEpoxyHolder
-import com.tce.teacherapp.ui.dashboard.subjects.loadImage
 import com.tce.teacherapp.util.StateMessageCallback
-import com.tce.teacherapp.util.bottomSheet.BottomSheetBehavior
 import com.tce.teacherapp.util.gallerypicker.model.GalleryAlbums
 import com.tce.teacherapp.util.gallerypicker.model.GalleryData
 import com.tce.teacherapp.util.gallerypicker.presenter.MessageDetailPhotosPresenterImpl
@@ -54,8 +48,8 @@ import com.tce.teacherapp.util.gallerypicker.view.ImagePickerContract
 import com.tce.teacherapp.util.gallerypicker.view.OnPhoneImagesObtained
 import com.tce.teacherapp.util.gallerypicker.view.adapters.ImageGridAdapter
 import com.tce.teacherapp.util.gallerypicker.view.adapters.VideoGridAdapter
+import com.tce.teacherapp.util.sheets.BottomSheetBehavior
 import kotlinx.android.synthetic.main.activity_dashboard.*
-import kotlinx.android.synthetic.main.fragment_group_chat.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import org.jetbrains.anko.doAsync
@@ -150,12 +144,12 @@ constructor(
             binding.rvMessageDetail.setHasFixedSize(true)
             val epoxyVisibilityTracker = EpoxyVisibilityTracker()
             epoxyVisibilityTracker.attach(binding.rvMessageDetail)
-            binding.rvMessageDetail.addGlidePreloader(
+  /*          binding.rvMessageDetail.addGlidePreloader(
                 Glide.with(this),
                 preloader = glidePreloader { requestManager, model: SubjectListEpoxyHolder, _ ->
                     requestManager.loadImage(model.imageUrl)
                 }
-            )
+            )*/
 
         }
 
